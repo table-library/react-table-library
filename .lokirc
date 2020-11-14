@@ -1,0 +1,17 @@
+{
+  "diffingEngine": "gm",
+  "requireReference": true,
+  "chromeDockerWithoutSeccomp": true,
+  "reactUri": "file:./dist",
+  "chromeTolerance": 0.02,
+  "chromeFlags": "--headless --disable-gpu --hide-scrollbars --no-sandbox --cap-add=SYS_ADMIN",
+  "configurations": {
+    "chrome.laptop": {
+      "target": "chrome.app",
+      "width": 1920,
+      "height": 1080,
+      "deviceScaleFactor": 1,
+      "mobile": false
+    }
+  }
+}

@@ -1,0 +1,27 @@
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  * {
+    font-family: 'Roboto', sans-serif !important;
+  }
+
+   /* hide stories dedicated for screenshot tests */
+  [id$='only-screenshot-test'] {
+    display: none !important;
+  }
+
+  /* hide toolbar above of every story */
+  .sbdocs-preview > .os-host:first-child {
+    display: none !important;
+  }
+
+  /* remove too much padding which results from removed toolbar */
+  .sbdocs-preview {
+    padding-top: 0 !important;
+  }
+</style>
+
+<div id="custom-root"></div>

@@ -1,0 +1,12 @@
+{
+  "testRegex": "((\\.|/*.)(spec))\\.js?$",
+  "rootDir": "..",
+  "setupFilesAfterEnv": [
+    "<rootDir>/.storybook/jest.setup.js"
+  ],
+  "moduleNameMapper": {
+    "\\.svg": "<rootDir>/.storybook/jest.svgrmock.js",
+    "\\.(css|less|sass|scss)$": "<rootDir>/.storybook/stylemock.js"
+  },
+  "clearMocks": true
+}

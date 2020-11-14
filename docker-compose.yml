@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  dev:
+    privileged: true
+    build:
+      context: .
+    ports:
+      - 9001:9001
+    command: npm run storybook
+    volumes:
+      - './src:/usr/app/src'
+
+  loki-test:
+    privileged: true
+    build:
+      context: .
+    environment:
+      - CI=true
+    command: npm run loki:test
+    volumes:
+      - './.loki:/usr/app/.loki'
+
+  loki-update:
+    privileged: true
+    build:
+      context: .
+    environment:
+      - CI=true
+    command: npm run loki:update
+    volumes:
+      - './.loki:/usr/app/.loki'
