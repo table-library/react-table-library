@@ -4,23 +4,33 @@ import PropTypes from 'prop-types';
 import {
   TableProvider,
   ThemeProvider,
+  SelectProvider,
   SortProvider,
   SortContext
 } from '@context';
 
-const Table = ({ list, theme, defaultSort, children }) => {
+const Table = ({
+  list,
+  theme,
+  defaultSort,
+  defaultSelect,
+  children
+}) => {
   // otherwise we would mutate the outer list (e.g. sort)
   const listCopy = [...list];
 
   return (
     <ThemeProvider theme={theme}>
-      <SortProvider defaultSort={defaultSort}>
-        <TableProvider list={listCopy}>
-          <SortContext.Consumer>
-            {({ sort }) => children(sort.fn(listCopy))}
-          </SortContext.Consumer>
-        </TableProvider>
-      </SortProvider>
+      <TableProvider list={listCopy}>
+        <SelectProvider defaultSelect={defaultSelect}>
+          <SortProvider defaultSort={defaultSort}>
+            <SortContext.Consumer>
+              {/* do any list operations (e.g. sort, pagination) here */}
+              {({ sortState }) => children(sortState.fn(listCopy))}
+            </SortContext.Consumer>
+          </SortProvider>
+        </SelectProvider>
+      </TableProvider>
     </ThemeProvider>
   );
 };
@@ -28,6 +38,9 @@ const Table = ({ list, theme, defaultSort, children }) => {
 Table.propTypes = {
   list: PropTypes.arrayOf(PropTypes.any).isRequired,
   theme: PropTypes.shape(PropTypes.any),
+  defaultSelect: PropTypes.shape({
+    ids: PropTypes.arrayOf(PropTypes.string)
+  }),
   defaultSort: PropTypes.shape({
     key: PropTypes.string,
     reverse: PropTypes.bool,

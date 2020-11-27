@@ -14,7 +14,7 @@ import {
   Cell
 } from '@table';
 
-import { HeaderSortCell } from '@sort';
+import { HeaderCellSort } from '@sort';
 
 const list = [
   { id: '1', name: 'Hello', stars: 24, count: 42, light: true },
@@ -41,7 +41,7 @@ storiesOf('03. Table with Sort', module)
           <Content>
             <Header>
               <HeaderRow>
-                <HeaderSortCell
+                <HeaderCellSort
                   width="25%"
                   sortKey="name"
                   sortFn={array =>
@@ -49,9 +49,9 @@ storiesOf('03. Table with Sort', module)
                   }
                 >
                   Name
-                </HeaderSortCell>
+                </HeaderCellSort>
                 <HeaderCell width="25%">Stars</HeaderCell>
-                <HeaderSortCell
+                <HeaderCellSort
                   width="25%"
                   sortKey="light"
                   sortFn={array =>
@@ -59,8 +59,8 @@ storiesOf('03. Table with Sort', module)
                   }
                 >
                   Light
-                </HeaderSortCell>
-                <HeaderSortCell
+                </HeaderCellSort>
+                <HeaderCellSort
                   width="25%"
                   sortKey="count"
                   sortFn={array =>
@@ -68,7 +68,7 @@ storiesOf('03. Table with Sort', module)
                   }
                 >
                   Count
-                </HeaderSortCell>
+                </HeaderCellSort>
               </HeaderRow>
             </Header>
 
@@ -100,7 +100,7 @@ storiesOf('03. Table with Sort', module)
           <Content>
             <Header>
               <HeaderRow>
-                <HeaderSortCell
+                <HeaderCellSort
                   width="25%"
                   sortKey="name"
                   sortFn={array =>
@@ -108,9 +108,9 @@ storiesOf('03. Table with Sort', module)
                   }
                 >
                   Name
-                </HeaderSortCell>
+                </HeaderCellSort>
                 <HeaderCell width="25%">Stars</HeaderCell>
-                <HeaderSortCell
+                <HeaderCellSort
                   width="25%"
                   sortKey="light"
                   sortFn={array =>
@@ -118,8 +118,8 @@ storiesOf('03. Table with Sort', module)
                   }
                 >
                   Light
-                </HeaderSortCell>
-                <HeaderSortCell
+                </HeaderCellSort>
+                <HeaderCellSort
                   width="25%"
                   sortKey="count"
                   sortFn={array =>
@@ -127,7 +127,7 @@ storiesOf('03. Table with Sort', module)
                   }
                 >
                   Count
-                </HeaderSortCell>
+                </HeaderCellSort>
               </HeaderRow>
             </Header>
 
@@ -153,7 +153,7 @@ storiesOf('03. Table with Sort', module)
           <Content>
             <Header>
               <HeaderRow>
-                <HeaderSortCell
+                <HeaderCellSort
                   width="25%"
                   sortKey="name"
                   sortFn={array =>
@@ -161,13 +161,13 @@ storiesOf('03. Table with Sort', module)
                   }
                   sortIcon={{
                     position:
-                      HeaderSortCell.SORT_ICON_POSITIONS.Suffix
+                      HeaderCellSort.SORT_ICON_POSITIONS.Suffix
                   }}
                 >
                   Name
-                </HeaderSortCell>
+                </HeaderCellSort>
                 <HeaderCell width="25%">Stars</HeaderCell>
-                <HeaderSortCell
+                <HeaderCellSort
                   width="25%"
                   sortKey="light"
                   sortFn={array =>
@@ -175,12 +175,12 @@ storiesOf('03. Table with Sort', module)
                   }
                   sortIcon={{
                     position:
-                      HeaderSortCell.SORT_ICON_POSITIONS.Suffix
+                      HeaderCellSort.SORT_ICON_POSITIONS.Suffix
                   }}
                 >
                   Light
-                </HeaderSortCell>
-                <HeaderSortCell
+                </HeaderCellSort>
+                <HeaderCellSort
                   width="25%"
                   sortKey="count"
                   sortFn={array =>
@@ -188,11 +188,11 @@ storiesOf('03. Table with Sort', module)
                   }
                   sortIcon={{
                     position:
-                      HeaderSortCell.SORT_ICON_POSITIONS.Suffix
+                      HeaderCellSort.SORT_ICON_POSITIONS.Suffix
                   }}
                 >
                   Count
-                </HeaderSortCell>
+                </HeaderCellSort>
               </HeaderRow>
             </Header>
 
@@ -218,7 +218,7 @@ storiesOf('03. Table with Sort', module)
           <Content>
             <Header>
               <HeaderRow>
-                <HeaderSortCell
+                <HeaderCellSort
                   width="25%"
                   sortKey="name"
                   sortFn={array =>
@@ -226,9 +226,9 @@ storiesOf('03. Table with Sort', module)
                   }
                 >
                   Name
-                </HeaderSortCell>
+                </HeaderCellSort>
                 <HeaderCell width="25%">Stars</HeaderCell>
-                <HeaderSortCell
+                <HeaderCellSort
                   width="25%"
                   sortKey="light"
                   sortFn={array =>
@@ -236,8 +236,8 @@ storiesOf('03. Table with Sort', module)
                   }
                 >
                   Light
-                </HeaderSortCell>
-                <HeaderSortCell
+                </HeaderCellSort>
+                <HeaderCellSort
                   width="25%"
                   sortKey="count"
                   sortFn={array =>
@@ -245,7 +245,7 @@ storiesOf('03. Table with Sort', module)
                   }
                 >
                   Count
-                </HeaderSortCell>
+                </HeaderCellSort>
               </HeaderRow>
             </Header>
 

@@ -120,7 +120,7 @@ storiesOf('01. Table', module)
 //                 width={WIDTHS.Checkbox}
 //                 noIndent
 //               />
-//               <HeaderSortCell
+//               <HeaderCellSort
 //                 width="25%"
 //                 sortKey="name"
 //                 sortFn={array =>
@@ -128,25 +128,25 @@ storiesOf('01. Table', module)
 //                 }
 //               >
 //                 Name
-//               </HeaderSortCell>
+//               </HeaderCellSort>
 //               <HeaderCell width="25%" >
 //                 Stars
 //               </HeaderCell>
-//               <HeaderSortCell
+//               <HeaderCellSort
 //                 width="25%"
 //                 sortKey="light"
 //
 //                 sortFn={array => array.sort((a, b) => a.light - b.light)}
 //               >
 //                 Light
-//               </HeaderSortCell>
-//               <HeaderSortCell
+//               </HeaderCellSort>
+//               <HeaderCellSort
 //                 width="25%"
 //                 sortKey="count"
 //                 sortFn={array => array.sort((a, b) => a.count - b.count)}
 //               >
 //                 Count
-//               </HeaderSortCell>
+//               </HeaderCellSort>
 //             </HeaderRow>
 //           </Header>
 

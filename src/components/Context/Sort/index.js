@@ -7,15 +7,15 @@ const sortReducer = (state, action) => {
   switch (action.type) {
     case SET_SORT: {
       const needsReverse =
-        action.payload.sort.key === state.key && !state.reverse;
+        action.payload.key === state.key && !state.reverse;
 
       return needsReverse
         ? {
-            ...action.payload.sort,
+            ...action.payload,
             reverse: true,
-            fn: array => action.payload.sort.fn(array).reverse()
+            fn: array => action.payload.fn(array).reverse()
           }
-        : { ...action.payload.sort, reverse: false };
+        : { ...action.payload, reverse: false };
     }
     default:
       throw new Error();
@@ -31,16 +31,19 @@ const DEFAULT_SORT = {
 };
 
 const SortProvider = ({ defaultSort = DEFAULT_SORT, children }) => {
-  const [sort, sortDispatcher] = React.useReducer(
+  const [sortState, sortStateDispatcher] = React.useReducer(
     sortReducer,
     defaultSort
   );
 
-  const setSort = value =>
-    sortDispatcher({ type: SET_SORT, payload: { sort: value } });
+  const onSort = value =>
+    sortStateDispatcher({
+      type: SET_SORT,
+      payload: value
+    });
 
   return (
-    <SortContext.Provider value={{ sort, setSort }}>
+    <SortContext.Provider value={{ sortState, onSort }}>
       {children}
     </SortContext.Provider>
   );

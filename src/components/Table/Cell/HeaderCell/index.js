@@ -2,21 +2,21 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
 
-import { CellContainer } from '@shared';
+import { HeaderCellContainer } from '@shared';
 import { ThemeContext } from '@context';
 
 const HeaderCell = ({ width, className, indentation, children }) => {
   const theme = React.useContext(ThemeContext);
 
   return (
-    <CellContainer
+    <HeaderCellContainer
       className={cs('th', className)}
       css={theme?.HeaderCell}
       width={width}
       indentation={indentation}
     >
       <div>{children}</div>
-    </CellContainer>
+    </HeaderCellContainer>
   );
 };
 

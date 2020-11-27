@@ -5,7 +5,7 @@ import * as COLORS from '@colors';
 const GUTTER_INNER = 12;
 const GUTTER_OUTER = 8;
 
-const CellContainer = styled.div`
+const CellContainerBase = styled.div`
   width: ${props => props.width};
 
   &:first-child > div {
@@ -43,4 +43,8 @@ const CellContainer = styled.div`
   ${({ css }) => css};
 `;
 
-export { CellContainer };
+const CellContainer = styled(CellContainerBase)``;
+
+const HeaderCellContainer = styled(CellContainerBase)``;
+
+export { CellContainerBase, CellContainer, HeaderCellContainer };

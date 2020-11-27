@@ -1,1 +1,1 @@
-export * from './HeaderSortCell';
+export * from './HeaderCellSort';

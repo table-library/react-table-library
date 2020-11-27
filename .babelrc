@@ -13,7 +13,8 @@
           "@context": "./src/components/Context",
           "@table": "./src/components/Table",
           "@theme": "./src/components/Theme",
-          "@sort": "./src/components/Sort"
+          "@sort": "./src/components/Sort",
+          "@select": "./src/components/Select"
         }
       }
     ],
