@@ -1,6 +1,6 @@
 {
-  "name": "@table-library/react",
-  "version": "0.1.0",
+  "name": "@table-library/react-table-library",
+  "version": "0.0.1",
   "description": "react-table-library",
   "main": "lib/main.js",
   "directories": {
@@ -21,8 +21,10 @@
   },
   "devDependencies": {
     "@babel/core": "7.11.6",
+    "@babel/eslint-parser": "^7.12.1",
     "@babel/node": "7.10.5",
     "@babel/plugin-proposal-export-default-from": "7.10.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.12.7",
     "@babel/plugin-transform-runtime": "7.11.5",
     "@babel/preset-env": "7.11.5",
     "@babel/preset-react": "7.10.4",
@@ -62,21 +64,16 @@
     "prettier": "prettier './src/**/*.js'",
     "prettier:write": "npm run prettier -- --write",
     "prettier:check": "npm run prettier -- --check",
-
     "lint": "eslint '**/*.js' --ignore-pattern .eslintignore --max-warnings 0",
     "lint:check": "npm run lint",
     "lint:fix": "npm run lint -- --fix",
-
     "test": "jest --config ./.storybook/jest.config.json",
     "test:watch": "npm run test -- --watch",
     "test:update": "npm run test -- --u",
-
     "loki:test": "loki test",
     "loki:update": "loki update",
-
     "storybook:dev": "start-storybook --docs -s ./static -c .storybook -p 9001",
     "storybook:build": "build-storybook --docs -s ./static -c .storybook -o dist",
-
     "library:build": "webpack --config ./webpack.config.js --mode=production",
     "prepublishOnly": "npm run test && npm run prettier:check && npm run lint:check && npm run library:build"
   },
@@ -93,12 +90,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rwieruch/react-open-source-boilerplate.git"
+    "url": "git+https://github.com/table-library/react-table-library.git"
   },
-  "keywords": [],
-  "author": "“Robin <hello@rwieruch.com”> (https://www.robinwieruch.de)",
+  "keywords": [
+    "react",
+    "table",
+    "library"
+  ],
+  "author": "Robin Wieruch <opensource@rwieruch.com> (https://www.robinwieruch.de)",
+  "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/rwieruch/react-open-source-boilerplate/issues"
+    "url": "https://github.com/table-library/react-table-library/issues"
   },
-  "homepage": "https://github.com/rwieruch/react-open-source-boilerplate#readme"
+  "homepage": "https://github.com/table-library/react-table-library#readme"
 }

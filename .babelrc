@@ -2,13 +2,18 @@
   "presets": ["@babel/preset-env", "@babel/preset-react"],
   "plugins": [
     "@babel/plugin-proposal-export-default-from",
+    "@babel/plugin-proposal-optional-chaining",
     [
       "module-resolver",
       {
         "alias": {
           "@colors": "./src/constants/colors",
           "@icons": "./src/components/Icons",
-          "@table": "./src/components/Table"
+          "@shared": "./src/components/_shared",
+          "@context": "./src/components/Context",
+          "@table": "./src/components/Table",
+          "@theme": "./src/components/Theme",
+          "@sort": "./src/components/Sort"
         }
       }
     ],

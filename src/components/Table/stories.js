@@ -3,178 +3,108 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { Table } from '.';
+import {
+  Table,
+  Content,
+  Header,
+  HeaderRow,
+  Body,
+  Row,
+  HeaderCell,
+  Cell
+} from '@table';
 
 const list = [
-  { id: '1', name: 'Hello', stars: 24, count: 42, laser: true },
-  { id: '2', name: 'There', stars: 42, count: 24, laser: false },
-  { id: '3', name: 'Nice', stars: 111, count: 111, laser: true },
-  { id: '4', name: 'To', stars: 122, count: 133, laser: false },
-  { id: '5', name: 'Meet', stars: 133, count: 122, laser: true },
-  { id: '6', name: 'You', stars: 155, count: 155, laser: true },
+  { id: '1', name: 'Hello', stars: 24, count: 42, light: true },
+  { id: '2', name: 'There', stars: 42, count: 24, light: false },
+  { id: '3', name: 'Nice', stars: 111, count: 111, light: true },
+  { id: '4', name: 'To', stars: 122, count: 133, light: false },
+  { id: '5', name: 'Meet', stars: 133, count: 122, light: true },
+  { id: '6', name: 'You', stars: 155, count: 155, light: true },
   {
     id: '7',
     name: 'And Welcome To This Table Folks',
     stars: 155,
     count: 155,
-    laser: true
+    light: true
   }
 ];
 
 storiesOf('01. Table', module)
   .addParameters({ component: Table })
-  .add('01. default', () => {
+  .add('default', () => {
     return (
       <Table list={list}>
         {tableList => (
-          <Table.Content>
-            <Table.Header>
-              <Table.HeaderRow>
-                <Table.HeaderCell width="25%">Name</Table.HeaderCell>
-                <Table.HeaderCell width="25%" isGroupEnd>
-                  Stars
-                </Table.HeaderCell>
-                {/* <Table.HeaderCell width="25%" isGroupEnd>
-                  Laser
-                </Table.HeaderCell> */}
-                <Table.HeaderCell width="25%">Count</Table.HeaderCell>
-              </Table.HeaderRow>
-            </Table.Header>
+          <Content>
+            <Header>
+              <HeaderRow>
+                <HeaderCell width="25%">Name</HeaderCell>
+                <HeaderCell width="25%">Stars</HeaderCell>
+                <HeaderCell width="25%">Light</HeaderCell>
+                <HeaderCell width="25%">Count</HeaderCell>
+              </HeaderRow>
+            </Header>
 
-            <Table.Body>
+            <Body>
               {tableList.map(item => (
-                <Table.Row key={item.id}>
-                  <Table.Cell width="25%">{item.name}</Table.Cell>
-                  <Table.Cell width="25%" isGroupEnd>
-                    {item.stars}
-                  </Table.Cell>
-                  {/* <Table.Cell width="25%" isGroupEnd>
-                    <Checkbox
-                      asAtom
-                      selection={
-                        item.laser
-                          ? Checkbox.SELECTION.selected
-                          : Checkbox.SELECTION.unselected
-                      }
-                      onChange={() => {}}
-                    />
-                  </Table.Cell> */}
-                  <Table.Cell width="25%">{item.count}</Table.Cell>
-                </Table.Row>
+                <Row key={item.id}>
+                  <Cell width="25%">{item.name}</Cell>
+                  <Cell width="25%">{item.stars}</Cell>
+                  <Cell width="25%">{item.light.toString()}</Cell>
+                  <Cell width="25%">{item.count}</Cell>
+                </Row>
               ))}
-            </Table.Body>
-          </Table.Content>
+            </Body>
+          </Content>
         )}
       </Table>
     );
   });
-// .add('02. with sort', () => {
-//   return (
-//     <Table list={list}>
-//       {tableList => (
-//         <Table.Content>
-//           <Table.Header>
-//             <Table.HeaderRow>
-//               <Table.HeaderSortCell
-//                 width="25%"
-//                 sortKey="name"
-//                 sortFn={array =>
-//                   array.sort((a, b) => a.name.localeCompare(b.name))
-//                 }
-//               >
-//                 Name
-//               </Table.HeaderSortCell>
-//               <Table.HeaderCell width="25%" isGroupEnd>
-//                 Stars
-//               </Table.HeaderCell>
-//               <Table.HeaderSortCell
-//                 width="25%"
-//                 sortKey="laser"
-//                 isGroupEnd
-//                 sortFn={array => array.sort((a, b) => a.laser - b.laser)}
-//               >
-//                 Laser
-//               </Table.HeaderSortCell>
-//               <Table.HeaderSortCell
-//                 width="25%"
-//                 sortKey="count"
-//                 sortFn={array => array.sort((a, b) => a.count - b.count)}
-//               >
-//                 Count
-//               </Table.HeaderSortCell>
-//             </Table.HeaderRow>
-//           </Table.Header>
 
-//           <Table.Body>
-//             {tableList.map(item => (
-//               <Table.Row key={item.id}>
-//                 <Table.Cell width="25%">{item.name}</Table.Cell>
-//                 <Table.Cell width="25%" isGroupEnd>
-//                   {item.stars}
-//                 </Table.Cell>
-//                 <Table.Cell width="25%" isGroupEnd>
-//                   <Checkbox
-//                     asAtom
-//                     selection={
-//                       item.laser
-//                         ? Checkbox.SELECTION.selected
-//                         : Checkbox.SELECTION.unselected
-//                     }
-//                     onChange={() => {}}
-//                   />
-//                 </Table.Cell>
-//                 <Table.Cell width="25%">{item.count}</Table.Cell>
-//               </Table.Row>
-//             ))}
-//           </Table.Body>
-//         </Table.Content>
-//       )}
-//     </Table>
-//   );
-// })
 // .add('03. with select', () => {
 //   return (
 //     <Table list={list}>
 //       {(tableList, selectedTableIdList) => (
-//         <Table.Content>
-//           <Table.Header>
-//             <Table.HeaderRow>
-//               <Table.HeaderCell width={Table.WIDTHS.Checkbox} noIndent />
-//               <Table.HeaderCell width="25%">Name</Table.HeaderCell>
-//               <Table.HeaderCell width="25%" isGroupEnd>
+//         <Content>
+//           <Header>
+//             <HeaderRow>
+//               <HeaderCell width={WIDTHS.Checkbox} noIndent />
+//               <HeaderCell width="25%">Name</HeaderCell>
+//               <HeaderCell width="25%" >
 //                 Stars
-//               </Table.HeaderCell>
-//               <Table.HeaderCell width="25%" isGroupEnd>
-//                 Laser
-//               </Table.HeaderCell>
-//               <Table.HeaderCell width="25%">Count</Table.HeaderCell>
-//             </Table.HeaderRow>
-//           </Table.Header>
+//               </HeaderCell>
+//               <HeaderCell width="25%" >
+//                 Light
+//               </HeaderCell>
+//               <HeaderCell width="25%">Count</HeaderCell>
+//             </HeaderRow>
+//           </Header>
 
-//           <Table.Body>
+//           <Body>
 //             {tableList.map(item => (
-//               <Table.Row selectableId={item.id} key={item.id}>
-//                 <Table.SelectCell width={Table.WIDTHS.Checkbox} noIndent />
-//                 <Table.Cell width="25%">{item.name}</Table.Cell>
-//                 <Table.Cell width="25%" isGroupEnd>
+//               <Row selectableId={item.id} key={item.id}>
+//                 <SelectCell width={WIDTHS.Checkbox} noIndent />
+//                 <Cell width="25%">{item.name}</Cell>
+//                 <Cell width="25%" >
 //                   {item.stars}
-//                 </Table.Cell>
-//                 <Table.Cell width="25%" isGroupEnd>
+//                 </Cell>
+//                 <Cell width="25%" >
 //                   <Checkbox
 //                     asAtom
 //                     selection={
-//                       item.laser
+//                       item.light
 //                         ? Checkbox.SELECTION.selected
 //                         : Checkbox.SELECTION.unselected
 //                     }
 //                     onChange={() => {}}
 //                   />
-//                 </Table.Cell>
-//                 <Table.Cell width="25%">{item.count}</Table.Cell>
-//               </Table.Row>
+//                 </Cell>
+//                 <Cell width="25%">{item.count}</Cell>
+//               </Row>
 //             ))}
-//           </Table.Body>
-//         </Table.Content>
+//           </Body>
+//         </Content>
 //       )}
 //     </Table>
 //   );
@@ -183,14 +113,14 @@ storiesOf('01. Table', module)
 //   return (
 //     <Table list={list}>
 //       {(tableList, selectedTableIdList) => (
-//         <Table.Content>
-//           <Table.Header>
-//             <Table.HeaderRow>
-//               <Table.HeaderSelectCell
-//                 width={Table.WIDTHS.Checkbox}
+//         <Content>
+//           <Header>
+//             <HeaderRow>
+//               <HeaderSelectCell
+//                 width={WIDTHS.Checkbox}
 //                 noIndent
 //               />
-//               <Table.HeaderSortCell
+//               <HeaderSortCell
 //                 width="25%"
 //                 sortKey="name"
 //                 sortFn={array =>
@@ -198,52 +128,52 @@ storiesOf('01. Table', module)
 //                 }
 //               >
 //                 Name
-//               </Table.HeaderSortCell>
-//               <Table.HeaderCell width="25%" isGroupEnd>
+//               </HeaderSortCell>
+//               <HeaderCell width="25%" >
 //                 Stars
-//               </Table.HeaderCell>
-//               <Table.HeaderSortCell
+//               </HeaderCell>
+//               <HeaderSortCell
 //                 width="25%"
-//                 sortKey="laser"
-//                 isGroupEnd
-//                 sortFn={array => array.sort((a, b) => a.laser - b.laser)}
+//                 sortKey="light"
+//
+//                 sortFn={array => array.sort((a, b) => a.light - b.light)}
 //               >
-//                 Laser
-//               </Table.HeaderSortCell>
-//               <Table.HeaderSortCell
+//                 Light
+//               </HeaderSortCell>
+//               <HeaderSortCell
 //                 width="25%"
 //                 sortKey="count"
 //                 sortFn={array => array.sort((a, b) => a.count - b.count)}
 //               >
 //                 Count
-//               </Table.HeaderSortCell>
-//             </Table.HeaderRow>
-//           </Table.Header>
+//               </HeaderSortCell>
+//             </HeaderRow>
+//           </Header>
 
-//           <Table.Body>
+//           <Body>
 //             {tableList.map(item => (
-//               <Table.Row selectableId={item.id} key={item.id}>
-//                 <Table.SelectCell width={Table.WIDTHS.Checkbox} noIndent />
-//                 <Table.Cell width="25%">{item.name}</Table.Cell>
-//                 <Table.Cell width="25%" isGroupEnd>
+//               <Row selectableId={item.id} key={item.id}>
+//                 <SelectCell width={WIDTHS.Checkbox} noIndent />
+//                 <Cell width="25%">{item.name}</Cell>
+//                 <Cell width="25%" >
 //                   {item.stars}
-//                 </Table.Cell>
-//                 <Table.Cell width="25%" isGroupEnd>
+//                 </Cell>
+//                 <Cell width="25%" >
 //                   <Checkbox
 //                     asAtom
 //                     selection={
-//                       item.laser
+//                       item.light
 //                         ? Checkbox.SELECTION.selected
 //                         : Checkbox.SELECTION.unselected
 //                     }
 //                     onChange={() => {}}
 //                   />
-//                 </Table.Cell>
-//                 <Table.Cell width="25%">{item.count}</Table.Cell>
-//               </Table.Row>
+//                 </Cell>
+//                 <Cell width="25%">{item.count}</Cell>
+//               </Row>
 //             ))}
-//           </Table.Body>
-//         </Table.Content>
+//           </Body>
+//         </Content>
 //       )}
 //     </Table>
 //   );
@@ -252,43 +182,43 @@ storiesOf('01. Table', module)
 //   return (
 //     <Table list={list}>
 //       {tableList => (
-//         <Table.Content>
-//           <Table.Header>
-//             <Table.HeaderRow>
-//               <Table.HeaderCell width="25%">Name</Table.HeaderCell>
-//               <Table.HeaderCell width="25%" isGroupEnd>
+//         <Content>
+//           <Header>
+//             <HeaderRow>
+//               <HeaderCell width="25%">Name</HeaderCell>
+//               <HeaderCell width="25%" >
 //                 Stars
-//               </Table.HeaderCell>
-//               <Table.HeaderCell width="25%" isGroupEnd>
-//                 Laser
-//               </Table.HeaderCell>
-//               <Table.HeaderCell width="25%">Count</Table.HeaderCell>
-//             </Table.HeaderRow>
-//           </Table.Header>
+//               </HeaderCell>
+//               <HeaderCell width="25%" >
+//                 Light
+//               </HeaderCell>
+//               <HeaderCell width="25%">Count</HeaderCell>
+//             </HeaderRow>
+//           </Header>
 
-//           <Table.Body>
+//           <Body>
 //             {tableList.map(item => (
-//               <Table.Row key={item.id} onClick={event => console.log(event)}>
-//                 <Table.Cell width="25%">{item.name}</Table.Cell>
-//                 <Table.Cell width="25%" isGroupEnd>
+//               <Row key={item.id} onClick={event => console.log(event)}>
+//                 <Cell width="25%">{item.name}</Cell>
+//                 <Cell width="25%" >
 //                   {item.stars}
-//                 </Table.Cell>
-//                 <Table.Cell width="25%" isGroupEnd>
+//                 </Cell>
+//                 <Cell width="25%" >
 //                   <Checkbox
 //                     asAtom
 //                     selection={
-//                       item.laser
+//                       item.light
 //                         ? Checkbox.SELECTION.selected
 //                         : Checkbox.SELECTION.unselected
 //                     }
 //                     onChange={() => {}}
 //                   />
-//                 </Table.Cell>
-//                 <Table.Cell width="25%">{item.count}</Table.Cell>
-//               </Table.Row>
+//                 </Cell>
+//                 <Cell width="25%">{item.count}</Cell>
+//               </Row>
 //             ))}
-//           </Table.Body>
-//         </Table.Content>
+//           </Body>
+//         </Content>
 //       )}
 //     </Table>
 //   );
@@ -298,43 +228,43 @@ storiesOf('01. Table', module)
 //     <div style={{ height: text('container height', '300px') }}>
 //       <Table list={list}>
 //         {tableList => (
-//           <Table.Content>
-//             <Table.Header>
-//               <Table.HeaderRow>
-//                 <Table.HeaderCell width="25%">Name</Table.HeaderCell>
-//                 <Table.HeaderCell width="25%" isGroupEnd>
+//           <Content>
+//             <Header>
+//               <HeaderRow>
+//                 <HeaderCell width="25%">Name</HeaderCell>
+//                 <HeaderCell width="25%" >
 //                   Stars
-//                 </Table.HeaderCell>
-//                 <Table.HeaderCell width="25%" isGroupEnd>
-//                   Laser
-//                 </Table.HeaderCell>
-//                 <Table.HeaderCell width="25%">Count</Table.HeaderCell>
-//               </Table.HeaderRow>
-//             </Table.Header>
+//                 </HeaderCell>
+//                 <HeaderCell width="25%" >
+//                   Light
+//                 </HeaderCell>
+//                 <HeaderCell width="25%">Count</HeaderCell>
+//               </HeaderRow>
+//             </Header>
 
-//             <Table.Body>
+//             <Body>
 //               {tableList.map(item => (
-//                 <Table.Row key={item.id}>
-//                   <Table.Cell width="25%">{item.name}</Table.Cell>
-//                   <Table.Cell width="25%" isGroupEnd>
+//                 <Row key={item.id}>
+//                   <Cell width="25%">{item.name}</Cell>
+//                   <Cell width="25%" >
 //                     {item.stars}
-//                   </Table.Cell>
-//                   <Table.Cell width="25%" isGroupEnd>
+//                   </Cell>
+//                   <Cell width="25%" >
 //                     <Checkbox
 //                       asAtom
 //                       selection={
-//                         item.laser
+//                         item.light
 //                           ? Checkbox.SELECTION.selected
 //                           : Checkbox.SELECTION.unselected
 //                       }
 //                       onChange={() => {}}
 //                     />
-//                   </Table.Cell>
-//                   <Table.Cell width="25%">{item.count}</Table.Cell>
-//                 </Table.Row>
+//                   </Cell>
+//                   <Cell width="25%">{item.count}</Cell>
+//                 </Row>
 //               ))}
-//             </Table.Body>
-//           </Table.Content>
+//             </Body>
+//           </Content>
 //         )}
 //       </Table>
 //     </div>
@@ -357,47 +287,47 @@ storiesOf('01. Table', module)
 
 //       <Table list={filteredList}>
 //         {tableList => (
-//           <Table.Content>
-//             <Table.Header>
-//               <Table.HeaderRow>
-//                 <Table.HeaderCell width="25%" noIndent>
+//           <Content>
+//             <Header>
+//               <HeaderRow>
+//                 <HeaderCell width="25%" noIndent>
 //                   Name
-//                 </Table.HeaderCell>
-//                 <Table.HeaderCell width="25%" isGroupEnd>
+//                 </HeaderCell>
+//                 <HeaderCell width="25%" >
 //                   Stars
-//                 </Table.HeaderCell>
-//                 <Table.HeaderCell width="25%" isGroupEnd>
-//                   Laser
-//                 </Table.HeaderCell>
-//                 <Table.HeaderCell width="25%">Count</Table.HeaderCell>
-//               </Table.HeaderRow>
-//             </Table.Header>
+//                 </HeaderCell>
+//                 <HeaderCell width="25%" >
+//                   Light
+//                 </HeaderCell>
+//                 <HeaderCell width="25%">Count</HeaderCell>
+//               </HeaderRow>
+//             </Header>
 
-//             <Table.Body>
+//             <Body>
 //               {tableList.map(item => (
-//                 <Table.Row key={item.id}>
-//                   <Table.Cell width="25%" noIndent>
+//                 <Row key={item.id}>
+//                   <Cell width="25%" noIndent>
 //                     {item.name}
-//                   </Table.Cell>
-//                   <Table.Cell width="25%" isGroupEnd>
+//                   </Cell>
+//                   <Cell width="25%" >
 //                     {item.stars}
-//                   </Table.Cell>
-//                   <Table.Cell width="25%" isGroupEnd>
+//                   </Cell>
+//                   <Cell width="25%" >
 //                     <Checkbox
 //                       asAtom
 //                       selection={
-//                         item.laser
+//                         item.light
 //                           ? Checkbox.SELECTION.selected
 //                           : Checkbox.SELECTION.unselected
 //                       }
 //                       onChange={() => {}}
 //                     />
-//                   </Table.Cell>
-//                   <Table.Cell width="25%">{item.count}</Table.Cell>
-//                 </Table.Row>
+//                   </Cell>
+//                   <Cell width="25%">{item.count}</Cell>
+//                 </Row>
 //               ))}
-//             </Table.Body>
-//           </Table.Content>
+//             </Body>
+//           </Content>
 //         )}
 //       </Table>
 //     </>
