@@ -31,10 +31,9 @@ const RowSelect = ({
   children
 }) => {
   const theme = React.useContext(ThemeContext);
+  const select = React.useContext(SelectContext);
 
-  const { selectState, onSelectById } = React.useContext(
-    SelectContext
-  );
+  const { selectState, onSelectById } = select;
 
   const handleClick = event => {
     // TODO
@@ -58,7 +57,11 @@ const RowSelect = ({
       css={theme?.RowSelect}
       onClick={handleClick}
     >
-      <RowBase>{children}</RowBase>
+      <RowBase>
+        {React.Children.map(children, child =>
+          React.cloneElement(child, { selectId })
+        )}
+      </RowBase>
     </RowSelectContainer>
   );
 };

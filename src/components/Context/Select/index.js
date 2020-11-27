@@ -1,6 +1,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
+import { TableContext } from '../Table';
+
 const SELECT_BY_ID = 'SELECT_BY_ID';
 const SELECT_ALL = 'SELECT_ALL';
 
@@ -48,6 +50,8 @@ const SelectProvider = ({
   defaultSelect = DEFAULT_SELECT,
   children
 }) => {
+  const { list } = React.useContext(TableContext);
+
   const [selectState, selectStateDispatcher] = React.useReducer(
     selectReducer,
     defaultSelect
@@ -56,15 +60,34 @@ const SelectProvider = ({
   const onSelectById = id =>
     selectStateDispatcher({ type: SELECT_BY_ID, payload: { id } });
 
-  const onSelectAll = list =>
+  const onSelectAll = () =>
     selectStateDispatcher({
       type: SELECT_ALL,
       payload: { ids: list.map(item => item.id) }
     });
 
+  const allSelected =
+    selectState.ids.sort().join(',') ===
+    list
+      .map(item => item.id)
+      .sort()
+      .join(',');
+
+  const noneSelected = !selectState.ids.length;
+
+  const mergedSelectState = {
+    ...selectState,
+    allSelected,
+    noneSelected
+  };
+
   return (
     <SelectContext.Provider
-      value={{ selectState, onSelectById, onSelectAll }}
+      value={{
+        selectState: mergedSelectState,
+        onSelectById,
+        onSelectAll
+      }}
     >
       {children}
     </SelectContext.Provider>

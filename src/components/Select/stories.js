@@ -9,12 +9,11 @@ import {
   Header,
   HeaderRow,
   Body,
-  Row,
   HeaderCell,
   Cell
 } from '@table';
 
-import { RowSelect } from '@select';
+import { RowSelect, HeaderCellSelect, CellSelect } from '@select';
 
 const list = [
   { id: '1', name: 'Hello', stars: 24, count: 42, light: true },
@@ -88,6 +87,41 @@ storiesOf('04. Table with Select', module)
                   <Cell width="25%">{item.stars}</Cell>
                   <Cell width="25%">{item.light.toString()}</Cell>
                   <Cell width="25%">{item.count}</Cell>
+                </RowSelect>
+              ))}
+            </Body>
+          </Content>
+        )}
+      </Table>
+    );
+  })
+  .add('with checkbox select', () => {
+    return (
+      <Table list={list}>
+        {tableList => (
+          <Content>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSelect />
+                <HeaderCell width="20%">Name</HeaderCell>
+                <HeaderCell width="20%">Stars</HeaderCell>
+                <HeaderCell width="20%">Light</HeaderCell>
+                <HeaderCell width="20%">Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <RowSelect
+                  key={item.id}
+                  selectId={item.id}
+                  selectType={RowSelect.SELECT_TYPES.CellSelectClick}
+                >
+                  <CellSelect />
+                  <Cell width="20%">{item.name}</Cell>
+                  <Cell width="20%">{item.stars}</Cell>
+                  <Cell width="20%">{item.light.toString()}</Cell>
+                  <Cell width="20%">{item.count}</Cell>
                 </RowSelect>
               ))}
             </Body>

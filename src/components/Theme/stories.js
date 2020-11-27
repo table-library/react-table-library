@@ -179,22 +179,18 @@ storiesOf('02. Table with Themes', module)
         font-size: 18px;
         color: #363636;
 
+        position: relative;
         margin-top: -1px;
+        z-index: 1;
 
-        & > div {
-          z-index: 1;
-
-          border-top: 1px solid #a0a8ae;
-          border-bottom: 1px solid #a0a8ae;
-        }
+        border-top: 1px solid #a0a8ae;
+        border-bottom: 1px solid #a0a8ae;
 
         &:hover {
-          & > div {
-            z-index: 2;
+          z-index: 2;
 
-            border-top: 1px solid #177ac9;
-            border-bottom: 1px solid #177ac9;
-          }
+          border-top: 1px solid #177ac9;
+          border-bottom: 1px solid #177ac9;
 
           .td > div {
             color: #177ac9;

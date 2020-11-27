@@ -20,10 +20,14 @@ const CellContainerBase = styled.div`
     padding-right: ${GUTTER_OUTER}px;
   }
 
+  &:first-child > div {
+    margin-left: ${({ indentation = 0 }) => 0 + indentation}px;
+  }
+
   & > div {
+    margin-left: ${({ indentation = 0 }) => 20 + indentation}px;
     margin-top: 4px;
     margin-bottom: 4px;
-    margin-left: ${({ indentation = 0 }) => 20 + indentation}px;
 
     white-space: nowrap;
     overflow: hidden;
@@ -32,12 +36,13 @@ const CellContainerBase = styled.div`
     border-right: 1px solid ${COLORS.BORDER};
   }
 
-  &:last-child > div {
-    border-right: 1px solid transparent;
+  &.shrink > div {
+    padding-right: ${GUTTER_OUTER}px;
+    padding-left: ${GUTTER_OUTER}px;
   }
 
-  &:first-child > div {
-    margin-left: ${({ indentation = 0 }) => 0 + indentation}px;
+  &:last-child > div {
+    border-right: 1px solid transparent;
   }
 
   ${({ css }) => css};

@@ -19,6 +19,7 @@ const RowContainerBase = styled.div`
   display: flex;
   align-items: center;
 `;
+// height: 40px;
 
 const RowContainer = styled(RowContainerBase)`
   font-size: 14px;
@@ -39,9 +40,7 @@ const HeaderRowContainer = styled(RowContainerBase)`
   font-size: 14px;
   color: ${COLORS.FONT_PRIMARY};
 
-  & > div {
-    border-bottom: 1px solid ${COLORS.BORDER};
-  }
+  border-bottom: 1px solid ${COLORS.BORDER};
 
   ${({ css }) => css};
 `;
