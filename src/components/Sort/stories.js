@@ -165,6 +165,79 @@ storiesOf('03. Table with Sort', module)
       </Table>
     );
   })
+  .add('sort icon size ', () => {
+    return (
+      <Table list={list}>
+        {tableList => (
+          <Content>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSort
+                  width="25%"
+                  sortKey="name"
+                  sortFn={array =>
+                    array.sort((a, b) => a.name.localeCompare(b.name))
+                  }
+                  sortIcon={{
+                    size: '10px'
+                  }}
+                >
+                  Name
+                </HeaderCellSort>
+                <HeaderCellSort
+                  width="25%"
+                  sortKey="stars"
+                  sortFn={array =>
+                    array.sort((a, b) => a.stars - b.stars)
+                  }
+                  sortIcon={{
+                    size: '10px'
+                  }}
+                >
+                  Stars
+                </HeaderCellSort>
+                <HeaderCellSort
+                  width="25%"
+                  sortKey="light"
+                  sortFn={array =>
+                    array.sort((a, b) => a.light - b.light)
+                  }
+                  sortIcon={{
+                    size: '10px'
+                  }}
+                >
+                  Light
+                </HeaderCellSort>
+                <HeaderCellSort
+                  width="25%"
+                  sortKey="count"
+                  sortFn={array =>
+                    array.sort((a, b) => a.count - b.count)
+                  }
+                  sortIcon={{
+                    size: '10px'
+                  }}
+                >
+                  Count
+                </HeaderCellSort>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <Row key={item.id}>
+                  <Cell width="25%">{item.name}</Cell>
+                  <Cell width="25%">{item.stars}</Cell>
+                  <Cell width="25%">{item.light.toString()}</Cell>
+                  <Cell width="25%">{item.count}</Cell>
+                </Row>
+              ))}
+            </Body>
+          </Content>
+        )}
+      </Table>
+    );
+  })
   .add('sort icon position ', () => {
     return (
       <Table list={list}>
@@ -180,7 +253,7 @@ storiesOf('03. Table with Sort', module)
                   }
                   sortIcon={{
                     position:
-                      HeaderCellSort.SORT_ICON_POSITIONS.Suffix
+                      HeaderCellSort.SORT_ICON_POSITIONS.Prefix
                   }}
                 >
                   Name
@@ -193,7 +266,7 @@ storiesOf('03. Table with Sort', module)
                   }
                   sortIcon={{
                     position:
-                      HeaderCellSort.SORT_ICON_POSITIONS.Suffix
+                      HeaderCellSort.SORT_ICON_POSITIONS.Prefix
                   }}
                 >
                   Stars
@@ -206,7 +279,7 @@ storiesOf('03. Table with Sort', module)
                   }
                   sortIcon={{
                     position:
-                      HeaderCellSort.SORT_ICON_POSITIONS.Suffix
+                      HeaderCellSort.SORT_ICON_POSITIONS.Prefix
                   }}
                 >
                   Light
@@ -219,169 +292,7 @@ storiesOf('03. Table with Sort', module)
                   }
                   sortIcon={{
                     position:
-                      HeaderCellSort.SORT_ICON_POSITIONS.Suffix
-                  }}
-                >
-                  Count
-                </HeaderCellSort>
-              </HeaderRow>
-            </Header>
-
-            <Body>
-              {tableList.map(item => (
-                <Row key={item.id}>
-                  <Cell width="25%">{item.name}</Cell>
-                  <Cell width="25%">{item.stars}</Cell>
-                  <Cell width="25%">{item.light.toString()}</Cell>
-                  <Cell width="25%">{item.count}</Cell>
-                </Row>
-              ))}
-            </Body>
-          </Content>
-        )}
-      </Table>
-    );
-  })
-  .add('sort icon size ', () => {
-    return (
-      <Table list={list}>
-        {tableList => (
-          <Content>
-            <Header>
-              <HeaderRow>
-                <HeaderCellSort
-                  width="25%"
-                  sortKey="name"
-                  sortFn={array =>
-                    array.sort((a, b) => a.name.localeCompare(b.name))
-                  }
-                  sortIcon={{
-                    size: '18px'
-                  }}
-                >
-                  Name
-                </HeaderCellSort>
-                <HeaderCellSort
-                  width="25%"
-                  sortKey="stars"
-                  sortFn={array =>
-                    array.sort((a, b) => a.stars - b.stars)
-                  }
-                  sortIcon={{
-                    size: '18px'
-                  }}
-                >
-                  Stars
-                </HeaderCellSort>
-                <HeaderCellSort
-                  width="25%"
-                  sortKey="light"
-                  sortFn={array =>
-                    array.sort((a, b) => a.light - b.light)
-                  }
-                  sortIcon={{
-                    size: '18px'
-                  }}
-                >
-                  Light
-                </HeaderCellSort>
-                <HeaderCellSort
-                  width="25%"
-                  sortKey="count"
-                  sortFn={array =>
-                    array.sort((a, b) => a.count - b.count)
-                  }
-                  sortIcon={{
-                    size: '18px'
-                  }}
-                >
-                  Count
-                </HeaderCellSort>
-              </HeaderRow>
-            </Header>
-
-            <Body>
-              {tableList.map(item => (
-                <Row key={item.id}>
-                  <Cell width="25%">{item.name}</Cell>
-                  <Cell width="25%">{item.stars}</Cell>
-                  <Cell width="25%">{item.light.toString()}</Cell>
-                  <Cell width="25%">{item.count}</Cell>
-                </Row>
-              ))}
-            </Body>
-          </Content>
-        )}
-      </Table>
-    );
-  })
-  .add('custom sort icon (Material UI)', () => {
-    return (
-      <Table list={list}>
-        {tableList => (
-          <Content>
-            <Header>
-              <HeaderRow>
-                <HeaderCellSort
-                  width="25%"
-                  sortKey="name"
-                  sortFn={array =>
-                    array.sort((a, b) => a.name.localeCompare(b.name))
-                  }
-                  sortIcon={{
-                    iconDefault: null,
-                    iconUp: <KeyboardArrowUpIcon fontSize="small" />,
-                    iconDown: (
-                      <KeyboardArrowDownIcon fontSize="small" />
-                    )
-                  }}
-                >
-                  Name
-                </HeaderCellSort>
-                <HeaderCellSort
-                  width="25%"
-                  sortKey="stars"
-                  sortFn={array =>
-                    array.sort((a, b) => a.stars - b.stars)
-                  }
-                  sortIcon={{
-                    iconDefault: null,
-                    iconUp: <KeyboardArrowUpIcon fontSize="small" />,
-                    iconDown: (
-                      <KeyboardArrowDownIcon fontSize="small" />
-                    )
-                  }}
-                >
-                  Stars
-                </HeaderCellSort>
-                <HeaderCellSort
-                  width="25%"
-                  sortKey="light"
-                  sortFn={array =>
-                    array.sort((a, b) => a.light - b.light)
-                  }
-                  sortIcon={{
-                    iconDefault: null,
-                    iconUp: <KeyboardArrowUpIcon fontSize="small" />,
-                    iconDown: (
-                      <KeyboardArrowDownIcon fontSize="small" />
-                    )
-                  }}
-                >
-                  Light
-                </HeaderCellSort>
-                <HeaderCellSort
-                  width="25%"
-                  sortKey="count"
-                  sortFn={array =>
-                    array.sort((a, b) => a.count - b.count)
-                  }
-                  sortIcon={{
-                    iconDefault: null,
-                    iconUp: <KeyboardArrowUpIcon fontSize="small" />,
-                    iconDown: (
-                      <KeyboardArrowDownIcon fontSize="small" />
-                    )
+                      HeaderCellSort.SORT_ICON_POSITIONS.Prefix
                   }}
                 >
                   Count
@@ -417,6 +328,10 @@ storiesOf('03. Table with Sort', module)
                   sortFn={array =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
+                  sortIcon={{
+                    position:
+                      HeaderCellSort.SORT_ICON_POSITIONS.Prefix
+                  }}
                 >
                   Name
                 </HeaderCellSort>
@@ -426,6 +341,10 @@ storiesOf('03. Table with Sort', module)
                   sortFn={array =>
                     array.sort((a, b) => a.stars - b.stars)
                   }
+                  sortIcon={{
+                    position:
+                      HeaderCellSort.SORT_ICON_POSITIONS.Prefix
+                  }}
                 >
                   Stars
                 </HeaderCellSort>
@@ -435,6 +354,10 @@ storiesOf('03. Table with Sort', module)
                   sortFn={array =>
                     array.sort((a, b) => a.light - b.light)
                   }
+                  sortIcon={{
+                    position:
+                      HeaderCellSort.SORT_ICON_POSITIONS.Prefix
+                  }}
                 >
                   Light
                 </HeaderCellSort>
@@ -444,6 +367,10 @@ storiesOf('03. Table with Sort', module)
                   sortFn={array =>
                     array.sort((a, b) => a.count - b.count)
                   }
+                  sortIcon={{
+                    position:
+                      HeaderCellSort.SORT_ICON_POSITIONS.Prefix
+                  }}
                 >
                   Count
                 </HeaderCellSort>
@@ -465,6 +392,99 @@ storiesOf('03. Table with Sort', module)
                   <Cell width="25%" indentation={18}>
                     {item.count}
                   </Cell>
+                </Row>
+              ))}
+            </Body>
+          </Content>
+        )}
+      </Table>
+    );
+  })
+  .add('custom sort icon (Material UI)', () => {
+    return (
+      <Table list={list}>
+        {tableList => (
+          <Content>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSort
+                  width="25%"
+                  sortKey="name"
+                  sortFn={array =>
+                    array.sort((a, b) => a.name.localeCompare(b.name))
+                  }
+                  sortIcon={{
+                    margin: '0px',
+                    iconDefault: null,
+                    iconUp: <KeyboardArrowUpIcon fontSize="small" />,
+                    iconDown: (
+                      <KeyboardArrowDownIcon fontSize="small" />
+                    )
+                  }}
+                >
+                  Name
+                </HeaderCellSort>
+                <HeaderCellSort
+                  width="25%"
+                  sortKey="stars"
+                  sortFn={array =>
+                    array.sort((a, b) => a.stars - b.stars)
+                  }
+                  sortIcon={{
+                    margin: '0px',
+                    iconDefault: null,
+                    iconUp: <KeyboardArrowUpIcon fontSize="small" />,
+                    iconDown: (
+                      <KeyboardArrowDownIcon fontSize="small" />
+                    )
+                  }}
+                >
+                  Stars
+                </HeaderCellSort>
+                <HeaderCellSort
+                  width="25%"
+                  sortKey="light"
+                  sortFn={array =>
+                    array.sort((a, b) => a.light - b.light)
+                  }
+                  sortIcon={{
+                    margin: '0px',
+                    iconDefault: null,
+                    iconUp: <KeyboardArrowUpIcon fontSize="small" />,
+                    iconDown: (
+                      <KeyboardArrowDownIcon fontSize="small" />
+                    )
+                  }}
+                >
+                  Light
+                </HeaderCellSort>
+                <HeaderCellSort
+                  width="25%"
+                  sortKey="count"
+                  sortFn={array =>
+                    array.sort((a, b) => a.count - b.count)
+                  }
+                  sortIcon={{
+                    margin: '0px',
+                    iconDefault: null,
+                    iconUp: <KeyboardArrowUpIcon fontSize="small" />,
+                    iconDown: (
+                      <KeyboardArrowDownIcon fontSize="small" />
+                    )
+                  }}
+                >
+                  Count
+                </HeaderCellSort>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <Row key={item.id}>
+                  <Cell width="25%">{item.name}</Cell>
+                  <Cell width="25%">{item.stars}</Cell>
+                  <Cell width="25%">{item.light.toString()}</Cell>
+                  <Cell width="25%">{item.count}</Cell>
                 </Row>
               ))}
             </Body>

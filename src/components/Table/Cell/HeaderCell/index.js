@@ -15,7 +15,7 @@ const HeaderCell = ({ width, className, indentation, children }) => {
       width={width}
       indentation={indentation}
     >
-      <div>{children}</div>
+      {children}
     </HeaderCellContainer>
   );
 };

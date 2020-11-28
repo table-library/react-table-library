@@ -67,6 +67,7 @@ storiesOf('02. Table with Themes', module)
       HeaderRow: `
         font-size: 14px;
 
+        z-index: 3;
         background-color: #eaf5fd;
       `,
       Row: `
@@ -78,11 +79,6 @@ storiesOf('02. Table with Themes', module)
 
         &:nth-child(even) {
           background-color: #eaf5fd;
-        }
-      `,
-      Cell: `
-        & > div {
-          border-right: 1px solid #b6cada;
         }
       `
     });
@@ -120,6 +116,7 @@ storiesOf('02. Table with Themes', module)
       HeaderRow: `
         font-size: 14px;
 
+        z-index: 3;
         background-color: #fafafa;
       `,
       Row: `
@@ -131,20 +128,6 @@ storiesOf('02. Table with Themes', module)
 
         &:nth-child(even) {
           background-color: #fafafa;
-        }
-      `,
-      HeaderCell: `
-        & > div {
-          border-right: 1px solid transparent;
-
-          font-weight: semi-bold;
-        }
-      `,
-      Cell: `
-        & > div {
-          border-right: 1px solid transparent;
-
-          font-weight: semi-bold;
         }
       `
     });
@@ -185,60 +168,26 @@ storiesOf('02. Table with Themes', module)
       Row: `
         color: #363636;
 
-        position: relative;
-        margin-top: -1px;
-        z-index: 1;
-
         border-top: 1px solid #a0a8ae;
         border-bottom: 1px solid #a0a8ae;
 
         &:hover {
-          z-index: 2;
-
           border-top: 1px solid #177ac9;
           border-bottom: 1px solid #177ac9;
 
-          .td > div {
-            color: #177ac9;
-          }
+          color: #177ac9;
         }
       `,
       HeaderCell: `
-        height: 50px;
+        margin-top: 9px;
+        margin-bottom: 9px;
 
-        & > div {
-          display: flex;
-          align-items: center;
-          height: 75%;
-        }
-
-        &.group > div {
-          border-right: 1px solid #a1a1a1;
-        }
-
-        &:not(.group) > div {
-          border-right: 1px solid transparent;
-        }
+        padding-top: 11px;
+        padding-bottom: 11px;
       `,
       Cell: `
-        height: 62px;
-        display: flex;
-        align-items: center;
-
-        & > div {
-          flex: 1;
-          display: flex;
-          align-items: center;
-          height: 75%;
-        }
-
-        &.group > div {
-          border-right: 1px solid #a1a1a1;
-        }
-
-        &:not(.group) > div {
-          border-right: 1px solid transparent;
-        }
+        margin-top: 8px;
+        margin-bottom: 9px;
       `
     });
 

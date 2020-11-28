@@ -8,41 +8,39 @@ const GUTTER_OUTER = 8;
 const CellContainerBase = styled.div`
   width: ${props => props.width};
 
-  &:first-child > div {
+  padding-top: 4px;
+  padding-bottom: 4px;
+
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:first-child {
     padding-left: ${GUTTER_OUTER}px;
   }
 
-  & > div {
-    padding-right: ${GUTTER_INNER}px;
-  }
+  padding-right: ${GUTTER_INNER}px;
 
-  &:last-child > div {
+  &:last-child {
     padding-right: ${GUTTER_OUTER}px;
   }
 
-  &:first-child > div {
+  margin-left: ${({ indentation = 0 }) => 20 + indentation}px;
+
+  &:first-child {
     margin-left: ${({ indentation = 0 }) => 0 + indentation}px;
   }
 
-  & > div {
-    margin-left: ${({ indentation = 0 }) => 20 + indentation}px;
-    margin-top: 4px;
-    margin-bottom: 4px;
+  border-right: 1px solid ${COLORS.BORDER};
 
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    border-right: 1px solid ${COLORS.BORDER};
+  &:last-child {
+    border-right: 1px solid transparent;
   }
 
-  &.shrink > div {
+  &.shrink {
     padding-right: ${GUTTER_OUTER}px;
     padding-left: ${GUTTER_OUTER}px;
-  }
-
-  &:last-child > div {
-    border-right: 1px solid transparent;
   }
 
   ${({ css }) => css};
