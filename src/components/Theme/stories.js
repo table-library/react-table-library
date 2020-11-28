@@ -65,9 +65,13 @@ storiesOf('02. Table with Themes', module)
   .add('Ocean Blue', () => {
     const theme = useTheme({
       HeaderRow: `
+        font-size: 14px;
+
         background-color: #eaf5fd;
       `,
       Row: `
+        font-size: 14px;
+
         &:nth-child(odd) {
           background-color: #d2e9fb;
         }
@@ -114,9 +118,13 @@ storiesOf('02. Table with Themes', module)
   .add('Grey Wolf', () => {
     const theme = useTheme({
       HeaderRow: `
+        font-size: 14px;
+
         background-color: #fafafa;
       `,
       Row: `
+        font-size: 14px;
+
         &:nth-child(odd) {
           background-color: #f5f5f5;
         }
@@ -172,11 +180,9 @@ storiesOf('02. Table with Themes', module)
   .add('Machine', () => {
     const theme = useTheme({
       HeaderRow: `
-        font-size: 18px;
         color: #000000;
       `,
       Row: `
-        font-size: 18px;
         color: #363636;
 
         position: relative;

@@ -2,20 +2,16 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
 
+import { isFunction } from '@util/isFunction';
 import { CellContainer } from '@shared';
 import { ThemeContext, SelectContext } from '@context';
 
-const HeaderCellSelect = ({ width, className }) => {
-  const theme = React.useContext(ThemeContext);
+const Checkbox = ({ children }) => {
   const select = React.useContext(SelectContext);
 
   const { selectState, onSelectAll } = select;
 
-  const handleChange = () => {
-    onSelectAll();
-  };
-
-  const checkboxRef = node => {
+  const ref = node => {
     if (!node) return;
 
     if (selectState.allSelected) {
@@ -30,6 +26,26 @@ const HeaderCellSelect = ({ width, className }) => {
     }
   };
 
+  const hasChildren = !!children;
+  const hasRenderProp = hasChildren && isFunction(children);
+
+  if (hasChildren && hasRenderProp) {
+    return children({ selectState, onSelectAll });
+  }
+
+  if (hasChildren && !hasRenderProp) {
+    return React.cloneElement(children, {
+      ref,
+      onChange: onSelectAll
+    });
+  }
+
+  return <input ref={ref} type="checkbox" onChange={onSelectAll} />;
+};
+
+const HeaderCellSelect = ({ width, className, children }) => {
+  const theme = React.useContext(ThemeContext);
+
   return (
     <CellContainer
       className={cs('td', 'shrink', className)}
@@ -37,11 +53,7 @@ const HeaderCellSelect = ({ width, className }) => {
       width={width}
     >
       <div>
-        <input
-          ref={checkboxRef}
-          type="checkbox"
-          onChange={handleChange}
-        />
+        <Checkbox>{children}</Checkbox>
       </div>
     </CellContainer>
   );
@@ -49,8 +61,8 @@ const HeaderCellSelect = ({ width, className }) => {
 
 HeaderCellSelect.propTypes = {
   width: PropTypes.string,
-  className: PropTypes.string
-  // children: PropTypes.node
+  className: PropTypes.string,
+  children: PropTypes.node
 };
 
 export { HeaderCellSelect };

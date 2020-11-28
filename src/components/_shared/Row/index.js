@@ -22,7 +22,7 @@ const RowContainerBase = styled.div`
 // height: 40px;
 
 const RowContainer = styled(RowContainerBase)`
-  font-size: 14px;
+  font-size: 18px;
   color: ${COLORS.FONT_SECONDARY};
 
   &:hover > div {
@@ -37,7 +37,7 @@ const RowContainer = styled(RowContainerBase)`
 `;
 
 const HeaderRowContainer = styled(RowContainerBase)`
-  font-size: 14px;
+  font-size: 18px;
   color: ${COLORS.FONT_PRIMARY};
 
   border-bottom: 1px solid ${COLORS.BORDER};

@@ -3,6 +3,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
+import Checkbox from '@material-ui/core/Checkbox';
+
 import {
   Table,
   Content,
@@ -62,7 +64,7 @@ storiesOf('04. Table with Select', module)
       </Table>
     );
   })
-  .add('with default select', () => {
+  .add('default select', () => {
     const defaultSelect = {
       ids: ['2', '4']
     };
@@ -95,7 +97,7 @@ storiesOf('04. Table with Select', module)
       </Table>
     );
   })
-  .add('with checkbox select', () => {
+  .add('checkbox', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -118,6 +120,55 @@ storiesOf('04. Table with Select', module)
                   selectType={RowSelect.SELECT_TYPES.CellSelectClick}
                 >
                   <CellSelect />
+                  <Cell width="20%">{item.name}</Cell>
+                  <Cell width="20%">{item.stars}</Cell>
+                  <Cell width="20%">{item.light.toString()}</Cell>
+                  <Cell width="20%">{item.count}</Cell>
+                </RowSelect>
+              ))}
+            </Body>
+          </Content>
+        )}
+      </Table>
+    );
+  })
+  .add('custom checkbox (Material UI)', () => {
+    return (
+      <Table list={list}>
+        {tableList => (
+          <Content>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSelect>
+                  {({ selectState, onSelectAll }) => (
+                    <Checkbox
+                      size="small"
+                      checked={selectState.allSelected}
+                      indeterminate={
+                        !selectState.allSelected &&
+                        !selectState.noneSelected
+                      }
+                      onChange={onSelectAll}
+                    />
+                  )}
+                </HeaderCellSelect>
+                <HeaderCell width="20%">Name</HeaderCell>
+                <HeaderCell width="20%">Stars</HeaderCell>
+                <HeaderCell width="20%">Light</HeaderCell>
+                <HeaderCell width="20%">Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <RowSelect
+                  key={item.id}
+                  selectId={item.id}
+                  selectType={RowSelect.SELECT_TYPES.CellSelectClick}
+                >
+                  <CellSelect>
+                    <Checkbox size="small" />
+                  </CellSelect>
                   <Cell width="20%">{item.name}</Cell>
                   <Cell width="20%">{item.stars}</Cell>
                   <Cell width="20%">{item.light.toString()}</Cell>

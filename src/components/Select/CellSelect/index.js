@@ -9,8 +9,8 @@ const CellSelect = ({
   selectId,
   width,
   className,
-  indentation
-  // children
+  indentation,
+  children
 }) => {
   const theme = React.useContext(ThemeContext);
   const select = React.useContext(SelectContext);
@@ -29,11 +29,18 @@ const CellSelect = ({
       indentation={indentation}
     >
       <div>
-        <input
-          type="checkbox"
-          checked={selectState.ids.includes(selectId)}
-          onChange={handleChange}
-        />
+        {children ? (
+          React.cloneElement(children, {
+            checked: selectState.ids.includes(selectId),
+            onChange: handleChange
+          })
+        ) : (
+          <input
+            type="checkbox"
+            checked={selectState.ids.includes(selectId)}
+            onChange={handleChange}
+          />
+        )}
       </div>
     </CellContainer>
   );
@@ -43,8 +50,8 @@ CellSelect.propTypes = {
   selectId: PropTypes.string.isRequired,
   width: PropTypes.string,
   className: PropTypes.string,
-  indentation: PropTypes.number
-  // children: PropTypes.node
+  indentation: PropTypes.number,
+  children: PropTypes.node
 };
 
 export { CellSelect };

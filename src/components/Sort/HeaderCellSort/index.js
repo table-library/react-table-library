@@ -10,28 +10,53 @@ import { CellContainer } from '@shared';
 import * as COLORS from '@colors';
 import { ThemeContext, SortContext } from '@context';
 
-const CHEVRON_SIZE = 12;
-
 const SORT_ICON_POSITIONS = {
   Prefix: 'Prefix',
   Suffix: 'Suffix'
 };
 
-const getChevron = (sortState, sortKey) => {
+const SORT_ICON_SIZE = '14px';
+
+const getIcon = (icon, iconFallback) => {
+  if (icon === null) {
+    return null;
+  }
+
+  if (icon === undefined) {
+    return iconFallback;
+  }
+
+  return icon;
+};
+
+const getChevron = (
+  sortState,
+  sortKey,
+  sortIconSize,
+  SortIconDefault,
+  SortIconUp,
+  SortIconDown
+) => {
   const size = {
-    height: `${CHEVRON_SIZE}px`,
-    width: `${CHEVRON_SIZE}px`
+    height: `${sortIconSize}`,
+    width: `${sortIconSize}`
   };
 
   if (sortState.key === sortKey && sortState.reverse) {
-    return <IconChevronSingleDown {...size} />;
+    return SortIconDown
+      ? React.cloneElement(SortIconDown, { ...size })
+      : null;
   }
 
   if (sortState.key === sortKey && !sortState.reverse) {
-    return <IconChevronSingleUp {...size} />;
+    return SortIconUp
+      ? React.cloneElement(SortIconUp, { ...size })
+      : null;
   }
 
-  return <IconChevronSingleUpDown {...size} />;
+  return SortIconDefault
+    ? React.cloneElement(SortIconDefault, { ...size })
+    : null;
 };
 
 const HeaderCellSortContainer = styled(CellContainer)`
@@ -100,6 +125,19 @@ const HeaderCellSort = ({
 
   const sortIconPosition =
     sortIcon.position || SORT_ICON_POSITIONS.Prefix;
+  const sortIconSize = sortIcon.size || SORT_ICON_SIZE;
+  const sortIconDefault = getIcon(
+    sortIcon.iconDefault,
+    <IconChevronSingleUpDown />
+  );
+  const sortIconUp = getIcon(
+    sortIcon.iconUp,
+    <IconChevronSingleUp />
+  );
+  const sortIconDown = getIcon(
+    sortIcon.iconDown,
+    <IconChevronSingleDown />
+  );
 
   const { sortState, onSort } = React.useContext(SortContext);
 
@@ -124,9 +162,25 @@ const HeaderCellSort = ({
           })}
           onClick={() => onSort({ fn: sortFn, key: sortKey })}
         >
-          {prefix && getChevron(sortState, sortKey)}
+          {prefix &&
+            getChevron(
+              sortState,
+              sortKey,
+              sortIconSize,
+              sortIconDefault,
+              sortIconUp,
+              sortIconDown
+            )}
           <div title={children}>{children}</div>
-          {suffix && getChevron(sortState, sortKey)}
+          {suffix &&
+            getChevron(
+              sortState,
+              sortKey,
+              sortIconSize,
+              sortIconDefault,
+              sortIconUp,
+              sortIconDown
+            )}
         </SortButton>
       </div>
     </HeaderCellSortContainer>
@@ -139,7 +193,8 @@ HeaderCellSort.propTypes = {
   sortKey: PropTypes.string.isRequired,
   sortFn: PropTypes.func.isRequired,
   sortIcon: PropTypes.shape({
-    position: PropTypes.oneOf(Object.values(SORT_ICON_POSITIONS))
+    position: PropTypes.oneOf(Object.values(SORT_ICON_POSITIONS)),
+    size: PropTypes.string
   }),
   width: PropTypes.string.isRequired,
   className: PropTypes.string,
