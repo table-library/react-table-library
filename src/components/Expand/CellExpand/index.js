@@ -5,17 +5,15 @@ import cs from 'classnames';
 
 import IconChevronSingleDown from '@icons/IconChevronSingleDown';
 import IconChevronSingleRight from '@icons/IconChevronSingleRight';
-import { CellContainer } from '@shared';
+import { Button, CellContainer } from '@shared';
 import { ThemeContext, ExpandContext } from '@context';
 
-import { isLeaf, hasLeaves, EXPAND_TYPES } from '../util';
+import { isLeaf, hasLeaves } from '../util';
 
 const EXPAND_ICON_SIZE = '14px';
 const EXPAND_ICON_MARGIN = '4px';
 
-const Icon = styled.span`
-  margin-right: ${EXPAND_ICON_MARGIN};
-`;
+const ExpandButton = styled(Button)``;
 
 const CellExpand = ({
   item,
@@ -29,14 +27,11 @@ const CellExpand = ({
 
   const { expandState, onExpandById } = expand;
 
-  // const handleClick = event => {
-  //   // TODO
-  //   if (event.target.tagName !== 'DIV') return;
+  const handleClick = () => {
+    if (isLeaf(item)) return;
 
-  //   if (expandType === EXPAND_TYPES.RowExpandClick) {
-  //     onExpandById(item.id);
-  //   }
-  // };
+    onExpandById(item.id);
+  };
 
   const expanded = expandState.ids.includes(item.id);
 
@@ -68,8 +63,16 @@ const CellExpand = ({
       indentation={indentation}
     >
       <div>
-        <Icon>{icon}</Icon>
-        {children}
+        <ExpandButton
+          className={cs('prefix', {
+            active: expanded
+          })}
+          margin={EXPAND_ICON_MARGIN}
+          onClick={handleClick}
+        >
+          <span>{icon}</span>
+          <div title={children}>{children}</div>
+        </ExpandButton>
       </div>
     </CellContainer>
   );

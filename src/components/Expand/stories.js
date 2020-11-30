@@ -47,10 +47,26 @@ const list = [
           },
           {
             id: '6444',
-            name: 'There',
+            name: 'There There',
             stars: 3522,
             count: 3633,
-            light: false
+            light: false,
+            nodes: [
+              {
+                id: '64422',
+                name: 'Hi',
+                stars: 423224,
+                count: 233334,
+                light: true
+              },
+              {
+                id: '64144',
+                name: 'Ha ',
+                stars: 135224,
+                count: 136334,
+                light: false
+              }
+            ]
           }
         ]
       },
@@ -133,6 +149,50 @@ storiesOf('05. Table with Expand', module)
                 <RowExpand
                   key={item.id}
                   item={item}
+                  onExpand={tableItem => tableItem.nodes}
+                >
+                  {(tableItem, expandState) => (
+                    <>
+                      <CellExpand item={tableItem} width="25%">
+                        {tableItem.name}
+                      </CellExpand>
+                      <Cell width="25%">{tableItem.stars}</Cell>
+                      <Cell width="25%">
+                        {tableItem.light.toString()}
+                      </Cell>
+                      <Cell width="25%">{tableItem.count}</Cell>
+                    </>
+                  )}
+                </RowExpand>
+              ))}
+            </Body>
+          </Content>
+        )}
+      </Table>
+    );
+  })
+  .add('on button expand', () => {
+    return (
+      <Table list={list}>
+        {tableList => (
+          <Content>
+            <Header>
+              <HeaderRow>
+                <HeaderCell width="25%">Name</HeaderCell>
+                <HeaderCell width="25%">Stars</HeaderCell>
+                <HeaderCell width="25%">Light</HeaderCell>
+                <HeaderCell width="25%">Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <RowExpand
+                  key={item.id}
+                  item={item}
+                  expandType={
+                    RowExpand.EXPAND_TYPES.ButtonExpandClick
+                  }
                   onExpand={tableItem => tableItem.nodes}
                 >
                   {(tableItem, expandState) => (

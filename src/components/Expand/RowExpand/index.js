@@ -6,17 +6,22 @@ import cs from 'classnames';
 import { RowContainer } from '@shared';
 import { ThemeContext, ExpandContext } from '@context';
 
-import { isLeaf, hasLeaves, EXPAND_TYPES } from '../util';
+import { isLeaf, hasLeaves } from '../util';
 
 const RowExpandContainer = styled(RowContainer)`
   &.expandable-row {
     cursor: pointer;
   }
 
-  .cell-expand div {
+  .cell-expand > div {
     margin-left: ${({ $level }) => $level * 20}px;
   }
 `;
+
+const EXPAND_TYPES = {
+  RowExpandClick: 'RowExpandClick',
+  ButtonExpandClick: 'ButtonExpandClick'
+};
 
 const RowExpand = ({
   item,
@@ -32,8 +37,9 @@ const RowExpand = ({
   const { expandState, onExpandById } = expand;
 
   const handleClick = event => {
-    // TODO
-    // if (event.target.tagName !== 'DIV') return;
+    if (event.target.tagName !== 'DIV' || event.target.title) return;
+
+    if (isLeaf(item)) return;
 
     if (expandType === EXPAND_TYPES.RowExpandClick) {
       onExpandById(item.id);

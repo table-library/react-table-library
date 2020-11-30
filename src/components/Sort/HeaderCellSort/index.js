@@ -6,7 +6,7 @@ import cs from 'classnames';
 import IconChevronSingleDown from '@icons/IconChevronSingleDown';
 import IconChevronSingleUp from '@icons/IconChevronSingleUp';
 import IconChevronSingleUpDown from '@icons/IconChevronSingleUpDown';
-import { CellContainer } from '@shared';
+import { Button, CellContainer } from '@shared';
 import * as COLORS from '@colors';
 import { ThemeContext, SortContext } from '@context';
 
@@ -68,53 +68,9 @@ const HeaderCellSortContainer = styled(CellContainer)`
   }
 `;
 
-const SortButton = styled.button`
-  display: flex;
-  align-items: center;
-
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
-
-  width: 100%;
-  height: 100%;
-
-  span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &.prefix span {
-    margin-right: ${({ margin }) => margin};
-  }
-
-  &.suffix span {
-    margin-left: ${({ margin }) => margin};
-  }
-
-  div {
-    text-align: left;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  &.sort-active {
+const SortButton = styled(Button)`
+  &.active {
     font-weight: bold;
-  }
-
-  div:after {
-    display: block;
-    content: attr(title);
-    font-weight: bold;
-    height: 0;
-    overflow: hidden;
-    visibility: hidden;
   }
 `;
 
@@ -168,9 +124,8 @@ const HeaderCellSort = ({
     >
       <div>
         <SortButton
-          type="button"
           className={cs({
-            'sort-active': sortState.key === sortKey,
+            active: sortState.key === sortKey,
             prefix,
             suffix
           })}
