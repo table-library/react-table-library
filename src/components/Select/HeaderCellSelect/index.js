@@ -8,8 +8,9 @@ import { ThemeContext, SelectContext } from '@context';
 
 const Checkbox = ({ children }) => {
   const select = React.useContext(SelectContext);
-
-  const { selectState, onSelectAll } = select;
+  const { selectState, onSelectAll } = React.useContext(
+    SelectContext
+  );
 
   const ref = node => {
     if (!node) return;
@@ -47,21 +48,28 @@ Checkbox.propTypes = {
   children: PropTypes.node
 };
 
-const HeaderCellSelect = ({ width, className, children }) => {
-  const theme = React.useContext(ThemeContext);
+const HeaderCellSelect = React.memo(
+  ({ width, className, children }) => {
+    const theme = React.useContext(ThemeContext);
 
-  return (
-    <CellContainer
-      className={cs('td', 'header-cell-select', 'shrink', className)}
-      css={theme?.HeaderCellSelect}
-      width={width}
-    >
-      <div>
-        <Checkbox>{children}</Checkbox>
-      </div>
-    </CellContainer>
-  );
-};
+    return (
+      <CellContainer
+        className={cs(
+          'td',
+          'header-cell-select',
+          'shrink',
+          className
+        )}
+        css={theme?.HeaderCellSelect}
+        width={width}
+      >
+        <div>
+          <Checkbox>{children}</Checkbox>
+        </div>
+      </CellContainer>
+    );
+  }
+);
 
 HeaderCellSelect.propTypes = {
   width: PropTypes.string,

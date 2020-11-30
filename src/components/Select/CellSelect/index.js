@@ -3,51 +3,54 @@ import PropTypes from 'prop-types';
 import cs from 'classnames';
 
 import { CellContainer } from '@shared';
-import { ThemeContext, SelectContext } from '@context';
+import { ThemeContext } from '@context';
 
-const CellSelect = ({
-  selectId,
-  width,
-  className,
-  indentation,
-  children
-}) => {
-  const theme = React.useContext(ThemeContext);
-  const select = React.useContext(SelectContext);
+const CellSelect = React.memo(
+  ({
+    selectId,
+    isSelected,
+    onSelectById,
+    width,
+    className,
+    indentation,
+    children
+  }) => {
+    const theme = React.useContext(ThemeContext);
 
-  const { selectState, onSelectById } = select;
+    const handleChange = () => {
+      onSelectById(selectId);
+    };
 
-  const handleChange = () => {
-    onSelectById(selectId);
-  };
-
-  return (
-    <CellContainer
-      className={cs('td', 'cell-select', 'shrink', className)}
-      css={theme?.CellSelect}
-      width={width}
-      indentation={indentation}
-    >
-      <div>
-        {children ? (
-          React.cloneElement(children, {
-            checked: selectState.ids.includes(selectId),
-            onChange: handleChange
-          })
-        ) : (
-          <input
-            type="checkbox"
-            checked={selectState.ids.includes(selectId)}
-            onChange={handleChange}
-          />
-        )}
-      </div>
-    </CellContainer>
-  );
-};
+    return (
+      <CellContainer
+        className={cs('td', 'cell-select', 'shrink', className)}
+        css={theme?.CellSelect}
+        width={width}
+        indentation={indentation}
+      >
+        <div>
+          {children ? (
+            React.cloneElement(children, {
+              checked: isSelected,
+              onChange: handleChange
+            })
+          ) : (
+            <input
+              type="checkbox"
+              checked={isSelected}
+              onChange={handleChange}
+            />
+          )}
+        </div>
+      </CellContainer>
+    );
+  }
+);
 
 CellSelect.propTypes = {
   selectId: PropTypes.string.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  onSelectById: PropTypes.func.isRequired,
   width: PropTypes.string,
   className: PropTypes.string,
   indentation: PropTypes.number,

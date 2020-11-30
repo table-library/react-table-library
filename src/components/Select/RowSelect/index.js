@@ -5,7 +5,7 @@ import cs from 'classnames';
 
 import { RowContainer } from '@shared';
 import * as COLORS from '@colors';
-import { ThemeContext, SelectContext } from '@context';
+import { ThemeContext } from '@context';
 
 const RowSelectContainer = styled(RowContainer)`
   &.selected-row {
@@ -23,51 +23,56 @@ const SELECT_TYPES = {
   ButtonSelectClick: 'ButtonSelectClick'
 };
 
-const RowSelect = ({
-  selectId,
-  selectType = SELECT_TYPES.RowSelectClick,
-  className,
-  disabled,
-  children
-}) => {
-  const theme = React.useContext(ThemeContext);
-  const select = React.useContext(SelectContext);
+const RowSelect = React.memo(
+  ({
+    selectId,
+    isSelected,
+    onSelectById,
+    selectType = SELECT_TYPES.RowSelectClick,
+    className,
+    disabled,
+    children
+  }) => {
+    const theme = React.useContext(ThemeContext);
 
-  const { selectState, onSelectById } = select;
+    const handleClick = event => {
+      // TODO
+      if (event.target.tagName !== 'DIV') return;
 
-  const handleClick = event => {
-    // TODO
-    if (event.target.tagName !== 'DIV') return;
+      if (selectType === SELECT_TYPES.RowSelectClick) {
+        onSelectById(selectId);
+      }
+    };
 
-    if (selectType === SELECT_TYPES.RowSelectClick) {
-      onSelectById(selectId);
-    }
-  };
-
-  return (
-    <RowSelectContainer
-      className={cs('tr', 'row-select', className, {
-        disabled,
-        'selectable-row':
-          selectId != null &&
-          selectType === SELECT_TYPES.RowSelectClick,
-        'selected-row':
-          selectId != null && selectState.ids.includes(selectId)
-      })}
-      css={theme?.RowSelect}
-      onClick={handleClick}
-    >
-      {React.Children.map(children, child =>
-        React.cloneElement(child, { selectId })
-      )}
-    </RowSelectContainer>
-  );
-};
+    return (
+      <RowSelectContainer
+        className={cs('tr', 'row-select', className, {
+          disabled,
+          'selectable-row':
+            selectType === SELECT_TYPES.RowSelectClick,
+          'selected-row': isSelected
+        })}
+        css={theme?.RowSelect}
+        onClick={handleClick}
+      >
+        {React.Children.map(children, child =>
+          React.cloneElement(child, {
+            selectId,
+            isSelected,
+            onSelectById
+          })
+        )}
+      </RowSelectContainer>
+    );
+  }
+);
 
 RowSelect.SELECT_TYPES = SELECT_TYPES;
 
 RowSelect.propTypes = {
   selectId: PropTypes.string.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  onSelectById: PropTypes.func.isRequired,
   selectType: PropTypes.oneOf(Object.values(SELECT_TYPES)),
   className: PropTypes.string,
   disabled: PropTypes.bool,

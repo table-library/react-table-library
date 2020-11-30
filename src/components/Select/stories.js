@@ -51,7 +51,7 @@ storiesOf('04. Table with Select', module)
 
             <Body>
               {tableList.map(item => (
-                <RowSelect selectId={item.id} key={item.id}>
+                <RowSelect item={item} key={item.id}>
                   <Cell width="25%">{item.name}</Cell>
                   <Cell width="25%">{item.stars}</Cell>
                   <Cell width="25%">{item.light.toString()}</Cell>
@@ -84,7 +84,7 @@ storiesOf('04. Table with Select', module)
 
             <Body>
               {tableList.map(item => (
-                <RowSelect selectId={item.id} key={item.id}>
+                <RowSelect item={item} key={item.id}>
                   <Cell width="25%">{item.name}</Cell>
                   <Cell width="25%">{item.stars}</Cell>
                   <Cell width="25%">{item.light.toString()}</Cell>
@@ -116,7 +116,7 @@ storiesOf('04. Table with Select', module)
               {tableList.map(item => (
                 <RowSelect
                   key={item.id}
-                  selectId={item.id}
+                  item={item}
                   selectType={
                     RowSelect.SELECT_TYPES.ButtonSelectClick
                   }
@@ -165,7 +165,7 @@ storiesOf('04. Table with Select', module)
               {tableList.map(item => (
                 <RowSelect
                   key={item.id}
-                  selectId={item.id}
+                  item={item}
                   selectType={
                     RowSelect.SELECT_TYPES.ButtonSelectClick
                   }

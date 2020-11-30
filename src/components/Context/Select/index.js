@@ -57,14 +57,20 @@ const SelectProvider = ({
     defaultSelect
   );
 
-  const onSelectById = id =>
-    selectStateDispatcher({ type: SELECT_BY_ID, payload: { id } });
+  const onSelectById = React.useCallback(
+    id =>
+      selectStateDispatcher({ type: SELECT_BY_ID, payload: { id } }),
+    []
+  );
 
-  const onSelectAll = () =>
-    selectStateDispatcher({
-      type: SELECT_ALL,
-      payload: { ids: list.map(item => item.id) }
-    });
+  const onSelectAll = React.useCallback(
+    () =>
+      selectStateDispatcher({
+        type: SELECT_ALL,
+        payload: { ids: list.map(item => item.id) }
+      }),
+    [list]
+  );
 
   const allSelected =
     selectState.ids.sort().join(',') ===
@@ -75,16 +81,14 @@ const SelectProvider = ({
 
   const noneSelected = !selectState.ids.length;
 
-  const mergedSelectState = {
-    ...selectState,
-    allSelected,
-    noneSelected
-  };
-
   return (
     <SelectContext.Provider
       value={{
-        selectState: mergedSelectState,
+        selectState: {
+          ...selectState,
+          allSelected,
+          noneSelected
+        },
         onSelectById,
         onSelectAll
       }}
