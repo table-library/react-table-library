@@ -146,11 +146,42 @@ storiesOf('05. Table with Expand', module)
 
             <Body>
               {tableList.map(item => (
-                <RowExpand
-                  key={item.id}
-                  item={item}
-                  onExpand={tableItem => tableItem.nodes}
-                >
+                <RowExpand key={item.id} item={item}>
+                  {tableItem => (
+                    <>
+                      <Cell width="25%">{tableItem.name}</Cell>
+                      <Cell width="25%">{tableItem.stars}</Cell>
+                      <Cell width="25%">
+                        {tableItem.light.toString()}
+                      </Cell>
+                      <Cell width="25%">{tableItem.count}</Cell>
+                    </>
+                  )}
+                </RowExpand>
+              ))}
+            </Body>
+          </Content>
+        )}
+      </Table>
+    );
+  })
+  .add('with icon', () => {
+    return (
+      <Table list={list}>
+        {tableList => (
+          <Content>
+            <Header>
+              <HeaderRow>
+                <HeaderCell width="25%">Name</HeaderCell>
+                <HeaderCell width="25%">Stars</HeaderCell>
+                <HeaderCell width="25%">Light</HeaderCell>
+                <HeaderCell width="25%">Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <RowExpand key={item.id} item={item}>
                   {tableItem => (
                     <>
                       <CellExpand item={tableItem} width="25%">
@@ -171,7 +202,7 @@ storiesOf('05. Table with Expand', module)
       </Table>
     );
   })
-  .add('on icon expand', () => {
+  .add('expand on icon', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -193,7 +224,6 @@ storiesOf('05. Table with Expand', module)
                   expandType={
                     RowExpand.EXPAND_TYPES.ButtonExpandClick
                   }
-                  onExpand={tableItem => tableItem.nodes}
                 >
                   {tableItem => (
                     <>
@@ -235,11 +265,7 @@ storiesOf('05. Table with Expand', module)
 
             <Body>
               {tableList.map(item => (
-                <RowExpand
-                  key={item.id}
-                  item={item}
-                  onExpand={tableItem => tableItem.nodes}
-                >
+                <RowExpand key={item.id} item={item}>
                   {tableItem => (
                     <>
                       <CellExpand item={tableItem} width="25%">

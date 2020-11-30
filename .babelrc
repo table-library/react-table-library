@@ -14,6 +14,7 @@
           "@context": "./src/components/Context",
           "@table": "./src/components/Table",
           "@theme": "./src/components/Theme",
+          "@composite": "./src/components/Composite",
           "@sort": "./src/components/Sort",
           "@select": "./src/components/Select",
           "@expand": "./src/components/Expand"

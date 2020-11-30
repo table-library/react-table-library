@@ -126,6 +126,43 @@ storiesOf('04. Table with Select', module)
 
             <Body>
               {tableList.map(item => (
+                <RowSelect key={item.id} item={item}>
+                  {tableItem => (
+                    <>
+                      <CellSelect item={tableItem} />
+                      <Cell width="20%">{tableItem.name}</Cell>
+                      <Cell width="20%">{tableItem.stars}</Cell>
+                      <Cell width="20%">
+                        {tableItem.light.toString()}
+                      </Cell>
+                      <Cell width="20%">{tableItem.count}</Cell>
+                    </>
+                  )}
+                </RowSelect>
+              ))}
+            </Body>
+          </Content>
+        )}
+      </Table>
+    );
+  })
+  .add('select on checkbox ', () => {
+    return (
+      <Table list={list}>
+        {tableList => (
+          <Content>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSelect />
+                <HeaderCell width="20%">Name</HeaderCell>
+                <HeaderCell width="20%">Stars</HeaderCell>
+                <HeaderCell width="20%">Light</HeaderCell>
+                <HeaderCell width="20%">Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
                 <RowSelect
                   key={item.id}
                   item={item}
@@ -181,13 +218,7 @@ storiesOf('04. Table with Select', module)
 
             <Body>
               {tableList.map(item => (
-                <RowSelect
-                  key={item.id}
-                  item={item}
-                  selectType={
-                    RowSelect.SELECT_TYPES.ButtonSelectClick
-                  }
-                >
+                <RowSelect key={item.id} item={item}>
                   {tableItem => (
                     <>
                       <CellSelect item={tableItem}>

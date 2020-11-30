@@ -73,8 +73,8 @@ const RowSelect = React.memo(
       <Row
         _theme={rowSelectTheme}
         className={rowSelectClassName}
-        disabled={disabled}
         onClick={onClick}
+        disabled={disabled}
       >
         {children(item)}
       </Row>
@@ -99,4 +99,4 @@ RowSelect.propTypes = {
   ])
 };
 
-export { RowSelect, useRowSelect };
+export { RowSelect, useRowSelect, SELECT_TYPES };

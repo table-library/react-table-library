@@ -16,14 +16,16 @@ const useRowExpand = ({
   onExpandById,
   expandType = EXPAND_TYPES.RowExpandClick,
   className,
-  children
+  children,
+  // eslint-disable-next-line no-use-before-define
+  RecursiveComponent = RowExpand
 }) => {
   const rowExpandTheme = css`
     &.expandable-row {
       cursor: pointer;
     }
 
-    .cell-expand > div {
+    .td:first-child > div {
       margin-left: ${_level * 20}px;
     }
   `;
@@ -47,15 +49,15 @@ const useRowExpand = ({
     hasLeaves(item) &&
     item.nodes.map(node => (
       <Body>
-        <RowExpand
+        <RecursiveComponent
           key={node.id}
-          _level={_level + 1}
           item={node}
+          _level={_level + 1}
           expandType={expandType}
           className={className}
         >
           {recursiveNode => children(recursiveNode)}
-        </RowExpand>
+        </RecursiveComponent>
       </Body>
     ));
 
@@ -69,9 +71,9 @@ const useRowExpand = ({
 
 const RowExpand = React.memo(
   ({
-    _level = 0,
     id,
     item,
+    _level = 0,
     isExpanded,
     onExpandById,
     expandType,
@@ -112,9 +114,9 @@ const RowExpand = React.memo(
 RowExpand.EXPAND_TYPES = EXPAND_TYPES;
 
 RowExpand.propTypes = {
-  _level: PropTypes.number,
   id: PropTypes.string,
   item: PropTypes.shape(PropTypes.any),
+  _level: PropTypes.number,
   isExpanded: PropTypes.bool,
   onExpandById: PropTypes.func,
   expandType: PropTypes.oneOf(Object.values(EXPAND_TYPES)),
@@ -127,4 +129,4 @@ RowExpand.propTypes = {
   ])
 };
 
-export { RowExpand, useRowExpand };
+export { RowExpand, useRowExpand, EXPAND_TYPES };

@@ -1,9 +1,14 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import cs from 'classnames';
 
 import { CellContainer } from '@shared';
 import { ThemeContext, SelectContext } from '@context';
+
+const Checkbox = styled.input`
+  cursor: pointer;
+`;
 
 const CellSelect = React.memo(
   ({ item, width, className, indentation, children }) => {
@@ -32,7 +37,7 @@ const CellSelect = React.memo(
               onChange: handleChange
             })
           ) : (
-            <input
+            <Checkbox
               type="checkbox"
               checked={isSelected}
               onChange={handleChange}

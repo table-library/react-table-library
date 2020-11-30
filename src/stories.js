@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-storiesOf('00. Installation', module)
+storiesOf('00. Installation/ Instructions', module)
   .add('Introduction', () => {
     return <p>Introduction ....</p>;
   })
