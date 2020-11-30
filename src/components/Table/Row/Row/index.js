@@ -1,17 +1,29 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { css } from 'styled-components';
 import cs from 'classnames';
 
 import { RowContainer } from '@shared';
 import { ThemeContext } from '@context';
 
-const Row = ({ className, disabled, children }) => {
+const Row = ({
+  _theme,
+  _className,
+  className,
+  disabled,
+  onClick = () => {},
+  children
+}) => {
   const theme = React.useContext(ThemeContext);
 
   return (
     <RowContainer
-      className={cs('tr', className, { disabled })}
-      css={theme?.Row}
+      onClick={onClick}
+      className={cs('tr', className, _className, { disabled })}
+      css={css`
+        ${_theme}
+        ${theme?.Row}
+      `}
     >
       {children}
     </RowContainer>
@@ -19,6 +31,9 @@ const Row = ({ className, disabled, children }) => {
 };
 
 Row.propTypes = {
+  _theme: PropTypes.string,
+  _className: PropTypes.string,
+  onClick: PropTypes.func,
   className: PropTypes.string,
   disabled: PropTypes.bool,
   children: PropTypes.oneOfType([

@@ -97,9 +97,8 @@ RowExpand.propTypes = {
   disabled: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-    PropTypes.func
-  ]),
+    PropTypes.node
+  ]).isRequired,
   _level: PropTypes.number
 };
 

@@ -1,27 +1,10 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import cs from 'classnames';
 
-import { RowContainer } from '@shared';
-import * as COLORS from '@colors';
-import { ThemeContext } from '@context';
+import { Row } from '@table';
 
-const RowSelectContainer = styled(RowContainer)`
-  &.selected-row {
-    color: ${COLORS.FONT_PRIMARY};
-    font-weight: bold;
-  }
-
-  &.selectable-row {
-    cursor: pointer;
-  }
-`;
-
-const SELECT_TYPES = {
-  RowSelectClick: 'RowSelectClick',
-  ButtonSelectClick: 'ButtonSelectClick'
-};
+import { SELECT_TYPES } from './config';
+import { useRowSelect } from './useRowSelect';
 
 const RowSelect = React.memo(
   ({
@@ -29,34 +12,32 @@ const RowSelect = React.memo(
     item,
     isSelected,
     onSelectById,
-    selectType = SELECT_TYPES.RowSelectClick,
+    selectType,
     className,
     disabled,
     children
   }) => {
-    const theme = React.useContext(ThemeContext);
-
-    const handleClick = event => {
-      if (event.target.tagName !== 'DIV') return;
-
-      if (selectType === SELECT_TYPES.RowSelectClick) {
-        onSelectById(id);
-      }
-    };
+    const {
+      theme: rowSelectTheme,
+      className: rowSelectClassName,
+      onClick
+    } = useRowSelect({
+      id,
+      isSelected,
+      onSelectById,
+      selectType
+    });
 
     return (
-      <RowSelectContainer
-        className={cs('tr', 'row-select', className, {
-          disabled,
-          'selectable-row':
-            selectType === SELECT_TYPES.RowSelectClick,
-          'selected-row': isSelected
-        })}
-        css={theme?.RowSelect}
-        onClick={handleClick}
+      <Row
+        className={className}
+        disabled={disabled}
+        _theme={rowSelectTheme}
+        _className={rowSelectClassName}
+        onClick={onClick}
       >
         {children(item)}
-      </RowSelectContainer>
+      </Row>
     );
   }
 );

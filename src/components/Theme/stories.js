@@ -49,7 +49,7 @@ storiesOf('02. Table with Themes', module)
 
             <Body>
               {tableList.map(item => (
-                <Row key={item.id}>
+                <Row key={item.id} item={item}>
                   <Cell width="25%">{item.name}</Cell>
                   <Cell width="25%">{item.stars}</Cell>
                   <Cell width="25%">{item.light.toString()}</Cell>
@@ -98,7 +98,7 @@ storiesOf('02. Table with Themes', module)
 
             <Body>
               {tableList.map(item => (
-                <Row key={item.id}>
+                <Row key={item.id} item={item}>
                   <Cell width="25%">{item.name}</Cell>
                   <Cell width="25%">{item.stars}</Cell>
                   <Cell width="25%">{item.light.toString()}</Cell>
@@ -147,7 +147,7 @@ storiesOf('02. Table with Themes', module)
 
             <Body>
               {tableList.map(item => (
-                <Row key={item.id}>
+                <Row key={item.id} item={item}>
                   <Cell width="25%">{item.name}</Cell>
                   <Cell width="25%">{item.stars}</Cell>
                   <Cell width="25%">{item.light.toString()}</Cell>
@@ -208,7 +208,7 @@ storiesOf('02. Table with Themes', module)
 
             <Body>
               {tableList.map(item => (
-                <Row key={item.id}>
+                <Row key={item.id} item={item}>
                   <Cell width="25%">{item.name}</Cell>
                   <Cell width="25%" className="group">
                     {item.stars}

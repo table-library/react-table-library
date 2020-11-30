@@ -48,7 +48,7 @@ storiesOf('01. Table', module)
 
             <Body>
               {tableList.map(item => (
-                <Row key={item.id}>
+                <Row key={item.id} item={item}>
                   <Cell width="25%">{item.name}</Cell>
                   <Cell width="25%">{item.stars}</Cell>
                   <Cell width="25%">{item.light.toString()}</Cell>
@@ -120,7 +120,7 @@ storiesOf('01. Table', module)
 //                 width={WIDTHS.Checkbox}
 //                 noIndent
 //               />
-//               <HeaderCellSort
+//               <HeaderSortCell
 //                 width="25%"
 //                 sortKey="name"
 //                 sortFn={array =>
@@ -128,25 +128,25 @@ storiesOf('01. Table', module)
 //                 }
 //               >
 //                 Name
-//               </HeaderCellSort>
+//               </HeaderSortCell>
 //               <HeaderCell width="25%" >
 //                 Stars
 //               </HeaderCell>
-//               <HeaderCellSort
+//               <HeaderSortCell
 //                 width="25%"
 //                 sortKey="light"
 //
 //                 sortFn={array => array.sort((a, b) => a.light - b.light)}
 //               >
 //                 Light
-//               </HeaderCellSort>
-//               <HeaderCellSort
+//               </HeaderSortCell>
+//               <HeaderSortCell
 //                 width="25%"
 //                 sortKey="count"
 //                 sortFn={array => array.sort((a, b) => a.count - b.count)}
 //               >
 //                 Count
-//               </HeaderCellSort>
+//               </HeaderSortCell>
 //             </HeaderRow>
 //           </Header>
 
