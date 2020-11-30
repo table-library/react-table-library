@@ -171,7 +171,7 @@ storiesOf('05. Table with Expand', module)
       </Table>
     );
   })
-  .add('on button expand', () => {
+  .add('on icon expand', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -214,37 +214,49 @@ storiesOf('05. Table with Expand', module)
         )}
       </Table>
     );
+  })
+  .add('default expand', () => {
+    const defaultExpand = {
+      ids: ['2', '62', '4']
+    };
+
+    return (
+      <Table list={list} defaultExpand={defaultExpand}>
+        {tableList => (
+          <Content>
+            <Header>
+              <HeaderRow>
+                <HeaderCell width="25%">Name</HeaderCell>
+                <HeaderCell width="25%">Stars</HeaderCell>
+                <HeaderCell width="25%">Light</HeaderCell>
+                <HeaderCell width="25%">Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <RowExpand
+                  key={item.id}
+                  item={item}
+                  onExpand={tableItem => tableItem.nodes}
+                >
+                  {(tableItem, expandState) => (
+                    <>
+                      <CellExpand item={tableItem} width="25%">
+                        {tableItem.name}
+                      </CellExpand>
+                      <Cell width="25%">{tableItem.stars}</Cell>
+                      <Cell width="25%">
+                        {tableItem.light.toString()}
+                      </Cell>
+                      <Cell width="25%">{tableItem.count}</Cell>
+                    </>
+                  )}
+                </RowExpand>
+              ))}
+            </Body>
+          </Content>
+        )}
+      </Table>
+    );
   });
-// .add('default expand', () => {
-//   const defaultExpand = {
-//     ids: ['2', '4']
-//   };
-
-//   return (
-//     <Table list={list} defaultExpand={defaultExpand}>
-//       {tableList => (
-//         <Content>
-//           <Header>
-//             <HeaderRow>
-//               <HeaderCell width="25%">Name</HeaderCell>
-//               <HeaderCell width="25%">Stars</HeaderCell>
-//               <HeaderCell width="25%">Light</HeaderCell>
-//               <HeaderCell width="25%">Count</HeaderCell>
-//             </HeaderRow>
-//           </Header>
-
-//           <Body>
-//             {tableList.map(item => (
-//               <RowExpand expandId={item.id} key={item.id}>
-//                 <Cell width="25%">{item.name}</Cell>
-//                 <Cell width="25%">{item.stars}</Cell>
-//                 <Cell width="25%">{item.light.toString()}</Cell>
-//                 <Cell width="25%">{item.count}</Cell>
-//               </RowExpand>
-//             ))}
-//           </Body>
-//         </Content>
-//       )}
-//     </Table>
-//   );
-// });
