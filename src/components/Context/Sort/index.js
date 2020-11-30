@@ -58,7 +58,11 @@ SortProvider.propTypes = {
     reverse: PropTypes.bool,
     fn: PropTypes.func
   }),
-  children: PropTypes.func.isRequired
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.func
+  ])
 };
 
 export { SortContext, SortProvider };

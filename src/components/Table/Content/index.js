@@ -23,7 +23,11 @@ const Content = ({ children }) => {
 };
 
 Content.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.func
+  ])
 };
 
 export { Content };

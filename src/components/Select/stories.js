@@ -52,10 +52,16 @@ storiesOf('04. Table with Select', module)
             <Body>
               {tableList.map(item => (
                 <RowSelect item={item} key={item.id}>
-                  <Cell width="25%">{item.name}</Cell>
-                  <Cell width="25%">{item.stars}</Cell>
-                  <Cell width="25%">{item.light.toString()}</Cell>
-                  <Cell width="25%">{item.count}</Cell>
+                  {tableItem => (
+                    <>
+                      <Cell width="25%">{tableItem.name}</Cell>
+                      <Cell width="25%">{tableItem.stars}</Cell>
+                      <Cell width="25%">
+                        {tableItem.light.toString()}
+                      </Cell>
+                      <Cell width="25%">{tableItem.count}</Cell>
+                    </>
+                  )}
                 </RowSelect>
               ))}
             </Body>
@@ -85,10 +91,16 @@ storiesOf('04. Table with Select', module)
             <Body>
               {tableList.map(item => (
                 <RowSelect item={item} key={item.id}>
-                  <Cell width="25%">{item.name}</Cell>
-                  <Cell width="25%">{item.stars}</Cell>
-                  <Cell width="25%">{item.light.toString()}</Cell>
-                  <Cell width="25%">{item.count}</Cell>
+                  {tableItem => (
+                    <>
+                      <Cell width="25%">{tableItem.name}</Cell>
+                      <Cell width="25%">{tableItem.stars}</Cell>
+                      <Cell width="25%">
+                        {tableItem.light.toString()}
+                      </Cell>
+                      <Cell width="25%">{tableItem.count}</Cell>
+                    </>
+                  )}
                 </RowSelect>
               ))}
             </Body>
@@ -121,11 +133,17 @@ storiesOf('04. Table with Select', module)
                     RowSelect.SELECT_TYPES.ButtonSelectClick
                   }
                 >
-                  <CellSelect />
-                  <Cell width="20%">{item.name}</Cell>
-                  <Cell width="20%">{item.stars}</Cell>
-                  <Cell width="20%">{item.light.toString()}</Cell>
-                  <Cell width="20%">{item.count}</Cell>
+                  {tableItem => (
+                    <>
+                      <CellSelect item={tableItem} />
+                      <Cell width="20%">{tableItem.name}</Cell>
+                      <Cell width="20%">{tableItem.stars}</Cell>
+                      <Cell width="20%">
+                        {tableItem.light.toString()}
+                      </Cell>
+                      <Cell width="20%">{tableItem.count}</Cell>
+                    </>
+                  )}
                 </RowSelect>
               ))}
             </Body>
@@ -170,13 +188,19 @@ storiesOf('04. Table with Select', module)
                     RowSelect.SELECT_TYPES.ButtonSelectClick
                   }
                 >
-                  <CellSelect>
-                    <Checkbox size="small" />
-                  </CellSelect>
-                  <Cell width="20%">{item.name}</Cell>
-                  <Cell width="20%">{item.stars}</Cell>
-                  <Cell width="20%">{item.light.toString()}</Cell>
-                  <Cell width="20%">{item.count}</Cell>
+                  {tableItem => (
+                    <>
+                      <CellSelect item={tableItem}>
+                        <Checkbox size="small" />
+                      </CellSelect>
+                      <Cell width="20%">{tableItem.name}</Cell>
+                      <Cell width="20%">{tableItem.stars}</Cell>
+                      <Cell width="20%">
+                        {tableItem.light.toString()}
+                      </Cell>
+                      <Cell width="20%">{tableItem.count}</Cell>
+                    </>
+                  )}
                 </RowSelect>
               ))}
             </Body>

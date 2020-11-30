@@ -32,9 +32,9 @@ const ExpandContent = styled.div`
 const CellExpand = React.memo(
   ({ item, width, className, indentation, children }) => {
     const theme = React.useContext(ThemeContext);
-    const expand = React.useContext(ExpandContext);
-
-    const { expandState, onExpandById } = expand;
+    const { expandState, onExpandById } = React.useContext(
+      ExpandContext
+    );
 
     const handleClick = () => {
       if (isLeaf(item)) return;
@@ -42,20 +42,20 @@ const CellExpand = React.memo(
       onExpandById(item.id);
     };
 
-    const expanded = expandState.ids.includes(item.id);
+    const isExpanded = expandState.ids.includes(item.id);
 
     let icon = null;
 
     if (isLeaf(item)) {
       icon = null;
-    } else if (!isLeaf(item) && expanded) {
+    } else if (!isLeaf(item) && isExpanded) {
       icon = (
         <IconChevronSingleDown
           height={EXPAND_ICON_SIZE}
           width={EXPAND_ICON_SIZE}
         />
       );
-    } else if (!isLeaf(item) && !expanded) {
+    } else if (!isLeaf(item) && !isExpanded) {
       icon = (
         <IconChevronSingleRight
           height={EXPAND_ICON_SIZE}
@@ -74,7 +74,7 @@ const CellExpand = React.memo(
         <ExpandContent>
           <ExpandButton
             className={cs('prefix', {
-              active: expanded
+              active: isExpanded
             })}
             margin={EXPAND_ICON_MARGIN}
             onClick={handleClick}
@@ -90,10 +90,14 @@ const CellExpand = React.memo(
 
 CellExpand.propTypes = {
   item: PropTypes.shape(PropTypes.any),
-  width: PropTypes.string.isRequired,
+  width: PropTypes.string,
   className: PropTypes.string,
   indentation: PropTypes.number,
-  children: PropTypes.node
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.func
+  ])
 };
 
 export { CellExpand };

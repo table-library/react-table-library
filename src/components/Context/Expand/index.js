@@ -53,7 +53,11 @@ ExpandProvider.propTypes = {
   defaultExpand: PropTypes.shape({
     ids: PropTypes.arrayOf(PropTypes.string)
   }),
-  children: PropTypes.func.isRequired
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.func
+  ])
 };
 
 export { ExpandContext, ExpandProvider };

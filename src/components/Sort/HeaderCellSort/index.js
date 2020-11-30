@@ -146,8 +146,8 @@ const HeaderCellSort = React.memo(
 HeaderCellSort.SORT_ICON_POSITIONS = SORT_ICON_POSITIONS;
 
 HeaderCellSort.propTypes = {
-  sortKey: PropTypes.string.isRequired,
-  sortFn: PropTypes.func.isRequired,
+  sortKey: PropTypes.string,
+  sortFn: PropTypes.func,
   sortIcon: PropTypes.shape({
     position: PropTypes.oneOf(Object.values(SORT_ICON_POSITIONS)),
     margin: PropTypes.string,
@@ -156,10 +156,14 @@ HeaderCellSort.propTypes = {
     iconUp: PropTypes.node,
     iconDown: PropTypes.node
   }),
-  width: PropTypes.string.isRequired,
+  width: PropTypes.string,
   className: PropTypes.string,
   indentation: PropTypes.number,
-  children: PropTypes.node
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.func
+  ])
 };
 
 export { HeaderCellSort };

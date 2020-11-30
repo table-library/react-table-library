@@ -26,6 +26,7 @@ const SELECT_TYPES = {
 const RowSelect = React.memo(
   ({
     id,
+    item,
     isSelected,
     onSelectById,
     selectType = SELECT_TYPES.RowSelectClick,
@@ -36,7 +37,6 @@ const RowSelect = React.memo(
     const theme = React.useContext(ThemeContext);
 
     const handleClick = event => {
-      // TODO
       if (event.target.tagName !== 'DIV') return;
 
       if (selectType === SELECT_TYPES.RowSelectClick) {
@@ -55,13 +55,7 @@ const RowSelect = React.memo(
         css={theme?.RowSelect}
         onClick={handleClick}
       >
-        {React.Children.map(children, child =>
-          React.cloneElement(child, {
-            id,
-            isSelected,
-            onSelectById
-          })
-        )}
+        {children(item)}
       </RowSelectContainer>
     );
   }
@@ -70,13 +64,18 @@ const RowSelect = React.memo(
 RowSelect.SELECT_TYPES = SELECT_TYPES;
 
 RowSelect.propTypes = {
-  id: PropTypes.string.isRequired,
-  isSelected: PropTypes.bool.isRequired,
-  onSelectById: PropTypes.func.isRequired,
+  id: PropTypes.string,
+  item: PropTypes.shape(PropTypes.any),
+  isSelected: PropTypes.bool,
+  onSelectById: PropTypes.func,
   selectType: PropTypes.oneOf(Object.values(SELECT_TYPES)),
   className: PropTypes.string,
   disabled: PropTypes.bool,
-  children: PropTypes.node.isRequired
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.func
+  ])
 };
 
 export { RowSelect };

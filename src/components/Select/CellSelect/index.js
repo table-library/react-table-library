@@ -3,22 +3,19 @@ import PropTypes from 'prop-types';
 import cs from 'classnames';
 
 import { CellContainer } from '@shared';
-import { ThemeContext } from '@context';
+import { ThemeContext, SelectContext } from '@context';
 
 const CellSelect = React.memo(
-  ({
-    id,
-    isSelected,
-    onSelectById,
-    width,
-    className,
-    indentation,
-    children
-  }) => {
+  ({ item, width, className, indentation, children }) => {
     const theme = React.useContext(ThemeContext);
+    const { selectState, onSelectById } = React.useContext(
+      SelectContext
+    );
+
+    const isSelected = selectState.ids.includes(item.id);
 
     const handleChange = () => {
-      onSelectById(id);
+      onSelectById(item.id);
     };
 
     return (
@@ -48,13 +45,15 @@ const CellSelect = React.memo(
 );
 
 CellSelect.propTypes = {
-  id: PropTypes.string.isRequired,
-  isSelected: PropTypes.bool.isRequired,
-  onSelectById: PropTypes.func.isRequired,
+  item: PropTypes.shape(PropTypes.any),
   width: PropTypes.string,
   className: PropTypes.string,
   indentation: PropTypes.number,
-  children: PropTypes.node
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.func
+  ])
 };
 
 export { CellSelect };

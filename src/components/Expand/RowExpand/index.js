@@ -71,6 +71,7 @@ const RowExpand = React.memo(
               <RowExpand
                 key={node.id}
                 item={node}
+                expandType={expandType}
                 className={className}
                 disabled={disabled}
                 _level={_level + 1}
@@ -87,14 +88,18 @@ const RowExpand = React.memo(
 RowExpand.EXPAND_TYPES = EXPAND_TYPES;
 
 RowExpand.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   item: PropTypes.shape(PropTypes.any),
-  isExpanded: PropTypes.bool.isRequired,
-  onExpandById: PropTypes.func.isRequired,
+  isExpanded: PropTypes.bool,
+  onExpandById: PropTypes.func,
   expandType: PropTypes.oneOf(Object.values(EXPAND_TYPES)),
   className: PropTypes.string,
   disabled: PropTypes.bool,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.func
+  ]),
   _level: PropTypes.number
 };
 

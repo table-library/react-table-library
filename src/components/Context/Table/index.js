@@ -17,7 +17,11 @@ const TableProvider = ({ list, children }) => {
 
 TableProvider.propTypes = {
   list: PropTypes.arrayOf(PropTypes.any),
-  children: PropTypes.node.isRequired
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.func
+  ])
 };
 
 export { TableProvider, TableContext };

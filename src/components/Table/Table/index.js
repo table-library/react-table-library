@@ -53,7 +53,7 @@ const Table = ({
 };
 
 Table.propTypes = {
-  list: PropTypes.arrayOf(PropTypes.any).isRequired,
+  list: PropTypes.arrayOf(PropTypes.any),
   theme: PropTypes.shape(PropTypes.any),
   defaultSelect: PropTypes.shape({
     ids: PropTypes.arrayOf(PropTypes.string)
@@ -66,7 +66,11 @@ Table.propTypes = {
     reverse: PropTypes.bool,
     fn: PropTypes.func
   }),
-  children: PropTypes.func.isRequired
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.func
+  ])
 };
 
 export { Table };

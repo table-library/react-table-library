@@ -13,7 +13,11 @@ const ThemeProvider = ({ theme, children }) => {
 
 ThemeProvider.propTypes = {
   theme: PropTypes.shape(PropTypes.any),
-  children: PropTypes.func.isRequired
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.func
+  ])
 };
 
 export { ThemeContext, ThemeProvider };

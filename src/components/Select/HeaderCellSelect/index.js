@@ -45,7 +45,11 @@ const Checkbox = ({ children }) => {
 };
 
 Checkbox.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.func
+  ])
 };
 
 const HeaderCellSelect = React.memo(
@@ -74,7 +78,11 @@ const HeaderCellSelect = React.memo(
 HeaderCellSelect.propTypes = {
   width: PropTypes.string,
   className: PropTypes.string,
-  children: PropTypes.node
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.func
+  ])
 };
 
 export { HeaderCellSelect };

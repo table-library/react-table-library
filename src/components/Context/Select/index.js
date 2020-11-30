@@ -102,7 +102,11 @@ SelectProvider.propTypes = {
   defaultSelect: PropTypes.shape({
     ids: PropTypes.arrayOf(PropTypes.string)
   }),
-  children: PropTypes.func.isRequired
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.func
+  ])
 };
 
 export { SelectContext, SelectProvider };
