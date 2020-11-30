@@ -31,8 +31,11 @@ const ExpandProvider = ({
     defaultExpand
   );
 
-  const onExpandById = id =>
-    expandStateDispatcher({ type: EXPAND_BY_ID, payload: { id } });
+  const onExpandById = React.useCallback(
+    id =>
+      expandStateDispatcher({ type: EXPAND_BY_ID, payload: { id } }),
+    []
+  );
 
   return (
     <ExpandContext.Provider

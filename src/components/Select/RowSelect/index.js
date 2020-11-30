@@ -25,7 +25,7 @@ const SELECT_TYPES = {
 
 const RowSelect = React.memo(
   ({
-    selectId,
+    id,
     isSelected,
     onSelectById,
     selectType = SELECT_TYPES.RowSelectClick,
@@ -40,7 +40,7 @@ const RowSelect = React.memo(
       if (event.target.tagName !== 'DIV') return;
 
       if (selectType === SELECT_TYPES.RowSelectClick) {
-        onSelectById(selectId);
+        onSelectById(id);
       }
     };
 
@@ -57,7 +57,7 @@ const RowSelect = React.memo(
       >
         {React.Children.map(children, child =>
           React.cloneElement(child, {
-            selectId,
+            id,
             isSelected,
             onSelectById
           })
@@ -70,7 +70,7 @@ const RowSelect = React.memo(
 RowSelect.SELECT_TYPES = SELECT_TYPES;
 
 RowSelect.propTypes = {
-  selectId: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   isSelected: PropTypes.bool.isRequired,
   onSelectById: PropTypes.func.isRequired,
   selectType: PropTypes.oneOf(Object.values(SELECT_TYPES)),

@@ -8,7 +8,7 @@ import IconChevronSingleRight from '@icons/IconChevronSingleRight';
 import { Button, CellContainer } from '@shared';
 import { ThemeContext, ExpandContext } from '@context';
 
-import { isLeaf, hasLeaves } from '../util';
+import { isLeaf } from '../util';
 
 const EXPAND_ICON_SIZE = '14px';
 const EXPAND_ICON_MARGIN = '4px';
@@ -29,68 +29,64 @@ const ExpandContent = styled.div`
   }
 `;
 
-const CellExpand = ({
-  item,
-  width,
-  className,
-  indentation,
-  children
-}) => {
-  const theme = React.useContext(ThemeContext);
-  const expand = React.useContext(ExpandContext);
+const CellExpand = React.memo(
+  ({ item, width, className, indentation, children }) => {
+    const theme = React.useContext(ThemeContext);
+    const expand = React.useContext(ExpandContext);
 
-  const { expandState, onExpandById } = expand;
+    const { expandState, onExpandById } = expand;
 
-  const handleClick = () => {
-    if (isLeaf(item)) return;
+    const handleClick = () => {
+      if (isLeaf(item)) return;
 
-    onExpandById(item.id);
-  };
+      onExpandById(item.id);
+    };
 
-  const expanded = expandState.ids.includes(item.id);
+    const expanded = expandState.ids.includes(item.id);
 
-  let icon = null;
+    let icon = null;
 
-  if (isLeaf(item)) {
-    icon = null;
-  } else if (!isLeaf(item) && expanded) {
-    icon = (
-      <IconChevronSingleDown
-        height={EXPAND_ICON_SIZE}
-        width={EXPAND_ICON_SIZE}
-      />
-    );
-  } else if (!isLeaf(item) && !expanded) {
-    icon = (
-      <IconChevronSingleRight
-        height={EXPAND_ICON_SIZE}
-        width={EXPAND_ICON_SIZE}
-      />
+    if (isLeaf(item)) {
+      icon = null;
+    } else if (!isLeaf(item) && expanded) {
+      icon = (
+        <IconChevronSingleDown
+          height={EXPAND_ICON_SIZE}
+          width={EXPAND_ICON_SIZE}
+        />
+      );
+    } else if (!isLeaf(item) && !expanded) {
+      icon = (
+        <IconChevronSingleRight
+          height={EXPAND_ICON_SIZE}
+          width={EXPAND_ICON_SIZE}
+        />
+      );
+    }
+
+    return (
+      <CellContainer
+        className={cs('td', 'cell-expand', className)}
+        css={theme?.Cell}
+        width={width}
+        indentation={indentation}
+      >
+        <ExpandContent>
+          <ExpandButton
+            className={cs('prefix', {
+              active: expanded
+            })}
+            margin={EXPAND_ICON_MARGIN}
+            onClick={handleClick}
+          >
+            <span>{icon}</span>
+          </ExpandButton>
+          <div>{children}</div>
+        </ExpandContent>
+      </CellContainer>
     );
   }
-
-  return (
-    <CellContainer
-      className={cs('td', 'cell-expand', className)}
-      css={theme?.Cell}
-      width={width}
-      indentation={indentation}
-    >
-      <ExpandContent>
-        <ExpandButton
-          className={cs('prefix', {
-            active: expanded
-          })}
-          margin={EXPAND_ICON_MARGIN}
-          onClick={handleClick}
-        >
-          <span>{icon}</span>
-        </ExpandButton>
-        <div>{children}</div>
-      </ExpandContent>
-    </CellContainer>
-  );
-};
+);
 
 CellExpand.propTypes = {
   item: PropTypes.shape(PropTypes.any),

@@ -151,7 +151,7 @@ storiesOf('05. Table with Expand', module)
                   item={item}
                   onExpand={tableItem => tableItem.nodes}
                 >
-                  {(tableItem, expandState) => (
+                  {tableItem => (
                     <>
                       <CellExpand item={tableItem} width="25%">
                         {tableItem.name}
@@ -195,7 +195,7 @@ storiesOf('05. Table with Expand', module)
                   }
                   onExpand={tableItem => tableItem.nodes}
                 >
-                  {(tableItem, expandState) => (
+                  {tableItem => (
                     <>
                       <CellExpand item={tableItem} width="25%">
                         {tableItem.name}
@@ -240,7 +240,7 @@ storiesOf('05. Table with Expand', module)
                   item={item}
                   onExpand={tableItem => tableItem.nodes}
                 >
-                  {(tableItem, expandState) => (
+                  {tableItem => (
                     <>
                       <CellExpand item={tableItem} width="25%">
                         {tableItem.name}

@@ -36,11 +36,14 @@ const SortProvider = ({ defaultSort = DEFAULT_SORT, children }) => {
     defaultSort
   );
 
-  const onSort = value =>
-    sortStateDispatcher({
-      type: SET_SORT,
-      payload: value
-    });
+  const onSort = React.useCallback(
+    value =>
+      sortStateDispatcher({
+        type: SET_SORT,
+        payload: value
+      }),
+    []
+  );
 
   return (
     <SortContext.Provider value={{ sortState, onSort }}>

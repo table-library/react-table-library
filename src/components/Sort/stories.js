@@ -85,7 +85,7 @@ storiesOf('03. Table with Sort', module)
 
             <Body>
               {tableList.map(item => (
-                <Row key={item.id}>
+                <Row item={item} key={item.id}>
                   <Cell width="25%">{item.name}</Cell>
                   <Cell width="25%">{item.stars}</Cell>
                   <Cell width="25%">{item.light.toString()}</Cell>
@@ -152,7 +152,7 @@ storiesOf('03. Table with Sort', module)
 
             <Body>
               {tableList.map(item => (
-                <Row key={item.id}>
+                <Row item={item} key={item.id}>
                   <Cell width="25%">{item.name}</Cell>
                   <Cell width="25%">{item.stars}</Cell>
                   <Cell width="25%">{item.light.toString()}</Cell>
@@ -225,7 +225,7 @@ storiesOf('03. Table with Sort', module)
 
             <Body>
               {tableList.map(item => (
-                <Row key={item.id}>
+                <Row item={item} key={item.id}>
                   <Cell width="25%">{item.name}</Cell>
                   <Cell width="25%">{item.stars}</Cell>
                   <Cell width="25%">{item.light.toString()}</Cell>
@@ -302,7 +302,7 @@ storiesOf('03. Table with Sort', module)
 
             <Body>
               {tableList.map(item => (
-                <Row key={item.id}>
+                <Row item={item} key={item.id}>
                   <Cell width="25%">{item.name}</Cell>
                   <Cell width="25%">{item.stars}</Cell>
                   <Cell width="25%">{item.light.toString()}</Cell>
@@ -379,7 +379,7 @@ storiesOf('03. Table with Sort', module)
 
             <Body>
               {tableList.map(item => (
-                <Row key={item.id}>
+                <Row item={item} key={item.id}>
                   <Cell width="25%" indentation={18}>
                     {item.name}
                   </Cell>
@@ -480,7 +480,7 @@ storiesOf('03. Table with Sort', module)
 
             <Body>
               {tableList.map(item => (
-                <Row key={item.id}>
+                <Row item={item} key={item.id}>
                   <Cell width="25%">{item.name}</Cell>
                   <Cell width="25%">{item.stars}</Cell>
                   <Cell width="25%">{item.light.toString()}</Cell>

@@ -7,7 +7,7 @@ import { ThemeContext } from '@context';
 
 const CellSelect = React.memo(
   ({
-    selectId,
+    id,
     isSelected,
     onSelectById,
     width,
@@ -18,7 +18,7 @@ const CellSelect = React.memo(
     const theme = React.useContext(ThemeContext);
 
     const handleChange = () => {
-      onSelectById(selectId);
+      onSelectById(id);
     };
 
     return (
@@ -48,7 +48,7 @@ const CellSelect = React.memo(
 );
 
 CellSelect.propTypes = {
-  selectId: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   isSelected: PropTypes.bool.isRequired,
   onSelectById: PropTypes.func.isRequired,
   width: PropTypes.string,

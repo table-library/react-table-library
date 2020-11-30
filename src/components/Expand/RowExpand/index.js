@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import cs from 'classnames';
 
 import { RowContainer } from '@shared';
-import { ThemeContext, ExpandContext } from '@context';
+import { ThemeContext } from '@context';
+import { Body } from '@table';
 
 import { isLeaf, hasLeaves } from '../util';
 
@@ -23,67 +24,73 @@ const EXPAND_TYPES = {
   ButtonExpandClick: 'ButtonExpandClick'
 };
 
-const RowExpand = ({
-  item,
-  expandType = EXPAND_TYPES.RowExpandClick,
-  className,
-  disabled,
-  children,
-  _level = 0
-}) => {
-  const theme = React.useContext(ThemeContext);
-  const expand = React.useContext(ExpandContext);
+const RowExpand = React.memo(
+  ({
+    id,
+    item,
+    isExpanded,
+    onExpandById,
+    expandType = EXPAND_TYPES.RowExpandClick,
+    className,
+    disabled,
+    children,
+    _level = 0
+  }) => {
+    const theme = React.useContext(ThemeContext);
 
-  const { expandState, onExpandById } = expand;
+    const handleClick = event => {
+      if (event.target.tagName !== 'DIV' || event.target.title)
+        return;
 
-  const handleClick = event => {
-    if (event.target.tagName !== 'DIV' || event.target.title) return;
+      if (isLeaf(item)) return;
 
-    if (isLeaf(item)) return;
+      if (expandType === EXPAND_TYPES.RowExpandClick) {
+        onExpandById(id);
+      }
+    };
 
-    if (expandType === EXPAND_TYPES.RowExpandClick) {
-      onExpandById(item.id);
-    }
-  };
+    return (
+      <>
+        <RowExpandContainer
+          className={cs('tr', 'row-expand', className, {
+            disabled,
+            'expandable-row':
+              expandType === EXPAND_TYPES.RowExpandClick
+          })}
+          css={theme?.RowExpand}
+          $level={_level}
+          onClick={handleClick}
+        >
+          {children(item)}
+        </RowExpandContainer>
 
-  const expanded = expandState.ids.includes(item.id);
-
-  return (
-    <>
-      <RowExpandContainer
-        className={cs('tr', 'row-expand', className, {
-          disabled,
-          'expandable-row': expandType === EXPAND_TYPES.RowExpandClick
-        })}
-        css={theme?.RowExpand}
-        $level={_level}
-        onClick={handleClick}
-      >
-        {children(item, expand)}
-      </RowExpandContainer>
-
-      {expanded &&
-        hasLeaves(item) &&
-        item.nodes.map(node => (
-          <RowExpand
-            key={node.id}
-            item={node}
-            expandType={expandType}
-            className={className}
-            disabled={disabled}
-            _level={_level + 1}
-          >
-            {recursiveNode => children(recursiveNode, expand)}
-          </RowExpand>
-        ))}
-    </>
-  );
-};
+        {isExpanded &&
+          hasLeaves(item) &&
+          item.nodes.map(node => (
+            <Body>
+              <RowExpand
+                key={node.id}
+                item={node}
+                className={className}
+                disabled={disabled}
+                _level={_level + 1}
+              >
+                {recursiveNode => children(recursiveNode)}
+              </RowExpand>
+            </Body>
+          ))}
+      </>
+    );
+  }
+);
 
 RowExpand.EXPAND_TYPES = EXPAND_TYPES;
 
 RowExpand.propTypes = {
+  id: PropTypes.string.isRequired,
   item: PropTypes.shape(PropTypes.any),
+  isExpanded: PropTypes.bool.isRequired,
+  onExpandById: PropTypes.func.isRequired,
   expandType: PropTypes.oneOf(Object.values(EXPAND_TYPES)),
   className: PropTypes.string,
   disabled: PropTypes.bool,
