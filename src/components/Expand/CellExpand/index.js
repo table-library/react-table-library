@@ -13,7 +13,21 @@ import { isLeaf, hasLeaves } from '../util';
 const EXPAND_ICON_SIZE = '14px';
 const EXPAND_ICON_MARGIN = '4px';
 
-const ExpandButton = styled(Button)``;
+const ExpandButton = styled(Button)`
+  width: auto;
+`;
+
+const ExpandContent = styled.div`
+  display: flex;
+  align-items: center;
+
+  & > div {
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+`;
 
 const CellExpand = ({
   item,
@@ -62,7 +76,7 @@ const CellExpand = ({
       width={width}
       indentation={indentation}
     >
-      <div>
+      <ExpandContent>
         <ExpandButton
           className={cs('prefix', {
             active: expanded
@@ -71,9 +85,9 @@ const CellExpand = ({
           onClick={handleClick}
         >
           <span>{icon}</span>
-          <div title={children}>{children}</div>
         </ExpandButton>
-      </div>
+        <div>{children}</div>
+      </ExpandContent>
     </CellContainer>
   );
 };
