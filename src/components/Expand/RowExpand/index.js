@@ -9,12 +9,15 @@ import { isLeaf, hasLeaves } from '../util';
 import { EXPAND_TYPES } from './config';
 
 const useRowExpand = ({
-  _level,
   id,
   item,
+  expandColumnLevel,
+  expandDepthLevel,
   isExpanded,
   onExpandById,
   expandType = EXPAND_TYPES.RowExpandClick,
+  // e.g. select
+  composites,
   className,
   children,
   // eslint-disable-next-line no-use-before-define
@@ -25,8 +28,8 @@ const useRowExpand = ({
       cursor: pointer;
     }
 
-    .td:first-child > div {
-      margin-left: ${_level * 20}px;
+    .td:nth-child(${expandColumnLevel}) > div {
+      margin-left: ${expandDepthLevel * 20}px;
     }
   `;
 
@@ -52,8 +55,10 @@ const useRowExpand = ({
         <RecursiveComponent
           key={node.id}
           item={node}
-          _level={_level + 1}
+          expandColumnLevel={expandColumnLevel}
+          expandDepthLevel={expandDepthLevel + 1}
           expandType={expandType}
+          {...composites}
           className={className}
         >
           {recursiveNode => children(recursiveNode)}
@@ -73,7 +78,8 @@ const RowExpand = React.memo(
   ({
     id,
     item,
-    _level = 0,
+    expandDepthLevel = 0,
+    expandColumnLevel = 1,
     isExpanded,
     onExpandById,
     expandType,
@@ -87,9 +93,10 @@ const RowExpand = React.memo(
       onClick,
       panel
     } = useRowExpand({
-      _level,
       id,
       item,
+      expandColumnLevel,
+      expandDepthLevel,
       isExpanded,
       onExpandById,
       expandType,
@@ -116,7 +123,8 @@ RowExpand.EXPAND_TYPES = EXPAND_TYPES;
 RowExpand.propTypes = {
   id: PropTypes.string,
   item: PropTypes.shape(PropTypes.any),
-  _level: PropTypes.number,
+  expandColumnLevel: PropTypes.number,
+  expandDepthLevel: PropTypes.number,
   isExpanded: PropTypes.bool,
   onExpandById: PropTypes.func,
   expandType: PropTypes.oneOf(Object.values(EXPAND_TYPES)),

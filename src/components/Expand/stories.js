@@ -165,7 +165,7 @@ storiesOf('05. Table with Expand', module)
       </Table>
     );
   })
-  .add('with icon', () => {
+  .add('icon', () => {
     return (
       <Table list={list}>
         {tableList => (

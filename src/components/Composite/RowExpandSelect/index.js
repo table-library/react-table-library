@@ -13,7 +13,8 @@ const RowExpandSelect = React.memo(
     id,
     item,
     // expand
-    _level = 0,
+    expandDepthLevel = 0,
+    expandColumnLevel = 1,
     isExpanded,
     onExpandById,
     expandType,
@@ -43,12 +44,16 @@ const RowExpandSelect = React.memo(
       onClick: onExpandClick,
       panel: expandPanel
     } = useRowExpand({
-      _level,
       id,
       item,
+      expandColumnLevel,
+      expandDepthLevel,
       isExpanded,
       onExpandById,
       expandType,
+      composites: {
+        selectType
+      },
       className,
       children,
       RecursiveComponent: RowExpandSelect
@@ -76,13 +81,16 @@ const RowExpandSelect = React.memo(
   }
 );
 
+RowExpandSelect.SELECT_TYPES = SELECT_TYPES;
+RowExpandSelect.EXPAND_TYPES = EXPAND_TYPES;
+
 RowExpandSelect.propTypes = {
   id: PropTypes.string,
   item: PropTypes.shape(PropTypes.any),
   isSelected: PropTypes.bool,
   onSelectById: PropTypes.func,
   selectType: PropTypes.oneOf(Object.values(SELECT_TYPES)),
-  _level: PropTypes.number,
+  expandDepthLevel: PropTypes.number,
   isExpanded: PropTypes.bool,
   onExpandById: PropTypes.func,
   expandType: PropTypes.oneOf(Object.values(EXPAND_TYPES)),

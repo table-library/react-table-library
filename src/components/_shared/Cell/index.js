@@ -19,23 +19,17 @@ const CellContainerBase = styled.div`
   }
 
   &:first-child > div {
-    padding-left: ${GUTTER_OUTER}px;
+    padding-left: ${({ indentation = 0 }) =>
+      GUTTER_OUTER + indentation}px;
   }
 
   & > div {
-    padding-right: ${GUTTER_INNER}px;
+    padding-right: ${({ indentation = 0 }) => 20 + indentation}px;
+    padding-left: ${({ indentation = 0 }) => 20 + indentation}px;
   }
 
   &:last-child > div {
     padding-right: ${GUTTER_OUTER}px;
-  }
-
-  & > div {
-    margin-left: ${({ indentation = 0 }) => 20 + indentation}px;
-  }
-
-  &:first-child > div {
-    margin-left: ${({ indentation = 0 }) => 0 + indentation}px;
   }
 
   border-right: 1px solid ${COLORS.BORDER};
