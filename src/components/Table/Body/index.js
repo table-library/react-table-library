@@ -45,7 +45,7 @@ Body.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
     PropTypes.func
-  ]).isRequired
+  ])
 };
 
 export { Body };

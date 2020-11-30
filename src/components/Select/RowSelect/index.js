@@ -1,10 +1,50 @@
 import * as React from 'react';
+import { css } from 'styled-components';
+import cs from 'classnames';
 import PropTypes from 'prop-types';
 
+import * as COLORS from '@colors';
 import { Row } from '@table';
 
 import { SELECT_TYPES } from './config';
-import { useRowSelect } from './useRowSelect';
+
+const useRowSelect = ({
+  id,
+  isSelected,
+  onSelectById,
+  selectType = SELECT_TYPES.RowSelectClick,
+  className
+}) => {
+  const rowSelectTheme = css`
+    &.selected-row {
+      color: ${COLORS.FONT_PRIMARY};
+      font-weight: bold;
+    }
+
+    &.selectable-row {
+      cursor: pointer;
+    }
+  `;
+
+  const rowSelectClassName = cs('row-select', className, {
+    'selectable-row': selectType === SELECT_TYPES.RowSelectClick,
+    'selected-row': isSelected
+  });
+
+  const handleClick = event => {
+    if (event.target.tagName !== 'DIV') return;
+
+    if (selectType === SELECT_TYPES.RowSelectClick) {
+      onSelectById(id);
+    }
+  };
+
+  return {
+    theme: rowSelectTheme,
+    className: rowSelectClassName,
+    onClick: handleClick
+  };
+};
 
 const RowSelect = React.memo(
   ({
@@ -25,15 +65,15 @@ const RowSelect = React.memo(
       id,
       isSelected,
       onSelectById,
-      selectType
+      selectType,
+      className
     });
 
     return (
       <Row
-        className={className}
-        disabled={disabled}
         _theme={rowSelectTheme}
-        _className={rowSelectClassName}
+        className={rowSelectClassName}
+        disabled={disabled}
         onClick={onClick}
       >
         {children(item)}
@@ -59,4 +99,4 @@ RowSelect.propTypes = {
   ])
 };
 
-export { RowSelect };
+export { RowSelect, useRowSelect };

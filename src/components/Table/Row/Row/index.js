@@ -12,30 +12,40 @@ const Row = ({
   className,
   disabled,
   onClick = () => {},
+  panel,
   children
 }) => {
   const theme = React.useContext(ThemeContext);
 
   return (
-    <RowContainer
-      onClick={onClick}
-      className={cs('tr', className, _className, { disabled })}
-      css={css`
-        ${_theme}
-        ${theme?.Row}
-      `}
-    >
-      {children}
-    </RowContainer>
+    <>
+      <RowContainer
+        onClick={onClick}
+        className={cs('tr', className, _className, { disabled })}
+        css={css`
+          ${_theme}
+          ${theme?.Row}
+        `}
+      >
+        {children}
+      </RowContainer>
+
+      {panel}
+    </>
   );
 };
 
 Row.propTypes = {
-  _theme: PropTypes.string,
+  _theme: PropTypes.arrayOf(PropTypes.any),
   _className: PropTypes.string,
   onClick: PropTypes.func,
   className: PropTypes.string,
   disabled: PropTypes.bool,
+  panel: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.func
+  ]),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
