@@ -83,21 +83,21 @@ const SortButton = styled.button`
   width: 100%;
   height: 100%;
 
-  div {
+  span {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  &.prefix div {
+  &.prefix span {
     margin-right: ${({ margin }) => margin};
   }
 
-  &.suffix div {
+  &.suffix span {
     margin-left: ${({ margin }) => margin};
   }
 
-  span {
+  div {
     text-align: left;
     overflow: hidden;
     white-space: nowrap;
@@ -108,7 +108,7 @@ const SortButton = styled.button`
     font-weight: bold;
   }
 
-  span:after {
+  div:after {
     display: block;
     content: attr(title);
     font-weight: bold;
@@ -162,24 +162,26 @@ const HeaderCellSort = ({
   return (
     <HeaderCellSortContainer
       width={width}
-      className={className}
+      className={cs(className, 'td', 'header-cell-sort')}
       css={theme?.HeaderCellSort}
       indentation={indentation}
     >
-      <SortButton
-        type="button"
-        className={cs({
-          'sort-active': sortState.key === sortKey,
-          prefix,
-          suffix
-        })}
-        margin={sortIconMargin}
-        onClick={() => onSort({ fn: sortFn, key: sortKey })}
-      >
-        {prefix && icon && <div>{icon}</div>}
-        <span title={children}>{children}</span>
-        {suffix && icon && <div>{icon}</div>}
-      </SortButton>
+      <div>
+        <SortButton
+          type="button"
+          className={cs({
+            'sort-active': sortState.key === sortKey,
+            prefix,
+            suffix
+          })}
+          margin={sortIconMargin}
+          onClick={() => onSort({ fn: sortFn, key: sortKey })}
+        >
+          {prefix && icon && <span>{icon}</span>}
+          <div title={children}>{children}</div>
+          {suffix && icon && <span>{icon}</span>}
+        </SortButton>
+      </div>
     </HeaderCellSortContainer>
   );
 };

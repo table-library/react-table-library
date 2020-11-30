@@ -30,7 +30,7 @@ const Checkbox = ({ children }) => {
   const hasRenderProp = hasChildren && isFunction(children);
 
   if (hasChildren && hasRenderProp) {
-    return children({ selectState, onSelectAll });
+    return children(select);
   }
 
   if (hasChildren && !hasRenderProp) {
@@ -43,12 +43,16 @@ const Checkbox = ({ children }) => {
   return <input ref={ref} type="checkbox" onChange={onSelectAll} />;
 };
 
+Checkbox.propTypes = {
+  children: PropTypes.node
+};
+
 const HeaderCellSelect = ({ width, className, children }) => {
   const theme = React.useContext(ThemeContext);
 
   return (
     <CellContainer
-      className={cs('td', 'shrink', className)}
+      className={cs('td', 'header-cell-select', 'shrink', className)}
       css={theme?.HeaderCellSelect}
       width={width}
     >

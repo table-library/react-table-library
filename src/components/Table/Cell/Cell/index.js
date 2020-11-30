@@ -15,7 +15,7 @@ const Cell = ({ width, className, indentation, children }) => {
       width={width}
       indentation={indentation}
     >
-      {children}
+      <div>{children}</div>
     </CellContainer>
   );
 };

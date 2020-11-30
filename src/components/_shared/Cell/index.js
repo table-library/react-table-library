@@ -11,24 +11,30 @@ const CellContainerBase = styled.div`
   padding-top: 4px;
   padding-bottom: 4px;
 
-  text-align: left;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  & > div {
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-  &:first-child {
+  &:first-child > div {
     padding-left: ${GUTTER_OUTER}px;
   }
 
-  padding-right: ${GUTTER_INNER}px;
+  & > div {
+    padding-right: ${GUTTER_INNER}px;
+  }
 
-  &:last-child {
+  &:last-child > div {
     padding-right: ${GUTTER_OUTER}px;
   }
 
-  margin-left: ${({ indentation = 0 }) => 20 + indentation}px;
+  & > div {
+    margin-left: ${({ indentation = 0 }) => 20 + indentation}px;
+  }
 
-  &:first-child {
+  &:first-child > div {
     margin-left: ${({ indentation = 0 }) => 0 + indentation}px;
   }
 

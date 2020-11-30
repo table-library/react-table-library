@@ -15,7 +15,8 @@
           "@table": "./src/components/Table",
           "@theme": "./src/components/Theme",
           "@sort": "./src/components/Sort",
-          "@select": "./src/components/Select"
+          "@select": "./src/components/Select",
+          "@expand": "./src/components/Expand"
         }
       }
     ],

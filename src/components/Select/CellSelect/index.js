@@ -23,7 +23,7 @@ const CellSelect = ({
 
   return (
     <CellContainer
-      className={cs('td', 'shrink', className)}
+      className={cs('td', 'cell-select', 'shrink', className)}
       css={theme?.CellSelect}
       width={width}
       indentation={indentation}

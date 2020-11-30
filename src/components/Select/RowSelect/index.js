@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cs from 'classnames';
 
-import { RowBase, RowContainer } from '@shared';
+import { RowContainer } from '@shared';
 import * as COLORS from '@colors';
 import { ThemeContext, SelectContext } from '@context';
 
@@ -20,7 +20,7 @@ const RowSelectContainer = styled(RowContainer)`
 
 const SELECT_TYPES = {
   RowSelectClick: 'RowSelectClick',
-  CellSelectClick: 'CellSelectClick'
+  ButtonSelectClick: 'ButtonSelectClick'
 };
 
 const RowSelect = ({
@@ -46,7 +46,7 @@ const RowSelect = ({
 
   return (
     <RowSelectContainer
-      className={cs('tr', className, {
+      className={cs('tr', 'row-select', className, {
         disabled,
         'selectable-row':
           selectId != null &&
@@ -57,11 +57,9 @@ const RowSelect = ({
       css={theme?.RowSelect}
       onClick={handleClick}
     >
-      <RowBase>
-        {React.Children.map(children, child =>
-          React.cloneElement(child, { selectId })
-        )}
-      </RowBase>
+      {React.Children.map(children, child =>
+        React.cloneElement(child, { selectId })
+      )}
     </RowSelectContainer>
   );
 };

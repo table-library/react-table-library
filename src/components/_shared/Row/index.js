@@ -1,19 +1,6 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import * as COLORS from '@colors';
-
-const RowBase = ({ children }) => {
-  return React.Children.map(children, child =>
-    React.cloneElement(child)
-  );
-};
-
-RowBase.propTypes = {
-  disabled: PropTypes.bool,
-  children: PropTypes.node.isRequired
-};
 
 const RowContainerBase = styled.div`
   display: flex;
@@ -54,9 +41,4 @@ const HeaderRowContainer = styled(RowContainerBase)`
   ${({ css }) => css};
 `;
 
-export {
-  RowBase,
-  RowContainerBase,
-  RowContainer,
-  HeaderRowContainer
-};
+export { RowContainerBase, RowContainer, HeaderRowContainer };

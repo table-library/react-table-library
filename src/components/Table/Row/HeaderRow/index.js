@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
 
-import { RowBase, HeaderRowContainer } from '@shared';
+import { HeaderRowContainer } from '@shared';
 import { ThemeContext } from '@context';
 
 const HeaderRow = ({ className, disabled, children }) => {
@@ -13,7 +13,7 @@ const HeaderRow = ({ className, disabled, children }) => {
       className={cs('tr', className, { disabled })}
       css={theme?.HeaderRow}
     >
-      <RowBase>{children}</RowBase>
+      {children}
     </HeaderRowContainer>
   );
 };

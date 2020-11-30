@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
 
-import { RowBase, RowContainer } from '@shared';
+import { RowContainer } from '@shared';
 import { ThemeContext } from '@context';
 
 const Row = ({ className, disabled, children }) => {
@@ -13,7 +13,7 @@ const Row = ({ className, disabled, children }) => {
       className={cs('tr', className, { disabled })}
       css={theme?.Row}
     >
-      <RowBase>{children}</RowBase>
+      {children}
     </RowContainer>
   );
 };

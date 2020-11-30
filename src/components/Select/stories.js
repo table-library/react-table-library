@@ -117,7 +117,9 @@ storiesOf('04. Table with Select', module)
                 <RowSelect
                   key={item.id}
                   selectId={item.id}
-                  selectType={RowSelect.SELECT_TYPES.CellSelectClick}
+                  selectType={
+                    RowSelect.SELECT_TYPES.ButtonSelectClick
+                  }
                 >
                   <CellSelect />
                   <Cell width="20%">{item.name}</Cell>
@@ -164,7 +166,9 @@ storiesOf('04. Table with Select', module)
                 <RowSelect
                   key={item.id}
                   selectId={item.id}
-                  selectType={RowSelect.SELECT_TYPES.CellSelectClick}
+                  selectType={
+                    RowSelect.SELECT_TYPES.ButtonSelectClick
+                  }
                 >
                   <CellSelect>
                     <Checkbox size="small" />
