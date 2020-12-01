@@ -18,6 +18,7 @@ const useRowSelect = ({
   const rowSelectTheme = css`
     &.selected-row {
       color: ${COLORS.FONT_PRIMARY};
+      background-color: ${COLORS.ROW_SELECTED};
       font-weight: bold;
     }
 

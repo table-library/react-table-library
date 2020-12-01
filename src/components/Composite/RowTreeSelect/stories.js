@@ -167,91 +167,6 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
       </Table>
     );
   })
-  .add('only icon: tree on icon, select on row', () => {
-    return (
-      <Table list={list}>
-        {tableList => (
-          <Content>
-            <Header>
-              <HeaderRow>
-                <HeaderCell width="25%">Name</HeaderCell>
-                <HeaderCell width="25%">Stars</HeaderCell>
-                <HeaderCell width="25%">Light</HeaderCell>
-                <HeaderCell width="25%">Count</HeaderCell>
-              </HeaderRow>
-            </Header>
-
-            <Body>
-              {tableList.map(item => (
-                <RowTreeSelect
-                  key={item.id}
-                  item={item}
-                  treeType={RowTreeSelect.TREE_TYPES.ButtonTreeClick}
-                >
-                  {tableItem => (
-                    <>
-                      <CellTree item={tableItem} width="25%">
-                        {tableItem.name}
-                      </CellTree>
-                      <Cell width="25%">{tableItem.stars}</Cell>
-                      <Cell width="25%">
-                        {tableItem.light.toString()}
-                      </Cell>
-                      <Cell width="25%">{tableItem.count}</Cell>
-                    </>
-                  )}
-                </RowTreeSelect>
-              ))}
-            </Body>
-          </Content>
-        )}
-      </Table>
-    );
-  })
-  .add('only checkbox: select on checkbox, tree on row', () => {
-    return (
-      <Table list={list}>
-        {tableList => (
-          <Content>
-            <Header>
-              <HeaderRow>
-                <HeaderCellSelect />
-                <HeaderCell width="20%">Name</HeaderCell>
-                <HeaderCell width="20%">Stars</HeaderCell>
-                <HeaderCell width="20%">Light</HeaderCell>
-                <HeaderCell width="20%">Count</HeaderCell>
-              </HeaderRow>
-            </Header>
-
-            <Body>
-              {tableList.map(item => (
-                <RowTreeSelect
-                  key={item.id}
-                  item={item}
-                  selectType={
-                    RowTreeSelect.SELECT_TYPES.ButtonSelectClick
-                  }
-                  treeColumnLevel={2}
-                >
-                  {tableItem => (
-                    <>
-                      <CellSelect item={tableItem} />
-                      <Cell width="20%">{tableItem.name}</Cell>
-                      <Cell width="20%">{tableItem.stars}</Cell>
-                      <Cell width="20%">
-                        {tableItem.light.toString()}
-                      </Cell>
-                      <Cell width="20%">{tableItem.count}</Cell>
-                    </>
-                  )}
-                </RowTreeSelect>
-              ))}
-            </Body>
-          </Content>
-        )}
-      </Table>
-    );
-  })
   .add('select on checkbox, tree on icon', () => {
     return (
       <Table list={list}>
@@ -378,6 +293,91 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
                       <CellTree item={tableItem} width="20%">
                         {tableItem.name}
                       </CellTree>
+                      <Cell width="20%">{tableItem.stars}</Cell>
+                      <Cell width="20%">
+                        {tableItem.light.toString()}
+                      </Cell>
+                      <Cell width="20%">{tableItem.count}</Cell>
+                    </>
+                  )}
+                </RowTreeSelect>
+              ))}
+            </Body>
+          </Content>
+        )}
+      </Table>
+    );
+  })
+  .add('only icon: tree on icon, select on row', () => {
+    return (
+      <Table list={list}>
+        {tableList => (
+          <Content>
+            <Header>
+              <HeaderRow>
+                <HeaderCell width="25%">Name</HeaderCell>
+                <HeaderCell width="25%">Stars</HeaderCell>
+                <HeaderCell width="25%">Light</HeaderCell>
+                <HeaderCell width="25%">Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <RowTreeSelect
+                  key={item.id}
+                  item={item}
+                  treeType={RowTreeSelect.TREE_TYPES.ButtonTreeClick}
+                >
+                  {tableItem => (
+                    <>
+                      <CellTree item={tableItem} width="25%">
+                        {tableItem.name}
+                      </CellTree>
+                      <Cell width="25%">{tableItem.stars}</Cell>
+                      <Cell width="25%">
+                        {tableItem.light.toString()}
+                      </Cell>
+                      <Cell width="25%">{tableItem.count}</Cell>
+                    </>
+                  )}
+                </RowTreeSelect>
+              ))}
+            </Body>
+          </Content>
+        )}
+      </Table>
+    );
+  })
+  .add('only checkbox: select on checkbox, tree on row', () => {
+    return (
+      <Table list={list}>
+        {tableList => (
+          <Content>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSelect />
+                <HeaderCell width="20%">Name</HeaderCell>
+                <HeaderCell width="20%">Stars</HeaderCell>
+                <HeaderCell width="20%">Light</HeaderCell>
+                <HeaderCell width="20%">Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <RowTreeSelect
+                  key={item.id}
+                  item={item}
+                  selectType={
+                    RowTreeSelect.SELECT_TYPES.ButtonSelectClick
+                  }
+                  treeColumnLevel={2}
+                >
+                  {tableItem => (
+                    <>
+                      <CellSelect item={tableItem} />
+                      <Cell width="20%">{tableItem.name}</Cell>
                       <Cell width="20%">{tableItem.stars}</Cell>
                       <Cell width="20%">
                         {tableItem.light.toString()}
