@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { ThemeContext, SelectContext, ExpandContext } from '@context';
+import { ThemeContext, SelectContext, TreeContext } from '@context';
 
 const BodyContainer = styled.div`
   ${({ css }) => css};
@@ -17,15 +17,15 @@ const getSelectProps = (child, { selectState, onSelectById }) => ({
   onSelectById
 });
 
-const getExpandProps = (child, { expandState, onExpandById }) => ({
-  isExpanded: expandState.ids.includes(child.props.item.id),
-  onExpandById
+const getTreeProps = (child, { treeState, onTreeById }) => ({
+  isTreeed: treeState.ids.includes(child.props.item.id),
+  onTreeById
 });
 
 const Body = ({ children }) => {
   const theme = React.useContext(ThemeContext);
   const select = React.useContext(SelectContext);
-  const expand = React.useContext(ExpandContext);
+  const tree = React.useContext(TreeContext);
 
   return (
     <BodyContainer css={theme?.Body}>
@@ -33,7 +33,7 @@ const Body = ({ children }) => {
         React.cloneElement(child, {
           ...getCommonProps(child),
           ...getSelectProps(child, select),
-          ...getExpandProps(child, expand)
+          ...getTreeProps(child, tree)
         })
       )}
     </BodyContainer>

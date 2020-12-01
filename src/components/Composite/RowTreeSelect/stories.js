@@ -13,8 +13,8 @@ import {
   Cell
 } from '@table';
 
-import { RowExpandSelect } from '@composite';
-import { RowExpand, CellExpand } from '@expand';
+import { RowTreeSelect } from '@composite';
+import { RowTree, CellTree } from '@tree';
 import { RowSelect, CellSelect, HeaderCellSelect } from '@select';
 
 const list = [
@@ -130,7 +130,7 @@ const list = [
   }
 ];
 
-storiesOf('02. Composite/ 01. Expand & Select', module)
+storiesOf('02. Composite/ 01. Tree & Select', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
@@ -148,7 +148,7 @@ storiesOf('02. Composite/ 01. Expand & Select', module)
 
             <Body>
               {tableList.map(item => (
-                <RowExpandSelect key={item.id} item={item}>
+                <RowTreeSelect key={item.id} item={item}>
                   {tableItem => (
                     <>
                       <Cell width="25%">{tableItem.name}</Cell>
@@ -159,7 +159,7 @@ storiesOf('02. Composite/ 01. Expand & Select', module)
                       <Cell width="25%">{tableItem.count}</Cell>
                     </>
                   )}
-                </RowExpandSelect>
+                </RowTreeSelect>
               ))}
             </Body>
           </Content>
@@ -167,7 +167,7 @@ storiesOf('02. Composite/ 01. Expand & Select', module)
       </Table>
     );
   })
-  .add('only icon: expand on icon, select on row', () => {
+  .add('only icon: tree on icon, select on row', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -183,18 +183,16 @@ storiesOf('02. Composite/ 01. Expand & Select', module)
 
             <Body>
               {tableList.map(item => (
-                <RowExpandSelect
+                <RowTreeSelect
                   key={item.id}
                   item={item}
-                  expandType={
-                    RowExpandSelect.EXPAND_TYPES.ButtonExpandClick
-                  }
+                  treeType={RowTreeSelect.TREE_TYPES.ButtonTreeClick}
                 >
                   {tableItem => (
                     <>
-                      <CellExpand item={tableItem} width="25%">
+                      <CellTree item={tableItem} width="25%">
                         {tableItem.name}
-                      </CellExpand>
+                      </CellTree>
                       <Cell width="25%">{tableItem.stars}</Cell>
                       <Cell width="25%">
                         {tableItem.light.toString()}
@@ -202,7 +200,7 @@ storiesOf('02. Composite/ 01. Expand & Select', module)
                       <Cell width="25%">{tableItem.count}</Cell>
                     </>
                   )}
-                </RowExpandSelect>
+                </RowTreeSelect>
               ))}
             </Body>
           </Content>
@@ -210,7 +208,7 @@ storiesOf('02. Composite/ 01. Expand & Select', module)
       </Table>
     );
   })
-  .add('only checkbox: select on checkbox, expand on row', () => {
+  .add('only checkbox: select on checkbox, tree on row', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -227,13 +225,13 @@ storiesOf('02. Composite/ 01. Expand & Select', module)
 
             <Body>
               {tableList.map(item => (
-                <RowExpandSelect
+                <RowTreeSelect
                   key={item.id}
                   item={item}
                   selectType={
-                    RowExpandSelect.SELECT_TYPES.ButtonSelectClick
+                    RowTreeSelect.SELECT_TYPES.ButtonSelectClick
                   }
-                  expandColumnLevel={2}
+                  treeColumnLevel={2}
                 >
                   {tableItem => (
                     <>
@@ -246,7 +244,7 @@ storiesOf('02. Composite/ 01. Expand & Select', module)
                       <Cell width="20%">{tableItem.count}</Cell>
                     </>
                   )}
-                </RowExpandSelect>
+                </RowTreeSelect>
               ))}
             </Body>
           </Content>
@@ -254,7 +252,7 @@ storiesOf('02. Composite/ 01. Expand & Select', module)
       </Table>
     );
   })
-  .add('select on checkbox, expand on icon', () => {
+  .add('select on checkbox, tree on icon', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -271,23 +269,21 @@ storiesOf('02. Composite/ 01. Expand & Select', module)
 
             <Body>
               {tableList.map(item => (
-                <RowExpandSelect
+                <RowTreeSelect
                   key={item.id}
                   item={item}
                   selectType={
-                    RowExpandSelect.SELECT_TYPES.ButtonSelectClick
+                    RowTreeSelect.SELECT_TYPES.ButtonSelectClick
                   }
-                  expandType={
-                    RowExpandSelect.EXPAND_TYPES.ButtonExpandClick
-                  }
-                  expandColumnLevel={2}
+                  treeType={RowTreeSelect.TREE_TYPES.ButtonTreeClick}
+                  treeColumnLevel={2}
                 >
                   {tableItem => (
                     <>
                       <CellSelect item={tableItem} />
-                      <CellExpand item={tableItem} width="20%">
+                      <CellTree item={tableItem} width="20%">
                         {tableItem.name}
-                      </CellExpand>
+                      </CellTree>
                       <Cell width="20%">{tableItem.stars}</Cell>
                       <Cell width="20%">
                         {tableItem.light.toString()}
@@ -295,7 +291,7 @@ storiesOf('02. Composite/ 01. Expand & Select', module)
                       <Cell width="20%">{tableItem.count}</Cell>
                     </>
                   )}
-                </RowExpandSelect>
+                </RowTreeSelect>
               ))}
             </Body>
           </Content>
@@ -303,7 +299,7 @@ storiesOf('02. Composite/ 01. Expand & Select', module)
       </Table>
     );
   })
-  .add('select on row, expand on icon', () => {
+  .add('select on row, tree on icon', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -320,23 +316,21 @@ storiesOf('02. Composite/ 01. Expand & Select', module)
 
             <Body>
               {tableList.map(item => (
-                <RowExpandSelect
+                <RowTreeSelect
                   key={item.id}
                   item={item}
                   selectType={
-                    RowExpandSelect.SELECT_TYPES.RowSelectClick
+                    RowTreeSelect.SELECT_TYPES.RowSelectClick
                   }
-                  expandType={
-                    RowExpandSelect.EXPAND_TYPES.ButtonExpandClick
-                  }
-                  expandColumnLevel={2}
+                  treeType={RowTreeSelect.TREE_TYPES.ButtonTreeClick}
+                  treeColumnLevel={2}
                 >
                   {tableItem => (
                     <>
                       <CellSelect item={tableItem} />
-                      <CellExpand item={tableItem} width="20%">
+                      <CellTree item={tableItem} width="20%">
                         {tableItem.name}
-                      </CellExpand>
+                      </CellTree>
                       <Cell width="20%">{tableItem.stars}</Cell>
                       <Cell width="20%">
                         {tableItem.light.toString()}
@@ -344,7 +338,7 @@ storiesOf('02. Composite/ 01. Expand & Select', module)
                       <Cell width="20%">{tableItem.count}</Cell>
                     </>
                   )}
-                </RowExpandSelect>
+                </RowTreeSelect>
               ))}
             </Body>
           </Content>
@@ -352,7 +346,7 @@ storiesOf('02. Composite/ 01. Expand & Select', module)
       </Table>
     );
   })
-  .add('expand on row, select on checkbox', () => {
+  .add('tree on row, select on checkbox', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -369,23 +363,21 @@ storiesOf('02. Composite/ 01. Expand & Select', module)
 
             <Body>
               {tableList.map(item => (
-                <RowExpandSelect
+                <RowTreeSelect
                   key={item.id}
                   item={item}
                   selectType={
-                    RowExpandSelect.SELECT_TYPES.ButtonSelectClick
+                    RowTreeSelect.SELECT_TYPES.ButtonSelectClick
                   }
-                  expandType={
-                    RowExpandSelect.EXPAND_TYPES.RowExpandClick
-                  }
-                  expandColumnLevel={2}
+                  treeType={RowTreeSelect.TREE_TYPES.RowTreeClick}
+                  treeColumnLevel={2}
                 >
                   {tableItem => (
                     <>
                       <CellSelect item={tableItem} />
-                      <CellExpand item={tableItem} width="20%">
+                      <CellTree item={tableItem} width="20%">
                         {tableItem.name}
-                      </CellExpand>
+                      </CellTree>
                       <Cell width="20%">{tableItem.stars}</Cell>
                       <Cell width="20%">
                         {tableItem.light.toString()}
@@ -393,7 +385,7 @@ storiesOf('02. Composite/ 01. Expand & Select', module)
                       <Cell width="20%">{tableItem.count}</Cell>
                     </>
                   )}
-                </RowExpandSelect>
+                </RowTreeSelect>
               ))}
             </Body>
           </Content>

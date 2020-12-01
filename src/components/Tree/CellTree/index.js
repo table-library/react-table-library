@@ -6,18 +6,18 @@ import cs from 'classnames';
 import IconChevronSingleDown from '@icons/IconChevronSingleDown';
 import IconChevronSingleRight from '@icons/IconChevronSingleRight';
 import { Button, CellContainer } from '@shared';
-import { ThemeContext, ExpandContext } from '@context';
+import { ThemeContext, TreeContext } from '@context';
 
 import { isLeaf } from '../util';
 
-const EXPAND_ICON_SIZE = '14px';
-const EXPAND_ICON_MARGIN = '4px';
+const TREE_ICON_SIZE = '14px';
+const TREE_ICON_MARGIN = '4px';
 
-const ExpandButton = styled(Button)`
+const TreeButton = styled(Button)`
   width: auto;
 `;
 
-const ExpandContent = styled.div`
+const TreeContent = styled.div`
   display: flex;
   align-items: center;
 
@@ -29,66 +29,64 @@ const ExpandContent = styled.div`
   }
 `;
 
-const CellExpand = React.memo(
+const CellTree = React.memo(
   ({ item, width, className, indentation, children }) => {
     const theme = React.useContext(ThemeContext);
-    const { expandState, onExpandById } = React.useContext(
-      ExpandContext
-    );
+    const { treeState, onTreeById } = React.useContext(TreeContext);
 
     const handleClick = () => {
       if (isLeaf(item)) return;
 
-      onExpandById(item.id);
+      onTreeById(item.id);
     };
 
-    const isExpanded = expandState.ids.includes(item.id);
+    const isTreeed = treeState.ids.includes(item.id);
 
     let icon = null;
 
     if (isLeaf(item)) {
       icon = null;
-    } else if (!isLeaf(item) && isExpanded) {
+    } else if (!isLeaf(item) && isTreeed) {
       icon = (
         <IconChevronSingleDown
-          height={EXPAND_ICON_SIZE}
-          width={EXPAND_ICON_SIZE}
+          height={TREE_ICON_SIZE}
+          width={TREE_ICON_SIZE}
         />
       );
-    } else if (!isLeaf(item) && !isExpanded) {
+    } else if (!isLeaf(item) && !isTreeed) {
       icon = (
         <IconChevronSingleRight
-          height={EXPAND_ICON_SIZE}
-          width={EXPAND_ICON_SIZE}
+          height={TREE_ICON_SIZE}
+          width={TREE_ICON_SIZE}
         />
       );
     }
 
     return (
       <CellContainer
-        className={cs('td', 'cell-expand', className)}
+        className={cs('td', 'cell-tree', className)}
         css={theme?.Cell}
         width={width}
         indentation={indentation}
       >
-        <ExpandContent>
-          <ExpandButton
+        <TreeContent>
+          <TreeButton
             className={cs('prefix', {
-              active: isExpanded
+              active: isTreeed
             })}
-            margin={EXPAND_ICON_MARGIN}
+            margin={TREE_ICON_MARGIN}
             onClick={handleClick}
           >
             <span>{icon}</span>
-          </ExpandButton>
+          </TreeButton>
           <div>{children}</div>
-        </ExpandContent>
+        </TreeContent>
       </CellContainer>
     );
   }
 );
 
-CellExpand.propTypes = {
+CellTree.propTypes = {
   item: PropTypes.shape(PropTypes.any),
   width: PropTypes.string,
   className: PropTypes.string,
@@ -100,4 +98,4 @@ CellExpand.propTypes = {
   ])
 };
 
-export { CellExpand };
+export { CellTree };

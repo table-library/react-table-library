@@ -5,7 +5,7 @@ import * as Table from './components/Table';
 import * as Theme from './components/Theme';
 import * as Sort from './components/Sort';
 import * as Select from './components/Select';
-import * as Expand from './components/Expand';
+import * as Tree from './components/Tree';
 // import * as Pagination from './components/Pagination';
 
 export {
@@ -15,6 +15,6 @@ export {
   Theme,
   Sort,
   Select,
-  Expand
+  Tree
   // Pagination,
 };

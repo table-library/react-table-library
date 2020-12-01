@@ -13,7 +13,7 @@ import {
   Cell
 } from '@table';
 
-import { RowExpand, CellExpand } from '@expand';
+import { RowTree, CellTree } from '@tree';
 
 const list = [
   {
@@ -146,7 +146,7 @@ storiesOf('01. Features/05. Tree', module)
 
             <Body>
               {tableList.map(item => (
-                <RowExpand key={item.id} item={item}>
+                <RowTree key={item.id} item={item}>
                   {tableItem => (
                     <>
                       <Cell width="25%">{tableItem.name}</Cell>
@@ -157,7 +157,7 @@ storiesOf('01. Features/05. Tree', module)
                       <Cell width="25%">{tableItem.count}</Cell>
                     </>
                   )}
-                </RowExpand>
+                </RowTree>
               ))}
             </Body>
           </Content>
@@ -181,12 +181,12 @@ storiesOf('01. Features/05. Tree', module)
 
             <Body>
               {tableList.map(item => (
-                <RowExpand key={item.id} item={item}>
+                <RowTree key={item.id} item={item}>
                   {tableItem => (
                     <>
-                      <CellExpand item={tableItem} width="25%">
+                      <CellTree item={tableItem} width="25%">
                         {tableItem.name}
-                      </CellExpand>
+                      </CellTree>
                       <Cell width="25%">{tableItem.stars}</Cell>
                       <Cell width="25%">
                         {tableItem.light.toString()}
@@ -194,7 +194,7 @@ storiesOf('01. Features/05. Tree', module)
                       <Cell width="25%">{tableItem.count}</Cell>
                     </>
                   )}
-                </RowExpand>
+                </RowTree>
               ))}
             </Body>
           </Content>
@@ -202,7 +202,7 @@ storiesOf('01. Features/05. Tree', module)
       </Table>
     );
   })
-  .add('expand on icon', () => {
+  .add('tree on icon', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -218,18 +218,16 @@ storiesOf('01. Features/05. Tree', module)
 
             <Body>
               {tableList.map(item => (
-                <RowExpand
+                <RowTree
                   key={item.id}
                   item={item}
-                  expandType={
-                    RowExpand.EXPAND_TYPES.ButtonExpandClick
-                  }
+                  treeType={RowTree.TREE_TYPES.ButtonTreeClick}
                 >
                   {tableItem => (
                     <>
-                      <CellExpand item={tableItem} width="25%">
+                      <CellTree item={tableItem} width="25%">
                         {tableItem.name}
-                      </CellExpand>
+                      </CellTree>
                       <Cell width="25%">{tableItem.stars}</Cell>
                       <Cell width="25%">
                         {tableItem.light.toString()}
@@ -237,7 +235,7 @@ storiesOf('01. Features/05. Tree', module)
                       <Cell width="25%">{tableItem.count}</Cell>
                     </>
                   )}
-                </RowExpand>
+                </RowTree>
               ))}
             </Body>
           </Content>
@@ -245,13 +243,13 @@ storiesOf('01. Features/05. Tree', module)
       </Table>
     );
   })
-  .add('default expand', () => {
-    const defaultExpand = {
+  .add('default tree', () => {
+    const defaultTree = {
       ids: ['2', '62', '4']
     };
 
     return (
-      <Table list={list} defaultExpand={defaultExpand}>
+      <Table list={list} defaultTree={defaultTree}>
         {tableList => (
           <Content>
             <Header>
@@ -265,12 +263,12 @@ storiesOf('01. Features/05. Tree', module)
 
             <Body>
               {tableList.map(item => (
-                <RowExpand key={item.id} item={item}>
+                <RowTree key={item.id} item={item}>
                   {tableItem => (
                     <>
-                      <CellExpand item={tableItem} width="25%">
+                      <CellTree item={tableItem} width="25%">
                         {tableItem.name}
-                      </CellExpand>
+                      </CellTree>
                       <Cell width="25%">{tableItem.stars}</Cell>
                       <Cell width="25%">
                         {tableItem.light.toString()}
@@ -278,7 +276,7 @@ storiesOf('01. Features/05. Tree', module)
                       <Cell width="25%">{tableItem.count}</Cell>
                     </>
                   )}
-                </RowExpand>
+                </RowTree>
               ))}
             </Body>
           </Content>

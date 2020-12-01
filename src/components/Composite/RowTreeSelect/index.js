@@ -5,19 +5,19 @@ import cs from 'classnames';
 
 import { Row } from '@table';
 
-import { useRowExpand, EXPAND_TYPES } from '@expand';
+import { useRowTree, TREE_TYPES } from '@tree';
 import { useRowSelect, SELECT_TYPES } from '@select';
 
-const RowExpandSelect = React.memo(
+const RowTreeSelect = React.memo(
   ({
     id,
     item,
-    // expand
-    expandDepthLevel = 0,
-    expandColumnLevel = 1,
-    isExpanded,
-    onExpandById,
-    expandType,
+    // tree
+    treeDepthLevel = 0,
+    treeColumnLevel = 1,
+    isTreeed,
+    onTreeById,
+    treeType,
     // select
     isSelected,
     onSelectById,
@@ -39,41 +39,41 @@ const RowExpandSelect = React.memo(
     });
 
     const {
-      theme: rowExpandTheme,
-      className: rowExpandClassName,
-      onClick: onExpandClick,
-      panel: expandPanel
-    } = useRowExpand({
+      theme: rowTreeTheme,
+      className: rowTreeClassName,
+      onClick: onTreeClick,
+      panel: treePanel
+    } = useRowTree({
       id,
       item,
-      expandColumnLevel,
-      expandDepthLevel,
-      isExpanded,
-      onExpandById,
-      expandType,
+      treeColumnLevel,
+      treeDepthLevel,
+      isTreeed,
+      onTreeById,
+      treeType,
       composites: {
         selectType
       },
       className,
       children,
-      RecursiveComponent: RowExpandSelect
+      RecursiveComponent: RowTreeSelect
     });
 
     const onClick = event => {
-      onExpandClick(event);
+      onTreeClick(event);
       onSelectClick(event);
     };
 
     return (
       <Row
         _theme={css`
-          ${rowExpandTheme}
+          ${rowTreeTheme}
           ${rowSelectTheme}
         `}
-        className={cs(rowExpandClassName, rowSelectClassName)}
+        className={cs(rowTreeClassName, rowSelectClassName)}
         disabled={disabled}
         onClick={onClick}
-        panel={expandPanel}
+        panel={treePanel}
       >
         {children(item)}
       </Row>
@@ -81,19 +81,19 @@ const RowExpandSelect = React.memo(
   }
 );
 
-RowExpandSelect.SELECT_TYPES = SELECT_TYPES;
-RowExpandSelect.EXPAND_TYPES = EXPAND_TYPES;
+RowTreeSelect.SELECT_TYPES = SELECT_TYPES;
+RowTreeSelect.TREE_TYPES = TREE_TYPES;
 
-RowExpandSelect.propTypes = {
+RowTreeSelect.propTypes = {
   id: PropTypes.string,
   item: PropTypes.shape(PropTypes.any),
   isSelected: PropTypes.bool,
   onSelectById: PropTypes.func,
   selectType: PropTypes.oneOf(Object.values(SELECT_TYPES)),
-  expandDepthLevel: PropTypes.number,
-  isExpanded: PropTypes.bool,
-  onExpandById: PropTypes.func,
-  expandType: PropTypes.oneOf(Object.values(EXPAND_TYPES)),
+  treeDepthLevel: PropTypes.number,
+  isTreeed: PropTypes.bool,
+  onTreeById: PropTypes.func,
+  treeType: PropTypes.oneOf(Object.values(TREE_TYPES)),
   className: PropTypes.string,
   disabled: PropTypes.bool,
   children: PropTypes.oneOfType([
@@ -103,4 +103,4 @@ RowExpandSelect.propTypes = {
   ])
 };
 
-export { RowExpandSelect };
+export { RowTreeSelect };

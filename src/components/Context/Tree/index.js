@@ -1,11 +1,11 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-const EXPAND_BY_ID = 'EXPAND_BY_ID';
+const TREE_BY_ID = 'TREE_BY_ID';
 
 const selectReducer = (state, action) => {
   switch (action.type) {
-    case EXPAND_BY_ID: {
+    case TREE_BY_ID: {
       const ids = state.ids.includes(action.payload.id)
         ? state.ids.filter(id => id !== action.payload.id)
         : state.ids.concat(action.payload.id);
@@ -16,41 +16,37 @@ const selectReducer = (state, action) => {
   }
 };
 
-const ExpandContext = React.createContext({});
+const TreeContext = React.createContext({});
 
-const DEFAULT_EXPAND = {
+const DEFAULT_TREE = {
   ids: []
 };
 
-const ExpandProvider = ({
-  defaultExpand = DEFAULT_EXPAND,
-  children
-}) => {
-  const [expandState, expandStateDispatcher] = React.useReducer(
+const TreeProvider = ({ defaultTree = DEFAULT_TREE, children }) => {
+  const [treeState, treeStateDispatcher] = React.useReducer(
     selectReducer,
-    defaultExpand
+    defaultTree
   );
 
-  const onExpandById = React.useCallback(
-    id =>
-      expandStateDispatcher({ type: EXPAND_BY_ID, payload: { id } }),
+  const onTreeById = React.useCallback(
+    id => treeStateDispatcher({ type: TREE_BY_ID, payload: { id } }),
     []
   );
 
   return (
-    <ExpandContext.Provider
+    <TreeContext.Provider
       value={{
-        expandState,
-        onExpandById
+        treeState,
+        onTreeById
       }}
     >
       {children}
-    </ExpandContext.Provider>
+    </TreeContext.Provider>
   );
 };
 
-ExpandProvider.propTypes = {
-  defaultExpand: PropTypes.shape({
+TreeProvider.propTypes = {
+  defaultTree: PropTypes.shape({
     ids: PropTypes.arrayOf(PropTypes.string)
   }),
   children: PropTypes.oneOfType([
@@ -60,4 +56,4 @@ ExpandProvider.propTypes = {
   ])
 };
 
-export { ExpandContext, ExpandProvider };
+export { TreeContext, TreeProvider };

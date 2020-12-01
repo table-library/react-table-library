@@ -17,7 +17,7 @@
           "@composite": "./src/components/Composite",
           "@sort": "./src/components/Sort",
           "@select": "./src/components/Select",
-          "@expand": "./src/components/Expand"
+          "@tree": "./src/components/Tree"
         }
       }
     ],

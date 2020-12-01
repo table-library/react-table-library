@@ -6,7 +6,7 @@ import {
   TableProvider,
   ThemeProvider,
   SelectProvider,
-  ExpandProvider,
+  TreeProvider,
   SortProvider,
   SortContext
 } from '@context';
@@ -24,7 +24,7 @@ const Table = ({
   theme,
   defaultSort,
   defaultSelect,
-  defaultExpand,
+  defaultTree,
   children
 }) => {
   // otherwise we would mutate the outer list (e.g. sort)
@@ -35,7 +35,7 @@ const Table = ({
       <ThemeProvider theme={theme}>
         <TableProvider list={listCopy}>
           <SelectProvider defaultSelect={defaultSelect}>
-            <ExpandProvider defaultExpand={defaultExpand}>
+            <TreeProvider defaultTree={defaultTree}>
               <SortProvider defaultSort={defaultSort}>
                 <SortContext.Consumer>
                   {/* do any list operations (e.g. sort, pagination) here */}
@@ -44,7 +44,7 @@ const Table = ({
                   }
                 </SortContext.Consumer>
               </SortProvider>
-            </ExpandProvider>
+            </TreeProvider>
           </SelectProvider>
         </TableProvider>
       </ThemeProvider>
@@ -58,7 +58,7 @@ Table.propTypes = {
   defaultSelect: PropTypes.shape({
     ids: PropTypes.arrayOf(PropTypes.string)
   }),
-  defaultExpand: PropTypes.shape({
+  defaultTree: PropTypes.shape({
     ids: PropTypes.arrayOf(PropTypes.string)
   }),
   defaultSort: PropTypes.shape({
