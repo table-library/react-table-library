@@ -130,7 +130,7 @@ const list = [
   }
 ];
 
-storiesOf('01. Composite/ Expand & Select', module)
+storiesOf('02. Composite/ 01. Expand & Select', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
@@ -167,7 +167,7 @@ storiesOf('01. Composite/ Expand & Select', module)
       </Table>
     );
   })
-  .add('expand on icon, select on row', () => {
+  .add('only icon: expand on icon, select on row', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -210,7 +210,7 @@ storiesOf('01. Composite/ Expand & Select', module)
       </Table>
     );
   })
-  .add('select on checkbox, expand on row', () => {
+  .add('only checkbox: select on checkbox, expand on row', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -239,6 +239,153 @@ storiesOf('01. Composite/ Expand & Select', module)
                     <>
                       <CellSelect item={tableItem} />
                       <Cell width="20%">{tableItem.name}</Cell>
+                      <Cell width="20%">{tableItem.stars}</Cell>
+                      <Cell width="20%">
+                        {tableItem.light.toString()}
+                      </Cell>
+                      <Cell width="20%">{tableItem.count}</Cell>
+                    </>
+                  )}
+                </RowExpandSelect>
+              ))}
+            </Body>
+          </Content>
+        )}
+      </Table>
+    );
+  })
+  .add('select on checkbox, expand on icon', () => {
+    return (
+      <Table list={list}>
+        {tableList => (
+          <Content>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSelect />
+                <HeaderCell width="20%">Name</HeaderCell>
+                <HeaderCell width="20%">Stars</HeaderCell>
+                <HeaderCell width="20%">Light</HeaderCell>
+                <HeaderCell width="20%">Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <RowExpandSelect
+                  key={item.id}
+                  item={item}
+                  selectType={
+                    RowExpandSelect.SELECT_TYPES.ButtonSelectClick
+                  }
+                  expandType={
+                    RowExpandSelect.EXPAND_TYPES.ButtonExpandClick
+                  }
+                  expandColumnLevel={2}
+                >
+                  {tableItem => (
+                    <>
+                      <CellSelect item={tableItem} />
+                      <CellExpand item={tableItem} width="20%">
+                        {tableItem.name}
+                      </CellExpand>
+                      <Cell width="20%">{tableItem.stars}</Cell>
+                      <Cell width="20%">
+                        {tableItem.light.toString()}
+                      </Cell>
+                      <Cell width="20%">{tableItem.count}</Cell>
+                    </>
+                  )}
+                </RowExpandSelect>
+              ))}
+            </Body>
+          </Content>
+        )}
+      </Table>
+    );
+  })
+  .add('select on row, expand on icon', () => {
+    return (
+      <Table list={list}>
+        {tableList => (
+          <Content>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSelect />
+                <HeaderCell width="20%">Name</HeaderCell>
+                <HeaderCell width="20%">Stars</HeaderCell>
+                <HeaderCell width="20%">Light</HeaderCell>
+                <HeaderCell width="20%">Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <RowExpandSelect
+                  key={item.id}
+                  item={item}
+                  selectType={
+                    RowExpandSelect.SELECT_TYPES.RowSelectClick
+                  }
+                  expandType={
+                    RowExpandSelect.EXPAND_TYPES.ButtonExpandClick
+                  }
+                  expandColumnLevel={2}
+                >
+                  {tableItem => (
+                    <>
+                      <CellSelect item={tableItem} />
+                      <CellExpand item={tableItem} width="20%">
+                        {tableItem.name}
+                      </CellExpand>
+                      <Cell width="20%">{tableItem.stars}</Cell>
+                      <Cell width="20%">
+                        {tableItem.light.toString()}
+                      </Cell>
+                      <Cell width="20%">{tableItem.count}</Cell>
+                    </>
+                  )}
+                </RowExpandSelect>
+              ))}
+            </Body>
+          </Content>
+        )}
+      </Table>
+    );
+  })
+  .add('expand on row, select on checkbox', () => {
+    return (
+      <Table list={list}>
+        {tableList => (
+          <Content>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSelect />
+                <HeaderCell width="20%">Name</HeaderCell>
+                <HeaderCell width="20%">Stars</HeaderCell>
+                <HeaderCell width="20%">Light</HeaderCell>
+                <HeaderCell width="20%">Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <RowExpandSelect
+                  key={item.id}
+                  item={item}
+                  selectType={
+                    RowExpandSelect.SELECT_TYPES.ButtonSelectClick
+                  }
+                  expandType={
+                    RowExpandSelect.EXPAND_TYPES.RowExpandClick
+                  }
+                  expandColumnLevel={2}
+                >
+                  {tableItem => (
+                    <>
+                      <CellSelect item={tableItem} />
+                      <CellExpand item={tableItem} width="20%">
+                        {tableItem.name}
+                      </CellExpand>
                       <Cell width="20%">{tableItem.stars}</Cell>
                       <Cell width="20%">
                         {tableItem.light.toString()}

@@ -33,7 +33,7 @@ const list = [
   }
 ];
 
-storiesOf('04. Table with Select', module)
+storiesOf('01. Features/04. Select', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (

@@ -38,7 +38,7 @@ const CellContainerBase = styled.div`
     border-right: 1px solid transparent;
   }
 
-  &.shrink {
+  &.shrink > div {
     padding-right: ${GUTTER_OUTER}px;
     padding-left: ${GUTTER_OUTER}px;
   }

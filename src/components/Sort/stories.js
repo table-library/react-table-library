@@ -35,7 +35,7 @@ const list = [
   }
 ];
 
-storiesOf('03. Table with Sort', module)
+storiesOf('01. Features/ 03. Sort', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
