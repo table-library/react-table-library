@@ -288,6 +288,49 @@ storiesOf('01. Features/05. Tree', module)
       </Table>
     );
   })
+  .add('tree icon size', () => {
+    return (
+      <Table list={list}>
+        {tableList => (
+          <Content>
+            <Header>
+              <HeaderRow>
+                <HeaderCell width="25%">Name</HeaderCell>
+                <HeaderCell width="25%">Stars</HeaderCell>
+                <HeaderCell width="25%">Light</HeaderCell>
+                <HeaderCell width="25%">Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <RowTree key={item.id} item={item}>
+                  {tableItem => (
+                    <>
+                      <CellTree
+                        item={tableItem}
+                        width="25%"
+                        treeIcon={{
+                          size: '10px'
+                        }}
+                      >
+                        {tableItem.name}
+                      </CellTree>
+                      <Cell width="25%">{tableItem.stars}</Cell>
+                      <Cell width="25%">
+                        {tableItem.light.toString()}
+                      </Cell>
+                      <Cell width="25%">{tableItem.count}</Cell>
+                    </>
+                  )}
+                </RowTree>
+              ))}
+            </Body>
+          </Content>
+        )}
+      </Table>
+    );
+  })
   .add('custom tree icon (Material UI)', () => {
     return (
       <Table list={list}>
