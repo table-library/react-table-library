@@ -3,6 +3,10 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
+import FolderIcon from '@material-ui/icons/Folder';
+import FolderOpenIcon from '@material-ui/icons/FolderOpen';
+import InsertDriveFileOutlinedIcon from '@material-ui/icons/InsertDriveFileOutlined';
+
 import {
   Table,
   Content,
@@ -267,6 +271,56 @@ storiesOf('01. Features/05. Tree', module)
                   {tableItem => (
                     <>
                       <CellTree item={tableItem} width="25%">
+                        {tableItem.name}
+                      </CellTree>
+                      <Cell width="25%">{tableItem.stars}</Cell>
+                      <Cell width="25%">
+                        {tableItem.light.toString()}
+                      </Cell>
+                      <Cell width="25%">{tableItem.count}</Cell>
+                    </>
+                  )}
+                </RowTree>
+              ))}
+            </Body>
+          </Content>
+        )}
+      </Table>
+    );
+  })
+  .add('custom tree icon (Material UI)', () => {
+    return (
+      <Table list={list}>
+        {tableList => (
+          <Content>
+            <Header>
+              <HeaderRow>
+                <HeaderCell width="25%">Name</HeaderCell>
+                <HeaderCell width="25%">Stars</HeaderCell>
+                <HeaderCell width="25%">Light</HeaderCell>
+                <HeaderCell width="25%">Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <RowTree key={item.id} item={item}>
+                  {tableItem => (
+                    <>
+                      <CellTree
+                        item={tableItem}
+                        width="25%"
+                        treeIcon={{
+                          margin: '4px',
+                          iconDefault: (
+                            <InsertDriveFileOutlinedIcon fontSize="small" />
+                          ),
+                          iconRight: <FolderIcon fontSize="small" />,
+                          iconDown: (
+                            <FolderOpenIcon fontSize="small" />
+                          )
+                        }}
+                      >
                         {tableItem.name}
                       </CellTree>
                       <Cell width="25%">{tableItem.stars}</Cell>

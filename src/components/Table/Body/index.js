@@ -18,7 +18,7 @@ const getSelectProps = (child, { selectState, onSelectById }) => ({
 });
 
 const getTreeProps = (child, { treeState, onTreeById }) => ({
-  isTreeed: treeState.ids.includes(child.props.item.id),
+  isTree: treeState.ids.includes(child.props.item.id),
   onTreeById
 });
 

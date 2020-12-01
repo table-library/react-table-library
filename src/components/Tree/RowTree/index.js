@@ -13,7 +13,7 @@ const useRowTree = ({
   item,
   treeColumnLevel,
   treeDepthLevel,
-  isTreeed,
+  isTree,
   onTreeById,
   treeType = TREE_TYPES.RowTreeClick,
   // e.g. select
@@ -48,7 +48,7 @@ const useRowTree = ({
   };
 
   const childNodes =
-    isTreeed &&
+    isTree &&
     hasLeaves(item) &&
     item.nodes.map(node => (
       <Body>
@@ -80,7 +80,7 @@ const RowTree = React.memo(
     item,
     treeDepthLevel = 0,
     treeColumnLevel = 1,
-    isTreeed,
+    isTree,
     onTreeById,
     treeType,
     className,
@@ -97,7 +97,7 @@ const RowTree = React.memo(
       item,
       treeColumnLevel,
       treeDepthLevel,
-      isTreeed,
+      isTree,
       onTreeById,
       treeType,
       className,
@@ -125,7 +125,7 @@ RowTree.propTypes = {
   item: PropTypes.shape(PropTypes.any),
   treeColumnLevel: PropTypes.number,
   treeDepthLevel: PropTypes.number,
-  isTreeed: PropTypes.bool,
+  isTree: PropTypes.bool,
   onTreeById: PropTypes.func,
   treeType: PropTypes.oneOf(Object.values(TREE_TYPES)),
   className: PropTypes.string,

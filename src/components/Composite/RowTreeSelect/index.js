@@ -15,7 +15,7 @@ const RowTreeSelect = React.memo(
     // tree
     treeDepthLevel = 0,
     treeColumnLevel = 1,
-    isTreeed,
+    isTree,
     onTreeById,
     treeType,
     // select
@@ -48,7 +48,7 @@ const RowTreeSelect = React.memo(
       item,
       treeColumnLevel,
       treeDepthLevel,
-      isTreeed,
+      isTree,
       onTreeById,
       treeType,
       composites: {
@@ -91,7 +91,7 @@ RowTreeSelect.propTypes = {
   onSelectById: PropTypes.func,
   selectType: PropTypes.oneOf(Object.values(SELECT_TYPES)),
   treeDepthLevel: PropTypes.number,
-  isTreeed: PropTypes.bool,
+  isTree: PropTypes.bool,
   onTreeById: PropTypes.func,
   treeType: PropTypes.oneOf(Object.values(TREE_TYPES)),
   className: PropTypes.string,

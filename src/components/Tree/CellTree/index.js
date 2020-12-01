@@ -5,6 +5,7 @@ import cs from 'classnames';
 
 import IconChevronSingleDown from '@icons/IconChevronSingleDown';
 import IconChevronSingleRight from '@icons/IconChevronSingleRight';
+import { getIcon } from '@util/getIcon';
 import { Button, CellContainer } from '@shared';
 import { ThemeContext, TreeContext } from '@context';
 
@@ -29,10 +30,61 @@ const TreeContent = styled.div`
   }
 `;
 
+const getTreeIcon = (
+  item,
+  treeState,
+  treeIconSize,
+  TreeIconDefault,
+  TreeIconRight,
+  TreeIconDown
+) => {
+  const size = {
+    height: `${treeIconSize}`,
+    width: `${treeIconSize}`
+  };
+
+  const isTree = treeState.ids.includes(item.id);
+
+  if (!isLeaf(item) && isTree) {
+    return TreeIconDown
+      ? React.cloneElement(TreeIconDown, { ...size })
+      : null;
+  }
+
+  if (!isLeaf(item) && !isTree) {
+    return TreeIconRight
+      ? React.cloneElement(TreeIconRight, { ...size })
+      : null;
+  }
+
+  return TreeIconDefault
+    ? React.cloneElement(TreeIconDefault, { ...size })
+    : null;
+};
+
 const CellTree = React.memo(
-  ({ item, width, className, indentation, children }) => {
+  ({
+    item,
+    treeIcon = {},
+    width,
+    className,
+    indentation,
+    children
+  }) => {
     const theme = React.useContext(ThemeContext);
     const { treeState, onTreeById } = React.useContext(TreeContext);
+
+    const treeIconSize = treeIcon.size || TREE_ICON_SIZE;
+    const treeIconMargin = treeIcon.margin || TREE_ICON_MARGIN;
+    const treeIconDefault = getIcon(treeIcon.iconDefault, null);
+    const treeIconRight = getIcon(
+      treeIcon.iconRight,
+      <IconChevronSingleRight />
+    );
+    const treeIconDown = getIcon(
+      treeIcon.iconDown,
+      <IconChevronSingleDown />
+    );
 
     const handleClick = () => {
       if (isLeaf(item)) return;
@@ -40,27 +92,14 @@ const CellTree = React.memo(
       onTreeById(item.id);
     };
 
-    const isTreeed = treeState.ids.includes(item.id);
-
-    let icon = null;
-
-    if (isLeaf(item)) {
-      icon = null;
-    } else if (!isLeaf(item) && isTreeed) {
-      icon = (
-        <IconChevronSingleDown
-          height={TREE_ICON_SIZE}
-          width={TREE_ICON_SIZE}
-        />
-      );
-    } else if (!isLeaf(item) && !isTreeed) {
-      icon = (
-        <IconChevronSingleRight
-          height={TREE_ICON_SIZE}
-          width={TREE_ICON_SIZE}
-        />
-      );
-    }
+    const icon = getTreeIcon(
+      item,
+      treeState,
+      treeIconSize,
+      treeIconDefault,
+      treeIconRight,
+      treeIconDown
+    );
 
     return (
       <CellContainer
@@ -71,10 +110,8 @@ const CellTree = React.memo(
       >
         <TreeContent>
           <TreeButton
-            className={cs('prefix', {
-              active: isTreeed
-            })}
-            margin={TREE_ICON_MARGIN}
+            className="prefix"
+            margin={treeIconMargin}
             onClick={handleClick}
           >
             <span>{icon}</span>
@@ -88,6 +125,13 @@ const CellTree = React.memo(
 
 CellTree.propTypes = {
   item: PropTypes.shape(PropTypes.any),
+  treeIcon: PropTypes.shape({
+    margin: PropTypes.string,
+    size: PropTypes.string,
+    iconDefault: PropTypes.node,
+    iconRight: PropTypes.node,
+    iconDown: PropTypes.node
+  }),
   width: PropTypes.string,
   className: PropTypes.string,
   indentation: PropTypes.number,

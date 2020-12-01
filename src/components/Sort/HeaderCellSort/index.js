@@ -6,6 +6,7 @@ import cs from 'classnames';
 import IconChevronSingleDown from '@icons/IconChevronSingleDown';
 import IconChevronSingleUp from '@icons/IconChevronSingleUp';
 import IconChevronSingleUpDown from '@icons/IconChevronSingleUpDown';
+import { getIcon } from '@util/getIcon';
 import { Button, CellContainer } from '@shared';
 import * as COLORS from '@colors';
 import { ThemeContext, SortContext } from '@context';
@@ -18,19 +19,7 @@ const SORT_ICON_POSITIONS = {
 const SORT_ICON_SIZE = '14px';
 const SORT_ICON_MARGIN = '4px';
 
-const getIcon = (icon, iconFallback) => {
-  if (icon === null) {
-    return null;
-  }
-
-  if (icon === undefined) {
-    return iconFallback;
-  }
-
-  return icon;
-};
-
-const getChevron = (
+const getSortIcon = (
   sortState,
   sortKey,
   sortIconSize,
@@ -107,7 +96,7 @@ const HeaderCellSort = React.memo(
     const prefix = sortIconPosition === SORT_ICON_POSITIONS.Prefix;
     const suffix = sortIconPosition === SORT_ICON_POSITIONS.Suffix;
 
-    const icon = getChevron(
+    const icon = getSortIcon(
       sortState,
       sortKey,
       sortIconSize,
