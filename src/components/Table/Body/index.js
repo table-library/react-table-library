@@ -28,7 +28,7 @@ const Body = ({ children }) => {
   const tree = React.useContext(TreeContext);
 
   return (
-    <BodyContainer css={theme?.Body}>
+    <BodyContainer role="rowgroup" className="body" css={theme?.Body}>
       {React.Children.map(children, child =>
         React.cloneElement(child, {
           ...getCommonProps(child),

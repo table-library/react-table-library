@@ -12,7 +12,11 @@ const Header = ({ children }) => {
   const theme = React.useContext(ThemeContext);
 
   return (
-    <HeaderContainer css={theme?.Header}>
+    <HeaderContainer
+      role="rowgroup"
+      className="header"
+      css={theme?.Header}
+    >
       {React.Children.map(children, child =>
         React.cloneElement(child, { header: true })
       )}

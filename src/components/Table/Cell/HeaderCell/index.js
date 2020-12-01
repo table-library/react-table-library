@@ -10,6 +10,7 @@ const HeaderCell = ({ width, className, indentation, children }) => {
 
   return (
     <HeaderCellContainer
+      role="columnheader"
       className={cs('th', className)}
       css={theme?.HeaderCell}
       width={width}

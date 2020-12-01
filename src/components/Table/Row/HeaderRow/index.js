@@ -10,6 +10,7 @@ const HeaderRow = ({ className, disabled, children }) => {
 
   return (
     <HeaderRowContainer
+      role="rowheader"
       className={cs('tr', className, { disabled })}
       css={theme?.HeaderRow}
     >

@@ -20,12 +20,13 @@ const Row = ({
   return (
     <>
       <RowContainer
-        onClick={onClick}
+        role="row"
         className={cs('tr', className, _className, { disabled })}
         css={css`
           ${_theme}
           ${theme?.Row}
         `}
+        onClick={onClick}
       >
         {children}
       </RowContainer>

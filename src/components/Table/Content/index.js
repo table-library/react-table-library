@@ -16,7 +16,11 @@ const Content = ({ children }) => {
   const theme = React.useContext(ThemeContext);
 
   return (
-    <ContentContainer css={theme?.Content}>
+    <ContentContainer
+      role="rowgroup"
+      className="content"
+      css={theme?.Content}
+    >
       {children}
     </ContentContainer>
   );

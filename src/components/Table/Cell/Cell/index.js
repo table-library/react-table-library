@@ -10,6 +10,7 @@ const Cell = ({ width, className, indentation, children }) => {
 
   return (
     <CellContainer
+      role="gridcell"
       className={cs('td', className)}
       css={theme?.Cell}
       width={width}

@@ -58,8 +58,9 @@ const HeaderCellSelect = React.memo(
 
     return (
       <CellContainer
+        role="columnheader"
         className={cs(
-          'td',
+          'th',
           'header-cell-select',
           'shrink',
           className

@@ -31,7 +31,7 @@ const Table = ({
   const listCopy = [...list];
 
   return (
-    <TableContainer>
+    <TableContainer className="table" role="grid">
       <ThemeProvider theme={theme}>
         <TableProvider list={listCopy}>
           <SelectProvider defaultSelect={defaultSelect}>

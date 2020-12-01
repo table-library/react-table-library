@@ -103,6 +103,7 @@ const CellTree = React.memo(
 
     return (
       <CellContainer
+        role="gridcell"
         className={cs('td', 'cell-tree', className)}
         css={theme?.Cell}
         width={width}

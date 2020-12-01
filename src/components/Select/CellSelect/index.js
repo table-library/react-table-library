@@ -25,6 +25,7 @@ const CellSelect = React.memo(
 
     return (
       <CellContainer
+        role="gridcell"
         className={cs('td', 'cell-select', 'shrink', className)}
         css={theme?.CellSelect}
         width={width}

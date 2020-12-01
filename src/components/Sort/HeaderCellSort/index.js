@@ -107,9 +107,10 @@ const HeaderCellSort = React.memo(
 
     return (
       <HeaderCellSortContainer
-        width={width}
-        className={cs(className, 'td', 'header-cell-sort')}
+        role="columnheader"
+        className={cs(className, 'th', 'header-cell-sort')}
         css={theme?.HeaderCellSort}
+        width={width}
         indentation={indentation}
       >
         <div>
