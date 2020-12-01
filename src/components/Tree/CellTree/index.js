@@ -43,15 +43,15 @@ const getTreeIcon = (
     width: `${treeIconSize}`
   };
 
-  const isTree = treeState.ids.includes(item.id);
+  const isTreeExpanded = treeState.ids.includes(item.id);
 
-  if (!isLeaf(item) && isTree) {
+  if (!isLeaf(item) && isTreeExpanded) {
     return TreeIconDown
       ? React.cloneElement(TreeIconDown, { ...size })
       : null;
   }
 
-  if (!isLeaf(item) && !isTree) {
+  if (!isLeaf(item) && !isTreeExpanded) {
     return TreeIconRight
       ? React.cloneElement(TreeIconRight, { ...size })
       : null;
@@ -72,7 +72,9 @@ const CellTree = React.memo(
     children
   }) => {
     const theme = React.useContext(ThemeContext);
-    const { treeState, onTreeById } = React.useContext(TreeContext);
+    const { treeState, onTreeExpandById } = React.useContext(
+      TreeContext
+    );
 
     const treeIconSize = treeIcon.size || TREE_ICON_SIZE;
     const treeIconMargin = treeIcon.margin || TREE_ICON_MARGIN;
@@ -89,7 +91,7 @@ const CellTree = React.memo(
     const handleClick = () => {
       if (isLeaf(item)) return;
 
-      onTreeById(item.id);
+      onTreeExpandById(item.id);
     };
 
     const icon = getTreeIcon(

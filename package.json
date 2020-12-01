@@ -17,7 +17,8 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "use-double-click": "^1.0.5"
   },
   "devDependencies": {
     "@babel/core": "7.11.6",

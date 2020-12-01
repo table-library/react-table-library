@@ -43,7 +43,7 @@ const useRowSelect = ({
   return {
     theme: rowSelectTheme,
     className: rowSelectClassName,
-    onClick: handleClick
+    handleClick
   };
 };
 
@@ -56,12 +56,13 @@ const RowSelect = React.memo(
     selectType,
     className,
     disabled,
+    onDoubleClick,
     children
   }) => {
     const {
       theme: rowSelectTheme,
       className: rowSelectClassName,
-      onClick
+      handleClick
     } = useRowSelect({
       id,
       isSelected,
@@ -72,9 +73,11 @@ const RowSelect = React.memo(
 
     return (
       <Row
-        _theme={rowSelectTheme}
+        item={item}
+        theme={rowSelectTheme}
         className={rowSelectClassName}
-        onClick={onClick}
+        onClick={handleClick}
+        onDoubleClick={onDoubleClick}
         disabled={disabled}
       >
         {children(item)}
@@ -93,6 +96,7 @@ RowSelect.propTypes = {
   selectType: PropTypes.oneOf(Object.values(SELECT_TYPES)),
   className: PropTypes.string,
   disabled: PropTypes.bool,
+  onDoubleClick: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

@@ -15,8 +15,8 @@ const RowTreeSelect = React.memo(
     // tree
     treeDepthLevel = 0,
     treeColumnLevel = 1,
-    isTree,
-    onTreeById,
+    isTreeExpanded,
+    onTreeExpandById,
     treeType,
     // select
     isSelected,
@@ -24,12 +24,13 @@ const RowTreeSelect = React.memo(
     selectType,
     className,
     disabled,
+    onDoubleClick,
     children
   }) => {
     const {
       theme: rowSelectTheme,
       className: rowSelectClassName,
-      onClick: onSelectClick
+      handleClick: handleSelectClick
     } = useRowSelect({
       id,
       isSelected,
@@ -41,38 +42,41 @@ const RowTreeSelect = React.memo(
     const {
       theme: rowTreeTheme,
       className: rowTreeClassName,
-      onClick: onTreeClick,
+      handleClick: handleTreeClick,
       panel: treePanel
     } = useRowTree({
       id,
       item,
       treeColumnLevel,
       treeDepthLevel,
-      isTree,
-      onTreeById,
+      isTreeExpanded,
+      onTreeExpandById,
       treeType,
       composites: {
         selectType
       },
       className,
       children,
+      onDoubleClick,
       RecursiveComponent: RowTreeSelect
     });
 
-    const onClick = event => {
-      onTreeClick(event);
-      onSelectClick(event);
+    const handleClick = event => {
+      handleTreeClick(event);
+      handleSelectClick(event);
     };
 
     return (
       <Row
-        _theme={css`
+        item={item}
+        theme={css`
           ${rowTreeTheme}
           ${rowSelectTheme}
         `}
         className={cs(rowTreeClassName, rowSelectClassName)}
         disabled={disabled}
-        onClick={onClick}
+        onClick={handleClick}
+        onDoubleClick={onDoubleClick}
         panel={treePanel}
       >
         {children(item)}
@@ -91,11 +95,13 @@ RowTreeSelect.propTypes = {
   onSelectById: PropTypes.func,
   selectType: PropTypes.oneOf(Object.values(SELECT_TYPES)),
   treeDepthLevel: PropTypes.number,
-  isTree: PropTypes.bool,
-  onTreeById: PropTypes.func,
+  treeColumnLevel: PropTypes.number,
+  isTreeExpanded: PropTypes.bool,
+  onTreeExpandById: PropTypes.func,
   treeType: PropTypes.oneOf(Object.values(TREE_TYPES)),
   className: PropTypes.string,
   disabled: PropTypes.bool,
+  onDoubleClick: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

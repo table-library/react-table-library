@@ -13,12 +13,14 @@ const useRowTree = ({
   item,
   treeColumnLevel,
   treeDepthLevel,
-  isTree,
-  onTreeById,
+  isTreeExpanded,
+  onTreeExpandById,
   treeType = TREE_TYPES.RowTreeClick,
   // e.g. select
   composites,
+  // common
   className,
+  onDoubleClick,
   children,
   // eslint-disable-next-line no-use-before-define
   RecursiveComponent = RowTree
@@ -33,7 +35,7 @@ const useRowTree = ({
     }
   `;
 
-  const rowTreeClassName = cs('tr', className, 'row-tree', {
+  const rowTreeClassName = cs(className, 'row-tree', {
     'treeable-row': treeType === TREE_TYPES.RowTreeClick
   });
 
@@ -43,12 +45,17 @@ const useRowTree = ({
     if (isLeaf(item)) return;
 
     if (treeType === TREE_TYPES.RowTreeClick) {
-      onTreeById(id);
+      onTreeExpandById(id);
     }
   };
 
+  const passThroughProps = {
+    className,
+    onDoubleClick
+  };
+
   const childNodes =
-    isTree &&
+    isTreeExpanded &&
     hasLeaves(item) &&
     item.nodes.map(node => (
       <Body>
@@ -59,7 +66,7 @@ const useRowTree = ({
           treeDepthLevel={treeDepthLevel + 1}
           treeType={treeType}
           {...composites}
-          className={className}
+          {...passThroughProps}
         >
           {recursiveNode => children(recursiveNode)}
         </RecursiveComponent>
@@ -69,7 +76,7 @@ const useRowTree = ({
   return {
     theme: rowTreeTheme,
     className: rowTreeClassName,
-    onClick: handleClick,
+    handleClick,
     panel: childNodes
   };
 };
@@ -80,35 +87,39 @@ const RowTree = React.memo(
     item,
     treeDepthLevel = 0,
     treeColumnLevel = 1,
-    isTree,
-    onTreeById,
+    isTreeExpanded,
+    onTreeExpandById,
     treeType,
     className,
     disabled,
+    onDoubleClick,
     children
   }) => {
     const {
       theme: rowTreeTheme,
       className: rowTreeClassName,
-      onClick,
+      handleClick,
       panel
     } = useRowTree({
       id,
       item,
       treeColumnLevel,
       treeDepthLevel,
-      isTree,
-      onTreeById,
+      isTreeExpanded,
+      onTreeExpandById,
       treeType,
       className,
+      onDoubleClick,
       children
     });
 
     return (
       <Row
-        _theme={rowTreeTheme}
+        item={item}
+        theme={rowTreeTheme}
         className={rowTreeClassName}
-        onClick={onClick}
+        onClick={handleClick}
+        onDoubleClick={onDoubleClick}
         disabled={disabled}
         panel={panel}
       >
@@ -125,11 +136,12 @@ RowTree.propTypes = {
   item: PropTypes.shape(PropTypes.any),
   treeColumnLevel: PropTypes.number,
   treeDepthLevel: PropTypes.number,
-  isTree: PropTypes.bool,
-  onTreeById: PropTypes.func,
+  isTreeExpanded: PropTypes.bool,
+  onTreeExpandById: PropTypes.func,
   treeType: PropTypes.oneOf(Object.values(TREE_TYPES)),
   className: PropTypes.string,
   disabled: PropTypes.bool,
+  onDoubleClick: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

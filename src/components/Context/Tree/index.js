@@ -1,11 +1,11 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-const TREE_BY_ID = 'TREE_BY_ID';
+const TREE_EXPAND_BY_ID = 'TREE_EXPAND_BY_ID';
 
 const selectReducer = (state, action) => {
   switch (action.type) {
-    case TREE_BY_ID: {
+    case TREE_EXPAND_BY_ID: {
       const ids = state.ids.includes(action.payload.id)
         ? state.ids.filter(id => id !== action.payload.id)
         : state.ids.concat(action.payload.id);
@@ -28,8 +28,12 @@ const TreeProvider = ({ defaultTree = DEFAULT_TREE, children }) => {
     defaultTree
   );
 
-  const onTreeById = React.useCallback(
-    id => treeStateDispatcher({ type: TREE_BY_ID, payload: { id } }),
+  const onTreeExpandById = React.useCallback(
+    id =>
+      treeStateDispatcher({
+        type: TREE_EXPAND_BY_ID,
+        payload: { id }
+      }),
     []
   );
 
@@ -37,7 +41,7 @@ const TreeProvider = ({ defaultTree = DEFAULT_TREE, children }) => {
     <TreeContext.Provider
       value={{
         treeState,
-        onTreeById
+        onTreeExpandById
       }}
     >
       {children}

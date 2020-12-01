@@ -206,7 +206,7 @@ storiesOf('01. Features/05. Tree', module)
       </Table>
     );
   })
-  .add('tree on icon', () => {
+  .add('expand on icon', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -268,6 +268,49 @@ storiesOf('01. Features/05. Tree', module)
             <Body>
               {tableList.map(item => (
                 <RowTree key={item.id} item={item}>
+                  {tableItem => (
+                    <>
+                      <CellTree item={tableItem} width="25%">
+                        {tableItem.name}
+                      </CellTree>
+                      <Cell width="25%">{tableItem.stars}</Cell>
+                      <Cell width="25%">
+                        {tableItem.light.toString()}
+                      </Cell>
+                      <Cell width="25%">{tableItem.count}</Cell>
+                    </>
+                  )}
+                </RowTree>
+              ))}
+            </Body>
+          </Content>
+        )}
+      </Table>
+    );
+  })
+  .add('zoom on double click', () => {
+    return (
+      <Table list={list}>
+        {tableList => (
+          <Content>
+            <Header>
+              <HeaderRow>
+                <HeaderCell width="25%">Name</HeaderCell>
+                <HeaderCell width="25%">Stars</HeaderCell>
+                <HeaderCell width="25%">Light</HeaderCell>
+                <HeaderCell width="25%">Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <RowTree
+                  key={item.id}
+                  item={item}
+                  onDoubleClick={(_, tableItem) =>
+                    console.log(tableItem)
+                  }
+                >
                   {tableItem => (
                     <>
                       <CellTree item={tableItem} width="25%">

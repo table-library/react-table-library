@@ -17,9 +17,9 @@ const getSelectProps = (child, { selectState, onSelectById }) => ({
   onSelectById
 });
 
-const getTreeProps = (child, { treeState, onTreeById }) => ({
-  isTree: treeState.ids.includes(child.props.item.id),
-  onTreeById
+const getTreeProps = (child, { treeState, onTreeExpandById }) => ({
+  isTreeExpanded: treeState.ids.includes(child.props.item.id),
+  onTreeExpandById
 });
 
 const Body = ({ children }) => {
