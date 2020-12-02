@@ -14,7 +14,7 @@ const Header = ({ children }) => {
   return (
     <HeaderContainer
       role="rowgroup"
-      className="header"
+      className="thead"
       css={theme?.Header}
     >
       {React.Children.map(children, child =>

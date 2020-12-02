@@ -52,32 +52,23 @@ Checkbox.propTypes = {
   ])
 };
 
-const HeaderCellSelect = React.memo(
-  ({ width, className, children }) => {
-    const theme = React.useContext(ThemeContext);
+const HeaderCellSelect = React.memo(({ className, children }) => {
+  const theme = React.useContext(ThemeContext);
 
-    return (
-      <CellContainer
-        role="columnheader"
-        className={cs(
-          'th',
-          'header-cell-select',
-          'shrink',
-          className
-        )}
-        css={theme?.HeaderCellSelect}
-        width={width}
-      >
-        <div>
-          <Checkbox>{children}</Checkbox>
-        </div>
-      </CellContainer>
-    );
-  }
-);
+  return (
+    <CellContainer
+      role="columnheader"
+      className={cs('th', 'header-cell-select', 'shrink', className)}
+      css={theme?.HeaderCellSelect}
+    >
+      <div>
+        <Checkbox>{children}</Checkbox>
+      </div>
+    </CellContainer>
+  );
+});
 
 HeaderCellSelect.propTypes = {
-  width: PropTypes.string,
   className: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

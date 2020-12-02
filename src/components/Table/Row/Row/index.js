@@ -2,12 +2,12 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'styled-components';
 import cs from 'classnames';
-import useDoubleClick from 'use-double-click';
 
 import { RowContainer } from '@shared';
 import { ThemeContext } from '@context';
 
-const NOOP = () => {};
+import { useRowLayout } from '../useRowLayout';
+import { useDoubleClick } from './useDoubleClick';
 
 const Row = ({
   item,
@@ -22,14 +22,9 @@ const Row = ({
   const theme = React.useContext(ThemeContext);
 
   const ref = React.useRef();
-  useDoubleClick({
-    onSingleClick: onClick || NOOP,
-    onDoubleClick: onDoubleClick
-      ? event => onDoubleClick(event, item)
-      : NOOP,
-    latency: onDoubleClick ? 250 : 0,
-    ref
-  });
+
+  useDoubleClick(ref, onClick, onDoubleClick, item);
+  useRowLayout(ref);
 
   return (
     <>
@@ -42,7 +37,9 @@ const Row = ({
         `}
         ref={ref}
       >
-        {children}
+        {React.Children.map(children, (child, index) =>
+          React.cloneElement(child, { index })
+        )}
       </RowContainer>
 
       {panel}

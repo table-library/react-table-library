@@ -9,7 +9,6 @@ import InsertDriveFileOutlinedIcon from '@material-ui/icons/InsertDriveFileOutli
 
 import {
   Table,
-  Content,
   Header,
   HeaderRow,
   Body,
@@ -142,9 +141,9 @@ storiesOf('01. Features/05. Tree', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list}>
+      <Table layout={['25%', '25%', '25%', '25%']} resize list={list}>
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCell width="25%">Name</HeaderCell>
@@ -170,16 +169,16 @@ storiesOf('01. Features/05. Tree', module)
                 </RowTree>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
   })
   .add('icon', () => {
     return (
-      <Table list={list}>
+      <Table layout={['25%', '25%', '25%', '25%']} resize list={list}>
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCell width="25%">Name</HeaderCell>
@@ -207,16 +206,16 @@ storiesOf('01. Features/05. Tree', module)
                 </RowTree>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
   })
   .add('expand on icon', () => {
     return (
-      <Table list={list}>
+      <Table layout={['25%', '25%', '25%', '25%']} resize list={list}>
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCell width="25%">Name</HeaderCell>
@@ -248,7 +247,7 @@ storiesOf('01. Features/05. Tree', module)
                 </RowTree>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
@@ -259,9 +258,14 @@ storiesOf('01. Features/05. Tree', module)
     };
 
     return (
-      <Table list={list} defaultTree={defaultTree}>
+      <Table
+        layout={['25%', '25%', '25%', '25%']}
+        resize
+        list={list}
+        defaultTree={defaultTree}
+      >
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCell width="25%">Name</HeaderCell>
@@ -289,16 +293,16 @@ storiesOf('01. Features/05. Tree', module)
                 </RowTree>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
   })
   .add('zoom on double click', () => {
     return (
-      <Table list={list}>
+      <Table layout={['25%', '25%', '25%', '25%']} resize list={list}>
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCell width="25%">Name</HeaderCell>
@@ -332,16 +336,16 @@ storiesOf('01. Features/05. Tree', module)
                 </RowTree>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
   })
   .add('tree icon size', () => {
     return (
-      <Table list={list}>
+      <Table layout={['25%', '25%', '25%', '25%']} resize list={list}>
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCell width="25%">Name</HeaderCell>
@@ -375,16 +379,16 @@ storiesOf('01. Features/05. Tree', module)
                 </RowTree>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
   })
   .add('custom tree icon (Material UI)', () => {
     return (
-      <Table list={list}>
+      <Table layout={['25%', '25%', '25%', '25%']} resize list={list}>
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCell width="25%">Name</HeaderCell>
@@ -425,7 +429,7 @@ storiesOf('01. Features/05. Tree', module)
                 </RowTree>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );

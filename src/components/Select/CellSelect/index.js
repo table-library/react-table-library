@@ -11,7 +11,7 @@ const Checkbox = styled.input`
 `;
 
 const CellSelect = React.memo(
-  ({ item, width, className, indentation, children }) => {
+  ({ item, className, indentation, children }) => {
     const theme = React.useContext(ThemeContext);
     const { selectState, onSelectById } = React.useContext(
       SelectContext
@@ -28,7 +28,6 @@ const CellSelect = React.memo(
         role="gridcell"
         className={cs('td', 'cell-select', 'shrink', className)}
         css={theme?.CellSelect}
-        width={width}
         indentation={indentation}
       >
         <div>
@@ -52,7 +51,6 @@ const CellSelect = React.memo(
 
 CellSelect.propTypes = {
   item: PropTypes.shape(PropTypes.any),
-  width: PropTypes.string,
   className: PropTypes.string,
   indentation: PropTypes.number,
   children: PropTypes.oneOfType([

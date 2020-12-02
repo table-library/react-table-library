@@ -5,7 +5,6 @@ import { storiesOf } from '@storybook/react';
 
 import {
   Table,
-  Content,
   Header,
   HeaderRow,
   Body,
@@ -35,29 +34,29 @@ storiesOf('01. Features/ 02. Theme', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list}>
+      <Table list={list} layout={['25%', '25%', '25%', '25%']} resize>
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
-                <HeaderCell width="25%">Name</HeaderCell>
-                <HeaderCell width="25%">Stars</HeaderCell>
-                <HeaderCell width="25%">Light</HeaderCell>
-                <HeaderCell width="25%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
             <Body>
               {tableList.map(item => (
                 <Row key={item.id} item={item}>
-                  <Cell width="25%">{item.name}</Cell>
-                  <Cell width="25%">{item.stars}</Cell>
-                  <Cell width="25%">{item.light.toString()}</Cell>
-                  <Cell width="25%">{item.count}</Cell>
+                  <Cell>{item.name}</Cell>
+                  <Cell>{item.stars}</Cell>
+                  <Cell>{item.light.toString()}</Cell>
+                  <Cell>{item.count}</Cell>
                 </Row>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
@@ -84,29 +83,34 @@ storiesOf('01. Features/ 02. Theme', module)
     });
 
     return (
-      <Table list={list} theme={theme}>
+      <Table
+        list={list}
+        layout={['25%', '25%', '25%', '25%']}
+        resize
+        theme={theme}
+      >
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
-                <HeaderCell width="25%">Name</HeaderCell>
-                <HeaderCell width="25%">Stars</HeaderCell>
-                <HeaderCell width="25%">Light</HeaderCell>
-                <HeaderCell width="25%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
             <Body>
               {tableList.map(item => (
                 <Row key={item.id} item={item}>
-                  <Cell width="25%">{item.name}</Cell>
-                  <Cell width="25%">{item.stars}</Cell>
-                  <Cell width="25%">{item.light.toString()}</Cell>
-                  <Cell width="25%">{item.count}</Cell>
+                  <Cell>{item.name}</Cell>
+                  <Cell>{item.stars}</Cell>
+                  <Cell>{item.light.toString()}</Cell>
+                  <Cell>{item.count}</Cell>
                 </Row>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
@@ -133,29 +137,34 @@ storiesOf('01. Features/ 02. Theme', module)
     });
 
     return (
-      <Table list={list} theme={theme}>
+      <Table
+        list={list}
+        layout={['25%', '25%', '25%', '25%']}
+        resize
+        theme={theme}
+      >
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
-                <HeaderCell width="25%">Name</HeaderCell>
-                <HeaderCell width="25%">Stars</HeaderCell>
-                <HeaderCell width="25%">Light</HeaderCell>
-                <HeaderCell width="25%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
             <Body>
               {tableList.map(item => (
                 <Row key={item.id} item={item}>
-                  <Cell width="25%">{item.name}</Cell>
-                  <Cell width="25%">{item.stars}</Cell>
-                  <Cell width="25%">{item.light.toString()}</Cell>
-                  <Cell width="25%">{item.count}</Cell>
+                  <Cell>{item.name}</Cell>
+                  <Cell>{item.stars}</Cell>
+                  <Cell>{item.light.toString()}</Cell>
+                  <Cell>{item.count}</Cell>
                 </Row>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
@@ -192,33 +201,34 @@ storiesOf('01. Features/ 02. Theme', module)
     });
 
     return (
-      <Table list={list} theme={theme}>
+      <Table
+        list={list}
+        layout={['25%', '25%', '25%', '25%']}
+        resize
+        theme={theme}
+      >
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
-                <HeaderCell width="25%">Name</HeaderCell>
-                <HeaderCell width="25%" className="group">
-                  Stars
-                </HeaderCell>
-                <HeaderCell width="25%">Light</HeaderCell>
-                <HeaderCell width="25%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell className="group">Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
             <Body>
               {tableList.map(item => (
                 <Row key={item.id} item={item}>
-                  <Cell width="25%">{item.name}</Cell>
-                  <Cell width="25%" className="group">
-                    {item.stars}
-                  </Cell>
-                  <Cell width="25%">{item.light.toString()}</Cell>
-                  <Cell width="25%">{item.count}</Cell>
+                  <Cell>{item.name}</Cell>
+                  <Cell className="group">{item.stars}</Cell>
+                  <Cell>{item.light.toString()}</Cell>
+                  <Cell>{item.count}</Cell>
                 </Row>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );

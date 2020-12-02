@@ -2,12 +2,9 @@ import styled from 'styled-components';
 
 import * as COLORS from '@colors';
 
-const GUTTER_INNER = 12;
-const GUTTER_OUTER = 8;
+const GUTTER = 8;
 
 const CellContainerBase = styled.div`
-  width: ${props => props.width};
-
   padding-top: 4px;
   padding-bottom: 4px;
 
@@ -19,8 +16,7 @@ const CellContainerBase = styled.div`
   }
 
   &:first-child > div {
-    padding-left: ${({ indentation = 0 }) =>
-      GUTTER_OUTER + indentation}px;
+    padding-left: ${({ indentation = 0 }) => GUTTER + indentation}px;
   }
 
   & > div {
@@ -29,7 +25,7 @@ const CellContainerBase = styled.div`
   }
 
   &:last-child > div {
-    padding-right: ${GUTTER_OUTER}px;
+    padding-right: ${GUTTER}px;
   }
 
   border-right: 1px solid ${COLORS.BORDER};
@@ -39,8 +35,8 @@ const CellContainerBase = styled.div`
   }
 
   &.shrink > div {
-    padding-right: ${GUTTER_OUTER}px;
-    padding-left: ${GUTTER_OUTER}px;
+    padding-right: ${GUTTER}px;
+    padding-left: ${GUTTER}px;
   }
 
   ${({ css }) => css};
@@ -48,6 +44,8 @@ const CellContainerBase = styled.div`
 
 const CellContainer = styled(CellContainerBase)``;
 
-const HeaderCellContainer = styled(CellContainerBase)``;
+const HeaderCellContainer = styled(CellContainerBase)`
+  position: relative;
+`;
 
 export { CellContainerBase, CellContainer, HeaderCellContainer };

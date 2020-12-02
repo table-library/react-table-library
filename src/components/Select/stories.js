@@ -7,7 +7,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 import {
   Table,
-  Content,
   Header,
   HeaderRow,
   Body,
@@ -37,15 +36,15 @@ storiesOf('01. Features/04. Select', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list}>
+      <Table list={list} layout={['25%', '25%', '25%', '25%']} resize>
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
-                <HeaderCell width="25%">Name</HeaderCell>
-                <HeaderCell width="25%">Stars</HeaderCell>
-                <HeaderCell width="25%">Light</HeaderCell>
-                <HeaderCell width="25%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -54,18 +53,16 @@ storiesOf('01. Features/04. Select', module)
                 <RowSelect item={item} key={item.id}>
                   {tableItem => (
                     <>
-                      <Cell width="25%">{tableItem.name}</Cell>
-                      <Cell width="25%">{tableItem.stars}</Cell>
-                      <Cell width="25%">
-                        {tableItem.light.toString()}
-                      </Cell>
-                      <Cell width="25%">{tableItem.count}</Cell>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
                     </>
                   )}
                 </RowSelect>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
@@ -76,15 +73,20 @@ storiesOf('01. Features/04. Select', module)
     };
 
     return (
-      <Table list={list} defaultSelect={defaultSelect}>
+      <Table
+        list={list}
+        layout={['25%', '25%', '25%', '25%']}
+        resize
+        defaultSelect={defaultSelect}
+      >
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
-                <HeaderCell width="25%">Name</HeaderCell>
-                <HeaderCell width="25%">Stars</HeaderCell>
-                <HeaderCell width="25%">Light</HeaderCell>
-                <HeaderCell width="25%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -93,34 +95,36 @@ storiesOf('01. Features/04. Select', module)
                 <RowSelect item={item} key={item.id}>
                   {tableItem => (
                     <>
-                      <Cell width="25%">{tableItem.name}</Cell>
-                      <Cell width="25%">{tableItem.stars}</Cell>
-                      <Cell width="25%">
-                        {tableItem.light.toString()}
-                      </Cell>
-                      <Cell width="25%">{tableItem.count}</Cell>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
                     </>
                   )}
                 </RowSelect>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
   })
   .add('checkbox', () => {
     return (
-      <Table list={list}>
+      <Table
+        list={list}
+        layout={['min-content', '25%', '25%', '25%', '25%']}
+        resize
+      >
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCellSelect />
-                <HeaderCell width="20%">Name</HeaderCell>
-                <HeaderCell width="20%">Stars</HeaderCell>
-                <HeaderCell width="20%">Light</HeaderCell>
-                <HeaderCell width="20%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -130,34 +134,36 @@ storiesOf('01. Features/04. Select', module)
                   {tableItem => (
                     <>
                       <CellSelect item={tableItem} />
-                      <Cell width="20%">{tableItem.name}</Cell>
-                      <Cell width="20%">{tableItem.stars}</Cell>
-                      <Cell width="20%">
-                        {tableItem.light.toString()}
-                      </Cell>
-                      <Cell width="20%">{tableItem.count}</Cell>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
                     </>
                   )}
                 </RowSelect>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
   })
   .add('select on checkbox ', () => {
     return (
-      <Table list={list}>
+      <Table
+        list={list}
+        layout={['min-content', '25%', '25%', '25%', '25%']}
+        resize
+      >
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCellSelect />
-                <HeaderCell width="20%">Name</HeaderCell>
-                <HeaderCell width="20%">Stars</HeaderCell>
-                <HeaderCell width="20%">Light</HeaderCell>
-                <HeaderCell width="20%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -173,27 +179,29 @@ storiesOf('01. Features/04. Select', module)
                   {tableItem => (
                     <>
                       <CellSelect item={tableItem} />
-                      <Cell width="20%">{tableItem.name}</Cell>
-                      <Cell width="20%">{tableItem.stars}</Cell>
-                      <Cell width="20%">
-                        {tableItem.light.toString()}
-                      </Cell>
-                      <Cell width="20%">{tableItem.count}</Cell>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
                     </>
                   )}
                 </RowSelect>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
   })
   .add('custom checkbox (Material UI)', () => {
     return (
-      <Table list={list}>
+      <Table
+        list={list}
+        layout={['min-content', '25%', '25%', '25%', '25%']}
+        resize
+      >
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCellSelect>
@@ -209,10 +217,10 @@ storiesOf('01. Features/04. Select', module)
                     />
                   )}
                 </HeaderCellSelect>
-                <HeaderCell width="20%">Name</HeaderCell>
-                <HeaderCell width="20%">Stars</HeaderCell>
-                <HeaderCell width="20%">Light</HeaderCell>
-                <HeaderCell width="20%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -224,18 +232,16 @@ storiesOf('01. Features/04. Select', module)
                       <CellSelect item={tableItem}>
                         <Checkbox size="small" />
                       </CellSelect>
-                      <Cell width="20%">{tableItem.name}</Cell>
-                      <Cell width="20%">{tableItem.stars}</Cell>
-                      <Cell width="20%">
-                        {tableItem.light.toString()}
-                      </Cell>
-                      <Cell width="20%">{tableItem.count}</Cell>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
                     </>
                   )}
                 </RowSelect>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );

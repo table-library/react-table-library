@@ -4,25 +4,29 @@ import cs from 'classnames';
 
 import { HeaderCellContainer } from '@shared';
 import { ThemeContext } from '@context';
+import { Resizer, useResize } from '@resize';
 
-const HeaderCell = ({ width, className, indentation, children }) => {
+const HeaderCell = ({ index, className, indentation, children }) => {
   const theme = React.useContext(ThemeContext);
+
+  const { resize, resizeRef, cellRef } = useResize(index);
 
   return (
     <HeaderCellContainer
       role="columnheader"
-      className={cs('th', className)}
+      className={cs('th', `column-${index}`, className)}
       css={theme?.HeaderCell}
-      width={width}
       indentation={indentation}
+      ref={cellRef}
     >
       <div>{children}</div>
+      {resize && <Resizer ref={resizeRef} />}
     </HeaderCellContainer>
   );
 };
 
 HeaderCell.propTypes = {
-  width: PropTypes.string,
+  index: PropTypes.number,
   className: PropTypes.string,
   indentation: PropTypes.number,
   children: PropTypes.oneOfType([

@@ -5,7 +5,6 @@ import { storiesOf } from '@storybook/react';
 
 import {
   Table,
-  Content,
   Header,
   HeaderRow,
   Body,
@@ -34,29 +33,29 @@ storiesOf('01. Features/ 01. Table', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list}>
+      <Table list={list} layout={['25%', '25%', '25%', '25%']} resize>
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
-                <HeaderCell width="25%">Name</HeaderCell>
-                <HeaderCell width="25%">Stars</HeaderCell>
-                <HeaderCell width="25%">Light</HeaderCell>
-                <HeaderCell width="25%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
             <Body>
               {tableList.map(item => (
                 <Row key={item.id} item={item}>
-                  <Cell width="25%">{item.name}</Cell>
-                  <Cell width="25%">{item.stars}</Cell>
-                  <Cell width="25%">{item.light.toString()}</Cell>
-                  <Cell width="25%">{item.count}</Cell>
+                  <Cell>{item.name}</Cell>
+                  <Cell>{item.stars}</Cell>
+                  <Cell>{item.light.toString()}</Cell>
+                  <Cell>{item.count}</Cell>
                 </Row>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
@@ -66,7 +65,7 @@ storiesOf('01. Features/ 01. Table', module)
 //   return (
 //     <Table list={list}>
 //       {(tableList, selectedTableIdList) => (
-//         <Content>
+//         <>
 //           <Header>
 //             <HeaderRow>
 //               <HeaderCell width={WIDTHS.Checkbox} noIndent />
@@ -104,7 +103,7 @@ storiesOf('01. Features/ 01. Table', module)
 //               </Row>
 //             ))}
 //           </Body>
-//         </Content>
+//         <>
 //       )}
 //     </Table>
 //   );
@@ -113,7 +112,7 @@ storiesOf('01. Features/ 01. Table', module)
 //   return (
 //     <Table list={list}>
 //       {(tableList, selectedTableIdList) => (
-//         <Content>
+//         <>
 //           <Header>
 //             <HeaderRow>
 //               <HeaderSelectCell
@@ -173,7 +172,7 @@ storiesOf('01. Features/ 01. Table', module)
 //               </Row>
 //             ))}
 //           </Body>
-//         </Content>
+//         <>
 //       )}
 //     </Table>
 //   );
@@ -182,7 +181,7 @@ storiesOf('01. Features/ 01. Table', module)
 //   return (
 //     <Table list={list}>
 //       {tableList => (
-//         <Content>
+//         <>
 //           <Header>
 //             <HeaderRow>
 //               <HeaderCell width="25%">Name</HeaderCell>
@@ -218,7 +217,7 @@ storiesOf('01. Features/ 01. Table', module)
 //               </Row>
 //             ))}
 //           </Body>
-//         </Content>
+//         <>
 //       )}
 //     </Table>
 //   );
@@ -228,7 +227,7 @@ storiesOf('01. Features/ 01. Table', module)
 //     <div style={{ height: text('container height', '300px') }}>
 //       <Table list={list}>
 //         {tableList => (
-//           <Content>
+//           <>
 //             <Header>
 //               <HeaderRow>
 //                 <HeaderCell width="25%">Name</HeaderCell>
@@ -264,7 +263,7 @@ storiesOf('01. Features/ 01. Table', module)
 //                 </Row>
 //               ))}
 //             </Body>
-//           </Content>
+//           <>
 //         )}
 //       </Table>
 //     </div>
@@ -287,7 +286,7 @@ storiesOf('01. Features/ 01. Table', module)
 
 //       <Table list={filteredList}>
 //         {tableList => (
-//           <Content>
+//           <>
 //             <Header>
 //               <HeaderRow>
 //                 <HeaderCell width="25%" noIndent>
@@ -327,7 +326,7 @@ storiesOf('01. Features/ 01. Table', module)
 //                 </Row>
 //               ))}
 //             </Body>
-//           </Content>
+//           <>
 //         )}
 //       </Table>
 //     </>

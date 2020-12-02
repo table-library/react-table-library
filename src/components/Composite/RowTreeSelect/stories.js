@@ -5,7 +5,6 @@ import { storiesOf } from '@storybook/react';
 
 import {
   Table,
-  Content,
   Header,
   HeaderRow,
   Body,
@@ -140,9 +139,9 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list}>
+      <Table list={list} layout={['25%', '25%', '25%', '25%']} resize>
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCell width="25%">Name</HeaderCell>
@@ -168,16 +167,20 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
                 </RowTreeSelect>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
   })
   .add('select on checkbox, expand on icon', () => {
     return (
-      <Table list={list}>
+      <Table
+        list={list}
+        layout={['min-content', '25%', '25%', '25%', '25%']}
+        resize
+      >
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCellSelect />
@@ -215,16 +218,20 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
                 </RowTreeSelect>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
   })
   .add('select on row, expand on icon', () => {
     return (
-      <Table list={list}>
+      <Table
+        list={list}
+        layout={['min-content', '25%', '25%', '25%', '25%']}
+        resize
+      >
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCellSelect />
@@ -265,16 +272,20 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
                 </RowTreeSelect>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
   })
   .add('expand on row, select on checkbox', () => {
     return (
-      <Table list={list}>
+      <Table
+        list={list}
+        layout={['min-content', '25%', '25%', '25%', '25%']}
+        resize
+      >
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCellSelect />
@@ -312,16 +323,16 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
                 </RowTreeSelect>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
   })
   .add('only icon: expand on icon, select on row', () => {
     return (
-      <Table list={list}>
+      <Table list={list} layout={['25%', '25%', '25%', '25%']} resize>
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCell width="25%">Name</HeaderCell>
@@ -353,16 +364,20 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
                 </RowTreeSelect>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
   })
   .add('only checkbox: select on checkbox, expand on row', () => {
     return (
-      <Table list={list}>
+      <Table
+        list={list}
+        layout={['min-content', '25%', '25%', '25%', '25%']}
+        resize
+      >
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCellSelect />
@@ -397,7 +412,7 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
                 </RowTreeSelect>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );

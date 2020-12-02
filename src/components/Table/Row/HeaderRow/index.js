@@ -5,16 +5,25 @@ import cs from 'classnames';
 import { HeaderRowContainer } from '@shared';
 import { ThemeContext } from '@context';
 
+import { useRowLayout } from '../useRowLayout';
+
 const HeaderRow = ({ className, disabled, children }) => {
   const theme = React.useContext(ThemeContext);
+
+  const ref = React.useRef();
+
+  useRowLayout(ref);
 
   return (
     <HeaderRowContainer
       role="rowheader"
       className={cs('tr', className, { disabled })}
       css={theme?.HeaderRow}
+      ref={ref}
     >
-      {children}
+      {React.Children.map(children, (child, index) =>
+        React.cloneElement(child, { index })
+      )}
     </HeaderRowContainer>
   );
 };

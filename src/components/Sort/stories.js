@@ -8,7 +8,6 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 
 import {
   Table,
-  Content,
   Header,
   HeaderRow,
   Body,
@@ -39,13 +38,12 @@ storiesOf('01. Features/ 03. Sort', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list}>
+      <Table list={list} layout={['25%', '25%', '25%', '25%']} resize>
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="name"
                   sortFn={array =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
@@ -54,7 +52,6 @@ storiesOf('01. Features/ 03. Sort', module)
                   Name
                 </HeaderCellSort>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="stars"
                   sortFn={array =>
                     array.sort((a, b) => a.stars - b.stars)
@@ -63,7 +60,6 @@ storiesOf('01. Features/ 03. Sort', module)
                   Stars
                 </HeaderCellSort>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="light"
                   sortFn={array =>
                     array.sort((a, b) => a.light - b.light)
@@ -72,7 +68,6 @@ storiesOf('01. Features/ 03. Sort', module)
                   Light
                 </HeaderCellSort>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="count"
                   sortFn={array =>
                     array.sort((a, b) => a.count - b.count)
@@ -86,14 +81,14 @@ storiesOf('01. Features/ 03. Sort', module)
             <Body>
               {tableList.map(item => (
                 <Row item={item} key={item.id}>
-                  <Cell width="25%">{item.name}</Cell>
-                  <Cell width="25%">{item.stars}</Cell>
-                  <Cell width="25%">{item.light.toString()}</Cell>
-                  <Cell width="25%">{item.count}</Cell>
+                  <Cell>{item.name}</Cell>
+                  <Cell>{item.stars}</Cell>
+                  <Cell>{item.light.toString()}</Cell>
+                  <Cell>{item.count}</Cell>
                 </Row>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
@@ -106,13 +101,17 @@ storiesOf('01. Features/ 03. Sort', module)
     };
 
     return (
-      <Table list={list} defaultSort={defaultSort}>
+      <Table
+        list={list}
+        defaultSort={defaultSort}
+        layout={['25%', '25%', '25%', '25%']}
+        resize
+      >
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="name"
                   sortFn={array =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
@@ -121,7 +120,6 @@ storiesOf('01. Features/ 03. Sort', module)
                   Name
                 </HeaderCellSort>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="stars"
                   sortFn={array =>
                     array.sort((a, b) => a.stars - b.stars)
@@ -130,7 +128,6 @@ storiesOf('01. Features/ 03. Sort', module)
                   Stars
                 </HeaderCellSort>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="light"
                   sortFn={array =>
                     array.sort((a, b) => a.light - b.light)
@@ -139,7 +136,6 @@ storiesOf('01. Features/ 03. Sort', module)
                   Light
                 </HeaderCellSort>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="count"
                   sortFn={array =>
                     array.sort((a, b) => a.count - b.count)
@@ -153,27 +149,26 @@ storiesOf('01. Features/ 03. Sort', module)
             <Body>
               {tableList.map(item => (
                 <Row item={item} key={item.id}>
-                  <Cell width="25%">{item.name}</Cell>
-                  <Cell width="25%">{item.stars}</Cell>
-                  <Cell width="25%">{item.light.toString()}</Cell>
-                  <Cell width="25%">{item.count}</Cell>
+                  <Cell>{item.name}</Cell>
+                  <Cell>{item.stars}</Cell>
+                  <Cell>{item.light.toString()}</Cell>
+                  <Cell>{item.count}</Cell>
                 </Row>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
   })
   .add('sort icon size ', () => {
     return (
-      <Table list={list}>
+      <Table list={list} layout={['25%', '25%', '25%', '25%']} resize>
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="name"
                   sortFn={array =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
@@ -185,7 +180,6 @@ storiesOf('01. Features/ 03. Sort', module)
                   Name
                 </HeaderCellSort>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="stars"
                   sortFn={array =>
                     array.sort((a, b) => a.stars - b.stars)
@@ -197,7 +191,6 @@ storiesOf('01. Features/ 03. Sort', module)
                   Stars
                 </HeaderCellSort>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="light"
                   sortFn={array =>
                     array.sort((a, b) => a.light - b.light)
@@ -209,7 +202,6 @@ storiesOf('01. Features/ 03. Sort', module)
                   Light
                 </HeaderCellSort>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="count"
                   sortFn={array =>
                     array.sort((a, b) => a.count - b.count)
@@ -226,27 +218,26 @@ storiesOf('01. Features/ 03. Sort', module)
             <Body>
               {tableList.map(item => (
                 <Row item={item} key={item.id}>
-                  <Cell width="25%">{item.name}</Cell>
-                  <Cell width="25%">{item.stars}</Cell>
-                  <Cell width="25%">{item.light.toString()}</Cell>
-                  <Cell width="25%">{item.count}</Cell>
+                  <Cell>{item.name}</Cell>
+                  <Cell>{item.stars}</Cell>
+                  <Cell>{item.light.toString()}</Cell>
+                  <Cell>{item.count}</Cell>
                 </Row>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
   })
   .add('sort icon position ', () => {
     return (
-      <Table list={list}>
+      <Table list={list} layout={['25%', '25%', '25%', '25%']} resize>
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="name"
                   sortFn={array =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
@@ -259,7 +250,6 @@ storiesOf('01. Features/ 03. Sort', module)
                   Name
                 </HeaderCellSort>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="stars"
                   sortFn={array =>
                     array.sort((a, b) => a.stars - b.stars)
@@ -272,7 +262,6 @@ storiesOf('01. Features/ 03. Sort', module)
                   Stars
                 </HeaderCellSort>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="light"
                   sortFn={array =>
                     array.sort((a, b) => a.light - b.light)
@@ -285,7 +274,6 @@ storiesOf('01. Features/ 03. Sort', module)
                   Light
                 </HeaderCellSort>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="count"
                   sortFn={array =>
                     array.sort((a, b) => a.count - b.count)
@@ -303,27 +291,26 @@ storiesOf('01. Features/ 03. Sort', module)
             <Body>
               {tableList.map(item => (
                 <Row item={item} key={item.id}>
-                  <Cell width="25%">{item.name}</Cell>
-                  <Cell width="25%">{item.stars}</Cell>
-                  <Cell width="25%">{item.light.toString()}</Cell>
-                  <Cell width="25%">{item.count}</Cell>
+                  <Cell>{item.name}</Cell>
+                  <Cell>{item.stars}</Cell>
+                  <Cell>{item.light.toString()}</Cell>
+                  <Cell>{item.count}</Cell>
                 </Row>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
   })
   .add('indentation ', () => {
     return (
-      <Table list={list}>
+      <Table list={list} layout={['25%', '25%', '25%', '25%']} resize>
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="name"
                   sortFn={array =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
@@ -336,7 +323,6 @@ storiesOf('01. Features/ 03. Sort', module)
                   Name
                 </HeaderCellSort>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="stars"
                   sortFn={array =>
                     array.sort((a, b) => a.stars - b.stars)
@@ -349,7 +335,6 @@ storiesOf('01. Features/ 03. Sort', module)
                   Stars
                 </HeaderCellSort>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="light"
                   sortFn={array =>
                     array.sort((a, b) => a.light - b.light)
@@ -362,7 +347,6 @@ storiesOf('01. Features/ 03. Sort', module)
                   Light
                 </HeaderCellSort>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="count"
                   sortFn={array =>
                     array.sort((a, b) => a.count - b.count)
@@ -380,35 +364,28 @@ storiesOf('01. Features/ 03. Sort', module)
             <Body>
               {tableList.map(item => (
                 <Row item={item} key={item.id}>
-                  <Cell width="25%" indentation={18}>
-                    {item.name}
-                  </Cell>
-                  <Cell width="25%" indentation={18}>
-                    {item.stars}
-                  </Cell>
-                  <Cell width="25%" indentation={18}>
+                  <Cell indentation={18}>{item.name}</Cell>
+                  <Cell indentation={18}>{item.stars}</Cell>
+                  <Cell indentation={18}>
                     {item.light.toString()}
                   </Cell>
-                  <Cell width="25%" indentation={18}>
-                    {item.count}
-                  </Cell>
+                  <Cell indentation={18}>{item.count}</Cell>
                 </Row>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
   })
   .add('custom sort icon (Material UI)', () => {
     return (
-      <Table list={list}>
+      <Table list={list} layout={['25%', '25%', '25%', '25%']} resize>
         {tableList => (
-          <Content>
+          <>
             <Header>
               <HeaderRow>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="name"
                   sortFn={array =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
@@ -425,7 +402,6 @@ storiesOf('01. Features/ 03. Sort', module)
                   Name
                 </HeaderCellSort>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="stars"
                   sortFn={array =>
                     array.sort((a, b) => a.stars - b.stars)
@@ -442,7 +418,6 @@ storiesOf('01. Features/ 03. Sort', module)
                   Stars
                 </HeaderCellSort>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="light"
                   sortFn={array =>
                     array.sort((a, b) => a.light - b.light)
@@ -459,7 +434,6 @@ storiesOf('01. Features/ 03. Sort', module)
                   Light
                 </HeaderCellSort>
                 <HeaderCellSort
-                  width="25%"
                   sortKey="count"
                   sortFn={array =>
                     array.sort((a, b) => a.count - b.count)
@@ -481,14 +455,14 @@ storiesOf('01. Features/ 03. Sort', module)
             <Body>
               {tableList.map(item => (
                 <Row item={item} key={item.id}>
-                  <Cell width="25%">{item.name}</Cell>
-                  <Cell width="25%">{item.stars}</Cell>
-                  <Cell width="25%">{item.light.toString()}</Cell>
-                  <Cell width="25%">{item.count}</Cell>
+                  <Cell>{item.name}</Cell>
+                  <Cell>{item.stars}</Cell>
+                  <Cell>{item.light.toString()}</Cell>
+                  <Cell>{item.count}</Cell>
                 </Row>
               ))}
             </Body>
-          </Content>
+          </>
         )}
       </Table>
     );
