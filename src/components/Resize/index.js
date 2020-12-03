@@ -13,7 +13,7 @@ export const Resizer = styled.span`
 `;
 
 export const useResize = columnIndex => {
-  const { resize, resizedLayout, tableRef } = React.useContext(
+  const { resize, resizedWidths, tableRef } = React.useContext(
     ResizeContext
   );
 
@@ -44,22 +44,62 @@ export const useResize = columnIndex => {
             ? resizeWidth
             : MIN_RESIZE_WIDTH;
 
-        const trs = tableRef.current.querySelectorAll('.tr');
+        const headerColumns = Array.from(
+          tableRef.current
+            .querySelector('.thead')
+            .querySelector('.tr')
+            .querySelectorAll('.th')
+        );
 
-        Array.from(trs).forEach(element => {
-          const columns = element.style['grid-template-columns']
-            .split(' ')
-            .map((width, i) =>
-              columnIndex === i ? `${resizeWidth}px` : width
-            );
+        const tableWidth = tableRef.current.getBoundingClientRect()
+          .width;
 
-          resizedLayout.current = columns;
+        const columnsWidths = headerColumns.map(
+          headerCell => headerCell.getBoundingClientRect().width
+        );
 
-          element.style['grid-template-columns'] = columns.join(' ');
+        const diffWidth = resizeWidth - columnsWidths[columnIndex];
+
+        const newColumnWidths = columnsWidths
+          .map((width, index) => {
+            if (columnIndex === index) {
+              const nextWidth = columnsWidths[index + 1] - diffWidth;
+              const willNextAdjust = nextWidth > MIN_RESIZE_WIDTH;
+
+              return willNextAdjust ? resizeWidth : width;
+            }
+
+            if (columnIndex + 1 === index) {
+              const nextWidth = width - diffWidth;
+              const shouldAdjust = nextWidth > MIN_RESIZE_WIDTH;
+
+              return shouldAdjust ? nextWidth : width;
+            }
+
+            return width;
+          })
+          .map(width => `${(width / tableWidth) * 100}%`);
+
+        headerColumns.forEach((headerCell, index) => {
+          headerCell.style.width = newColumnWidths[index];
         });
+
+        Array.from(
+          tableRef.current
+            .querySelector('.tbody')
+            .querySelectorAll('.tr')
+        ).map(row =>
+          Array.from(row.querySelectorAll('.td')).forEach(
+            (cell, index) => {
+              cell.style.width = newColumnWidths[index];
+            }
+          )
+        );
+
+        resizedWidths.current = newColumnWidths;
       }
     },
-    [columnIndex, tableRef, resizedLayout]
+    [columnIndex, resizedWidths, tableRef]
   );
 
   const onMouseUp = React.useCallback(() => {

@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 const ResizeContext = React.createContext(false);
 
 const ResizeProvider = ({ resize, tableRef, children }) => {
-  const resizedLayout = React.useRef();
+  const resizedWidths = React.useRef();
 
   return (
     <ResizeContext.Provider
-      value={{ resize, resizedLayout, tableRef }}
+      value={{ resize, resizedWidths, tableRef }}
     >
       {children}
     </ResizeContext.Provider>

@@ -24,7 +24,7 @@ const Row = ({
   const ref = React.useRef();
 
   useDoubleClick(ref, onClick, onDoubleClick, item);
-  useRowLayout(ref);
+  useRowLayout(ref, '.td', children);
 
   return (
     <>

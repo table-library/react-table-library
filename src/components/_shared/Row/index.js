@@ -8,8 +8,6 @@ const RowContainerBase = styled.div`
 `;
 
 const RowContainer = styled(RowContainerBase)`
-  display: grid;
-
   position: relative;
   margin-top: -1px;
   z-index: 1;
@@ -33,8 +31,6 @@ const RowContainer = styled(RowContainerBase)`
 `;
 
 const HeaderRowContainer = styled(RowContainerBase)`
-  display: grid;
-
   border-bottom: 1px solid ${COLORS.BORDER};
 
   position: relative;

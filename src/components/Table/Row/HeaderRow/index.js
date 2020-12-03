@@ -12,7 +12,7 @@ const HeaderRow = ({ className, disabled, children }) => {
 
   const ref = React.useRef();
 
-  useRowLayout(ref);
+  useRowLayout(ref, '.th', children);
 
   return (
     <HeaderRowContainer
