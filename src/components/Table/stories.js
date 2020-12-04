@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 import React from 'react';
@@ -52,6 +53,40 @@ storiesOf('01. Features/ 01. Table', module)
                   <Cell>{item.stars}</Cell>
                   <Cell>{item.light.toString()}</Cell>
                   <Cell>{item.count}</Cell>
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('column mapping (important: key must be index)', () => {
+    const columns = [
+      { label: 'Name', get: item => item.name },
+      { label: 'Stars', get: item => item.stars },
+      { label: 'Light', get: item => item.light.toString() },
+      { label: 'Count', get: item => item.count }
+    ];
+
+    return (
+      <Table list={list}>
+        {tableList => (
+          <>
+            <Header>
+              <HeaderRow>
+                {columns.map((column, index) => (
+                  <HeaderCell key={index}>{column.label}</HeaderCell>
+                ))}
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <Row key={item.id} item={item}>
+                  {columns.map((column, index) => (
+                    <Cell key={index}>{column.get(item)}</Cell>
+                  ))}
                 </Row>
               ))}
             </Body>
