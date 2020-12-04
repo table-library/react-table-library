@@ -26,7 +26,7 @@ const CellSelect = React.memo(
     return (
       <CellContainer
         role="gridcell"
-        className={cs('td', 'cell-select', 'shrink', className)}
+        className={cs('td', 'cell-select', 'th-shrink', className)}
         css={theme?.CellSelect}
         indentation={indentation}
       >

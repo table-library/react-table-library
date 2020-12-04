@@ -16,8 +16,6 @@ const useRowSelect = ({
   className
 }) => {
   const rowSelectTheme = css`
-    background-color: ${COLORS.BACKGROUND};
-
     &.selected-row {
       color: ${COLORS.FONT_PRIMARY};
       font-weight: bold;

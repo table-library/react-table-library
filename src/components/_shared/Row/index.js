@@ -31,6 +31,8 @@ const RowContainer = styled(RowContainerBase)`
 `;
 
 const HeaderRowContainer = styled(RowContainerBase)`
+  z-index: 3;
+
   border-bottom: 1px solid ${COLORS.BORDER};
 
   position: relative;

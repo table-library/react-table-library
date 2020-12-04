@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import cs from 'classnames';
 
 import { isFunction } from '@util/isFunction';
-import { CellContainer } from '@shared';
-import { ThemeContext, SelectContext } from '@context';
+import { SelectContext } from '@context';
+import { HeaderCell } from '@table';
 
 const Checkbox = ({ children }) => {
   const select = React.useContext(SelectContext);
@@ -52,21 +52,19 @@ Checkbox.propTypes = {
   ])
 };
 
-const HeaderCellSelect = React.memo(({ className, children }) => {
-  const theme = React.useContext(ThemeContext);
-
-  return (
-    <CellContainer
-      role="columnheader"
-      className={cs('th', 'header-cell-select', 'shrink', className)}
-      css={theme?.HeaderCellSelect}
-    >
-      <div>
+const HeaderCellSelect = React.memo(
+  ({ className, children, ...passThrough }) => {
+    return (
+      <HeaderCell
+        noResize
+        className={cs('th-select', 'th-shrink', className)}
+        {...passThrough}
+      >
         <Checkbox>{children}</Checkbox>
-      </div>
-    </CellContainer>
-  );
-});
+      </HeaderCell>
+    );
+  }
+);
 
 HeaderCellSelect.propTypes = {
   className: PropTypes.string,

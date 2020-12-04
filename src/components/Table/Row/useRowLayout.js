@@ -11,7 +11,7 @@ export const useRowLayout = (ref, selector, rowLayout) => {
     );
 
     const shrinkCells = Array.from(
-      ref.current.querySelectorAll(`${selector}.shrink`)
+      ref.current.querySelectorAll(`${selector}.th-shrink`)
     );
 
     const shrinkCellsWidth = shrinkCells.reduce(
@@ -20,7 +20,7 @@ export const useRowLayout = (ref, selector, rowLayout) => {
     );
 
     const normalCells = Array.from(
-      ref.current.querySelectorAll(`${selector}:not(.shrink)`)
+      ref.current.querySelectorAll(`${selector}:not(.th-shrink)`)
     );
 
     allCells.forEach((cell, index) => {

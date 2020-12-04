@@ -66,7 +66,6 @@ storiesOf('01. Features/ 02. Theme', module)
       HeaderRow: `
         font-size: 14px;
 
-        z-index: 3;
         background-color: #eaf5fd;
       `,
       Row: `
@@ -115,7 +114,6 @@ storiesOf('01. Features/ 02. Theme', module)
       HeaderRow: `
         font-size: 14px;
 
-        z-index: 3;
         background-color: #fafafa;
       `,
       Row: `
