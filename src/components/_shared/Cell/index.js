@@ -42,6 +42,10 @@ const CellContainerBase = styled.div`
     padding-left: ${GUTTER}px;
   }
 
+  &.hide {
+    display: none;
+  }
+
   ${({ css }) => css};
 `;
 

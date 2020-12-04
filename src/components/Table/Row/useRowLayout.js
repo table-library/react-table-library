@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { ResizeContext } from '@context';
 
-export const useRowLayout = (ref, selector, rowLayout) => {
+export const useRowLayout = (ref, selector, rowLayout, children) => {
   const { resizedLayout } = React.useContext(ResizeContext);
 
   React.useLayoutEffect(() => {
@@ -41,5 +41,5 @@ export const useRowLayout = (ref, selector, rowLayout) => {
         cell.style.width = `calc(${percentage}% - ${diff}px)`;
       }
     });
-  }, [ref, resizedLayout, rowLayout, selector]);
+  }, [ref, resizedLayout, rowLayout, selector, children]);
 };

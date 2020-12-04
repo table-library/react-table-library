@@ -25,7 +25,7 @@ const Row = ({
   const ref = React.useRef();
 
   useDoubleClick(ref, onClick, onDoubleClick, item);
-  useRowLayout(ref, '.td', rowLayout);
+  useRowLayout(ref, '.td', rowLayout, children);
 
   return (
     <>
@@ -38,9 +38,9 @@ const Row = ({
         `}
         ref={ref}
       >
-        {React.Children.map(children, child =>
-          React.cloneElement(child)
-        )}
+        {React.Children.toArray(children)
+          .filter(Boolean)
+          .map(child => React.cloneElement(child))}
       </RowContainer>
 
       {panel}

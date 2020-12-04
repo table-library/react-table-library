@@ -12,7 +12,7 @@ const HeaderRow = ({ className, rowLayout, disabled, children }) => {
 
   const ref = React.useRef();
 
-  useRowLayout(ref, '.th', rowLayout);
+  useRowLayout(ref, '.th', rowLayout, children);
 
   return (
     <HeaderRowContainer
@@ -21,9 +21,13 @@ const HeaderRow = ({ className, rowLayout, disabled, children }) => {
       css={theme?.HeaderRow}
       ref={ref}
     >
-      {React.Children.map(children, (child, index) =>
-        React.cloneElement(child, { index })
-      )}
+      {React.Children.toArray(children)
+        .filter(Boolean)
+        .map(child =>
+          React.cloneElement(child, {
+            index: Number(child.key.replace('.', ''))
+          })
+        )}
     </HeaderRowContainer>
   );
 };

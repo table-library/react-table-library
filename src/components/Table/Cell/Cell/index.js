@@ -5,13 +5,15 @@ import cs from 'classnames';
 import { CellContainer } from '@shared';
 import { ThemeContext } from '@context';
 
-const Cell = ({ className, indentation, children }) => {
+const Cell = ({ className, indentation, hide, children }) => {
   const theme = React.useContext(ThemeContext);
 
   return (
     <CellContainer
       role="gridcell"
-      className={cs('td', className)}
+      className={cs('td', className, {
+        hide
+      })}
       css={theme?.Cell}
       indentation={indentation}
     >
@@ -23,6 +25,7 @@ const Cell = ({ className, indentation, children }) => {
 Cell.propTypes = {
   className: PropTypes.string,
   indentation: PropTypes.number,
+  hide: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

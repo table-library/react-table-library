@@ -10,6 +10,7 @@ const HeaderCell = ({
   index,
   className,
   indentation,
+  hide,
   noResize,
   children
 }) => {
@@ -20,7 +21,7 @@ const HeaderCell = ({
   return (
     <HeaderCellContainer
       role="columnheader"
-      className={cs('th', className)}
+      className={cs('th', className, { hide })}
       css={theme?.HeaderCell}
       indentation={indentation}
       ref={cellRef}
@@ -35,6 +36,7 @@ HeaderCell.propTypes = {
   index: PropTypes.number,
   className: PropTypes.string,
   indentation: PropTypes.number,
+  hide: PropTypes.bool,
   noResize: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

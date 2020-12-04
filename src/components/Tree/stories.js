@@ -137,7 +137,7 @@ const list = [
   }
 ];
 
-storiesOf('01. Features/07. Tree', module)
+storiesOf('01. Features/09. Tree', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
