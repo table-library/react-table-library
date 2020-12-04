@@ -12,16 +12,17 @@ const RowTreeSelect = React.memo(
   ({
     id,
     item,
-    // tree
+    // tree composite
     treeDepthLevel = 0,
     treeColumnLevel = 1,
     isTreeExpanded,
     onTreeExpandById,
     treeType,
-    // select
+    // select composite
     isSelected,
     onSelectById,
     selectType,
+    onClick,
     className,
     children,
     ...passThrough
@@ -42,7 +43,7 @@ const RowTreeSelect = React.memo(
       theme: rowTreeTheme,
       className: rowTreeClassName,
       handleClick: handleTreeClick,
-      expansion: treeExpansion
+      rowChildren
     } = useRowTree({
       id,
       item,
@@ -51,6 +52,7 @@ const RowTreeSelect = React.memo(
       isTreeExpanded,
       onTreeExpandById,
       treeType,
+      onClick,
       className,
       children,
       RecursiveComponent: RowTreeSelect,
@@ -60,9 +62,13 @@ const RowTreeSelect = React.memo(
       ...passThrough
     });
 
-    const handleClick = event => {
+    const handleClick = (tableItem, event) => {
       handleTreeClick(event);
       handleSelectClick(event);
+
+      if (onClick && isRowClick(event)) {
+        onClick(tableItem, event);
+      }
     };
 
     return (
@@ -74,7 +80,7 @@ const RowTreeSelect = React.memo(
         `}
         className={cs(rowTreeClassName, rowSelectClassName)}
         onClick={handleClick}
-        expansion={treeExpansion}
+        rowChildren={rowChildren}
         {...passThrough}
       >
         {children(item)}
@@ -98,6 +104,7 @@ RowTreeSelect.propTypes = {
   onTreeExpandById: PropTypes.func,
   treeType: PropTypes.oneOf(Object.values(TREE_TYPES)),
   className: PropTypes.string,
+  onClick: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

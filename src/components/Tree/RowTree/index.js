@@ -5,6 +5,7 @@ import cs from 'classnames';
 
 import { Body } from '@table/Body';
 import { Row } from '@table/Row';
+import { isRowClick } from '@util/isRowClick';
 
 import { isLeaf, hasLeaves } from '../util';
 import { TREE_TYPES } from './config';
@@ -18,6 +19,7 @@ const useRowTree = ({
   onTreeExpandById,
   treeType = TREE_TYPES.RowTreeClick,
   className,
+  onClick,
   children,
   // eslint-disable-next-line no-use-before-define
   RecursiveComponent = RowTree,
@@ -40,7 +42,7 @@ const useRowTree = ({
   });
 
   const handleClick = event => {
-    if (event.target.tagName !== 'DIV' || event.target.title) return;
+    if (!isRowClick(event)) return;
 
     if (isLeaf(item)) return;
 
@@ -62,6 +64,7 @@ const useRowTree = ({
           treeType={treeType}
           {...composites}
           {...passThrough}
+          onClick={onClick}
         >
           {recursiveNode => children(recursiveNode)}
         </RecursiveComponent>
@@ -72,7 +75,7 @@ const useRowTree = ({
     theme: rowTreeTheme,
     className: rowTreeClassName,
     handleClick,
-    expansion: childNodes
+    rowChildren: childNodes
   };
 };
 
@@ -86,14 +89,15 @@ const RowTree = React.memo(
     onTreeExpandById,
     treeType,
     className,
+    onClick,
     children,
     ...passThrough
   }) => {
     const {
       theme: rowTreeTheme,
       className: rowTreeClassName,
-      handleClick,
-      expansion
+      handleClick: handleTreeClick,
+      rowChildren
     } = useRowTree({
       id,
       item,
@@ -103,9 +107,18 @@ const RowTree = React.memo(
       onTreeExpandById,
       treeType,
       className,
+      onClick,
       children,
       ...passThrough
     });
+
+    const handleClick = (tableItem, event) => {
+      handleTreeClick(event);
+
+      if (onClick && isRowClick(event)) {
+        onClick(tableItem, event);
+      }
+    };
 
     return (
       <Row
@@ -113,7 +126,7 @@ const RowTree = React.memo(
         theme={rowTreeTheme}
         className={rowTreeClassName}
         onClick={handleClick}
-        expansion={expansion}
+        rowChildren={rowChildren}
         {...passThrough}
       >
         {children(item)}
@@ -133,7 +146,7 @@ RowTree.propTypes = {
   onTreeExpandById: PropTypes.func,
   treeType: PropTypes.oneOf(Object.values(TREE_TYPES)),
   className: PropTypes.string,
-  disabled: PropTypes.bool,
+  onClick: PropTypes.func,
   onDoubleClick: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

@@ -135,7 +135,7 @@ const list = [
   }
 ];
 
-storiesOf('02. Composites/ 01. Tree & Select', module)
+storiesOf('02. Composites/ 02. Tree & Select', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
@@ -170,7 +170,7 @@ storiesOf('02. Composites/ 01. Tree & Select', module)
       </Table>
     );
   })
-  .add('select on checkbox, expand on icon', () => {
+  .add('select on checkbox, tree on icon', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -215,7 +215,7 @@ storiesOf('02. Composites/ 01. Tree & Select', module)
       </Table>
     );
   })
-  .add('select on row, expand on icon', () => {
+  .add('select on row, tree on icon', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -263,7 +263,7 @@ storiesOf('02. Composites/ 01. Tree & Select', module)
       </Table>
     );
   })
-  .add('expand on row, select on checkbox', () => {
+  .add('tree on row, select on checkbox', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -308,7 +308,7 @@ storiesOf('02. Composites/ 01. Tree & Select', module)
       </Table>
     );
   })
-  .add('only icon: expand on icon, select on row', () => {
+  .add('only icon: tree on icon, select on row', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -347,7 +347,7 @@ storiesOf('02. Composites/ 01. Tree & Select', module)
       </Table>
     );
   })
-  .add('only checkbox: select on checkbox, expand on row', () => {
+  .add('only checkbox: select on checkbox, tree on row', () => {
     return (
       <Table list={list}>
         {tableList => (

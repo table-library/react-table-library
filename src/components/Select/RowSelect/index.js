@@ -4,6 +4,7 @@ import cs from 'classnames';
 import PropTypes from 'prop-types';
 
 import { Row } from '@table/Row';
+import { isRowClick } from '@util/isRowClick';
 import * as COLORS from '@colors';
 
 import { SELECT_TYPES } from './config';
@@ -34,7 +35,7 @@ const useRowSelect = ({
   });
 
   const handleClick = event => {
-    if (event.target.tagName !== 'DIV') return;
+    if (!isRowClick(event)) return;
 
     if (selectType === SELECT_TYPES.RowSelectClick) {
       onSelectById(id);
@@ -56,13 +57,14 @@ const RowSelect = React.memo(
     onSelectById,
     selectType,
     className,
+    onClick,
     children,
     ...passThrough
   }) => {
     const {
       theme: rowSelectTheme,
       className: rowSelectClassName,
-      handleClick
+      handleClick: handleSelectClick
     } = useRowSelect({
       id,
       isSelected,
@@ -70,6 +72,14 @@ const RowSelect = React.memo(
       selectType,
       className
     });
+
+    const handleClick = (tableItem, event) => {
+      handleSelectClick(event);
+
+      if (onClick && isRowClick(event)) {
+        onClick(tableItem, event);
+      }
+    };
 
     return (
       <Row
@@ -94,6 +104,7 @@ RowSelect.propTypes = {
   onSelectById: PropTypes.func,
   selectType: PropTypes.oneOf(Object.values(SELECT_TYPES)),
   className: PropTypes.string,
+  onClick: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

@@ -2,11 +2,18 @@ import useDoubleClickBase from 'use-double-click';
 
 const NOOP = () => {};
 
-export const useDoubleClick = (ref, onClick, onDoubleClick, item) =>
+export const useDoubleClick = (
+  ref,
+  onClick,
+  onDoubleClick,
+  tableItem
+) =>
   useDoubleClickBase({
-    onSingleClick: onClick || NOOP,
+    onSingleClick: onClick
+      ? event => onClick(tableItem, event)
+      : NOOP,
     onDoubleClick: onDoubleClick
-      ? event => onDoubleClick(event, item)
+      ? event => onDoubleClick(tableItem, event)
       : NOOP,
     latency: onDoubleClick ? 250 : 0,
     ref

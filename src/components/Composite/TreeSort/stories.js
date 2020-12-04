@@ -29,36 +29,9 @@ const list = [
   }
 ];
 
-storiesOf('01. Features/ 10. Expand', module)
+storiesOf('02. Composites/ 03. Tree & Sort WIP', module)
   .addParameters({ component: Table })
   .add('default', () => {
-    const Content = ({ item }) => (
-      <div>
-        <div>
-          <strong>Name:</strong> {item.name}
-        </div>
-        <div>
-          <strong>Stars:</strong> {item.stars}
-        </div>
-        <div>
-          <strong>Light:</strong> {item.light.toString()}
-        </div>
-        <div>
-          <strong>Count:</strong> {item.count}
-        </div>
-      </div>
-    );
-
-    const [expandedRows, setExpandedRows] = React.useState([]);
-
-    const handleExpandRow = id => {
-      if (expandedRows.includes(id)) {
-        setExpandedRows(expandedRows.filter(value => value !== id));
-      } else {
-        setExpandedRows(expandedRows.concat(id));
-      }
-    };
-
     return (
       <Table list={list}>
         {tableList => (
@@ -74,16 +47,7 @@ storiesOf('01. Features/ 10. Expand', module)
 
             <Body>
               {tableList.map(item => (
-                <Row
-                  key={item.id}
-                  item={item}
-                  onClick={() => handleExpandRow(item.id)}
-                  expansion={tableItem =>
-                    expandedRows.includes(tableItem.id) && (
-                      <Content item={tableItem} />
-                    )
-                  }
-                >
+                <Row key={item.id} item={item}>
                   <Cell>{item.name}</Cell>
                   <Cell>{item.stars}</Cell>
                   <Cell>{item.light.toString()}</Cell>

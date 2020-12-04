@@ -8,10 +8,11 @@ import {
   Header,
   HeaderRow,
   Body,
-  Row,
   HeaderCell,
   Cell
 } from '@table';
+
+import { RowSelect, HeaderCellSelect, CellSelect } from '@select';
 
 const list = [
   { id: '1', name: 'Hello', stars: 24, count: 42, light: true },
@@ -29,7 +30,7 @@ const list = [
   }
 ];
 
-storiesOf('01. Features/ 10. Expand', module)
+storiesOf('02. Composites/ 05. Select & Expand', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const Content = ({ item }) => (
@@ -65,6 +66,7 @@ storiesOf('01. Features/ 10. Expand', module)
           <>
             <Header>
               <HeaderRow>
+                <HeaderCellSelect />
                 <HeaderCell>Name</HeaderCell>
                 <HeaderCell>Stars</HeaderCell>
                 <HeaderCell>Light</HeaderCell>
@@ -74,21 +76,29 @@ storiesOf('01. Features/ 10. Expand', module)
 
             <Body>
               {tableList.map(item => (
-                <Row
+                <RowSelect
                   key={item.id}
                   item={item}
-                  onClick={() => handleExpandRow(item.id)}
+                  selectType={
+                    RowSelect.SELECT_TYPES.ButtonSelectClick
+                  }
+                  onClick={tableItem => handleExpandRow(tableItem.id)}
                   expansion={tableItem =>
                     expandedRows.includes(tableItem.id) && (
                       <Content item={tableItem} />
                     )
                   }
                 >
-                  <Cell>{item.name}</Cell>
-                  <Cell>{item.stars}</Cell>
-                  <Cell>{item.light.toString()}</Cell>
-                  <Cell>{item.count}</Cell>
-                </Row>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <CellSelect item={tableItem} />
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
+                </RowSelect>
               ))}
             </Body>
           </>

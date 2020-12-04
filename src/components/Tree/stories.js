@@ -304,9 +304,7 @@ storiesOf('01. Features/09. Tree', module)
                 <RowTree
                   key={item.id}
                   item={item}
-                  onDoubleClick={(_, tableItem) =>
-                    console.log(tableItem)
-                  }
+                  onDoubleClick={tableItem => console.log(tableItem)}
                 >
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>

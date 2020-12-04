@@ -18,6 +18,7 @@ const Row = ({
   onClick,
   onDoubleClick,
   expansion,
+  rowChildren,
   children
 }) => {
   const theme = React.useContext(ThemeContext);
@@ -46,7 +47,9 @@ const Row = ({
           .map(child => React.cloneElement(child))}
       </RowContainer>
 
-      {expansion}
+      {expansion(item)}
+
+      {rowChildren}
     </>
   );
 };
@@ -60,6 +63,11 @@ Row.propTypes = {
   onClick: PropTypes.func,
   onDoubleClick: PropTypes.func,
   expansion: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.func
+  ]),
+  rowChildren: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
     PropTypes.func
