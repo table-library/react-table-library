@@ -69,14 +69,14 @@ storiesOf('01. Features/ 01. Table', module)
 //           <Header>
 //             <HeaderRow>
 //               <HeaderCell width={WIDTHS.Checkbox} noIndent />
-//               <HeaderCell width="25%">Name</HeaderCell>
-//               <HeaderCell width="25%" >
+//               <HeaderCell  >Name</HeaderCell>
+//               <HeaderCell   >
 //                 Stars
 //               </HeaderCell>
-//               <HeaderCell width="25%" >
+//               <HeaderCell   >
 //                 Light
 //               </HeaderCell>
-//               <HeaderCell width="25%">Count</HeaderCell>
+//               <HeaderCell  >Count</HeaderCell>
 //             </HeaderRow>
 //           </Header>
 
@@ -84,11 +84,11 @@ storiesOf('01. Features/ 01. Table', module)
 //             {tableList.map(item => (
 //               <Row selectableId={item.id} key={item.id}>
 //                 <SelectCell width={WIDTHS.Checkbox} noIndent />
-//                 <Cell width="25%">{item.name}</Cell>
-//                 <Cell width="25%" >
+//                 <Cell  >{item.name}</Cell>
+//                 <Cell   >
 //                   {item.stars}
 //                 </Cell>
-//                 <Cell width="25%" >
+//                 <Cell   >
 //                   <Checkbox
 //                     asAtom
 //                     selection={
@@ -99,7 +99,7 @@ storiesOf('01. Features/ 01. Table', module)
 //                     onChange={() => {}}
 //                   />
 //                 </Cell>
-//                 <Cell width="25%">{item.count}</Cell>
+//                 <Cell  >{item.count}</Cell>
 //               </Row>
 //             ))}
 //           </Body>
@@ -120,7 +120,7 @@ storiesOf('01. Features/ 01. Table', module)
 //                 noIndent
 //               />
 //               <HeaderSortCell
-//                 width="25%"
+//
 //                 sortKey="name"
 //                 sortFn={array =>
 //                   array.sort((a, b) => a.name.localeCompare(b.name))
@@ -128,11 +128,11 @@ storiesOf('01. Features/ 01. Table', module)
 //               >
 //                 Name
 //               </HeaderSortCell>
-//               <HeaderCell width="25%" >
+//               <HeaderCell   >
 //                 Stars
 //               </HeaderCell>
 //               <HeaderSortCell
-//                 width="25%"
+//
 //                 sortKey="light"
 //
 //                 sortFn={array => array.sort((a, b) => a.light - b.light)}
@@ -140,7 +140,7 @@ storiesOf('01. Features/ 01. Table', module)
 //                 Light
 //               </HeaderSortCell>
 //               <HeaderSortCell
-//                 width="25%"
+//
 //                 sortKey="count"
 //                 sortFn={array => array.sort((a, b) => a.count - b.count)}
 //               >
@@ -153,11 +153,11 @@ storiesOf('01. Features/ 01. Table', module)
 //             {tableList.map(item => (
 //               <Row selectableId={item.id} key={item.id}>
 //                 <SelectCell width={WIDTHS.Checkbox} noIndent />
-//                 <Cell width="25%">{item.name}</Cell>
-//                 <Cell width="25%" >
+//                 <Cell  >{item.name}</Cell>
+//                 <Cell   >
 //                   {item.stars}
 //                 </Cell>
-//                 <Cell width="25%" >
+//                 <Cell   >
 //                   <Checkbox
 //                     asAtom
 //                     selection={
@@ -168,7 +168,7 @@ storiesOf('01. Features/ 01. Table', module)
 //                     onChange={() => {}}
 //                   />
 //                 </Cell>
-//                 <Cell width="25%">{item.count}</Cell>
+//                 <Cell  >{item.count}</Cell>
 //               </Row>
 //             ))}
 //           </Body>
@@ -184,25 +184,25 @@ storiesOf('01. Features/ 01. Table', module)
 //         <>
 //           <Header>
 //             <HeaderRow>
-//               <HeaderCell width="25%">Name</HeaderCell>
-//               <HeaderCell width="25%" >
+//               <HeaderCell  >Name</HeaderCell>
+//               <HeaderCell   >
 //                 Stars
 //               </HeaderCell>
-//               <HeaderCell width="25%" >
+//               <HeaderCell   >
 //                 Light
 //               </HeaderCell>
-//               <HeaderCell width="25%">Count</HeaderCell>
+//               <HeaderCell  >Count</HeaderCell>
 //             </HeaderRow>
 //           </Header>
 
 //           <Body>
 //             {tableList.map(item => (
 //               <Row key={item.id} onClick={event => console.log(event)}>
-//                 <Cell width="25%">{item.name}</Cell>
-//                 <Cell width="25%" >
+//                 <Cell  >{item.name}</Cell>
+//                 <Cell   >
 //                   {item.stars}
 //                 </Cell>
-//                 <Cell width="25%" >
+//                 <Cell   >
 //                   <Checkbox
 //                     asAtom
 //                     selection={
@@ -213,7 +213,7 @@ storiesOf('01. Features/ 01. Table', module)
 //                     onChange={() => {}}
 //                   />
 //                 </Cell>
-//                 <Cell width="25%">{item.count}</Cell>
+//                 <Cell  >{item.count}</Cell>
 //               </Row>
 //             ))}
 //           </Body>
@@ -230,25 +230,25 @@ storiesOf('01. Features/ 01. Table', module)
 //           <>
 //             <Header>
 //               <HeaderRow>
-//                 <HeaderCell width="25%">Name</HeaderCell>
-//                 <HeaderCell width="25%" >
+//                 <HeaderCell  >Name</HeaderCell>
+//                 <HeaderCell   >
 //                   Stars
 //                 </HeaderCell>
-//                 <HeaderCell width="25%" >
+//                 <HeaderCell   >
 //                   Light
 //                 </HeaderCell>
-//                 <HeaderCell width="25%">Count</HeaderCell>
+//                 <HeaderCell  >Count</HeaderCell>
 //               </HeaderRow>
 //             </Header>
 
 //             <Body>
 //               {tableList.map(item => (
 //                 <Row key={item.id}>
-//                   <Cell width="25%">{item.name}</Cell>
-//                   <Cell width="25%" >
+//                   <Cell  >{item.name}</Cell>
+//                   <Cell   >
 //                     {item.stars}
 //                   </Cell>
-//                   <Cell width="25%" >
+//                   <Cell   >
 //                     <Checkbox
 //                       asAtom
 //                       selection={
@@ -259,7 +259,7 @@ storiesOf('01. Features/ 01. Table', module)
 //                       onChange={() => {}}
 //                     />
 //                   </Cell>
-//                   <Cell width="25%">{item.count}</Cell>
+//                   <Cell  >{item.count}</Cell>
 //                 </Row>
 //               ))}
 //             </Body>
@@ -289,29 +289,29 @@ storiesOf('01. Features/ 01. Table', module)
 //           <>
 //             <Header>
 //               <HeaderRow>
-//                 <HeaderCell width="25%" noIndent>
+//                 <HeaderCell   noIndent>
 //                   Name
 //                 </HeaderCell>
-//                 <HeaderCell width="25%" >
+//                 <HeaderCell   >
 //                   Stars
 //                 </HeaderCell>
-//                 <HeaderCell width="25%" >
+//                 <HeaderCell   >
 //                   Light
 //                 </HeaderCell>
-//                 <HeaderCell width="25%">Count</HeaderCell>
+//                 <HeaderCell  >Count</HeaderCell>
 //               </HeaderRow>
 //             </Header>
 
 //             <Body>
 //               {tableList.map(item => (
 //                 <Row key={item.id}>
-//                   <Cell width="25%" noIndent>
+//                   <Cell   noIndent>
 //                     {item.name}
 //                   </Cell>
-//                   <Cell width="25%" >
+//                   <Cell   >
 //                     {item.stars}
 //                   </Cell>
-//                   <Cell width="25%" >
+//                   <Cell   >
 //                     <Checkbox
 //                       asAtom
 //                       selection={
@@ -322,7 +322,7 @@ storiesOf('01. Features/ 01. Table', module)
 //                       onChange={() => {}}
 //                     />
 //                   </Cell>
-//                   <Cell width="25%">{item.count}</Cell>
+//                   <Cell  >{item.count}</Cell>
 //                 </Row>
 //               ))}
 //             </Body>

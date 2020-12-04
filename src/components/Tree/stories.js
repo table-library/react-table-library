@@ -146,10 +146,10 @@ storiesOf('01. Features/09. Tree', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell width="25%">Name</HeaderCell>
-                <HeaderCell width="25%">Stars</HeaderCell>
-                <HeaderCell width="25%">Light</HeaderCell>
-                <HeaderCell width="25%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -157,14 +157,12 @@ storiesOf('01. Features/09. Tree', module)
               {tableList.map(item => (
                 <RowTree key={item.id} item={item}>
                   {tableItem => (
-                    <>
-                      <Cell width="25%">{tableItem.name}</Cell>
-                      <Cell width="25%">{tableItem.stars}</Cell>
-                      <Cell width="25%">
-                        {tableItem.light.toString()}
-                      </Cell>
-                      <Cell width="25%">{tableItem.count}</Cell>
-                    </>
+                    <React.Fragment key={tableItem.id}>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
                   )}
                 </RowTree>
               ))}
@@ -181,10 +179,10 @@ storiesOf('01. Features/09. Tree', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell width="25%">Name</HeaderCell>
-                <HeaderCell width="25%">Stars</HeaderCell>
-                <HeaderCell width="25%">Light</HeaderCell>
-                <HeaderCell width="25%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -192,16 +190,14 @@ storiesOf('01. Features/09. Tree', module)
               {tableList.map(item => (
                 <RowTree key={item.id} item={item}>
                   {tableItem => (
-                    <>
-                      <CellTree item={tableItem} width="25%">
+                    <React.Fragment key={tableItem.id}>
+                      <CellTree item={tableItem}>
                         {tableItem.name}
                       </CellTree>
-                      <Cell width="25%">{tableItem.stars}</Cell>
-                      <Cell width="25%">
-                        {tableItem.light.toString()}
-                      </Cell>
-                      <Cell width="25%">{tableItem.count}</Cell>
-                    </>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
                   )}
                 </RowTree>
               ))}
@@ -218,10 +214,10 @@ storiesOf('01. Features/09. Tree', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell width="25%">Name</HeaderCell>
-                <HeaderCell width="25%">Stars</HeaderCell>
-                <HeaderCell width="25%">Light</HeaderCell>
-                <HeaderCell width="25%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -233,16 +229,14 @@ storiesOf('01. Features/09. Tree', module)
                   treeType={RowTree.TREE_TYPES.ButtonTreeClick}
                 >
                   {tableItem => (
-                    <>
-                      <CellTree item={tableItem} width="25%">
+                    <React.Fragment key={tableItem.id}>
+                      <CellTree item={tableItem}>
                         {tableItem.name}
                       </CellTree>
-                      <Cell width="25%">{tableItem.stars}</Cell>
-                      <Cell width="25%">
-                        {tableItem.light.toString()}
-                      </Cell>
-                      <Cell width="25%">{tableItem.count}</Cell>
-                    </>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
                   )}
                 </RowTree>
               ))}
@@ -263,10 +257,10 @@ storiesOf('01. Features/09. Tree', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell width="25%">Name</HeaderCell>
-                <HeaderCell width="25%">Stars</HeaderCell>
-                <HeaderCell width="25%">Light</HeaderCell>
-                <HeaderCell width="25%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -274,16 +268,14 @@ storiesOf('01. Features/09. Tree', module)
               {tableList.map(item => (
                 <RowTree key={item.id} item={item}>
                   {tableItem => (
-                    <>
-                      <CellTree item={tableItem} width="25%">
+                    <React.Fragment key={tableItem.id}>
+                      <CellTree item={tableItem}>
                         {tableItem.name}
                       </CellTree>
-                      <Cell width="25%">{tableItem.stars}</Cell>
-                      <Cell width="25%">
-                        {tableItem.light.toString()}
-                      </Cell>
-                      <Cell width="25%">{tableItem.count}</Cell>
-                    </>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
                   )}
                 </RowTree>
               ))}
@@ -300,10 +292,10 @@ storiesOf('01. Features/09. Tree', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell width="25%">Name</HeaderCell>
-                <HeaderCell width="25%">Stars</HeaderCell>
-                <HeaderCell width="25%">Light</HeaderCell>
-                <HeaderCell width="25%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -317,16 +309,14 @@ storiesOf('01. Features/09. Tree', module)
                   }
                 >
                   {tableItem => (
-                    <>
-                      <CellTree item={tableItem} width="25%">
+                    <React.Fragment key={tableItem.id}>
+                      <CellTree item={tableItem}>
                         {tableItem.name}
                       </CellTree>
-                      <Cell width="25%">{tableItem.stars}</Cell>
-                      <Cell width="25%">
-                        {tableItem.light.toString()}
-                      </Cell>
-                      <Cell width="25%">{tableItem.count}</Cell>
-                    </>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
                   )}
                 </RowTree>
               ))}
@@ -343,10 +333,10 @@ storiesOf('01. Features/09. Tree', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell width="25%">Name</HeaderCell>
-                <HeaderCell width="25%">Stars</HeaderCell>
-                <HeaderCell width="25%">Light</HeaderCell>
-                <HeaderCell width="25%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -354,22 +344,19 @@ storiesOf('01. Features/09. Tree', module)
               {tableList.map(item => (
                 <RowTree key={item.id} item={item}>
                   {tableItem => (
-                    <>
+                    <React.Fragment key={tableItem.id}>
                       <CellTree
                         item={tableItem}
-                        width="25%"
                         treeIcon={{
                           size: '10px'
                         }}
                       >
                         {tableItem.name}
                       </CellTree>
-                      <Cell width="25%">{tableItem.stars}</Cell>
-                      <Cell width="25%">
-                        {tableItem.light.toString()}
-                      </Cell>
-                      <Cell width="25%">{tableItem.count}</Cell>
-                    </>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
                   )}
                 </RowTree>
               ))}
@@ -386,10 +373,10 @@ storiesOf('01. Features/09. Tree', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell width="25%">Name</HeaderCell>
-                <HeaderCell width="25%">Stars</HeaderCell>
-                <HeaderCell width="25%">Light</HeaderCell>
-                <HeaderCell width="25%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -397,10 +384,9 @@ storiesOf('01. Features/09. Tree', module)
               {tableList.map(item => (
                 <RowTree key={item.id} item={item}>
                   {tableItem => (
-                    <>
+                    <React.Fragment key={tableItem.id}>
                       <CellTree
                         item={tableItem}
-                        width="25%"
                         treeIcon={{
                           margin: '4px',
                           iconDefault: (
@@ -414,12 +400,10 @@ storiesOf('01. Features/09. Tree', module)
                       >
                         {tableItem.name}
                       </CellTree>
-                      <Cell width="25%">{tableItem.stars}</Cell>
-                      <Cell width="25%">
-                        {tableItem.light.toString()}
-                      </Cell>
-                      <Cell width="25%">{tableItem.count}</Cell>
-                    </>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
                   )}
                 </RowTree>
               ))}

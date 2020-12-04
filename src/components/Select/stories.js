@@ -52,12 +52,12 @@ storiesOf('01. Features/06. Select', module)
               {tableList.map(item => (
                 <RowSelect item={item} key={item.id}>
                   {tableItem => (
-                    <>
+                    <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>{tableItem.stars}</Cell>
                       <Cell>{tableItem.light.toString()}</Cell>
                       <Cell>{tableItem.count}</Cell>
-                    </>
+                    </React.Fragment>
                   )}
                 </RowSelect>
               ))}
@@ -123,13 +123,13 @@ storiesOf('01. Features/06. Select', module)
               {tableList.map(item => (
                 <RowSelect key={item.id} item={item}>
                   {tableItem => (
-                    <>
+                    <React.Fragment key={tableItem.id}>
                       <CellSelect item={tableItem} />
                       <Cell>{tableItem.name}</Cell>
                       <Cell>{tableItem.stars}</Cell>
                       <Cell>{tableItem.light.toString()}</Cell>
                       <Cell>{tableItem.count}</Cell>
-                    </>
+                    </React.Fragment>
                   )}
                 </RowSelect>
               ))}
@@ -164,13 +164,13 @@ storiesOf('01. Features/06. Select', module)
                   }
                 >
                   {tableItem => (
-                    <>
+                    <React.Fragment key={tableItem.id}>
                       <CellSelect item={tableItem} />
                       <Cell>{tableItem.name}</Cell>
                       <Cell>{tableItem.stars}</Cell>
                       <Cell>{tableItem.light.toString()}</Cell>
                       <Cell>{tableItem.count}</Cell>
-                    </>
+                    </React.Fragment>
                   )}
                 </RowSelect>
               ))}
@@ -211,7 +211,7 @@ storiesOf('01. Features/06. Select', module)
               {tableList.map(item => (
                 <RowSelect key={item.id} item={item}>
                   {tableItem => (
-                    <>
+                    <React.Fragment key={tableItem.id}>
                       <CellSelect item={tableItem}>
                         <Checkbox size="small" />
                       </CellSelect>
@@ -219,7 +219,7 @@ storiesOf('01. Features/06. Select', module)
                       <Cell>{tableItem.stars}</Cell>
                       <Cell>{tableItem.light.toString()}</Cell>
                       <Cell>{tableItem.count}</Cell>
-                    </>
+                    </React.Fragment>
                   )}
                 </RowSelect>
               ))}

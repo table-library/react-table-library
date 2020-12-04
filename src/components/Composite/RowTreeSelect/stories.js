@@ -144,10 +144,10 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell width="25%">Name</HeaderCell>
-                <HeaderCell width="25%">Stars</HeaderCell>
-                <HeaderCell width="25%">Light</HeaderCell>
-                <HeaderCell width="25%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -155,14 +155,12 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
               {tableList.map(item => (
                 <RowTreeSelect key={item.id} item={item}>
                   {tableItem => (
-                    <>
-                      <Cell width="25%">{tableItem.name}</Cell>
-                      <Cell width="25%">{tableItem.stars}</Cell>
-                      <Cell width="25%">
-                        {tableItem.light.toString()}
-                      </Cell>
-                      <Cell width="25%">{tableItem.count}</Cell>
-                    </>
+                    <React.Fragment key={tableItem.id}>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
                   )}
                 </RowTreeSelect>
               ))}
@@ -180,10 +178,10 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSelect />
-                <HeaderCell width="20%">Name</HeaderCell>
-                <HeaderCell width="20%">Stars</HeaderCell>
-                <HeaderCell width="20%">Light</HeaderCell>
-                <HeaderCell width="20%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -199,17 +197,15 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
                   treeColumnLevel={2}
                 >
                   {tableItem => (
-                    <>
+                    <React.Fragment key={tableItem.id}>
                       <CellSelect item={tableItem} />
-                      <CellTree item={tableItem} width="20%">
+                      <CellTree item={tableItem}>
                         {tableItem.name}
                       </CellTree>
-                      <Cell width="20%">{tableItem.stars}</Cell>
-                      <Cell width="20%">
-                        {tableItem.light.toString()}
-                      </Cell>
-                      <Cell width="20%">{tableItem.count}</Cell>
-                    </>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
                   )}
                 </RowTreeSelect>
               ))}
@@ -227,10 +223,10 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSelect />
-                <HeaderCell width="20%">Name</HeaderCell>
-                <HeaderCell width="20%">Stars</HeaderCell>
-                <HeaderCell width="20%">Light</HeaderCell>
-                <HeaderCell width="20%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -249,17 +245,15 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
                   }
                 >
                   {tableItem => (
-                    <>
+                    <React.Fragment key={tableItem.id}>
                       <CellSelect item={tableItem} />
-                      <CellTree item={tableItem} width="20%">
+                      <CellTree item={tableItem}>
                         {tableItem.name}
                       </CellTree>
-                      <Cell width="20%">{tableItem.stars}</Cell>
-                      <Cell width="20%">
-                        {tableItem.light.toString()}
-                      </Cell>
-                      <Cell width="20%">{tableItem.count}</Cell>
-                    </>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
                   )}
                 </RowTreeSelect>
               ))}
@@ -277,10 +271,10 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSelect />
-                <HeaderCell width="20%">Name</HeaderCell>
-                <HeaderCell width="20%">Stars</HeaderCell>
-                <HeaderCell width="20%">Light</HeaderCell>
-                <HeaderCell width="20%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -296,17 +290,15 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
                   treeColumnLevel={2}
                 >
                   {tableItem => (
-                    <>
+                    <React.Fragment key={tableItem.id}>
                       <CellSelect item={tableItem} />
-                      <CellTree item={tableItem} width="20%">
+                      <CellTree item={tableItem}>
                         {tableItem.name}
                       </CellTree>
-                      <Cell width="20%">{tableItem.stars}</Cell>
-                      <Cell width="20%">
-                        {tableItem.light.toString()}
-                      </Cell>
-                      <Cell width="20%">{tableItem.count}</Cell>
-                    </>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
                   )}
                 </RowTreeSelect>
               ))}
@@ -323,10 +315,10 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell width="25%">Name</HeaderCell>
-                <HeaderCell width="25%">Stars</HeaderCell>
-                <HeaderCell width="25%">Light</HeaderCell>
-                <HeaderCell width="25%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -338,16 +330,14 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
                   treeType={RowTreeSelect.TREE_TYPES.ButtonTreeClick}
                 >
                   {tableItem => (
-                    <>
-                      <CellTree item={tableItem} width="25%">
+                    <React.Fragment key={tableItem.id}>
+                      <CellTree item={tableItem}>
                         {tableItem.name}
                       </CellTree>
-                      <Cell width="25%">{tableItem.stars}</Cell>
-                      <Cell width="25%">
-                        {tableItem.light.toString()}
-                      </Cell>
-                      <Cell width="25%">{tableItem.count}</Cell>
-                    </>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
                   )}
                 </RowTreeSelect>
               ))}
@@ -365,10 +355,10 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSelect />
-                <HeaderCell width="20%">Name</HeaderCell>
-                <HeaderCell width="20%">Stars</HeaderCell>
-                <HeaderCell width="20%">Light</HeaderCell>
-                <HeaderCell width="20%">Count</HeaderCell>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -383,15 +373,13 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
                   treeColumnLevel={2}
                 >
                   {tableItem => (
-                    <>
+                    <React.Fragment key={tableItem.id}>
                       <CellSelect item={tableItem} />
-                      <Cell width="20%">{tableItem.name}</Cell>
-                      <Cell width="20%">{tableItem.stars}</Cell>
-                      <Cell width="20%">
-                        {tableItem.light.toString()}
-                      </Cell>
-                      <Cell width="20%">{tableItem.count}</Cell>
-                    </>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
                   )}
                 </RowTreeSelect>
               ))}
