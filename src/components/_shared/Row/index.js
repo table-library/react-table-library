@@ -4,7 +4,7 @@ import * as COLORS from '@colors';
 
 const RowContainerBase = styled.div`
   display: flex;
-  align-items: center;
+  align-items: stretch;
 `;
 
 const RowContainer = styled(RowContainerBase)`

@@ -5,6 +5,9 @@ import * as COLORS from '@colors';
 const GUTTER = 8;
 
 const CellContainerBase = styled.div`
+  display: flex;
+  align-items: center;
+
   padding-top: 4px;
   padding-bottom: 4px;
 
