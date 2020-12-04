@@ -30,7 +30,7 @@ const list = [
   }
 ];
 
-storiesOf('01. Features/ 11. Column Ordering', module)
+storiesOf('01. Features/ 12. Column Ordering', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [columns, setColumns] = React.useState([

@@ -42,7 +42,7 @@ const RowTreeSelect = React.memo(
       theme: rowTreeTheme,
       className: rowTreeClassName,
       handleClick: handleTreeClick,
-      panel: treePanel
+      expansion: treeExpansion
     } = useRowTree({
       id,
       item,
@@ -74,7 +74,7 @@ const RowTreeSelect = React.memo(
         `}
         className={cs(rowTreeClassName, rowSelectClassName)}
         onClick={handleClick}
-        panel={treePanel}
+        expansion={treeExpansion}
         {...passThrough}
       >
         {children(item)}

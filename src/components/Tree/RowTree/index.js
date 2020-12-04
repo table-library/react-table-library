@@ -72,7 +72,7 @@ const useRowTree = ({
     theme: rowTreeTheme,
     className: rowTreeClassName,
     handleClick,
-    panel: childNodes
+    expansion: childNodes
   };
 };
 
@@ -93,7 +93,7 @@ const RowTree = React.memo(
       theme: rowTreeTheme,
       className: rowTreeClassName,
       handleClick,
-      panel
+      expansion
     } = useRowTree({
       id,
       item,
@@ -113,7 +113,7 @@ const RowTree = React.memo(
         theme={rowTreeTheme}
         className={rowTreeClassName}
         onClick={handleClick}
-        panel={panel}
+        expansion={expansion}
         {...passThrough}
       >
         {children(item)}
