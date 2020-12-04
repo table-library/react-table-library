@@ -2,8 +2,8 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
 
-import { HeaderRowContainer } from '@shared';
-import { ThemeContext } from '@context';
+import { HeaderRowContainer } from '@shared/Row';
+import { ThemeContext } from '@context/Theme';
 
 import { useRowLayout } from '../useRowLayout';
 

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import cs from 'classnames';
 
 import { isFunction } from '@util/isFunction';
-import { SelectContext } from '@context';
-import { HeaderCell } from '@table';
 import { Checkbox } from '@shared/Checkbox';
+import { SelectContext } from '@context/Select';
+import { HeaderCell } from '@table/Cell';
 
 const ImperativeCheckbox = ({ children }) => {
   const select = React.useContext(SelectContext);

@@ -2,9 +2,9 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
 
-import { Cell } from '@table';
-import { SelectContext } from '@context';
 import { Checkbox } from '@shared/Checkbox';
+import { Cell } from '@table/Cell';
+import { SelectContext } from '@context/Select';
 
 const CellSelect = React.memo(
   ({ item, className, children, ...passThrough }) => {

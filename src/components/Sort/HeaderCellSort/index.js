@@ -7,9 +7,9 @@ import IconChevronSingleDown from '@icons/IconChevronSingleDown';
 import IconChevronSingleUp from '@icons/IconChevronSingleUp';
 import IconChevronSingleUpDown from '@icons/IconChevronSingleUpDown';
 import { getIcon } from '@util/getIcon';
-import { Button } from '@shared';
-import { SortContext } from '@context';
-import { HeaderCell } from '@table';
+import { Button } from '@shared/Button';
+import { SortContext } from '@context/Sort';
+import { HeaderCell } from '@table/Cell';
 
 const SORT_ICON_POSITIONS = {
   Prefix: 'Prefix',

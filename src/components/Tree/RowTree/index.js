@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { css } from 'styled-components';
 import cs from 'classnames';
 
-import { Body, Row } from '@table';
+import { Body } from '@table/Body';
+import { Row } from '@table/Row';
 
 import { isLeaf, hasLeaves } from '../util';
 import { TREE_TYPES } from './config';

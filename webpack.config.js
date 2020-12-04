@@ -7,7 +7,7 @@ module.exports = {
   entry: {
     main: './src/index.js',
     // Icons
-    Icons: './src/components/Icons/index.js',
+    Icons: './src/components/_shared/Icons/index.js',
     ...createIconEntries('Icons'),
     // Atoms
     Table: './src/components/Table/index.js',

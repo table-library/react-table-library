@@ -2,8 +2,8 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
 
-import { CellContainer } from '@shared';
-import { ThemeContext } from '@context';
+import { CellContainer } from '@shared/Cell';
+import { ThemeContext } from '@context/Theme';
 
 const Cell = ({ className, indentation, hide, children }) => {
   const theme = React.useContext(ThemeContext);

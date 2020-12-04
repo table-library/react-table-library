@@ -2,8 +2,8 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
 
-import { HeaderCellContainer } from '@shared';
-import { ThemeContext } from '@context';
+import { HeaderCellContainer } from '@shared/Cell';
+import { ThemeContext } from '@context/Theme';
 import { Resizer, useResize } from '@resize';
 
 const HeaderCell = ({

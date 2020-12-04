@@ -12,7 +12,7 @@ import {
   Cell
 } from '@table';
 
-import { RowTreeSelect } from '@composite';
+import { RowTreeSelect } from '@composite/TreeSelect';
 import { RowTree, CellTree } from '@tree';
 import { RowSelect, CellSelect, HeaderCellSelect } from '@select';
 

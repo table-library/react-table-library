@@ -6,8 +6,10 @@ import cs from 'classnames';
 import IconChevronSingleDown from '@icons/IconChevronSingleDown';
 import IconChevronSingleRight from '@icons/IconChevronSingleRight';
 import { getIcon } from '@util/getIcon';
-import { Button, CellContainer } from '@shared';
-import { ThemeContext, TreeContext } from '@context';
+import { Button } from '@shared/Button';
+import { CellContainer } from '@shared/Cell';
+import { ThemeContext } from '@context/Theme';
+import { TreeContext } from '@context/Tree';
 
 import { isLeaf } from '../util';
 

@@ -3,8 +3,8 @@ import { css } from 'styled-components';
 import cs from 'classnames';
 import PropTypes from 'prop-types';
 
+import { Row } from '@table/Row';
 import * as COLORS from '@colors';
-import { Row } from '@table';
 
 import { SELECT_TYPES } from './config';
 

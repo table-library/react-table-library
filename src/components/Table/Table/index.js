@@ -2,15 +2,12 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import {
-  TableProvider,
-  ThemeProvider,
-  ResizeProvider,
-  SelectProvider,
-  TreeProvider,
-  SortProvider,
-  SortContext
-} from '@context';
+import { TableProvider } from '@context/Table';
+import { ThemeProvider } from '@context/Theme';
+import { ResizeProvider } from '@context/Resize';
+import { SelectProvider } from '@context/Select';
+import { TreeProvider } from '@context/Tree';
+import { SortProvider, SortContext } from '@context/Sort';
 
 const TableContainer = styled.div`
   *,

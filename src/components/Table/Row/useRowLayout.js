@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ResizeContext } from '@context';
+import { ResizeContext } from '@context/Resize';
 
 export const useRowLayout = (ref, selector, rowLayout, children) => {
   const { resizedLayout } = React.useContext(ResizeContext);

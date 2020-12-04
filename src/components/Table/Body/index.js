@@ -2,7 +2,9 @@ import * as React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { ThemeContext, SelectContext, TreeContext } from '@context';
+import { ThemeContext } from '@context/Theme';
+import { SelectContext } from '@context/Select';
+import { TreeContext } from '@context/Tree';
 
 const BodyContainer = styled.div`
   ${({ css }) => css};

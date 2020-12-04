@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { css } from 'styled-components';
 import cs from 'classnames';
 
-import { Row } from '@table';
+import { Row } from '@table/Row';
 
 import { useRowTree, TREE_TYPES } from '@tree';
 import { useRowSelect, SELECT_TYPES } from '@select';

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { css } from 'styled-components';
 import cs from 'classnames';
 
-import { RowContainer } from '@shared';
-import { ThemeContext } from '@context';
+import { RowContainer } from '@shared/Row';
+import { ThemeContext } from '@context/Theme';
 
 import { useRowLayout } from '../useRowLayout';
 import { useDoubleClick } from './useDoubleClick';
