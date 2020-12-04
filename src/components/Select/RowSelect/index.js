@@ -94,8 +94,6 @@ RowSelect.propTypes = {
   onSelectById: PropTypes.func,
   selectType: PropTypes.oneOf(Object.values(SELECT_TYPES)),
   className: PropTypes.string,
-  disabled: PropTypes.bool,
-  onDoubleClick: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

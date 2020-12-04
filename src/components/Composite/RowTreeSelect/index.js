@@ -98,8 +98,6 @@ RowTreeSelect.propTypes = {
   onTreeExpandById: PropTypes.func,
   treeType: PropTypes.oneOf(Object.values(TREE_TYPES)),
   className: PropTypes.string,
-  disabled: PropTypes.bool,
-  onDoubleClick: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

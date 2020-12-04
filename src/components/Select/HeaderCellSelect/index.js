@@ -57,7 +57,7 @@ const HeaderCellSelect = React.memo(
     return (
       <HeaderCell
         noResize
-        className={cs('th-select', 'th-shrink', className)}
+        className={cs('th-select', 'shrink', className)}
         {...passThrough}
       >
         <Checkbox>{children}</Checkbox>

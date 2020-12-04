@@ -3,16 +3,15 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cs from 'classnames';
 
-import { CellContainer } from '@shared';
-import { ThemeContext, SelectContext } from '@context';
+import { Cell } from '@table';
+import { SelectContext } from '@context';
 
 const Checkbox = styled.input`
   cursor: pointer;
 `;
 
 const CellSelect = React.memo(
-  ({ item, className, indentation, children }) => {
-    const theme = React.useContext(ThemeContext);
+  ({ item, className, children, ...passThrough }) => {
     const { selectState, onSelectById } = React.useContext(
       SelectContext
     );
@@ -24,27 +23,23 @@ const CellSelect = React.memo(
     };
 
     return (
-      <CellContainer
-        role="gridcell"
-        className={cs('td', 'cell-select', 'th-shrink', className)}
-        css={theme?.CellSelect}
-        indentation={indentation}
+      <Cell
+        className={cs('td-select', 'shrink', className)}
+        {...passThrough}
       >
-        <div>
-          {children ? (
-            React.cloneElement(children, {
-              checked: isSelected,
-              onChange: handleChange
-            })
-          ) : (
-            <Checkbox
-              type="checkbox"
-              checked={isSelected}
-              onChange={handleChange}
-            />
-          )}
-        </div>
-      </CellContainer>
+        {children ? (
+          React.cloneElement(children, {
+            checked: isSelected,
+            onChange: handleChange
+          })
+        ) : (
+          <Checkbox
+            type="checkbox"
+            checked={isSelected}
+            onChange={handleChange}
+          />
+        )}
+      </Cell>
     );
   }
 );
@@ -52,7 +47,6 @@ const CellSelect = React.memo(
 CellSelect.propTypes = {
   item: PropTypes.shape(PropTypes.any),
   className: PropTypes.string,
-  indentation: PropTypes.number,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

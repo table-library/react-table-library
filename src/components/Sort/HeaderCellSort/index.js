@@ -131,9 +131,7 @@ HeaderCellSort.propTypes = {
     iconUp: PropTypes.node,
     iconDown: PropTypes.node
   }),
-  width: PropTypes.string,
   className: PropTypes.string,
-  indentation: PropTypes.number,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
