@@ -3,8 +3,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import UnfoldMoreOutlinedIcon from '@material-ui/icons/UnfoldMoreOutlined';
+import KeyboardArrowUpOutlinedIcon from '@material-ui/icons/KeyboardArrowUpOutlined';
+import KeyboardArrowDownOutlinedIcon from '@material-ui/icons/KeyboardArrowDownOutlined';
 
 import {
   Table,
@@ -373,6 +374,83 @@ storiesOf('01. Features/ 05. Sort', module)
       </Table>
     );
   })
+  .add('no sort icon', () => {
+    return (
+      <Table list={list}>
+        {tableList => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSort
+                  sortKey="name"
+                  sortFn={array =>
+                    array.sort((a, b) => a.name.localeCompare(b.name))
+                  }
+                  sortIcon={{
+                    iconDefault: null,
+                    iconUp: null,
+                    iconDown: null
+                  }}
+                >
+                  Name
+                </HeaderCellSort>
+                <HeaderCellSort
+                  sortKey="stars"
+                  sortFn={array =>
+                    array.sort((a, b) => a.stars - b.stars)
+                  }
+                  sortIcon={{
+                    iconDefault: null,
+                    iconUp: null,
+                    iconDown: null
+                  }}
+                >
+                  Stars
+                </HeaderCellSort>
+                <HeaderCellSort
+                  sortKey="light"
+                  sortFn={array =>
+                    array.sort((a, b) => a.light - b.light)
+                  }
+                  sortIcon={{
+                    iconDefault: null,
+                    iconUp: null,
+                    iconDown: null
+                  }}
+                >
+                  Light
+                </HeaderCellSort>
+                <HeaderCellSort
+                  sortKey="count"
+                  sortFn={array =>
+                    array.sort((a, b) => a.count - b.count)
+                  }
+                  sortIcon={{
+                    iconDefault: null,
+                    iconUp: null,
+                    iconDown: null
+                  }}
+                >
+                  Count
+                </HeaderCellSort>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <Row item={item} key={item.id}>
+                  <Cell>{item.name}</Cell>
+                  <Cell>{item.stars}</Cell>
+                  <Cell>{item.light.toString()}</Cell>
+                  <Cell>{item.count}</Cell>
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
   .add('custom sort icon (Material UI)', () => {
     return (
       <Table list={list}>
@@ -387,10 +465,14 @@ storiesOf('01. Features/ 05. Sort', module)
                   }
                   sortIcon={{
                     margin: '0px',
-                    iconDefault: null,
-                    iconUp: <KeyboardArrowUpIcon fontSize="small" />,
+                    iconDefault: (
+                      <UnfoldMoreOutlinedIcon fontSize="small" />
+                    ),
+                    iconUp: (
+                      <KeyboardArrowUpOutlinedIcon fontSize="small" />
+                    ),
                     iconDown: (
-                      <KeyboardArrowDownIcon fontSize="small" />
+                      <KeyboardArrowDownOutlinedIcon fontSize="small" />
                     )
                   }}
                 >
@@ -403,10 +485,14 @@ storiesOf('01. Features/ 05. Sort', module)
                   }
                   sortIcon={{
                     margin: '0px',
-                    iconDefault: null,
-                    iconUp: <KeyboardArrowUpIcon fontSize="small" />,
+                    iconDefault: (
+                      <UnfoldMoreOutlinedIcon fontSize="small" />
+                    ),
+                    iconUp: (
+                      <KeyboardArrowUpOutlinedIcon fontSize="small" />
+                    ),
                     iconDown: (
-                      <KeyboardArrowDownIcon fontSize="small" />
+                      <KeyboardArrowDownOutlinedIcon fontSize="small" />
                     )
                   }}
                 >
@@ -419,10 +505,14 @@ storiesOf('01. Features/ 05. Sort', module)
                   }
                   sortIcon={{
                     margin: '0px',
-                    iconDefault: null,
-                    iconUp: <KeyboardArrowUpIcon fontSize="small" />,
+                    iconDefault: (
+                      <UnfoldMoreOutlinedIcon fontSize="small" />
+                    ),
+                    iconUp: (
+                      <KeyboardArrowUpOutlinedIcon fontSize="small" />
+                    ),
                     iconDown: (
-                      <KeyboardArrowDownIcon fontSize="small" />
+                      <KeyboardArrowDownOutlinedIcon fontSize="small" />
                     )
                   }}
                 >
@@ -435,10 +525,14 @@ storiesOf('01. Features/ 05. Sort', module)
                   }
                   sortIcon={{
                     margin: '0px',
-                    iconDefault: null,
-                    iconUp: <KeyboardArrowUpIcon fontSize="small" />,
+                    iconDefault: (
+                      <UnfoldMoreOutlinedIcon fontSize="small" />
+                    ),
+                    iconUp: (
+                      <KeyboardArrowUpOutlinedIcon fontSize="small" />
+                    ),
                     iconDown: (
-                      <KeyboardArrowDownIcon fontSize="small" />
+                      <KeyboardArrowDownOutlinedIcon fontSize="small" />
                     )
                   }}
                 >

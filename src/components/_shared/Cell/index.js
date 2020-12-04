@@ -46,6 +46,11 @@ const CellContainer = styled(CellContainerBase)``;
 
 const HeaderCellContainer = styled(CellContainerBase)`
   position: relative;
+
+  svg,
+  path {
+    fill: currentColor;
+  }
 `;
 
 export { CellContainerBase, CellContainer, HeaderCellContainer };

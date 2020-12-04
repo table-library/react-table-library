@@ -7,9 +7,9 @@ import IconChevronSingleDown from '@icons/IconChevronSingleDown';
 import IconChevronSingleUp from '@icons/IconChevronSingleUp';
 import IconChevronSingleUpDown from '@icons/IconChevronSingleUpDown';
 import { getIcon } from '@util/getIcon';
-import { Button, CellContainer } from '@shared';
-import * as COLORS from '@colors';
-import { ThemeContext, SortContext } from '@context';
+import { Button } from '@shared';
+import { SortContext } from '@context';
+import { HeaderCell } from '@table';
 
 const SORT_ICON_POSITIONS = {
   Prefix: 'Prefix',
@@ -49,14 +49,6 @@ const getSortIcon = (
     : null;
 };
 
-const HeaderCellSortContainer = styled(CellContainer)`
-  svg,
-  path {
-    stroke: ${COLORS.FONT_PRIMARY};
-    fill: ${COLORS.FONT_PRIMARY};
-  }
-`;
-
 const SortButton = styled(Button)`
   &.active {
     font-weight: bold;
@@ -68,12 +60,10 @@ const HeaderCellSort = React.memo(
     sortKey,
     sortFn,
     sortIcon = {},
-    width,
     className,
-    indentation,
-    children
+    children,
+    ...passThrough
   }) => {
-    const theme = React.useContext(ThemeContext);
     const { sortState, onSort } = React.useContext(SortContext);
 
     const sortIconPosition =
@@ -106,29 +96,24 @@ const HeaderCellSort = React.memo(
     );
 
     return (
-      <HeaderCellSortContainer
-        role="columnheader"
-        className={cs(className, 'th', 'header-cell-sort')}
-        css={theme?.HeaderCellSort}
-        width={width}
-        indentation={indentation}
+      <HeaderCell
+        className={cs('th-sort', className)}
+        {...passThrough}
       >
-        <div>
-          <SortButton
-            className={cs({
-              active: sortState.key === sortKey,
-              prefix,
-              suffix
-            })}
-            margin={sortIconMargin}
-            onClick={() => onSort({ fn: sortFn, key: sortKey })}
-          >
-            {prefix && icon && <span>{icon}</span>}
-            <div title={children}>{children}</div>
-            {suffix && icon && <span>{icon}</span>}
-          </SortButton>
-        </div>
-      </HeaderCellSortContainer>
+        <SortButton
+          className={cs({
+            active: sortState.key === sortKey,
+            prefix,
+            suffix
+          })}
+          margin={sortIconMargin}
+          onClick={() => onSort({ fn: sortFn, key: sortKey })}
+        >
+          {prefix && icon && <span>{icon}</span>}
+          <div title={children}>{children}</div>
+          {suffix && icon && <span>{icon}</span>}
+        </SortButton>
+      </HeaderCell>
     );
   }
 );
