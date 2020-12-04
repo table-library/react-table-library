@@ -137,11 +137,11 @@ const list = [
   }
 ];
 
-storiesOf('01. Features/05. Tree', module)
+storiesOf('01. Features/07. Tree', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table layout={['25%', '25%', '25%', '25%']} resize list={list}>
+      <Table list={list}>
         {tableList => (
           <>
             <Header>
@@ -176,7 +176,7 @@ storiesOf('01. Features/05. Tree', module)
   })
   .add('icon', () => {
     return (
-      <Table layout={['25%', '25%', '25%', '25%']} resize list={list}>
+      <Table list={list}>
         {tableList => (
           <>
             <Header>
@@ -213,7 +213,7 @@ storiesOf('01. Features/05. Tree', module)
   })
   .add('expand on icon', () => {
     return (
-      <Table layout={['25%', '25%', '25%', '25%']} resize list={list}>
+      <Table list={list}>
         {tableList => (
           <>
             <Header>
@@ -258,12 +258,7 @@ storiesOf('01. Features/05. Tree', module)
     };
 
     return (
-      <Table
-        layout={['25%', '25%', '25%', '25%']}
-        resize
-        list={list}
-        defaultTree={defaultTree}
-      >
+      <Table list={list} defaultTree={defaultTree}>
         {tableList => (
           <>
             <Header>
@@ -298,9 +293,9 @@ storiesOf('01. Features/05. Tree', module)
       </Table>
     );
   })
-  .add('zoom on double click', () => {
+  .add('zoom on double click (WIP)', () => {
     return (
-      <Table layout={['25%', '25%', '25%', '25%']} resize list={list}>
+      <Table list={list}>
         {tableList => (
           <>
             <Header>
@@ -343,7 +338,7 @@ storiesOf('01. Features/05. Tree', module)
   })
   .add('tree icon size', () => {
     return (
-      <Table layout={['25%', '25%', '25%', '25%']} resize list={list}>
+      <Table list={list}>
         {tableList => (
           <>
             <Header>
@@ -386,7 +381,7 @@ storiesOf('01. Features/05. Tree', module)
   })
   .add('custom tree icon (Material UI)', () => {
     return (
-      <Table layout={['25%', '25%', '25%', '25%']} resize list={list}>
+      <Table list={list}>
         {tableList => (
           <>
             <Header>

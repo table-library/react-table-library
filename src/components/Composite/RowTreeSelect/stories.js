@@ -139,7 +139,7 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list} layout={['25%', '25%', '25%', '25%']} resize>
+      <Table list={list}>
         {tableList => (
           <>
             <Header>
@@ -174,11 +174,7 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
   })
   .add('select on checkbox, expand on icon', () => {
     return (
-      <Table
-        list={list}
-        layout={['min-content', '25%', '25%', '25%', '25%']}
-        resize
-      >
+      <Table list={list}>
         {tableList => (
           <>
             <Header>
@@ -225,11 +221,7 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
   })
   .add('select on row, expand on icon', () => {
     return (
-      <Table
-        list={list}
-        layout={['min-content', '25%', '25%', '25%', '25%']}
-        resize
-      >
+      <Table list={list}>
         {tableList => (
           <>
             <Header>
@@ -279,11 +271,7 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
   })
   .add('expand on row, select on checkbox', () => {
     return (
-      <Table
-        list={list}
-        layout={['min-content', '25%', '25%', '25%', '25%']}
-        resize
-      >
+      <Table list={list}>
         {tableList => (
           <>
             <Header>
@@ -330,7 +318,7 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
   })
   .add('only icon: expand on icon, select on row', () => {
     return (
-      <Table list={list} layout={['25%', '25%', '25%', '25%']} resize>
+      <Table list={list}>
         {tableList => (
           <>
             <Header>
@@ -371,11 +359,7 @@ storiesOf('02. Composite/ 01. Tree & Select', module)
   })
   .add('only checkbox: select on checkbox, expand on row', () => {
     return (
-      <Table
-        list={list}
-        layout={['min-content', '25%', '25%', '25%', '25%']}
-        resize
-      >
+      <Table list={list}>
         {tableList => (
           <>
             <Header>

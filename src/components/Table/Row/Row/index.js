@@ -13,6 +13,7 @@ const Row = ({
   item,
   theme: _theme,
   className,
+  rowLayout,
   disabled,
   onClick,
   onDoubleClick,
@@ -24,7 +25,7 @@ const Row = ({
   const ref = React.useRef();
 
   useDoubleClick(ref, onClick, onDoubleClick, item);
-  useRowLayout(ref, '.td', children);
+  useRowLayout(ref, '.td', rowLayout);
 
   return (
     <>
@@ -50,6 +51,7 @@ const Row = ({
 Row.propTypes = {
   item: PropTypes.shape(PropTypes.any),
   theme: PropTypes.arrayOf(PropTypes.any),
+  rowLayout: PropTypes.arrayOf(PropTypes.any),
   className: PropTypes.string,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,

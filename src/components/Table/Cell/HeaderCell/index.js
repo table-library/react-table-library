@@ -14,7 +14,7 @@ const HeaderCell = ({ index, className, indentation, children }) => {
   return (
     <HeaderCellContainer
       role="columnheader"
-      className={cs('th', `column-${index}`, className)}
+      className={cs('th', className)}
       css={theme?.HeaderCell}
       indentation={indentation}
       ref={cellRef}

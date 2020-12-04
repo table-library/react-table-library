@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import {
   TableProvider,
   ThemeProvider,
-  LayoutProvider,
   ResizeProvider,
   SelectProvider,
   TreeProvider,
@@ -24,7 +23,6 @@ const TableContainer = styled.div`
 const Table = ({
   list,
   theme,
-  layout,
   resize,
   defaultSort,
   defaultSelect,
@@ -39,24 +37,22 @@ const Table = ({
   return (
     <TableContainer className="table" role="grid" ref={tableRef}>
       <ThemeProvider theme={theme}>
-        <LayoutProvider layout={layout}>
-          <ResizeProvider resize={resize} tableRef={tableRef}>
-            <TableProvider list={listCopy}>
-              <SelectProvider defaultSelect={defaultSelect}>
-                <TreeProvider defaultTree={defaultTree}>
-                  <SortProvider defaultSort={defaultSort}>
-                    <SortContext.Consumer>
-                      {/* do any list operations (e.g. sort, pagination) here */}
-                      {({ sortState }) =>
-                        children(sortState.fn(listCopy))
-                      }
-                    </SortContext.Consumer>
-                  </SortProvider>
-                </TreeProvider>
-              </SelectProvider>
-            </TableProvider>
-          </ResizeProvider>
-        </LayoutProvider>
+        <ResizeProvider resize={resize} tableRef={tableRef}>
+          <TableProvider list={listCopy}>
+            <SelectProvider defaultSelect={defaultSelect}>
+              <TreeProvider defaultTree={defaultTree}>
+                <SortProvider defaultSort={defaultSort}>
+                  <SortContext.Consumer>
+                    {/* do any list operations (e.g. sort, pagination) here */}
+                    {({ sortState }) =>
+                      children(sortState.fn(listCopy))
+                    }
+                  </SortContext.Consumer>
+                </SortProvider>
+              </TreeProvider>
+            </SelectProvider>
+          </TableProvider>
+        </ResizeProvider>
       </ThemeProvider>
     </TableContainer>
   );
@@ -65,7 +61,6 @@ const Table = ({
 Table.propTypes = {
   list: PropTypes.arrayOf(PropTypes.any),
   theme: PropTypes.shape(PropTypes.any),
-  layout: PropTypes.arrayOf(PropTypes.string).isRequired,
   resize: PropTypes.bool,
   defaultSelect: PropTypes.shape({
     ids: PropTypes.arrayOf(PropTypes.string)

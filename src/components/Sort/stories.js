@@ -34,11 +34,11 @@ const list = [
   }
 ];
 
-storiesOf('01. Features/ 03. Sort', module)
+storiesOf('01. Features/ 05. Sort', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list} layout={['25%', '25%', '25%', '25%']} resize>
+      <Table list={list}>
         {tableList => (
           <>
             <Header>
@@ -101,12 +101,7 @@ storiesOf('01. Features/ 03. Sort', module)
     };
 
     return (
-      <Table
-        list={list}
-        defaultSort={defaultSort}
-        layout={['25%', '25%', '25%', '25%']}
-        resize
-      >
+      <Table list={list} defaultSort={defaultSort}>
         {tableList => (
           <>
             <Header>
@@ -163,7 +158,7 @@ storiesOf('01. Features/ 03. Sort', module)
   })
   .add('sort icon size ', () => {
     return (
-      <Table list={list} layout={['25%', '25%', '25%', '25%']} resize>
+      <Table list={list}>
         {tableList => (
           <>
             <Header>
@@ -232,7 +227,7 @@ storiesOf('01. Features/ 03. Sort', module)
   })
   .add('sort icon position ', () => {
     return (
-      <Table list={list} layout={['25%', '25%', '25%', '25%']} resize>
+      <Table list={list}>
         {tableList => (
           <>
             <Header>
@@ -305,7 +300,7 @@ storiesOf('01. Features/ 03. Sort', module)
   })
   .add('indentation ', () => {
     return (
-      <Table list={list} layout={['25%', '25%', '25%', '25%']} resize>
+      <Table list={list}>
         {tableList => (
           <>
             <Header>
@@ -380,7 +375,7 @@ storiesOf('01. Features/ 03. Sort', module)
   })
   .add('custom sort icon (Material UI)', () => {
     return (
-      <Table list={list} layout={['25%', '25%', '25%', '25%']} resize>
+      <Table list={list}>
         {tableList => (
           <>
             <Header>

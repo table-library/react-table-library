@@ -1,29 +1,45 @@
 import * as React from 'react';
 
-import { LayoutContext, ResizeContext } from '@context';
+import { ResizeContext } from '@context';
 
-export const useRowLayout = (ref, selector, children) => {
-  // const { layout } = React.useContext(LayoutContext);
-  const { resizedWidths } = React.useContext(ResizeContext);
+export const useRowLayout = (ref, selector, rowLayout) => {
+  const { resizedLayout } = React.useContext(ResizeContext);
 
   React.useLayoutEffect(() => {
-    console.log(resizedWidths);
+    const allCells = Array.from(
+      ref.current.querySelectorAll(selector)
+    );
 
-    const cells = ref.current.querySelectorAll(selector);
+    const shrinkCells = Array.from(
+      ref.current.querySelectorAll(`${selector}.shrink`)
+    );
 
-    cells.forEach((cell, index) => {
-      if (resizedWidths?.current?.[index]) {
-        cell.style.width = resizedWidths.current[index];
+    const shrinkCellsWidth = shrinkCells.reduce(
+      (acc, element) => acc + element.getBoundingClientRect().width,
+      0
+    );
+
+    const normalCells = Array.from(
+      ref.current.querySelectorAll(`${selector}:not(.shrink)`)
+    );
+
+    allCells.forEach((cell, index) => {
+      if (resizedLayout.current?.[index]) {
+        cell.style.width = resizedLayout.current[index];
+      } else if (rowLayout) {
+        if (typeof rowLayout[index] === 'string') {
+          cell.style.width = rowLayout[index];
+        } else {
+          cell.style[rowLayout[index].key] = rowLayout[index].value;
+        }
+      } else if (shrinkCells.includes(cell)) {
+        cell.style.width = `${cell.getBoundingClientRect().width}px`;
       } else {
-        cell.style.width = `${100 / cells.length}%`;
+        const percentage = 100 / normalCells.length;
+        const diff = shrinkCellsWidth / normalCells.length;
+
+        cell.style.width = `calc(${percentage}% - ${diff}px)`;
       }
     });
-
-    // const columns = resizedWidths.current
-    //   ? resizedWidths.current
-    //   : layout;
-    // ref.current.style.display = 'grid';
-    // ref.current.style['grid-template-columns'] = columns.join(' ');
-    // }, [layout, ref, resizedWidths]);
-  }, [ref, resizedWidths, selector]);
+  }, [ref, resizedLayout, rowLayout, selector]);
 };

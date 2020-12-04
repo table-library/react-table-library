@@ -23,9 +23,8 @@ const RowTreeSelect = React.memo(
     onSelectById,
     selectType,
     className,
-    disabled,
-    onDoubleClick,
-    children
+    children,
+    ...passThrough
   }) => {
     const {
       theme: rowSelectTheme,
@@ -52,13 +51,13 @@ const RowTreeSelect = React.memo(
       isTreeExpanded,
       onTreeExpandById,
       treeType,
+      className,
+      children,
+      RecursiveComponent: RowTreeSelect,
       composites: {
         selectType
       },
-      className,
-      children,
-      onDoubleClick,
-      RecursiveComponent: RowTreeSelect
+      ...passThrough
     });
 
     const handleClick = event => {
@@ -74,10 +73,9 @@ const RowTreeSelect = React.memo(
           ${rowSelectTheme}
         `}
         className={cs(rowTreeClassName, rowSelectClassName)}
-        disabled={disabled}
         onClick={handleClick}
-        onDoubleClick={onDoubleClick}
         panel={treePanel}
+        {...passThrough}
       >
         {children(item)}
       </Row>

@@ -32,11 +32,11 @@ const list = [
   }
 ];
 
-storiesOf('01. Features/04. Select', module)
+storiesOf('01. Features/06. Select', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list} layout={['25%', '25%', '25%', '25%']} resize>
+      <Table list={list}>
         {tableList => (
           <>
             <Header>
@@ -73,12 +73,7 @@ storiesOf('01. Features/04. Select', module)
     };
 
     return (
-      <Table
-        list={list}
-        layout={['25%', '25%', '25%', '25%']}
-        resize
-        defaultSelect={defaultSelect}
-      >
+      <Table list={list} defaultSelect={defaultSelect}>
         {tableList => (
           <>
             <Header>
@@ -111,11 +106,7 @@ storiesOf('01. Features/04. Select', module)
   })
   .add('checkbox', () => {
     return (
-      <Table
-        list={list}
-        layout={['min-content', '25%', '25%', '25%', '25%']}
-        resize
-      >
+      <Table list={list}>
         {tableList => (
           <>
             <Header>
@@ -150,11 +141,7 @@ storiesOf('01. Features/04. Select', module)
   })
   .add('select on checkbox ', () => {
     return (
-      <Table
-        list={list}
-        layout={['min-content', '25%', '25%', '25%', '25%']}
-        resize
-      >
+      <Table list={list}>
         {tableList => (
           <>
             <Header>
@@ -195,11 +182,7 @@ storiesOf('01. Features/04. Select', module)
   })
   .add('custom checkbox (Material UI)', () => {
     return (
-      <Table
-        list={list}
-        layout={['min-content', '25%', '25%', '25%', '25%']}
-        resize
-      >
+      <Table list={list}>
         {tableList => (
           <>
             <Header>

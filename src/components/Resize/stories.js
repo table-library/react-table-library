@@ -29,11 +29,11 @@ const list = [
   }
 ];
 
-storiesOf('01. Features/ 06. Resize', module)
+storiesOf('01. Features/ 04. Resize', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list} layout={['25%', '25%', '25%', '25%']} resize>
+      <Table list={list} resize>
         {tableList => (
           <>
             <Header>

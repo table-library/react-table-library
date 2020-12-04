@@ -13,11 +13,11 @@ export const Resizer = styled.span`
 `;
 
 export const useResize = columnIndex => {
-  const { resize, resizedWidths, tableRef } = React.useContext(
+  const { resize, resizedLayout, tableRef } = React.useContext(
     ResizeContext
   );
 
-  const MIN_RESIZE_WIDTH = 50;
+  const MIN_RESIZE_WIDTH = 75;
 
   const cellRef = React.useRef();
   const resizeRef = React.useRef();
@@ -96,10 +96,10 @@ export const useResize = columnIndex => {
           )
         );
 
-        resizedWidths.current = newColumnWidths;
+        resizedLayout.current = newColumnWidths;
       }
     },
-    [columnIndex, resizedWidths, tableRef]
+    [columnIndex, resizedLayout, tableRef]
   );
 
   const onMouseUp = React.useCallback(() => {

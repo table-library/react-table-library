@@ -16,14 +16,13 @@ const useRowTree = ({
   isTreeExpanded,
   onTreeExpandById,
   treeType = TREE_TYPES.RowTreeClick,
-  // e.g. select
-  composites,
-  // common
   className,
-  onDoubleClick,
   children,
   // eslint-disable-next-line no-use-before-define
-  RecursiveComponent = RowTree
+  RecursiveComponent = RowTree,
+  // e.g. select
+  composites,
+  ...passThrough
 }) => {
   const rowTreeTheme = css`
     &.treeable-row {
@@ -49,11 +48,6 @@ const useRowTree = ({
     }
   };
 
-  const passThroughProps = {
-    className,
-    onDoubleClick
-  };
-
   const childNodes =
     isTreeExpanded &&
     hasLeaves(item) &&
@@ -66,7 +60,7 @@ const useRowTree = ({
           treeDepthLevel={treeDepthLevel + 1}
           treeType={treeType}
           {...composites}
-          {...passThroughProps}
+          {...passThrough}
         >
           {recursiveNode => children(recursiveNode)}
         </RecursiveComponent>
@@ -91,9 +85,8 @@ const RowTree = React.memo(
     onTreeExpandById,
     treeType,
     className,
-    disabled,
-    onDoubleClick,
-    children
+    children,
+    ...passThrough
   }) => {
     const {
       theme: rowTreeTheme,
@@ -109,8 +102,8 @@ const RowTree = React.memo(
       onTreeExpandById,
       treeType,
       className,
-      onDoubleClick,
-      children
+      children,
+      ...passThrough
     });
 
     return (
@@ -119,9 +112,8 @@ const RowTree = React.memo(
         theme={rowTreeTheme}
         className={rowTreeClassName}
         onClick={handleClick}
-        onDoubleClick={onDoubleClick}
-        disabled={disabled}
         panel={panel}
+        {...passThrough}
       >
         {children(item)}
       </Row>

@@ -33,7 +33,7 @@ storiesOf('01. Features/ 01. Table', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list} layout={['25%', '25%', '25%', '25%']} resize>
+      <Table list={list}>
         {tableList => (
           <>
             <Header>

@@ -16,10 +16,13 @@ const useRowSelect = ({
   className
 }) => {
   const rowSelectTheme = css`
+    background-color: ${COLORS.BACKGROUND};
+
     &.selected-row {
       color: ${COLORS.FONT_PRIMARY};
-      background-color: ${COLORS.ROW_SELECTED};
       font-weight: bold;
+
+      background-color: ${COLORS.ROW_SELECTED};
     }
 
     &.selectable-row {
@@ -55,9 +58,8 @@ const RowSelect = React.memo(
     onSelectById,
     selectType,
     className,
-    disabled,
-    onDoubleClick,
-    children
+    children,
+    ...passThrough
   }) => {
     const {
       theme: rowSelectTheme,
@@ -77,8 +79,7 @@ const RowSelect = React.memo(
         theme={rowSelectTheme}
         className={rowSelectClassName}
         onClick={handleClick}
-        onDoubleClick={onDoubleClick}
-        disabled={disabled}
+        {...passThrough}
       >
         {children(item)}
       </Row>
