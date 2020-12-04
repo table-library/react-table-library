@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 import React from 'react';
@@ -32,5 +33,48 @@ const list = [
 storiesOf('01. Features/ 11. Column Ordering', module)
   .addParameters({ component: Table })
   .add('default', () => {
-    return <>WIP</>;
+    const [columns, setColumns] = React.useState([
+      { label: 'Name', get: v => v.name },
+      { label: 'Stars', get: v => v.stars },
+      { label: 'Light', get: v => v.light.toString() },
+      { label: 'Count', get: v => v.count }
+    ]);
+
+    const handleOrder = () => {
+      setColumns([...columns].sort(() => 0.5 - Math.random()));
+    };
+
+    return (
+      <>
+        <button type="button" onClick={handleOrder}>
+          Shuffle
+        </button>
+
+        <Table list={list}>
+          {tableList => (
+            <>
+              <Header>
+                <HeaderRow>
+                  {columns.map((column, index) => (
+                    <HeaderCell key={index}>
+                      {column.label}
+                    </HeaderCell>
+                  ))}
+                </HeaderRow>
+              </Header>
+
+              <Body>
+                {tableList.map(item => (
+                  <Row key={item.id} item={item}>
+                    {columns.map((column, index) => (
+                      <Cell key={index}>{column.get(item)}</Cell>
+                    ))}
+                  </Row>
+                ))}
+              </Body>
+            </>
+          )}
+        </Table>
+      </>
+    );
   });
