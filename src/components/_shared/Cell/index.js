@@ -42,7 +42,12 @@ const CellContainerBase = styled.div`
   ${({ css }) => css};
 `;
 
-const CellContainer = styled(CellContainerBase)``;
+const CellContainer = styled(CellContainerBase)`
+  ${() => {
+    /* #1 otherwise tree + resize would have overflow icons */
+  }}
+  background-color: inherit;
+`;
 
 const HeaderCellContainer = styled(CellContainerBase)`
   position: relative;

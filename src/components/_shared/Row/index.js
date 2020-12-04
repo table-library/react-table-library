@@ -16,6 +16,11 @@ const RowContainer = styled(RowContainerBase)`
     z-index: 2;
   }
 
+  ${() => {
+    /* #1 */
+  }}
+  background-color: ${COLORS.BACKGROUND};
+
   font-size: 18px;
   color: ${COLORS.FONT_SECONDARY};
 
