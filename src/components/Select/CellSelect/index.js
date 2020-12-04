@@ -1,14 +1,10 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import cs from 'classnames';
 
 import { Cell } from '@table';
 import { SelectContext } from '@context';
-
-const Checkbox = styled.input`
-  cursor: pointer;
-`;
+import { Checkbox } from '@shared/Checkbox';
 
 const CellSelect = React.memo(
   ({ item, className, children, ...passThrough }) => {

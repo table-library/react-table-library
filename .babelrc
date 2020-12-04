@@ -9,8 +9,8 @@
         "alias": {
           "@util": "./src/util",
           "@colors": "./src/constants/colors",
-          "@icons": "./src/components/Icons",
           "@shared": "./src/components/_shared",
+          "@icons": "./src/components/_shared/Icons",
           "@context": "./src/components/Context",
           "@table": "./src/components/Table",
           "@theme": "./src/components/Theme",

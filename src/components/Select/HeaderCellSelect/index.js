@@ -5,8 +5,9 @@ import cs from 'classnames';
 import { isFunction } from '@util/isFunction';
 import { SelectContext } from '@context';
 import { HeaderCell } from '@table';
+import { Checkbox } from '@shared/Checkbox';
 
-const Checkbox = ({ children }) => {
+const ImperativeCheckbox = ({ children }) => {
   const select = React.useContext(SelectContext);
   const { selectState, onSelectAll } = React.useContext(
     SelectContext
@@ -41,10 +42,12 @@ const Checkbox = ({ children }) => {
     });
   }
 
-  return <input ref={ref} type="checkbox" onChange={onSelectAll} />;
+  return (
+    <Checkbox ref={ref} type="checkbox" onChange={onSelectAll} />
+  );
 };
 
-Checkbox.propTypes = {
+ImperativeCheckbox.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
@@ -60,7 +63,7 @@ const HeaderCellSelect = React.memo(
         className={cs('th-select', 'shrink', className)}
         {...passThrough}
       >
-        <Checkbox>{children}</Checkbox>
+        <ImperativeCheckbox>{children}</ImperativeCheckbox>
       </HeaderCell>
     );
   }
