@@ -38,8 +38,8 @@ const Row = ({
         `}
         ref={ref}
       >
-        {React.Children.map(children, (child, index) =>
-          React.cloneElement(child, { index })
+        {React.Children.map(children, child =>
+          React.cloneElement(child)
         )}
       </RowContainer>
 
