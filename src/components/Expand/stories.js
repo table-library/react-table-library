@@ -29,9 +29,36 @@ const list = [
   }
 ];
 
+const Content = ({ item }) => (
+  <div>
+    <div>
+      <strong>Name:</strong> {item.name}
+    </div>
+    <div>
+      <strong>Stars:</strong> {item.stars}
+    </div>
+    <div>
+      <strong>Light:</strong> {item.light.toString()}
+    </div>
+    <div>
+      <strong>Count:</strong> {item.count}
+    </div>
+  </div>
+);
+
 storiesOf('01. Features/ 10. Expand Row', module)
   .addParameters({ component: Table })
   .add('default', () => {
+    const [expandedRows, setExpandedRows] = React.useState([]);
+
+    const handleExpandRow = id => {
+      if (expandedRows.includes(id)) {
+        setExpandedRows(expandedRows.filter(value => value !== id));
+      } else {
+        setExpandedRows(expandedRows.concat(id));
+      }
+    };
+
     return (
       <Table list={list}>
         {tableList => (
@@ -47,7 +74,16 @@ storiesOf('01. Features/ 10. Expand Row', module)
 
             <Body>
               {tableList.map(item => (
-                <Row key={item.id} item={item}>
+                <Row
+                  key={item.id}
+                  item={item}
+                  onClick={() => handleExpandRow(item.id)}
+                  expansion={
+                    expandedRows.includes(item.id) && (
+                      <Content item={item} />
+                    )
+                  }
+                >
                   <Cell>{item.name}</Cell>
                   <Cell>{item.stars}</Cell>
                   <Cell>{item.light.toString()}</Cell>

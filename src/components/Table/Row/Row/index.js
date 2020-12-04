@@ -31,7 +31,10 @@ const Row = ({
     <>
       <RowContainer
         role="row"
-        className={cs('tr', className, { disabled })}
+        className={cs('tr', className, {
+          disabled,
+          clickable: onClick || onDoubleClick
+        })}
         css={css`
           ${_theme}
           ${theme?.Row}

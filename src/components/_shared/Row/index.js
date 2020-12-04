@@ -32,6 +32,10 @@ const RowContainer = styled(RowContainerBase)`
     color: ${COLORS.FONT_DISABLED};
   }
 
+  &.clickable {
+    cursor: pointer;
+  }
+
   ${({ css }) => css};
 `;
 
