@@ -15,7 +15,7 @@ const useTreeRow = ({
   treeColumnLevel = 1,
   isTreeExpanded,
   onTreeExpandById,
-  treeType = TREE_EXPAND_TYPES.RowClick,
+  treeExpandType = TREE_EXPAND_TYPES.RowClick,
   children,
   ...passThrough
 }) => {
@@ -30,7 +30,7 @@ const useTreeRow = ({
   `;
 
   const className = cs('row-tree', {
-    'treeable-row': treeType === TREE_EXPAND_TYPES.RowClick
+    'treeable-row': treeExpandType === TREE_EXPAND_TYPES.RowClick
   });
 
   const onClick = (tableItem, event) => {
@@ -38,7 +38,7 @@ const useTreeRow = ({
 
     if (isLeaf(tableItem)) return;
 
-    if (treeType === TREE_EXPAND_TYPES.RowClick) {
+    if (treeExpandType === TREE_EXPAND_TYPES.RowClick) {
       onTreeExpandById(tableItem.id);
     }
   };
@@ -53,7 +53,7 @@ const useTreeRow = ({
           item={node}
           treeColumnLevel={treeColumnLevel}
           treeDepthLevel={treeDepthLevel + 1}
-          treeType={treeType}
+          treeExpandType={treeExpandType}
           {...passThrough}
         >
           {recursiveNode => children(recursiveNode)}

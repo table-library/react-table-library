@@ -239,7 +239,7 @@ storiesOf('01. Features/09. Tree', module)
                     {
                       plugin: useTreeRow,
                       options: {
-                        treeType: TREE_EXPAND_TYPES.ButtonClick
+                        treeExpandType: TREE_EXPAND_TYPES.ButtonClick
                       }
                     }
                   ]}

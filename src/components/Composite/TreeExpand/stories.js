@@ -188,7 +188,7 @@ storiesOf('02. Composites/ 04. Tree & Expand', module)
                     {
                       plugin: useTreeRow,
                       options: {
-                        treeType: TREE_EXPAND_TYPES.ButtonClick
+                        treeExpandType: TREE_EXPAND_TYPES.ButtonClick
                       }
                     }
                   ]}
