@@ -7,6 +7,7 @@ import { ThemeProvider } from '@context/Theme';
 import { ResizeProvider } from '@context/Resize';
 import { SelectProvider } from '@context/Select';
 import { TreeProvider } from '@context/Tree';
+import { ExpandProvider } from '@context/Expand';
 import { SortProvider, SortContext } from '@context/Sort';
 
 const TableContainer = styled.div`
@@ -24,6 +25,7 @@ const Table = ({
   defaultSort,
   defaultSelect,
   defaultTree,
+  defaultExpand,
   children
 }) => {
   // otherwise we would mutate the outer list (e.g. sort)
@@ -38,14 +40,16 @@ const Table = ({
           <TableProvider list={listCopy}>
             <SelectProvider defaultSelect={defaultSelect}>
               <TreeProvider defaultTree={defaultTree}>
-                <SortProvider defaultSort={defaultSort}>
-                  <SortContext.Consumer>
-                    {/* do any list operations (e.g. sort, pagination) here */}
-                    {({ sortState }) =>
-                      children(sortState.fn(listCopy))
-                    }
-                  </SortContext.Consumer>
-                </SortProvider>
+                <ExpandProvider defaultExpand={defaultExpand}>
+                  <SortProvider defaultSort={defaultSort}>
+                    <SortContext.Consumer>
+                      {/* do any list operations (e.g. sort, pagination) here */}
+                      {({ sortState }) =>
+                        children(sortState.fn(listCopy))
+                      }
+                    </SortContext.Consumer>
+                  </SortProvider>
+                </ExpandProvider>
               </TreeProvider>
             </SelectProvider>
           </TableProvider>
@@ -63,6 +67,9 @@ Table.propTypes = {
     ids: PropTypes.arrayOf(PropTypes.string)
   }),
   defaultTree: PropTypes.shape({
+    ids: PropTypes.arrayOf(PropTypes.string)
+  }),
+  defaultExpand: PropTypes.shape({
     ids: PropTypes.arrayOf(PropTypes.string)
   }),
   defaultSort: PropTypes.shape({

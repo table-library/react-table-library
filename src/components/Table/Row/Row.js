@@ -74,7 +74,8 @@ const Row = props => {
     classNameByPlugins,
     onClickByPlugins,
     // specificsByPlugins
-    recursiveTree
+    tree,
+    expand
     // eslint-disable-next-line react/destructuring-assignment
   } = evaluatePlugins(props.plugins || [], props);
 
@@ -84,7 +85,6 @@ const Row = props => {
     rowLayout,
     disabled,
     onDoubleClick,
-    expansion,
     children
   } = props;
 
@@ -110,9 +110,9 @@ const Row = props => {
         {children(item)}
       </RowContainer>
 
-      {expansion && expansion(item)}
+      {expand?.expansionPanel && expand?.expansionPanel(item)}
 
-      {recursiveTree}
+      {tree?.recursiveTree}
     </>
   );
 };
@@ -124,11 +124,6 @@ Row.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   onDoubleClick: PropTypes.func,
-  expansion: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-    PropTypes.func
-  ]),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

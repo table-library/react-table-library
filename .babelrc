@@ -18,7 +18,8 @@
           "@sort": "./src/components/Sort",
           "@select": "./src/components/Select",
           "@tree": "./src/components/Tree",
-          "@resize": "./src/components/Resize"
+          "@resize": "./src/components/Resize",
+          "@expand": "./src/components/Expand"
         }
       }
     ],

@@ -177,7 +177,7 @@ storiesOf('01. Features/09. Tree', module)
       </Table>
     );
   })
-  .add('icon', () => {
+  .add('tree icon', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -216,7 +216,7 @@ storiesOf('01. Features/09. Tree', module)
       </Table>
     );
   })
-  .add('expand on icon', () => {
+  .add('expand tree on tree icon click', () => {
     return (
       <Table list={list}>
         {tableList => (

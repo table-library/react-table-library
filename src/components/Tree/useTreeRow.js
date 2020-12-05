@@ -20,7 +20,7 @@ const useTreeRow = ({
   ...passThrough
 }) => {
   const theme = css`
-    &.treeable-row {
+    &.tree-expandable-row {
       cursor: pointer;
     }
 
@@ -30,7 +30,9 @@ const useTreeRow = ({
   `;
 
   const className = cs('row-tree', {
-    'treeable-row': treeExpandType === TREE_EXPAND_TYPES.RowClick
+    'tree-expandable-row':
+      treeExpandType === TREE_EXPAND_TYPES.RowClick,
+    'expanded-tree-row': isTreeExpanded
   });
 
   const onClick = (tableItem, event) => {
@@ -65,8 +67,9 @@ const useTreeRow = ({
     theme,
     className,
     onClick,
-    // tree specific
-    recursiveTree
+    tree: {
+      recursiveTree
+    }
   };
 };
 

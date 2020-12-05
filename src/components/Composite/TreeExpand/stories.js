@@ -15,6 +15,13 @@ import {
 
 import { CellTree, useTreeRow, TREE_EXPAND_TYPES } from '@tree';
 
+import {
+  HeaderCellExpand,
+  CellExpand,
+  useExpandRow,
+  EXPAND_TYPES
+} from '@expand';
+
 const list = [
   {
     id: '1',
@@ -137,7 +144,7 @@ const list = [
 storiesOf('02. Composites/ 04. Tree & Expand', module)
   .addParameters({ component: Table })
   .add('default', () => {
-    const Content = ({ item }) => (
+    const ExpansionPanel = ({ item }) => (
       <div>
         <div>
           <strong>Name:</strong> {item.name}
@@ -153,16 +160,6 @@ storiesOf('02. Composites/ 04. Tree & Expand', module)
         </div>
       </div>
     );
-
-    const [expandedRows, setExpandedRows] = React.useState([]);
-
-    const handleExpandRow = id => {
-      if (expandedRows.includes(id)) {
-        setExpandedRows(expandedRows.filter(value => value !== id));
-      } else {
-        setExpandedRows(expandedRows.concat(id));
-      }
-    };
 
     return (
       <Table list={list}>
@@ -184,18 +181,17 @@ storiesOf('02. Composites/ 04. Tree & Expand', module)
                   item={item}
                   plugins={[
                     {
-                      plugin: useTreeRow,
+                      plugin: useTreeRow
+                    },
+                    {
+                      plugin: useExpandRow,
                       options: {
-                        treeExpandType: TREE_EXPAND_TYPES.ButtonClick
+                        expansionPanel: tableItem => (
+                          <ExpansionPanel item={tableItem} />
+                        )
                       }
                     }
                   ]}
-                  onClick={tableItem => handleExpandRow(tableItem.id)}
-                  expansion={tableItem =>
-                    expandedRows.includes(tableItem.id) && (
-                      <Content item={tableItem} />
-                    )
-                  }
                 >
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
@@ -214,4 +210,390 @@ storiesOf('02. Composites/ 04. Tree & Expand', module)
         )}
       </Table>
     );
-  });
+  })
+  .add(
+    'expand row on expand icon click, expand tree on tree icon click',
+    () => {
+      const ExpansionPanel = ({ item }) => (
+        <div>
+          <div>
+            <strong>Name:</strong> {item.name}
+          </div>
+          <div>
+            <strong>Stars:</strong> {item.stars}
+          </div>
+          <div>
+            <strong>Light:</strong> {item.light.toString()}
+          </div>
+          <div>
+            <strong>Count:</strong> {item.count}
+          </div>
+        </div>
+      );
+
+      return (
+        <Table list={list}>
+          {tableList => (
+            <>
+              <Header>
+                <HeaderRow>
+                  <HeaderCellExpand />
+                  <HeaderCell>Name</HeaderCell>
+                  <HeaderCell>Stars</HeaderCell>
+                  <HeaderCell>Light</HeaderCell>
+                  <HeaderCell>Count</HeaderCell>
+                </HeaderRow>
+              </Header>
+
+              <Body>
+                {tableList.map(item => (
+                  <Row
+                    key={item.id}
+                    item={item}
+                    plugins={[
+                      {
+                        plugin: useTreeRow,
+                        options: {
+                          treeExpandType:
+                            TREE_EXPAND_TYPES.ButtonClick,
+                          treeColumnLevel: 2
+                        }
+                      },
+                      {
+                        plugin: useExpandRow,
+                        options: {
+                          expandType: EXPAND_TYPES.ButtonClick,
+                          expansionPanel: tableItem => (
+                            <ExpansionPanel item={tableItem} />
+                          )
+                        }
+                      }
+                    ]}
+                  >
+                    {tableItem => (
+                      <React.Fragment key={tableItem.id}>
+                        <CellExpand item={tableItem} />
+                        <CellTree item={tableItem}>
+                          {tableItem.name}
+                        </CellTree>
+                        <Cell>{tableItem.stars}</Cell>
+                        <Cell>{tableItem.light.toString()}</Cell>
+                        <Cell>{tableItem.count}</Cell>
+                      </React.Fragment>
+                    )}
+                  </Row>
+                ))}
+              </Body>
+            </>
+          )}
+        </Table>
+      );
+    }
+  )
+  .add(
+    'expand row on row click, expand tree on tree icon click',
+    () => {
+      const ExpansionPanel = ({ item }) => (
+        <div>
+          <div>
+            <strong>Name:</strong> {item.name}
+          </div>
+          <div>
+            <strong>Stars:</strong> {item.stars}
+          </div>
+          <div>
+            <strong>Light:</strong> {item.light.toString()}
+          </div>
+          <div>
+            <strong>Count:</strong> {item.count}
+          </div>
+        </div>
+      );
+
+      return (
+        <Table list={list}>
+          {tableList => (
+            <>
+              <Header>
+                <HeaderRow>
+                  <HeaderCellExpand />
+                  <HeaderCell>Name</HeaderCell>
+                  <HeaderCell>Stars</HeaderCell>
+                  <HeaderCell>Light</HeaderCell>
+                  <HeaderCell>Count</HeaderCell>
+                </HeaderRow>
+              </Header>
+
+              <Body>
+                {tableList.map(item => (
+                  <Row
+                    key={item.id}
+                    item={item}
+                    plugins={[
+                      {
+                        plugin: useTreeRow,
+                        options: {
+                          treeExpandType:
+                            TREE_EXPAND_TYPES.ButtonClick,
+                          treeColumnLevel: 2
+                        }
+                      },
+                      {
+                        plugin: useExpandRow,
+                        options: {
+                          expandType: EXPAND_TYPES.RowClick,
+                          expansionPanel: tableItem => (
+                            <ExpansionPanel item={tableItem} />
+                          )
+                        }
+                      }
+                    ]}
+                  >
+                    {tableItem => (
+                      <React.Fragment key={tableItem.id}>
+                        <CellExpand item={tableItem} />
+                        <CellTree item={tableItem}>
+                          {tableItem.name}
+                        </CellTree>
+                        <Cell>{tableItem.stars}</Cell>
+                        <Cell>{tableItem.light.toString()}</Cell>
+                        <Cell>{tableItem.count}</Cell>
+                      </React.Fragment>
+                    )}
+                  </Row>
+                ))}
+              </Body>
+            </>
+          )}
+        </Table>
+      );
+    }
+  )
+  .add(
+    'expand tree on row click, expand row on expand icon click',
+    () => {
+      const ExpansionPanel = ({ item }) => (
+        <div>
+          <div>
+            <strong>Name:</strong> {item.name}
+          </div>
+          <div>
+            <strong>Stars:</strong> {item.stars}
+          </div>
+          <div>
+            <strong>Light:</strong> {item.light.toString()}
+          </div>
+          <div>
+            <strong>Count:</strong> {item.count}
+          </div>
+        </div>
+      );
+
+      return (
+        <Table list={list}>
+          {tableList => (
+            <>
+              <Header>
+                <HeaderRow>
+                  <HeaderCellExpand />
+                  <HeaderCell>Name</HeaderCell>
+                  <HeaderCell>Stars</HeaderCell>
+                  <HeaderCell>Light</HeaderCell>
+                  <HeaderCell>Count</HeaderCell>
+                </HeaderRow>
+              </Header>
+
+              <Body>
+                {tableList.map(item => (
+                  <Row
+                    key={item.id}
+                    item={item}
+                    plugins={[
+                      {
+                        plugin: useTreeRow,
+                        options: {
+                          treeExpandType: TREE_EXPAND_TYPES.RowClick,
+                          treeColumnLevel: 2
+                        }
+                      },
+                      {
+                        plugin: useExpandRow,
+                        options: {
+                          expandType: EXPAND_TYPES.ButtonClick,
+                          expansionPanel: tableItem => (
+                            <ExpansionPanel item={tableItem} />
+                          )
+                        }
+                      }
+                    ]}
+                  >
+                    {tableItem => (
+                      <React.Fragment key={tableItem.id}>
+                        <CellExpand item={tableItem} />
+                        <CellTree item={tableItem}>
+                          {tableItem.name}
+                        </CellTree>
+                        <Cell>{tableItem.stars}</Cell>
+                        <Cell>{tableItem.light.toString()}</Cell>
+                        <Cell>{tableItem.count}</Cell>
+                      </React.Fragment>
+                    )}
+                  </Row>
+                ))}
+              </Body>
+            </>
+          )}
+        </Table>
+      );
+    }
+  )
+  .add(
+    'only tree icon: expand tree on tree icon click, expand row on row click',
+    () => {
+      const ExpansionPanel = ({ item }) => (
+        <div>
+          <div>
+            <strong>Name:</strong> {item.name}
+          </div>
+          <div>
+            <strong>Stars:</strong> {item.stars}
+          </div>
+          <div>
+            <strong>Light:</strong> {item.light.toString()}
+          </div>
+          <div>
+            <strong>Count:</strong> {item.count}
+          </div>
+        </div>
+      );
+
+      return (
+        <Table list={list}>
+          {tableList => (
+            <>
+              <Header>
+                <HeaderRow>
+                  <HeaderCell>Name</HeaderCell>
+                  <HeaderCell>Stars</HeaderCell>
+                  <HeaderCell>Light</HeaderCell>
+                  <HeaderCell>Count</HeaderCell>
+                </HeaderRow>
+              </Header>
+
+              <Body>
+                {tableList.map(item => (
+                  <Row
+                    key={item.id}
+                    item={item}
+                    plugins={[
+                      {
+                        plugin: useTreeRow,
+                        options: {
+                          treeExpandType:
+                            TREE_EXPAND_TYPES.ButtonClick
+                        }
+                      },
+                      {
+                        plugin: useExpandRow,
+                        options: {
+                          expansionPanel: tableItem => (
+                            <ExpansionPanel item={tableItem} />
+                          )
+                        }
+                      }
+                    ]}
+                  >
+                    {tableItem => (
+                      <React.Fragment key={tableItem.id}>
+                        <CellTree item={tableItem}>
+                          {tableItem.name}
+                        </CellTree>
+                        <Cell>{tableItem.stars}</Cell>
+                        <Cell>{tableItem.light.toString()}</Cell>
+                        <Cell>{tableItem.count}</Cell>
+                      </React.Fragment>
+                    )}
+                  </Row>
+                ))}
+              </Body>
+            </>
+          )}
+        </Table>
+      );
+    }
+  )
+  .add(
+    'only checkbox: expand row on expand icon click, expand tree on row click',
+    () => {
+      const ExpansionPanel = ({ item }) => (
+        <div>
+          <div>
+            <strong>Name:</strong> {item.name}
+          </div>
+          <div>
+            <strong>Stars:</strong> {item.stars}
+          </div>
+          <div>
+            <strong>Light:</strong> {item.light.toString()}
+          </div>
+          <div>
+            <strong>Count:</strong> {item.count}
+          </div>
+        </div>
+      );
+
+      return (
+        <Table list={list}>
+          {tableList => (
+            <>
+              <Header>
+                <HeaderRow>
+                  <HeaderCellExpand />
+                  <HeaderCell>Name</HeaderCell>
+                  <HeaderCell>Stars</HeaderCell>
+                  <HeaderCell>Light</HeaderCell>
+                  <HeaderCell>Count</HeaderCell>
+                </HeaderRow>
+              </Header>
+
+              <Body>
+                {tableList.map(item => (
+                  <Row
+                    key={item.id}
+                    item={item}
+                    plugins={[
+                      {
+                        plugin: useTreeRow,
+                        options: {
+                          treeColumnLevel: 2
+                        }
+                      },
+                      {
+                        plugin: useExpandRow,
+                        options: {
+                          expandType: EXPAND_TYPES.ButtonClick,
+                          expansionPanel: tableItem => (
+                            <ExpansionPanel item={tableItem} />
+                          )
+                        }
+                      }
+                    ]}
+                  >
+                    {tableItem => (
+                      <React.Fragment key={tableItem.id}>
+                        <CellExpand item={tableItem} />
+                        <Cell>{tableItem.name}</Cell>
+                        <Cell>{tableItem.stars}</Cell>
+                        <Cell>{tableItem.light.toString()}</Cell>
+                        <Cell>{tableItem.count}</Cell>
+                      </React.Fragment>
+                    )}
+                  </Row>
+                ))}
+              </Body>
+            </>
+          )}
+        </Table>
+      );
+    }
+  );

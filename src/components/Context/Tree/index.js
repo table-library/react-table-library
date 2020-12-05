@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const TREE_EXPAND_BY_ID = 'TREE_EXPAND_BY_ID';
 
-const selectReducer = (state, action) => {
+const treeReducer = (state, action) => {
   switch (action.type) {
     case TREE_EXPAND_BY_ID: {
       const ids = state.ids.includes(action.payload.id)
@@ -24,7 +24,7 @@ const DEFAULT_TREE = {
 
 const TreeProvider = ({ defaultTree = DEFAULT_TREE, children }) => {
   const [treeState, treeStateDispatcher] = React.useReducer(
-    selectReducer,
+    treeReducer,
     defaultTree
   );
 

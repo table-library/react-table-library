@@ -39,7 +39,7 @@ const list = [
 storiesOf('02. Composites/ 05. Select & Expand', module)
   .addParameters({ component: Table })
   .add('default', () => {
-    const Content = ({ item }) => (
+    const ExpansionPanel = ({ item }) => (
       <div>
         <div>
           <strong>Name:</strong> {item.name}
@@ -96,7 +96,7 @@ storiesOf('02. Composites/ 05. Select & Expand', module)
                   onClick={tableItem => handleExpandRow(tableItem.id)}
                   expansion={tableItem =>
                     expandedRows.includes(tableItem.id) && (
-                      <Content item={tableItem} />
+                      <ExpansionPanel item={tableItem} />
                     )
                   }
                 >

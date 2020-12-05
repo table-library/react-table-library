@@ -4,3 +4,4 @@ export * from './Sort';
 export * from './Select';
 export * from './Tree';
 export * from './Resize';
+export * from './Expand';

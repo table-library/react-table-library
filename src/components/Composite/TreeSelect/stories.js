@@ -182,7 +182,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
       </Table>
     );
   })
-  .add('select on checkbox, expand on icon', () => {
+  .add('select on checkbox, expand tree on tree icon click', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -237,7 +237,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
       </Table>
     );
   })
-  .add('select on row, expand on icon', () => {
+  .add('select on row click, expand tree on tree icon click', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -292,7 +292,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
       </Table>
     );
   })
-  .add('expand on row, select on checkbox', () => {
+  .add('expand tree on row click, select on checkbox', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -347,104 +347,111 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
       </Table>
     );
   })
-  .add('only icon: expand on icon, select on row', () => {
-    return (
-      <Table list={list}>
-        {tableList => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCell>Name</HeaderCell>
-                <HeaderCell>Stars</HeaderCell>
-                <HeaderCell>Light</HeaderCell>
-                <HeaderCell>Count</HeaderCell>
-              </HeaderRow>
-            </Header>
+  .add(
+    'only tree icon: expand tree on tree icon click, select on row click',
+    () => {
+      return (
+        <Table list={list}>
+          {tableList => (
+            <>
+              <Header>
+                <HeaderRow>
+                  <HeaderCell>Name</HeaderCell>
+                  <HeaderCell>Stars</HeaderCell>
+                  <HeaderCell>Light</HeaderCell>
+                  <HeaderCell>Count</HeaderCell>
+                </HeaderRow>
+              </Header>
 
-            <Body>
-              {tableList.map(item => (
-                <Row
-                  key={item.id}
-                  item={item}
-                  plugins={[
-                    {
-                      plugin: useTreeRow,
-                      options: {
-                        treeExpandType: TREE_EXPAND_TYPES.ButtonClick
+              <Body>
+                {tableList.map(item => (
+                  <Row
+                    key={item.id}
+                    item={item}
+                    plugins={[
+                      {
+                        plugin: useTreeRow,
+                        options: {
+                          treeExpandType:
+                            TREE_EXPAND_TYPES.ButtonClick
+                        }
+                      },
+                      {
+                        plugin: useSelectRow
                       }
-                    },
-                    {
-                      plugin: useSelectRow
-                    }
-                  ]}
-                >
-                  {tableItem => (
-                    <React.Fragment key={tableItem.id}>
-                      <CellTree item={tableItem}>
-                        {tableItem.name}
-                      </CellTree>
-                      <Cell>{tableItem.stars}</Cell>
-                      <Cell>{tableItem.light.toString()}</Cell>
-                      <Cell>{tableItem.count}</Cell>
-                    </React.Fragment>
-                  )}
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
-    );
-  })
-  .add('only checkbox: select on checkbox, expand on row', () => {
-    return (
-      <Table list={list}>
-        {tableList => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCellSelect />
-                <HeaderCell>Name</HeaderCell>
-                <HeaderCell>Stars</HeaderCell>
-                <HeaderCell>Light</HeaderCell>
-                <HeaderCell>Count</HeaderCell>
-              </HeaderRow>
-            </Header>
+                    ]}
+                  >
+                    {tableItem => (
+                      <React.Fragment key={tableItem.id}>
+                        <CellTree item={tableItem}>
+                          {tableItem.name}
+                        </CellTree>
+                        <Cell>{tableItem.stars}</Cell>
+                        <Cell>{tableItem.light.toString()}</Cell>
+                        <Cell>{tableItem.count}</Cell>
+                      </React.Fragment>
+                    )}
+                  </Row>
+                ))}
+              </Body>
+            </>
+          )}
+        </Table>
+      );
+    }
+  )
+  .add(
+    'only checkbox: select on checkbox, expand tree on row click',
+    () => {
+      return (
+        <Table list={list}>
+          {tableList => (
+            <>
+              <Header>
+                <HeaderRow>
+                  <HeaderCellSelect />
+                  <HeaderCell>Name</HeaderCell>
+                  <HeaderCell>Stars</HeaderCell>
+                  <HeaderCell>Light</HeaderCell>
+                  <HeaderCell>Count</HeaderCell>
+                </HeaderRow>
+              </Header>
 
-            <Body>
-              {tableList.map(item => (
-                <Row
-                  key={item.id}
-                  item={item}
-                  plugins={[
-                    {
-                      plugin: useTreeRow,
-                      options: {
-                        treeColumnLevel: 2
+              <Body>
+                {tableList.map(item => (
+                  <Row
+                    key={item.id}
+                    item={item}
+                    plugins={[
+                      {
+                        plugin: useTreeRow,
+                        options: {
+                          treeColumnLevel: 2
+                        }
+                      },
+                      {
+                        plugin: useSelectRow,
+                        options: {
+                          selectType: SELECT_TYPES.ButtonClick
+                        }
                       }
-                    },
-                    {
-                      plugin: useSelectRow,
-                      options: {
-                        selectType: SELECT_TYPES.ButtonClick
-                      }
-                    }
-                  ]}
-                >
-                  {tableItem => (
-                    <React.Fragment key={tableItem.id}>
-                      <CellSelect item={tableItem} />
-                      <Cell>{tableItem.name}</Cell>
-                      <Cell>{tableItem.stars}</Cell>
-                      <Cell>{tableItem.light.toString()}</Cell>
-                      <Cell>{tableItem.count}</Cell>
-                    </React.Fragment>
-                  )}
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
-    );
-  });
+                    ]}
+                  >
+                    {tableItem => (
+                      <React.Fragment key={tableItem.id}>
+                        <CellSelect item={tableItem} />
+                        <Cell>{tableItem.name}</Cell>
+                        <Cell>{tableItem.stars}</Cell>
+                        <Cell>{tableItem.light.toString()}</Cell>
+                        <Cell>{tableItem.count}</Cell>
+                      </React.Fragment>
+                    )}
+                  </Row>
+                ))}
+              </Body>
+            </>
+          )}
+        </Table>
+      );
+    }
+  );

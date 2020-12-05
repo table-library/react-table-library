@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { ThemeContext } from '@context/Theme';
 import { SelectContext } from '@context/Select';
 import { TreeContext } from '@context/Tree';
+import { ExpandContext } from '@context/Expand';
 
 const BodyContainer = styled.div`
   ${({ css }) => css};
@@ -24,10 +25,16 @@ const getTreeProps = (child, { treeState, onTreeExpandById }) => ({
   onTreeExpandById
 });
 
+const getExpandProps = (child, { expandState, onExpandById }) => ({
+  isExpanded: expandState.ids.includes(child.props.item.id),
+  onExpandById
+});
+
 const Body = ({ children }) => {
   const theme = React.useContext(ThemeContext);
   const select = React.useContext(SelectContext);
   const tree = React.useContext(TreeContext);
+  const expand = React.useContext(ExpandContext);
 
   return (
     <BodyContainer
@@ -39,7 +46,8 @@ const Body = ({ children }) => {
         React.cloneElement(child, {
           ...getCommonProps(child),
           ...getSelectProps(child, select),
-          ...getTreeProps(child, tree)
+          ...getTreeProps(child, tree),
+          ...getExpandProps(child, expand)
         })
       )}
     </BodyContainer>
