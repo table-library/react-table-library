@@ -164,8 +164,6 @@ storiesOf('02. Composites/ 04. Tree & Expand', module)
       }
     };
 
-    console.log(expandedRows);
-
     return (
       <Table list={list}>
         {tableList => (

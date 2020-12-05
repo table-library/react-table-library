@@ -236,53 +236,6 @@ storiesOf('01. Features/ 01. Table', module)
     );
   });
 
-// .add('03. with select', () => {
-//   return (
-//     <Table list={list}>
-//       {(tableList, selectedTableIdList) => (
-//         <>
-//           <Header>
-//             <HeaderRow>
-//               <HeaderCell width={WIDTHS.Checkbox} noIndent />
-//               <HeaderCell  >Name</HeaderCell>
-//               <HeaderCell   >
-//                 Stars
-//               </HeaderCell>
-//               <HeaderCell   >
-//                 Light
-//               </HeaderCell>
-//               <HeaderCell  >Count</HeaderCell>
-//             </HeaderRow>
-//           </Header>
-
-//           <Body>
-//             {tableList.map(item => (
-//               <Row selectableId={item.id} key={item.id}>
-//                 <SelectCell width={WIDTHS.Checkbox} noIndent />
-//                 <Cell  >{item.name}</Cell>
-//                 <Cell   >
-//                   {item.stars}
-//                 </Cell>
-//                 <Cell   >
-//                   <Checkbox
-//                     asAtom
-//                     selection={
-//                       item.light
-//                         ? Checkbox.SELECTION.selected
-//                         : Checkbox.SELECTION.unselected
-//                     }
-//                     onChange={() => {}}
-//                   />
-//                 </Cell>
-//                 <Cell  >{item.count}</Cell>
-//               </Row>
-//             ))}
-//           </Body>
-//         <>
-//       )}
-//     </Table>
-//   );
-// })
 // .add('04. with sort/select', () => {
 //   return (
 //     <Table list={list}>
@@ -352,51 +305,7 @@ storiesOf('01. Features/ 01. Table', module)
 //     </Table>
 //   );
 // })
-// .add('05. with onClick', () => {
-//   return (
-//     <Table list={list}>
-//       {tableList => (
-//         <>
-//           <Header>
-//             <HeaderRow>
-//               <HeaderCell  >Name</HeaderCell>
-//               <HeaderCell   >
-//                 Stars
-//               </HeaderCell>
-//               <HeaderCell   >
-//                 Light
-//               </HeaderCell>
-//               <HeaderCell  >Count</HeaderCell>
-//             </HeaderRow>
-//           </Header>
 
-//           <Body>
-//             {tableList.map(item => (
-//               <Row key={item.id} onClick={event => console.log(event)}>
-//                 <Cell  >{item.name}</Cell>
-//                 <Cell   >
-//                   {item.stars}
-//                 </Cell>
-//                 <Cell   >
-//                   <Checkbox
-//                     asAtom
-//                     selection={
-//                       item.light
-//                         ? Checkbox.SELECTION.selected
-//                         : Checkbox.SELECTION.unselected
-//                     }
-//                     onChange={() => {}}
-//                   />
-//                 </Cell>
-//                 <Cell  >{item.count}</Cell>
-//               </Row>
-//             ))}
-//           </Body>
-//         <>
-//       )}
-//     </Table>
-//   );
-// })
 // .add('06. with fixed header', () => {
 //   return (
 //     <div style={{ height: text('container height', '300px') }}>
