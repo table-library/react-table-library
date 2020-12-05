@@ -66,9 +66,15 @@ storiesOf('01. Features/ 12. Column Ordering', module)
               <Body>
                 {tableList.map(item => (
                   <Row key={item.id} item={item}>
-                    {columns.map((column, index) => (
-                      <Cell key={index}>{column.get(item)}</Cell>
-                    ))}
+                    {tableItem => (
+                      <React.Fragment key={tableItem.id}>
+                        {columns.map((column, index) => (
+                          <Cell key={index}>
+                            {column.get(tableItem)}
+                          </Cell>
+                        ))}
+                      </React.Fragment>
+                    )}
                   </Row>
                 ))}
               </Body>

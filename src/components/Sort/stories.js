@@ -82,10 +82,14 @@ storiesOf('01. Features/ 05. Sort', module)
             <Body>
               {tableList.map(item => (
                 <Row item={item} key={item.id}>
-                  <Cell>{item.name}</Cell>
-                  <Cell>{item.stars}</Cell>
-                  <Cell>{item.light.toString()}</Cell>
-                  <Cell>{item.count}</Cell>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
                 </Row>
               ))}
             </Body>
@@ -145,10 +149,14 @@ storiesOf('01. Features/ 05. Sort', module)
             <Body>
               {tableList.map(item => (
                 <Row item={item} key={item.id}>
-                  <Cell>{item.name}</Cell>
-                  <Cell>{item.stars}</Cell>
-                  <Cell>{item.light.toString()}</Cell>
-                  <Cell>{item.count}</Cell>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
                 </Row>
               ))}
             </Body>
@@ -214,10 +222,14 @@ storiesOf('01. Features/ 05. Sort', module)
             <Body>
               {tableList.map(item => (
                 <Row item={item} key={item.id}>
-                  <Cell>{item.name}</Cell>
-                  <Cell>{item.stars}</Cell>
-                  <Cell>{item.light.toString()}</Cell>
-                  <Cell>{item.count}</Cell>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
                 </Row>
               ))}
             </Body>
@@ -287,10 +299,14 @@ storiesOf('01. Features/ 05. Sort', module)
             <Body>
               {tableList.map(item => (
                 <Row item={item} key={item.id}>
-                  <Cell>{item.name}</Cell>
-                  <Cell>{item.stars}</Cell>
-                  <Cell>{item.light.toString()}</Cell>
-                  <Cell>{item.count}</Cell>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
                 </Row>
               ))}
             </Body>
@@ -360,12 +376,16 @@ storiesOf('01. Features/ 05. Sort', module)
             <Body>
               {tableList.map(item => (
                 <Row item={item} key={item.id}>
-                  <Cell indentation={18}>{item.name}</Cell>
-                  <Cell indentation={18}>{item.stars}</Cell>
-                  <Cell indentation={18}>
-                    {item.light.toString()}
-                  </Cell>
-                  <Cell indentation={18}>{item.count}</Cell>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <Cell indentation={18}>{tableItem.name}</Cell>
+                      <Cell indentation={18}>{tableItem.stars}</Cell>
+                      <Cell indentation={18}>
+                        {tableItem.light.toString()}
+                      </Cell>
+                      <Cell indentation={18}>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
                 </Row>
               ))}
             </Body>
@@ -439,10 +459,14 @@ storiesOf('01. Features/ 05. Sort', module)
             <Body>
               {tableList.map(item => (
                 <Row item={item} key={item.id}>
-                  <Cell>{item.name}</Cell>
-                  <Cell>{item.stars}</Cell>
-                  <Cell>{item.light.toString()}</Cell>
-                  <Cell>{item.count}</Cell>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
                 </Row>
               ))}
             </Body>
@@ -544,10 +568,14 @@ storiesOf('01. Features/ 05. Sort', module)
             <Body>
               {tableList.map(item => (
                 <Row item={item} key={item.id}>
-                  <Cell>{item.name}</Cell>
-                  <Cell>{item.stars}</Cell>
-                  <Cell>{item.light.toString()}</Cell>
-                  <Cell>{item.count}</Cell>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
                 </Row>
               ))}
             </Body>

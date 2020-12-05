@@ -10,11 +10,17 @@ import {
   Header,
   HeaderRow,
   Body,
+  Row,
   HeaderCell,
   Cell
 } from '@table';
 
-import { RowSelect, HeaderCellSelect, CellSelect } from '@select';
+import {
+  HeaderCellSelect,
+  CellSelect,
+  useSelectRow,
+  SELECT_TYPES
+} from '@select';
 
 const list = [
   { id: '1', name: 'Hello', stars: 24, count: 42, light: true },
@@ -50,7 +56,11 @@ storiesOf('01. Features/06. Select', module)
 
             <Body>
               {tableList.map(item => (
-                <RowSelect item={item} key={item.id}>
+                <Row
+                  item={item}
+                  key={item.id}
+                  plugins={[{ plugin: useSelectRow }]}
+                >
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
@@ -59,7 +69,7 @@ storiesOf('01. Features/06. Select', module)
                       <Cell>{tableItem.count}</Cell>
                     </React.Fragment>
                   )}
-                </RowSelect>
+                </Row>
               ))}
             </Body>
           </>
@@ -87,7 +97,11 @@ storiesOf('01. Features/06. Select', module)
 
             <Body>
               {tableList.map(item => (
-                <RowSelect item={item} key={item.id}>
+                <Row
+                  item={item}
+                  key={item.id}
+                  plugins={[{ plugin: useSelectRow }]}
+                >
                   {tableItem => (
                     <>
                       <Cell>{tableItem.name}</Cell>
@@ -96,7 +110,7 @@ storiesOf('01. Features/06. Select', module)
                       <Cell>{tableItem.count}</Cell>
                     </>
                   )}
-                </RowSelect>
+                </Row>
               ))}
             </Body>
           </>
@@ -121,7 +135,11 @@ storiesOf('01. Features/06. Select', module)
 
             <Body>
               {tableList.map(item => (
-                <RowSelect key={item.id} item={item}>
+                <Row
+                  key={item.id}
+                  item={item}
+                  plugins={[{ plugin: useSelectRow }]}
+                >
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <CellSelect item={tableItem} />
@@ -131,7 +149,7 @@ storiesOf('01. Features/06. Select', module)
                       <Cell>{tableItem.count}</Cell>
                     </React.Fragment>
                   )}
-                </RowSelect>
+                </Row>
               ))}
             </Body>
           </>
@@ -156,12 +174,17 @@ storiesOf('01. Features/06. Select', module)
 
             <Body>
               {tableList.map(item => (
-                <RowSelect
+                <Row
                   key={item.id}
                   item={item}
-                  selectType={
-                    RowSelect.SELECT_TYPES.ButtonSelectClick
-                  }
+                  plugins={[
+                    {
+                      plugin: useSelectRow,
+                      options: {
+                        selectType: SELECT_TYPES.ButtonClick
+                      }
+                    }
+                  ]}
                 >
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
@@ -172,7 +195,7 @@ storiesOf('01. Features/06. Select', module)
                       <Cell>{tableItem.count}</Cell>
                     </React.Fragment>
                   )}
-                </RowSelect>
+                </Row>
               ))}
             </Body>
           </>
@@ -209,7 +232,11 @@ storiesOf('01. Features/06. Select', module)
 
             <Body>
               {tableList.map(item => (
-                <RowSelect key={item.id} item={item}>
+                <Row
+                  key={item.id}
+                  item={item}
+                  plugins={[{ plugin: useSelectRow }]}
+                >
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <CellSelect item={tableItem}>
@@ -221,7 +248,7 @@ storiesOf('01. Features/06. Select', module)
                       <Cell>{tableItem.count}</Cell>
                     </React.Fragment>
                   )}
-                </RowSelect>
+                </Row>
               ))}
             </Body>
           </>

@@ -124,18 +124,22 @@ storiesOf('01. Features/ 11. Column Hiding', module)
               <Body>
                 {tableList.map(item => (
                   <Row key={item.id} item={item}>
-                    <Cell hide={!columns.includes('name')}>
-                      {item.name}
-                    </Cell>
-                    <Cell hide={!columns.includes('stars')}>
-                      {item.stars}
-                    </Cell>
-                    <Cell hide={!columns.includes('light')}>
-                      {item.light.toString()}
-                    </Cell>
-                    <Cell hide={!columns.includes('count')}>
-                      {item.count}
-                    </Cell>
+                    {tableItem => (
+                      <React.Fragment key={tableItem.id}>
+                        <Cell hide={!columns.includes('name')}>
+                          {tableItem.name}
+                        </Cell>
+                        <Cell hide={!columns.includes('stars')}>
+                          {tableItem.stars}
+                        </Cell>
+                        <Cell hide={!columns.includes('light')}>
+                          {tableItem.light.toString()}
+                        </Cell>
+                        <Cell hide={!columns.includes('count')}>
+                          {tableItem.count}
+                        </Cell>
+                      </React.Fragment>
+                    )}
                   </Row>
                 ))}
               </Body>

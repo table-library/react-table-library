@@ -8,11 +8,17 @@ import {
   Header,
   HeaderRow,
   Body,
+  Row,
   HeaderCell,
   Cell
 } from '@table';
 
-import { RowSelect, HeaderCellSelect, CellSelect } from '@select';
+import {
+  HeaderCellSelect,
+  CellSelect,
+  useSelectRow,
+  SELECT_TYPES
+} from '@select';
 
 const list = [
   { id: '1', name: 'Hello', stars: 24, count: 42, light: true },
@@ -76,12 +82,17 @@ storiesOf('02. Composites/ 05. Select & Expand', module)
 
             <Body>
               {tableList.map(item => (
-                <RowSelect
+                <Row
                   key={item.id}
                   item={item}
-                  selectType={
-                    RowSelect.SELECT_TYPES.ButtonSelectClick
-                  }
+                  plugins={[
+                    {
+                      plugin: useSelectRow,
+                      options: {
+                        selectType: SELECT_TYPES.ButtonClick
+                      }
+                    }
+                  ]}
                   onClick={tableItem => handleExpandRow(tableItem.id)}
                   expansion={tableItem =>
                     expandedRows.includes(tableItem.id) && (
@@ -98,7 +109,7 @@ storiesOf('02. Composites/ 05. Select & Expand', module)
                       <Cell>{tableItem.count}</Cell>
                     </React.Fragment>
                   )}
-                </RowSelect>
+                </Row>
               ))}
             </Body>
           </>

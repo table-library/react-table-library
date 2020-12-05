@@ -12,11 +12,12 @@ import {
   Header,
   HeaderRow,
   Body,
+  Row,
   HeaderCell,
   Cell
 } from '@table';
 
-import { RowTree, CellTree } from '@tree';
+import { useTreeRow, CellTree, TREE_EXPAND_TYPES } from '@tree';
 
 const list = [
   {
@@ -155,7 +156,11 @@ storiesOf('01. Features/09. Tree', module)
 
             <Body>
               {tableList.map(item => (
-                <RowTree key={item.id} item={item}>
+                <Row
+                  key={item.id}
+                  item={item}
+                  plugins={[{ plugin: useTreeRow }]}
+                >
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
@@ -164,7 +169,7 @@ storiesOf('01. Features/09. Tree', module)
                       <Cell>{tableItem.count}</Cell>
                     </React.Fragment>
                   )}
-                </RowTree>
+                </Row>
               ))}
             </Body>
           </>
@@ -188,7 +193,11 @@ storiesOf('01. Features/09. Tree', module)
 
             <Body>
               {tableList.map(item => (
-                <RowTree key={item.id} item={item}>
+                <Row
+                  key={item.id}
+                  item={item}
+                  plugins={[{ plugin: useTreeRow }]}
+                >
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <CellTree item={tableItem}>
@@ -199,7 +208,7 @@ storiesOf('01. Features/09. Tree', module)
                       <Cell>{tableItem.count}</Cell>
                     </React.Fragment>
                   )}
-                </RowTree>
+                </Row>
               ))}
             </Body>
           </>
@@ -223,10 +232,17 @@ storiesOf('01. Features/09. Tree', module)
 
             <Body>
               {tableList.map(item => (
-                <RowTree
+                <Row
                   key={item.id}
                   item={item}
-                  treeType={RowTree.TREE_TYPES.ButtonTreeClick}
+                  plugins={[
+                    {
+                      plugin: useTreeRow,
+                      options: {
+                        treeType: TREE_EXPAND_TYPES.ButtonClick
+                      }
+                    }
+                  ]}
                 >
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
@@ -238,7 +254,7 @@ storiesOf('01. Features/09. Tree', module)
                       <Cell>{tableItem.count}</Cell>
                     </React.Fragment>
                   )}
-                </RowTree>
+                </Row>
               ))}
             </Body>
           </>
@@ -266,7 +282,11 @@ storiesOf('01. Features/09. Tree', module)
 
             <Body>
               {tableList.map(item => (
-                <RowTree key={item.id} item={item}>
+                <Row
+                  key={item.id}
+                  item={item}
+                  plugins={[{ plugin: useTreeRow }]}
+                >
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <CellTree item={tableItem}>
@@ -277,7 +297,7 @@ storiesOf('01. Features/09. Tree', module)
                       <Cell>{tableItem.count}</Cell>
                     </React.Fragment>
                   )}
-                </RowTree>
+                </Row>
               ))}
             </Body>
           </>
@@ -301,9 +321,10 @@ storiesOf('01. Features/09. Tree', module)
 
             <Body>
               {tableList.map(item => (
-                <RowTree
+                <Row
                   key={item.id}
                   item={item}
+                  plugins={[{ plugin: useTreeRow }]}
                   onDoubleClick={tableItem => console.log(tableItem)}
                 >
                   {tableItem => (
@@ -316,7 +337,7 @@ storiesOf('01. Features/09. Tree', module)
                       <Cell>{tableItem.count}</Cell>
                     </React.Fragment>
                   )}
-                </RowTree>
+                </Row>
               ))}
             </Body>
           </>
@@ -340,7 +361,11 @@ storiesOf('01. Features/09. Tree', module)
 
             <Body>
               {tableList.map(item => (
-                <RowTree key={item.id} item={item}>
+                <Row
+                  key={item.id}
+                  item={item}
+                  plugins={[{ plugin: useTreeRow }]}
+                >
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <CellTree
@@ -356,7 +381,7 @@ storiesOf('01. Features/09. Tree', module)
                       <Cell>{tableItem.count}</Cell>
                     </React.Fragment>
                   )}
-                </RowTree>
+                </Row>
               ))}
             </Body>
           </>
@@ -380,7 +405,11 @@ storiesOf('01. Features/09. Tree', module)
 
             <Body>
               {tableList.map(item => (
-                <RowTree key={item.id} item={item}>
+                <Row
+                  key={item.id}
+                  item={item}
+                  plugins={[{ plugin: useTreeRow }]}
+                >
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <CellTree
@@ -403,7 +432,7 @@ storiesOf('01. Features/09. Tree', module)
                       <Cell>{tableItem.count}</Cell>
                     </React.Fragment>
                   )}
-                </RowTree>
+                </Row>
               ))}
             </Body>
           </>

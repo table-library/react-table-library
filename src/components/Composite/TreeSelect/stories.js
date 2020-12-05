@@ -8,13 +8,18 @@ import {
   Header,
   HeaderRow,
   Body,
+  Row,
   HeaderCell,
   Cell
 } from '@table';
 
-import { RowTreeSelect } from '@composite/TreeSelect';
-import { RowTree, CellTree } from '@tree';
-import { RowSelect, CellSelect, HeaderCellSelect } from '@select';
+import { CellTree, useTreeRow, TREE_EXPAND_TYPES } from '@tree';
+import {
+  CellSelect,
+  HeaderCellSelect,
+  useSelectRow,
+  SELECT_TYPES
+} from '@select';
 
 const list = [
   {
@@ -153,7 +158,14 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
 
             <Body>
               {tableList.map(item => (
-                <RowTreeSelect key={item.id} item={item}>
+                <Row
+                  key={item.id}
+                  item={item}
+                  plugins={[
+                    { plugin: useTreeRow },
+                    { plugin: useSelectRow }
+                  ]}
+                >
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
@@ -162,7 +174,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
                       <Cell>{tableItem.count}</Cell>
                     </React.Fragment>
                   )}
-                </RowTreeSelect>
+                </Row>
               ))}
             </Body>
           </>
@@ -170,7 +182,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
       </Table>
     );
   })
-  .add('select on checkbox, tree on icon', () => {
+  .add('select on checkbox, expand on icon', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -187,14 +199,24 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
 
             <Body>
               {tableList.map(item => (
-                <RowTreeSelect
+                <Row
                   key={item.id}
                   item={item}
-                  selectType={
-                    RowTreeSelect.SELECT_TYPES.ButtonSelectClick
-                  }
-                  treeType={RowTreeSelect.TREE_TYPES.ButtonTreeClick}
-                  treeColumnLevel={2}
+                  plugins={[
+                    {
+                      plugin: useTreeRow,
+                      options: {
+                        treeType: TREE_EXPAND_TYPES.ButtonClick,
+                        treeColumnLevel: 2
+                      }
+                    },
+                    {
+                      plugin: useSelectRow,
+                      options: {
+                        selectType: SELECT_TYPES.ButtonClick
+                      }
+                    }
+                  ]}
                 >
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
@@ -207,7 +229,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
                       <Cell>{tableItem.count}</Cell>
                     </React.Fragment>
                   )}
-                </RowTreeSelect>
+                </Row>
               ))}
             </Body>
           </>
@@ -215,7 +237,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
       </Table>
     );
   })
-  .add('select on row, tree on icon', () => {
+  .add('select on row, expand on icon', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -232,17 +254,24 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
 
             <Body>
               {tableList.map(item => (
-                <RowTreeSelect
+                <Row
                   key={item.id}
                   item={item}
-                  selectType={
-                    RowTreeSelect.SELECT_TYPES.RowSelectClick
-                  }
-                  treeType={RowTreeSelect.TREE_TYPES.ButtonTreeClick}
-                  treeColumnLevel={2}
-                  onDoubleClick={(_, tableItem) =>
-                    console.log(tableItem)
-                  }
+                  plugins={[
+                    {
+                      plugin: useTreeRow,
+                      options: {
+                        treeType: TREE_EXPAND_TYPES.ButtonClick,
+                        treeColumnLevel: 2
+                      }
+                    },
+                    {
+                      plugin: useSelectRow,
+                      options: {
+                        selectType: SELECT_TYPES.RowClick
+                      }
+                    }
+                  ]}
                 >
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
@@ -255,7 +284,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
                       <Cell>{tableItem.count}</Cell>
                     </React.Fragment>
                   )}
-                </RowTreeSelect>
+                </Row>
               ))}
             </Body>
           </>
@@ -263,7 +292,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
       </Table>
     );
   })
-  .add('tree on row, select on checkbox', () => {
+  .add('expand on row, select on checkbox', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -280,14 +309,24 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
 
             <Body>
               {tableList.map(item => (
-                <RowTreeSelect
+                <Row
                   key={item.id}
                   item={item}
-                  selectType={
-                    RowTreeSelect.SELECT_TYPES.ButtonSelectClick
-                  }
-                  treeType={RowTreeSelect.TREE_TYPES.RowTreeClick}
-                  treeColumnLevel={2}
+                  plugins={[
+                    {
+                      plugin: useTreeRow,
+                      options: {
+                        treeType: TREE_EXPAND_TYPES.RowClick,
+                        treeColumnLevel: 2
+                      }
+                    },
+                    {
+                      plugin: useSelectRow,
+                      options: {
+                        selectType: SELECT_TYPES.ButtonClick
+                      }
+                    }
+                  ]}
                 >
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
@@ -300,7 +339,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
                       <Cell>{tableItem.count}</Cell>
                     </React.Fragment>
                   )}
-                </RowTreeSelect>
+                </Row>
               ))}
             </Body>
           </>
@@ -308,7 +347,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
       </Table>
     );
   })
-  .add('only icon: tree on icon, select on row', () => {
+  .add('only icon: expand on icon, select on row', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -324,10 +363,20 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
 
             <Body>
               {tableList.map(item => (
-                <RowTreeSelect
+                <Row
                   key={item.id}
                   item={item}
-                  treeType={RowTreeSelect.TREE_TYPES.ButtonTreeClick}
+                  plugins={[
+                    {
+                      plugin: useTreeRow,
+                      options: {
+                        treeType: TREE_EXPAND_TYPES.ButtonClick
+                      }
+                    },
+                    {
+                      plugin: useSelectRow
+                    }
+                  ]}
                 >
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
@@ -339,7 +388,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
                       <Cell>{tableItem.count}</Cell>
                     </React.Fragment>
                   )}
-                </RowTreeSelect>
+                </Row>
               ))}
             </Body>
           </>
@@ -347,7 +396,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
       </Table>
     );
   })
-  .add('only checkbox: select on checkbox, tree on row', () => {
+  .add('only checkbox: select on checkbox, expand on row', () => {
     return (
       <Table list={list}>
         {tableList => (
@@ -364,13 +413,23 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
 
             <Body>
               {tableList.map(item => (
-                <RowTreeSelect
+                <Row
                   key={item.id}
                   item={item}
-                  selectType={
-                    RowTreeSelect.SELECT_TYPES.ButtonSelectClick
-                  }
-                  treeColumnLevel={2}
+                  plugins={[
+                    {
+                      plugin: useTreeRow,
+                      options: {
+                        treeColumnLevel: 2
+                      }
+                    },
+                    {
+                      plugin: useSelectRow,
+                      options: {
+                        selectType: SELECT_TYPES.ButtonClick
+                      }
+                    }
+                  ]}
                 >
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
@@ -381,7 +440,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
                       <Cell>{tableItem.count}</Cell>
                     </React.Fragment>
                   )}
-                </RowTreeSelect>
+                </Row>
               ))}
             </Body>
           </>

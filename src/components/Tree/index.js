@@ -1,2 +1,3 @@
-export * from './RowTree';
+export * from './useTreeRow';
 export * from './CellTree';
+export * from './config';

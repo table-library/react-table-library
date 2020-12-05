@@ -48,10 +48,14 @@ storiesOf('01. Features/ 01. Table', module)
             <Body>
               {tableList.map(item => (
                 <Row key={item.id} item={item}>
-                  <Cell>{item.name}</Cell>
-                  <Cell>{item.stars}</Cell>
-                  <Cell>{item.light.toString()}</Cell>
-                  <Cell>{item.count}</Cell>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
                 </Row>
               ))}
             </Body>
@@ -59,6 +63,137 @@ storiesOf('01. Features/ 01. Table', module)
         )}
       </Table>
     );
+  })
+  .add('row click', () => {
+    return (
+      <Table list={list}>
+        {tableList => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <Row
+                  key={item.id}
+                  item={item}
+                  onClick={(tableItem, event) =>
+                    console.log(tableItem, event)
+                  }
+                >
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('row double click', () => {
+    return (
+      <Table list={list}>
+        {tableList => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <Row
+                  key={item.id}
+                  item={item}
+                  onDoubleClick={(tableItem, event) =>
+                    console.log(tableItem, event)
+                  }
+                >
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('row click & row double click', () => {
+    return (
+      <Table list={list}>
+        {tableList => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <Row
+                  key={item.id}
+                  item={item}
+                  onClick={(tableItem, event) => {
+                    console.log('onClick');
+                    console.log(tableItem, event);
+                  }}
+                  onDoubleClick={(tableItem, event) => {
+                    console.log('onDoubleClick');
+                    console.log(tableItem, event);
+                  }}
+                >
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('create WIP', () => {
+    return <div>create item</div>;
+  })
+  .add('delete WIP', () => {
+    return <div>delete item</div>;
+  })
+  .add('update WIP', () => {
+    return <div>update item</div>;
   })
   .add('column mapping (important: key must be index)', () => {
     const columns = [
@@ -83,9 +218,15 @@ storiesOf('01. Features/ 01. Table', module)
             <Body>
               {tableList.map(item => (
                 <Row key={item.id} item={item}>
-                  {columns.map((column, index) => (
-                    <Cell key={index}>{column.get(item)}</Cell>
-                  ))}
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      {columns.map((column, index) => (
+                        <Cell key={index}>
+                          {column.get(tableItem)}
+                        </Cell>
+                      ))}
+                    </React.Fragment>
+                  )}
                 </Row>
               ))}
             </Body>

@@ -48,10 +48,14 @@ storiesOf('01. Features/ 03. Layout', module)
             <Body>
               {tableList.map(item => (
                 <Row key={item.id} item={item}>
-                  <Cell>{item.name}</Cell>
-                  <Cell>{item.stars}</Cell>
-                  <Cell>{item.light.toString()}</Cell>
-                  <Cell>{item.count}</Cell>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
                 </Row>
               ))}
             </Body>
@@ -79,10 +83,14 @@ storiesOf('01. Features/ 03. Layout', module)
             <Body>
               {tableList.map(item => (
                 <Row key={item.id} item={item} rowLayout={rowLayout}>
-                  <Cell>{item.name}</Cell>
-                  <Cell>{item.stars}</Cell>
-                  <Cell>{item.light.toString()}</Cell>
-                  <Cell>{item.count}</Cell>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
                 </Row>
               ))}
             </Body>
@@ -115,10 +123,14 @@ storiesOf('01. Features/ 03. Layout', module)
             <Body>
               {tableList.map(item => (
                 <Row key={item.id} item={item} rowLayout={rowLayout}>
-                  <Cell>{item.name}</Cell>
-                  <Cell>{item.stars}</Cell>
-                  <Cell>{item.light.toString()}</Cell>
-                  <Cell>{item.count}</Cell>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
                 </Row>
               ))}
             </Body>

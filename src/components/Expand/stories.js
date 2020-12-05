@@ -84,10 +84,14 @@ storiesOf('01. Features/ 10. Expand', module)
                     )
                   }
                 >
-                  <Cell>{item.name}</Cell>
-                  <Cell>{item.stars}</Cell>
-                  <Cell>{item.light.toString()}</Cell>
-                  <Cell>{item.count}</Cell>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
                 </Row>
               ))}
             </Body>

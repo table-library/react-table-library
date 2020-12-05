@@ -13,7 +13,7 @@ import {
   Cell
 } from '@table';
 
-import { RowTree, CellTree } from '@tree';
+import { CellTree, useTreeRow, TREE_EXPAND_TYPES } from '@tree';
 
 const list = [
   {
@@ -164,6 +164,8 @@ storiesOf('02. Composites/ 04. Tree & Expand', module)
       }
     };
 
+    console.log(expandedRows);
+
     return (
       <Table list={list}>
         {tableList => (
@@ -179,10 +181,17 @@ storiesOf('02. Composites/ 04. Tree & Expand', module)
 
             <Body>
               {tableList.map(item => (
-                <RowTree
+                <Row
                   key={item.id}
                   item={item}
-                  treeType={RowTree.TREE_TYPES.ButtonTreeClick}
+                  plugins={[
+                    {
+                      plugin: useTreeRow,
+                      options: {
+                        treeType: TREE_EXPAND_TYPES.ButtonClick
+                      }
+                    }
+                  ]}
                   onClick={tableItem => handleExpandRow(tableItem.id)}
                   expansion={tableItem =>
                     expandedRows.includes(tableItem.id) && (
@@ -200,7 +209,7 @@ storiesOf('02. Composites/ 04. Tree & Expand', module)
                       <Cell>{tableItem.count}</Cell>
                     </React.Fragment>
                   )}
-                </RowTree>
+                </Row>
               ))}
             </Body>
           </>

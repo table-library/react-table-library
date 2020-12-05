@@ -5,15 +5,15 @@ import { storiesOf } from '@storybook/react';
 
 storiesOf('04. Server/ 01. Table', module)
   // .addParameters({ component: Table })
-  .add('default', () => {
+  .add('default WIP', () => {
     return <div>dat fetching</div>;
   })
-  .add('create', () => {
+  .add('create WIP', () => {
     return <div>dat fetching</div>;
   })
-  .add('delete', () => {
+  .add('delete WIP', () => {
     return <div>dat fetching</div>;
   })
-  .add('update', () => {
+  .add('update WIP', () => {
     return <div>dat fetching</div>;
   });

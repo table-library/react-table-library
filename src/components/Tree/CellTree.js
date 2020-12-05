@@ -11,7 +11,7 @@ import { CellContainer } from '@shared/Cell';
 import { ThemeContext } from '@context/Theme';
 import { TreeContext } from '@context/Tree';
 
-import { isLeaf } from '../util';
+import { isLeaf } from './util';
 
 const TREE_ICON_SIZE = '14px';
 const TREE_ICON_MARGIN = '4px';

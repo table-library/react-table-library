@@ -5,7 +5,7 @@ import cs from 'classnames';
 import { HeaderRowContainer } from '@shared/Row';
 import { ThemeContext } from '@context/Theme';
 
-import { useRowLayout } from '../useRowLayout';
+import { useRowLayout } from './useRowLayout';
 
 const HeaderRow = ({ className, rowLayout, disabled, children }) => {
   const theme = React.useContext(ThemeContext);
