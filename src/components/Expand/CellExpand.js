@@ -1,41 +1,11 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import cs from 'classnames';
 
-import IconChevronSingleDown from '@icons/IconChevronSingleDown';
-import IconChevronSingleUp from '@icons/IconChevronSingleUp';
-import { getIcon } from '@util/getIcon';
-import { Button } from '@shared/Button';
 import { Cell } from '@table/Cell';
 import { ExpandContext } from '@context/Expand';
 
-const EXPAND_ICON_SIZE = '14px';
-
-const getExpandIcon = (
-  item,
-  expandState,
-  expandIconSize,
-  ExpandIconUp,
-  ExpandIconDown
-) => {
-  const size = {
-    height: `${expandIconSize}`,
-    width: `${expandIconSize}`
-  };
-
-  const isExpanded = expandState.ids.includes(item.id);
-
-  if (isExpanded) {
-    return ExpandIconUp
-      ? React.cloneElement(ExpandIconUp, { ...size })
-      : null;
-  } else {
-    return ExpandIconDown
-      ? React.cloneElement(ExpandIconDown, { ...size })
-      : null;
-  }
-};
+import { ExpandButton } from './ExpandButton';
 
 const CellExpand = React.memo(
   ({
@@ -45,44 +15,23 @@ const CellExpand = React.memo(
     children,
     ...passThrough
   }) => {
-    const { expandState, onExpandById } = React.useContext(
-      ExpandContext
-    );
-
-    const expandIconSize = expandIcon.size || EXPAND_ICON_SIZE;
-    const expandIconRight = getIcon(
-      expandIcon.iconRight,
-      <IconChevronSingleUp />
-    );
-    const expandIconDown = getIcon(
-      expandIcon.iconDown,
-      <IconChevronSingleDown />
-    );
-
-    const handleClick = () => {
-      onExpandById(item.id);
-    };
-
-    const icon = getExpandIcon(
-      item,
-      expandState,
-      expandIconSize,
-      expandIconRight,
-      expandIconDown
-    );
-
-    // TODO custom button
+    const expand = React.useContext(ExpandContext);
+    const isExpanded = expand.expandState.ids.includes(item.id);
+    const handleClick = () => expand.onExpandById(item.id);
 
     return (
       <Cell
         className={cs('cell-expand', 'shrink', className)}
         {...passThrough}
       >
-        {children ? null : (
-          <Button className="narrow" onClick={handleClick}>
-            <span>{icon}</span>
-          </Button>
-        )}
+        <ExpandButton
+          expand={expand}
+          isExpanded={isExpanded}
+          expandIcon={expandIcon}
+          onClick={handleClick}
+        >
+          {children}
+        </ExpandButton>
       </Cell>
     );
   }

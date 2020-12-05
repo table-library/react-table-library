@@ -240,7 +240,17 @@ storiesOf('01. Features/06. Select', module)
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <CellSelect item={tableItem}>
-                        <Checkbox size="small" />
+                        {({ selectState, onSelectById }) => (
+                          <Checkbox
+                            size="small"
+                            checked={selectState.ids.includes(
+                              tableItem.id
+                            )}
+                            onChange={() =>
+                              onSelectById(tableItem.id)
+                            }
+                          />
+                        )}
                       </CellSelect>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>{tableItem.stars}</Cell>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-import { isFunction } from '@util/isFunction';
+import { isRenderProp } from '@util/isRenderProp';
 import { Checkbox } from '@shared/Checkbox';
 
 const ImperativeCheckbox = ({
@@ -11,6 +11,10 @@ const ImperativeCheckbox = ({
   onChange,
   children
 }) => {
+  if (isRenderProp(children)) {
+    return children(select);
+  }
+
   const ref = node => {
     if (!node) return;
 
@@ -26,29 +30,7 @@ const ImperativeCheckbox = ({
     }
   };
 
-  const hasChildren = !!children;
-  const hasRenderProp = hasChildren && isFunction(children);
-
-  if (hasChildren && hasRenderProp) {
-    return children(select);
-  }
-
-  if (hasChildren && !hasRenderProp) {
-    return React.cloneElement(children, {
-      ref,
-      checked,
-      onChange
-    });
-  }
-
-  return (
-    <Checkbox
-      ref={ref}
-      type="checkbox"
-      checked={checked}
-      onChange={onChange}
-    />
-  );
+  return <Checkbox ref={ref} type="checkbox" onChange={onChange} />;
 };
 
 ImperativeCheckbox.propTypes = {
