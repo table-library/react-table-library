@@ -1,75 +1,97 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import cs from 'classnames';
 
-import { isFunction } from '@util/isFunction';
-import { Checkbox } from '@shared/Checkbox';
-import { SelectContext } from '@context/Select';
-import { HeaderCell } from '@table/Cell';
+import IconChevronSingleDown from '@icons/IconChevronSingleDown';
+import IconChevronSingleUp from '@icons/IconChevronSingleUp';
+import { getIcon } from '@util/getIcon';
+import { Button } from '@shared/Button';
+import { Cell } from '@table/Cell';
+import { ExpandContext } from '@context/Expand';
 
-const ImperativeCheckbox = ({ children }) => {
-  const select = React.useContext(SelectContext);
-  const { selectState, onSelectAll } = React.useContext(
-    SelectContext
-  );
+const EXPAND_ICON_SIZE = '14px';
 
-  const ref = node => {
-    if (!node) return;
-
-    if (selectState.allSelected) {
-      node.indeterminate = false;
-      node.checked = true;
-    } else if (selectState.noneSelected) {
-      node.indeterminate = false;
-      node.checked = false;
-    } else {
-      node.indeterminate = true;
-      node.checked = false;
-    }
+const getExpandIcon = (
+  expandState,
+  expandIconSize,
+  ExpandIconUp,
+  ExpandIconDown
+) => {
+  const size = {
+    height: `${expandIconSize}`,
+    width: `${expandIconSize}`
   };
 
-  const hasChildren = !!children;
-  const hasRenderProp = hasChildren && isFunction(children);
-
-  if (hasChildren && hasRenderProp) {
-    return children(select);
+  if (expandState.allExpanded) {
+    return ExpandIconUp
+      ? React.cloneElement(ExpandIconUp, { ...size })
+      : null;
+  } else {
+    return ExpandIconDown
+      ? React.cloneElement(ExpandIconDown, { ...size })
+      : null;
   }
-
-  if (hasChildren && !hasRenderProp) {
-    return React.cloneElement(children, {
-      ref,
-      onChange: onSelectAll
-    });
-  }
-
-  return (
-    <Checkbox ref={ref} type="checkbox" onChange={onSelectAll} />
-  );
-};
-
-ImperativeCheckbox.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-    PropTypes.func
-  ])
 };
 
 const HeaderCellExpand = React.memo(
-  ({ className, children, ...passThrough }) => {
+  ({
+    item,
+    expandIcon = {},
+    className,
+    children,
+    ...passThrough
+  }) => {
+    const { expandState, onExpandAll } = React.useContext(
+      ExpandContext
+    );
+
+    const expandIconSize = expandIcon.size || EXPAND_ICON_SIZE;
+    const expandIconRight = getIcon(
+      expandIcon.iconRight,
+      <IconChevronSingleUp />
+    );
+    const expandIconDown = getIcon(
+      expandIcon.iconDown,
+      <IconChevronSingleDown />
+    );
+
+    const handleClick = () => {
+      onExpandAll();
+    };
+
+    const icon = getExpandIcon(
+      expandState,
+      expandIconSize,
+      expandIconRight,
+      expandIconDown
+    );
+
+    // TODO custom button
+
     return (
-      <HeaderCell
-        noResize
-        className={cs('th-select', 'shrink', className)}
+      <Cell
+        className={cs('cell-expand', 'shrink', className)}
         {...passThrough}
       >
-        <ImperativeCheckbox>{children}</ImperativeCheckbox>
-      </HeaderCell>
+        {children ? null : (
+          <Button className="narrow" onClick={handleClick}>
+            <span>{icon}</span>
+          </Button>
+        )}
+      </Cell>
     );
   }
 );
 
 HeaderCellExpand.propTypes = {
+  item: PropTypes.shape(PropTypes.any),
+  expandIcon: PropTypes.shape({
+    size: PropTypes.string,
+    iconDefault: PropTypes.node,
+    iconRight: PropTypes.node,
+    iconDown: PropTypes.node
+  }),
   className: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

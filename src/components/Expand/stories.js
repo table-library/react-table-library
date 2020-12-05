@@ -164,4 +164,6 @@ storiesOf('01. Features/ 10. Expand WIP', module)
         )}
       </Table>
     );
-  });
+  })
+  .add('expand icon size WIP', () => <div>WIP</div>)
+  .add('custom expand icon (Material UI) WIP', () => <div>WIP</div>);

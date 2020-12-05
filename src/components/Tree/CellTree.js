@@ -7,18 +7,13 @@ import IconChevronSingleDown from '@icons/IconChevronSingleDown';
 import IconChevronSingleRight from '@icons/IconChevronSingleRight';
 import { getIcon } from '@util/getIcon';
 import { Button } from '@shared/Button';
-import { CellContainer } from '@shared/Cell';
-import { ThemeContext } from '@context/Theme';
+import { Cell } from '@table/Cell';
 import { TreeContext } from '@context/Tree';
 
 import { isLeaf } from './util';
 
 const TREE_ICON_SIZE = '14px';
 const TREE_ICON_MARGIN = '4px';
-
-const TreeButton = styled(Button)`
-  width: auto;
-`;
 
 const TreeContent = styled.div`
   display: flex;
@@ -65,15 +60,7 @@ const getTreeIcon = (
 };
 
 const CellTree = React.memo(
-  ({
-    item,
-    treeIcon = {},
-    width,
-    className,
-    indentation,
-    children
-  }) => {
-    const theme = React.useContext(ThemeContext);
+  ({ item, treeIcon = {}, className, children, ...passThrough }) => {
     const { treeState, onTreeExpandById } = React.useContext(
       TreeContext
     );
@@ -106,24 +93,18 @@ const CellTree = React.memo(
     );
 
     return (
-      <CellContainer
-        role="gridcell"
-        className={cs('td', 'cell-tree', className)}
-        css={theme?.Cell}
-        width={width}
-        indentation={indentation}
-      >
+      <Cell className={cs('cell-tree', className)} {...passThrough}>
         <TreeContent>
-          <TreeButton
-            className="prefix"
+          <Button
+            className="prefix narrow"
             margin={treeIconMargin}
             onClick={handleClick}
           >
             <span>{icon}</span>
-          </TreeButton>
+          </Button>
           <div>{children}</div>
         </TreeContent>
-      </CellContainer>
+      </Cell>
     );
   }
 );
@@ -137,9 +118,7 @@ CellTree.propTypes = {
     iconRight: PropTypes.node,
     iconDown: PropTypes.node
   }),
-  width: PropTypes.string,
   className: PropTypes.string,
-  indentation: PropTypes.number,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

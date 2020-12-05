@@ -1,39 +1,87 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import cs from 'classnames';
 
-import { Checkbox } from '@shared/Checkbox';
+import IconChevronSingleDown from '@icons/IconChevronSingleDown';
+import IconChevronSingleUp from '@icons/IconChevronSingleUp';
+import { getIcon } from '@util/getIcon';
+import { Button } from '@shared/Button';
 import { Cell } from '@table/Cell';
-import { SelectContext } from '@context/Select';
+import { ExpandContext } from '@context/Expand';
+
+const EXPAND_ICON_SIZE = '14px';
+
+const getExpandIcon = (
+  item,
+  expandState,
+  expandIconSize,
+  ExpandIconUp,
+  ExpandIconDown
+) => {
+  const size = {
+    height: `${expandIconSize}`,
+    width: `${expandIconSize}`
+  };
+
+  const isExpanded = expandState.ids.includes(item.id);
+
+  if (isExpanded) {
+    return ExpandIconUp
+      ? React.cloneElement(ExpandIconUp, { ...size })
+      : null;
+  } else {
+    return ExpandIconDown
+      ? React.cloneElement(ExpandIconDown, { ...size })
+      : null;
+  }
+};
 
 const CellExpand = React.memo(
-  ({ item, className, children, ...passThrough }) => {
-    const { selectState, onSelectById } = React.useContext(
-      SelectContext
+  ({
+    item,
+    expandIcon = {},
+    className,
+    children,
+    ...passThrough
+  }) => {
+    const { expandState, onExpandById } = React.useContext(
+      ExpandContext
     );
 
-    const isSelected = selectState.ids.includes(item.id);
+    const expandIconSize = expandIcon.size || EXPAND_ICON_SIZE;
+    const expandIconRight = getIcon(
+      expandIcon.iconRight,
+      <IconChevronSingleUp />
+    );
+    const expandIconDown = getIcon(
+      expandIcon.iconDown,
+      <IconChevronSingleDown />
+    );
 
-    const handleChange = () => {
-      onSelectById(item.id);
+    const handleClick = () => {
+      onExpandById(item.id);
     };
+
+    const icon = getExpandIcon(
+      item,
+      expandState,
+      expandIconSize,
+      expandIconRight,
+      expandIconDown
+    );
+
+    // TODO custom button
 
     return (
       <Cell
-        className={cs('td-select', 'shrink', className)}
+        className={cs('cell-expand', 'shrink', className)}
         {...passThrough}
       >
-        {children ? (
-          React.cloneElement(children, {
-            checked: isSelected,
-            onChange: handleChange
-          })
-        ) : (
-          <Checkbox
-            type="checkbox"
-            checked={isSelected}
-            onChange={handleChange}
-          />
+        {children ? null : (
+          <Button className="narrow" onClick={handleClick}>
+            <span>{icon}</span>
+          </Button>
         )}
       </Cell>
     );
@@ -42,6 +90,12 @@ const CellExpand = React.memo(
 
 CellExpand.propTypes = {
   item: PropTypes.shape(PropTypes.any),
+  expandIcon: PropTypes.shape({
+    size: PropTypes.string,
+    iconDefault: PropTypes.node,
+    iconRight: PropTypes.node,
+    iconDown: PropTypes.node
+  }),
   className: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

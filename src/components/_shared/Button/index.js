@@ -15,6 +15,10 @@ const Button = styled.button`
   width: 100%;
   height: 100%;
 
+  &.narrow {
+    width: auto;
+  }
+
   span {
     display: flex;
     align-items: center;

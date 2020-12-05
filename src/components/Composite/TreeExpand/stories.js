@@ -523,7 +523,7 @@ storiesOf('02. Composites/ 04. Tree & Expand', module)
     }
   )
   .add(
-    'only checkbox: expand row on expand icon click, expand tree on row click',
+    'only expand icon: expand row on expand icon click, expand tree on row click',
     () => {
       const ExpansionPanel = ({ item }) => (
         <div>
