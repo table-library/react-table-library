@@ -64,7 +64,7 @@ storiesOf('01. Features/ 03. Layout', module)
       </Table>
     );
   })
-  .add('simple', () => {
+  .add('primitive string layout', () => {
     const rowLayout = ['50%', '15%', '20%', '15%'];
 
     return (
@@ -99,7 +99,7 @@ storiesOf('01. Features/ 03. Layout', module)
       </Table>
     );
   })
-  .add('complex', () => {
+  .add('complex object layout', () => {
     const rowLayout = [
       { key: 'width', value: '20%' },
       { key: 'width', value: '100px' },

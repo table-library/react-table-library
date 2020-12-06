@@ -1,7 +1,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-import { TableContext } from '../Table';
+import { TableContext } from './Table';
+import { byId, byAll } from './reducers';
 
 const EXPAND_BY_ID = 'EXPAND_BY_ID';
 const EXPAND_ALL = 'EXPAND_ALL';
@@ -9,31 +10,10 @@ const EXPAND_ALL = 'EXPAND_ALL';
 const expandReducer = (state, action) => {
   switch (action.type) {
     case EXPAND_BY_ID: {
-      const needsUnexpand = state.ids.includes(action.payload.id);
-
-      return needsUnexpand
-        ? {
-            ...state,
-            ids: state.ids.filter(idx => idx !== action.payload.id)
-          }
-        : {
-            ...state,
-            ids: state.ids.concat(action.payload.id)
-          };
+      return byId(state, action);
     }
     case EXPAND_ALL: {
-      const needsUnexpand =
-        action.payload.ids.length === state.ids.length;
-
-      return needsUnexpand
-        ? {
-            ...state,
-            ids: []
-          }
-        : {
-            ...state,
-            ids: action.payload.ids
-          };
+      return byAll(state, action);
     }
     default:
       throw new Error();

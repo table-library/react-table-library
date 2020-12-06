@@ -1,15 +1,14 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
+import { byId } from './reducers';
+
 const TREE_EXPAND_BY_ID = 'TREE_EXPAND_BY_ID';
 
 const treeReducer = (state, action) => {
   switch (action.type) {
     case TREE_EXPAND_BY_ID: {
-      const ids = state.ids.includes(action.payload.id)
-        ? state.ids.filter(id => id !== action.payload.id)
-        : state.ids.concat(action.payload.id);
-      return { ...state, ids };
+      return byId(state, action);
     }
     default:
       throw new Error();

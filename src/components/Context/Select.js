@@ -1,7 +1,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-import { TableContext } from '../Table';
+import { TableContext } from './Table';
+import { byId, byAll } from './reducers';
 
 const SELECT_BY_ID = 'SELECT_BY_ID';
 const SELECT_ALL = 'SELECT_ALL';
@@ -9,31 +10,10 @@ const SELECT_ALL = 'SELECT_ALL';
 const selectReducer = (state, action) => {
   switch (action.type) {
     case SELECT_BY_ID: {
-      const needsUnselect = state.ids.includes(action.payload.id);
-
-      return needsUnselect
-        ? {
-            ...state,
-            ids: state.ids.filter(idx => idx !== action.payload.id)
-          }
-        : {
-            ...state,
-            ids: state.ids.concat(action.payload.id)
-          };
+      return byId(state, action);
     }
     case SELECT_ALL: {
-      const needsUnselect =
-        action.payload.ids.length === state.ids.length;
-
-      return needsUnselect
-        ? {
-            ...state,
-            ids: []
-          }
-        : {
-            ...state,
-            ids: action.payload.ids
-          };
+      return byAll(state, action);
     }
     default:
       throw new Error();
