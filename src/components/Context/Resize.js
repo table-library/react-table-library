@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const ResizeContext = React.createContext(false);
 
-const ResizeProvider = ({ resize, tableRef, children }) => {
+const ResizeProvider = ({ resize = false, tableRef, children }) => {
   const resizedLayout = React.useRef();
 
   return (

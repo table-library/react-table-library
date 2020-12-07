@@ -3,7 +3,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-storiesOf('04. Server/ 01. Table', module)
+storiesOf('05. Server/ 01. Table', module)
   // .addParameters({ component: Table })
   .add('default WIP', () => {
     return <div>dat fetching</div>;

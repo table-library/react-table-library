@@ -64,7 +64,7 @@ const HeaderCellSort = React.memo(
     children,
     ...passThrough
   }) => {
-    const { sortState, onSort } = React.useContext(SortContext);
+    const { sortState, onToggleSort } = React.useContext(SortContext);
 
     const sortIconPosition =
       sortIcon.position || SORT_ICON_POSITIONS.Suffix;
@@ -107,7 +107,7 @@ const HeaderCellSort = React.memo(
             suffix
           })}
           margin={sortIconMargin}
-          onClick={() => onSort({ fn: sortFn, key: sortKey })}
+          onClick={() => onToggleSort({ fn: sortFn, key: sortKey })}
         >
           {prefix && icon && <span>{icon}</span>}
           <div title={children}>{children}</div>

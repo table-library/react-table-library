@@ -9,6 +9,7 @@ import { SelectProvider, SelectContext } from '@context/Select';
 import { TreeProvider, TreeContext } from '@context/Tree';
 import { ExpandProvider, ExpandContext } from '@context/Expand';
 import { SortProvider, SortContext } from '@context/Sort';
+import { StateListener } from '@context/State';
 
 const TableContainer = styled.div`
   *,
@@ -28,15 +29,14 @@ const TableContent = ({ children }) => {
   const sort = React.useContext(SortContext);
 
   // do any list operations (e.g. sort, pagination) here
-  return children(
-    sort.sortState.fn([...list]),
+  return children(sort.sortState.fn([...list]), {
     theme,
     resize,
     select,
     tree,
     expand,
     sort
-  );
+  });
 };
 
 const Table = ({
@@ -47,6 +47,7 @@ const Table = ({
   defaultSelect,
   defaultTree,
   defaultExpand,
+  tableStateChange,
   children
 }) => {
   const tableRef = React.useRef();
@@ -60,6 +61,11 @@ const Table = ({
               <TreeProvider defaultTree={defaultTree}>
                 <ExpandProvider defaultExpand={defaultExpand}>
                   <SortProvider defaultSort={defaultSort}>
+                    {tableStateChange && (
+                      <StateListener
+                        tableStateChange={tableStateChange}
+                      />
+                    )}
                     <TableContent>{children}</TableContent>
                   </SortProvider>
                 </ExpandProvider>
@@ -89,6 +95,10 @@ Table.propTypes = {
     key: PropTypes.string,
     reverse: PropTypes.bool,
     fn: PropTypes.func
+  }),
+  tableStateChange: PropTypes.shape({
+    notifyOnMount: PropTypes.bool,
+    onTableStateChange: PropTypes.func
   }),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
