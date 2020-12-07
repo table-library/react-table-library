@@ -35,7 +35,13 @@ export const useTableState = (callback, dependencies) => {
         );
 
       if (dependencyChanged) {
-        enhancedCallback(key, tableStateRef.current, thirdPartyState);
+        const type = key;
+
+        enhancedCallback(
+          type,
+          tableStateRef.current,
+          thirdPartyState
+        );
       }
     });
   }, [dependenciesPrev, dependencies, enhancedCallback]);

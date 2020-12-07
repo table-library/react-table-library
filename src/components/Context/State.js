@@ -25,54 +25,46 @@ const StateListener = ({ onTableStateChange }) => {
     [select, tree, expand, sort]
   );
 
-  // const featureState = {
-  //   select: select.selectState,
-  //   tree: tree.treeState,
-  //   expand: expand.expandState,
-  //   sort: sort.sortState
-  // };
+  const featureState = React.useMemo(
+    () => ({
+      SELECT: select.selectState,
+      TREE: tree.treeState,
+      EXPAND: expand.expandState,
+      SORT: sort.sortState
+    }),
+    [select, tree, expand, sort]
+  );
 
-  const selectStatePrev = usePrevious(select.selectState);
-  const treeStatePrev = usePrevious(tree.treeState);
-  const expandStatePrev = usePrevious(expand.expandState);
-  const sortStatePrev = usePrevious(sort.sortState);
+  const featureStatePrev = usePrevious(featureState);
 
   const isMount = React.useRef(false);
 
   React.useEffect(() => {
+    // callback with an initial table state
     if (!isMount.current) {
-      onTableStateChange('INIT', tableState);
-
       isMount.current = true;
-      return;
+
+      onTableStateChange('INIT', tableState);
     }
 
-    if (!isEqual(selectStatePrev, select.selectState)) {
-      onTableStateChange('SELECT', tableState);
-    }
+    // callback with every feature state change
+    if (!isMount.current) {
+      Object.keys(featureState).forEach(key => {
+        const dependencyChanged =
+          featureStatePrev &&
+          !isEqual(featureState[key], featureStatePrev[key]);
 
-    if (!isEqual(treeStatePrev, tree.treeState)) {
-      onTableStateChange('TREE', tableState);
-    }
-
-    if (!isEqual(expandStatePrev, expand.expandState)) {
-      onTableStateChange('EXPAND', tableState);
-    }
-
-    if (!isEqual(sortStatePrev, sort.sortState)) {
-      onTableStateChange('SORT', tableState);
+        if (dependencyChanged) {
+          const type = key;
+          onTableStateChange(type, tableState);
+        }
+      });
     }
   }, [
+    featureState,
+    featureStatePrev,
     onTableStateChange,
-    expand,
-    expandStatePrev,
-    select,
-    selectStatePrev,
-    sort,
-    sortStatePrev,
-    tableState,
-    tree,
-    treeStatePrev
+    tableState
   ]);
 
   return null;
