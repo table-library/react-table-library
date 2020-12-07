@@ -29,38 +29,55 @@ const list = [
   }
 ];
 
-storiesOf('01. Features/ 07. Search WIP', module)
+storiesOf('01. Features/ 07. Search', module)
   .addParameters({ component: Table })
   .add('default', () => {
-    return (
-      <Table list={list}>
-        {tableList => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCell>Name</HeaderCell>
-                <HeaderCell>Stars</HeaderCell>
-                <HeaderCell>Light</HeaderCell>
-                <HeaderCell>Count</HeaderCell>
-              </HeaderRow>
-            </Header>
+    const [search, setSearch] = React.useState('');
 
-            <Body>
-              {tableList.map(item => (
-                <Row key={item.id} item={item}>
-                  {tableItem => (
-                    <React.Fragment key={tableItem.id}>
-                      <Cell>{tableItem.name}</Cell>
-                      <Cell>{tableItem.stars}</Cell>
-                      <Cell>{tableItem.light.toString()}</Cell>
-                      <Cell>{tableItem.count}</Cell>
-                    </React.Fragment>
-                  )}
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
+    const handleSearch = event => {
+      setSearch(event.target.value);
+    };
+
+    const searchedList = list.filter(item =>
+      item.name.toLowerCase().includes(search.toLowerCase())
+    );
+
+    return (
+      <>
+        <label htmlFor="search">
+          Search by name:
+          <input id="search" type="text" onChange={handleSearch} />
+        </label>
+
+        <Table list={searchedList}>
+          {tableList => (
+            <>
+              <Header>
+                <HeaderRow>
+                  <HeaderCell>Name</HeaderCell>
+                  <HeaderCell>Stars</HeaderCell>
+                  <HeaderCell>Light</HeaderCell>
+                  <HeaderCell>Count</HeaderCell>
+                </HeaderRow>
+              </Header>
+
+              <Body>
+                {tableList.map(item => (
+                  <Row key={item.id} item={item}>
+                    {tableItem => (
+                      <React.Fragment key={tableItem.id}>
+                        <Cell>{tableItem.name}</Cell>
+                        <Cell>{tableItem.stars}</Cell>
+                        <Cell>{tableItem.light.toString()}</Cell>
+                        <Cell>{tableItem.count}</Cell>
+                      </React.Fragment>
+                    )}
+                  </Row>
+                ))}
+              </Body>
+            </>
+          )}
+        </Table>
+      </>
     );
   });

@@ -9,6 +9,7 @@
         "alias": {
           "@server": "./src/server",
           "@util": "./src/util",
+          "@hooks": "./src/hooks",
           "@colors": "./src/constants/colors",
           "@shared": "./src/components/_shared",
           "@icons": "./src/components/_shared/Icons",

@@ -209,7 +209,7 @@ storiesOf('04. Recipes/ 02. Controlled', module)
     const [key, setKey] = React.useState(null);
 
     const handleTableStateChange = (type, tableState) => {
-      if (type === 'SORT') {
+      if (type === 'SORT' || type === 'INIT') {
         setKey(tableState.sort.sortState.key);
       }
     };
@@ -217,13 +217,11 @@ storiesOf('04. Recipes/ 02. Controlled', module)
     return (
       <>
         {/* we have implicit access to all table states outside of the table via onTableStateChange */}
-        Active Sort: {key}
+        Active Sort:
+        {key}
         <Table
           list={list}
-          tableStateChange={{
-            notifyOnMount: true,
-            onTableStateChange: handleTableStateChange
-          }}
+          onTableStateChange={handleTableStateChange}
         >
           {tableList => (
             <>
@@ -480,19 +478,13 @@ storiesOf('04. Recipes/ 02. Controlled', module)
 
     // tableState to component binding
     const handleTableStateChange = (type, tableState) => {
-      if (type === 'SORT') {
+      if (type === 'SORT' || type === 'INIT') {
         setOption(tableState.sort.sortState.key);
       }
     };
 
     return (
-      <Table
-        list={list}
-        tableStateChange={{
-          notifyOnMount: true,
-          onTableStateChange: handleTableStateChange
-        }}
-      >
+      <Table list={list} onTableStateChange={handleTableStateChange}>
         {(tableList, { sort }) => (
           <>
             <select
@@ -592,7 +584,7 @@ storiesOf('04. Recipes/ 02. Controlled', module)
 
     // table to outside component binding
     const handleTableStateChange = (type, tableState) => {
-      if (type === 'SORT') {
+      if (type === 'SORT' || type === 'INIT') {
         setOption(tableState.sort.sortState.key);
       }
     };
@@ -611,10 +603,7 @@ storiesOf('04. Recipes/ 02. Controlled', module)
           list={list}
           // outside component to table binding
           defaultSort={SORTS[option]}
-          tableStateChange={{
-            notifyOnMount: true,
-            onTableStateChange: handleTableStateChange
-          }}
+          onTableStateChange={handleTableStateChange}
         >
           {tableList => (
             <>

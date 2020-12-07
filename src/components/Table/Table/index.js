@@ -53,7 +53,7 @@ const Table = ({
   defaultSelect,
   defaultTree,
   defaultExpand,
-  tableStateChange,
+  onTableStateChange,
   children
 }) => {
   const tableRef = React.useRef();
@@ -67,9 +67,9 @@ const Table = ({
               <TreeProvider defaultTree={defaultTree}>
                 <ExpandProvider defaultExpand={defaultExpand}>
                   <SortProvider defaultSort={defaultSort}>
-                    {tableStateChange && (
+                    {onTableStateChange && (
                       <StateListener
-                        tableStateChange={tableStateChange}
+                        onTableStateChange={onTableStateChange}
                       />
                     )}
                     <TableContent server={server}>
@@ -106,10 +106,7 @@ Table.propTypes = {
     reverse: PropTypes.bool,
     fn: PropTypes.func
   }),
-  tableStateChange: PropTypes.shape({
-    notifyOnMount: PropTypes.bool,
-    onTableStateChange: PropTypes.func
-  }),
+  onTableStateChange: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

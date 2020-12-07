@@ -24,14 +24,24 @@ const SORTS = {
   count: array => array.sort((a, b) => a.count - b.count)
 };
 
-export const getList = ({ sortKey = 'none', sortReverse = false }) =>
+export const getList = ({
+  search = '',
+  sortKey = 'none',
+  sortReverse = false
+}) =>
+  console.log('get list') ||
   new Promise(resolve => {
-    let list = [...LIST];
+    let modifiedList = [...LIST];
+
+    // search
+    modifiedList = modifiedList.filter(item =>
+      item.name.toLowerCase().includes(search.toLowerCase())
+    );
 
     // sort
-    list = sortReverse
-      ? SORTS[sortKey](list).reverse()
-      : SORTS[sortKey](list);
+    modifiedList = sortReverse
+      ? SORTS[sortKey](modifiedList).reverse()
+      : SORTS[sortKey](modifiedList);
 
-    setTimeout(() => resolve(list), TIMEOUT);
+    setTimeout(() => resolve(modifiedList), TIMEOUT);
   });

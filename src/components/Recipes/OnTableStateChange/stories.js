@@ -30,12 +30,7 @@ storiesOf('04. Recipes/ 01. On Table State Change', module)
     };
 
     return (
-      <Table
-        list={list}
-        tableStateChange={{
-          onTableStateChange: handleTableStateChange
-        }}
-      >
+      <Table list={list} onTableStateChange={handleTableStateChange}>
         {tableList => (
           <>
             <Header>
@@ -100,13 +95,7 @@ storiesOf('04. Recipes/ 01. On Table State Change', module)
     };
 
     return (
-      <Table
-        list={list}
-        tableStateChange={{
-          notifyOnMount: true,
-          onTableStateChange: handleTableStateChange
-        }}
-      >
+      <Table list={list} onTableStateChange={handleTableStateChange}>
         {tableList => (
           <>
             <Header>

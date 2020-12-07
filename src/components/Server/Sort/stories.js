@@ -19,17 +19,20 @@ import { HeaderCellSort } from '@sort';
 
 storiesOf('05. Server/ 02. Sort', module)
   .addParameters({ component: Table })
-  .add('default WIP', () => {
+  .add('default', () => {
     const [list, setList] = React.useState([]);
 
+    // initial fetching
+
     const doGetList = React.useCallback(async params => {
-      const result = await getList(params);
-      setList(result);
+      setList(await getList(params));
     }, []);
 
     React.useEffect(() => {
       doGetList({});
     }, [doGetList]);
+
+    // server-side sort
 
     const handleTableStateChange = (type, tableState) => {
       const SERVER_SIDE_OPERATIONS = ['SORT'];
@@ -53,9 +56,7 @@ storiesOf('05. Server/ 02. Sort', module)
         server={{
           sort: true
         }}
-        tableStateChange={{
-          onTableStateChange: handleTableStateChange
-        }}
+        onTableStateChange={handleTableStateChange}
       >
         {tableList => (
           <>

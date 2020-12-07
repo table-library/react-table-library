@@ -9,18 +9,28 @@ import { TreeContext } from './Tree';
 import { ExpandContext } from './Expand';
 import { SortContext } from './Sort';
 
-const StateListener = ({ tableStateChange }) => {
+const StateListener = ({ onTableStateChange }) => {
   const select = React.useContext(SelectContext);
   const tree = React.useContext(TreeContext);
   const expand = React.useContext(ExpandContext);
   const sort = React.useContext(SortContext);
 
-  const tableState = {
-    select,
-    tree,
-    expand,
-    sort
-  };
+  const tableState = React.useMemo(
+    () => ({
+      select,
+      tree,
+      expand,
+      sort
+    }),
+    [select, tree, expand, sort]
+  );
+
+  // const featureState = {
+  //   select: select.selectState,
+  //   tree: tree.treeState,
+  //   expand: expand.expandState,
+  //   sort: sort.sortState
+  // };
 
   const selectStatePrev = usePrevious(select.selectState);
   const treeStatePrev = usePrevious(tree.treeState);
@@ -30,27 +40,30 @@ const StateListener = ({ tableStateChange }) => {
   const isMount = React.useRef(false);
 
   React.useEffect(() => {
-    if (!isMount.current && !tableStateChange.notifyOnMount) {
+    if (!isMount.current) {
+      onTableStateChange('INIT', tableState);
+
       isMount.current = true;
       return;
     }
 
     if (!isEqual(selectStatePrev, select.selectState)) {
-      tableStateChange.onTableStateChange('SELECT', tableState);
+      onTableStateChange('SELECT', tableState);
     }
 
     if (!isEqual(treeStatePrev, tree.treeState)) {
-      tableStateChange.onTableStateChange('TREE', tableState);
+      onTableStateChange('TREE', tableState);
     }
 
     if (!isEqual(expandStatePrev, expand.expandState)) {
-      tableStateChange.onTableStateChange('EXPAND', tableState);
+      onTableStateChange('EXPAND', tableState);
     }
 
     if (!isEqual(sortStatePrev, sort.sortState)) {
-      tableStateChange.onTableStateChange('SORT', tableState);
+      onTableStateChange('SORT', tableState);
     }
   }, [
+    onTableStateChange,
     expand,
     expandStatePrev,
     select,
@@ -58,7 +71,6 @@ const StateListener = ({ tableStateChange }) => {
     sort,
     sortStatePrev,
     tableState,
-    tableStateChange,
     tree,
     treeStatePrev
   ]);
@@ -67,10 +79,7 @@ const StateListener = ({ tableStateChange }) => {
 };
 
 StateListener.propTypes = {
-  tableStateChange: PropTypes.shape({
-    notifyOnMount: PropTypes.bool,
-    onTableStateChange: PropTypes.func
-  })
+  onTableStateChange: PropTypes.func
 };
 
 export { StateListener };

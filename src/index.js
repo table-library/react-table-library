@@ -1,3 +1,4 @@
+import * as hooks from './hooks';
 import * as Table from './components/Table';
 import * as Theme from './components/Theme';
 import * as Sort from './components/Sort';

@@ -21,8 +21,7 @@ storiesOf('05. Server/ 01. Table', module)
     const [list, setList] = React.useState([]);
 
     const doGetList = React.useCallback(async params => {
-      const result = await getList(params);
-      setList(result);
+      setList(await getList(params));
     }, []);
 
     React.useEffect(() => {
