@@ -7,6 +7,7 @@
       "module-resolver",
       {
         "alias": {
+          "@server": "./src/server",
           "@util": "./src/util",
           "@colors": "./src/constants/colors",
           "@shared": "./src/components/_shared",

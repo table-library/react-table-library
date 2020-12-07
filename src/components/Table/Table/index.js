@@ -19,7 +19,7 @@ const TableContainer = styled.div`
   }
 `;
 
-const TableContent = ({ children }) => {
+const TableContent = ({ server, children }) => {
   const { list } = React.useContext(TableContext);
   const theme = React.useContext(ThemeContext);
   const resize = React.useContext(ResizeContext);
@@ -28,8 +28,14 @@ const TableContent = ({ children }) => {
   const expand = React.useContext(ExpandContext);
   const sort = React.useContext(SortContext);
 
-  // do any list operations (e.g. sort, pagination) here
-  return children(sort.sortState.fn([...list]), {
+  // do any list operations (e.g. sort, pagination), if not server-side
+  let modifiedList = [...list];
+
+  if (!server?.sort) {
+    modifiedList = sort.sortState.fn(modifiedList);
+  }
+
+  return children(modifiedList, {
     theme,
     resize,
     select,
@@ -41,6 +47,7 @@ const TableContent = ({ children }) => {
 
 const Table = ({
   list,
+  server,
   theme,
   defaultSort,
   defaultSelect,
@@ -65,7 +72,9 @@ const Table = ({
                         tableStateChange={tableStateChange}
                       />
                     )}
-                    <TableContent>{children}</TableContent>
+                    <TableContent server={server}>
+                      {children}
+                    </TableContent>
                   </SortProvider>
                 </ExpandProvider>
               </TreeProvider>
@@ -79,6 +88,9 @@ const Table = ({
 
 Table.propTypes = {
   list: PropTypes.arrayOf(PropTypes.any),
+  server: PropTypes.shape({
+    sort: PropTypes.bool
+  }),
   theme: PropTypes.shape(PropTypes.any),
   defaultSelect: PropTypes.shape({
     ids: PropTypes.arrayOf(PropTypes.string)
