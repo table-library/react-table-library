@@ -3,9 +3,7 @@ import * as React from 'react';
 import { ResizeContext } from '@context/Resize';
 
 export const useResize = columnIndex => {
-  const { resize, resizedLayout, tableRef } = React.useContext(
-    ResizeContext
-  );
+  const { resizedLayout, tableRef } = React.useContext(ResizeContext);
 
   const MIN_RESIZE_WIDTH = 75;
 
@@ -114,5 +112,5 @@ export const useResize = columnIndex => {
     };
   }, [onMouseDown, onMouseMove, onMouseUp]);
 
-  return { resize, resizeRef, cellRef };
+  return { resizeRef, cellRef };
 };

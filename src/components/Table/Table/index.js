@@ -42,7 +42,6 @@ const TableContent = ({ children }) => {
 const Table = ({
   list,
   theme,
-  resize,
   defaultSort,
   defaultSelect,
   defaultTree,
@@ -56,7 +55,7 @@ const Table = ({
     <TableContainer className="table" role="grid" ref={tableRef}>
       <TableProvider list={list}>
         <ThemeProvider theme={theme}>
-          <ResizeProvider resize={resize} tableRef={tableRef}>
+          <ResizeProvider tableRef={tableRef}>
             <SelectProvider defaultSelect={defaultSelect}>
               <TreeProvider defaultTree={defaultTree}>
                 <ExpandProvider defaultExpand={defaultExpand}>
@@ -81,7 +80,6 @@ const Table = ({
 Table.propTypes = {
   list: PropTypes.arrayOf(PropTypes.any),
   theme: PropTypes.shape(PropTypes.any),
-  resize: PropTypes.bool,
   defaultSelect: PropTypes.shape({
     ids: PropTypes.arrayOf(PropTypes.string)
   }),

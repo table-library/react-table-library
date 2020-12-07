@@ -33,15 +33,15 @@ storiesOf('01. Features/ 04. Resize', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list} resize>
+      <Table list={list}>
         {tableList => (
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell>Name</HeaderCell>
-                <HeaderCell>Stars</HeaderCell>
-                <HeaderCell>Light</HeaderCell>
-                <HeaderCell>Count</HeaderCell>
+                <HeaderCell resize>Name</HeaderCell>
+                <HeaderCell resize>Stars</HeaderCell>
+                <HeaderCell resize>Light</HeaderCell>
+                <HeaderCell resize>Count</HeaderCell>
               </HeaderRow>
             </Header>
 

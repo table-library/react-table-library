@@ -3,20 +3,17 @@ import PropTypes from 'prop-types';
 
 const ResizeContext = React.createContext(false);
 
-const ResizeProvider = ({ resize = false, tableRef, children }) => {
+const ResizeProvider = ({ tableRef, children }) => {
   const resizedLayout = React.useRef();
 
   return (
-    <ResizeContext.Provider
-      value={{ resize, resizedLayout, tableRef }}
-    >
+    <ResizeContext.Provider value={{ resizedLayout, tableRef }}>
       {children}
     </ResizeContext.Provider>
   );
 };
 
 ResizeProvider.propTypes = {
-  resize: PropTypes.bool,
   tableRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) })

@@ -11,12 +11,12 @@ const HeaderCell = ({
   className,
   indentation,
   hide,
-  noResize,
+  resize,
   children
 }) => {
   const theme = React.useContext(ThemeContext);
 
-  const { resize, resizeRef, cellRef } = useResize(index);
+  const { resizeRef, cellRef } = useResize(index);
 
   return (
     <HeaderCellContainer
@@ -27,7 +27,7 @@ const HeaderCell = ({
       ref={cellRef}
     >
       <div>{children}</div>
-      {resize && !noResize && <Resizer ref={resizeRef} />}
+      {resize && <Resizer ref={resizeRef} />}
     </HeaderCellContainer>
   );
 };
@@ -37,7 +37,7 @@ HeaderCell.propTypes = {
   className: PropTypes.string,
   indentation: PropTypes.number,
   hide: PropTypes.bool,
-  noResize: PropTypes.bool,
+  resize: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
