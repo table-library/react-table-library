@@ -44,10 +44,7 @@ storiesOf('05. Server/ 03. Search', module)
       (type, tableState, thirdPartyState) => {
         const SERVER_SIDE_OPERATIONS = ['SEARCH'];
 
-        let params = {};
-
-        params = {
-          ...params,
+        const params = {
           search: thirdPartyState.search
         };
 
@@ -137,10 +134,7 @@ storiesOf('05. Server/ 03. Search', module)
         const SERVER_SIDE_OPERATIONS = [];
         const SERVER_SIDE_OPERATIONS_DEBOUNCED = ['SEARCH'];
 
-        let params = {};
-
-        params = {
-          ...params,
+        const params = {
           search: thirdPartyState.search
         };
 

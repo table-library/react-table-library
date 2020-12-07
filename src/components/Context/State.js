@@ -48,7 +48,7 @@ const StateListener = ({ onTableStateChange }) => {
     }
 
     // callback with every feature state change
-    if (!isMount.current) {
+    if (isMount.current) {
       Object.keys(featureState).forEach(key => {
         const dependencyChanged =
           featureStatePrev &&

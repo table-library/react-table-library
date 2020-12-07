@@ -37,15 +37,12 @@ storiesOf('05. Server/ 02. Sort', module)
     const handleTableStateChange = (type, tableState) => {
       const SERVER_SIDE_OPERATIONS = ['SORT'];
 
-      let params = {};
-
-      params = {
-        ...params,
-        sortKey: tableState.sort.sortState.key,
-        sortReverse: tableState.sort.sortState.reverse
-      };
-
       if (SERVER_SIDE_OPERATIONS.includes(type)) {
+        const params = {
+          sortKey: tableState.sort.sortState.key,
+          sortReverse: tableState.sort.sortState.reverse
+        };
+
         doGetList(params);
       }
     };
