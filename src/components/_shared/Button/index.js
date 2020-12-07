@@ -19,6 +19,10 @@ const Button = styled.button`
     width: auto;
   }
 
+  &.active {
+    font-weight: bold;
+  }
+
   span {
     display: flex;
     align-items: center;

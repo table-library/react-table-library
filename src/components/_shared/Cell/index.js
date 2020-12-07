@@ -12,6 +12,8 @@ const CellContainerBase = styled.div`
   padding-bottom: 4px;
 
   & > div {
+    width: 100%;
+
     text-align: left;
     white-space: nowrap;
     overflow: hidden;

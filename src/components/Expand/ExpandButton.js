@@ -71,7 +71,6 @@ ExpandButton.propTypes = {
   isExpanded: PropTypes.bool,
   expandIcon: PropTypes.shape({
     size: PropTypes.string,
-    iconDefault: PropTypes.node,
     iconUp: PropTypes.node,
     iconDown: PropTypes.node
   }),

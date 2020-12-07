@@ -21,7 +21,7 @@ const CellExpand = React.memo(
 
     return (
       <Cell
-        className={cs('cell-expand', 'shrink', className)}
+        className={cs('td-expand', 'shrink', className)}
         {...passThrough}
       >
         <ExpandButton

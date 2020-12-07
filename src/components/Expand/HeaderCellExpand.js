@@ -14,7 +14,7 @@ const HeaderCellExpand = React.memo(
 
     return (
       <Cell
-        className={cs('cell-expand', 'shrink', className)}
+        className={cs('th-expand', 'shrink', className)}
         {...passThrough}
       >
         <ExpandButton
@@ -33,7 +33,6 @@ const HeaderCellExpand = React.memo(
 HeaderCellExpand.propTypes = {
   expandIcon: PropTypes.shape({
     size: PropTypes.string,
-    iconDefault: PropTypes.node,
     iconRight: PropTypes.node,
     iconDown: PropTypes.node
   }),

@@ -6,6 +6,7 @@ import { storiesOf } from '@storybook/react';
 import UnfoldMoreOutlinedIcon from '@material-ui/icons/UnfoldMoreOutlined';
 import KeyboardArrowUpOutlinedIcon from '@material-ui/icons/KeyboardArrowUpOutlined';
 import KeyboardArrowDownOutlinedIcon from '@material-ui/icons/KeyboardArrowDownOutlined';
+import Button from '@material-ui/core/Button';
 
 import {
   Table,
@@ -17,7 +18,7 @@ import {
   Cell
 } from '@table';
 
-import { HeaderCellSort } from '@sort';
+import { HeaderCellSort, SORT_ICON_POSITIONS } from '@sort';
 
 const list = [
   { id: '1', name: 'Hello', stars: 24, count: 42, light: true },
@@ -251,8 +252,7 @@ storiesOf('01. Features/ 05. Sort', module)
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
                   sortIcon={{
-                    position:
-                      HeaderCellSort.SORT_ICON_POSITIONS.Prefix
+                    position: SORT_ICON_POSITIONS.Prefix
                   }}
                 >
                   Name
@@ -263,8 +263,7 @@ storiesOf('01. Features/ 05. Sort', module)
                     array.sort((a, b) => a.stars - b.stars)
                   }
                   sortIcon={{
-                    position:
-                      HeaderCellSort.SORT_ICON_POSITIONS.Prefix
+                    position: SORT_ICON_POSITIONS.Prefix
                   }}
                 >
                   Stars
@@ -275,8 +274,7 @@ storiesOf('01. Features/ 05. Sort', module)
                     array.sort((a, b) => a.light - b.light)
                   }
                   sortIcon={{
-                    position:
-                      HeaderCellSort.SORT_ICON_POSITIONS.Prefix
+                    position: SORT_ICON_POSITIONS.Prefix
                   }}
                 >
                   Light
@@ -287,8 +285,7 @@ storiesOf('01. Features/ 05. Sort', module)
                     array.sort((a, b) => a.count - b.count)
                   }
                   sortIcon={{
-                    position:
-                      HeaderCellSort.SORT_ICON_POSITIONS.Prefix
+                    position: SORT_ICON_POSITIONS.Prefix
                   }}
                 >
                   Count
@@ -328,8 +325,7 @@ storiesOf('01. Features/ 05. Sort', module)
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
                   sortIcon={{
-                    position:
-                      HeaderCellSort.SORT_ICON_POSITIONS.Prefix
+                    position: SORT_ICON_POSITIONS.Prefix
                   }}
                 >
                   Name
@@ -340,8 +336,7 @@ storiesOf('01. Features/ 05. Sort', module)
                     array.sort((a, b) => a.stars - b.stars)
                   }
                   sortIcon={{
-                    position:
-                      HeaderCellSort.SORT_ICON_POSITIONS.Prefix
+                    position: SORT_ICON_POSITIONS.Prefix
                   }}
                 >
                   Stars
@@ -352,8 +347,7 @@ storiesOf('01. Features/ 05. Sort', module)
                     array.sort((a, b) => a.light - b.light)
                   }
                   sortIcon={{
-                    position:
-                      HeaderCellSort.SORT_ICON_POSITIONS.Prefix
+                    position: SORT_ICON_POSITIONS.Prefix
                   }}
                 >
                   Light
@@ -364,8 +358,7 @@ storiesOf('01. Features/ 05. Sort', module)
                     array.sort((a, b) => a.count - b.count)
                   }
                   sortIcon={{
-                    position:
-                      HeaderCellSort.SORT_ICON_POSITIONS.Prefix
+                    position: SORT_ICON_POSITIONS.Prefix
                   }}
                 >
                   Count
@@ -561,6 +554,127 @@ storiesOf('01. Features/ 05. Sort', module)
                   }}
                 >
                   Count
+                </HeaderCellSort>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <Row item={item} key={item.id}>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('custom sort button (Material UI)', () => {
+    const getIcon = (sortState, sortKey) => {
+      if (sortState.key === sortKey && sortState.reverse) {
+        return <KeyboardArrowDownOutlinedIcon />;
+      }
+
+      if (sortState.key === sortKey && !sortState.reverse) {
+        return <KeyboardArrowUpOutlinedIcon />;
+      }
+
+      return <UnfoldMoreOutlinedIcon />;
+    };
+
+    return (
+      <Table list={list}>
+        {tableList => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSort
+                  sortKey="count"
+                  sortFn={array =>
+                    array.sort((a, b) => a.name.localeCompare(b.name))
+                  }
+                >
+                  {(sort, sortProps) => (
+                    <Button
+                      fullWidth
+                      style={{ justifyContent: 'flex-start' }}
+                      endIcon={getIcon(
+                        sort.sortState,
+                        sortProps.sortKey
+                      )}
+                      onClick={sortProps.onToggleSort}
+                    >
+                      Name
+                    </Button>
+                  )}
+                </HeaderCellSort>
+                <HeaderCellSort
+                  sortKey="stars"
+                  sortFn={array =>
+                    array.sort((a, b) => a.stars - b.stars)
+                  }
+                >
+                  {(sort, sortProps) => (
+                    <Button
+                      fullWidth
+                      style={{ justifyContent: 'flex-start' }}
+                      endIcon={getIcon(
+                        sort.sortState,
+                        sortProps.sortKey
+                      )}
+                      onClick={sortProps.onToggleSort}
+                    >
+                      Stars
+                    </Button>
+                  )}
+                </HeaderCellSort>
+                <HeaderCellSort
+                  sortKey="light"
+                  sortFn={array =>
+                    array.sort((a, b) => a.light - b.light)
+                  }
+                >
+                  {(sort, sortProps) => (
+                    <Button
+                      fullWidth
+                      style={{ justifyContent: 'flex-start' }}
+                      endIcon={getIcon(
+                        sort.sortState,
+                        sortProps.sortKey
+                      )}
+                      onClick={sortProps.onToggleSort}
+                    >
+                      Light
+                    </Button>
+                  )}
+                </HeaderCellSort>
+                <HeaderCellSort
+                  sortKey="count"
+                  sortFn={array =>
+                    array.sort((a, b) => a.count - b.count)
+                  }
+                >
+                  {(sort, sortProps) => (
+                    <Button
+                      fullWidth
+                      style={{ justifyContent: 'flex-start' }}
+                      endIcon={getIcon(
+                        sort.sortState,
+                        sortProps.sortKey
+                      )}
+                      onClick={sortProps.onToggleSort}
+                    >
+                      Count
+                    </Button>
+                  )}
                 </HeaderCellSort>
               </HeaderRow>
             </Header>

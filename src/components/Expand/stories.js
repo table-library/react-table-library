@@ -486,9 +486,12 @@ storiesOf('01. Features/ 10. Expand', module)
             <Header>
               <HeaderRow>
                 <HeaderCellExpand>
-                  {({ expandState, onExpandAll }) => (
-                    <IconButton size="small" onClick={onExpandAll}>
-                      {expandState.allExpanded ? (
+                  {expand => (
+                    <IconButton
+                      size="small"
+                      onClick={expand.onExpandAll}
+                    >
+                      {expand.expandState.allExpanded ? (
                         <KeyboardArrowUpOutlinedIcon fontSize="small" />
                       ) : (
                         <KeyboardArrowDownOutlinedIcon fontSize="small" />
@@ -522,12 +525,14 @@ storiesOf('01. Features/ 10. Expand', module)
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <CellExpand item={tableItem}>
-                        {({ expandState, onExpandById }) => (
+                        {expand => (
                           <IconButton
                             size="small"
-                            onClick={() => onExpandById(tableItem.id)}
+                            onClick={() =>
+                              expand.onExpandById(tableItem.id)
+                            }
                           >
-                            {expandState.ids.includes(
+                            {expand.expandState.ids.includes(
                               tableItem.id
                             ) ? (
                               <KeyboardArrowUpOutlinedIcon fontSize="small" />

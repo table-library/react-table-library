@@ -1,59 +1,12 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import cs from 'classnames';
 
-import IconChevronSingleDown from '@icons/IconChevronSingleDown';
-import IconChevronSingleUp from '@icons/IconChevronSingleUp';
-import IconChevronSingleUpDown from '@icons/IconChevronSingleUpDown';
-import { getIcon } from '@util/getIcon';
-import { Button } from '@shared/Button';
 import { SortContext } from '@context/Sort';
 import { HeaderCell } from '@table/Cell';
 
-const SORT_ICON_POSITIONS = {
-  Prefix: 'Prefix',
-  Suffix: 'Suffix'
-};
-
-const SORT_ICON_SIZE = '14px';
-const SORT_ICON_MARGIN = '4px';
-
-const getSortIcon = (
-  sortState,
-  sortKey,
-  sortIconSize,
-  SortIconDefault,
-  SortIconUp,
-  SortIconDown
-) => {
-  const size = {
-    height: `${sortIconSize}`,
-    width: `${sortIconSize}`
-  };
-
-  if (sortState.key === sortKey && sortState.reverse) {
-    return SortIconDown
-      ? React.cloneElement(SortIconDown, { ...size })
-      : null;
-  }
-
-  if (sortState.key === sortKey && !sortState.reverse) {
-    return SortIconUp
-      ? React.cloneElement(SortIconUp, { ...size })
-      : null;
-  }
-
-  return SortIconDefault
-    ? React.cloneElement(SortIconDefault, { ...size })
-    : null;
-};
-
-const SortButton = styled(Button)`
-  &.active {
-    font-weight: bold;
-  }
-`;
+import { SortButton } from './SortButton';
+import { SORT_ICON_POSITIONS } from './config';
 
 const HeaderCellSort = React.memo(
   ({
@@ -64,36 +17,7 @@ const HeaderCellSort = React.memo(
     children,
     ...passThrough
   }) => {
-    const { sortState, onToggleSort } = React.useContext(SortContext);
-
-    const sortIconPosition =
-      sortIcon.position || SORT_ICON_POSITIONS.Suffix;
-    const sortIconSize = sortIcon.size || SORT_ICON_SIZE;
-    const sortIconMargin = sortIcon.margin || SORT_ICON_MARGIN;
-    const sortIconDefault = getIcon(
-      sortIcon.iconDefault,
-      <IconChevronSingleUpDown />
-    );
-    const sortIconUp = getIcon(
-      sortIcon.iconUp,
-      <IconChevronSingleUp />
-    );
-    const sortIconDown = getIcon(
-      sortIcon.iconDown,
-      <IconChevronSingleDown />
-    );
-
-    const prefix = sortIconPosition === SORT_ICON_POSITIONS.Prefix;
-    const suffix = sortIconPosition === SORT_ICON_POSITIONS.Suffix;
-
-    const icon = getSortIcon(
-      sortState,
-      sortKey,
-      sortIconSize,
-      sortIconDefault,
-      sortIconUp,
-      sortIconDown
-    );
+    const sort = React.useContext(SortContext);
 
     return (
       <HeaderCell
@@ -101,24 +25,17 @@ const HeaderCellSort = React.memo(
         {...passThrough}
       >
         <SortButton
-          className={cs({
-            active: sortState.key === sortKey,
-            prefix,
-            suffix
-          })}
-          margin={sortIconMargin}
-          onClick={() => onToggleSort({ fn: sortFn, key: sortKey })}
+          sort={sort}
+          sortKey={sortKey}
+          sortFn={sortFn}
+          sortIcon={sortIcon}
         >
-          {prefix && icon && <span>{icon}</span>}
-          <div title={children}>{children}</div>
-          {suffix && icon && <span>{icon}</span>}
+          {children}
         </SortButton>
       </HeaderCell>
     );
   }
 );
-
-HeaderCellSort.SORT_ICON_POSITIONS = SORT_ICON_POSITIONS;
 
 HeaderCellSort.propTypes = {
   sortKey: PropTypes.string,

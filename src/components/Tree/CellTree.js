@@ -93,7 +93,7 @@ const CellTree = React.memo(
     );
 
     return (
-      <Cell className={cs('cell-tree', className)} {...passThrough}>
+      <Cell className={cs('td-tree', className)} {...passThrough}>
         <TreeContent>
           <Button
             className="prefix narrow"
