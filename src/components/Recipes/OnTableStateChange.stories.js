@@ -23,8 +23,9 @@ const list = [
   }
 ];
 
-storiesOf('04. Recipes/ 01. On Table State Change', module)
-  .add('default', () => {
+storiesOf('04. Recipes/ 01. On Table State Change', module).add(
+  'default',
+  () => {
     const handleTableStateChange = (type, sort) => {
       console.log(type, sort);
     };
@@ -88,69 +89,5 @@ storiesOf('04. Recipes/ 01. On Table State Change', module)
         )}
       </Table>
     );
-  })
-  .add('notify on mount', () => {
-    const handleTableStateChange = (type, sort) => {
-      console.log(type, sort);
-    };
-
-    return (
-      <Table list={list} onTableStateChange={handleTableStateChange}>
-        {tableList => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCellSort
-                  sortKey="name"
-                  sortFn={array =>
-                    array.sort((a, b) => a.name.localeCompare(b.name))
-                  }
-                >
-                  Name
-                </HeaderCellSort>
-                <HeaderCellSort
-                  sortKey="stars"
-                  sortFn={array =>
-                    array.sort((a, b) => a.stars - b.stars)
-                  }
-                >
-                  Stars
-                </HeaderCellSort>
-                <HeaderCellSort
-                  sortKey="light"
-                  sortFn={array =>
-                    array.sort((a, b) => a.light - b.light)
-                  }
-                >
-                  Light
-                </HeaderCellSort>
-                <HeaderCellSort
-                  sortKey="count"
-                  sortFn={array =>
-                    array.sort((a, b) => a.count - b.count)
-                  }
-                >
-                  Count
-                </HeaderCellSort>
-              </HeaderRow>
-            </Header>
-
-            <Body>
-              {tableList.map(item => (
-                <Row item={item} key={item.id}>
-                  {tableItem => (
-                    <React.Fragment key={tableItem.id}>
-                      <Cell>{tableItem.name}</Cell>
-                      <Cell>{tableItem.stars}</Cell>
-                      <Cell>{tableItem.light.toString()}</Cell>
-                      <Cell>{tableItem.count}</Cell>
-                    </React.Fragment>
-                  )}
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
-    );
-  });
+  }
+);

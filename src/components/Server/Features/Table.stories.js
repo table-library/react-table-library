@@ -3,8 +3,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { getList } from '@server/list';
-
 import {
   Table,
   Header,
@@ -15,9 +13,11 @@ import {
   Cell
 } from '@table';
 
+import { getList } from '../server/list';
+
 storiesOf('05. Server/ 01. Table', module)
   .addParameters({ component: Table })
-  .add('default WIP', () => {
+  .add('default', () => {
     const [list, setList] = React.useState([]);
 
     const doGetList = React.useCallback(async params => {

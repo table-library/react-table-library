@@ -1,4 +1,4 @@
-const TIMEOUT = 500;
+const TIMEOUT = 250;
 
 const LIST = [
   { id: '1', name: 'Hello', stars: 24, count: 42, light: true },
@@ -29,7 +29,7 @@ export const getList = ({
   sortKey = 'none',
   sortReverse = false
 }) =>
-  console.log('get list') ||
+  console.log('getList') ||
   new Promise(resolve => {
     let modifiedList = [...LIST];
 

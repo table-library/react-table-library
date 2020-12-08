@@ -3,10 +3,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { getList } from '@server/list';
-
-import { useTableState } from '@hooks';
-
 import {
   Table,
   Header,
@@ -17,7 +13,12 @@ import {
   Cell
 } from '@table';
 
-storiesOf('05. Server/ 03. Search', module)
+import { HeaderCellSort } from '@sort';
+import { useTableState } from '@hooks';
+
+import { getList } from '../server/list';
+
+storiesOf('06. Server Recipes/ 03. Origin Mixed/Multi', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [search, setSearch] = React.useState('');
@@ -38,17 +39,19 @@ storiesOf('05. Server/ 03. Search', module)
       doGetList({});
     }, [doGetList]);
 
-    // server-side search
+    // server-side search and sort
 
     const handleTableStateChange = useTableState(
       (type, tableState, thirdPartyState) => {
-        const SERVER_SIDE_OPERATIONS = ['SEARCH'];
-
-        const params = {
-          search: thirdPartyState.search
-        };
+        const SERVER_SIDE_OPERATIONS = ['SEARCH', 'SORT'];
 
         if (SERVER_SIDE_OPERATIONS.includes(type)) {
+          const params = {
+            search: thirdPartyState.search,
+            sortKey: tableState.sort.sortState.key,
+            sortReverse: tableState.sort.sortState.reverse
+          };
+
           doGetList(params);
         }
       },
@@ -71,7 +74,8 @@ storiesOf('05. Server/ 03. Search', module)
         <Table
           list={list}
           server={{
-            search: true
+            search: true,
+            sort: true
           }}
           onTableStateChange={handleTableStateChange}
         >
@@ -79,10 +83,40 @@ storiesOf('05. Server/ 03. Search', module)
             <>
               <Header>
                 <HeaderRow>
-                  <HeaderCell>Name</HeaderCell>
-                  <HeaderCell>Stars</HeaderCell>
-                  <HeaderCell>Light</HeaderCell>
-                  <HeaderCell>Count</HeaderCell>
+                  <HeaderCellSort
+                    sortKey="name"
+                    sortFn={array =>
+                      array.sort((a, b) =>
+                        a.name.localeCompare(b.name)
+                      )
+                    }
+                  >
+                    Name
+                  </HeaderCellSort>
+                  <HeaderCellSort
+                    sortKey="stars"
+                    sortFn={array =>
+                      array.sort((a, b) => a.stars - b.stars)
+                    }
+                  >
+                    Stars
+                  </HeaderCellSort>
+                  <HeaderCellSort
+                    sortKey="light"
+                    sortFn={array =>
+                      array.sort((a, b) => a.light - b.light)
+                    }
+                  >
+                    Light
+                  </HeaderCellSort>
+                  <HeaderCellSort
+                    sortKey="count"
+                    sortFn={array =>
+                      array.sort((a, b) => a.count - b.count)
+                    }
+                  >
+                    Count
+                  </HeaderCellSort>
                 </HeaderRow>
               </Header>
 
@@ -106,7 +140,7 @@ storiesOf('05. Server/ 03. Search', module)
       </>
     );
   })
-  .add('with debounce', () => {
+  .add('with one debounced operation', () => {
     const [search, setSearch] = React.useState('');
 
     const handleSearch = event => {
@@ -125,17 +159,19 @@ storiesOf('05. Server/ 03. Search', module)
       doGetList({});
     }, [doGetList]);
 
-    // server-side search
+    // server-side search and sort
 
     const timeout = React.useRef();
 
     const handleTableStateChange = useTableState(
       (type, tableState, thirdPartyState) => {
-        const SERVER_SIDE_OPERATIONS = [];
+        const SERVER_SIDE_OPERATIONS = ['SORT'];
         const SERVER_SIDE_OPERATIONS_DEBOUNCED = ['SEARCH'];
 
         const params = {
-          search: thirdPartyState.search
+          search: thirdPartyState.search,
+          sortKey: tableState.sort.sortState.key,
+          sortReverse: tableState.sort.sortState.reverse
         };
 
         if (SERVER_SIDE_OPERATIONS.includes(type)) {
@@ -167,7 +203,8 @@ storiesOf('05. Server/ 03. Search', module)
         <Table
           list={list}
           server={{
-            search: true
+            search: true,
+            sort: true
           }}
           onTableStateChange={handleTableStateChange}
         >
@@ -175,10 +212,40 @@ storiesOf('05. Server/ 03. Search', module)
             <>
               <Header>
                 <HeaderRow>
-                  <HeaderCell>Name</HeaderCell>
-                  <HeaderCell>Stars</HeaderCell>
-                  <HeaderCell>Light</HeaderCell>
-                  <HeaderCell>Count</HeaderCell>
+                  <HeaderCellSort
+                    sortKey="name"
+                    sortFn={array =>
+                      array.sort((a, b) =>
+                        a.name.localeCompare(b.name)
+                      )
+                    }
+                  >
+                    Name
+                  </HeaderCellSort>
+                  <HeaderCellSort
+                    sortKey="stars"
+                    sortFn={array =>
+                      array.sort((a, b) => a.stars - b.stars)
+                    }
+                  >
+                    Stars
+                  </HeaderCellSort>
+                  <HeaderCellSort
+                    sortKey="light"
+                    sortFn={array =>
+                      array.sort((a, b) => a.light - b.light)
+                    }
+                  >
+                    Light
+                  </HeaderCellSort>
+                  <HeaderCellSort
+                    sortKey="count"
+                    sortFn={array =>
+                      array.sort((a, b) => a.count - b.count)
+                    }
+                  >
+                    Count
+                  </HeaderCellSort>
                 </HeaderRow>
               </Header>
 

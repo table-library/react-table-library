@@ -3,8 +3,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { getList } from '@server/list';
-
 import {
   Table,
   Header,
@@ -16,8 +14,11 @@ import {
 } from '@table';
 
 import { HeaderCellSort } from '@sort';
+import { useTableState } from '@hooks';
 
-storiesOf('05. Server/ 02. Sort', module)
+import { getList } from '../server/list';
+
+storiesOf('06. Server Recipes/ 01. Origin Table State', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [list, setList] = React.useState([]);
@@ -34,18 +35,20 @@ storiesOf('05. Server/ 02. Sort', module)
 
     // server-side sort
 
-    const handleTableStateChange = (type, tableState) => {
-      const SERVER_SIDE_OPERATIONS = ['SORT'];
+    const handleTableStateChange = useTableState(
+      (type, tableState) => {
+        const SERVER_SIDE_OPERATIONS = ['SORT'];
 
-      if (SERVER_SIDE_OPERATIONS.includes(type)) {
-        const params = {
-          sortKey: tableState.sort.sortState.key,
-          sortReverse: tableState.sort.sortState.reverse
-        };
+        if (SERVER_SIDE_OPERATIONS.includes(type)) {
+          const params = {
+            sortKey: tableState.sort.sortState.key,
+            sortReverse: tableState.sort.sortState.reverse
+          };
 
-        doGetList(params);
+          doGetList(params);
+        }
       }
-    };
+    );
 
     return (
       <Table

@@ -3,13 +3,24 @@ import isEqual from 'lodash.isequal';
 
 import { usePrevious } from '@util/usePrevious';
 
-export const useTableState = (callback, dependencies) => {
+const dependenciesToState = dependencies =>
+  Object.keys(dependencies).reduce(
+    (acc, key) => ({
+      ...acc,
+      [dependencies[key].stateKey]: dependencies[key].stateValue
+    }),
+    {}
+  );
+
+export const useTableState = (callback, dependencies = {}) => {
   const tableStateRef = React.useRef();
+  const thirdPartyStateRef = React.useRef();
 
-  const dependenciesPrev = usePrevious(dependencies);
-
-  const enhancedCallback = React.useCallback(
+  // #1 memoize tableState
+  const firstEnhancedCallback = React.useCallback(
     (type, tableState, thirdPartyState = {}) => {
+      // whenever we run through this origin coming from the table
+      // we memoize the tableState to have it available in #2
       tableStateRef.current = tableState;
 
       callback(type, tableState, thirdPartyState);
@@ -17,14 +28,15 @@ export const useTableState = (callback, dependencies) => {
     [callback]
   );
 
+  const dependenciesPrev = usePrevious(dependencies);
+
+  // #2 react to thirdPartyState change
   React.useEffect(() => {
-    const thirdPartyState = Object.keys(dependencies).reduce(
-      (acc, key) => ({
-        ...acc,
-        [dependencies[key].stateKey]: dependencies[key].stateValue
-      }),
-      {}
-    );
+    const thirdPartyState = dependenciesToState(dependencies);
+
+    // whenever we run through this origin coming from outside of table
+    // we memoize the thirdPartyState to have it available in #3
+    thirdPartyStateRef.current = thirdPartyState;
 
     Object.keys(dependencies).forEach(key => {
       const dependencyChanged =
@@ -37,14 +49,26 @@ export const useTableState = (callback, dependencies) => {
       if (dependencyChanged) {
         const type = key;
 
-        enhancedCallback(
+        // for the changed dependency
+        // call #1 with the memoized tableState
+        firstEnhancedCallback(
           type,
           tableStateRef.current,
           thirdPartyState
         );
       }
     });
-  }, [dependenciesPrev, dependencies, enhancedCallback]);
+  }, [dependenciesPrev, dependencies, firstEnhancedCallback]);
 
-  return enhancedCallback;
+  // #3
+  const secondEnhancedCallback = (type, tableState) =>
+    firstEnhancedCallback(
+      type,
+      tableState,
+      // whenever we run through this origin coming from the table
+      // we use the memoized thirdPartyState from #2
+      thirdPartyStateRef.current
+    );
+
+  return secondEnhancedCallback;
 };
