@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cs from 'classnames';
 
 import { SortContext } from '@common/context/Sort';
-import { HeaderCell } from '@table/Cell';
+import { HeaderCell } from '@table-library/react-table-library/lib/table/Cell';
 
 import { SortButton } from './SortButton';
 import { SORT_ICON_POSITIONS } from './config';

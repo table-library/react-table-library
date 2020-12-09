@@ -11,16 +11,20 @@ import {
   Row,
   HeaderCell,
   Cell
-} from '@table';
+} from '@table-library/react-table-library/lib/table';
 
-import { CellTree, useTreeRow, TREE_EXPAND_TYPES } from '@tree';
+import {
+  CellTree,
+  useTreeRow,
+  TREE_EXPAND_TYPES
+} from '@table-library/react-table-library/lib/tree';
 
 import {
   HeaderCellExpand,
   CellExpand,
   useExpandRow,
   EXPAND_TYPES
-} from '@expand';
+} from '@table-library/react-table-library/lib/expand';
 
 const list = [
   {

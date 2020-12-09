@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
 
-import { Cell } from '@table/Cell';
+import { Cell } from '@table-library/react-table-library/lib/table/Cell';
 import { SelectContext } from '@common/context/Select';
 
 import { ImperativeCheckbox } from './Checkbox';

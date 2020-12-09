@@ -11,7 +11,7 @@ import {
   Row,
   HeaderCell,
   Cell
-} from '@table';
+} from '@table-library/react-table-library/lib/table';
 
 import { getList } from '../server/list';
 

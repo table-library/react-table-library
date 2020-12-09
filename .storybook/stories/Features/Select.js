@@ -13,14 +13,14 @@ import {
   Row,
   HeaderCell,
   Cell
-} from '@table';
+} from '@table-library/react-table-library/lib/table';
 
 import {
   HeaderCellSelect,
   CellSelect,
   useSelectRow,
   SELECT_TYPES
-} from '@select';
+} from '@table-library/react-table-library/lib/select';
 
 const list = [
   { id: '1', name: 'Hello', stars: 24, count: 42, light: true },

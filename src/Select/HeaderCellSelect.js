@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cs from 'classnames';
 
 import { SelectContext } from '@common/context/Select';
-import { HeaderCell } from '@table/Cell';
+import { HeaderCell } from '@table-library/react-table-library/lib/table/Cell';
 
 import { ImperativeCheckbox } from './Checkbox';
 

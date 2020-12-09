@@ -2,8 +2,8 @@ import * as React from 'react';
 import { css } from 'styled-components';
 import cs from 'classnames';
 
-import { Body } from '@table/Body';
-import { Row } from '@table/Row';
+import { Body } from '@table-library/react-table-library/lib/table/Body';
+import { Row } from '@table-library/react-table-library/lib/table/Row';
 import { isRowClick } from '@common/util/isRowClick';
 
 import { isLeaf, hasLeaves } from './util';

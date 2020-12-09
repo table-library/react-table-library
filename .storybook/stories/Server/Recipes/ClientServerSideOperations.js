@@ -11,10 +11,10 @@ import {
   Row,
   HeaderCell,
   Cell
-} from '@table';
+} from '@table-library/react-table-library/lib/table';
 
-import { HeaderCellSort } from '@sort';
-import { useTableState } from '@hooks';
+import { HeaderCellSort } from '@table-library/react-table-library/lib/sort';
+import { useTableState } from '@table-library/react-table-library/lib/hooks';
 
 import { getList } from '../server/list';
 

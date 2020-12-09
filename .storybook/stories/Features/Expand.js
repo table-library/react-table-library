@@ -15,14 +15,14 @@ import {
   Row,
   HeaderCell,
   Cell
-} from '@table';
+} from '@table-library/react-table-library/lib/table';
 
 import {
   HeaderCellExpand,
   CellExpand,
   useExpandRow,
   EXPAND_TYPES
-} from '@expand';
+} from '@table-library/react-table-library/lib/expand';
 
 const list = [
   { id: '1', name: 'Hello', stars: 24, count: 42, light: true },

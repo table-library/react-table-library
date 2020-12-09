@@ -11,9 +11,9 @@ import {
   Row,
   HeaderCell,
   Cell
-} from '@table';
+} from '@table-library/react-table-library/lib/table';
 
-import { useTableState } from '@hooks';
+import { useTableState } from '@table-library/react-table-library/lib/hooks';
 
 import { getList } from '../server/list';
 

@@ -15,9 +15,13 @@ import {
   Row,
   HeaderCell,
   Cell
-} from '@table';
+} from '@table-library/react-table-library/lib/table';
 
-import { useTreeRow, CellTree, TREE_EXPAND_TYPES } from '@tree';
+import {
+  useTreeRow,
+  CellTree,
+  TREE_EXPAND_TYPES
+} from '@table-library/react-table-library/lib/tree';
 
 const list = [
   {

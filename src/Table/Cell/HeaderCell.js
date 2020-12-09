@@ -4,7 +4,10 @@ import cs from 'classnames';
 
 import { HeaderCellContainer } from '@common/components/Cell';
 import { ThemeContext } from '@common/context/Theme';
-import { Resizer, useResize } from '@resize';
+import {
+  Resizer,
+  useResize
+} from '@table-library/react-table-library/lib/resize';
 
 const HeaderCell = ({
   index,

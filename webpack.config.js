@@ -5,13 +5,19 @@ module.exports = {
   entry: {
     main: './src/index.js',
     hooks: './src/hooks/index.js',
-    Table: './src/Table/index.js',
-    Theme: './src/Theme/index.js',
-    Sort: './src/Sort/index.js',
-    Select: './src/Select/index.js',
-    Tree: './src/Tree/index.js',
-    Resize: './src/Resize/index.js',
-    Expand: './src/Expand/index.js'
+    table: './src/Table/index.js',
+    theme: './src/Theme/index.js',
+    sort: './src/Sort/index.js',
+    select: './src/Select/index.js',
+    tree: './src/Tree/index.js',
+    resize: './src/Resize/index.js',
+    expand: './src/Expand/index.js'
+  },
+  // Webpack 4: https://v4.webpack.js.org/guides/code-splitting/#prevent-duplication
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
   },
   output: {
     path: `${__dirname}/lib`,

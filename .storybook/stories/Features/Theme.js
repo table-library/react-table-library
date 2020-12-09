@@ -11,8 +11,8 @@ import {
   Row,
   HeaderCell,
   Cell
-} from '@table';
-import { useTheme } from '@theme';
+} from '@table-library/react-table-library/lib/table';
+import { useTheme } from '@table-library/react-table-library/lib/theme';
 
 const list = [
   { id: '1', name: 'Hello', stars: 24, count: 42, light: true },

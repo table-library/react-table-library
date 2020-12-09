@@ -11,15 +11,19 @@ import {
   Row,
   HeaderCell,
   Cell
-} from '@table';
+} from '@table-library/react-table-library/lib/table';
 
-import { CellTree, useTreeRow, TREE_EXPAND_TYPES } from '@tree';
+import {
+  CellTree,
+  useTreeRow,
+  TREE_EXPAND_TYPES
+} from '@table-library/react-table-library/lib/tree';
 import {
   CellSelect,
   HeaderCellSelect,
   useSelectRow,
   SELECT_TYPES
-} from '@select';
+} from '@table-library/react-table-library/lib/select';
 
 const list = [
   {

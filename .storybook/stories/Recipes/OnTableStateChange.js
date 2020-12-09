@@ -3,9 +3,16 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { Table, Header, HeaderRow, Body, Row, Cell } from '@table';
+import {
+  Table,
+  Header,
+  HeaderRow,
+  Body,
+  Row,
+  Cell
+} from '@table-library/react-table-library/lib/table';
 
-import { HeaderCellSort } from '@sort';
+import { HeaderCellSort } from '@table-library/react-table-library/lib/sort';
 
 const list = [
   { id: '1', name: 'Hello', stars: 24, count: 42, light: true },

@@ -7,7 +7,7 @@ import IconChevronSingleDown from '@common/icons/IconChevronSingleDown';
 import IconChevronSingleRight from '@common/icons/IconChevronSingleRight';
 import { getIcon } from '@common/util/getIcon';
 import { Button } from '@common/components/Button';
-import { Cell } from '@table/Cell';
+import { Cell } from '@table-library/react-table-library/lib/table/Cell';
 import { TreeContext } from '@common/context/Tree';
 
 import { isLeaf } from './util';

@@ -11,7 +11,7 @@ import {
   Row,
   HeaderCell,
   Cell
-} from '@table';
+} from '@table-library/react-table-library/lib/table';
 
 const list = [
   { id: '1', name: 'Hello', stars: 24, count: 42, light: true },
