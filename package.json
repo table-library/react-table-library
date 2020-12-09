@@ -1,6 +1,6 @@
 {
   "name": "@table-library/react-table-library",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "react-table-library",
   "main": "lib/main.js",
   "directories": {
@@ -10,14 +10,13 @@
     "@babel/preset-env": "7.5.5"
   },
   "peerDependencies": {
-    "classnames": "^2.2.6",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "styled-components": "^5.0.1"
+    "react": "^16.13.1 || ^17",
+    "react-dom": "^16.13.1 || ^17"
   },
   "dependencies": {
     "classnames": "^2.2.6",
     "lodash.isequal": "^4.5.0",
+    "styled-components": "^5.0.1",
     "use-double-click": "^1.0.5"
   },
   "devDependencies": {
@@ -95,14 +94,14 @@
     "type": "git",
     "url": "git+https://github.com/table-library/react-table-library.git"
   },
-    "keywords": [
-      "react",
-      "table",
-      "react-table",
-      "react-table-library",
-      "datagrid",
-      "react-datagrid"
-    ],
+  "keywords": [
+    "react",
+    "table",
+    "react-table",
+    "react-table-library",
+    "datagrid",
+    "react-datagrid"
+  ],
   "author": "Robin Wieruch <opensource@rwieruch.com> (https://www.robinwieruch.de)",
   "license": "UNLICENSED",
   "bugs": {
