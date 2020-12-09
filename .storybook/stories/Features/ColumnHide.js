@@ -29,7 +29,7 @@ const list = [
   }
 ];
 
-storiesOf('01. Features/ 11. Column Hiding', module)
+storiesOf('01. Features/ 12. Column Hiding', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [columns, setColumns] = React.useState([
