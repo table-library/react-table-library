@@ -1,8 +1,10 @@
 import * as hooks from './hooks';
-import * as Table from './components/Table';
-import * as Theme from './components/Theme';
-import * as Sort from './components/Sort';
-import * as Select from './components/Select';
-import * as Tree from './components/Tree';
+import * as Table from './Table';
+import * as Theme from './Theme';
+import * as Sort from './Sort';
+import * as Select from './Select';
+import * as Tree from './Tree';
+import * as Expand from './Expand';
+// import * as Resize from './Expand';
 
-export { Table, Theme, Sort, Select, Tree };
+export { hooks, Expand, Table, Theme, Sort, Select, Tree };

@@ -1,18 +1,16 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-const createEntries = require('./build-utils/create-entries');
-const createIconEntries = require('./build-utils/create-icon-entries');
-
 module.exports = {
   entry: {
     main: './src/index.js',
-    // Icons
-    Icons: './src/components/_shared/Icons/index.js',
-    ...createIconEntries('Icons'),
-    // Atoms
-    Table: './src/components/Table/index.js',
-    ...createEntries('Table').primaryEntries,
-    ...createEntries('Table').secondaryEntries
+    hooks: './src/hooks/index.js',
+    Table: './src/Table/index.js',
+    Theme: './src/Theme/index.js',
+    Sort: './src/Sort/index.js',
+    Select: './src/Select/index.js',
+    Tree: './src/Tree/index.js',
+    Resize: './src/Resize/index.js',
+    Expand: './src/Expand/index.js'
   },
   output: {
     path: `${__dirname}/lib`,
@@ -21,8 +19,7 @@ module.exports = {
     libraryTarget: 'umd'
   },
   externals: {
-    react: 'react',
-    'react-dom': 'react-dom'
+    react: 'react'
   },
   module: {
     rules: [

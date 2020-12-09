@@ -1,7 +1,7 @@
 import * as React from 'react';
 import isEqual from 'lodash.isequal';
 
-import { usePrevious } from '@util/usePrevious';
+import { usePrevious } from '@common/util/usePrevious';
 
 const dependenciesToState = dependencies =>
   Object.keys(dependencies).reduce(

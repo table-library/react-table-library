@@ -7,21 +7,15 @@
       "module-resolver",
       {
         "alias": {
-          "@server": "./src/server",
-          "@util": "./src/util",
+          "@common": "./src/common",
           "@hooks": "./src/hooks",
-          "@colors": "./src/constants/colors",
-          "@shared": "./src/components/_shared",
-          "@icons": "./src/components/_shared/Icons",
-          "@context": "./src/components/Context",
-          "@table": "./src/components/Table",
-          "@theme": "./src/components/Theme",
-          "@composite": "./src/components/Composite",
-          "@sort": "./src/components/Sort",
-          "@select": "./src/components/Select",
-          "@tree": "./src/components/Tree",
-          "@resize": "./src/components/Resize",
-          "@expand": "./src/components/Expand"
+          "@table": "./src/Table",
+          "@theme": "./src/Theme",
+          "@sort": "./src/Sort",
+          "@select": "./src/Select",
+          "@tree": "./src/Tree",
+          "@resize": "./src/Resize",
+          "@expand": "./src/Expand"
         }
       }
     ],
