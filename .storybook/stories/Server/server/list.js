@@ -24,12 +24,11 @@ const SORTS = {
   count: array => array.sort((a, b) => a.count - b.count)
 };
 
-export const getList = ({
+export const get = ({
   search = '',
   sortKey = 'none',
   sortReverse = false
 }) =>
-  console.log('getList') ||
   new Promise(resolve => {
     let modifiedList = [...LIST];
 

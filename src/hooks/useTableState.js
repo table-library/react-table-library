@@ -13,7 +13,7 @@ const dependenciesToState = dependencies =>
   );
 
 export const useTableState = (callback, dependencies = {}) => {
-  const tableStateRef = React.useRef();
+  const tableFeatureRef = React.useRef();
   const thirdPartyStateRef = React.useRef();
 
   // #1 memoize tableState
@@ -21,7 +21,7 @@ export const useTableState = (callback, dependencies = {}) => {
     (type, tableState, thirdPartyState = {}) => {
       // whenever we run through this origin coming from the table
       // we memoize the tableState to have it available in #2
-      tableStateRef.current = tableState;
+      tableFeatureRef.current = tableState;
 
       callback(type, tableState, thirdPartyState);
     },
@@ -53,7 +53,7 @@ export const useTableState = (callback, dependencies = {}) => {
         // call #1 with the memoized tableState
         firstEnhancedCallback(
           type,
-          tableStateRef.current,
+          tableFeatureRef.current,
           thirdPartyState
         );
       }

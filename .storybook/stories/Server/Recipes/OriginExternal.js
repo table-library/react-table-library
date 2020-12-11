@@ -15,7 +15,7 @@ import {
 
 import { useTableState } from '@table-library/react-table-library/lib/hooks';
 
-import { getList } from '../server/list';
+import { get } from '../server/list';
 
 storiesOf('06. Server Recipes/ 02. Origin External', module)
   .addParameters({ component: Table })
@@ -26,13 +26,13 @@ storiesOf('06. Server Recipes/ 02. Origin External', module)
 
     // initial fetching
 
-    const doGetList = React.useCallback(async params => {
-      setList(await getList(params));
+    const doGet = React.useCallback(async params => {
+      setList(await get(params));
     }, []);
 
     React.useEffect(() => {
-      doGetList({});
-    }, [doGetList]);
+      doGet({});
+    }, [doGet]);
 
     // server-side sort
 
@@ -46,7 +46,7 @@ storiesOf('06. Server Recipes/ 02. Origin External', module)
             sortReverse: false
           };
 
-          doGetList(params);
+          doGet(params);
         }
       },
       {

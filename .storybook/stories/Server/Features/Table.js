@@ -13,20 +13,20 @@ import {
   Cell
 } from '@table-library/react-table-library/lib/table';
 
-import { getList } from '../server/list';
+import { get } from '../server/list';
 
 storiesOf('05. Server/ 01. Table', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [list, setList] = React.useState([]);
 
-    const doGetList = React.useCallback(async params => {
-      setList(await getList(params));
+    const doGet = React.useCallback(async params => {
+      setList(await get(params));
     }, []);
 
     React.useEffect(() => {
-      doGetList({});
-    }, [doGetList]);
+      doGet({});
+    }, [doGet]);
 
     return (
       <Table list={list}>

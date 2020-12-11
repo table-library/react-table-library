@@ -16,7 +16,7 @@ import {
 import { HeaderCellSort } from '@table-library/react-table-library/lib/sort';
 import { useTableState } from '@table-library/react-table-library/lib/hooks';
 
-import { getList } from '../server/list';
+import { get } from '../server/list';
 
 storiesOf('06. Server Recipes/ 03. Origin Mixed/Multi', module)
   .addParameters({ component: Table })
@@ -31,13 +31,13 @@ storiesOf('06. Server Recipes/ 03. Origin Mixed/Multi', module)
 
     // initial fetching
 
-    const doGetList = React.useCallback(async params => {
-      setList(await getList(params));
+    const doGet = React.useCallback(async params => {
+      setList(await get(params));
     }, []);
 
     React.useEffect(() => {
-      doGetList({});
-    }, [doGetList]);
+      doGet({});
+    }, [doGet]);
 
     // server-side search and sort
 
@@ -52,7 +52,7 @@ storiesOf('06. Server Recipes/ 03. Origin Mixed/Multi', module)
             sortReverse: tableState.sort.sortState.reverse
           };
 
-          doGetList(params);
+          doGet(params);
         }
       },
       // thirdPartyState
@@ -151,13 +151,13 @@ storiesOf('06. Server Recipes/ 03. Origin Mixed/Multi', module)
 
     // initial fetching
 
-    const doGetList = React.useCallback(async params => {
-      setList(await getList(params));
+    const doGet = React.useCallback(async params => {
+      setList(await get(params));
     }, []);
 
     React.useEffect(() => {
-      doGetList({});
-    }, [doGetList]);
+      doGet({});
+    }, [doGet]);
 
     // server-side search and sort
 
@@ -175,13 +175,13 @@ storiesOf('06. Server Recipes/ 03. Origin Mixed/Multi', module)
         };
 
         if (SERVER_SIDE_OPERATIONS.includes(type)) {
-          doGetList(params);
+          doGet(params);
         }
 
         if (SERVER_SIDE_OPERATIONS_DEBOUNCED.includes(type)) {
           if (timeout.current) clearTimeout(timeout.current);
 
-          timeout.current = setTimeout(() => doGetList(params), 1500);
+          timeout.current = setTimeout(() => doGet(params), 1500);
         }
       },
       // thirdPartyState

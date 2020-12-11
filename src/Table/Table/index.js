@@ -18,7 +18,7 @@ import {
   ExpandContext
 } from '@common/context/Expand';
 import { SortProvider, SortContext } from '@common/context/Sort';
-import { StateListener } from '@common/context/State';
+import { State } from '@common/context/State';
 
 const TableContainer = styled.div`
   *,
@@ -69,18 +69,18 @@ const Table = ({
 
   return (
     <TableContainer className="table" role="grid" ref={tableRef}>
-      <TableProvider list={list}>
+      <TableProvider
+        list={list}
+        onTableStateChange={onTableStateChange}
+      >
         <ThemeProvider theme={theme}>
           <ResizeProvider tableRef={tableRef}>
             <SelectProvider defaultSelect={defaultSelect}>
               <TreeProvider defaultTree={defaultTree}>
                 <ExpandProvider defaultExpand={defaultExpand}>
                   <SortProvider defaultSort={defaultSort}>
-                    {onTableStateChange && (
-                      <StateListener
-                        onTableStateChange={onTableStateChange}
-                      />
-                    )}
+                    <State />
+
                     <TableContent server={server}>
                       {children}
                     </TableContent>

@@ -16,7 +16,7 @@ import {
 import { HeaderCellSort } from '@table-library/react-table-library/lib/sort';
 import { useTableState } from '@table-library/react-table-library/lib/hooks';
 
-import { getList } from '../server/list';
+import { get } from '../server/list';
 
 storiesOf('05. Server/ 02. Sort', module)
   .addParameters({ component: Table })
@@ -25,13 +25,13 @@ storiesOf('05. Server/ 02. Sort', module)
 
     // initial fetching
 
-    const doGetList = React.useCallback(async params => {
-      setList(await getList(params));
+    const doGet = React.useCallback(async params => {
+      setList(await get(params));
     }, []);
 
     React.useEffect(() => {
-      doGetList({});
-    }, [doGetList]);
+      doGet({});
+    }, [doGet]);
 
     // server-side sort
 
@@ -45,7 +45,7 @@ storiesOf('05. Server/ 02. Sort', module)
             sortReverse: tableState.sort.sortState.reverse
           };
 
-          doGetList(params);
+          doGet(params);
         }
       }
     );

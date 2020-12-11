@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
+import { useReducerWithNotify } from './useReducerWithNotify';
 import { byId } from './reducers';
 
 const TREE_EXPAND_BY_ID = 'TREE_EXPAND_BY_ID';
@@ -22,9 +23,11 @@ const DEFAULT_TREE = {
 };
 
 const TreeProvider = ({ defaultTree = DEFAULT_TREE, children }) => {
-  const [treeState, treeStateDispatcher] = React.useReducer(
+  const [treeState, treeStateDispatcher] = useReducerWithNotify(
     treeReducer,
-    defaultTree
+    defaultTree,
+    'tree',
+    'treeState'
   );
 
   const onTreeExpandById = React.useCallback(
@@ -33,7 +36,7 @@ const TreeProvider = ({ defaultTree = DEFAULT_TREE, children }) => {
         type: TREE_EXPAND_BY_ID,
         payload: { id }
       }),
-    []
+    [treeStateDispatcher]
   );
 
   return (

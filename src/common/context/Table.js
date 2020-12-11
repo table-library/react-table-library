@@ -3,11 +3,15 @@ import PropTypes from 'prop-types';
 
 const TableContext = React.createContext(null);
 
-const TableProvider = ({ list, children }) => {
+const TableProvider = ({ list, onTableStateChange, children }) => {
+  const tableFeatureRef = React.useRef();
+
   return (
     <TableContext.Provider
       value={{
-        list
+        list,
+        onTableStateChange,
+        tableFeatureRef
       }}
     >
       {children}
@@ -17,6 +21,7 @@ const TableProvider = ({ list, children }) => {
 
 TableProvider.propTypes = {
   list: PropTypes.arrayOf(PropTypes.any),
+  onTableStateChange: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

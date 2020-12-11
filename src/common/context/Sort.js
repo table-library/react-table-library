@@ -2,6 +2,8 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash.isequal';
 
+import { useReducerWithNotify } from './useReducerWithNotify';
+
 const TOGGLE_SORT = 'TOGGLE_SORT';
 const SET_SORT = 'SET_SORT';
 
@@ -45,9 +47,11 @@ const DEFAULT_SORT = {
 };
 
 const SortProvider = ({ defaultSort = DEFAULT_SORT, children }) => {
-  const [sortState, sortStateDispatcher] = React.useReducer(
+  const [sortState, sortStateDispatcher] = useReducerWithNotify(
     sortReducer,
-    defaultSort
+    defaultSort,
+    'sort',
+    'sortState'
   );
 
   const onToggleSort = React.useCallback(
@@ -56,7 +60,7 @@ const SortProvider = ({ defaultSort = DEFAULT_SORT, children }) => {
         type: TOGGLE_SORT,
         payload: value
       }),
-    []
+    [sortStateDispatcher]
   );
 
   const onSetSort = React.useCallback(
@@ -65,7 +69,7 @@ const SortProvider = ({ defaultSort = DEFAULT_SORT, children }) => {
         type: SET_SORT,
         payload: value
       }),
-    []
+    [sortStateDispatcher]
   );
 
   React.useEffect(() => {

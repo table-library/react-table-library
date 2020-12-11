@@ -3,8 +3,100 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-storiesOf('05. Server/ 05. Tree WIP', module)
-  // .addParameters({ component: Table })
+import {
+  Table,
+  Header,
+  HeaderRow,
+  Body,
+  Row,
+  HeaderCell,
+  Cell
+} from '@table-library/react-table-library/lib/table';
+
+import {
+  HeaderCellSelect,
+  CellSelect,
+  useSelectRow,
+  SELECT_TYPES
+} from '@table-library/react-table-library/lib/select';
+
+import {
+  useTreeRow,
+  CellTree,
+  TREE_EXPAND_TYPES
+} from '@table-library/react-table-library/lib/tree';
+import { useTableState } from '@table-library/react-table-library/lib/hooks';
+
+import { get } from '../server/tree';
+
+storiesOf('05. Server/ 05. Tree', module)
+  .addParameters({ component: Table })
   .add('default', () => {
-    return <div>WIP</div>;
+    const [list, setList] = React.useState([]);
+
+    const doGet = React.useCallback(async params => {
+      setList(await get(params));
+    }, []);
+
+    React.useEffect(() => {
+      doGet({});
+    }, [doGet]);
+
+    const handleTableStateChange = useTableState(
+      (type, tableState) => {
+        console.log(type, tableState);
+
+        // const SERVER_SIDE_OPERATIONS = ['SORT'];
+
+        // if (SERVER_SIDE_OPERATIONS.includes(type)) {
+        //   const params = {
+        //     sortKey: tableState.sort.sortState.key,
+        //     sortReverse: tableState.sort.sortState.reverse
+        //   };
+
+        // doGet(params);
+        // }
+      }
+    );
+
+    return (
+      <Table list={list} onTableStateChange={handleTableStateChange}>
+        {tableList => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <Row
+                  key={item.id}
+                  item={item}
+                  plugins={[
+                    { plugin: useTreeRow },
+                    { plugin: useSelectRow }
+                  ]}
+                >
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <CellTree item={tableItem}>
+                        {tableItem.name}
+                      </CellTree>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
   });

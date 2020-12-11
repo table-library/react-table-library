@@ -2,6 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import { TableContext } from './Table';
+import { useReducerWithNotify } from './useReducerWithNotify';
 import { byId, byAll } from './reducers';
 
 const EXPAND_BY_ID = 'EXPAND_BY_ID';
@@ -32,15 +33,17 @@ const ExpandProvider = ({
 }) => {
   const { list } = React.useContext(TableContext);
 
-  const [expandState, expandStateDispatcher] = React.useReducer(
+  const [expandState, expandStateDispatcher] = useReducerWithNotify(
     expandReducer,
-    defaultExpand
+    defaultExpand,
+    'expand',
+    'expandState'
   );
 
   const onExpandById = React.useCallback(
     id =>
       expandStateDispatcher({ type: EXPAND_BY_ID, payload: { id } }),
-    []
+    [expandStateDispatcher]
   );
 
   const onExpandAll = React.useCallback(
@@ -49,7 +52,7 @@ const ExpandProvider = ({
         type: EXPAND_ALL,
         payload: { ids: list.map(item => item.id) }
       }),
-    [list]
+    [list, expandStateDispatcher]
   );
 
   const allExpanded =

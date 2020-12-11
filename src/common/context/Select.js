@@ -2,6 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import { TableContext } from './Table';
+import { useReducerWithNotify } from './useReducerWithNotify';
 import { byId, byAll } from './reducers';
 
 const SELECT_BY_ID = 'SELECT_BY_ID';
@@ -32,15 +33,17 @@ const SelectProvider = ({
 }) => {
   const { list } = React.useContext(TableContext);
 
-  const [selectState, selectStateDispatcher] = React.useReducer(
+  const [selectState, selectStateDispatcher] = useReducerWithNotify(
     selectReducer,
-    defaultSelect
+    defaultSelect,
+    'select',
+    'selectState'
   );
 
   const onSelectById = React.useCallback(
     id =>
       selectStateDispatcher({ type: SELECT_BY_ID, payload: { id } }),
-    []
+    [selectStateDispatcher]
   );
 
   const onSelectAll = React.useCallback(
@@ -49,7 +52,7 @@ const SelectProvider = ({
         type: SELECT_ALL,
         payload: { ids: list.map(item => item.id) }
       }),
-    [list]
+    [list, selectStateDispatcher]
   );
 
   const allSelected =

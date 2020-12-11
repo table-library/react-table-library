@@ -15,7 +15,7 @@ import {
 
 import { useTableState } from '@table-library/react-table-library/lib/hooks';
 
-import { getList } from '../server/list';
+import { get } from '../server/list';
 
 storiesOf('05. Server/ 03. Search', module)
   .addParameters({ component: Table })
@@ -30,13 +30,13 @@ storiesOf('05. Server/ 03. Search', module)
 
     // initial fetching
 
-    const doGetList = React.useCallback(async params => {
-      setList(await getList(params));
+    const doGet = React.useCallback(async params => {
+      setList(await get(params));
     }, []);
 
     React.useEffect(() => {
-      doGetList({});
-    }, [doGetList]);
+      doGet({});
+    }, [doGet]);
 
     // server-side search
 
@@ -49,7 +49,7 @@ storiesOf('05. Server/ 03. Search', module)
             search: thirdPartyState.search
           };
 
-          doGetList(params);
+          doGet(params);
         }
       },
       // thirdPartyState
