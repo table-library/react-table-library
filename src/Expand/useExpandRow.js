@@ -8,7 +8,7 @@ import { EXPAND_TYPES } from './config';
 const useExpandRow = ({
   expansionPanel,
   isExpanded,
-  onExpandById,
+  onToggleExpandById,
   expandType = EXPAND_TYPES.RowClick
 }) => {
   const theme = css`
@@ -26,7 +26,7 @@ const useExpandRow = ({
     if (!isRowClick(event)) return;
 
     if (expandType === EXPAND_TYPES.RowClick) {
-      onExpandById(tableItem.id);
+      onToggleExpandById(tableItem.id);
     }
   };
 

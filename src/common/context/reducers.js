@@ -1,15 +1,15 @@
-export const byId = (state, action) => {
-  const hasId = state.ids.includes(action.payload.id);
+export const addById = (state, action) => {
+  return {
+    ...state,
+    ids: state.ids.concat(action.payload.id)
+  };
+};
 
-  return hasId
-    ? {
-        ...state,
-        ids: state.ids.filter(id => id !== action.payload.id)
-      }
-    : {
-        ...state,
-        ids: state.ids.concat(action.payload.id)
-      };
+export const removeById = (state, action) => {
+  return {
+    ...state,
+    ids: state.ids.filter(id => id !== action.payload.id)
+  };
 };
 
 export const byAll = (state, action) => {
@@ -24,4 +24,18 @@ export const byAll = (state, action) => {
         ...state,
         ids: action.payload.ids
       };
+};
+
+export const addAll = (state, action) => {
+  return {
+    ...state,
+    ids: action.payload.ids
+  };
+};
+
+export const removeAll = state => {
+  return {
+    ...state,
+    ids: []
+  };
 };

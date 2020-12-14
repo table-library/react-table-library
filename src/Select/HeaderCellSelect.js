@@ -23,7 +23,7 @@ const HeaderCellSelect = React.memo(
             !select.selectState.allSelected &&
             !select.selectState.noneSelected
           }
-          onChange={select.onSelectAll}
+          onChange={select.onToggleSelectAll}
         >
           {children}
         </ImperativeCheckbox>

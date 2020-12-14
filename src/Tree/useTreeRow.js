@@ -14,7 +14,7 @@ const useTreeRow = ({
   treeDepthLevel = 0,
   treeColumnLevel = 1,
   isTreeExpanded,
-  onTreeExpandById,
+  onToggleTreeExpandById,
   treeExpandType = TREE_EXPAND_TYPES.RowClick,
   children,
   ...passThrough
@@ -41,7 +41,7 @@ const useTreeRow = ({
     if (isLeaf(tableItem)) return;
 
     if (treeExpandType === TREE_EXPAND_TYPES.RowClick) {
-      onTreeExpandById(tableItem.id);
+      onToggleTreeExpandById(tableItem.id);
     }
   };
 

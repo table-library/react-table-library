@@ -3,15 +3,19 @@ import PropTypes from 'prop-types';
 
 import { TableContext } from './Table';
 import { useReducerWithNotify } from './useReducerWithNotify';
-import { byId, byAll } from './reducers';
+import { addById, removeById, byAll } from './reducers';
 
-const EXPAND_BY_ID = 'EXPAND_BY_ID';
+const ADD_EXPAND_BY_ID = 'ADD_EXPAND_BY_ID';
+const REMOVE_EXPAND_BY_ID = 'REMOVE_EXPAND_BY_ID';
 const EXPAND_ALL = 'EXPAND_ALL';
 
 const expandReducer = (state, action) => {
   switch (action.type) {
-    case EXPAND_BY_ID: {
-      return byId(state, action);
+    case ADD_EXPAND_BY_ID: {
+      return addById(state, action);
+    }
+    case REMOVE_EXPAND_BY_ID: {
+      return removeById(state, action);
     }
     case EXPAND_ALL: {
       return byAll(state, action);
@@ -33,47 +37,52 @@ const ExpandProvider = ({
 }) => {
   const { list } = React.useContext(TableContext);
 
-  const [expandState, expandStateDispatcher] = useReducerWithNotify(
+  const [state, dispatch] = useReducerWithNotify(
     expandReducer,
     defaultExpand,
     'expand',
     'expandState'
   );
 
-  const onExpandById = React.useCallback(
+  const onToggleExpandById = React.useCallback(
     id =>
-      expandStateDispatcher({ type: EXPAND_BY_ID, payload: { id } }),
-    [expandStateDispatcher]
+      dispatch({
+        type: state.ids.includes(id)
+          ? REMOVE_EXPAND_BY_ID
+          : ADD_EXPAND_BY_ID,
+        payload: { id }
+      }),
+    [state, dispatch]
   );
 
-  const onExpandAll = React.useCallback(
+  const onToggleExpandAll = React.useCallback(
     () =>
-      expandStateDispatcher({
+      dispatch({
         type: EXPAND_ALL,
         payload: { ids: list.map(item => item.id) }
       }),
-    [list, expandStateDispatcher]
+    [list, dispatch]
   );
 
   const allExpanded =
-    expandState.ids.sort().join(',') ===
+    state.ids.sort().join(',') ===
     list
       .map(item => item.id)
       .sort()
       .join(',');
 
-  const noneExpanded = !expandState.ids.length;
+  const noneExpanded = !state.ids.length;
 
   return (
     <ExpandContext.Provider
       value={{
         expandState: {
-          ...expandState,
+          ...state,
           allExpanded,
           noneExpanded
         },
-        onExpandById,
-        onExpandAll
+        onToggleExpandById,
+        onToggleExpandAll
       }}
     >
       {children}

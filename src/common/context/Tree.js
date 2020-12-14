@@ -2,14 +2,18 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import { useReducerWithNotify } from './useReducerWithNotify';
-import { byId } from './reducers';
+import { addById, removeById } from './reducers';
 
-const TREE_EXPAND_BY_ID = 'TREE_EXPAND_BY_ID';
+const ADD_TREE_EXPAND_BY_ID = 'ADD_TREE_EXPAND_BY_ID';
+const REMOVE_TREE_EXPAND_BY_ID = 'REMOVE_TREE_EXPAND_BY_ID';
 
 const treeReducer = (state, action) => {
   switch (action.type) {
-    case TREE_EXPAND_BY_ID: {
-      return byId(state, action);
+    case ADD_TREE_EXPAND_BY_ID: {
+      return addById(state, action);
+    }
+    case REMOVE_TREE_EXPAND_BY_ID: {
+      return removeById(state, action);
     }
     default:
       throw new Error();
@@ -23,27 +27,30 @@ const DEFAULT_TREE = {
 };
 
 const TreeProvider = ({ defaultTree = DEFAULT_TREE, children }) => {
-  const [treeState, treeStateDispatcher] = useReducerWithNotify(
+  const [state, dispatch] = useReducerWithNotify(
     treeReducer,
     defaultTree,
     'tree',
     'treeState'
   );
 
-  const onTreeExpandById = React.useCallback(
-    id =>
-      treeStateDispatcher({
-        type: TREE_EXPAND_BY_ID,
+  const onToggleTreeExpandById = React.useCallback(
+    id => {
+      dispatch({
+        type: state.ids.includes(id)
+          ? REMOVE_TREE_EXPAND_BY_ID
+          : ADD_TREE_EXPAND_BY_ID,
         payload: { id }
-      }),
-    [treeStateDispatcher]
+      });
+    },
+    [state, dispatch]
   );
 
   return (
     <TreeContext.Provider
       value={{
-        treeState,
-        onTreeExpandById
+        treeState: state,
+        onToggleTreeExpandById
       }}
     >
       {children}

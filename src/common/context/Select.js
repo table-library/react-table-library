@@ -3,15 +3,20 @@ import PropTypes from 'prop-types';
 
 import { TableContext } from './Table';
 import { useReducerWithNotify } from './useReducerWithNotify';
-import { byId, byAll } from './reducers';
+import { addById, removeById, byAll } from './reducers';
 
-const SELECT_BY_ID = 'SELECT_BY_ID';
+const ADD_SELECT_BY_ID = 'ADD_SELECT_BY_ID';
+const REMOVE_SELECT_BY_ID = 'REMOVE_SELECT_BY_ID';
+
 const SELECT_ALL = 'SELECT_ALL';
 
 const selectReducer = (state, action) => {
   switch (action.type) {
-    case SELECT_BY_ID: {
-      return byId(state, action);
+    case ADD_SELECT_BY_ID: {
+      return addById(state, action);
+    }
+    case REMOVE_SELECT_BY_ID: {
+      return removeById(state, action);
     }
     case SELECT_ALL: {
       return byAll(state, action);
@@ -33,47 +38,52 @@ const SelectProvider = ({
 }) => {
   const { list } = React.useContext(TableContext);
 
-  const [selectState, selectStateDispatcher] = useReducerWithNotify(
+  const [state, dispatch] = useReducerWithNotify(
     selectReducer,
     defaultSelect,
     'select',
     'selectState'
   );
 
-  const onSelectById = React.useCallback(
+  const onToggleSelectById = React.useCallback(
     id =>
-      selectStateDispatcher({ type: SELECT_BY_ID, payload: { id } }),
-    [selectStateDispatcher]
+      dispatch({
+        type: state.ids.includes(id)
+          ? REMOVE_SELECT_BY_ID
+          : ADD_SELECT_BY_ID,
+        payload: { id }
+      }),
+    [state, dispatch]
   );
 
-  const onSelectAll = React.useCallback(
+  const onToggleSelectAll = React.useCallback(
     () =>
-      selectStateDispatcher({
+      dispatch({
         type: SELECT_ALL,
         payload: { ids: list.map(item => item.id) }
       }),
-    [list, selectStateDispatcher]
+    [list, dispatch]
   );
 
   const allSelected =
-    selectState.ids.sort().join(',') ===
+    state.ids.sort().join(',') ===
     list
       .map(item => item.id)
       .sort()
       .join(',');
 
-  const noneSelected = !selectState.ids.length;
+  const noneSelected = !state.ids.length;
 
   return (
     <SelectContext.Provider
       value={{
         selectState: {
-          ...selectState,
+          ...state,
           allSelected,
           noneSelected
         },
-        onSelectById,
-        onSelectAll
+        onToggleSelectById,
+        onToggleSelectAll
       }}
     >
       {children}

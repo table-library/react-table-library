@@ -10,7 +10,7 @@ import { ExpandButton } from './ExpandButton';
 const HeaderCellExpand = React.memo(
   ({ expandIcon = {}, className, children, ...passThrough }) => {
     const expand = React.useContext(ExpandContext);
-    const handleClick = () => expand.onExpandAll();
+    const handleClick = () => expand.onToggleExpandAll();
 
     return (
       <Cell

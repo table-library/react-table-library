@@ -15,19 +15,28 @@ const getCommonProps = child => ({
   id: child.props.item.id
 });
 
-const getSelectProps = (child, { selectState, onSelectById }) => ({
+const getSelectProps = (
+  child,
+  { selectState, onToggleSelectById }
+) => ({
   isSelected: selectState.ids.includes(child.props.item.id),
-  onSelectById
+  onToggleSelectById
 });
 
-const getTreeProps = (child, { treeState, onTreeExpandById }) => ({
+const getTreeProps = (
+  child,
+  { treeState, onToggleTreeExpandById }
+) => ({
   isTreeExpanded: treeState.ids.includes(child.props.item.id),
-  onTreeExpandById
+  onToggleTreeExpandById
 });
 
-const getExpandProps = (child, { expandState, onExpandById }) => ({
+const getExpandProps = (
+  child,
+  { expandState, onToggleExpandById }
+) => ({
   isExpanded: expandState.ids.includes(child.props.item.id),
-  onExpandById
+  onToggleExpandById
 });
 
 const Body = ({ children }) => {

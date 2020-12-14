@@ -11,7 +11,7 @@ const CellSelect = React.memo(
   ({ item, className, children, ...passThrough }) => {
     const select = React.useContext(SelectContext);
     const isSelected = select.selectState.ids.includes(item.id);
-    const handleChange = () => select.onSelectById(item.id);
+    const handleChange = () => select.onToggleSelectById(item.id);
 
     return (
       <Cell

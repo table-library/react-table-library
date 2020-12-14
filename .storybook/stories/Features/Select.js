@@ -211,7 +211,7 @@ storiesOf('01. Features/06. Select', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSelect>
-                  {({ selectState, onSelectAll }) => (
+                  {({ selectState, onToggleSelectAll }) => (
                     <Checkbox
                       size="small"
                       checked={selectState.allSelected}
@@ -219,7 +219,7 @@ storiesOf('01. Features/06. Select', module)
                         !selectState.allSelected &&
                         !selectState.noneSelected
                       }
-                      onChange={onSelectAll}
+                      onChange={onToggleSelectAll}
                     />
                   )}
                 </HeaderCellSelect>
@@ -240,14 +240,14 @@ storiesOf('01. Features/06. Select', module)
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <CellSelect item={tableItem}>
-                        {({ selectState, onSelectById }) => (
+                        {({ selectState, onToggleSelectById }) => (
                           <Checkbox
                             size="small"
                             checked={selectState.ids.includes(
                               tableItem.id
                             )}
                             onChange={() =>
-                              onSelectById(tableItem.id)
+                              onToggleSelectById(tableItem.id)
                             }
                           />
                         )}

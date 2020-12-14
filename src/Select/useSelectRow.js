@@ -8,7 +8,7 @@ import { SELECT_TYPES } from './config';
 
 const useSelectRow = ({
   isSelected,
-  onSelectById,
+  onToggleSelectById,
   selectType = SELECT_TYPES.RowClick
 }) => {
   const theme = css`
@@ -33,7 +33,7 @@ const useSelectRow = ({
     if (!isRowClick(event)) return;
 
     if (selectType === SELECT_TYPES.RowClick) {
-      onSelectById(tableItem.id);
+      onToggleSelectById(tableItem.id);
     }
   };
 
