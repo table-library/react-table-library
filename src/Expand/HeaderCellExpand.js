@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
 
-import { Cell } from '@table-library/react-table-library/lib/table/Cell';
+import { HeaderCell } from '@table-library/react-table-library/lib/table/Cell';
 import { ExpandContext } from '@common/context/Expand';
 
 import { ExpandButton } from './ExpandButton';
@@ -13,7 +13,7 @@ const HeaderCellExpand = React.memo(
     const handleClick = () => expand.onToggleExpandAll();
 
     return (
-      <Cell
+      <HeaderCell
         className={cs('th-expand', 'shrink', className)}
         {...passThrough}
       >
@@ -25,7 +25,7 @@ const HeaderCellExpand = React.memo(
         >
           {children}
         </ExpandButton>
-      </Cell>
+      </HeaderCell>
     );
   }
 );
