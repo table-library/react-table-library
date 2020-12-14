@@ -7,7 +7,6 @@
       "module-resolver",
       {
         "alias": {
-          "@table-library/react-table-library/lib/hooks": "./src/hooks",
           "@common": "./src/common",
           "@table-library/react-table-library/lib/table": "./src/Table",
           "@table-library/react-table-library/lib/theme": "./src/Theme",

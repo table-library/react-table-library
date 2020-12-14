@@ -31,7 +31,7 @@ const list = [
   }
 ];
 
-storiesOf('04. Recipes/03. Memoized Row', module)
+storiesOf('05. Recipes/03. Memoized Row', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (

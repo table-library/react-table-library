@@ -29,7 +29,7 @@ const list = [
   }
 ];
 
-storiesOf('04. Recipes/ 04. Large Table WIP', module)
+storiesOf('05. Recipes/ 04. Large Table WIP', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (

@@ -13,11 +13,9 @@ import {
   Cell
 } from '@table-library/react-table-library/lib/table';
 
-import { useTableState } from '@table-library/react-table-library/lib/hooks';
-
 import { get } from '../server/list';
 
-storiesOf('06. Server Recipes/ 02. Origin External', module)
+storiesOf('07. Server Recipes/ 02. Origin External', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [option, setOption] = React.useState('none');
@@ -36,23 +34,18 @@ storiesOf('06. Server Recipes/ 02. Origin External', module)
 
     // server-side sort
 
-    const handleTableStateChange = useTableState(
-      (type, tableState, thirdPartyState) => {
-        const SERVER_SIDE_OPERATIONS = ['OUTSIDE_SORT'];
+    const handleTableStateChange = React.useCallback(
+      (type, tableState, action) => {
+        console.log(type, tableState, action);
+        const SERVER_SIDE_OPERATIONS = ['mySort'];
 
         if (SERVER_SIDE_OPERATIONS.includes(type)) {
           const params = {
-            sortKey: thirdPartyState.outsideSort,
+            sortKey: tableState.mySort,
             sortReverse: false
           };
 
           doGet(params);
-        }
-      },
-      {
-        OUTSIDE_SORT: {
-          stateKey: 'outsideSort',
-          stateValue: option
         }
       }
     );
@@ -73,8 +66,8 @@ storiesOf('06. Server Recipes/ 02. Origin External', module)
 
         <Table
           list={list}
-          server={{
-            sort: true
+          externalTableState={{
+            mySort: option
           }}
           onTableStateChange={handleTableStateChange}
         >

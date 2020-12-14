@@ -13,11 +13,9 @@ import {
   Cell
 } from '@table-library/react-table-library/lib/table';
 
-import { useTableState } from '@table-library/react-table-library/lib/hooks';
-
 import { get } from '../server/list';
 
-storiesOf('05. Server/ 03. Search', module)
+storiesOf('06. Server/ 03. Search', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [search, setSearch] = React.useState('');
@@ -40,25 +38,20 @@ storiesOf('05. Server/ 03. Search', module)
 
     // server-side search
 
-    const handleTableStateChange = useTableState(
-      (type, tableState, thirdPartyState) => {
-        const SERVER_SIDE_OPERATIONS = ['SEARCH'];
+    const handleTableStateChange = React.useCallback(
+      (type, tableState, action) => {
+        console.log(type, tableState, action);
+        const SERVER_SIDE_OPERATIONS = ['mySearch'];
 
         if (SERVER_SIDE_OPERATIONS.includes(type)) {
           const params = {
-            search: thirdPartyState.search
+            search: tableState.mySearch
           };
 
           doGet(params);
         }
       },
-      // thirdPartyState
-      {
-        SEARCH: {
-          stateKey: 'search',
-          stateValue: search
-        }
-      }
+      []
     );
 
     return (
@@ -70,8 +63,8 @@ storiesOf('05. Server/ 03. Search', module)
 
         <Table
           list={list}
-          server={{
-            search: true
+          externalTableState={{
+            mySearch: search
           }}
           onTableStateChange={handleTableStateChange}
         >

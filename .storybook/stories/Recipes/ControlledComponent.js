@@ -31,7 +31,7 @@ const list = [
   }
 ];
 
-storiesOf('04. Recipes/ 02. Controlled', module)
+storiesOf('05. Recipes/ 02. Controlled', module)
   .add('default', () => {
     return (
       <Table list={list}>
@@ -93,7 +93,7 @@ storiesOf('04. Recipes/ 02. Controlled', module)
       </Table>
     );
   })
-  .add('controlled inside of table (recommended)', () => {
+  .add('get state inside of table', () => {
     const SORTS = {
       none: {
         key: 'none',
@@ -125,10 +125,10 @@ storiesOf('04. Recipes/ 02. Controlled', module)
 
     return (
       <Table list={list}>
-        {(tableList, { sort }) => (
+        {(tableList, tableState) => (
           <>
-            {/* we have explicit access to all table states inside of the table */}
-            Active Sort: {sort.sortState.key}
+            {/* explicit access to all table states inside of the table */}
+            Active Sort: {tableState.sort.sortState.key}
             <Header>
               <HeaderRow>
                 <HeaderCellSort
@@ -176,7 +176,7 @@ storiesOf('04. Recipes/ 02. Controlled', module)
       </Table>
     );
   })
-  .add('controlled outside of table', () => {
+  .add('get state outside of table', () => {
     const SORTS = {
       none: {
         key: 'none',
@@ -208,15 +208,20 @@ storiesOf('04. Recipes/ 02. Controlled', module)
 
     const [key, setKey] = React.useState(null);
 
-    const handleTableStateChange = (type, tableState) => {
-      if (type === 'SORT' || type === 'INIT') {
-        setKey(tableState.sort.sortState.key);
-      }
-    };
+    const handleTableStateChange = React.useCallback(
+      (type, tableState, action) => {
+        console.log(type, tableState, action);
+
+        if (type === 'init' || type === 'sort') {
+          setKey(tableState.sort.sortState.key);
+        }
+      },
+      []
+    );
 
     return (
       <>
-        {/* we have implicit access to all table states outside of the table via onTableStateChange */}
+        {/* implicit access to all table states outside of the table via onTableStateChange */}
         Active Sort:
         {key}
         <Table
@@ -274,7 +279,7 @@ storiesOf('04. Recipes/ 02. Controlled', module)
       </>
     );
   })
-  .add('one-way controlled inside of table (recommended)', () => {
+  .add('set state inside of table (active)', () => {
     const SORTS = {
       none: {
         key: 'none',
@@ -306,12 +311,6 @@ storiesOf('04. Recipes/ 02. Controlled', module)
 
     const [option, setOption] = React.useState('none');
 
-    // component to table binding
-    const handleOption = (event, sort) => {
-      setOption(event.target.value);
-      sort.onSetSort(SORTS[event.target.value]);
-    };
-
     return (
       <>
         <Table list={list}>
@@ -319,7 +318,12 @@ storiesOf('04. Recipes/ 02. Controlled', module)
             <>
               <select
                 value={option}
-                onChange={event => handleOption(event, sort)}
+                onChange={event => {
+                  setOption(event.target.value);
+
+                  // active
+                  sort.onSetSort(SORTS[event.target.value]);
+                }}
               >
                 <option value="none">None</option>
                 <option value="name">Name</option>
@@ -357,7 +361,7 @@ storiesOf('04. Recipes/ 02. Controlled', module)
       </>
     );
   })
-  .add('one-way controlled outside of table', () => {
+  .add('set state inside of table (re-active)', () => {
     const SORTS = {
       none: {
         key: 'none',
@@ -389,13 +393,106 @@ storiesOf('04. Recipes/ 02. Controlled', module)
 
     const [option, setOption] = React.useState('none');
 
-    const handleOption = event => {
-      setOption(event.target.value);
-    };
+    const handleTableStateChange = React.useCallback(
+      (type, tableState, action) => {
+        console.log(type, tableState, action);
+
+        if (type === 'sort') {
+          // re-active
+          setOption(tableState.sort.sortState.key);
+        }
+      },
+      []
+    );
 
     return (
       <>
-        <select value={option} onChange={handleOption}>
+        <Table
+          list={list}
+          onTableStateChange={handleTableStateChange}
+        >
+          {(tableList, { sort }) => (
+            <>
+              <select
+                value={option}
+                onChange={event => {
+                  sort.onSetSort(SORTS[event.target.value]);
+                }}
+              >
+                <option value="none">None</option>
+                <option value="name">Name</option>
+                <option value="stars">Stars</option>
+                <option value="light">Light</option>
+                <option value="count">Count</option>
+              </select>
+
+              <Header>
+                <HeaderRow>
+                  <HeaderCell>Name</HeaderCell>
+                  <HeaderCell>Stars</HeaderCell>
+                  <HeaderCell>Light</HeaderCell>
+                  <HeaderCell>Count</HeaderCell>
+                </HeaderRow>
+              </Header>
+
+              <Body>
+                {tableList.map(item => (
+                  <Row item={item} key={item.id}>
+                    {tableItem => (
+                      <React.Fragment key={tableItem.id}>
+                        <Cell>{tableItem.name}</Cell>
+                        <Cell>{tableItem.stars}</Cell>
+                        <Cell>{tableItem.light.toString()}</Cell>
+                        <Cell>{tableItem.count}</Cell>
+                      </React.Fragment>
+                    )}
+                  </Row>
+                ))}
+              </Body>
+            </>
+          )}
+        </Table>
+      </>
+    );
+  })
+  .add('set state outside of table', () => {
+    const SORTS = {
+      none: {
+        key: 'none',
+        reverse: false,
+        fn: array => array
+      },
+      name: {
+        key: 'name',
+        reverse: false,
+        fn: array =>
+          array.sort((a, b) => a.name.localeCompare(b.name))
+      },
+      stars: {
+        key: 'stars',
+        reverse: false,
+        fn: array => array.sort((a, b) => a.stars - b.stars)
+      },
+      light: {
+        key: 'light',
+        reverse: false,
+        fn: array => array.sort((a, b) => a.light - b.light)
+      },
+      count: {
+        key: 'count',
+        reverse: false,
+        fn: array => array.sort((a, b) => a.count - b.count)
+      }
+    };
+
+    const [option, setOption] = React.useState('none');
+
+    return (
+      <>
+        <select
+          value={option}
+          onChange={event => setOption(event.target.value)}
+        >
           <option value="none">None</option>
           <option value="name">Name</option>
           <option value="stars">Stars</option>
@@ -439,7 +536,7 @@ storiesOf('04. Recipes/ 02. Controlled', module)
       </>
     );
   })
-  .add('two-way controlled inside of table (recommended)', () => {
+  .add('two-way controlled inside of table', () => {
     const SORTS = {
       none: {
         key: 'none',
@@ -471,17 +568,22 @@ storiesOf('04. Recipes/ 02. Controlled', module)
 
     const [option, setOption] = React.useState(null);
 
-    // omponent to tableState binding
+    // component to tableState binding
     const handleOption = (event, sort) => {
       sort.onSetSort(SORTS[event.target.value]);
     };
 
     // tableState to component binding
-    const handleTableStateChange = (type, tableState) => {
-      if (type === 'SORT' || type === 'INIT') {
-        setOption(tableState.sort.sortState.key);
-      }
-    };
+    const handleTableStateChange = React.useCallback(
+      (type, tableState, action) => {
+        console.log(type, tableState, action);
+
+        if (type === 'sort' || type === 'init') {
+          setOption(tableState.sort.sortState.key);
+        }
+      },
+      []
+    );
 
     return (
       <Table list={list} onTableStateChange={handleTableStateChange}>
@@ -583,11 +685,16 @@ storiesOf('04. Recipes/ 02. Controlled', module)
     };
 
     // table to outside component binding
-    const handleTableStateChange = (type, tableState) => {
-      if (type === 'SORT' || type === 'INIT') {
-        setOption(tableState.sort.sortState.key);
-      }
-    };
+    const handleTableStateChange = React.useCallback(
+      (type, tableState, action) => {
+        console.log(type, tableState, action);
+
+        if (type === 'sort' || type === 'init') {
+          setOption(tableState.sort.sortState.key);
+        }
+      },
+      []
+    );
 
     return (
       <>

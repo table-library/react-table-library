@@ -4,7 +4,6 @@ const CompressionPlugin = require('compression-webpack-plugin');
 module.exports = {
   entry: {
     main: './src/index.js',
-    hooks: './src/hooks/index.js',
     table: './src/Table/index.js',
     theme: './src/Theme/index.js',
     sort: './src/Sort/index.js',

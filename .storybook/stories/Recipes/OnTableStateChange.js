@@ -30,12 +30,15 @@ const list = [
   }
 ];
 
-storiesOf('04. Recipes/ 01. On Table State Change', module).add(
+storiesOf('05. Recipes/ 01. On Table State Change', module).add(
   'default',
   () => {
-    const handleTableStateChange = (type, sort) => {
-      console.log(type, sort);
-    };
+    const handleTableStateChange = React.useCallback(
+      (type, tableState, action) => {
+        console.log(type, tableState, action);
+      },
+      []
+    );
 
     return (
       <Table list={list} onTableStateChange={handleTableStateChange}>

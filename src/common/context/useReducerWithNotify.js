@@ -14,8 +14,8 @@ const useReducerWithNotify = (
 
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
-  const isMount = React.useRef();
-  const aRef = React.useRef();
+  const isMount = React.useRef(false);
+  const aRef = React.useRef(null);
 
   const dispatchWithMiddleware = React.useCallback(action => {
     aRef.current = action;
@@ -29,6 +29,7 @@ const useReducerWithNotify = (
       return;
     }
 
+    if (!onTableStateChange) return;
     if (!aRef.current) return;
 
     const globalState = {
@@ -39,7 +40,10 @@ const useReducerWithNotify = (
       }
     };
 
-    onTableStateChange(key, globalState);
+    onTableStateChange(key, globalState, aRef.current);
+
+    // action should be only used once to notify
+    aRef.current = null;
   }, [key, stateKey, state, tableFeatureRef, onTableStateChange]);
 
   return [state, dispatchWithMiddleware];

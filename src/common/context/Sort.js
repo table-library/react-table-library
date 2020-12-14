@@ -74,7 +74,7 @@ const SortProvider = ({ defaultSort = DEFAULT_SORT, children }) => {
 
   React.useEffect(() => {
     onSetSort(defaultSort);
-  }, [defaultSort, onSetSort]);
+  }, [defaultSort]);
 
   return (
     <SortContext.Provider

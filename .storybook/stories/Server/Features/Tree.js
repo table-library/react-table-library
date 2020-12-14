@@ -25,11 +25,10 @@ import {
   CellTree,
   TREE_EXPAND_TYPES
 } from '@table-library/react-table-library/lib/tree';
-import { useTableState } from '@table-library/react-table-library/lib/hooks';
 
 import { get } from '../server/tree';
 
-storiesOf('05. Server/ 05. Tree', module)
+storiesOf('06. Server/ 05. Tree', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [list, setList] = React.useState([]);
@@ -42,11 +41,11 @@ storiesOf('05. Server/ 05. Tree', module)
       doGet({});
     }, [doGet]);
 
-    const handleTableStateChange = useTableState(
-      (type, tableState) => {
-        console.log(type, tableState);
+    const handleTableStateChange = React.useCallback(
+      (type, tableState, action) => {
+        console.log(type, tableState, action);
 
-        // const SERVER_SIDE_OPERATIONS = ['SORT'];
+        // const SERVER_SIDE_OPERATIONS = ['sort'];
 
         // if (SERVER_SIDE_OPERATIONS.includes(type)) {
         //   const params = {

@@ -15,7 +15,7 @@ import {
 
 import { get } from '../server/list';
 
-storiesOf('05. Server/ 01. Table', module)
+storiesOf('06. Server/ 01. Table', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [list, setList] = React.useState([]);

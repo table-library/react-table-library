@@ -62,6 +62,7 @@ const Table = ({
   defaultSelect,
   defaultTree,
   defaultExpand,
+  externalTableState,
   onTableStateChange,
   children
 }) => {
@@ -79,7 +80,7 @@ const Table = ({
               <TreeProvider defaultTree={defaultTree}>
                 <ExpandProvider defaultExpand={defaultExpand}>
                   <SortProvider defaultSort={defaultSort}>
-                    <State />
+                    <State externalTableState={externalTableState} />
 
                     <TableContent server={server}>
                       {children}

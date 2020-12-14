@@ -14,11 +14,10 @@ import {
 } from '@table-library/react-table-library/lib/table';
 
 import { HeaderCellSort } from '@table-library/react-table-library/lib/sort';
-import { useTableState } from '@table-library/react-table-library/lib/hooks';
 
 import { get } from '../server/list';
 
-storiesOf('06. Server Recipes/ 05. Client & Server-Side', module)
+storiesOf('07. Server Recipes/ 05. Client & Server-Side', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [search, setSearch] = React.useState('');
@@ -43,13 +42,14 @@ storiesOf('06. Server Recipes/ 05. Client & Server-Side', module)
 
     const timeout = React.useRef();
 
-    const handleTableStateChange = useTableState(
-      (type, tableState, thirdPartyState) => {
+    const handleTableStateChange = React.useCallback(
+      (type, tableState, action) => {
+        console.log(type, tableState, action);
         const SERVER_SIDE_OPERATIONS = [''];
-        const SERVER_SIDE_OPERATIONS_DEBOUNCED = ['SEARCH'];
+        const SERVER_SIDE_OPERATIONS_DEBOUNCED = ['mySearch'];
 
         const params = {
-          search: thirdPartyState.search
+          search: tableState.mySearch
         };
 
         if (SERVER_SIDE_OPERATIONS.includes(type)) {
@@ -62,13 +62,7 @@ storiesOf('06. Server Recipes/ 05. Client & Server-Side', module)
           timeout.current = setTimeout(() => doGet(params), 1500);
         }
       },
-      // thirdPartyState
-      {
-        SEARCH: {
-          stateKey: 'search',
-          stateValue: search
-        }
-      }
+      []
     );
 
     return (
@@ -82,6 +76,9 @@ storiesOf('06. Server Recipes/ 05. Client & Server-Side', module)
           list={list}
           server={{
             search: true
+          }}
+          externalTableState={{
+            mySearch: search
           }}
           onTableStateChange={handleTableStateChange}
         >

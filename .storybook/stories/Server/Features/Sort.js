@@ -14,11 +14,10 @@ import {
 } from '@table-library/react-table-library/lib/table';
 
 import { HeaderCellSort } from '@table-library/react-table-library/lib/sort';
-import { useTableState } from '@table-library/react-table-library/lib/hooks';
 
 import { get } from '../server/list';
 
-storiesOf('05. Server/ 02. Sort', module)
+storiesOf('06. Server/ 02. Sort', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [list, setList] = React.useState([]);
@@ -35,9 +34,10 @@ storiesOf('05. Server/ 02. Sort', module)
 
     // server-side sort
 
-    const handleTableStateChange = useTableState(
-      (type, tableState) => {
-        const SERVER_SIDE_OPERATIONS = ['SORT'];
+    const handleTableStateChange = React.useCallback(
+      (type, tableState, action) => {
+        console.log(type, tableState, action);
+        const SERVER_SIDE_OPERATIONS = ['sort'];
 
         if (SERVER_SIDE_OPERATIONS.includes(type)) {
           const params = {
@@ -47,7 +47,8 @@ storiesOf('05. Server/ 02. Sort', module)
 
           doGet(params);
         }
-      }
+      },
+      []
     );
 
     return (
