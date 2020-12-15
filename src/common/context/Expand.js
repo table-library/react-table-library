@@ -44,15 +44,30 @@ const ExpandProvider = ({
     'expandState'
   );
 
-  const onToggleExpandById = React.useCallback(
+  const onAddExpandById = React.useCallback(
     id =>
       dispatch({
-        type: state.ids.includes(id)
-          ? REMOVE_EXPAND_BY_ID
-          : ADD_EXPAND_BY_ID,
+        type: ADD_EXPAND_BY_ID,
         payload: { id }
       }),
-    [state, dispatch]
+    [dispatch]
+  );
+
+  const onRemoveExpandById = React.useCallback(
+    id =>
+      dispatch({
+        type: REMOVE_EXPAND_BY_ID,
+        payload: { id }
+      }),
+    [dispatch]
+  );
+
+  const onToggleExpandById = React.useCallback(
+    id =>
+      state.ids.includes(id)
+        ? onRemoveExpandById(id)
+        : onAddExpandById(id),
+    [state, onRemoveExpandById, onAddExpandById]
   );
 
   const onToggleExpandAll = React.useCallback(
@@ -82,6 +97,8 @@ const ExpandProvider = ({
           noneExpanded
         },
         onToggleExpandById,
+        onAddExpandById,
+        onRemoveExpandById,
         onToggleExpandAll
       }}
     >

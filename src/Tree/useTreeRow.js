@@ -64,6 +64,7 @@ const useTreeRow = ({
     ));
 
   return {
+    name: 'treePlugin',
     theme,
     className,
     onClick,

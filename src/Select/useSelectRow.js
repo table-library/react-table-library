@@ -38,6 +38,7 @@ const useSelectRow = ({
   };
 
   return {
+    name: 'selectPlugin',
     theme,
     className,
     onClick

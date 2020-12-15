@@ -18,18 +18,25 @@ const evaluatePlugins = (plugins, props) => {
   };
 
   const {
+    pluginNames,
     themeByPlugins,
     classNameByPlugins,
     onClickByPlugins,
     ...specificsByPlugins
   } = plugins.reduce(
     (acc, { plugin, options }) => {
-      const { theme, className, onClick, ...pluginSpecific } = plugin(
-        {
-          ...props,
-          ...options
-        }
-      );
+      const {
+        name,
+        theme,
+        className,
+        onClick,
+        ...pluginSpecific
+      } = plugin({
+        ...props,
+        ...options
+      });
+
+      const mergedPluginNames = acc.pluginNames.concat(name);
 
       const mergedTheme = css`
         ${acc.themeByPlugins}
@@ -45,6 +52,7 @@ const evaluatePlugins = (plugins, props) => {
 
       return {
         ...acc,
+        pluginNames: mergedPluginNames,
         themeByPlugins: mergedTheme,
         classNameByPlugins: mergedClassName,
         onClickByPlugins: mergedOnClick,
@@ -52,6 +60,7 @@ const evaluatePlugins = (plugins, props) => {
       };
     },
     {
+      pluginNames: [],
       themeByPlugins: '',
       classNameByPlugins: '',
       onClickByPlugins: onRowClick
@@ -59,6 +68,7 @@ const evaluatePlugins = (plugins, props) => {
   );
 
   return {
+    pluginNames,
     themeByPlugins,
     classNameByPlugins,
     onClickByPlugins,
@@ -70,6 +80,7 @@ const Row = props => {
   const theme = React.useContext(ThemeContext);
 
   const {
+    pluginNames,
     themeByPlugins,
     classNameByPlugins,
     onClickByPlugins,
@@ -110,9 +121,17 @@ const Row = props => {
         {children(item)}
       </RowContainer>
 
-      {expand?.expansionPanel && expand?.expansionPanel(item)}
+      {expand?.expansionPanel &&
+        pluginNames.findIndex(name => name === 'expandPlugin') <
+          pluginNames.findIndex(name => name === 'treePlugin') &&
+        expand?.expansionPanel(item)}
 
       {tree?.recursiveTree}
+
+      {expand?.expansionPanel &&
+        pluginNames.findIndex(name => name === 'expandPlugin') >
+          pluginNames.findIndex(name => name === 'treePlugin') &&
+        expand?.expansionPanel(item)}
     </>
   );
 };

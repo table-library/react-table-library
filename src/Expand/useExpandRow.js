@@ -31,6 +31,7 @@ const useExpandRow = ({
   };
 
   return {
+    name: 'expandPlugin',
     theme,
     className,
     onClick,
