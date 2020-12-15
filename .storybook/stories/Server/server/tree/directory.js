@@ -1,3 +1,5 @@
+import { TIMEOUT } from '../timeout';
+
 export const FOLDERS = [
   {
     id: '1',
@@ -137,3 +139,22 @@ export const FILES_BY_FOLDER = {
     }
   ]
 };
+
+export const getFolders = () =>
+  new Promise(resolve => {
+    let modifiedFolders = [...FOLDERS];
+
+    setTimeout(() => resolve(modifiedFolders), TIMEOUT);
+  });
+
+export const getFilesByFolder = ({ id }) =>
+  new Promise(resolve => {
+    let modifiedTopLevelFiles = [...TOP_LEVEL_FILES];
+    let modifiedByFolderFiles = { ...FILES_BY_FOLDER };
+
+    if (!id) {
+      setTimeout(() => resolve(modifiedTopLevelFiles), TIMEOUT);
+    } else {
+      setTimeout(() => resolve(modifiedByFolderFiles[id]), TIMEOUT);
+    }
+  });
