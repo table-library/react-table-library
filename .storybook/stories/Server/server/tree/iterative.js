@@ -1,6 +1,6 @@
-import { TIMEOUT } from './timeout';
+import { TIMEOUT } from '../timeout';
 
-const FOLDERS = [
+const TOP_LEVEL_NODES = [
   {
     id: '1',
     name: 'Empty Folder',
@@ -16,28 +16,8 @@ const FOLDERS = [
     stars: 42,
     count: 24,
     light: false,
-    hasContent: true,
-    nodes: [
-      {
-        id: '62',
-        name: 'More Images',
-        stars: 322,
-        count: 333,
-        light: true,
-        hasContent: true,
-        nodes: [
-          {
-            id: '6444',
-            name: 'Old Images',
-            stars: 3522,
-            count: 3633,
-            light: false,
-            nodes: [],
-            hasContent: true
-          }
-        ]
-      }
-    ]
+    nodes: [],
+    hasContent: true
   },
   {
     id: '3',
@@ -58,6 +38,13 @@ const FOLDERS = [
     hasContent: true
   },
   {
+    id: '5',
+    name: 'Some Video.mp4',
+    stars: 133,
+    count: 122,
+    light: true
+  },
+  {
     id: '6',
     name: 'Empty Folder 2',
     stars: 155,
@@ -65,16 +52,6 @@ const FOLDERS = [
     light: true,
     nodes: [],
     hasContent: false
-  }
-];
-
-const TOP_LEVEL_FILES = [
-  {
-    id: '5',
-    name: 'Some Video.mp4',
-    stars: 133,
-    count: 122,
-    light: true
   },
   {
     id: '7',
@@ -85,9 +62,18 @@ const TOP_LEVEL_FILES = [
   }
 ];
 
-const FILES_BY_FOLDER = {
+const NODES_BY_NODE = {
   '1': [],
   '2': [
+    {
+      id: '62',
+      name: 'More Images',
+      stars: 322,
+      count: 333,
+      light: true,
+      nodes: [],
+      hasContent: true
+    },
     {
       id: '64',
       name: 'Some Picture.jpg',
@@ -96,7 +82,6 @@ const FILES_BY_FOLDER = {
       light: false
     }
   ],
-  '3': [],
   '62': [
     {
       id: '6442',
@@ -104,6 +89,15 @@ const FILES_BY_FOLDER = {
       stars: 2322,
       count: 3333,
       light: true
+    },
+    {
+      id: '6444',
+      name: 'Old Images',
+      stars: 3522,
+      count: 3633,
+      light: false,
+      nodes: [],
+      hasContent: true
     }
   ],
   '6444': [
@@ -122,6 +116,7 @@ const FILES_BY_FOLDER = {
       light: false
     }
   ],
+  '3': [],
   '4': [
     {
       id: '42',
@@ -137,24 +132,18 @@ const FILES_BY_FOLDER = {
       count: 233,
       light: false
     }
-  ]
+  ],
+  '6': []
 };
 
-export const getFolders = () =>
+export const get = ({ id }) =>
   new Promise(resolve => {
-    let modifiedFolders = [...FOLDERS];
-
-    setTimeout(() => resolve(modifiedFolders), TIMEOUT);
-  });
-
-export const getFilesByFolder = ({ id }) =>
-  new Promise(resolve => {
-    let modifiedTopLevelFiles = [...TOP_LEVEL_FILES];
-    let modifiedByFolderFiles = { ...FILES_BY_FOLDER };
+    let modifiedTopLevelNodes = [...TOP_LEVEL_NODES];
+    let modifiedNodesByNode = { ...NODES_BY_NODE };
 
     if (!id) {
-      setTimeout(() => resolve(modifiedTopLevelFiles), TIMEOUT);
+      setTimeout(() => resolve(modifiedTopLevelNodes), TIMEOUT);
     } else {
-      setTimeout(() => resolve(modifiedByFolderFiles[id]), TIMEOUT);
+      setTimeout(() => resolve(modifiedNodesByNode[id]), TIMEOUT);
     }
   });

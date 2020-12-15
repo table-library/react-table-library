@@ -1,5 +1,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import isEqual from 'lodash.isequal';
+
+import { usePrevious } from '@common/util/usePrevious';
 
 import { TableContext } from './Table';
 import { useReducerWithNotify } from './useReducerWithNotify';
@@ -8,6 +11,7 @@ import { addById, removeById, byAll } from './reducers';
 const ADD_EXPAND_BY_ID = 'ADD_EXPAND_BY_ID';
 const REMOVE_EXPAND_BY_ID = 'REMOVE_EXPAND_BY_ID';
 const EXPAND_ALL = 'EXPAND_ALL';
+const SET_EXPAND = 'SET_EXPAND';
 
 const expandReducer = (state, action) => {
   switch (action.type) {
@@ -19,6 +23,9 @@ const expandReducer = (state, action) => {
     }
     case EXPAND_ALL: {
       return byAll(state, action);
+    }
+    case SET_EXPAND: {
+      return { ...action.payload };
     }
     default:
       throw new Error();
@@ -43,6 +50,14 @@ const ExpandProvider = ({
     'expand',
     'expandState'
   );
+
+  const defaultExpandPrev = usePrevious(defaultExpand);
+
+  React.useEffect(() => {
+    if (!isEqual(defaultExpand, defaultExpandPrev)) {
+      dispatch({ type: SET_EXPAND, payload: defaultExpand });
+    }
+  }, [dispatch, defaultExpand, defaultExpandPrev]);
 
   const onAddExpandById = React.useCallback(
     id =>

@@ -1,6 +1,4 @@
-import { TIMEOUT } from './timeout';
-
-const TOP_LEVEL_NODES = [
+export const FOLDERS = [
   {
     id: '1',
     name: 'Empty Folder',
@@ -16,8 +14,28 @@ const TOP_LEVEL_NODES = [
     stars: 42,
     count: 24,
     light: false,
-    nodes: [],
-    hasContent: true
+    hasContent: true,
+    nodes: [
+      {
+        id: '62',
+        name: 'More Images',
+        stars: 322,
+        count: 333,
+        light: true,
+        hasContent: true,
+        nodes: [
+          {
+            id: '6444',
+            name: 'Old Images',
+            stars: 3522,
+            count: 3633,
+            light: false,
+            nodes: [],
+            hasContent: true
+          }
+        ]
+      }
+    ]
   },
   {
     id: '3',
@@ -38,13 +56,6 @@ const TOP_LEVEL_NODES = [
     hasContent: true
   },
   {
-    id: '5',
-    name: 'Some Video.mp4',
-    stars: 133,
-    count: 122,
-    light: true
-  },
-  {
     id: '6',
     name: 'Empty Folder 2',
     stars: 155,
@@ -52,6 +63,16 @@ const TOP_LEVEL_NODES = [
     light: true,
     nodes: [],
     hasContent: false
+  }
+];
+
+export const TOP_LEVEL_FILES = [
+  {
+    id: '5',
+    name: 'Some Video.mp4',
+    stars: 133,
+    count: 122,
+    light: true
   },
   {
     id: '7',
@@ -62,18 +83,9 @@ const TOP_LEVEL_NODES = [
   }
 ];
 
-const NODES_BY_NODE = {
+export const FILES_BY_FOLDER = {
   '1': [],
   '2': [
-    {
-      id: '62',
-      name: 'More Images',
-      stars: 322,
-      count: 333,
-      light: true,
-      nodes: [],
-      hasContent: true
-    },
     {
       id: '64',
       name: 'Some Picture.jpg',
@@ -82,6 +94,7 @@ const NODES_BY_NODE = {
       light: false
     }
   ],
+  '3': [],
   '62': [
     {
       id: '6442',
@@ -89,15 +102,6 @@ const NODES_BY_NODE = {
       stars: 2322,
       count: 3333,
       light: true
-    },
-    {
-      id: '6444',
-      name: 'Old Images',
-      stars: 3522,
-      count: 3633,
-      light: false,
-      nodes: [],
-      hasContent: true
     }
   ],
   '6444': [
@@ -116,7 +120,6 @@ const NODES_BY_NODE = {
       light: false
     }
   ],
-  '3': [],
   '4': [
     {
       id: '42',
@@ -132,18 +135,5 @@ const NODES_BY_NODE = {
       count: 233,
       light: false
     }
-  ],
-  '6': []
+  ]
 };
-
-export const get = ({ id }) =>
-  new Promise(resolve => {
-    let modifiedTopLevelNodes = [...TOP_LEVEL_NODES];
-    let modifiedNodesByNode = { ...NODES_BY_NODE };
-
-    if (!id) {
-      setTimeout(() => resolve(modifiedTopLevelNodes), TIMEOUT);
-    } else {
-      setTimeout(() => resolve(modifiedNodesByNode[id]), TIMEOUT);
-    }
-  });

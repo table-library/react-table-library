@@ -1,4 +1,4 @@
-import { TIMEOUT } from './timeout';
+import { TIMEOUT } from '../timeout';
 
 const TREE_LIST = [
   {
