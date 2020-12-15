@@ -1,6 +1,6 @@
-const TIMEOUT = 250;
+import { TIMEOUT } from './timeout';
 
-const TREE = [
+const TREE_LIST = [
   {
     id: '1',
     name: 'Empty Folder',
@@ -119,33 +119,9 @@ const TREE = [
   }
 ];
 
-// const SORTS = {
-//   none: array => array,
-//   name: array => array.sort((a, b) => a.name.localeCompare(b.name)),
-//   stars: array => array.sort((a, b) => a.stars - b.stars),
-//   light: array => array.sort((a, b) => a.light - b.light),
-//   count: array => array.sort((a, b) => a.count - b.count)
-// };
-
-export const get = (
-  {
-    // search = '',
-    // sortKey = 'none',
-    // sortReverse = false
-  }
-) =>
+export const get = () =>
   new Promise(resolve => {
-    let modifiedTree = [...TREE];
-
-    // // search
-    // modifiedTree = modifiedTree.filter(item =>
-    //   item.name.toLowerCase().includes(search.toLowerCase())
-    // );
-
-    // // sort
-    // modifiedTree = sortReverse
-    //   ? SORTS[sortKey](modifiedTree).reverse()
-    //   : SORTS[sortKey](modifiedTree);
+    const modifiedTree = [...TREE_LIST];
 
     setTimeout(() => resolve(modifiedTree), TIMEOUT);
   });

@@ -1,4 +1,4 @@
-const TIMEOUT = 250;
+import { TIMEOUT } from './timeout';
 
 const LIST = [
   { id: '1', name: 'Hello', stars: 24, count: 42, light: true },
