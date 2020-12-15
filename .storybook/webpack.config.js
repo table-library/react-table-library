@@ -21,7 +21,7 @@ module.exports = ({ config }) => {
       use: ['babel-loader']
     },
     {
-      test: /stories\.(js|jsx)?$/,
+      test: /\.(js|jsx)?$/,
       loader: require.resolve('@storybook/source-loader'),
       enforce: 'pre'
     }
