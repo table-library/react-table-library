@@ -138,11 +138,14 @@ storiesOf('06. Server/ 05. Tree', module)
       async params => {
         if (!needsToFetch(list, params.id)) return;
 
-        const nestedList = await getIterativeTree(params);
+        const nestedNodes = await getIterativeTree(params);
 
         const insert = item => {
           if (item.id === params.id) {
-            return { ...item, nodes: [...item.nodes, ...nestedList] };
+            return {
+              ...item,
+              nodes: [...item.nodes, ...nestedNodes]
+            };
           } else if (item.nodes) {
             return { ...item, nodes: item.nodes.map(insert) };
           } else {
@@ -163,7 +166,7 @@ storiesOf('06. Server/ 05. Tree', module)
 
         let params = {};
 
-        if (action?.type === 'ADD_TREE_EXPAND_BY_ID') {
+        if (action.type === 'ADD_TREE_EXPAND_BY_ID') {
           params = {
             ...params,
             id: action.payload.id
@@ -227,24 +230,23 @@ storiesOf('06. Server/ 05. Tree', module)
     }, [doGet]);
 
     const doGetMore = React.useCallback(
-      async (params, expand) => {
+      async params => {
         if (!needsToFetch(list, params.id)) return;
 
-        params.id && expand.onAddExpandById(params.id);
-
-        const nestedList = await getIterativeTree(params);
+        const nestedNodes = await getIterativeTree(params);
 
         const insert = item => {
           if (item.id === params.id) {
-            return { ...item, nodes: [...item.nodes, ...nestedList] };
+            return {
+              ...item,
+              nodes: [...item.nodes, ...nestedNodes]
+            };
           } else if (item.nodes) {
             return { ...item, nodes: item.nodes.map(insert) };
           } else {
             return item;
           }
         };
-
-        params.id && expand.onRemoveExpandById(params.id);
 
         setList(list.map(insert));
       },
@@ -259,7 +261,7 @@ storiesOf('06. Server/ 05. Tree', module)
 
         let params = {};
 
-        if (action?.type === 'ADD_TREE_EXPAND_BY_ID') {
+        if (action.type === 'ADD_TREE_EXPAND_BY_ID') {
           params = {
             ...params,
             id: action.payload.id
@@ -267,11 +269,13 @@ storiesOf('06. Server/ 05. Tree', module)
         }
 
         if (SERVER_SIDE_OPERATIONS.includes(type)) {
-          doGetMore(params, tableState.expand);
+          doGetMore(params);
         }
       },
       [doGetMore]
     );
+
+    const LoadingPanel = () => <div>Loading ...</div>;
 
     return (
       <Table list={list} onTableStateChange={handleTableStateChange}>
@@ -292,7 +296,15 @@ storiesOf('06. Server/ 05. Tree', module)
                   key={item.id}
                   item={item}
                   plugins={[
-                    { plugin: useTreeRow },
+                    {
+                      plugin: useTreeRow,
+                      options: {
+                        showCondition: tableItem =>
+                          tableItem.hasContent &&
+                          !tableItem.nodes.length,
+                        loadingPanel: LoadingPanel
+                      }
+                    },
                     {
                       plugin: useExpandRow,
                       options: {
@@ -351,10 +363,8 @@ storiesOf('06. Server/ 05. Tree', module)
     }, [doGet]);
 
     const doGetMore = React.useCallback(
-      async (params, expand) => {
+      async params => {
         if (!needsToFetchPaginated(data.nodes, params.id)) return;
-
-        params.id && expand.onAddExpandById(params.id);
 
         const { nodes, pageInfo } = await getPaginatedTree(params);
 
@@ -372,8 +382,6 @@ storiesOf('06. Server/ 05. Tree', module)
           }
         };
 
-        params.id && expand.onRemoveExpandById(params.id);
-
         setData(state => ({
           pageInfo: state.pageInfo,
           nodes: state.nodes.map(insert)
@@ -390,7 +398,7 @@ storiesOf('06. Server/ 05. Tree', module)
 
         let params = {};
 
-        if (action?.type === 'ADD_TREE_EXPAND_BY_ID') {
+        if (action.type === 'ADD_TREE_EXPAND_BY_ID') {
           params = {
             ...params,
             id: action.payload.id,
@@ -400,7 +408,7 @@ storiesOf('06. Server/ 05. Tree', module)
         }
 
         if (SERVER_SIDE_OPERATIONS.includes(type)) {
-          doGetMore(params, tableState.expand);
+          doGetMore(params);
         }
       },
       [doGetMore]
@@ -449,12 +457,13 @@ storiesOf('06. Server/ 05. Tree', module)
                   key={item.id}
                   item={item}
                   plugins={[
-                    { plugin: useTreeRow },
                     {
-                      plugin: useExpandRow,
+                      plugin: useTreeRow,
                       options: {
-                        expandType: EXPAND_TYPES.NoClick,
-                        expansionPanel: LoadingPanel
+                        showCondition: tableItem =>
+                          tableItem.hasContent &&
+                          !tableItem.nodes.length,
+                        loadingPanel: LoadingPanel
                       }
                     },
                     {

@@ -66,7 +66,7 @@ const State = ({ externalTableState }) => {
     };
 
     if (!isMount.current && onTableStateChange) {
-      onTableStateChange('init', tableFeatureRef.current);
+      onTableStateChange('init', tableFeatureRef.current, {});
     }
 
     isMount.current = true;

@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import { useReducerWithNotify } from './useReducerWithNotify';
-import { addById, removeById, byAll } from './reducers';
+import { addById, removeById } from './reducers';
 
 const ADD_FETCH_BY_ID = 'ADD_FETCH_BY_ID';
 const REMOVE_FETCH_BY_ID = 'REMOVE_FETCH_BY_ID';

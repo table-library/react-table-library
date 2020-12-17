@@ -13,6 +13,8 @@ const useTreeRow = ({
   item,
   treeDepthLevel = 0,
   treeColumnLevel = 1,
+  showCondition = () => true,
+  loadingPanel = null,
   isTreeExpanded,
   onToggleTreeExpandById,
   treeExpandType = TREE_EXPAND_TYPES.RowClick,
@@ -45,10 +47,19 @@ const useTreeRow = ({
     }
   };
 
-  const recursiveTree =
+  let treePanel = null;
+
+  if (
     isTreeExpanded &&
-    hasLeaves(item) &&
-    item.nodes.map(node => (
+    !hasLeaves(item) &&
+    showCondition(item) &&
+    loadingPanel
+  ) {
+    treePanel = loadingPanel(item);
+  }
+
+  if (isTreeExpanded && hasLeaves(item)) {
+    treePanel = item.nodes.map(node => (
       <Body>
         <Row
           key={node.id}
@@ -62,6 +73,7 @@ const useTreeRow = ({
         </Row>
       </Body>
     ));
+  }
 
   return {
     name: 'treePlugin',
@@ -69,7 +81,7 @@ const useTreeRow = ({
     className,
     onClick,
     tree: {
-      recursiveTree
+      treePanel
     }
   };
 };

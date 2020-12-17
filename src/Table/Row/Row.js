@@ -127,7 +127,7 @@ const Row = props => {
           pluginNames.findIndex(name => name === 'treePlugin') &&
         expand?.expansionPanel}
 
-      {tree?.recursiveTree}
+      {tree?.treePanel}
 
       {expand?.expansionPanel &&
         pluginNames.findIndex(name => name === 'expandPlugin') >
