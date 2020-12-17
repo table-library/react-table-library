@@ -59,7 +59,7 @@ const Body = ({ children }) => {
   const select = React.useContext(SelectContext);
   const tree = React.useContext(TreeContext);
   const expand = React.useContext(ExpandContext);
-  const fetche = React.useContext(FetchContext);
+  const fetching = React.useContext(FetchContext);
 
   return (
     <BodyContainer
@@ -76,7 +76,7 @@ const Body = ({ children }) => {
           ...getSelectProps(child, select),
           ...getTreeProps(child, tree),
           ...getExpandProps(child, expand),
-          ...getFetchProps(child, fetche)
+          ...getFetchProps(child, fetching)
         })
       )}
     </BodyContainer>

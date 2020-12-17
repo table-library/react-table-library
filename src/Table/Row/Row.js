@@ -87,7 +87,7 @@ const Row = props => {
     // specificsByPlugins
     tree,
     expand,
-    fetche
+    fetching
     // eslint-disable-next-line react/destructuring-assignment
   } = evaluatePlugins(props.plugins || [], props);
 
@@ -134,7 +134,7 @@ const Row = props => {
           pluginNames.findIndex(name => name === 'treePlugin') &&
         expand?.expansionPanel}
 
-      {fetche?.fetchPanel}
+      {fetching?.fetchPanel}
     </>
   );
 };

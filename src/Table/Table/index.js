@@ -36,7 +36,7 @@ const TableContent = ({ server, children }) => {
   const select = React.useContext(SelectContext);
   const tree = React.useContext(TreeContext);
   const expand = React.useContext(ExpandContext);
-  const fetche = React.useContext(FetchContext);
+  const fetching = React.useContext(FetchContext);
   const sort = React.useContext(SortContext);
 
   // do any list operations (e.g. sort, pagination), if not server-side
@@ -52,7 +52,7 @@ const TableContent = ({ server, children }) => {
     select,
     tree,
     expand,
-    fetche,
+    fetching,
     sort
   });
 };

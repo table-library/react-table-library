@@ -32,7 +32,7 @@ const useFetch = ({
     theme: '',
     className: '',
     onClick: () => {},
-    fetche: {
+    fetching: {
       fetchPanel: showFetchPanel ? fetchPanel : null
     }
   };
