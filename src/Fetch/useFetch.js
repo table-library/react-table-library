@@ -1,19 +1,31 @@
 import React from 'react';
 
 const useFetch = ({
+  // general
   tableState,
   item,
   parentItem,
   lastRow,
+  // options
   panelShowCondition,
   idlePanel,
   loadingPanel,
+  // state
   isFetching,
   onAddFetchById,
-  onRemoveFetchById
+  onRemoveFetchById,
+  // tree specific
+  treeDepthLevel = 0,
+  treeColumnLevel = 1
 }) => {
-  const idlePanelElement = idlePanel(parentItem);
-  const loadingPanelElement = loadingPanel(parentItem);
+  const idlePanelElement = idlePanel(parentItem, {
+    treeDepthLevel,
+    treeColumnLevel
+  });
+  const loadingPanelElement = loadingPanel(parentItem, {
+    treeDepthLevel,
+    treeColumnLevel
+  });
 
   const fetchPanel = {
     false: React.cloneElement(idlePanelElement, {

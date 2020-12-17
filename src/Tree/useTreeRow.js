@@ -10,15 +10,19 @@ import { isLeaf, hasLeaves } from './util';
 import { TREE_EXPAND_TYPES } from './config';
 
 const useTreeRow = ({
+  // general
   item,
-  treeDepthLevel = 0,
-  treeColumnLevel = 1,
+  // options
   panelShowCondition = () => true,
   loadingPanel = null,
+  treeExpandType = TREE_EXPAND_TYPES.RowClick,
+  // state
+  treeDepthLevel = 0,
+  treeColumnLevel = 1,
   isTreeExpanded,
   onToggleTreeExpandById,
-  treeExpandType = TREE_EXPAND_TYPES.RowClick,
   children,
+  // others
   ...passThrough
 }) => {
   const theme = css`
@@ -55,7 +59,10 @@ const useTreeRow = ({
     panelShowCondition(item) &&
     loadingPanel
   ) {
-    treePanel = loadingPanel(item);
+    treePanel = loadingPanel(item, {
+      treeDepthLevel,
+      treeColumnLevel
+    });
   }
 
   if (isTreeExpanded && hasLeaves(item)) {

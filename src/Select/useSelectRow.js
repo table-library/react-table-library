@@ -7,8 +7,10 @@ import * as COLORS from '@common/colors';
 import { SELECT_TYPES } from './config';
 
 const useSelectRow = ({
+  // state
   isSelected,
   onToggleSelectById,
+  // options
   selectType = SELECT_TYPES.RowClick
 }) => {
   const theme = css`

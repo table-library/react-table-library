@@ -6,11 +6,17 @@ import { isRowClick } from '@common/util/isRowClick';
 import { EXPAND_TYPES } from './config';
 
 const useExpandRow = ({
+  // general
   item,
+  // options
+  expandType = EXPAND_TYPES.RowClick,
   expansionPanel,
+  // state
   isExpanded,
   onToggleExpandById,
-  expandType = EXPAND_TYPES.RowClick
+  // tree specific
+  treeDepthLevel = 0,
+  treeColumnLevel = 1
 }) => {
   const theme = css`
     &.expandable-row {
@@ -37,7 +43,12 @@ const useExpandRow = ({
     className,
     onClick,
     expand: {
-      expansionPanel: isExpanded ? expansionPanel(item) : null
+      expansionPanel: isExpanded
+        ? expansionPanel(item, {
+            treeDepthLevel,
+            treeColumnLevel
+          })
+        : null
     }
   };
 };
