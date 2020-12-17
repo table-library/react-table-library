@@ -4,6 +4,7 @@ import * as Sort from './Sort';
 import * as Select from './Select';
 import * as Tree from './Tree';
 import * as Expand from './Expand';
+import * as Fetch from './Fetch';
 // import * as Resize from './Resize';
 
-export { Expand, Table, Theme, Sort, Select, Tree };
+export { Table, Theme, Sort, Select, Tree, Expand, Fetch };

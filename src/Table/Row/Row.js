@@ -86,7 +86,8 @@ const Row = props => {
     onClickByPlugins,
     // specificsByPlugins
     tree,
-    expand
+    expand,
+    fetche
     // eslint-disable-next-line react/destructuring-assignment
   } = evaluatePlugins(props.plugins || [], props);
 
@@ -124,14 +125,16 @@ const Row = props => {
       {expand?.expansionPanel &&
         pluginNames.findIndex(name => name === 'expandPlugin') <
           pluginNames.findIndex(name => name === 'treePlugin') &&
-        expand?.expansionPanel(item)}
+        expand?.expansionPanel}
 
       {tree?.recursiveTree}
 
       {expand?.expansionPanel &&
         pluginNames.findIndex(name => name === 'expandPlugin') >
           pluginNames.findIndex(name => name === 'treePlugin') &&
-        expand?.expansionPanel(item)}
+        expand?.expansionPanel}
+
+      {fetche?.fetchPanel}
     </>
   );
 };

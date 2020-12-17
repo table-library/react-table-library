@@ -13,23 +13,48 @@ import {
   Cell
 } from '@table-library/react-table-library/lib/table';
 
+import { useFetch } from '@table-library/react-table-library/lib/fetch';
+
 import { get } from '../server/list';
 
 storiesOf('06. Server/ 09. Load More', module)
   .addParameters({ component: Table })
   .add('default', () => {
-    const [list, setList] = React.useState([]);
+    const [data, setData] = React.useState({
+      nodes: [],
+      pageInfo: null
+    });
 
     const doGet = React.useCallback(async params => {
-      setList(await get(params));
+      const { nodes, pageInfo } = await get(params);
+
+      setData(state => ({
+        pageInfo,
+        nodes: [...state.nodes, ...nodes]
+      }));
     }, []);
 
     React.useEffect(() => {
-      doGet({});
+      doGet({ offset: 0, limit: 2 });
     }, [doGet]);
 
+    const handleLoadMore = React.useCallback(
+      async (tableItem, tablestate) => {
+        console.log(tableItem, tablestate);
+
+        let params = {
+          ...params,
+          offset: data.pageInfo.nextOffset,
+          limit: 2
+        };
+
+        return doGet(params);
+      },
+      [data]
+    );
+
     return (
-      <Table list={list}>
+      <Table list={data.nodes}>
         {tableList => (
           <>
             <Header>
@@ -43,7 +68,28 @@ storiesOf('06. Server/ 09. Load More', module)
 
             <Body>
               {tableList.map(item => (
-                <Row key={item.id} item={item}>
+                <Row
+                  key={item.id}
+                  item={item}
+                  plugins={[
+                    {
+                      plugin: useFetch,
+                      options: {
+                        showCondition: tableItem =>
+                          data.pageInfo.nextOffset <
+                          data.pageInfo.total,
+                        idlePanel: tableItem => (
+                          <button onClick={handleLoadMore}>
+                            More ...
+                          </button>
+                        ),
+                        loadingPanel: tableItem => (
+                          <div>Loading ...</div>
+                        )
+                      }
+                    }
+                  ]}
+                >
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>

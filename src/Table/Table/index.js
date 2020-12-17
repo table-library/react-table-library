@@ -17,6 +17,7 @@ import {
   ExpandProvider,
   ExpandContext
 } from '@common/context/Expand';
+import { FetchProvider, FetchContext } from '@common/context/Fetch';
 import { SortProvider, SortContext } from '@common/context/Sort';
 import { State } from '@common/context/State';
 
@@ -35,6 +36,7 @@ const TableContent = ({ server, children }) => {
   const select = React.useContext(SelectContext);
   const tree = React.useContext(TreeContext);
   const expand = React.useContext(ExpandContext);
+  const fetche = React.useContext(FetchContext);
   const sort = React.useContext(SortContext);
 
   // do any list operations (e.g. sort, pagination), if not server-side
@@ -50,6 +52,7 @@ const TableContent = ({ server, children }) => {
     select,
     tree,
     expand,
+    fetche,
     sort
   });
 };
@@ -79,13 +82,17 @@ const Table = ({
             <SelectProvider defaultSelect={defaultSelect}>
               <TreeProvider defaultTree={defaultTree}>
                 <ExpandProvider defaultExpand={defaultExpand}>
-                  <SortProvider defaultSort={defaultSort}>
-                    <State externalTableState={externalTableState} />
+                  <FetchProvider>
+                    <SortProvider defaultSort={defaultSort}>
+                      <State
+                        externalTableState={externalTableState}
+                      />
 
-                    <TableContent server={server}>
-                      {children}
-                    </TableContent>
-                  </SortProvider>
+                      <TableContent server={server}>
+                        {children}
+                      </TableContent>
+                    </SortProvider>
+                  </FetchProvider>
                 </ExpandProvider>
               </TreeProvider>
             </SelectProvider>
@@ -98,6 +105,7 @@ const Table = ({
 
 Table.propTypes = {
   list: PropTypes.arrayOf(PropTypes.any),
+  externalTableState: PropTypes.shape(PropTypes.any),
   server: PropTypes.shape({
     sort: PropTypes.bool
   }),

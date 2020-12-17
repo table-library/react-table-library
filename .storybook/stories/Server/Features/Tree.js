@@ -23,6 +23,8 @@ import {
   EXPAND_TYPES
 } from '@table-library/react-table-library/lib/expand';
 
+import { useFetch } from '@table-library/react-table-library/lib/fetch';
+
 import { get as getSimpleStree } from '../server/tree/simple';
 import { get as getIterativeTree } from '../server/tree/iterative';
 import {
@@ -67,6 +69,12 @@ const needsToFetch = (tree, id) => {
     item.hasContent &&
     !item.nodes.filter(node => !node.nodes).length
   );
+};
+
+const needsToFetchPaginated = (tree, id) => {
+  const item = findItemById(tree, id);
+
+  return item && item.nodes && !item.nodes.length && item.hasContent;
 };
 
 storiesOf('06. Server/ 05. Tree', module)
@@ -121,96 +129,6 @@ storiesOf('06. Server/ 05. Tree', module)
     );
   })
   .add('fetch iterative', () => {
-    const [list, setList] = React.useState([]);
-
-    const doGet = React.useCallback(async params => {
-      setList(await getIterativeTree(params));
-    }, []);
-
-    React.useEffect(() => {
-      doGet({});
-    }, [doGet]);
-
-    const doGetMore = React.useCallback(
-      async params => {
-        const nestedList = await getIterativeTree(params);
-
-        const insert = item => {
-          if (item.id === params.id) {
-            return { ...item, nodes: [...item.nodes, ...nestedList] };
-          } else if (item.nodes) {
-            return { ...item, nodes: item.nodes.map(insert) };
-          } else {
-            return item;
-          }
-        };
-
-        setList(list.map(insert));
-      },
-      [list]
-    );
-
-    const handleTableStateChange = React.useCallback(
-      (type, tableState, action) => {
-        console.log(type, tableState, action);
-
-        const SERVER_SIDE_OPERATIONS = ['tree'];
-
-        let params = {};
-
-        if (action?.type === 'ADD_TREE_EXPAND_BY_ID') {
-          params = {
-            ...params,
-            id: action.payload.id
-          };
-        }
-
-        if (SERVER_SIDE_OPERATIONS.includes(type)) {
-          doGetMore(params);
-        }
-      },
-      [doGetMore]
-    );
-
-    return (
-      <Table list={list} onTableStateChange={handleTableStateChange}>
-        {tableList => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCell>Name</HeaderCell>
-                <HeaderCell>Stars</HeaderCell>
-                <HeaderCell>Light</HeaderCell>
-                <HeaderCell>Count</HeaderCell>
-              </HeaderRow>
-            </Header>
-
-            <Body>
-              {tableList.map(item => (
-                <Row
-                  key={item.id}
-                  item={item}
-                  plugins={[{ plugin: useTreeRow }]}
-                >
-                  {tableItem => (
-                    <React.Fragment key={tableItem.id}>
-                      <CellTree item={tableItem}>
-                        {tableItem.name}
-                      </CellTree>
-                      <Cell>{tableItem.stars}</Cell>
-                      <Cell>{tableItem.light.toString()}</Cell>
-                      <Cell>{tableItem.count}</Cell>
-                    </React.Fragment>
-                  )}
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
-    );
-  })
-  .add('fetch iterative (only once)', () => {
     const [list, setList] = React.useState([]);
 
     const doGet = React.useCallback(async params => {
@@ -422,7 +340,12 @@ storiesOf('06. Server/ 05. Tree', module)
     });
 
     const doGet = React.useCallback(async params => {
-      setData(await getPaginatedTree(params));
+      const { nodes, pageInfo } = await getPaginatedTree(params);
+
+      setData(state => ({
+        pageInfo,
+        nodes: [...state.nodes, ...nodes]
+      }));
     }, []);
 
     React.useEffect(() => {
@@ -434,7 +357,7 @@ storiesOf('06. Server/ 05. Tree', module)
 
     const doGetMore = React.useCallback(
       async (params, expand) => {
-        if (!needsToFetch(data.nodes, params.id)) return;
+        if (!needsToFetchPaginated(data.nodes, params.id)) return;
 
         params.id && expand.onAddExpandById(params.id);
 
@@ -458,7 +381,7 @@ storiesOf('06. Server/ 05. Tree', module)
 
         setData(state => ({
           pageInfo: state.pageInfo,
-          nodes: data.nodes.map(insert)
+          nodes: state.nodes.map(insert)
         }));
       },
       [data]
@@ -488,6 +411,27 @@ storiesOf('06. Server/ 05. Tree', module)
       [doGetMore]
     );
 
+    const handleLoadMore = React.useCallback(
+      async (tableItem, tablestate) => {
+        console.log(tableItem, tablestate);
+
+        let params = {
+          ...params,
+          offset: data.pageInfo.nextOffset, // get right pageInfo from tree
+          limit: 2
+        };
+
+        return doGet(params);
+      },
+      [data]
+    );
+
+    const LoadingPanel = () => <div>Loading ...</div>;
+
+    const IdlePanel = () => (
+      <button onClick={handleLoadMore}>More ...</button>
+    );
+
     return (
       <Table
         list={data.nodes}
@@ -515,15 +459,17 @@ storiesOf('06. Server/ 05. Tree', module)
                       plugin: useExpandRow,
                       options: {
                         expandType: EXPAND_TYPES.NoClick,
-                        expansionPanel: () => (
-                          <div
-                            style={{
-                              background: 'grey'
-                            }}
-                          >
-                            Loading ...
-                          </div>
-                        )
+                        expansionPanel: LoadingPanel
+                      }
+                    },
+                    {
+                      plugin: useFetch,
+                      options: {
+                        showCondition: tableItem =>
+                          data.pageInfo.nextOffset <
+                          data.pageInfo.total,
+                        idlePanel: IdlePanel,
+                        loadingPanel: LoadingPanel
                       }
                     }
                   ]}
@@ -546,6 +492,7 @@ storiesOf('06. Server/ 05. Tree', module)
       </Table>
     );
   });
+
 // .add('fetch folders once and files iterative', () => {
 //   const [list, setList] = React.useState([]);
 
@@ -718,7 +665,7 @@ storiesOf('06. Server/ 05. Tree', module)
 
 //       setData(state => ({
 //         pageInfo: state.pageInfo,
-//         nodes: data.nodes.map(insert)
+//         nodes: state.nodes.map(insert)
 //       }));
 //     },
 //     [data]
@@ -747,8 +694,6 @@ storiesOf('06. Server/ 05. Tree', module)
 //     },
 //     [doGetByFolder]
 //   );
-
-//   console.log(data);
 
 //   return (
 //     <Table

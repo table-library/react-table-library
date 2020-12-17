@@ -12,7 +12,7 @@ export const get = ({ id, offset, limit }) =>
       setTimeout(
         () =>
           resolve({
-            nodes: modifiedRoot.slice(offset, limit),
+            nodes: modifiedRoot.slice(offset, offset + limit),
             pageInfo: {
               total: modifiedRoot.length,
               nextOffset: offset + limit
@@ -24,7 +24,7 @@ export const get = ({ id, offset, limit }) =>
       setTimeout(
         () =>
           resolve({
-            nodes: modifiedById[id].slice(offset, limit),
+            nodes: modifiedById[id].slice(offset, offset + limit),
             pageInfo: {
               total: modifiedById[id].length,
               nextOffset: offset + limit

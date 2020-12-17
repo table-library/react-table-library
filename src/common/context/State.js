@@ -9,6 +9,7 @@ import { ResizeContext } from './Resize';
 import { SelectContext } from './Select';
 import { TreeContext } from './Tree';
 import { ExpandContext } from './Expand';
+import { FetchContext } from './Fetch';
 import { SortContext } from './Sort';
 
 const checkConflicts = externalTableState => {
@@ -18,7 +19,8 @@ const checkConflicts = externalTableState => {
     'select',
     'tree',
     'expand',
-    'sort'
+    'sort',
+    'fetch'
   ];
 
   Object.keys(externalTableState).forEach(key => {
@@ -41,6 +43,7 @@ const State = ({ externalTableState }) => {
   const select = React.useContext(SelectContext);
   const tree = React.useContext(TreeContext);
   const expand = React.useContext(ExpandContext);
+  const fetch = React.useContext(FetchContext);
   const sort = React.useContext(SortContext);
 
   const isMount = React.useRef(false);
@@ -57,6 +60,7 @@ const State = ({ externalTableState }) => {
       select,
       tree,
       expand,
+      fetch,
       sort,
       ...externalTableState
     };
@@ -75,6 +79,7 @@ const State = ({ externalTableState }) => {
     select,
     tree,
     expand,
+    fetch,
     sort,
     onTableStateChange
   ]);

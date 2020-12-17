@@ -6,6 +6,7 @@ import { isRowClick } from '@common/util/isRowClick';
 import { EXPAND_TYPES } from './config';
 
 const useExpandRow = ({
+  item,
   expansionPanel,
   isExpanded,
   onToggleExpandById,
@@ -36,7 +37,7 @@ const useExpandRow = ({
     className,
     onClick,
     expand: {
-      expansionPanel: isExpanded ? expansionPanel : null
+      expansionPanel: isExpanded ? expansionPanel(item) : null
     }
   };
 };

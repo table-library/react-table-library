@@ -14,7 +14,8 @@
           "@table-library/react-table-library/lib/select": "./src/Select",
           "@table-library/react-table-library/lib/tree": "./src/Tree",
           "@table-library/react-table-library/lib/resize": "./src/Resize",
-          "@table-library/react-table-library/lib/expand": "./src/Expand"
+          "@table-library/react-table-library/lib/expand": "./src/Expand",
+          "@table-library/react-table-library/lib/fetch": "./src/Fetch"
         }
       }
     ],

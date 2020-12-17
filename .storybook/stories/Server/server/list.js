@@ -25,6 +25,8 @@ const SORTS = {
 };
 
 export const get = ({
+  offset = 0,
+  limit = 0,
   search = '',
   sortKey = 'none',
   sortReverse = false
@@ -42,5 +44,20 @@ export const get = ({
       ? SORTS[sortKey](modifiedList).reverse()
       : SORTS[sortKey](modifiedList);
 
-    setTimeout(() => resolve(modifiedList), TIMEOUT);
+    // paginated list
+    if (offset || limit) {
+      setTimeout(
+        () =>
+          resolve({
+            nodes: modifiedList.slice(offset, offset + limit),
+            pageInfo: {
+              total: modifiedList.length,
+              nextOffset: offset + limit
+            }
+          }),
+        TIMEOUT
+      );
+    } else {
+      setTimeout(() => resolve(modifiedList), TIMEOUT);
+    }
   });
