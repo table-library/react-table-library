@@ -61,18 +61,7 @@ const findItemById = (nodes, id) =>
 const needsToFetch = (nodes, id) => {
   const item = findItemById(nodes, id);
 
-  return (
-    item &&
-    item.nodes &&
-    item.hasContent &&
-    !item.nodes.filter(node => !node.nodes).length
-  );
-};
-
-const needsToFetchPaginated = (nodes, id) => {
-  const item = findItemById(nodes, id);
-
-  return item && item.nodes && !item.nodes.length && item.hasContent;
+  return item && item.hasContent && item.nodes && !item.nodes.length;
 };
 
 storiesOf('06. Server/ 05. Tree', module)
@@ -392,7 +381,7 @@ storiesOf('06. Server/ 05. Tree', module)
 
     const doGetNested = React.useCallback(
       async params => {
-        if (!needsToFetchPaginated(data.nodes, params.id)) return;
+        if (!needsToFetch(data.nodes, params.id)) return;
 
         const { nodes, pageInfo } = await getPaginatedTree(params);
 
@@ -445,6 +434,7 @@ storiesOf('06. Server/ 05. Tree', module)
     const handleLoadMore = React.useCallback(
       async (tablestate, tableItem) => {
         console.log(tablestate, tableItem);
+
         const parentItem = getParentItem(data, tableItem.id);
 
         let params = {
