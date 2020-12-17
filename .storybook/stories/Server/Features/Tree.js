@@ -29,21 +29,24 @@ import { get as getSimpleStree } from '../server/tree/simple';
 import { get as getIterativeTree } from '../server/tree/iterative';
 import { get as getPaginatedTree } from '../server/tree/pagination';
 
-const findParentItem = (tree, id) =>
-  tree.reduce((acc, value) => {
+const findParentItem = (rootItem, id) =>
+  rootItem.nodes.reduce((acc, value) => {
     if (acc) return acc;
 
     if (value.nodes?.map(node => node.id).includes(id)) {
       acc = value;
     } else if (value.nodes) {
-      acc = findParentItem(value.nodes, id);
+      acc = findParentItem(value, id);
     }
 
     return acc;
   }, null);
 
-const findItemById = (tree, id) =>
-  tree.reduce((acc, value) => {
+const getParentItem = (rootItem, id) =>
+  findParentItem(rootItem, id) || rootItem;
+
+const findItemById = (nodes, id) =>
+  nodes.reduce((acc, value) => {
     if (acc) return acc;
 
     if (value.id === id) {
@@ -55,8 +58,8 @@ const findItemById = (tree, id) =>
     return acc;
   }, null);
 
-const needsToFetch = (tree, id) => {
-  const item = findItemById(tree, id);
+const needsToFetch = (nodes, id) => {
+  const item = findItemById(nodes, id);
 
   return (
     item &&
@@ -66,8 +69,8 @@ const needsToFetch = (tree, id) => {
   );
 };
 
-const needsToFetchPaginated = (tree, id) => {
-  const item = findItemById(tree, id);
+const needsToFetchPaginated = (nodes, id) => {
+  const item = findItemById(nodes, id);
 
   return item && item.nodes && !item.nodes.length && item.hasContent;
 };
@@ -75,7 +78,7 @@ const needsToFetchPaginated = (tree, id) => {
 storiesOf('06. Server/ 05. Tree', module)
   .addParameters({ component: Table })
   .add('default', () => {
-    const [list, setList] = React.useState([]);
+    const [tree, setList] = React.useState([]);
 
     const doGet = React.useCallback(async params => {
       setList(await getSimpleStree(params));
@@ -86,7 +89,7 @@ storiesOf('06. Server/ 05. Tree', module)
     }, [doGet]);
 
     return (
-      <Table list={list}>
+      <Table list={tree}>
         {tableList => (
           <>
             <Header>
@@ -124,7 +127,7 @@ storiesOf('06. Server/ 05. Tree', module)
     );
   })
   .add('fetch iterative', () => {
-    const [list, setList] = React.useState([]);
+    const [tree, setList] = React.useState([]);
 
     const doGet = React.useCallback(async params => {
       setList(await getIterativeTree(params));
@@ -134,9 +137,9 @@ storiesOf('06. Server/ 05. Tree', module)
       doGet({});
     }, [doGet]);
 
-    const doGetMore = React.useCallback(
+    const doGetNested = React.useCallback(
       async params => {
-        if (!needsToFetch(list, params.id)) return;
+        if (!needsToFetch(tree, params.id)) return;
 
         const nestedNodes = await getIterativeTree(params);
 
@@ -153,9 +156,9 @@ storiesOf('06. Server/ 05. Tree', module)
           }
         };
 
-        setList(list.map(insert));
+        setList(tree.map(insert));
       },
-      [list]
+      [tree]
     );
 
     const handleTableStateChange = React.useCallback(
@@ -174,14 +177,14 @@ storiesOf('06. Server/ 05. Tree', module)
         }
 
         if (SERVER_SIDE_OPERATIONS.includes(type)) {
-          doGetMore(params);
+          doGetNested(params);
         }
       },
-      [doGetMore]
+      [doGetNested]
     );
 
     return (
-      <Table list={list} onTableStateChange={handleTableStateChange}>
+      <Table list={tree} onTableStateChange={handleTableStateChange}>
         {tableList => (
           <>
             <Header>
@@ -219,7 +222,7 @@ storiesOf('06. Server/ 05. Tree', module)
     );
   })
   .add('fetch iterative (loading)', () => {
-    const [list, setList] = React.useState([]);
+    const [tree, setList] = React.useState([]);
 
     const doGet = React.useCallback(async params => {
       setList(await getIterativeTree(params));
@@ -229,9 +232,9 @@ storiesOf('06. Server/ 05. Tree', module)
       doGet({});
     }, [doGet]);
 
-    const doGetMore = React.useCallback(
+    const doGetNested = React.useCallback(
       async params => {
-        if (!needsToFetch(list, params.id)) return;
+        if (!needsToFetch(tree, params.id)) return;
 
         const nestedNodes = await getIterativeTree(params);
 
@@ -248,9 +251,9 @@ storiesOf('06. Server/ 05. Tree', module)
           }
         };
 
-        setList(list.map(insert));
+        setList(tree.map(insert));
       },
-      [list]
+      [tree]
     );
 
     const handleTableStateChange = React.useCallback(
@@ -269,16 +272,16 @@ storiesOf('06. Server/ 05. Tree', module)
         }
 
         if (SERVER_SIDE_OPERATIONS.includes(type)) {
-          doGetMore(params);
+          doGetNested(params);
         }
       },
-      [doGetMore]
+      [doGetNested]
     );
 
     const LoadingPanel = () => <div>Loading ...</div>;
 
     return (
-      <Table list={list} onTableStateChange={handleTableStateChange}>
+      <Table list={tree} onTableStateChange={handleTableStateChange}>
         {tableList => (
           <>
             <Header>
@@ -346,23 +349,48 @@ storiesOf('06. Server/ 05. Tree', module)
       pageInfo: null
     });
 
-    const doGet = React.useCallback(async params => {
+    const doGetPaginated = React.useCallback(async params => {
       const { nodes, pageInfo } = await getPaginatedTree(params);
 
-      setData(state => ({
-        pageInfo,
-        nodes: [...state.nodes, ...nodes]
-      }));
+      if (!params.id) {
+        setData(state => ({
+          pageInfo,
+          nodes: [...state.nodes, ...nodes]
+        }));
+
+        return;
+      }
+
+      if (params.id) {
+        const insert = item => {
+          if (item.id === params.id) {
+            return {
+              ...item,
+              nodes: [...item.nodes, ...nodes],
+              pageInfo
+            };
+          } else if (item.nodes) {
+            return { ...item, nodes: item.nodes.map(insert) };
+          } else {
+            return item;
+          }
+        };
+
+        setData(state => ({
+          pageInfo: state.pageInfo,
+          nodes: state.nodes.map(insert)
+        }));
+      }
     }, []);
 
     React.useEffect(() => {
-      doGet({
+      doGetPaginated({
         offset: 0,
-        limit: 3
+        limit: 2
       });
-    }, [doGet]);
+    }, [doGetPaginated]);
 
-    const doGetMore = React.useCallback(
+    const doGetNested = React.useCallback(
       async params => {
         if (!needsToFetchPaginated(data.nodes, params.id)) return;
 
@@ -408,23 +436,24 @@ storiesOf('06. Server/ 05. Tree', module)
         }
 
         if (SERVER_SIDE_OPERATIONS.includes(type)) {
-          doGetMore(params);
+          doGetNested(params);
         }
       },
-      [doGetMore]
+      [doGetNested]
     );
 
     const handleLoadMore = React.useCallback(
-      async (tableItem, tablestate) => {
-        console.log(tableItem, tablestate);
+      async (tablestate, tableItem) => {
+        console.log(tablestate, tableItem);
+        const parentItem = getParentItem(data, tableItem.id);
 
         let params = {
-          ...params,
-          offset: data.pageInfo.nextOffset, // get right pageInfo from tree
+          id: parentItem.id,
+          offset: parentItem.pageInfo.nextOffset,
           limit: 2
         };
 
-        return doGet(params);
+        return doGetPaginated(params);
       },
       [data]
     );
@@ -469,9 +498,17 @@ storiesOf('06. Server/ 05. Tree', module)
                     {
                       plugin: useFetch,
                       options: {
-                        showCondition: tableItem =>
-                          data.pageInfo.nextOffset <
-                          data.pageInfo.total,
+                        showCondition: tableItem => {
+                          const parentItem = getParentItem(
+                            data,
+                            tableItem.id
+                          );
+
+                          return (
+                            parentItem.pageInfo.nextOffset <
+                            parentItem.pageInfo.total
+                          );
+                        },
                         idlePanel: IdlePanel,
                         loadingPanel: LoadingPanel
                       }
