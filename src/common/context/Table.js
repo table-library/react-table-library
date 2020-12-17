@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 const TableContext = React.createContext(null);
 
-const TableProvider = ({ list, onTableStateChange, children }) => {
+const TableProvider = ({ data, onTableStateChange, children }) => {
   const tableFeatureRef = React.useRef();
 
   return (
     <TableContext.Provider
       value={{
-        list,
+        data,
         onTableStateChange,
         tableFeatureRef
       }}
@@ -20,7 +20,7 @@ const TableProvider = ({ list, onTableStateChange, children }) => {
 };
 
 TableProvider.propTypes = {
-  list: PropTypes.arrayOf(PropTypes.any),
+  data: PropTypes.shape(PropTypes.any),
   onTableStateChange: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

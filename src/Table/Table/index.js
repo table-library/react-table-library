@@ -30,7 +30,7 @@ const TableContainer = styled.div`
 `;
 
 const TableContent = ({ server, children }) => {
-  const { list } = React.useContext(TableContext);
+  const { data } = React.useContext(TableContext);
   const theme = React.useContext(ThemeContext);
   const resize = React.useContext(ResizeContext);
   const select = React.useContext(SelectContext);
@@ -39,14 +39,14 @@ const TableContent = ({ server, children }) => {
   const fetching = React.useContext(FetchContext);
   const sort = React.useContext(SortContext);
 
-  // do any list operations (e.g. sort, pagination), if not server-side
-  let modifiedList = [...list];
+  // do any nodes operations (e.g. sort, pagination), if not server-side
+  let modifiedNodes = [...data.nodes];
 
   if (!server?.sort) {
-    modifiedList = sort.sortState.fn(modifiedList);
+    modifiedNodes = sort.sortState.fn(modifiedNodes);
   }
 
-  return children(modifiedList, {
+  return children(modifiedNodes, {
     theme,
     resize,
     select,
@@ -58,7 +58,7 @@ const TableContent = ({ server, children }) => {
 };
 
 const Table = ({
-  list,
+  data,
   server,
   theme,
   defaultSort,
@@ -74,7 +74,7 @@ const Table = ({
   return (
     <TableContainer className="table" role="grid" ref={tableRef}>
       <TableProvider
-        list={list}
+        data={data}
         onTableStateChange={onTableStateChange}
       >
         <ThemeProvider theme={theme}>
@@ -104,7 +104,7 @@ const Table = ({
 };
 
 Table.propTypes = {
-  list: PropTypes.arrayOf(PropTypes.any),
+  data: PropTypes.shape(PropTypes.any),
   externalTableState: PropTypes.shape(PropTypes.any),
   server: PropTypes.shape({
     sort: PropTypes.bool

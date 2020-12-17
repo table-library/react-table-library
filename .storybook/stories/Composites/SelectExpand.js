@@ -67,7 +67,7 @@ storiesOf('02. Composites/ 05. Select & Expand', module)
     };
 
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>

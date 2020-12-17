@@ -29,22 +29,6 @@ import { get as getSimpleStree } from '../server/tree/simple';
 import { get as getIterativeTree } from '../server/tree/iterative';
 import { get as getPaginatedTree } from '../server/tree/pagination';
 
-const findParentItem = (rootItem, id) =>
-  rootItem.nodes.reduce((acc, value) => {
-    if (acc) return acc;
-
-    if (value.nodes?.map(node => node.id).includes(id)) {
-      acc = value;
-    } else if (value.nodes) {
-      acc = findParentItem(value, id);
-    }
-
-    return acc;
-  }, null);
-
-const getParentItem = (rootItem, id) =>
-  findParentItem(rootItem, id) || rootItem;
-
 const findItemById = (nodes, id) =>
   nodes.reduce((acc, value) => {
     if (acc) return acc;
@@ -78,7 +62,7 @@ storiesOf('06. Server/ 05. Tree', module)
     }, [doGet]);
 
     return (
-      <Table list={tree}>
+      <Table data={{ nodes: tree }}>
         {tableList => (
           <>
             <Header>
@@ -173,7 +157,10 @@ storiesOf('06. Server/ 05. Tree', module)
     );
 
     return (
-      <Table list={tree} onTableStateChange={handleTableStateChange}>
+      <Table
+        data={{ nodes: tree }}
+        onTableStateChange={handleTableStateChange}
+      >
         {tableList => (
           <>
             <Header>
@@ -270,7 +257,10 @@ storiesOf('06. Server/ 05. Tree', module)
     const LoadingPanel = () => <div>Loading ...</div>;
 
     return (
-      <Table list={tree} onTableStateChange={handleTableStateChange}>
+      <Table
+        data={{ nodes: tree }}
+        onTableStateChange={handleTableStateChange}
+      >
         {tableList => (
           <>
             <Header>
@@ -432,14 +422,12 @@ storiesOf('06. Server/ 05. Tree', module)
     );
 
     const handleLoadMore = React.useCallback(
-      async (tablestate, tableItem) => {
-        console.log(tablestate, tableItem);
-
-        const parentItem = getParentItem(data, tableItem.id);
+      async (tableState, tableItem) => {
+        console.log(tableState, tableItem);
 
         let params = {
-          id: parentItem.id,
-          offset: parentItem.pageInfo.nextOffset,
+          id: tableItem.id,
+          offset: tableItem.pageInfo.nextOffset,
           limit: 2
         };
 
@@ -455,10 +443,7 @@ storiesOf('06. Server/ 05. Tree', module)
     );
 
     return (
-      <Table
-        list={data.nodes}
-        onTableStateChange={handleTableStateChange}
-      >
+      <Table data={data} onTableStateChange={handleTableStateChange}>
         {tableList => (
           <>
             <Header>
@@ -488,17 +473,10 @@ storiesOf('06. Server/ 05. Tree', module)
                     {
                       plugin: useFetch,
                       options: {
-                        showCondition: tableItem => {
-                          const parentItem = getParentItem(
-                            data,
-                            tableItem.id
-                          );
-
-                          return (
-                            parentItem.pageInfo.nextOffset <
-                            parentItem.pageInfo.total
-                          );
-                        },
+                        showCondition: tableItem =>
+                          tableItem.pageInfo &&
+                          tableItem.pageInfo.nextOffset <
+                            tableItem.pageInfo.total,
                         idlePanel: IdlePanel,
                         loadingPanel: LoadingPanel
                       }

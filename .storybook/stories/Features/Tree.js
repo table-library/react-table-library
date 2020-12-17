@@ -23,7 +23,7 @@ import {
   TREE_EXPAND_TYPES
 } from '@table-library/react-table-library/lib/tree';
 
-const list = [
+const tree = [
   {
     id: '1',
     name: 'Empty Folder',
@@ -146,7 +146,7 @@ storiesOf('01. Features/09. Tree', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: tree }}>
         {tableList => (
           <>
             <Header>
@@ -183,7 +183,7 @@ storiesOf('01. Features/09. Tree', module)
   })
   .add('tree icon', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: tree }}>
         {tableList => (
           <>
             <Header>
@@ -222,7 +222,7 @@ storiesOf('01. Features/09. Tree', module)
   })
   .add('expand tree on tree icon click', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: tree }}>
         {tableList => (
           <>
             <Header>
@@ -272,7 +272,7 @@ storiesOf('01. Features/09. Tree', module)
     };
 
     return (
-      <Table list={list} defaultTree={defaultTree}>
+      <Table data={{ nodes: tree }} defaultTree={defaultTree}>
         {tableList => (
           <>
             <Header>
@@ -311,7 +311,7 @@ storiesOf('01. Features/09. Tree', module)
   })
   .add('zoom on double click (WIP)', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: tree }}>
         {tableList => (
           <>
             <Header>
@@ -351,7 +351,7 @@ storiesOf('01. Features/09. Tree', module)
   })
   .add('tree icon size', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: tree }}>
         {tableList => (
           <>
             <Header>
@@ -395,7 +395,7 @@ storiesOf('01. Features/09. Tree', module)
   })
   .add('custom tree icon (Material UI)', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: tree }}>
         {tableList => (
           <>
             <Header>

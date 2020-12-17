@@ -65,7 +65,7 @@ storiesOf('07. Server Recipes/ 02. Origin External', module)
         </select>
 
         <Table
-          list={list}
+          data={{ nodes: list }}
           externalTableState={{
             mySort: option
           }}

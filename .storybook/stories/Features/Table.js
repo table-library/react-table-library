@@ -33,7 +33,7 @@ storiesOf('01. Features/ 01. Table', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -66,7 +66,7 @@ storiesOf('01. Features/ 01. Table', module)
   })
   .add('row click', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -105,7 +105,7 @@ storiesOf('01. Features/ 01. Table', module)
   })
   .add('row double click', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -144,7 +144,7 @@ storiesOf('01. Features/ 01. Table', module)
   })
   .add('row click & row double click', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -204,7 +204,7 @@ storiesOf('01. Features/ 01. Table', module)
     ];
 
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -238,7 +238,7 @@ storiesOf('01. Features/ 01. Table', module)
 
 // .add('04. with sort/select', () => {
 //   return (
-//     <Table list={list}>
+//     <Table data={{ nodes: list }}>
 //       {(tableList, selectedTableIdList) => (
 //         <>
 //           <Header>
@@ -309,7 +309,7 @@ storiesOf('01. Features/ 01. Table', module)
 // .add('06. with fixed header', () => {
 //   return (
 //     <div style={{ height: text('container height', '300px') }}>
-//       <Table list={list}>
+//       <Table data={{ nodes: list }}>
 //         {tableList => (
 //           <>
 //             <Header>

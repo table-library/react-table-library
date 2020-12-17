@@ -50,7 +50,7 @@ storiesOf('01. Features/ 13. Column Ordering', module)
           Shuffle
         </button>
 
-        <Table list={list}>
+        <Table data={{ nodes: list }}>
           {tableList => (
             <>
               <Header>

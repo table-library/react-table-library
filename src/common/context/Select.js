@@ -36,7 +36,7 @@ const SelectProvider = ({
   defaultSelect = DEFAULT_SELECT,
   children
 }) => {
-  const { list } = React.useContext(TableContext);
+  const { data } = React.useContext(TableContext);
 
   const [state, dispatch] = useReducerWithNotify(
     selectReducer,
@@ -60,14 +60,14 @@ const SelectProvider = ({
     () =>
       dispatch({
         type: SELECT_ALL,
-        payload: { ids: list.map(item => item.id) }
+        payload: { ids: data.nodes.map(item => item.id) }
       }),
-    [list, dispatch]
+    [data, dispatch]
   );
 
   const allSelected =
     state.ids.sort().join(',') ===
-    list
+    data.nodes
       .map(item => item.id)
       .sort()
       .join(',');

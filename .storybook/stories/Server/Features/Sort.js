@@ -53,7 +53,7 @@ storiesOf('06. Server/ 02. Sort', module)
 
     return (
       <Table
-        list={list}
+        data={{ nodes: list }}
         server={{
           sort: true
         }}

@@ -61,7 +61,7 @@ storiesOf('01. Features/ 10. Expand', module)
     );
 
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -128,7 +128,7 @@ storiesOf('01. Features/ 10. Expand', module)
     );
 
     return (
-      <Table list={list} defaultExpand={defaultExpand}>
+      <Table data={{ nodes: list }} defaultExpand={defaultExpand}>
         {tableList => (
           <>
             <Header>
@@ -191,7 +191,7 @@ storiesOf('01. Features/ 10. Expand', module)
     );
 
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -256,7 +256,7 @@ storiesOf('01. Features/ 10. Expand', module)
     );
 
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -322,7 +322,7 @@ storiesOf('01. Features/ 10. Expand', module)
     );
 
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -396,7 +396,7 @@ storiesOf('01. Features/ 10. Expand', module)
     );
 
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -480,7 +480,7 @@ storiesOf('01. Features/ 10. Expand', module)
     );
 
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>

@@ -101,7 +101,7 @@ storiesOf('01. Features/ 12. Column Hiding', module)
           </label>
         </div>
 
-        <Table list={list}>
+        <Table data={{ nodes: list }}>
           {tableList => (
             <>
               <Header>

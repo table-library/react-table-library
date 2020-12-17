@@ -43,7 +43,7 @@ storiesOf('01. Features/ 05. Sort', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -110,7 +110,7 @@ storiesOf('01. Features/ 05. Sort', module)
     };
 
     return (
-      <Table list={list} defaultSort={defaultSort}>
+      <Table data={{ nodes: list }} defaultSort={defaultSort}>
         {tableList => (
           <>
             <Header>
@@ -171,7 +171,7 @@ storiesOf('01. Features/ 05. Sort', module)
   })
   .add('sort icon size ', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -244,7 +244,7 @@ storiesOf('01. Features/ 05. Sort', module)
   })
   .add('sort icon position ', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -317,7 +317,7 @@ storiesOf('01. Features/ 05. Sort', module)
   })
   .add('indentation ', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -392,7 +392,7 @@ storiesOf('01. Features/ 05. Sort', module)
   })
   .add('no sort icon', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -473,7 +473,7 @@ storiesOf('01. Features/ 05. Sort', module)
   })
   .add('custom sort icon (Material UI)', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -594,7 +594,7 @@ storiesOf('01. Features/ 05. Sort', module)
     };
 
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>

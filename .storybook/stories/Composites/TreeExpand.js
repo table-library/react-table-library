@@ -166,7 +166,7 @@ storiesOf('02. Composites/ 04. Tree & Expand', module)
     );
 
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -236,7 +236,7 @@ storiesOf('02. Composites/ 04. Tree & Expand', module)
       );
 
       return (
-        <Table list={list}>
+        <Table data={{ nodes: list }}>
           {tableList => (
             <>
               <Header>
@@ -315,7 +315,7 @@ storiesOf('02. Composites/ 04. Tree & Expand', module)
       );
 
       return (
-        <Table list={list}>
+        <Table data={{ nodes: list }}>
           {tableList => (
             <>
               <Header>
@@ -394,7 +394,7 @@ storiesOf('02. Composites/ 04. Tree & Expand', module)
       );
 
       return (
-        <Table list={list}>
+        <Table data={{ nodes: list }}>
           {tableList => (
             <>
               <Header>
@@ -472,7 +472,7 @@ storiesOf('02. Composites/ 04. Tree & Expand', module)
       );
 
       return (
-        <Table list={list}>
+        <Table data={{ nodes: list }}>
           {tableList => (
             <>
               <Header>
@@ -547,7 +547,7 @@ storiesOf('02. Composites/ 04. Tree & Expand', module)
       );
 
       return (
-        <Table list={list}>
+        <Table data={{ nodes: list }}>
           {tableList => (
             <>
               <Header>

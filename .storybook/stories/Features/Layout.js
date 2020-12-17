@@ -33,7 +33,7 @@ storiesOf('01. Features/ 03. Layout', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -68,7 +68,7 @@ storiesOf('01. Features/ 03. Layout', module)
     const rowLayout = ['50%', '15%', '20%', '15%'];
 
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -108,7 +108,7 @@ storiesOf('01. Features/ 03. Layout', module)
     ];
 
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>

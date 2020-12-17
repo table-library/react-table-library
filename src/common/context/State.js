@@ -33,7 +33,7 @@ const checkConflicts = externalTableState => {
 
 const State = ({ externalTableState }) => {
   const {
-    list,
+    data,
     onTableStateChange,
     tableFeatureRef
   } = React.useContext(TableContext);
@@ -54,7 +54,7 @@ const State = ({ externalTableState }) => {
     }
 
     tableFeatureRef.current = {
-      list,
+      data,
       theme,
       resize,
       select,
@@ -73,7 +73,7 @@ const State = ({ externalTableState }) => {
   }, [
     externalTableState,
     tableFeatureRef,
-    list,
+    data,
     theme,
     resize,
     select,

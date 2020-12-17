@@ -29,7 +29,7 @@ storiesOf('06. Server/ 01. Table', module)
     }, [doGet]);
 
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>

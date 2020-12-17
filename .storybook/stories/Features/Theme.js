@@ -34,7 +34,7 @@ storiesOf('01. Features/ 02. Theme', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -86,7 +86,7 @@ storiesOf('01. Features/ 02. Theme', module)
     });
 
     return (
-      <Table list={list} theme={theme}>
+      <Table data={{ nodes: list }} theme={theme}>
         {tableList => (
           <>
             <Header>
@@ -138,7 +138,7 @@ storiesOf('01. Features/ 02. Theme', module)
     });
 
     return (
-      <Table list={list} theme={theme}>
+      <Table data={{ nodes: list }} theme={theme}>
         {tableList => (
           <>
             <Header>
@@ -201,7 +201,7 @@ storiesOf('01. Features/ 02. Theme', module)
     });
 
     return (
-      <Table list={list} theme={theme}>
+      <Table data={{ nodes: list }} theme={theme}>
         {tableList => (
           <>
             <Header>

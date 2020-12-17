@@ -53,7 +53,7 @@ storiesOf('07. Server Recipes/ 01. Origin Table State', module)
 
     return (
       <Table
-        list={list}
+        data={{ nodes: list }}
         server={{
           sort: true
         }}

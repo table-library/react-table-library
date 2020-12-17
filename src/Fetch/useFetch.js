@@ -3,6 +3,7 @@ import React from 'react';
 const useFetch = ({
   tableState,
   item,
+  parentItem,
   lastRow,
   showCondition,
   idlePanel,
@@ -11,21 +12,21 @@ const useFetch = ({
   onAddFetchById,
   onRemoveFetchById
 }) => {
-  const idlePanelElement = idlePanel(item);
-  const loadingPanelElement = loadingPanel(item);
+  const idlePanelElement = idlePanel(parentItem);
+  const loadingPanelElement = loadingPanel(parentItem);
 
   const fetchPanel = {
     false: React.cloneElement(idlePanelElement, {
       onClick: async () => {
         onAddFetchById(item.id);
-        await idlePanelElement.props.onClick(tableState, item);
+        await idlePanelElement.props.onClick(tableState, parentItem);
         onRemoveFetchById(item.id);
       }
     }),
     true: loadingPanelElement
   }[isFetching];
 
-  const showFetchPanel = lastRow && showCondition(item);
+  const showFetchPanel = lastRow && showCondition(parentItem);
 
   return {
     name: 'fetchPlugin',

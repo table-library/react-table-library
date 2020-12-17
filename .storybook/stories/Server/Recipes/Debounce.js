@@ -71,7 +71,7 @@ storiesOf('07. Server Recipes/ 04. Debounce', module)
         </label>
 
         <Table
-          list={list}
+          data={{ nodes: list }}
           server={{
             search: true
           }}

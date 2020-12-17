@@ -33,7 +33,7 @@ storiesOf('01. Features/ 08. Filter WIP', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>

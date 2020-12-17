@@ -33,7 +33,7 @@ storiesOf('01. Features/ 11. Pagination WIP', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>

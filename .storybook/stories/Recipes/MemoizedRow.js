@@ -35,7 +35,7 @@ storiesOf('05. Recipes/03. Memoized Row', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>

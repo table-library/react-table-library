@@ -34,7 +34,7 @@ const list = [
 storiesOf('05. Recipes/ 02. Controlled', module)
   .add('default', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -124,7 +124,7 @@ storiesOf('05. Recipes/ 02. Controlled', module)
     };
 
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {(tableList, tableState) => (
           <>
             {/* explicit access to all table states inside of the table */}
@@ -225,7 +225,7 @@ storiesOf('05. Recipes/ 02. Controlled', module)
         Active Sort:
         {key}
         <Table
-          list={list}
+          data={{ nodes: list }}
           onTableStateChange={handleTableStateChange}
         >
           {tableList => (
@@ -313,7 +313,7 @@ storiesOf('05. Recipes/ 02. Controlled', module)
 
     return (
       <>
-        <Table list={list}>
+        <Table data={{ nodes: list }}>
           {(tableList, { sort }) => (
             <>
               <select
@@ -408,7 +408,7 @@ storiesOf('05. Recipes/ 02. Controlled', module)
     return (
       <>
         <Table
-          list={list}
+          data={{ nodes: list }}
           onTableStateChange={handleTableStateChange}
         >
           {(tableList, { sort }) => (
@@ -501,7 +501,7 @@ storiesOf('05. Recipes/ 02. Controlled', module)
         </select>
 
         <Table
-          list={list}
+          data={{ nodes: list }}
           // outside component to table binding
           defaultSort={SORTS[option]}
         >
@@ -586,7 +586,10 @@ storiesOf('05. Recipes/ 02. Controlled', module)
     );
 
     return (
-      <Table list={list} onTableStateChange={handleTableStateChange}>
+      <Table
+        data={{ nodes: list }}
+        onTableStateChange={handleTableStateChange}
+      >
         {(tableList, { sort }) => (
           <>
             <select
@@ -707,7 +710,7 @@ storiesOf('05. Recipes/ 02. Controlled', module)
         </select>
 
         <Table
-          list={list}
+          data={{ nodes: list }}
           // outside component to table binding
           defaultSort={SORTS[option]}
           onTableStateChange={handleTableStateChange}

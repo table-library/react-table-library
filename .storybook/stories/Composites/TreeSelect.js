@@ -148,7 +148,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -188,7 +188,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
   })
   .add('select on checkbox, expand tree on tree icon click', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -243,7 +243,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
   })
   .add('select on row click, expand tree on tree icon click', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -298,7 +298,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
   })
   .add('expand tree on row click, select on checkbox', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -355,7 +355,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
     'only tree icon: expand tree on tree icon click, select on row click',
     () => {
       return (
-        <Table list={list}>
+        <Table data={{ nodes: list }}>
           {tableList => (
             <>
               <Header>
@@ -408,7 +408,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
     'only checkbox: select on checkbox, expand tree on row click',
     () => {
       return (
-        <Table list={list}>
+        <Table data={{ nodes: list }}>
           {tableList => (
             <>
               <Header>

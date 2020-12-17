@@ -41,7 +41,10 @@ storiesOf('05. Recipes/ 01. On Table State Change', module).add(
     );
 
     return (
-      <Table list={list} onTableStateChange={handleTableStateChange}>
+      <Table
+        data={{ nodes: list }}
+        onTableStateChange={handleTableStateChange}
+      >
         {tableList => (
           <>
             <Header>

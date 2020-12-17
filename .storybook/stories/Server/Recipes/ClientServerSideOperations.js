@@ -73,7 +73,7 @@ storiesOf('07. Server Recipes/ 05. Client & Server-Side', module)
         </label>
 
         <Table
-          list={list}
+          data={{ nodes: list }}
           server={{
             search: true
           }}

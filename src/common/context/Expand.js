@@ -42,7 +42,7 @@ const ExpandProvider = ({
   defaultExpand = DEFAULT_EXPAND,
   children
 }) => {
-  const { list } = React.useContext(TableContext);
+  const { data } = React.useContext(TableContext);
 
   const [state, dispatch] = useReducerWithNotify(
     expandReducer,
@@ -89,14 +89,14 @@ const ExpandProvider = ({
     () =>
       dispatch({
         type: EXPAND_ALL,
-        payload: { ids: list.map(item => item.id) }
+        payload: { ids: data.nodes.map(item => item.id) }
       }),
-    [list, dispatch]
+    [data, dispatch]
   );
 
   const allExpanded =
     state.ids.sort().join(',') ===
-    list
+    data.nodes
       .map(item => item.id)
       .sort()
       .join(',');

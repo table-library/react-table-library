@@ -66,7 +66,7 @@ storiesOf('07. Server Recipes/ 03. Origin Mixed', module)
         </label>
 
         <Table
-          list={list}
+          data={{ nodes: list }}
           server={{
             sort: true
           }}
@@ -192,7 +192,7 @@ storiesOf('07. Server Recipes/ 03. Origin Mixed', module)
         </label>
 
         <Table
-          list={list}
+          data={{ nodes: list }}
           server={{
             sort: true
           }}

@@ -42,7 +42,7 @@ storiesOf('01. Features/06. Select', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -83,7 +83,7 @@ storiesOf('01. Features/06. Select', module)
     };
 
     return (
-      <Table list={list} defaultSelect={defaultSelect}>
+      <Table data={{ nodes: list }} defaultSelect={defaultSelect}>
         {tableList => (
           <>
             <Header>
@@ -120,7 +120,7 @@ storiesOf('01. Features/06. Select', module)
   })
   .add('checkbox', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -159,7 +159,7 @@ storiesOf('01. Features/06. Select', module)
   })
   .add('select on checkbox ', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>
@@ -205,7 +205,7 @@ storiesOf('01. Features/06. Select', module)
   })
   .add('custom checkbox (Material UI)', () => {
     return (
-      <Table list={list}>
+      <Table data={{ nodes: list }}>
         {tableList => (
           <>
             <Header>

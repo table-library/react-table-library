@@ -49,7 +49,7 @@ storiesOf('01. Features/ 07. Search', module)
           <input id="search" type="text" onChange={handleSearch} />
         </label>
 
-        <Table list={searchedList}>
+        <Table data={{ nodes: searchedList }}>
           {tableList => (
             <>
               <Header>

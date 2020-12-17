@@ -13,6 +13,24 @@ const BodyContainer = styled.div`
   ${({ css }) => css};
 `;
 
+const findParentItem = (rootItem, id) =>
+  rootItem.nodes.reduce((acc, value) => {
+    if (acc) return acc;
+
+    if (value.nodes?.map(node => node.id).includes(id)) {
+      return value;
+    }
+
+    if (value.nodes) {
+      return findParentItem(value, id);
+    }
+
+    return acc;
+  }, null);
+
+const getParentItem = (rootItem, id) =>
+  findParentItem(rootItem, id) || rootItem;
+
 const getCommonProps = child => ({
   id: child.props.item.id
 });
@@ -53,7 +71,7 @@ const getFetchProps = (
 const Body = ({ children }) => {
   const size = React.Children.count(children);
 
-  const { tableFeatureRef } = React.useContext(TableContext);
+  const { data, tableFeatureRef } = React.useContext(TableContext);
 
   const theme = React.useContext(ThemeContext);
   const select = React.useContext(SelectContext);
@@ -70,6 +88,7 @@ const Body = ({ children }) => {
       {React.Children.map(children, (child, index) =>
         React.cloneElement(child, {
           tableState: tableFeatureRef.current,
+          parentItem: getParentItem(data, child.props.item.id),
           firstRow: index === 0,
           lastRow: size === index + 1,
           ...getCommonProps(child),

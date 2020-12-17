@@ -62,7 +62,7 @@ storiesOf('06. Server/ 03. Search', module)
         </label>
 
         <Table
-          list={list}
+          data={{ nodes: list }}
           externalTableState={{
             mySearch: search
           }}

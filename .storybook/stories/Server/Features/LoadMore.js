@@ -39,8 +39,8 @@ storiesOf('06. Server/ 09. Load More', module)
     }, [doGet]);
 
     const handleLoadMore = React.useCallback(
-      async tablestate => {
-        console.log(tablestate);
+      async tableState => {
+        console.log(tableState);
 
         let params = {
           ...params,
@@ -54,7 +54,7 @@ storiesOf('06. Server/ 09. Load More', module)
     );
 
     return (
-      <Table list={data.nodes}>
+      <Table data={data}>
         {tableList => (
           <>
             <Header>
@@ -75,9 +75,10 @@ storiesOf('06. Server/ 09. Load More', module)
                     {
                       plugin: useFetch,
                       options: {
-                        showCondition: () =>
-                          data.pageInfo.nextOffset <
-                          data.pageInfo.total,
+                        showCondition: tableItem =>
+                          tableItem.pageInfo &&
+                          tableItem.pageInfo.nextOffset <
+                            tableItem.pageInfo.total,
                         idlePanel: () => (
                           <button onClick={handleLoadMore}>
                             More ...
