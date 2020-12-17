@@ -75,7 +75,7 @@ storiesOf('06. Server/ 09. Load More', module)
                     {
                       plugin: useFetch,
                       options: {
-                        showCondition: tableItem =>
+                        panelShowCondition: tableItem =>
                           tableItem.pageInfo &&
                           tableItem.pageInfo.nextOffset <
                             tableItem.pageInfo.total,

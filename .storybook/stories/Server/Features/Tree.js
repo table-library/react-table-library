@@ -281,7 +281,7 @@ storiesOf('06. Server/ 05. Tree', module)
                     {
                       plugin: useTreeRow,
                       options: {
-                        showCondition: tableItem =>
+                        panelShowCondition: tableItem =>
                           tableItem.hasContent &&
                           !tableItem.nodes.length,
                         loadingPanel: LoadingPanel
@@ -464,7 +464,7 @@ storiesOf('06. Server/ 05. Tree', module)
                     {
                       plugin: useTreeRow,
                       options: {
-                        showCondition: tableItem =>
+                        panelShowCondition: tableItem =>
                           tableItem.hasContent &&
                           !tableItem.nodes.length,
                         loadingPanel: LoadingPanel
@@ -473,7 +473,7 @@ storiesOf('06. Server/ 05. Tree', module)
                     {
                       plugin: useFetch,
                       options: {
-                        showCondition: tableItem =>
+                        panelShowCondition: tableItem =>
                           tableItem.pageInfo &&
                           tableItem.pageInfo.nextOffset <
                             tableItem.pageInfo.total,

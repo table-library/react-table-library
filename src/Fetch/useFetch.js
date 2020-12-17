@@ -5,7 +5,7 @@ const useFetch = ({
   item,
   parentItem,
   lastRow,
-  showCondition,
+  panelShowCondition,
   idlePanel,
   loadingPanel,
   isFetching,
@@ -26,7 +26,7 @@ const useFetch = ({
     true: loadingPanelElement
   }[isFetching];
 
-  const showFetchPanel = lastRow && showCondition(parentItem);
+  const showFetchPanel = lastRow && panelShowCondition(parentItem);
 
   return {
     name: 'fetchPlugin',

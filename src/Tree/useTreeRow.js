@@ -13,7 +13,7 @@ const useTreeRow = ({
   item,
   treeDepthLevel = 0,
   treeColumnLevel = 1,
-  showCondition = () => true,
+  panelShowCondition = () => true,
   loadingPanel = null,
   isTreeExpanded,
   onToggleTreeExpandById,
@@ -52,7 +52,7 @@ const useTreeRow = ({
   if (
     isTreeExpanded &&
     !hasLeaves(item) &&
-    showCondition(item) &&
+    panelShowCondition(item) &&
     loadingPanel
   ) {
     treePanel = loadingPanel(item);
