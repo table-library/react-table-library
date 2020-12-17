@@ -43,7 +43,6 @@ storiesOf('06. Server/ 09. Load More', module)
         console.log(tableState);
 
         let params = {
-          ...params,
           offset: data.pageInfo.nextOffset,
           limit: 2
         };

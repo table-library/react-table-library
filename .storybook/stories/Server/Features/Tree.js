@@ -18,11 +18,6 @@ import {
   CellTree
 } from '@table-library/react-table-library/lib/tree';
 
-import {
-  useExpandRow,
-  EXPAND_TYPES
-} from '@table-library/react-table-library/lib/expand';
-
 import { useFetch } from '@table-library/react-table-library/lib/fetch';
 
 import { get as getSimpleStree } from '../server/tree/simple';
@@ -46,6 +41,55 @@ const needsToFetch = (nodes, id) => {
   const item = findItemById(nodes, id);
 
   return item && item.hasContent && item.nodes && !item.nodes.length;
+};
+
+const insertTree = (targetId, nodes) => state => {
+  if (!targetId) {
+    return nodes;
+  }
+
+  const recursiveInsert = item => {
+    if (item.id === targetId) {
+      return {
+        ...item,
+        nodes: [...item.nodes, ...nodes]
+      };
+    } else if (item.nodes) {
+      return { ...item, nodes: item.nodes.map(recursiveInsert) };
+    } else {
+      return item;
+    }
+  };
+
+  return state.map(recursiveInsert);
+};
+
+const insertPaginatedTree = (targetId, nodes, pageInfo) => state => {
+  if (!targetId) {
+    return {
+      pageInfo,
+      nodes: [...state.nodes, ...nodes]
+    };
+  }
+
+  const recursiveInsert = item => {
+    if (item.id === targetId) {
+      return {
+        ...item,
+        nodes: [...item.nodes, ...nodes],
+        pageInfo
+      };
+    } else if (item.nodes) {
+      return { ...item, nodes: item.nodes.map(recursiveInsert) };
+    } else {
+      return item;
+    }
+  };
+
+  return {
+    pageInfo: state.pageInfo,
+    nodes: state.nodes.map(recursiveInsert)
+  };
 };
 
 storiesOf('06. Server/ 05. Tree', module)
@@ -103,36 +147,14 @@ storiesOf('06. Server/ 05. Tree', module)
     const [tree, setList] = React.useState([]);
 
     const doGet = React.useCallback(async params => {
-      setList(await getIterativeTree(params));
+      const nodes = await getIterativeTree(params);
+
+      setList(insertTree(params.id, nodes));
     }, []);
 
     React.useEffect(() => {
       doGet({});
     }, [doGet]);
-
-    const doGetNested = React.useCallback(
-      async params => {
-        if (!needsToFetch(tree, params.id)) return;
-
-        const nestedNodes = await getIterativeTree(params);
-
-        const insert = item => {
-          if (item.id === params.id) {
-            return {
-              ...item,
-              nodes: [...item.nodes, ...nestedNodes]
-            };
-          } else if (item.nodes) {
-            return { ...item, nodes: item.nodes.map(insert) };
-          } else {
-            return item;
-          }
-        };
-
-        setList(tree.map(insert));
-      },
-      [tree]
-    );
 
     const handleTableStateChange = React.useCallback(
       (type, tableState, action) => {
@@ -144,16 +166,18 @@ storiesOf('06. Server/ 05. Tree', module)
 
         if (action.type === 'ADD_TREE_EXPAND_BY_ID') {
           params = {
-            ...params,
             id: action.payload.id
           };
         }
 
-        if (SERVER_SIDE_OPERATIONS.includes(type)) {
-          doGetNested(params);
+        if (
+          SERVER_SIDE_OPERATIONS.includes(type) &&
+          needsToFetch(tableState.data.nodes, params.id)
+        ) {
+          doGet(params);
         }
       },
-      [doGetNested]
+      [doGet]
     );
 
     return (
@@ -201,36 +225,14 @@ storiesOf('06. Server/ 05. Tree', module)
     const [tree, setList] = React.useState([]);
 
     const doGet = React.useCallback(async params => {
-      setList(await getIterativeTree(params));
+      const nodes = await getIterativeTree(params);
+
+      setList(insertTree(params.id, nodes));
     }, []);
 
     React.useEffect(() => {
       doGet({});
     }, [doGet]);
-
-    const doGetNested = React.useCallback(
-      async params => {
-        if (!needsToFetch(tree, params.id)) return;
-
-        const nestedNodes = await getIterativeTree(params);
-
-        const insert = item => {
-          if (item.id === params.id) {
-            return {
-              ...item,
-              nodes: [...item.nodes, ...nestedNodes]
-            };
-          } else if (item.nodes) {
-            return { ...item, nodes: item.nodes.map(insert) };
-          } else {
-            return item;
-          }
-        };
-
-        setList(tree.map(insert));
-      },
-      [tree]
-    );
 
     const handleTableStateChange = React.useCallback(
       (type, tableState, action) => {
@@ -242,16 +244,18 @@ storiesOf('06. Server/ 05. Tree', module)
 
         if (action.type === 'ADD_TREE_EXPAND_BY_ID') {
           params = {
-            ...params,
             id: action.payload.id
           };
         }
 
-        if (SERVER_SIDE_OPERATIONS.includes(type)) {
-          doGetNested(params);
+        if (
+          SERVER_SIDE_OPERATIONS.includes(type) &&
+          needsToFetch(tableState.data.nodes, params.id)
+        ) {
+          doGet(params);
         }
       },
-      [doGetNested]
+      [doGet]
     );
 
     const LoadingPanel = () => <div>Loading ...</div>;
@@ -286,21 +290,6 @@ storiesOf('06. Server/ 05. Tree', module)
                           !tableItem.nodes.length,
                         loadingPanel: LoadingPanel
                       }
-                    },
-                    {
-                      plugin: useExpandRow,
-                      options: {
-                        expandType: EXPAND_TYPES.NoClick,
-                        expansionPanel: () => (
-                          <div
-                            style={{
-                              background: 'grey'
-                            }}
-                          >
-                            Loading ...
-                          </div>
-                        )
-                      }
                     }
                   ]}
                 >
@@ -328,74 +317,18 @@ storiesOf('06. Server/ 05. Tree', module)
       pageInfo: null
     });
 
-    const doGetPaginated = React.useCallback(async params => {
+    const doGet = React.useCallback(async params => {
       const { nodes, pageInfo } = await getPaginatedTree(params);
 
-      if (!params.id) {
-        setData(state => ({
-          pageInfo,
-          nodes: [...state.nodes, ...nodes]
-        }));
-
-        return;
-      }
-
-      if (params.id) {
-        const insert = item => {
-          if (item.id === params.id) {
-            return {
-              ...item,
-              nodes: [...item.nodes, ...nodes],
-              pageInfo
-            };
-          } else if (item.nodes) {
-            return { ...item, nodes: item.nodes.map(insert) };
-          } else {
-            return item;
-          }
-        };
-
-        setData(state => ({
-          pageInfo: state.pageInfo,
-          nodes: state.nodes.map(insert)
-        }));
-      }
+      setData(insertPaginatedTree(params.id, nodes, pageInfo));
     }, []);
 
     React.useEffect(() => {
-      doGetPaginated({
+      doGet({
         offset: 0,
-        limit: 2
+        limit: 1
       });
-    }, [doGetPaginated]);
-
-    const doGetNested = React.useCallback(
-      async params => {
-        if (!needsToFetch(data.nodes, params.id)) return;
-
-        const { nodes, pageInfo } = await getPaginatedTree(params);
-
-        const insert = item => {
-          if (item.id === params.id) {
-            return {
-              ...item,
-              nodes: [...item.nodes, ...nodes],
-              pageInfo
-            };
-          } else if (item.nodes) {
-            return { ...item, nodes: item.nodes.map(insert) };
-          } else {
-            return item;
-          }
-        };
-
-        setData(state => ({
-          pageInfo: state.pageInfo,
-          nodes: state.nodes.map(insert)
-        }));
-      },
-      [data]
-    );
+    }, [doGet]);
 
     const handleTableStateChange = React.useCallback(
       (type, tableState, action) => {
@@ -407,18 +340,20 @@ storiesOf('06. Server/ 05. Tree', module)
 
         if (action.type === 'ADD_TREE_EXPAND_BY_ID') {
           params = {
-            ...params,
             id: action.payload.id,
             offset: 0,
             limit: 1
           };
         }
 
-        if (SERVER_SIDE_OPERATIONS.includes(type)) {
-          doGetNested(params);
+        if (
+          SERVER_SIDE_OPERATIONS.includes(type) &&
+          needsToFetch(tableState.data.nodes, params.id)
+        ) {
+          doGet(params);
         }
       },
-      [doGetNested]
+      [doGet]
     );
 
     const handleLoadMore = React.useCallback(
@@ -431,7 +366,7 @@ storiesOf('06. Server/ 05. Tree', module)
           limit: 2
         };
 
-        return doGetPaginated(params);
+        return doGet(params);
       },
       [data]
     );
