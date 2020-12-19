@@ -8,14 +8,6 @@ const RowContainerBase = styled.div`
 `;
 
 const RowContainer = styled(RowContainerBase)`
-  position: relative;
-  margin-top: -1px;
-  z-index: 1;
-
-  &:hover {
-    z-index: 2;
-  }
-
   ${() => {
     /* #1 */
   }}

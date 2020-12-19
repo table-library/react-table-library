@@ -115,6 +115,7 @@ const Row = props => {
         })}
         css={css`
           ${themeByPlugins}
+          ${theme?.BaseRow}
           ${theme?.Row}
         `}
         ref={ref}

@@ -100,7 +100,7 @@ const CellTree = React.memo(
             margin={treeIconMargin}
             onClick={handleClick}
           >
-            <span>{icon}</span>
+            {icon && <span>{icon}</span>}
           </Button>
           <div>{children}</div>
         </TreeContent>

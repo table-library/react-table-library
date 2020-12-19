@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { css } from 'styled-components';
 import cs from 'classnames';
 
 import { HeaderCellContainer } from '@common/components/Cell';
@@ -25,7 +26,10 @@ const HeaderCell = ({
     <HeaderCellContainer
       role="columnheader"
       className={cs('th', className, { hide })}
-      css={theme?.HeaderCell}
+      css={css`
+        ${theme?.BaseCell}
+        ${theme?.HeaderCell}
+      `}
       indentation={indentation}
       ref={cellRef}
     >

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { css } from 'styled-components';
 import cs from 'classnames';
 
 import { CellContainer } from '@common/components/Cell';
@@ -14,7 +15,10 @@ const Cell = ({ className, indentation, hide, children }) => {
       className={cs('td', className, {
         hide
       })}
-      css={theme?.Cell}
+      css={css`
+        ${theme?.BaseCell}
+        ${theme?.Cell}
+      `}
       indentation={indentation}
     >
       <div>{children}</div>

@@ -14,11 +14,11 @@ module.exports = {
     fetch: './src/Fetch/index.js'
   },
   // Webpack 4: https://v4.webpack.js.org/guides/code-splitting/#prevent-duplication
-  optimization: {
-    splitChunks: {
-      chunks: 'all'
-    }
-  },
+  // optimization: {
+  //   splitChunks: {
+  //     chunks: 'all'
+  //   }
+  // },
   output: {
     path: `${__dirname}/lib`,
     filename: '[name].js',

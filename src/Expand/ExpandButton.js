@@ -61,7 +61,7 @@ const ExpandButton = ({
 
   return (
     <Button className="narrow" onClick={onClick}>
-      <span>{icon}</span>
+      {icon && <span>{icon}</span>}
     </Button>
   );
 };

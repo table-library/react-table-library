@@ -7,8 +7,8 @@ import { addById, removeById, byAll } from './reducers';
 
 const ADD_SELECT_BY_ID = 'ADD_SELECT_BY_ID';
 const REMOVE_SELECT_BY_ID = 'REMOVE_SELECT_BY_ID';
-
 const SELECT_ALL = 'SELECT_ALL';
+const SET_SELECT = 'SET_SELECT';
 
 const selectReducer = (state, action) => {
   switch (action.type) {
@@ -20,6 +20,9 @@ const selectReducer = (state, action) => {
     }
     case SELECT_ALL: {
       return byAll(state, action);
+    }
+    case SET_SELECT: {
+      return { ...state, ...action.payload };
     }
     default:
       throw new Error();
@@ -64,6 +67,19 @@ const SelectProvider = ({
       }),
     [data, dispatch]
   );
+
+  const onSetSelect = React.useCallback(
+    value =>
+      dispatch({
+        type: SET_SELECT,
+        payload: value
+      }),
+    [dispatch]
+  );
+
+  React.useEffect(() => {
+    onSetSelect(defaultSelect);
+  }, [defaultSelect, onSetSelect]);
 
   const allSelected =
     state.ids.sort().join(',') ===

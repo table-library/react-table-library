@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { css } from 'styled-components';
 import cs from 'classnames';
 
 import { HeaderRowContainer } from '@common/components/Row';
@@ -18,7 +19,10 @@ const HeaderRow = ({ className, rowLayout, disabled, children }) => {
     <HeaderRowContainer
       role="rowheader"
       className={cs('tr', className, { disabled })}
-      css={theme?.HeaderRow}
+      css={css`
+        ${theme?.BaseRow}
+        ${theme?.HeaderRow}
+      `}
       ref={ref}
     >
       {React.Children.toArray(children)

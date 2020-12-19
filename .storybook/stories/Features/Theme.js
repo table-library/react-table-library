@@ -186,6 +186,14 @@ storiesOf('01. Features/ 02. Theme', module)
 
           color: #177ac9;
         }
+
+        position: relative;
+        margin-top: -1px;
+        z-index: 1;
+
+        &:hover {
+          z-index: 2;
+        }
       `,
       HeaderCell: `
         margin-top: 9px;

@@ -11,7 +11,7 @@ const CellContainerBase = styled.div`
   padding-top: 4px;
   padding-bottom: 4px;
 
-  & > div {
+  &:not(.shrink) > div {
     width: 100%;
 
     text-align: left;
