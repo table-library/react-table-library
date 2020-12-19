@@ -19,14 +19,14 @@ const useExpandRow = ({
   treeColumnLevel = 1
 }) => {
   const theme = css`
-    &.expandable-row {
+    &.row-expand-clickable {
       cursor: pointer;
     }
   `;
 
   const className = cs('row-expand', {
-    'expandable-row': expandType === EXPAND_TYPES.RowClick,
-    'expanded-row': isExpanded
+    'row-expand-clickable': expandType === EXPAND_TYPES.RowClick,
+    'row-expand-expanded': isExpanded
   });
 
   const onClick = (tableItem, event) => {

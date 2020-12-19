@@ -14,21 +14,21 @@ const useSelectRow = ({
   selectType = SELECT_TYPES.RowClick
 }) => {
   const theme = css`
-    &.selected-row {
+    &.row-select-selected {
       color: ${COLORS.FONT_PRIMARY};
       font-weight: bold;
 
       background-color: ${COLORS.ROW_SELECTED};
     }
 
-    &.selectable-row {
+    &.row-select-clickable {
       cursor: pointer;
     }
   `;
 
   const className = cs('row-select', {
-    'selectable-row': selectType === SELECT_TYPES.RowClick,
-    'selected-row': isSelected
+    'row-select-clickable': selectType === SELECT_TYPES.RowClick,
+    'row-select-selected': isSelected
   });
 
   const onClick = (tableItem, event) => {

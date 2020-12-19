@@ -17,7 +17,7 @@ import { HeaderCellSort } from '@table-library/react-table-library/lib/sort';
 
 import { get } from '../server/list';
 
-storiesOf('07. Server Recipes/ 01. Origin Table State', module)
+storiesOf('07. Server Recipes/ 01. Origin Table', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [list, setList] = React.useState([]);
@@ -63,38 +63,10 @@ storiesOf('07. Server Recipes/ 01. Origin Table State', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCellSort
-                  sortKey="name"
-                  sortFn={array =>
-                    array.sort((a, b) => a.name.localeCompare(b.name))
-                  }
-                >
-                  Name
-                </HeaderCellSort>
-                <HeaderCellSort
-                  sortKey="stars"
-                  sortFn={array =>
-                    array.sort((a, b) => a.stars - b.stars)
-                  }
-                >
-                  Stars
-                </HeaderCellSort>
-                <HeaderCellSort
-                  sortKey="light"
-                  sortFn={array =>
-                    array.sort((a, b) => a.light - b.light)
-                  }
-                >
-                  Light
-                </HeaderCellSort>
-                <HeaderCellSort
-                  sortKey="count"
-                  sortFn={array =>
-                    array.sort((a, b) => a.count - b.count)
-                  }
-                >
-                  Count
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="name">Name</HeaderCellSort>
+                <HeaderCellSort sortKey="stars">Stars</HeaderCellSort>
+                <HeaderCellSort sortKey="light">Light</HeaderCellSort>
+                <HeaderCellSort sortKey="count">Count</HeaderCellSort>
               </HeaderRow>
             </Header>
 
