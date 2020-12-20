@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 import { useReducerWithNotify } from './useReducerWithNotify';
 import { addById, removeById } from './reducers';
 
-const ADD_TREE_EXPAND_BY_ID = 'ADD_TREE_EXPAND_BY_ID';
-const REMOVE_TREE_EXPAND_BY_ID = 'REMOVE_TREE_EXPAND_BY_ID';
+const TREE_ADD_EXPAND_BY_ID = 'TREE_ADD_EXPAND_BY_ID';
+const TREE_REMOVE_EXPAND_BY_ID = 'TREE_REMOVE_EXPAND_BY_ID';
 
 const treeReducer = (state, action) => {
   switch (action.type) {
-    case ADD_TREE_EXPAND_BY_ID: {
+    case TREE_ADD_EXPAND_BY_ID: {
       return addById(state, action);
     }
-    case REMOVE_TREE_EXPAND_BY_ID: {
+    case TREE_REMOVE_EXPAND_BY_ID: {
       return removeById(state, action);
     }
     default:
@@ -38,8 +38,8 @@ const TreeProvider = ({ defaultTree = DEFAULT_TREE, children }) => {
     id => {
       dispatch({
         type: state.ids.includes(id)
-          ? REMOVE_TREE_EXPAND_BY_ID
-          : ADD_TREE_EXPAND_BY_ID,
+          ? TREE_REMOVE_EXPAND_BY_ID
+          : TREE_ADD_EXPAND_BY_ID,
         payload: { id }
       });
     },

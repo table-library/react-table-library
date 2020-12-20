@@ -12,6 +12,19 @@ export const removeById = (state, action) => {
   };
 };
 
+export const addByIds = (state, action) => {
+  return {
+    ...state,
+    ids: state.ids.concat(action.payload.ids)
+  };
+};
+
+export const removeByIds = (state, action) => {
+  return {
+    ...state,
+    ids: state.ids.filter(id => !action.payload.ids.includes(id))
+  };
+};
 export const byAll = (state, action) => {
   const isAll = action.payload.ids.length === state.ids.length;
 

@@ -164,7 +164,7 @@ storiesOf('06. Server/ 05. Tree', module)
 
         let params = {};
 
-        if (action.type === 'ADD_TREE_EXPAND_BY_ID') {
+        if (action.type === 'TREE_ADD_EXPAND_BY_ID') {
           params = {
             id: action.payload.id
           };
@@ -242,7 +242,7 @@ storiesOf('06. Server/ 05. Tree', module)
 
         let params = {};
 
-        if (action.type === 'ADD_TREE_EXPAND_BY_ID') {
+        if (action.type === 'TREE_ADD_EXPAND_BY_ID') {
           params = {
             id: action.payload.id
           };
@@ -345,7 +345,7 @@ storiesOf('06. Server/ 05. Tree', module)
 
         let params = {};
 
-        if (action.type === 'ADD_TREE_EXPAND_BY_ID') {
+        if (action.type === 'TREE_ADD_EXPAND_BY_ID') {
           params = {
             id: action.payload.id,
             offset: 0,

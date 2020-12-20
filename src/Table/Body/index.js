@@ -37,10 +37,11 @@ const getCommonProps = child => ({
 
 const getSelectProps = (
   child,
-  { selectState, onToggleSelectById }
+  { selectState, onToggleSelectById, onToggleSelectByIdRecursively }
 ) => ({
   isSelected: selectState.ids.includes(child.props.item.id),
-  onToggleSelectById
+  onToggleSelectById,
+  onToggleSelectByIdRecursively
 });
 
 const getTreeProps = (
