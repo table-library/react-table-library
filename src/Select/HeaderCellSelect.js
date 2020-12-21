@@ -18,12 +18,11 @@ const HeaderCellSelect = React.memo(
       >
         <ImperativeCheckbox
           select={select}
-          checked={select.selectState.allSelected}
+          checked={select.selectState.all}
           isIndeterminate={
-            !select.selectState.allSelected &&
-            !select.selectState.noneSelected
+            !select.selectState.all && !select.selectState.none
           }
-          onChange={select.onToggleSelectAll}
+          onChange={select.onToggleAll}
         >
           {children}
         </ImperativeCheckbox>

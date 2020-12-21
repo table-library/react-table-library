@@ -59,7 +59,7 @@ storiesOf('07. Server Recipes/ 05. Client & Server-Side', module)
         if (SERVER_SIDE_OPERATIONS_DEBOUNCED.includes(type)) {
           if (timeout.current) clearTimeout(timeout.current);
 
-          timeout.current = setTimeout(() => doGet(params), 1500);
+          timeout.current = setTimeout(() => doGet(params), 500);
         }
       },
       []

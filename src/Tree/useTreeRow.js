@@ -16,13 +16,12 @@ const useTreeRow = ({
   panelShowCondition = () => true,
   loadingPanel = null,
   treeExpandType = TREE_EXPAND_TYPES.RowClick,
-  // state
   treeDepthLevel = 0,
   treeColumnLevel = 1,
-  isTreeExpanded,
-  onToggleTreeExpandById,
-  children,
+  // state
+  tree,
   // others
+  children,
   ...passThrough
 }) => {
   const theme = css`
@@ -38,7 +37,7 @@ const useTreeRow = ({
   const className = cs('row-tree', {
     'row-tree-clickable':
       treeExpandType === TREE_EXPAND_TYPES.RowClick,
-    'row-tree-expanded': isTreeExpanded,
+    'row-tree-expanded': tree.isTreeExpanded,
     'row-tree-leaf': isLeaf(item)
   });
 
@@ -48,14 +47,14 @@ const useTreeRow = ({
     if (isLeaf(tableItem)) return;
 
     if (treeExpandType === TREE_EXPAND_TYPES.RowClick) {
-      onToggleTreeExpandById(tableItem.id);
+      tree.onToggleById(tableItem.id);
     }
   };
 
   let treePanel = null;
 
   if (
-    isTreeExpanded &&
+    tree.isTreeExpanded &&
     !hasLeaves(item) &&
     panelShowCondition(item) &&
     loadingPanel
@@ -66,7 +65,7 @@ const useTreeRow = ({
     });
   }
 
-  if (isTreeExpanded && hasLeaves(item)) {
+  if (tree.isTreeExpanded && hasLeaves(item)) {
     treePanel = (
       <Body>
         {item.nodes.map(node => (

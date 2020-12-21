@@ -36,7 +36,7 @@ const list = [
   }
 ];
 
-storiesOf('02. Composites/ 05. Select & Expand', module)
+storiesOf('02. Composites/ 05. Select & Expand WIP', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const ExpansionPanel = ({ item }) => (

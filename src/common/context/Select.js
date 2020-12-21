@@ -20,37 +20,35 @@ import {
   removeAll
 } from './reducers';
 
-const SELECT_ADD_BY_ID = 'SELECT_ADD_BY_ID';
-const SELECT_REMOVE_BY_ID = 'SELECT_REMOVE_BY_ID';
-const SELECT_ADD_BY_ID_RECURSIVELY = 'SELECT_ADD_BY_ID_RECURSIVELY';
-const SELECT_REMOVE_BY_ID_RECURSIVELY =
-  'SELECT_REMOVE_BY_ID_RECURSIVELY';
-const SELECT_ADD_ALL = 'SELECT_ADD_ALL';
-const SELECT_REMOVE_ALL = 'SELECT_REMOVE_ALL';
-const SELECT_SET = 'SELECT_SET';
+const ADD_BY_ID = 'ADD_BY_ID';
+const REMOVE_BY_ID = 'REMOVE_BY_ID';
+const ADD_BY_ID_RECURSIVELY = 'ADD_BY_ID_RECURSIVELY';
+const REMOVE_BY_ID_RECURSIVELY = 'REMOVE_BY_ID_RECURSIVELY';
+const ADD_ALL = 'ADD_ALL';
+const REMOVE_ALL = 'REMOVE_ALL';
+const SET = 'SET';
 
 const selectReducer = (state, action) => {
   switch (action.type) {
-    case SELECT_ADD_BY_ID: {
+    case ADD_BY_ID: {
       return addById(state, action);
     }
-    case SELECT_REMOVE_BY_ID: {
+    case REMOVE_BY_ID: {
       return removeById(state, action);
     }
-    case SELECT_ADD_BY_ID_RECURSIVELY: {
+    case ADD_BY_ID_RECURSIVELY: {
       return addByIds(state, action);
     }
-    case SELECT_REMOVE_BY_ID_RECURSIVELY: {
+    case REMOVE_BY_ID_RECURSIVELY: {
       return removeByIds(state, action);
     }
-    case SELECT_ADD_ALL: {
+    case ADD_ALL: {
       return addAll(state, action);
     }
-    case SELECT_REMOVE_ALL: {
+    case REMOVE_ALL: {
       return removeAll(state, action);
     }
-
-    case SELECT_SET: {
+    case SET: {
       return { ...state, ...action.payload };
     }
     default:
@@ -77,100 +75,92 @@ const SelectProvider = ({
     'selectState'
   );
 
-  const onAddSelectById = React.useCallback(
+  const onAddById = React.useCallback(
     id =>
       dispatch({
-        type: SELECT_ADD_BY_ID,
+        type: ADD_BY_ID,
         payload: { id }
       }),
     [dispatch]
   );
 
-  const onRemoveSelectById = React.useCallback(
+  const onRemoveById = React.useCallback(
     id =>
       dispatch({
-        type: SELECT_REMOVE_BY_ID,
+        type: REMOVE_BY_ID,
         payload: { id }
       }),
     [dispatch]
   );
 
-  const onToggleSelectById = React.useCallback(
-    id =>
-      state.ids.includes(id)
-        ? onRemoveSelectById(id)
-        : onAddSelectById(id),
-    [state, onAddSelectById, onRemoveSelectById]
+  const onToggleById = React.useCallback(
+    id => (state.ids.includes(id) ? onRemoveById(id) : onAddById(id)),
+    [state, onAddById, onRemoveById]
   );
 
-  const onAddSelectByIdRecursively = React.useCallback(
+  const onAddByIdRecursively = React.useCallback(
     ids => {
       dispatch({
-        type: SELECT_ADD_BY_ID_RECURSIVELY,
+        type: ADD_BY_ID_RECURSIVELY,
         payload: { ids }
       });
     },
     [dispatch]
   );
 
-  const onRemoveSelectByIdRecursively = React.useCallback(
+  const onRemoveByIdRecursively = React.useCallback(
     ids => {
       dispatch({
-        type: SELECT_REMOVE_BY_ID_RECURSIVELY,
+        type: REMOVE_BY_ID_RECURSIVELY,
         payload: { ids }
       });
     },
     [dispatch]
   );
 
-  const onToggleSelectByIdRecursively = React.useCallback(
+  const onToggleByIdRecursively = React.useCallback(
     id => {
       const ids = findItemsById(data.nodes, id).map(item => item.id);
 
       if (isAll(ids, state.ids)) {
-        onRemoveSelectByIdRecursively(ids);
+        onRemoveByIdRecursively(ids);
       } else {
-        onAddSelectByIdRecursively(ids);
+        onAddByIdRecursively(ids);
       }
     },
-    [
-      data,
-      state,
-      onAddSelectByIdRecursively,
-      onRemoveSelectByIdRecursively
-    ]
+    [data, state, onAddByIdRecursively, onRemoveByIdRecursively]
   );
 
-  const onAddSelectAll = React.useCallback(
+  const onAddAll = React.useCallback(
     ids => {
       dispatch({
-        type: SELECT_ADD_ALL,
+        type: ADD_ALL,
         payload: { ids }
       });
     },
     [dispatch]
   );
 
-  const onRemoveSelectAll = React.useCallback(() => {
+  const onRemoveAll = React.useCallback(() => {
     dispatch({
-      type: SELECT_REMOVE_ALL
+      type: REMOVE_ALL
     });
   }, [dispatch]);
 
-  const onToggleSelectAll = React.useCallback(() => {
+  const onToggleAll = React.useCallback(() => {
     const ids = findAllItems(data.nodes).map(item => item.id);
 
     if (isAll(ids, state.ids)) {
-      onRemoveSelectAll();
+      onRemoveAll();
     } else {
-      onAddSelectAll(ids);
+      onAddAll(ids);
     }
-  }, [data, state, onAddSelectAll, onRemoveSelectAll]);
+  }, [data, state, onAddAll, onRemoveAll]);
 
-  const onSetSelect = React.useCallback(
+  const onSet = React.useCallback(
     value =>
       dispatch({
-        type: SELECT_SET,
+        type: SET,
         payload: value
       }),
     [dispatch]
@@ -180,31 +170,35 @@ const SelectProvider = ({
 
   React.useEffect(() => {
     if (!isEqual(defaultSelect, defaultSelectPrevious)) {
-      onSetSelect(defaultSelect);
+      onSet(defaultSelect);
     }
-  }, [defaultSelectPrevious, defaultSelect, onSetSelect]);
+  }, [defaultSelectPrevious, defaultSelect, onSet]);
+
+  const none = !state.ids.length;
+
+  const all = isAll(
+    data.nodes.map(item => item.id),
+    state.ids
+  );
 
   return (
     <SelectContext.Provider
       value={{
         selectState: {
           ...state,
-          allSelected: isAll(
-            data.nodes.map(item => item.id),
-            state.ids
-          ),
-          noneSelected: !state.ids.length
+          all,
+          none
         },
 
-        onAddSelectById,
-        onRemoveSelectById,
-        onToggleSelectById,
+        onAddById,
+        onRemoveById,
+        onToggleById,
 
-        onAddSelectByIdRecursively,
-        onRemoveSelectByIdRecursively,
-        onToggleSelectByIdRecursively,
+        onAddByIdRecursively,
+        onRemoveByIdRecursively,
+        onToggleByIdRecursively,
 
-        onToggleSelectAll
+        onToggleAll
       }}
     >
       {children}

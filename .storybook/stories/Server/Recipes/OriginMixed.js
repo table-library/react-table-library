@@ -154,7 +154,7 @@ storiesOf('07. Server Recipes/ 03. Origin Mixed', module)
         if (SERVER_SIDE_OPERATIONS_DEBOUNCED.includes(type)) {
           if (timeout.current) clearTimeout(timeout.current);
 
-          timeout.current = setTimeout(() => doGet(params), 1500);
+          timeout.current = setTimeout(() => doGet(params), 500);
         }
       },
       []

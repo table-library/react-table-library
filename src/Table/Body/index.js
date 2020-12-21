@@ -25,25 +25,18 @@ const findParentItem = (rootItem, id) =>
 const getParentItem = (rootItem, id) =>
   findParentItem(rootItem, id) || rootItem;
 
-const getCommonProps = child => ({
-  id: child.props.item.id
-});
-
 const getSelectProps = (
   child,
-  { selectState, onToggleSelectById, onToggleSelectByIdRecursively }
+  { selectState, onToggleById, onToggleByIdRecursively }
 ) => ({
   isSelected: selectState.ids.includes(child.props.item.id),
-  onToggleSelectById,
-  onToggleSelectByIdRecursively
+  onToggleById,
+  onToggleByIdRecursively
 });
 
-const getTreeProps = (
-  child,
-  { treeState, onToggleTreeExpandById }
-) => ({
+const getTreeProps = (child, { treeState, onToggleById }) => ({
   isTreeExpanded: treeState.ids.includes(child.props.item.id),
-  onToggleTreeExpandById
+  onToggleById
 });
 
 const getExpandProps = (
@@ -78,14 +71,16 @@ const Body = ({ children }) => {
       {React.Children.map(children, (child, index) =>
         React.cloneElement(child, {
           tableState: tableFeatureRef.current,
+
           parentItem: getParentItem(data, child.props.item.id),
           firstRow: index === 0,
           lastRow: size === index + 1,
-          ...getCommonProps(child),
-          ...getSelectProps(child, select),
-          ...getTreeProps(child, tree),
-          ...getExpandProps(child, expand),
-          ...getFetchProps(child, fetching)
+          id: child.props.item.id,
+
+          select: getSelectProps(child, select),
+          tree: getTreeProps(child, tree),
+          expand: getExpandProps(child, expand),
+          fetching: getFetchProps(child, fetching)
         })
       )}
     </>

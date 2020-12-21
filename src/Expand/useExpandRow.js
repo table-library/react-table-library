@@ -11,9 +11,8 @@ const useExpandRow = ({
   // options
   expandType = EXPAND_TYPES.RowClick,
   expansionPanel,
-  // state
-  isExpanded,
-  onToggleExpandById,
+  // context
+  expand,
   // tree specific
   treeDepthLevel = 0,
   treeColumnLevel = 1
@@ -26,14 +25,14 @@ const useExpandRow = ({
 
   const className = cs('row-expand', {
     'row-expand-clickable': expandType === EXPAND_TYPES.RowClick,
-    'row-expand-expanded': isExpanded
+    'row-expand-expanded': expand.isExpanded
   });
 
   const onClick = (tableItem, event) => {
     if (!isRowClick(event)) return;
 
     if (expandType === EXPAND_TYPES.RowClick) {
-      onToggleExpandById(tableItem.id);
+      expand.onToggleExpandById(tableItem.id);
     }
   };
 
@@ -43,7 +42,7 @@ const useExpandRow = ({
     className,
     onClick,
     expand: {
-      expansionPanel: isExpanded
+      expansionPanel: expand.isExpanded
         ? expansionPanel(item, {
             treeDepthLevel,
             treeColumnLevel

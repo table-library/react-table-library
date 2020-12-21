@@ -7,9 +7,8 @@ import * as COLORS from '@common/colors';
 import { SELECT_TYPES } from './config';
 
 const useSelectRow = ({
-  // state
-  isSelected,
-  onToggleSelectById,
+  // context
+  select,
   // options
   selectType = SELECT_TYPES.RowClick
 }) => {
@@ -28,14 +27,14 @@ const useSelectRow = ({
 
   const className = cs('row-select', {
     'row-select-clickable': selectType === SELECT_TYPES.RowClick,
-    'row-select-selected': isSelected
+    'row-select-selected': select.isSelected
   });
 
   const onClick = (tableItem, event) => {
     if (!isRowClick(event)) return;
 
     if (selectType === SELECT_TYPES.RowClick) {
-      onToggleSelectById(tableItem.id);
+      select.onToggleById(tableItem.id);
     }
   };
 

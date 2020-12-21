@@ -61,9 +61,7 @@ const getTreeIcon = (
 
 const CellTree = React.memo(
   ({ item, treeIcon = {}, className, children, ...passThrough }) => {
-    const { treeState, onToggleTreeExpandById } = React.useContext(
-      TreeContext
-    );
+    const { treeState, onToggleById } = React.useContext(TreeContext);
 
     const treeIconSize = treeIcon.size || TREE_ICON_SIZE;
     const treeIconMargin = treeIcon.margin || TREE_ICON_MARGIN;
@@ -80,7 +78,7 @@ const CellTree = React.memo(
     const handleClick = () => {
       if (isLeaf(item)) return;
 
-      onToggleTreeExpandById(item.id);
+      onToggleById(item.id);
     };
 
     const icon = getTreeIcon(

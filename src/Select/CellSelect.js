@@ -12,7 +12,7 @@ const CellSelect = React.memo(
     const select = React.useContext(SelectContext);
     const isSelected = select.selectState.ids.includes(item.id);
     const handleChange = () =>
-      select.onToggleSelectByIdRecursively(item.id);
+      select.onToggleByIdRecursively(item.id);
 
     return (
       <Cell

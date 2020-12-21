@@ -10,10 +10,8 @@ const useFetch = ({
   panelShowCondition,
   idlePanel,
   loadingPanel,
-  // state
-  isFetching,
-  onAddFetchById,
-  onRemoveFetchById,
+  // context
+  fetching,
   // tree specific
   treeDepthLevel = 0,
   treeColumnLevel = 1
@@ -30,13 +28,13 @@ const useFetch = ({
   const fetchPanel = {
     false: React.cloneElement(idlePanelElement, {
       onClick: async () => {
-        onAddFetchById(item.id);
+        fetching.onAddFetchById(item.id);
         await idlePanelElement.props.onClick(tableState, parentItem);
-        onRemoveFetchById(item.id);
+        fetching.onRemoveFetchById(item.id);
       }
     }),
     true: loadingPanelElement
-  }[isFetching];
+  }[fetching.isFetching];
 
   const showFetchPanel = lastRow && panelShowCondition(parentItem);
 
