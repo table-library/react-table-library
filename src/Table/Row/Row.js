@@ -109,10 +109,16 @@ const Row = props => {
     <>
       <RowContainer
         role="row"
-        className={cs('tr', classNameByPlugins, className, {
-          disabled,
-          clickable: onClickByPlugins || onDoubleClick
-        })}
+        className={cs(
+          'tr',
+          'tr-body',
+          classNameByPlugins,
+          className,
+          {
+            disabled,
+            clickable: onClickByPlugins || onDoubleClick
+          }
+        )}
         css={css`
           ${themeByPlugins}
           ${theme?.BaseRow}

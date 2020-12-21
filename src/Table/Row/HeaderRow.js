@@ -18,7 +18,7 @@ const HeaderRow = ({ className, rowLayout, disabled, children }) => {
   return (
     <HeaderRowContainer
       role="rowheader"
-      className={cs('tr', className, { disabled })}
+      className={cs('tr', 'tr-header', className, { disabled })}
       css={css`
         ${theme?.BaseRow}
         ${theme?.HeaderRow}

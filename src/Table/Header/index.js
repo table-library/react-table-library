@@ -18,7 +18,7 @@ const Header = ({ children }) => {
       css={theme?.Header}
     >
       {React.Children.map(children, child =>
-        React.cloneElement(child, { header: true })
+        React.cloneElement(child)
       )}
     </HeaderContainer>
   );

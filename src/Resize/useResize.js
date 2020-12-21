@@ -34,8 +34,7 @@ export const useResize = columnIndex => {
 
         const headerColumns = Array.from(
           tableRef.current
-            .querySelector('.thead')
-            .querySelector('.tr')
+            .querySelector('.tr-header')
             .querySelectorAll('.th')
         );
 
@@ -72,16 +71,13 @@ export const useResize = columnIndex => {
           headerCell.style.width = newColumnWidths[index];
         });
 
-        Array.from(
-          tableRef.current
-            .querySelector('.tbody')
-            .querySelectorAll('.tr')
-        ).map(row =>
-          Array.from(row.querySelectorAll('.td')).forEach(
-            (cell, index) => {
-              cell.style.width = newColumnWidths[index];
-            }
-          )
+        Array.from(tableRef.current.querySelectorAll('.tr-body')).map(
+          row =>
+            Array.from(row.querySelectorAll('.td')).forEach(
+              (cell, index) => {
+                cell.style.width = newColumnWidths[index];
+              }
+            )
         );
 
         resizedLayout.current = newColumnWidths;
