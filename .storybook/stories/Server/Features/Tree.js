@@ -333,7 +333,7 @@ storiesOf('06. Server/ 05. Tree', module)
     React.useEffect(() => {
       doGet({
         offset: 0,
-        limit: 1
+        limit: 2
       });
     }, [doGet]);
 
@@ -349,7 +349,7 @@ storiesOf('06. Server/ 05. Tree', module)
           params = {
             id: action.payload.id,
             offset: 0,
-            limit: 1
+            limit: 2
           };
         }
 
@@ -375,7 +375,7 @@ storiesOf('06. Server/ 05. Tree', module)
 
         return doGet(params);
       },
-      [data]
+      []
     );
 
     const LoadingPanel = (

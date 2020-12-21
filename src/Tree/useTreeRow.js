@@ -67,20 +67,22 @@ const useTreeRow = ({
   }
 
   if (isTreeExpanded && hasLeaves(item)) {
-    treePanel = item.nodes.map(node => (
+    treePanel = (
       <Body>
-        <Row
-          key={node.id}
-          item={node}
-          treeColumnLevel={treeColumnLevel}
-          treeDepthLevel={treeDepthLevel + 1}
-          treeExpandType={treeExpandType}
-          {...passThrough}
-        >
-          {recursiveNode => children(recursiveNode)}
-        </Row>
+        {item.nodes.map(node => (
+          <Row
+            key={node.id}
+            item={node}
+            treeColumnLevel={treeColumnLevel}
+            treeDepthLevel={treeDepthLevel + 1}
+            treeExpandType={treeExpandType}
+            {...passThrough}
+          >
+            {recursiveNode => children(recursiveNode)}
+          </Row>
+        ))}
       </Body>
-    ));
+    );
   }
 
   return {

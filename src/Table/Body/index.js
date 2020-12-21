@@ -1,17 +1,11 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { TableContext } from '@common/context/Table';
-import { ThemeContext } from '@common/context/Theme';
 import { SelectContext } from '@common/context/Select';
 import { TreeContext } from '@common/context/Tree';
 import { ExpandContext } from '@common/context/Expand';
 import { FetchContext } from '@common/context/Fetch';
-
-const BodyContainer = styled.div`
-  ${({ css }) => css};
-`;
 
 const findParentItem = (rootItem, id) =>
   rootItem.nodes.reduce((acc, value) => {
@@ -74,18 +68,13 @@ const Body = ({ children }) => {
 
   const { data, tableFeatureRef } = React.useContext(TableContext);
 
-  const theme = React.useContext(ThemeContext);
   const select = React.useContext(SelectContext);
   const tree = React.useContext(TreeContext);
   const expand = React.useContext(ExpandContext);
   const fetching = React.useContext(FetchContext);
 
   return (
-    <BodyContainer
-      role="rowgroup"
-      className="tbody"
-      css={theme?.Body}
-    >
+    <>
       {React.Children.map(children, (child, index) =>
         React.cloneElement(child, {
           tableState: tableFeatureRef.current,
@@ -99,7 +88,7 @@ const Body = ({ children }) => {
           ...getFetchProps(child, fetching)
         })
       )}
-    </BodyContainer>
+    </>
   );
 };
 
