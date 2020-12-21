@@ -195,6 +195,8 @@ const TreeProvider = ({ defaultTree = DEFAULT_SELECT, children }) => {
         onRemoveByIdRecursively,
         onToggleByIdRecursively,
 
+        onAddAll,
+        onRemoveAll,
         onToggleAll
       }}
     >

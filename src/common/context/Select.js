@@ -198,6 +198,8 @@ const SelectProvider = ({
         onRemoveByIdRecursively,
         onToggleByIdRecursively,
 
+        onAddAll,
+        onRemoveAll,
         onToggleAll
       }}
     >
