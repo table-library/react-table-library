@@ -1,24 +1,9 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
+import { TableContext } from './Table';
 import { useReducerWithNotify } from './useReducerWithNotify';
-import { addById, removeById } from './reducers';
-
-const ADD_FETCH_BY_ID = 'ADD_FETCH_BY_ID';
-const REMOVE_FETCH_BY_ID = 'REMOVE_FETCH_BY_ID';
-
-const fetchReducer = (state, action) => {
-  switch (action.type) {
-    case ADD_FETCH_BY_ID: {
-      return addById(state, action);
-    }
-    case REMOVE_FETCH_BY_ID: {
-      return removeById(state, action);
-    }
-    default:
-      throw new Error();
-  }
-};
+import { reducer, useCommonReducer } from './reducers';
 
 const FetchContext = React.createContext({});
 
@@ -26,38 +11,36 @@ const DEFAULT_FETCH = {
   ids: []
 };
 
-const FetchProvider = ({ children }) => {
+const FetchProvider = ({
+  defaultFetch = DEFAULT_FETCH,
+  children
+}) => {
+  const { data } = React.useContext(TableContext);
+
   const [state, dispatch] = useReducerWithNotify(
-    fetchReducer,
-    DEFAULT_FETCH,
+    reducer,
+    defaultFetch,
     'fetch',
     'fetchState'
   );
 
-  const onAddFetchById = React.useCallback(
-    id =>
-      dispatch({
-        type: ADD_FETCH_BY_ID,
-        payload: { id }
-      }),
-    [dispatch]
-  );
-
-  const onRemoveFetchById = React.useCallback(
-    id =>
-      dispatch({
-        type: REMOVE_FETCH_BY_ID,
-        payload: { id }
-      }),
-    [dispatch]
+  const { all, none, ...handler } = useCommonReducer(
+    data,
+    state,
+    dispatch,
+    defaultFetch
   );
 
   return (
     <FetchContext.Provider
       value={{
-        fetchState: state,
-        onAddFetchById,
-        onRemoveFetchById
+        fetchState: {
+          ...state,
+          all,
+          none
+        },
+
+        ...handler
       }}
     >
       {children}
@@ -66,6 +49,9 @@ const FetchProvider = ({ children }) => {
 };
 
 FetchProvider.propTypes = {
+  defaultFetch: PropTypes.shape({
+    ids: PropTypes.arrayOf(PropTypes.string)
+  }),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

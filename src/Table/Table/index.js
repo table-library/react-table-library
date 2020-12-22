@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 import { TableProvider, TableContext } from '@common/context/Table';
 import { ThemeProvider, ThemeContext } from '@common/context/Theme';
@@ -21,13 +20,20 @@ import { FetchProvider, FetchContext } from '@common/context/Fetch';
 import { SortProvider, SortContext } from '@common/context/Sort';
 import { State } from '@common/context/State';
 
-const TableContainer = styled.div`
-  *,
-  *:before,
-  *:after {
-    box-sizing: border-box;
-  }
-`;
+import { TableContainer } from './styles';
+
+const applySort = (nodes, sortFn) => {
+  return sortFn(nodes).reduce((acc, value) => {
+    if (value.nodes) {
+      return acc.concat({
+        ...value,
+        nodes: applySort(value.nodes, sortFn)
+      });
+    }
+
+    return acc.concat(value);
+  }, []);
+};
 
 const TableContent = ({ server, children }) => {
   const { data } = React.useContext(TableContext);
@@ -43,7 +49,7 @@ const TableContent = ({ server, children }) => {
   let modifiedNodes = [...data.nodes];
 
   if (!server?.sort) {
-    modifiedNodes = sort.sortState.fn(modifiedNodes);
+    modifiedNodes = applySort(modifiedNodes, sort.sortState.fn);
   }
 
   return children(modifiedNodes, {
