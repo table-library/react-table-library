@@ -489,9 +489,9 @@ storiesOf('01. Features/ 10. Expand', module)
                   {expand => (
                     <IconButton
                       size="small"
-                      onClick={expand.onToggleExpandAll}
+                      onClick={expand.onToggleAll}
                     >
-                      {expand.expandState.allExpanded ? (
+                      {expand.expandState.all ? (
                         <KeyboardArrowUpOutlinedIcon fontSize="small" />
                       ) : (
                         <KeyboardArrowDownOutlinedIcon fontSize="small" />
@@ -529,7 +529,7 @@ storiesOf('01. Features/ 10. Expand', module)
                           <IconButton
                             size="small"
                             onClick={() =>
-                              expand.onToggleExpandById(tableItem.id)
+                              expand.onToggleById(tableItem.id)
                             }
                           >
                             {expand.expandState.ids.includes(

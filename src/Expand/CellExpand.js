@@ -17,7 +17,7 @@ const CellExpand = React.memo(
   }) => {
     const expand = React.useContext(ExpandContext);
     const isExpanded = expand.expandState.ids.includes(item.id);
-    const handleClick = () => expand.onToggleExpandById(item.id);
+    const handleClick = () => expand.onToggleById(item.id);
 
     return (
       <Cell

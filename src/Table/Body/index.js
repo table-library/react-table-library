@@ -39,21 +39,18 @@ const getTreeProps = (child, { treeState, onToggleById }) => ({
   onToggleById
 });
 
-const getExpandProps = (
-  child,
-  { expandState, onToggleExpandById }
-) => ({
+const getExpandProps = (child, { expandState, onToggleById }) => ({
   isExpanded: expandState.ids.includes(child.props.item.id),
-  onToggleExpandById
+  onToggleById
 });
 
 const getFetchProps = (
   child,
-  { fetchState, onAddFetchById, onRemoveFetchById }
+  { fetchState, onAddById, onRemoveById }
 ) => ({
   isFetching: fetchState.ids.includes(child.props.item.id),
-  onAddFetchById,
-  onRemoveFetchById
+  onAddById,
+  onRemoveById
 });
 
 const Body = ({ children }) => {

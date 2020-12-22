@@ -32,7 +32,7 @@ const useExpandRow = ({
     if (!isRowClick(event)) return;
 
     if (expandType === EXPAND_TYPES.RowClick) {
-      expand.onToggleExpandById(tableItem.id);
+      expand.onToggleById(tableItem.id);
     }
   };
 

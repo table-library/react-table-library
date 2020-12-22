@@ -10,7 +10,7 @@ import { ExpandButton } from './ExpandButton';
 const HeaderCellExpand = React.memo(
   ({ expandIcon = {}, className, children, ...passThrough }) => {
     const expand = React.useContext(ExpandContext);
-    const handleClick = () => expand.onToggleExpandAll();
+    const handleClick = () => expand.onToggleAll();
 
     return (
       <HeaderCell
@@ -19,7 +19,7 @@ const HeaderCellExpand = React.memo(
       >
         <ExpandButton
           expand={expand}
-          isExpanded={expand.expandState.allExpanded}
+          isExpanded={expand.expandState.all}
           expandIcon={expandIcon}
           onClick={handleClick}
         >

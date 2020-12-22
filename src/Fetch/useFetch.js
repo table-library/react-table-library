@@ -28,9 +28,9 @@ const useFetch = ({
   const fetchPanel = {
     false: React.cloneElement(idlePanelElement, {
       onClick: async () => {
-        fetching.onAddFetchById(item.id);
+        fetching.onAddById(item.id);
         await idlePanelElement.props.onClick(tableState, parentItem);
-        fetching.onRemoveFetchById(item.id);
+        fetching.onRemoveById(item.id);
       }
     }),
     true: loadingPanelElement
