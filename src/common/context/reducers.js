@@ -3,9 +3,9 @@ import isEqual from 'lodash.isequal';
 
 import { usePrevious } from '@common/util/usePrevious';
 import {
-  findItemsById,
-  findAllItems,
-  isAll
+  findNodeById,
+  fromNodesToList,
+  includesAll
 } from '@common/util/tree';
 
 export const addById = (state, action) => {
@@ -150,9 +150,13 @@ export const useCommonReducer = (
 
   const onToggleByIdRecursively = React.useCallback(
     id => {
-      const ids = findItemsById(data.nodes, id).map(item => item.id);
+      const node = findNodeById(data.nodes, id);
 
-      if (isAll(ids, state.ids)) {
+      const ids = [node, ...fromNodesToList(node.nodes)].map(
+        item => item.id
+      );
+
+      if (includesAll(ids, state.ids)) {
         onRemoveByIdRecursively(ids);
       } else {
         onAddByIdRecursively(ids);
@@ -178,9 +182,9 @@ export const useCommonReducer = (
   }, [dispatch]);
 
   const onToggleAll = React.useCallback(() => {
-    const ids = findAllItems(data.nodes).map(item => item.id);
+    const ids = fromNodesToList(data.nodes).map(item => item.id);
 
-    if (isAll(ids, state.ids)) {
+    if (includesAll(ids, state.ids)) {
       onRemoveAll();
     } else {
       onAddAll(ids);
@@ -208,7 +212,7 @@ export const useCommonReducer = (
 
   const all =
     data.nodes.length &&
-    isAll(
+    includesAll(
       data.nodes.map(item => item.id),
       state.ids
     );

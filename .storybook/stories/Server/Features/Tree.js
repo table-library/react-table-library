@@ -20,14 +20,14 @@ import {
 
 import { useFetch } from '@table-library/react-table-library/lib/fetch';
 
-import { findItemById, recursiveInsert } from '@common/util';
+import { findNodeById, recursiveInsert } from '@common/util';
 
 import { get as getSimpleStree } from '../server/tree/simple';
 import { get as getIterativeTree } from '../server/tree/iterative';
 import { get as getPaginatedTree } from '../server/tree/pagination';
 
 const needsToFetch = (nodes, id) => {
-  const item = findItemById(nodes, id);
+  const item = findNodeById(nodes, id);
 
   return item && item.hasContent && item.nodes && !item.nodes.length;
 };
