@@ -206,10 +206,12 @@ export const useCommonReducer = (
 
   const none = !state.ids.length;
 
-  const all = isAll(
-    data.nodes.map(item => item.id),
-    state.ids
-  );
+  const all =
+    data.nodes.length &&
+    isAll(
+      data.nodes.map(item => item.id),
+      state.ids
+    );
 
   return {
     onAddById,
