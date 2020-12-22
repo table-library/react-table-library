@@ -20,22 +20,11 @@ import {
 
 import { useFetch } from '@table-library/react-table-library/lib/fetch';
 
+import { findItemById, recursiveInsert } from '@common/util';
+
 import { get as getSimpleStree } from '../server/tree/simple';
 import { get as getIterativeTree } from '../server/tree/iterative';
 import { get as getPaginatedTree } from '../server/tree/pagination';
-
-const findItemById = (nodes, id) =>
-  nodes.reduce((acc, value) => {
-    if (acc) return acc;
-
-    if (value.id === id) {
-      acc = value;
-    } else if (value.nodes) {
-      acc = findItemById(value.nodes, id);
-    }
-
-    return acc;
-  }, null);
 
 const needsToFetch = (nodes, id) => {
   const item = findItemById(nodes, id);
@@ -48,20 +37,7 @@ const insertTree = (targetId, nodes) => state => {
     return nodes;
   }
 
-  const recursiveInsert = item => {
-    if (item.id === targetId) {
-      return {
-        ...item,
-        nodes: [...item.nodes, ...nodes]
-      };
-    } else if (item.nodes) {
-      return { ...item, nodes: item.nodes.map(recursiveInsert) };
-    } else {
-      return item;
-    }
-  };
-
-  return state.map(recursiveInsert);
+  return state.map(recursiveInsert(targetId, nodes));
 };
 
 const insertPaginatedTree = (targetId, nodes, pageInfo) => state => {
@@ -72,23 +48,9 @@ const insertPaginatedTree = (targetId, nodes, pageInfo) => state => {
     };
   }
 
-  const recursiveInsert = item => {
-    if (item.id === targetId) {
-      return {
-        ...item,
-        nodes: [...item.nodes, ...nodes],
-        pageInfo
-      };
-    } else if (item.nodes) {
-      return { ...item, nodes: item.nodes.map(recursiveInsert) };
-    } else {
-      return item;
-    }
-  };
-
   return {
     pageInfo: state.pageInfo,
-    nodes: state.nodes.map(recursiveInsert)
+    nodes: state.nodes.map(recursiveInsert(targetId, nodes, pageInfo))
   };
 };
 

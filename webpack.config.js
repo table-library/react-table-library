@@ -3,6 +3,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   entry: {
+    util: './src/common/util/index.js',
     main: './src/index.js',
     table: './src/Table/index.js',
     theme: './src/Theme/index.js',

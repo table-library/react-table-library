@@ -5,8 +5,8 @@ import cs from 'classnames';
 import { Body } from '@table-library/react-table-library/lib/table/Body';
 import { Row } from '@table-library/react-table-library/lib/table/Row';
 import { isRowClick } from '@common/util/isRowClick';
+import { isLeaf, hasLeaves } from '@common/util/tree';
 
-import { isLeaf, hasLeaves } from './util';
 import { TREE_EXPAND_TYPES } from './config';
 
 const useTreeRow = ({
