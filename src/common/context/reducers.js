@@ -211,7 +211,7 @@ export const useCommonReducer = (
   const none = !state.ids.length;
 
   const all =
-    data.nodes.length &&
+    !!data.nodes.length &&
     includesAll(
       data.nodes.map(item => item.id),
       state.ids

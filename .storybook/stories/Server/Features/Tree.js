@@ -50,7 +50,9 @@ const insertPaginatedTree = (targetId, nodes, pageInfo) => state => {
 
   return {
     pageInfo: state.pageInfo,
-    nodes: state.nodes.map(recursiveInsert(targetId, nodes, pageInfo))
+    nodes: state.nodes.map(
+      recursiveInsert(targetId, nodes, { pageInfo })
+    )
   };
 };
 

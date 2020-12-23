@@ -2,7 +2,7 @@ export const isLeaf = node => !node.nodes;
 
 export const hasLeaves = node => !!node.nodes?.length;
 
-export const fromNodesToList = nodes =>
+export const fromNodesToList = (nodes = []) =>
   nodes.reduce((acc, value) => {
     // eslint-disable-next-line no-param-reassign
     acc = acc.concat(value);
@@ -34,7 +34,7 @@ export const includesAll = (idsOne, idsTwo) => {
   return idsOne.every(id => idsTwo.includes(id));
 };
 
-export const recursiveInsert = (targetId, nodes, ...rest) => item => {
+export const recursiveInsert = (targetId, nodes, rest) => item => {
   if (item.id === targetId) {
     return {
       ...item,
