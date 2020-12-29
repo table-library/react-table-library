@@ -34,19 +34,27 @@ export const includesAll = (idsOne, idsTwo) => {
   return idsOne.every(id => idsTwo.includes(id));
 };
 
-export const recursiveInsert = (targetId, nodes, rest) => item => {
-  if (item.id === targetId) {
+export const recursiveInsert = (
+  targetId,
+  nodes,
+  otherProperties
+) => node => {
+  if (node.id === targetId) {
     return {
-      ...item,
-      nodes: [...item.nodes, ...nodes],
-      ...rest
+      ...node,
+      nodes: [...node.nodes, ...nodes],
+      ...otherProperties
     };
   }
-  if (item.nodes) {
+
+  if (node.nodes) {
     return {
-      ...item,
-      nodes: item.nodes.map(recursiveInsert(targetId, nodes, rest))
+      ...node,
+      nodes: node.nodes.map(
+        recursiveInsert(targetId, nodes, otherProperties)
+      )
     };
   }
-  return item;
+
+  return node;
 };
