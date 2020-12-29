@@ -28,15 +28,22 @@ const RowContainer = styled(RowContainerBase)`
     cursor: pointer;
   }
 
+  position: relative;
+  z-index: 1;
+
+  &:hover {
+    z-index: 2;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: -1px;
+  }
+
   ${({ css }) => css};
 `;
 
 const HeaderRowContainer = styled(RowContainerBase)`
-  z-index: 3;
-
   border-bottom: 1px solid ${COLORS.BORDER};
-
-  position: relative;
 
   font-size: 18px;
   color: ${COLORS.FONT_PRIMARY};

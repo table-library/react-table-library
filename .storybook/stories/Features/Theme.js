@@ -173,6 +173,7 @@ storiesOf('01. Features/ 02. Theme', module)
     const theme = useTheme({
       HeaderRow: `
         color: #000000;
+        border-bottom: 1px solid transparent;
       `,
       Row: `
         color: #363636;
@@ -185,14 +186,6 @@ storiesOf('01. Features/ 02. Theme', module)
           border-bottom: 1px solid #177ac9;
 
           color: #177ac9;
-        }
-
-        position: relative;
-        margin-top: -1px;
-        z-index: 1;
-
-        &:hover {
-          z-index: 2;
         }
       `,
       HeaderCell: `
