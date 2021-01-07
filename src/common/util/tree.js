@@ -34,7 +34,7 @@ export const includesAll = (idsOne, idsTwo) => {
   return idsOne.every(id => idsTwo.includes(id));
 };
 
-export const recursiveInsert = (
+export const recursiveMergeInsert = (
   targetId,
   nodes,
   otherProperties
@@ -51,7 +51,32 @@ export const recursiveInsert = (
     return {
       ...node,
       nodes: node.nodes.map(
-        recursiveInsert(targetId, nodes, otherProperties)
+        recursiveMergeInsert(targetId, nodes, otherProperties)
+      )
+    };
+  }
+
+  return node;
+};
+
+export const recursiveReplaceInsert = (
+  targetId,
+  nodes,
+  otherProperties
+) => node => {
+  if (node.id === targetId) {
+    return {
+      ...node,
+      nodes,
+      ...otherProperties
+    };
+  }
+
+  if (node.nodes) {
+    return {
+      ...node,
+      nodes: node.nodes.map(
+        recursiveReplaceInsert(targetId, nodes, otherProperties)
       )
     };
   }

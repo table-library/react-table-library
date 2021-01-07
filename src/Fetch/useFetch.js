@@ -16,14 +16,19 @@ const useFetch = ({
   treeDepthLevel = 0,
   treeColumnLevel = 1
 }) => {
-  const idlePanelElement = idlePanel(parentItem, {
-    treeDepthLevel,
-    treeColumnLevel
-  });
-  const loadingPanelElement = loadingPanel(parentItem, {
-    treeDepthLevel,
-    treeColumnLevel
-  });
+  const idlePanelElement = idlePanel
+    ? idlePanel(parentItem, {
+        treeDepthLevel,
+        treeColumnLevel
+      })
+    : null;
+
+  const loadingPanelElement = loadingPanel
+    ? loadingPanel(parentItem, {
+        treeDepthLevel,
+        treeColumnLevel
+      })
+    : null;
 
   const fetchPanel = {
     false: React.cloneElement(idlePanelElement, {

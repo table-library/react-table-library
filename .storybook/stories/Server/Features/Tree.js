@@ -20,7 +20,7 @@ import {
 
 import { useFetch } from '@table-library/react-table-library/lib/fetch';
 
-import { findNodeById, recursiveInsert } from '@common/util';
+import { findNodeById, recursiveMergeInsert } from '@common/util';
 
 import { get as getSimpleStree } from '../server/tree/simple';
 import { get as getIterativeTree } from '../server/tree/iterative';
@@ -37,7 +37,7 @@ const insertTree = (targetId, nodes) => state => {
     return nodes;
   }
 
-  return state.map(recursiveInsert(targetId, nodes));
+  return state.map(recursiveMergeInsert(targetId, nodes));
 };
 
 const insertPaginatedTree = (targetId, nodes, pageInfo) => state => {
@@ -51,7 +51,7 @@ const insertPaginatedTree = (targetId, nodes, pageInfo) => state => {
   return {
     pageInfo: state.pageInfo,
     nodes: state.nodes.map(
-      recursiveInsert(targetId, nodes, { pageInfo })
+      recursiveMergeInsert(targetId, nodes, { pageInfo })
     )
   };
 };
