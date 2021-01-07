@@ -52,7 +52,7 @@ export const byAll = (state, action) => {
 export const addAll = (state, action) => {
   return {
     ...state,
-    ids: action.payload.ids
+    ids: [...new Set([...state.ids, ...action.payload.ids])]
   };
 };
 
