@@ -6,4 +6,6 @@ export const TableContainer = styled.div`
   *:after {
     box-sizing: border-box;
   }
+
+  ${({ css }) => css};
 `;
