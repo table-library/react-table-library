@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { css } from 'styled-components';
 
 import { TableProvider, TableContext } from '@common/context/Table';
 import { ThemeProvider, ThemeContext } from '@common/context/Theme';
@@ -78,7 +79,14 @@ const Table = ({
   const tableRef = React.useRef();
 
   return (
-    <TableContainer className="table" role="grid" ref={tableRef}>
+    <TableContainer
+      className="table"
+      css={css`
+        ${theme?.Table}
+      `}
+      role="grid"
+      ref={tableRef}
+    >
       <TableProvider
         data={data}
         onTableStateChange={onTableStateChange}
