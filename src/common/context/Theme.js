@@ -12,7 +12,7 @@ const ThemeProvider = ({ theme, children }) => {
 };
 
 ThemeProvider.propTypes = {
-  theme: PropTypes.shape(PropTypes.any),
+  theme: PropTypes.objectOf(PropTypes.any),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

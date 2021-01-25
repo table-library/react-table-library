@@ -20,7 +20,7 @@ const TableProvider = ({ data, onTableStateChange, children }) => {
 };
 
 TableProvider.propTypes = {
-  data: PropTypes.shape(PropTypes.any),
+  data: PropTypes.objectOf(PropTypes.any),
   onTableStateChange: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

@@ -107,7 +107,7 @@ const CellTree = React.memo(
 );
 
 CellTree.propTypes = {
-  item: PropTypes.shape(PropTypes.any),
+  item: PropTypes.objectOf(PropTypes.any),
   treeIcon: PropTypes.shape({
     margin: PropTypes.string,
     size: PropTypes.string,

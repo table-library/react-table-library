@@ -147,7 +147,7 @@ const Row = props => {
 };
 
 Row.propTypes = {
-  item: PropTypes.shape(PropTypes.any),
+  item: PropTypes.objectOf(PropTypes.any),
   rowLayout: PropTypes.arrayOf(PropTypes.any),
   plugins: PropTypes.arrayOf(PropTypes.any),
   className: PropTypes.string,

@@ -111,7 +111,7 @@ const SortButton = ({
 };
 
 SortButton.propTypes = {
-  sort: PropTypes.shape(PropTypes.any),
+  sort: PropTypes.objectOf(PropTypes.any),
   sortKey: PropTypes.string,
   sortFn: PropTypes.func,
   sortIcon: PropTypes.shape({

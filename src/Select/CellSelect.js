@@ -32,7 +32,7 @@ const CellSelect = React.memo(
 );
 
 CellSelect.propTypes = {
-  item: PropTypes.shape(PropTypes.any),
+  item: PropTypes.objectOf(PropTypes.any),
   className: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

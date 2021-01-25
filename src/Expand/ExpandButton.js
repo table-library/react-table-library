@@ -67,7 +67,7 @@ const ExpandButton = ({
 };
 
 ExpandButton.propTypes = {
-  expand: PropTypes.shape(PropTypes.any),
+  expand: PropTypes.objectOf(PropTypes.any),
   isExpanded: PropTypes.bool,
   expandIcon: PropTypes.shape({
     size: PropTypes.string,

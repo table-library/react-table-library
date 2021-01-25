@@ -38,7 +38,7 @@ const CellExpand = React.memo(
 );
 
 CellExpand.propTypes = {
-  item: PropTypes.shape(PropTypes.any),
+  item: PropTypes.objectOf(PropTypes.any),
   expandIcon: PropTypes.shape({
     size: PropTypes.string,
     iconDefault: PropTypes.node,

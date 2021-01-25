@@ -222,11 +222,8 @@ storiesOf('06. Server/ 05. Tree', module)
       [doGet]
     );
 
-    const LoadingPanel = (
-      tableItem,
-      { treeDepthLevel, treeColumnLevel }
-    ) => (
-      <div style={{ marginLeft: `${8 + treeDepthLevel * 20}px` }}>
+    const LoadingPanel = (tableItem, { treeXLevel, treeYLevel }) => (
+      <div style={{ marginLeft: `${8 + treeXLevel * 20}px` }}>
         Loading ...
       </div>
     );
@@ -342,21 +339,15 @@ storiesOf('06. Server/ 05. Tree', module)
       []
     );
 
-    const LoadingPanel = (
-      tableItem,
-      { treeDepthLevel, treeColumnLevel }
-    ) => (
-      <div style={{ marginLeft: `${8 + treeDepthLevel * 20}px` }}>
+    const LoadingPanel = (tableItem, { treeXLevel, treeYLevel }) => (
+      <div style={{ marginLeft: `${8 + treeXLevel * 20}px` }}>
         Loading ...
       </div>
     );
 
-    const IdlePanel = (
-      tableItem,
-      { treeDepthLevel, treeColumnLevel }
-    ) => (
+    const IdlePanel = (tableItem, { treeXLevel, treeYLevel }) => (
       <button
-        style={{ marginLeft: `${8 + treeDepthLevel * 20}px` }}
+        style={{ marginLeft: `${8 + treeXLevel * 20}px` }}
         onClick={handleLoadMore}
       >
         More ...

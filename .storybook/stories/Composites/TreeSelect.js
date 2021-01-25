@@ -211,7 +211,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
                       plugin: useTreeRow,
                       options: {
                         treeExpandType: TREE_EXPAND_TYPES.ButtonClick,
-                        treeColumnLevel: 2
+                        treeYLevel: 2
                       }
                     },
                     {
@@ -266,7 +266,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
                       plugin: useTreeRow,
                       options: {
                         treeExpandType: TREE_EXPAND_TYPES.ButtonClick,
-                        treeColumnLevel: 2
+                        treeYLevel: 2
                       }
                     },
                     {
@@ -321,7 +321,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
                       plugin: useTreeRow,
                       options: {
                         treeExpandType: TREE_EXPAND_TYPES.RowClick,
-                        treeColumnLevel: 2
+                        treeYLevel: 2
                       }
                     },
                     {
@@ -430,7 +430,7 @@ storiesOf('02. Composites/ 02. Tree & Select', module)
                       {
                         plugin: useTreeRow,
                         options: {
-                          treeColumnLevel: 2
+                          treeYLevel: 2
                         }
                       },
                       {

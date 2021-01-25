@@ -14,8 +14,8 @@ const useExpandRow = ({
   // context
   expand,
   // tree specific
-  treeDepthLevel = 0,
-  treeColumnLevel = 1
+  treeXLevel = 0,
+  treeYLevel = 1
 }) => {
   const theme = css`
     &.row-expand-clickable {
@@ -44,8 +44,8 @@ const useExpandRow = ({
     expand: {
       expansionPanel: expand.isExpanded
         ? expansionPanel(item, {
-            treeDepthLevel,
-            treeColumnLevel
+            treeXLevel,
+            treeYLevel
           })
         : null
     }

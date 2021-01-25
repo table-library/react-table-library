@@ -118,12 +118,12 @@ const Table = ({
 };
 
 Table.propTypes = {
-  data: PropTypes.shape(PropTypes.any),
-  externalTableState: PropTypes.shape(PropTypes.any),
+  data: PropTypes.objectOf(PropTypes.any),
+  externalTableState: PropTypes.objectOf(PropTypes.any),
   server: PropTypes.shape({
     sort: PropTypes.bool
   }),
-  theme: PropTypes.shape(PropTypes.any),
+  theme: PropTypes.objectOf(PropTypes.any),
   defaultSelect: PropTypes.shape({
     ids: PropTypes.arrayOf(PropTypes.string)
   }),

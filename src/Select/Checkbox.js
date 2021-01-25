@@ -34,7 +34,7 @@ const ImperativeCheckbox = ({
 };
 
 ImperativeCheckbox.propTypes = {
-  select: PropTypes.shape(PropTypes.any),
+  select: PropTypes.objectOf(PropTypes.any),
   checked: PropTypes.bool,
   isIndeterminate: PropTypes.bool,
   onChange: PropTypes.func,

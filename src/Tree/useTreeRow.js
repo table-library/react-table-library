@@ -16,8 +16,8 @@ const useTreeRow = ({
   panelShowCondition = () => true,
   loadingPanel = null,
   treeExpandType = TREE_EXPAND_TYPES.RowClick,
-  treeDepthLevel = 0,
-  treeColumnLevel = 1,
+  treeXLevel = 0,
+  treeYLevel = 1,
   // state
   tree,
   // others
@@ -29,8 +29,8 @@ const useTreeRow = ({
       cursor: pointer;
     }
 
-    .td:nth-child(${treeColumnLevel}) > div {
-      margin-left: ${treeDepthLevel * 20}px;
+    .td:nth-child(${treeYLevel}) > div {
+      margin-left: ${treeXLevel * 20}px;
     }
   `;
 
@@ -60,8 +60,8 @@ const useTreeRow = ({
     loadingPanel
   ) {
     treePanel = loadingPanel(item, {
-      treeDepthLevel,
-      treeColumnLevel
+      treeXLevel,
+      treeYLevel
     });
   }
 
@@ -72,8 +72,8 @@ const useTreeRow = ({
           <Row
             key={node.id}
             item={node}
-            treeColumnLevel={treeColumnLevel}
-            treeDepthLevel={treeDepthLevel + 1}
+            treeYLevel={treeYLevel}
+            treeXLevel={treeXLevel + 1}
             treeExpandType={treeExpandType}
             {...passThrough}
           >

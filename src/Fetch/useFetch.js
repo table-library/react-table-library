@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 const useFetch = ({
   // general
@@ -13,20 +13,20 @@ const useFetch = ({
   // context
   fetching,
   // tree specific
-  treeDepthLevel = 0,
-  treeColumnLevel = 1
+  treeXLevel = 0,
+  treeYLevel = 1
 }) => {
   const idlePanelElement = idlePanel
     ? idlePanel(parentItem, {
-        treeDepthLevel,
-        treeColumnLevel
+        treeXLevel,
+        treeYLevel
       })
     : null;
 
   const loadingPanelElement = loadingPanel
     ? loadingPanel(parentItem, {
-        treeDepthLevel,
-        treeColumnLevel
+        treeXLevel,
+        treeYLevel
       })
     : null;
 
