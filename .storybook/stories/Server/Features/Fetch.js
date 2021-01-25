@@ -17,7 +17,7 @@ import { useFetch } from '@table-library/react-table-library/lib/fetch';
 
 import { get } from '../server/list';
 
-storiesOf('06. Server/ 09. Load More', module)
+storiesOf('06. Server/ 09. Fetch', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [data, setData] = React.useState({
@@ -39,17 +39,17 @@ storiesOf('06. Server/ 09. Load More', module)
     }, [doGet]);
 
     const handleLoadMore = React.useCallback(
-      async tableState => {
-        console.log(tableState);
+      async (tableState, tableItem) => {
+        console.log(tableState, tableItem);
 
         let params = {
-          offset: data.pageInfo.nextOffset,
+          offset: tableItem.pageInfo.nextOffset,
           limit: 2
         };
 
         return doGet(params);
       },
-      [data]
+      []
     );
 
     return (
