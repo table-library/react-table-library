@@ -43,7 +43,7 @@ storiesOf('01. Features/06. Select', module)
   .add('default', () => {
     const data = { nodes: list };
 
-    const [selectState, selectFns, selectTableProps] = useSelect({
+    const select = useSelect({
       data,
       onChange: onSelectChange
     });
@@ -53,7 +53,7 @@ storiesOf('01. Features/06. Select', module)
     }
 
     return (
-      <Table data={data} {...selectTableProps}>
+      <Table data={data} select={select}>
         {tableList => (
           <>
             <Header>
@@ -87,7 +87,7 @@ storiesOf('01. Features/06. Select', module)
   .add('default select', () => {
     const data = { nodes: list };
 
-    const [selectState, selectFns, selectTableProps] = useSelect({
+    const select = useSelect({
       data,
       initialState: { ids: ['2', '4'] },
       onChange: onSelectChange
@@ -98,7 +98,7 @@ storiesOf('01. Features/06. Select', module)
     }
 
     return (
-      <Table data={data} {...selectTableProps}>
+      <Table data={data} select={select}>
         {tableList => (
           <>
             <Header>
@@ -132,7 +132,7 @@ storiesOf('01. Features/06. Select', module)
   .add('checkbox', () => {
     const data = { nodes: list };
 
-    const [selectState, selectFns, selectTableProps] = useSelect({
+    const select = useSelect({
       data,
       onChange: onSelectChange
     });
@@ -142,7 +142,7 @@ storiesOf('01. Features/06. Select', module)
     }
 
     return (
-      <Table data={data} {...selectTableProps}>
+      <Table data={data} select={select}>
         {tableList => (
           <>
             <Header>
@@ -178,7 +178,7 @@ storiesOf('01. Features/06. Select', module)
   .add('select on checkbox ', () => {
     const data = { nodes: list };
 
-    const [selectState, selectFns, selectTableProps] = useSelect(
+    const select = useSelect(
       {
         data,
         onChange: onSelectChange
@@ -193,7 +193,7 @@ storiesOf('01. Features/06. Select', module)
     }
 
     return (
-      <Table data={data} {...selectTableProps}>
+      <Table data={data} select={select}>
         {tableList => (
           <>
             <Header>
@@ -229,7 +229,7 @@ storiesOf('01. Features/06. Select', module)
   .add('custom checkbox (Material UI)', () => {
     const data = { nodes: list };
 
-    const [selectState, selectFns, selectTableProps] = useSelect({
+    const select = useSelect({
       data,
       onChange: onSelectChange
     });
@@ -239,7 +239,7 @@ storiesOf('01. Features/06. Select', module)
     }
 
     return (
-      <Table data={data} {...selectTableProps}>
+      <Table data={data} select={select}>
         {tableList => (
           <>
             <Header>
@@ -247,11 +247,11 @@ storiesOf('01. Features/06. Select', module)
                 <HeaderCellSelect custom>
                   <Checkbox
                     size="small"
-                    checked={selectState.all}
+                    checked={select.state.all}
                     indeterminate={
-                      !selectState.all && !selectState.none
+                      !select.state.all && !select.state.none
                     }
-                    onChange={selectFns.onToggleAll}
+                    onChange={select.fns.onToggleAll}
                   />
                 </HeaderCellSelect>
                 <HeaderCell>Name</HeaderCell>
@@ -269,11 +269,11 @@ storiesOf('01. Features/06. Select', module)
                       <CellSelect item={tableItem} custom>
                         <Checkbox
                           size="small"
-                          checked={selectState.ids.includes(
+                          checked={select.state.ids.includes(
                             tableItem.id
                           )}
                           onChange={() =>
-                            selectFns.onToggleById(tableItem.id)
+                            select.fns.onToggleById(tableItem.id)
                           }
                         />
                       </CellSelect>

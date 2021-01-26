@@ -56,9 +56,9 @@ const Body = ({ children }) => {
   const getRowProps = item =>
     [select]
       .filter(Boolean)
-      .filter(feature => feature.getRowProps)
+      .filter(feature => feature._getRowProps)
       .map(feature =>
-        feature.getRowProps(item, {
+        feature._getRowProps(item, {
           select
           // others // TODO
         })

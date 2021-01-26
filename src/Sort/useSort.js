@@ -63,11 +63,7 @@ const useSort = (
     ...options
   };
 
-  const tableProps = {
-    sort: { state, fns, _options: mergedOptions }
-  };
-
-  return [state, fns, tableProps];
+  return { state, fns, _options: mergedOptions };
 };
 
 export { useSort };

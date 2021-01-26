@@ -32,7 +32,7 @@ const Table = ({ data, theme, sort, select, children }) => {
   // do any nodes operations (e.g. sort, pagination), if not server-side
   let modifiedNodes = [...data.nodes];
 
-  if (sort && !sort.options.isServer) {
+  if (sort && !sort._options.isServer) {
     modifiedNodes = applySort(modifiedNodes, sort.state.sortFn);
   }
 

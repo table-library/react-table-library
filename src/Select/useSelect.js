@@ -23,14 +23,14 @@ const getRowProps = (item, { select }) => {
 
   const className = cs('row-select', {
     'row-select-clickable':
-      select.options.selectType === SELECT_TYPES.RowClick,
+      select._options.selectType === SELECT_TYPES.RowClick,
     'row-select-selected': select.state.ids.includes(item.id)
   });
 
   const onClick = (tableItem, event) => {
     if (!isRowClick(event)) return;
 
-    if (select.options.selectType === SELECT_TYPES.RowClick) {
+    if (select._options.selectType === SELECT_TYPES.RowClick) {
       select.fns.onToggleById(tableItem.id);
     }
   };
@@ -62,11 +62,12 @@ const useSelect = (
     ...options
   };
 
-  const tableProps = {
-    select: { state, fns, options: mergedOptions, getRowProps }
+  return {
+    state,
+    fns,
+    _options: mergedOptions,
+    _getRowProps: getRowProps
   };
-
-  return [state, fns, tableProps];
 };
 
 export { useSelect };

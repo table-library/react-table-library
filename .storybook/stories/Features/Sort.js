@@ -45,7 +45,7 @@ storiesOf('01. Features/ 05. Sort', module)
   .add('default', () => {
     const data = { nodes: list };
 
-    const [sortState, sortFns, sortTableProps] = useSort({
+    const sort = useSort({
       onChange: onSortChange
     });
 
@@ -54,7 +54,7 @@ storiesOf('01. Features/ 05. Sort', module)
     }
 
     return (
-      <Table data={data} {...sortTableProps}>
+      <Table data={data} sort={sort}>
         {tableList => (
           <>
             <Header>
@@ -116,7 +116,7 @@ storiesOf('01. Features/ 05. Sort', module)
   .add('default sort', () => {
     const data = { nodes: list };
 
-    const [sortState, sortFns, sortTableProps] = useSort({
+    const sort = useSort({
       initialState: {
         sortKey: 'NAME',
         sortFn: array =>
@@ -131,7 +131,7 @@ storiesOf('01. Features/ 05. Sort', module)
     }
 
     return (
-      <Table data={data} {...sortTableProps}>
+      <Table data={data} sort={sort}>
         {tableList => (
           <>
             <Header>
@@ -193,7 +193,7 @@ storiesOf('01. Features/ 05. Sort', module)
   .add('sort icon size ', () => {
     const data = { nodes: list };
 
-    const [sortState, sortFns, sortTableProps] = useSort({
+    const sort = useSort({
       onChange: onSortChange
     });
 
@@ -202,7 +202,7 @@ storiesOf('01. Features/ 05. Sort', module)
     }
 
     return (
-      <Table data={data} {...sortTableProps}>
+      <Table data={data} sort={sort}>
         {tableList => (
           <>
             <Header>
@@ -276,7 +276,7 @@ storiesOf('01. Features/ 05. Sort', module)
   .add('sort icon position ', () => {
     const data = { nodes: list };
 
-    const [sortState, sortFns, sortTableProps] = useSort({
+    const sort = useSort({
       onChange: onSortChange
     });
 
@@ -285,7 +285,7 @@ storiesOf('01. Features/ 05. Sort', module)
     }
 
     return (
-      <Table data={data} {...sortTableProps}>
+      <Table data={data} sort={sort}>
         {tableList => (
           <>
             <Header>
@@ -359,7 +359,7 @@ storiesOf('01. Features/ 05. Sort', module)
   .add('indentation ', () => {
     const data = { nodes: list };
 
-    const [sortState, sortFns, sortTableProps] = useSort({
+    const sort = useSort({
       onChange: onSortChange
     });
 
@@ -368,7 +368,7 @@ storiesOf('01. Features/ 05. Sort', module)
     }
 
     return (
-      <Table data={data} {...sortTableProps}>
+      <Table data={data} sort={sort}>
         {tableList => (
           <>
             <Header>
@@ -444,7 +444,7 @@ storiesOf('01. Features/ 05. Sort', module)
   .add('no sort icon', () => {
     const data = { nodes: list };
 
-    const [sortState, sortFns, sortTableProps] = useSort({
+    const sort = useSort({
       onChange: onSortChange
     });
 
@@ -453,7 +453,7 @@ storiesOf('01. Features/ 05. Sort', module)
     }
 
     return (
-      <Table data={data} {...sortTableProps}>
+      <Table data={data} sort={sort}>
         {tableList => (
           <>
             <Header>
@@ -535,7 +535,7 @@ storiesOf('01. Features/ 05. Sort', module)
   .add('custom sort icon (Material UI)', () => {
     const data = { nodes: list };
 
-    const [sortState, sortFns, sortTableProps] = useSort({
+    const sort = useSort({
       onChange: onSortChange
     });
 
@@ -544,7 +544,7 @@ storiesOf('01. Features/ 05. Sort', module)
     }
 
     return (
-      <Table data={data} {...sortTableProps}>
+      <Table data={data} sort={sort}>
         {tableList => (
           <>
             <Header>
@@ -654,19 +654,7 @@ storiesOf('01. Features/ 05. Sort', module)
   .add('custom sort button (Material UI)', () => {
     const data = { nodes: list };
 
-    const getIcon = (sortState, sortKey) => {
-      if (sortState.sortKey === sortKey && sortState.reverse) {
-        return <KeyboardArrowDownOutlinedIcon />;
-      }
-
-      if (sortState.sortKey === sortKey && !sortState.reverse) {
-        return <KeyboardArrowUpOutlinedIcon />;
-      }
-
-      return <UnfoldMoreOutlinedIcon />;
-    };
-
-    const [sortState, sortFns, sortTableProps] = useSort({
+    const sort = useSort({
       onChange: onSortChange
     });
 
@@ -674,8 +662,20 @@ storiesOf('01. Features/ 05. Sort', module)
       console.log(action, state);
     }
 
+    const getIcon = sortKey => {
+      if (sort.state.sortKey === sortKey && sort.state.reverse) {
+        return <KeyboardArrowDownOutlinedIcon />;
+      }
+
+      if (sort.state.sortKey === sortKey && !sort.state.reverse) {
+        return <KeyboardArrowUpOutlinedIcon />;
+      }
+
+      return <UnfoldMoreOutlinedIcon />;
+    };
+
     return (
-      <Table data={data} {...sortTableProps}>
+      <Table data={data} sort={sort}>
         {tableList => (
           <>
             <Header>
@@ -684,9 +684,9 @@ storiesOf('01. Features/ 05. Sort', module)
                   <Button
                     fullWidth
                     style={{ justifyContent: 'flex-start' }}
-                    endIcon={getIcon(sortState, 'COUNT')}
+                    endIcon={getIcon('COUNT')}
                     onClick={() =>
-                      sortFns.onToggleSort({
+                      sort.fns.onToggleSort({
                         sortKey: 'COUNT',
                         sortFn: array =>
                           array.sort((a, b) =>
@@ -702,9 +702,9 @@ storiesOf('01. Features/ 05. Sort', module)
                   <Button
                     fullWidth
                     style={{ justifyContent: 'flex-start' }}
-                    endIcon={getIcon(sortState, 'STARS')}
+                    endIcon={getIcon('STARS')}
                     onClick={() =>
-                      sortFns.onToggleSort({
+                      sort.fns.onToggleSort({
                         sortKey: 'STARS',
                         sortFn: array =>
                           array.sort((a, b) => a.stars - b.stars)
@@ -718,9 +718,9 @@ storiesOf('01. Features/ 05. Sort', module)
                   <Button
                     fullWidth
                     style={{ justifyContent: 'flex-start' }}
-                    endIcon={getIcon(sortState, 'LIGHT')}
+                    endIcon={getIcon('LIGHT')}
                     onClick={() =>
-                      sortFns.onToggleSort({
+                      sort.fns.onToggleSort({
                         sortKey: 'LIGHT',
                         sortFn: array =>
                           array.sort((a, b) => a.light - b.light)
@@ -734,9 +734,9 @@ storiesOf('01. Features/ 05. Sort', module)
                   <Button
                     fullWidth
                     style={{ justifyContent: 'flex-start' }}
-                    endIcon={getIcon(sortState, 'COUNT')}
+                    endIcon={getIcon('COUNT')}
                     onClick={() =>
-                      sortFns.onToggleSort({
+                      sort.fns.onToggleSort({
                         sortKey: 'COUNT',
                         sortFn: array =>
                           array.sort((a, b) => a.count - b.count)
