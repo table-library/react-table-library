@@ -9,6 +9,7 @@ import {
   ResizeContext
 } from '@common/context/Resize';
 import { SortContext } from '@common/context/Sort';
+import { SelectContext } from '@common/context/Select';
 
 import { TableContainer } from './styles';
 
@@ -25,13 +26,13 @@ const applySort = (nodes, sortFn) => {
   }, []);
 };
 
-const Table = ({ data, theme, sort, children }) => {
+const Table = ({ data, theme, sort, select, children }) => {
   const tableRef = React.useRef();
 
   // do any nodes operations (e.g. sort, pagination), if not server-side
   let modifiedNodes = [...data.nodes];
 
-  if (!sort.options.isServer) {
+  if (sort && !sort.options.isServer) {
     modifiedNodes = applySort(modifiedNodes, sort.state.sortFn);
   }
 
@@ -47,10 +48,12 @@ const Table = ({ data, theme, sort, children }) => {
       <TableContext.Provider value={data}>
         <ThemeProvider theme={theme}>
           <ResizeProvider tableRef={tableRef}>
-            <SortContext.Provider value={{ ...sort }}>
-              {children(modifiedNodes, {
-                theme
-              })}
+            <SortContext.Provider value={sort}>
+              <SelectContext.Provider value={select}>
+                {children(modifiedNodes, {
+                  theme
+                })}
+              </SelectContext.Provider>
             </SortContext.Provider>
           </ResizeProvider>
         </ThemeProvider>

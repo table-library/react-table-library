@@ -10,99 +10,94 @@ import { isRowClick } from '@common/util/isRowClick';
 import { useRowLayout } from './useRowLayout';
 import { useDoubleClick } from './useDoubleClick';
 
-// const evaluatePlugins = (plugins, props) => {
-//   const onRowClick = (tableItem, event) => {
-//     if (props.onClick && isRowClick(event)) {
-//       props.onClick(tableItem, event);
-//     }
-//   };
+const evaluateProps = (rowPropsByFeature, onSingleClick) => {
+  const {
+    namesByFeature,
+    themeByFeature,
+    classNamesByFeature,
+    onClickByFeature,
+    ...specificsByFeature
+  } = rowPropsByFeature.reduce(
+    (acc, value) => {
+      const {
+        name,
+        theme,
+        className,
+        onClick,
+        ...featureSpecific
+      } = value;
 
-//   const {
-//     pluginNames,
-//     themeByPlugins,
-//     classNameByPlugins,
-//     onClickByPlugins,
-//     ...specificsByPlugins
-//   } = plugins.reduce(
-//     (acc, { plugin, options }) => {
-//       const {
-//         name,
-//         theme,
-//         className,
-//         onClick,
-//         ...pluginSpecific
-//       } = plugin({
-//         ...props,
-//         ...options
-//       });
+      const mergedNames = acc.namesByFeature.concat(name);
 
-//       const mergedPluginNames = acc.pluginNames.concat(name);
+      const mergedTheme = css`
+        ${acc.themeByFeature}
+        ${theme}
+      `;
 
-//       const mergedTheme = css`
-//         ${acc.themeByPlugins}
-//         ${theme}
-//       `;
+      const mergedClassName = cs(acc.classNamesByFeature, className);
 
-//       const mergedClassName = cs(acc.classNameByPlugins, className);
+      const mergedOnClick = (tableItem, event) => {
+        onClick(tableItem, event);
+        acc.onClickByFeature(tableItem, event);
+      };
 
-//       const mergedOnClick = (tableItem, event) => {
-//         onClick(tableItem, event);
-//         acc.onClickByPlugins(tableItem, event);
-//       };
+      return {
+        ...acc,
+        namesByFeature: mergedNames,
+        themeByFeature: mergedTheme,
+        classNamesByFeature: mergedClassName,
+        onClickByFeature: mergedOnClick,
+        ...featureSpecific
+      };
+    },
+    {
+      namesByFeature: [],
+      themeByFeature: '',
+      classNamesByFeature: '',
+      onClickByFeature: (tableItem, event) => {
+        if (onSingleClick && isRowClick(event)) {
+          onSingleClick(tableItem, event);
+        }
+      }
+    }
+  );
 
-//       return {
-//         ...acc,
-//         pluginNames: mergedPluginNames,
-//         themeByPlugins: mergedTheme,
-//         classNameByPlugins: mergedClassName,
-//         onClickByPlugins: mergedOnClick,
-//         ...pluginSpecific
-//       };
-//     },
-//     {
-//       pluginNames: [],
-//       themeByPlugins: '',
-//       classNameByPlugins: '',
-//       onClickByPlugins: onRowClick
-//     }
-//   );
+  return {
+    namesByFeature,
+    themeByFeature,
+    classNamesByFeature,
+    onClickByFeature,
+    ...specificsByFeature
+  };
+};
 
-//   return {
-//     pluginNames,
-//     themeByPlugins,
-//     classNameByPlugins,
-//     onClickByPlugins,
-//     ...specificsByPlugins
-//   };
-// };
-
-const Row = props => {
+const Row = ({
+  item,
+  className,
+  disabled,
+  rowLayout,
+  rowPropsByFeature,
+  onClick,
+  onDoubleClick,
+  children
+}) => {
   const theme = React.useContext(ThemeContext);
 
-  // const {
-  //   pluginNames,
-  //   themeByPlugins,
-  //   classNameByPlugins,
-  //   onClickByPlugins,
-  //   // specificsByPlugins
-  //   tree,
-  //   expand,
-  //   fetching
-  //   // eslint-disable-next-line react/destructuring-assignment
-  // } = evaluatePlugins(props.plugins || [], props);
-
   const {
-    item,
-    className,
-    rowLayout,
-    disabled,
-    onDoubleClick,
-    children
-  } = props;
+    namesByFeature,
+    themeByFeature,
+    classNamesByFeature,
+    onClickByFeature,
+    // specificsByFeature
+    // TODO: exchange with panelByFeature
+    tree,
+    expand,
+    fetching
+  } = evaluateProps(rowPropsByFeature, onClick);
 
   const ref = React.useRef();
 
-  // useDoubleClick(ref, onClickByPlugins, onDoubleClick, item);
+  useDoubleClick(ref, onClickByFeature, onDoubleClick, item);
   useRowLayout(ref, '.td', rowLayout, children);
 
   return (
@@ -112,33 +107,33 @@ const Row = props => {
         className={cs(
           'tr',
           'tr-body',
-          // classNameByPlugins,
+          classNamesByFeature,
           className,
           {
-            disabled
-            // clickable: onClickByPlugins || onDoubleClick
+            disabled,
+            clickable: onClickByFeature || onDoubleClick
           }
         )}
-        // css={css`
-        //   ${themeByPlugins}
-        //   ${theme?.BaseRow}
-        //   ${theme?.Row}
-        // `}
+        css={css`
+          ${themeByFeature}
+          ${theme?.BaseRow}
+          ${theme?.Row}
+        `}
         ref={ref}
       >
         {children(item)}
       </RowContainer>
 
       {/* {expand?.expansionPanel &&
-        pluginNames.findIndex(name => name === 'expandPlugin') <
-          pluginNames.findIndex(name => name === 'treePlugin') &&
+        namesByFeature.findIndex(name => name === 'expand') <
+          namesByFeature.findIndex(name => name === 'tree') &&
         expand?.expansionPanel}
 
       {tree?.treePanel}
 
       {expand?.expansionPanel &&
-        pluginNames.findIndex(name => name === 'expandPlugin') >
-          pluginNames.findIndex(name => name === 'treePlugin') &&
+        namesByFeature.findIndex(name => name === 'expand') >
+          namesByFeature.findIndex(name => name === 'tree') &&
         expand?.expansionPanel}
 
       {fetching?.fetchPanel} */}
@@ -149,9 +144,10 @@ const Row = props => {
 Row.propTypes = {
   item: PropTypes.objectOf(PropTypes.any),
   rowLayout: PropTypes.arrayOf(PropTypes.any),
-  plugins: PropTypes.arrayOf(PropTypes.any),
+  rowPropsByFeature: PropTypes.arrayOf(PropTypes.any),
   className: PropTypes.string,
   disabled: PropTypes.bool,
+  onClick: PropTypes.func,
   onDoubleClick: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

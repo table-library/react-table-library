@@ -43,6 +43,8 @@ const list = [
 storiesOf('01. Features/ 05. Sort', module)
   .addParameters({ component: Table })
   .add('default', () => {
+    const data = { nodes: list };
+
     const [sortState, sortFns, sortTableProps] = useSort({
       onChange: onSortChange
     });
@@ -52,7 +54,7 @@ storiesOf('01. Features/ 05. Sort', module)
     }
 
     return (
-      <Table data={{ nodes: list }} {...sortTableProps}>
+      <Table data={data} {...sortTableProps}>
         {tableList => (
           <>
             <Header>
@@ -112,8 +114,10 @@ storiesOf('01. Features/ 05. Sort', module)
     );
   })
   .add('default sort', () => {
+    const data = { nodes: list };
+
     const [sortState, sortFns, sortTableProps] = useSort({
-      state: {
+      initialState: {
         sortKey: 'NAME',
         sortFn: array =>
           array.sort((a, b) => a.name.localeCompare(b.name)),
@@ -127,7 +131,7 @@ storiesOf('01. Features/ 05. Sort', module)
     }
 
     return (
-      <Table data={{ nodes: list }} {...sortTableProps}>
+      <Table data={data} {...sortTableProps}>
         {tableList => (
           <>
             <Header>
@@ -187,6 +191,8 @@ storiesOf('01. Features/ 05. Sort', module)
     );
   })
   .add('sort icon size ', () => {
+    const data = { nodes: list };
+
     const [sortState, sortFns, sortTableProps] = useSort({
       onChange: onSortChange
     });
@@ -196,7 +202,7 @@ storiesOf('01. Features/ 05. Sort', module)
     }
 
     return (
-      <Table data={{ nodes: list }} {...sortTableProps}>
+      <Table data={data} {...sortTableProps}>
         {tableList => (
           <>
             <Header>
@@ -268,6 +274,8 @@ storiesOf('01. Features/ 05. Sort', module)
     );
   })
   .add('sort icon position ', () => {
+    const data = { nodes: list };
+
     const [sortState, sortFns, sortTableProps] = useSort({
       onChange: onSortChange
     });
@@ -277,7 +285,7 @@ storiesOf('01. Features/ 05. Sort', module)
     }
 
     return (
-      <Table data={{ nodes: list }} {...sortTableProps}>
+      <Table data={data} {...sortTableProps}>
         {tableList => (
           <>
             <Header>
@@ -349,6 +357,8 @@ storiesOf('01. Features/ 05. Sort', module)
     );
   })
   .add('indentation ', () => {
+    const data = { nodes: list };
+
     const [sortState, sortFns, sortTableProps] = useSort({
       onChange: onSortChange
     });
@@ -358,7 +368,7 @@ storiesOf('01. Features/ 05. Sort', module)
     }
 
     return (
-      <Table data={{ nodes: list }} {...sortTableProps}>
+      <Table data={data} {...sortTableProps}>
         {tableList => (
           <>
             <Header>
@@ -432,6 +442,8 @@ storiesOf('01. Features/ 05. Sort', module)
     );
   })
   .add('no sort icon', () => {
+    const data = { nodes: list };
+
     const [sortState, sortFns, sortTableProps] = useSort({
       onChange: onSortChange
     });
@@ -441,7 +453,7 @@ storiesOf('01. Features/ 05. Sort', module)
     }
 
     return (
-      <Table data={{ nodes: list }} {...sortTableProps}>
+      <Table data={data} {...sortTableProps}>
         {tableList => (
           <>
             <Header>
@@ -521,6 +533,8 @@ storiesOf('01. Features/ 05. Sort', module)
     );
   })
   .add('custom sort icon (Material UI)', () => {
+    const data = { nodes: list };
+
     const [sortState, sortFns, sortTableProps] = useSort({
       onChange: onSortChange
     });
@@ -530,7 +544,7 @@ storiesOf('01. Features/ 05. Sort', module)
     }
 
     return (
-      <Table data={{ nodes: list }} {...sortTableProps}>
+      <Table data={data} {...sortTableProps}>
         {tableList => (
           <>
             <Header>
@@ -638,6 +652,8 @@ storiesOf('01. Features/ 05. Sort', module)
     );
   })
   .add('custom sort button (Material UI)', () => {
+    const data = { nodes: list };
+
     const getIcon = (sortState, sortKey) => {
       if (sortState.sortKey === sortKey && sortState.reverse) {
         return <KeyboardArrowDownOutlinedIcon />;
@@ -659,7 +675,7 @@ storiesOf('01. Features/ 05. Sort', module)
     }
 
     return (
-      <Table data={{ nodes: list }} {...sortTableProps}>
+      <Table data={data} {...sortTableProps}>
         {tableList => (
           <>
             <Header>

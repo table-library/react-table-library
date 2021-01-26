@@ -25,13 +25,10 @@ const findParentItem = (rootItem, id) =>
 const getParentItem = (rootItem, id) =>
   findParentItem(rootItem, id) || rootItem;
 
-const getSelectProps = (
-  child,
-  { selectState, onToggleById, onToggleByIdRecursively }
-) => ({
-  isSelected: selectState.ids.includes(child.props.item.id),
-  onToggleById,
-  onToggleByIdRecursively
+const getSelectProps = (child, select) => ({
+  isSelected: select.state.ids.includes(child.props.item.id)
+  // onToggleById: select.fns.onToggleByIdRecursively,
+  // onToggleByIdRecursively: select.fns.onToggleByIdRecursively
 });
 
 const getTreeProps = (child, { treeState, onToggleById }) => ({
@@ -54,6 +51,19 @@ const getFetchProps = (
 });
 
 const Body = ({ children }) => {
+  const select = React.useContext(SelectContext);
+
+  const getRowProps = item =>
+    [select]
+      .filter(Boolean)
+      .filter(feature => feature.getRowProps)
+      .map(feature =>
+        feature.getRowProps(item, {
+          select
+          // others // TODO
+        })
+      );
+
   return (
     <>
       {React.Children.map(children, (child, index) =>
@@ -63,7 +73,7 @@ const Body = ({ children }) => {
           // firstRow: index === 0,
           // lastRow: size === index + 1,
           // id: child.props.item.id,
-          // select: getSelectProps(child, select),
+          rowPropsByFeature: getRowProps(child.props.item)
           // tree: getTreeProps(child, tree),
           // expand: getExpandProps(child, expand),
           // fetching: getFetchProps(child, fetching)
