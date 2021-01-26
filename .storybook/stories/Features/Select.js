@@ -22,7 +22,7 @@ import {
   useSelect
 } from '@table-library/react-table-library/lib/select';
 
-const list = [
+const nodes = [
   { id: '1', name: 'Hello', stars: 24, count: 42, light: true },
   { id: '2', name: 'There', stars: 42, count: 24, light: false },
   { id: '3', name: 'Nice', stars: 111, count: 111, light: true },
@@ -41,7 +41,7 @@ const list = [
 storiesOf('01. Features/06. Select', module)
   .addParameters({ component: Table })
   .add('default', () => {
-    const data = { nodes: list };
+    const data = { nodes };
 
     const select = useSelect({
       data,
@@ -85,7 +85,7 @@ storiesOf('01. Features/06. Select', module)
     );
   })
   .add('default select', () => {
-    const data = { nodes: list };
+    const data = { nodes };
 
     const select = useSelect({
       data,
@@ -130,7 +130,7 @@ storiesOf('01. Features/06. Select', module)
     );
   })
   .add('checkbox', () => {
-    const data = { nodes: list };
+    const data = { nodes };
 
     const select = useSelect({
       data,
@@ -176,7 +176,7 @@ storiesOf('01. Features/06. Select', module)
     );
   })
   .add('select on checkbox ', () => {
-    const data = { nodes: list };
+    const data = { nodes };
 
     const select = useSelect(
       {
@@ -227,7 +227,7 @@ storiesOf('01. Features/06. Select', module)
     );
   })
   .add('custom checkbox (Material UI)', () => {
-    const data = { nodes: list };
+    const data = { nodes };
 
     const select = useSelect({
       data,

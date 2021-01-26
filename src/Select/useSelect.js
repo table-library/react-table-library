@@ -7,7 +7,13 @@ import { useCommonReducer } from '@common/util/useCommonReducer';
 
 import { SELECT_TYPES } from './config';
 
-const getRowProps = (item, { select }) => {
+const getRowProps = (props, features) => {
+  const { item } = props;
+
+  const { select } = features;
+
+  const isSelected = select.state.ids.includes(item.id);
+
   const theme = css`
     &.row-select-selected {
       color: ${COLORS.FONT_PRIMARY};
@@ -24,7 +30,7 @@ const getRowProps = (item, { select }) => {
   const className = cs('row-select', {
     'row-select-clickable':
       select._options.selectType === SELECT_TYPES.RowClick,
-    'row-select-selected': select.state.ids.includes(item.id)
+    'row-select-selected': isSelected
   });
 
   const onClick = (tableItem, event) => {

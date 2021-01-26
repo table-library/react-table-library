@@ -127,11 +127,11 @@ const Row = ({
       {/* {expand?.expansionPanel &&
         namesByFeature.findIndex(name => name === 'expand') <
           namesByFeature.findIndex(name => name === 'tree') &&
-        expand?.expansionPanel}
+        expand?.expansionPanel} */}
 
       {tree?.treePanel}
 
-      {expand?.expansionPanel &&
+      {/* {expand?.expansionPanel &&
         namesByFeature.findIndex(name => name === 'expand') >
           namesByFeature.findIndex(name => name === 'tree') &&
         expand?.expansionPanel}
