@@ -5,22 +5,22 @@ import cs from 'classnames';
 
 import { HeaderCellContainer } from '@common/components/Cell';
 import { ThemeContext } from '@common/context/Theme';
-import {
-  Resizer,
-  useResize
-} from '@table-library/react-table-library/lib/resize';
+// import {
+//   Resizer,
+//   useResize
+// } from '@table-library/react-table-library/lib/resize';
 
 const HeaderCell = ({
-  index,
+  // index,
   className,
   indentation,
   hide,
-  resize,
+  // resize,
   children
 }) => {
   const theme = React.useContext(ThemeContext);
 
-  const { resizeRef, cellRef } = useResize(index);
+  // const { resizeRef, cellRef } = useResize(index);
 
   return (
     <HeaderCellContainer
@@ -31,20 +31,20 @@ const HeaderCell = ({
         ${theme?.HeaderCell}
       `}
       indentation={indentation}
-      ref={cellRef}
+      // ref={cellRef}
     >
       <div>{children}</div>
-      {resize && <Resizer ref={resizeRef} />}
+      {/* {resize && <Resizer ref={resizeRef} />} */}
     </HeaderCellContainer>
   );
 };
 
 HeaderCell.propTypes = {
-  index: PropTypes.number,
+  // index: PropTypes.number,
   className: PropTypes.string,
   indentation: PropTypes.number,
   hide: PropTypes.bool,
-  resize: PropTypes.bool,
+  // resize: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

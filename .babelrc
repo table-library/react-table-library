@@ -10,12 +10,7 @@
           "@common": "./src/common",
           "@table-library/react-table-library/lib/table": "./src/Table",
           "@table-library/react-table-library/lib/theme": "./src/Theme",
-          "@table-library/react-table-library/lib/sort": "./src/Sort",
-          "@table-library/react-table-library/lib/select": "./src/Select",
-          "@table-library/react-table-library/lib/tree": "./src/Tree",
-          "@table-library/react-table-library/lib/resize": "./src/Resize",
-          "@table-library/react-table-library/lib/expand": "./src/Expand",
-          "@table-library/react-table-library/lib/fetch": "./src/Fetch"
+          "@table-library/react-table-library/lib/sort": "./src/Sort"
         }
       }
     ],
