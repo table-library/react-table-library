@@ -1,20 +1,13 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-import { isRenderProp } from '@common/util/isRenderProp';
 import { Checkbox } from '@common/components/Checkbox';
 
 const ImperativeCheckbox = ({
-  select,
   checked,
   isIndeterminate,
-  onChange,
-  children
+  onChange
 }) => {
-  if (isRenderProp(children)) {
-    return children(select);
-  }
-
   const ref = node => {
     if (!node) return;
 
@@ -34,15 +27,9 @@ const ImperativeCheckbox = ({
 };
 
 ImperativeCheckbox.propTypes = {
-  select: PropTypes.objectOf(PropTypes.any),
   checked: PropTypes.bool,
   isIndeterminate: PropTypes.bool,
-  onChange: PropTypes.func,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-    PropTypes.func
-  ])
+  onChange: PropTypes.func
 };
 
 export { ImperativeCheckbox };

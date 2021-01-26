@@ -53,7 +53,7 @@ const DEFAULT_OPTIONS = {
 
 const useSelect = (
   { data, initialState = DEFAULT_STATE, onChange },
-  options
+  options = {}
 ) => {
   const [state, fns] = useCommonReducer(data, initialState, onChange);
 

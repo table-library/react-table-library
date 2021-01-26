@@ -29,6 +29,10 @@ const DEFAULT_STATE = {
   reverse: false
 };
 
+const DEFAULT_OPTIONS = {
+  isServer: false
+};
+
 const useSort = (
   // eslint-disable-next-line no-unused-vars
   { data, initialState = DEFAULT_STATE, onChange },
@@ -54,7 +58,14 @@ const useSort = (
     onToggleSort
   };
 
-  const tableProps = { sort: { state, fns, options } };
+  const mergedOptions = {
+    ...DEFAULT_OPTIONS,
+    ...options
+  };
+
+  const tableProps = {
+    sort: { state, fns, _options: mergedOptions }
+  };
 
   return [state, fns, tableProps];
 };

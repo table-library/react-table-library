@@ -18,7 +18,6 @@ import {
 import {
   HeaderCellSelect,
   CellSelect,
-  useSelectRow,
   SELECT_TYPES,
   useSelect
 } from '@table-library/react-table-library/lib/select';
@@ -84,200 +83,211 @@ storiesOf('01. Features/06. Select', module)
         )}
       </Table>
     );
+  })
+  .add('default select', () => {
+    const data = { nodes: list };
+
+    const [selectState, selectFns, selectTableProps] = useSelect({
+      data,
+      initialState: { ids: ['2', '4'] },
+      onChange: onSelectChange
+    });
+
+    function onSelectChange(action, state) {
+      console.log(action, state);
+    }
+
+    return (
+      <Table data={data} {...selectTableProps}>
+        {tableList => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <Row item={item} key={item.id}>
+                  {tableItem => (
+                    <>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('checkbox', () => {
+    const data = { nodes: list };
+
+    const [selectState, selectFns, selectTableProps] = useSelect({
+      data,
+      onChange: onSelectChange
+    });
+
+    function onSelectChange(action, state) {
+      console.log(action, state);
+    }
+
+    return (
+      <Table data={data} {...selectTableProps}>
+        {tableList => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSelect />
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <Row key={item.id} item={item}>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <CellSelect item={tableItem} />
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('select on checkbox ', () => {
+    const data = { nodes: list };
+
+    const [selectState, selectFns, selectTableProps] = useSelect(
+      {
+        data,
+        onChange: onSelectChange
+      },
+      {
+        selectType: SELECT_TYPES.ButtonClick
+      }
+    );
+
+    function onSelectChange(action, state) {
+      console.log(action, state);
+    }
+
+    return (
+      <Table data={data} {...selectTableProps}>
+        {tableList => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSelect />
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <Row key={item.id} item={item}>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <CellSelect item={tableItem} />
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('custom checkbox (Material UI)', () => {
+    const data = { nodes: list };
+
+    const [selectState, selectFns, selectTableProps] = useSelect({
+      data,
+      onChange: onSelectChange
+    });
+
+    function onSelectChange(action, state) {
+      console.log(action, state);
+    }
+
+    return (
+      <Table data={data} {...selectTableProps}>
+        {tableList => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSelect custom>
+                  <Checkbox
+                    size="small"
+                    checked={selectState.all}
+                    indeterminate={
+                      !selectState.all && !selectState.none
+                    }
+                    onChange={selectFns.onToggleAll}
+                  />
+                </HeaderCellSelect>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <Row key={item.id} item={item}>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <CellSelect item={tableItem} custom>
+                        <Checkbox
+                          size="small"
+                          checked={selectState.ids.includes(
+                            tableItem.id
+                          )}
+                          onChange={() =>
+                            selectFns.onToggleById(tableItem.id)
+                          }
+                        />
+                      </CellSelect>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
   });
-// .add('default select', () => {
-// const data = { nodes: list };
-
-//   const defaultSelect = {
-//     ids: ['2', '4']
-//   };
-
-//   return (
-//     <Table data={data} defaultSelect={defaultSelect}>
-//       {tableList => (
-//         <>
-//           <Header>
-//             <HeaderRow>
-//               <HeaderCell>Name</HeaderCell>
-//               <HeaderCell>Stars</HeaderCell>
-//               <HeaderCell>Light</HeaderCell>
-//               <HeaderCell>Count</HeaderCell>
-//             </HeaderRow>
-//           </Header>
-
-//           <Body>
-//             {tableList.map(item => (
-//               <Row
-//                 item={item}
-//                 key={item.id}
-//                 plugins={[{ plugin: useSelectRow }]}
-//               >
-//                 {tableItem => (
-//                   <>
-//                     <Cell>{tableItem.name}</Cell>
-//                     <Cell>{tableItem.stars}</Cell>
-//                     <Cell>{tableItem.light.toString()}</Cell>
-//                     <Cell>{tableItem.count}</Cell>
-//                   </>
-//                 )}
-//               </Row>
-//             ))}
-//           </Body>
-//         </>
-//       )}
-//     </Table>
-//   );
-// })
-// .add('checkbox', () => {
-// const data = { nodes: list };
-
-//   return (
-//     <Table data={data}>
-//       {tableList => (
-//         <>
-//           <Header>
-//             <HeaderRow>
-//               <HeaderCellSelect />
-//               <HeaderCell>Name</HeaderCell>
-//               <HeaderCell>Stars</HeaderCell>
-//               <HeaderCell>Light</HeaderCell>
-//               <HeaderCell>Count</HeaderCell>
-//             </HeaderRow>
-//           </Header>
-
-//           <Body>
-//             {tableList.map(item => (
-//               <Row
-//                 key={item.id}
-//                 item={item}
-//                 plugins={[{ plugin: useSelectRow }]}
-//               >
-//                 {tableItem => (
-//                   <React.Fragment key={tableItem.id}>
-//                     <CellSelect item={tableItem} />
-//                     <Cell>{tableItem.name}</Cell>
-//                     <Cell>{tableItem.stars}</Cell>
-//                     <Cell>{tableItem.light.toString()}</Cell>
-//                     <Cell>{tableItem.count}</Cell>
-//                   </React.Fragment>
-//                 )}
-//               </Row>
-//             ))}
-//           </Body>
-//         </>
-//       )}
-//     </Table>
-//   );
-// })
-// .add('select on checkbox ', () => {
-// const data = { nodes: list };
-
-//   return (
-//     <Table data={data}>
-//       {tableList => (
-//         <>
-//           <Header>
-//             <HeaderRow>
-//               <HeaderCellSelect />
-//               <HeaderCell>Name</HeaderCell>
-//               <HeaderCell>Stars</HeaderCell>
-//               <HeaderCell>Light</HeaderCell>
-//               <HeaderCell>Count</HeaderCell>
-//             </HeaderRow>
-//           </Header>
-
-//           <Body>
-//             {tableList.map(item => (
-//               <Row
-//                 key={item.id}
-//                 item={item}
-//                 plugins={[
-//                   {
-//                     plugin: useSelectRow,
-//                     options: {
-//                       selectType: SELECT_TYPES.ButtonClick
-//                     }
-//                   }
-//                 ]}
-//               >
-//                 {tableItem => (
-//                   <React.Fragment key={tableItem.id}>
-//                     <CellSelect item={tableItem} />
-//                     <Cell>{tableItem.name}</Cell>
-//                     <Cell>{tableItem.stars}</Cell>
-//                     <Cell>{tableItem.light.toString()}</Cell>
-//                     <Cell>{tableItem.count}</Cell>
-//                   </React.Fragment>
-//                 )}
-//               </Row>
-//             ))}
-//           </Body>
-//         </>
-//       )}
-//     </Table>
-//   );
-// })
-// .add('custom checkbox (Material UI)', () => {
-// const data = { nodes: list };
-
-//   return (
-//     <Table data={data}>
-//       {tableList => (
-//         <>
-//           <Header>
-//             <HeaderRow>
-//               <HeaderCellSelect>
-//                 {({ selectState, onToggleAll }) => (
-//                   <Checkbox
-//                     size="small"
-//                     checked={selectState.all}
-//                     indeterminate={
-//                       !selectState.all && !selectState.none
-//                     }
-//                     onChange={onToggleAll}
-//                   />
-//                 )}
-//               </HeaderCellSelect>
-//               <HeaderCell>Name</HeaderCell>
-//               <HeaderCell>Stars</HeaderCell>
-//               <HeaderCell>Light</HeaderCell>
-//               <HeaderCell>Count</HeaderCell>
-//             </HeaderRow>
-//           </Header>
-
-//           <Body>
-//             {tableList.map(item => (
-//               <Row
-//                 key={item.id}
-//                 item={item}
-//                 plugins={[{ plugin: useSelectRow }]}
-//               >
-//                 {tableItem => (
-//                   <React.Fragment key={tableItem.id}>
-//                     <CellSelect item={tableItem}>
-//                       {({ selectState, onToggleById }) => (
-//                         <Checkbox
-//                           size="small"
-//                           checked={selectState.ids.includes(
-//                             tableItem.id
-//                           )}
-//                           onChange={() =>
-//                             onToggleById(tableItem.id)
-//                           }
-//                         />
-//                       )}
-//                     </CellSelect>
-//                     <Cell>{tableItem.name}</Cell>
-//                     <Cell>{tableItem.stars}</Cell>
-//                     <Cell>{tableItem.light.toString()}</Cell>
-//                     <Cell>{tableItem.count}</Cell>
-//                   </React.Fragment>
-//                 )}
-//               </Row>
-//             ))}
-//           </Body>
-//         </>
-//       )}
-//     </Table>
-//   );
-// });

@@ -8,30 +8,34 @@ import { SelectContext } from '@common/context/Select';
 import { ImperativeCheckbox } from './Checkbox';
 
 const CellSelect = React.memo(
-  ({ item, className, children, ...passThrough }) => {
+  ({ custom, item, className, children, ...passThrough }) => {
     const select = React.useContext(SelectContext);
-    const isSelected = select.selectState.ids.includes(item.id);
+
+    const isSelected = select.state.ids.includes(item.id);
     const handleChange = () =>
-      select.onToggleByIdRecursively(item.id);
+      select.fns.onToggleByIdRecursively(item.id);
 
     return (
       <Cell
         className={cs('td-select', 'shrink', className)}
         {...passThrough}
       >
-        <ImperativeCheckbox
-          select={select}
-          checked={isSelected}
-          onChange={handleChange}
-        >
-          {children}
-        </ImperativeCheckbox>
+        {custom ? (
+          children
+        ) : (
+          <ImperativeCheckbox
+            select={select}
+            checked={isSelected}
+            onChange={handleChange}
+          />
+        )}
       </Cell>
     );
   }
 );
 
 CellSelect.propTypes = {
+  custom: PropTypes.bool,
   item: PropTypes.objectOf(PropTypes.any),
   className: PropTypes.string,
   children: PropTypes.oneOfType([
