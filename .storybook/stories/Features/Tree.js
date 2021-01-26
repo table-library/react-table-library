@@ -188,267 +188,309 @@ storiesOf('01. Features/09. Tree', module)
         )}
       </Table>
     );
+  })
+  .add('tree icon', () => {
+    const data = { nodes };
+
+    const tree = useTree({
+      data,
+      onChange: onTreeChange
+    });
+
+    function onTreeChange(action, state) {
+      console.log(action, state);
+    }
+
+    return (
+      <Table data={data} tree={tree}>
+        {tableList => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <Row key={item.id} item={item}>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <CellTree item={tableItem}>
+                        {tableItem.name}
+                      </CellTree>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('expand tree on tree icon click', () => {
+    const data = { nodes };
+
+    const tree = useTree(
+      {
+        data,
+        onChange: onTreeChange
+      },
+      {
+        treeExpandType: TREE_EXPAND_TYPES.ButtonClick
+      }
+    );
+
+    function onTreeChange(action, state) {
+      console.log(action, state);
+    }
+
+    return (
+      <Table data={data} tree={tree}>
+        {tableList => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <Row key={item.id} item={item}>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <CellTree item={tableItem}>
+                        {tableItem.name}
+                      </CellTree>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('default tree', () => {
+    const data = { nodes };
+
+    const tree = useTree({
+      initialState: {
+        ids: ['2', '62', '4']
+      },
+      data,
+      onChange: onTreeChange
+    });
+
+    function onTreeChange(action, state) {
+      console.log(action, state);
+    }
+
+    return (
+      <Table data={data} tree={tree}>
+        {tableList => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <Row key={item.id} item={item}>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <CellTree item={tableItem}>
+                        {tableItem.name}
+                      </CellTree>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('zoom on double click (WIP)', () => {
+    const data = { nodes };
+
+    const tree = useTree({
+      data,
+      onChange: onTreeChange
+    });
+
+    function onTreeChange(action, state) {
+      console.log(action, state);
+    }
+
+    return (
+      <Table data={data} tree={tree}>
+        {tableList => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <Row
+                  key={item.id}
+                  item={item}
+                  onDoubleClick={tableItem => console.log(tableItem)}
+                >
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <CellTree item={tableItem}>
+                        {tableItem.name}
+                      </CellTree>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('tree icon size', () => {
+    const data = { nodes };
+
+    const tree = useTree({
+      data,
+      onChange: onTreeChange
+    });
+
+    function onTreeChange(action, state) {
+      console.log(action, state);
+    }
+
+    return (
+      <Table data={data} tree={tree}>
+        {tableList => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <Row key={item.id} item={item}>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <CellTree
+                        item={tableItem}
+                        treeIcon={{
+                          size: '10px'
+                        }}
+                      >
+                        {tableItem.name}
+                      </CellTree>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('custom tree icon (Material UI)', () => {
+    const data = { nodes };
+
+    const tree = useTree({
+      data,
+      onChange: onTreeChange
+    });
+
+    function onTreeChange(action, state) {
+      console.log(action, state);
+    }
+
+    return (
+      <Table data={data} tree={tree}>
+        {tableList => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <Row key={item.id} item={item}>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <CellTree
+                        item={tableItem}
+                        treeIcon={{
+                          margin: '4px',
+                          iconDefault: (
+                            <InsertDriveFileOutlinedIcon fontSize="small" />
+                          ),
+                          iconRight: <FolderIcon fontSize="small" />,
+                          iconDown: (
+                            <FolderOpenIcon fontSize="small" />
+                          )
+                        }}
+                      >
+                        {tableItem.name}
+                      </CellTree>
+                      <Cell>{tableItem.stars}</Cell>
+                      <Cell>{tableItem.light.toString()}</Cell>
+                      <Cell>{tableItem.count}</Cell>
+                    </React.Fragment>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
   });
-// .add('tree icon', () => {
-//   return (
-//     <Table data={{ nodes: tree }}>
-//       {tableList => (
-//         <>
-//           <Header>
-//             <HeaderRow>
-//               <HeaderCell>Name</HeaderCell>
-//               <HeaderCell>Stars</HeaderCell>
-//               <HeaderCell>Light</HeaderCell>
-//               <HeaderCell>Count</HeaderCell>
-//             </HeaderRow>
-//           </Header>
-
-//           <Body>
-//             {tableList.map(item => (
-//               <Row
-//                 key={item.id}
-//                 item={item}
-//                 plugins={[{ plugin: useTreeRow }]}
-//               >
-//                 {tableItem => (
-//                   <React.Fragment key={tableItem.id}>
-//                     <CellTree item={tableItem}>
-//                       {tableItem.name}
-//                     </CellTree>
-//                     <Cell>{tableItem.stars}</Cell>
-//                     <Cell>{tableItem.light.toString()}</Cell>
-//                     <Cell>{tableItem.count}</Cell>
-//                   </React.Fragment>
-//                 )}
-//               </Row>
-//             ))}
-//           </Body>
-//         </>
-//       )}
-//     </Table>
-//   );
-// })
-// .add('expand tree on tree icon click', () => {
-//   return (
-//     <Table data={{ nodes: tree }}>
-//       {tableList => (
-//         <>
-//           <Header>
-//             <HeaderRow>
-//               <HeaderCell>Name</HeaderCell>
-//               <HeaderCell>Stars</HeaderCell>
-//               <HeaderCell>Light</HeaderCell>
-//               <HeaderCell>Count</HeaderCell>
-//             </HeaderRow>
-//           </Header>
-
-//           <Body>
-//             {tableList.map(item => (
-//               <Row
-//                 key={item.id}
-//                 item={item}
-//                 plugins={[
-//                   {
-//                     plugin: useTreeRow,
-//                     options: {
-//                       treeExpandType: TREE_EXPAND_TYPES.ButtonClick
-//                     }
-//                   }
-//                 ]}
-//               >
-//                 {tableItem => (
-//                   <React.Fragment key={tableItem.id}>
-//                     <CellTree item={tableItem}>
-//                       {tableItem.name}
-//                     </CellTree>
-//                     <Cell>{tableItem.stars}</Cell>
-//                     <Cell>{tableItem.light.toString()}</Cell>
-//                     <Cell>{tableItem.count}</Cell>
-//                   </React.Fragment>
-//                 )}
-//               </Row>
-//             ))}
-//           </Body>
-//         </>
-//       )}
-//     </Table>
-//   );
-// })
-// .add('default tree', () => {
-//   const defaultTree = {
-//     ids: ['2', '62', '4']
-//   };
-
-//   return (
-//     <Table data={{ nodes: tree }} defaultTree={defaultTree}>
-//       {tableList => (
-//         <>
-//           <Header>
-//             <HeaderRow>
-//               <HeaderCell>Name</HeaderCell>
-//               <HeaderCell>Stars</HeaderCell>
-//               <HeaderCell>Light</HeaderCell>
-//               <HeaderCell>Count</HeaderCell>
-//             </HeaderRow>
-//           </Header>
-
-//           <Body>
-//             {tableList.map(item => (
-//               <Row
-//                 key={item.id}
-//                 item={item}
-//                 plugins={[{ plugin: useTreeRow }]}
-//               >
-//                 {tableItem => (
-//                   <React.Fragment key={tableItem.id}>
-//                     <CellTree item={tableItem}>
-//                       {tableItem.name}
-//                     </CellTree>
-//                     <Cell>{tableItem.stars}</Cell>
-//                     <Cell>{tableItem.light.toString()}</Cell>
-//                     <Cell>{tableItem.count}</Cell>
-//                   </React.Fragment>
-//                 )}
-//               </Row>
-//             ))}
-//           </Body>
-//         </>
-//       )}
-//     </Table>
-//   );
-// })
-// .add('zoom on double click (WIP)', () => {
-//   return (
-//     <Table data={{ nodes: tree }}>
-//       {tableList => (
-//         <>
-//           <Header>
-//             <HeaderRow>
-//               <HeaderCell>Name</HeaderCell>
-//               <HeaderCell>Stars</HeaderCell>
-//               <HeaderCell>Light</HeaderCell>
-//               <HeaderCell>Count</HeaderCell>
-//             </HeaderRow>
-//           </Header>
-
-//           <Body>
-//             {tableList.map(item => (
-//               <Row
-//                 key={item.id}
-//                 item={item}
-//                 plugins={[{ plugin: useTreeRow }]}
-//                 onDoubleClick={tableItem => console.log(tableItem)}
-//               >
-//                 {tableItem => (
-//                   <React.Fragment key={tableItem.id}>
-//                     <CellTree item={tableItem}>
-//                       {tableItem.name}
-//                     </CellTree>
-//                     <Cell>{tableItem.stars}</Cell>
-//                     <Cell>{tableItem.light.toString()}</Cell>
-//                     <Cell>{tableItem.count}</Cell>
-//                   </React.Fragment>
-//                 )}
-//               </Row>
-//             ))}
-//           </Body>
-//         </>
-//       )}
-//     </Table>
-//   );
-// })
-// .add('tree icon size', () => {
-//   return (
-//     <Table data={{ nodes: tree }}>
-//       {tableList => (
-//         <>
-//           <Header>
-//             <HeaderRow>
-//               <HeaderCell>Name</HeaderCell>
-//               <HeaderCell>Stars</HeaderCell>
-//               <HeaderCell>Light</HeaderCell>
-//               <HeaderCell>Count</HeaderCell>
-//             </HeaderRow>
-//           </Header>
-
-//           <Body>
-//             {tableList.map(item => (
-//               <Row
-//                 key={item.id}
-//                 item={item}
-//                 plugins={[{ plugin: useTreeRow }]}
-//               >
-//                 {tableItem => (
-//                   <React.Fragment key={tableItem.id}>
-//                     <CellTree
-//                       item={tableItem}
-//                       treeIcon={{
-//                         size: '10px'
-//                       }}
-//                     >
-//                       {tableItem.name}
-//                     </CellTree>
-//                     <Cell>{tableItem.stars}</Cell>
-//                     <Cell>{tableItem.light.toString()}</Cell>
-//                     <Cell>{tableItem.count}</Cell>
-//                   </React.Fragment>
-//                 )}
-//               </Row>
-//             ))}
-//           </Body>
-//         </>
-//       )}
-//     </Table>
-//   );
-// })
-// .add('custom tree icon (Material UI)', () => {
-//   return (
-//     <Table data={{ nodes: tree }}>
-//       {tableList => (
-//         <>
-//           <Header>
-//             <HeaderRow>
-//               <HeaderCell>Name</HeaderCell>
-//               <HeaderCell>Stars</HeaderCell>
-//               <HeaderCell>Light</HeaderCell>
-//               <HeaderCell>Count</HeaderCell>
-//             </HeaderRow>
-//           </Header>
-
-//           <Body>
-//             {tableList.map(item => (
-//               <Row
-//                 key={item.id}
-//                 item={item}
-//                 plugins={[{ plugin: useTreeRow }]}
-//               >
-//                 {tableItem => (
-//                   <React.Fragment key={tableItem.id}>
-//                     <CellTree
-//                       item={tableItem}
-//                       treeIcon={{
-//                         margin: '4px',
-//                         iconDefault: (
-//                           <InsertDriveFileOutlinedIcon fontSize="small" />
-//                         ),
-//                         iconRight: <FolderIcon fontSize="small" />,
-//                         iconDown: (
-//                           <FolderOpenIcon fontSize="small" />
-//                         )
-//                       }}
-//                     >
-//                       {tableItem.name}
-//                     </CellTree>
-//                     <Cell>{tableItem.stars}</Cell>
-//                     <Cell>{tableItem.light.toString()}</Cell>
-//                     <Cell>{tableItem.count}</Cell>
-//                   </React.Fragment>
-//                 )}
-//               </Row>
-//             ))}
-//           </Body>
-//         </>
-//       )}
-//     </Table>
-//   );
-// });

@@ -11,24 +11,21 @@ import { useCommonReducer } from '@common/util/useCommonReducer';
 import { TREE_EXPAND_TYPES } from './config';
 
 const getRowProps = (props, features) => {
-  const {
-    item,
-    treeYLevel,
-    treeXLevel,
-    children,
-    ...passThrough
-  } = props;
+  const { item, children, ...passThrough } = props;
 
   const { tree } = features;
 
   const isTreeExpanded = tree.state.ids.includes(item.id);
+
+  const treeYLevel = props.treeYLevel || tree._options.treeYLevel;
+  const treeXLevel = props.treeXLevel || tree._options.treeXLevel;
 
   const theme = css`
     &.row-tree-clickable {
       cursor: pointer;
     }
 
-    .td:nth-child(${treeYLevel}) > div {
+    .td:nth-child(${treeYLevel + 1}) > div {
       margin-left: ${treeXLevel * 20}px;
     }
   `;
@@ -71,9 +68,9 @@ const getRowProps = (props, features) => {
           <Row
             key={node.id}
             item={node}
+            {...passThrough}
             treeYLevel={treeYLevel}
             treeXLevel={treeXLevel + 1}
-            {...passThrough}
           >
             {recursiveNode => children(recursiveNode)}
           </Row>
