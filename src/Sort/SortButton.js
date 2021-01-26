@@ -27,13 +27,13 @@ const getSortIcon = (
     width: `${sortIconSize}`
   };
 
-  if (sortState.key === sortKey && sortState.reverse) {
+  if (sortState.sortKey === sortKey && sortState.reverse) {
     return SortIconDown
       ? React.cloneElement(SortIconDown, { ...size })
       : null;
   }
 
-  if (sortState.key === sortKey && !sortState.reverse) {
+  if (sortState.sortKey === sortKey && !sortState.reverse) {
     return SortIconUp
       ? React.cloneElement(SortIconUp, { ...size })
       : null;
@@ -51,18 +51,7 @@ const SortButton = ({
   sortIcon,
   children
 }) => {
-  const { sortState, onToggleSort } = sort;
-
-  const handleToggleSort = () =>
-    onToggleSort({ fn: sortFn, key: sortKey });
-
-  if (isRenderProp(children)) {
-    return children(sort, {
-      sortKey,
-      sortFn,
-      onToggleSort: handleToggleSort
-    });
-  }
+  const { state, fns } = sort;
 
   const sortIconPosition =
     sortIcon.position || SORT_ICON_POSITIONS.Suffix;
@@ -85,7 +74,7 @@ const SortButton = ({
   const suffix = sortIconPosition === SORT_ICON_POSITIONS.Suffix;
 
   const icon = getSortIcon(
-    sortState,
+    state,
     sortKey,
     sortIconSize,
     sortIconDefault,
@@ -93,10 +82,13 @@ const SortButton = ({
     sortIconDown
   );
 
+  const handleToggleSort = () =>
+    fns.onToggleSort({ sortFn, sortKey });
+
   return (
     <Button
       className={cs({
-        active: sortState.key === sortKey,
+        active: state.sortKey === sortKey,
         prefix,
         suffix
       })}

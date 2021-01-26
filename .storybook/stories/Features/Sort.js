@@ -19,6 +19,7 @@ import {
 } from '@table-library/react-table-library/lib/table';
 
 import {
+  useSort,
   HeaderCellSort,
   SORT_ICON_POSITIONS
 } from '@table-library/react-table-library/lib/sort';
@@ -42,14 +43,22 @@ const list = [
 storiesOf('01. Features/ 05. Sort', module)
   .addParameters({ component: Table })
   .add('default', () => {
+    const [sortState, sortFns, sortTableProps] = useSort({
+      onChange: onSortChange
+    });
+
+    function onSortChange(action, state) {
+      console.log(action, state);
+    }
+
     return (
-      <Table data={{ nodes: list }}>
+      <Table data={{ nodes: list }} {...sortTableProps}>
         {tableList => (
           <>
             <Header>
               <HeaderRow>
                 <HeaderCellSort
-                  sortKey="name"
+                  sortKey="NAME"
                   sortFn={array =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
@@ -57,7 +66,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   Name
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="stars"
+                  sortKey="STARS"
                   sortFn={array =>
                     array.sort((a, b) => a.stars - b.stars)
                   }
@@ -65,7 +74,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   Stars
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="light"
+                  sortKey="LIGHT"
                   sortFn={array =>
                     array.sort((a, b) => a.light - b.light)
                   }
@@ -73,7 +82,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   Light
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="count"
+                  sortKey="COUNT"
                   sortFn={array =>
                     array.sort((a, b) => a.count - b.count)
                   }
@@ -103,20 +112,28 @@ storiesOf('01. Features/ 05. Sort', module)
     );
   })
   .add('default sort', () => {
-    const defaultSort = {
-      key: 'name',
-      reverse: false,
-      fn: array => array.sort((a, b) => a.name.localeCompare(b.name))
-    };
+    const [sortState, sortFns, sortTableProps] = useSort({
+      state: {
+        sortKey: 'NAME',
+        sortFn: array =>
+          array.sort((a, b) => a.name.localeCompare(b.name)),
+        reverse: false
+      },
+      onChange: onSortChange
+    });
+
+    function onSortChange(action, state) {
+      console.log(action, state);
+    }
 
     return (
-      <Table data={{ nodes: list }} defaultSort={defaultSort}>
+      <Table data={{ nodes: list }} {...sortTableProps}>
         {tableList => (
           <>
             <Header>
               <HeaderRow>
                 <HeaderCellSort
-                  sortKey="name"
+                  sortKey="NAME"
                   sortFn={array =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
@@ -124,7 +141,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   Name
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="stars"
+                  sortKey="STARS"
                   sortFn={array =>
                     array.sort((a, b) => a.stars - b.stars)
                   }
@@ -132,7 +149,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   Stars
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="light"
+                  sortKey="LIGHT"
                   sortFn={array =>
                     array.sort((a, b) => a.light - b.light)
                   }
@@ -140,7 +157,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   Light
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="count"
+                  sortKey="COUNT"
                   sortFn={array =>
                     array.sort((a, b) => a.count - b.count)
                   }
@@ -170,14 +187,22 @@ storiesOf('01. Features/ 05. Sort', module)
     );
   })
   .add('sort icon size ', () => {
+    const [sortState, sortFns, sortTableProps] = useSort({
+      onChange: onSortChange
+    });
+
+    function onSortChange(action, state) {
+      console.log(action, state);
+    }
+
     return (
-      <Table data={{ nodes: list }}>
+      <Table data={{ nodes: list }} {...sortTableProps}>
         {tableList => (
           <>
             <Header>
               <HeaderRow>
                 <HeaderCellSort
-                  sortKey="name"
+                  sortKey="NAME"
                   sortFn={array =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
@@ -188,7 +213,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   Name
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="stars"
+                  sortKey="STARS"
                   sortFn={array =>
                     array.sort((a, b) => a.stars - b.stars)
                   }
@@ -199,7 +224,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   Stars
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="light"
+                  sortKey="LIGHT"
                   sortFn={array =>
                     array.sort((a, b) => a.light - b.light)
                   }
@@ -210,7 +235,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   Light
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="count"
+                  sortKey="COUNT"
                   sortFn={array =>
                     array.sort((a, b) => a.count - b.count)
                   }
@@ -243,14 +268,22 @@ storiesOf('01. Features/ 05. Sort', module)
     );
   })
   .add('sort icon position ', () => {
+    const [sortState, sortFns, sortTableProps] = useSort({
+      onChange: onSortChange
+    });
+
+    function onSortChange(action, state) {
+      console.log(action, state);
+    }
+
     return (
-      <Table data={{ nodes: list }}>
+      <Table data={{ nodes: list }} {...sortTableProps}>
         {tableList => (
           <>
             <Header>
               <HeaderRow>
                 <HeaderCellSort
-                  sortKey="name"
+                  sortKey="NAME"
                   sortFn={array =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
@@ -261,7 +294,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   Name
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="stars"
+                  sortKey="STARS"
                   sortFn={array =>
                     array.sort((a, b) => a.stars - b.stars)
                   }
@@ -272,7 +305,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   Stars
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="light"
+                  sortKey="LIGHT"
                   sortFn={array =>
                     array.sort((a, b) => a.light - b.light)
                   }
@@ -283,7 +316,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   Light
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="count"
+                  sortKey="COUNT"
                   sortFn={array =>
                     array.sort((a, b) => a.count - b.count)
                   }
@@ -316,14 +349,22 @@ storiesOf('01. Features/ 05. Sort', module)
     );
   })
   .add('indentation ', () => {
+    const [sortState, sortFns, sortTableProps] = useSort({
+      onChange: onSortChange
+    });
+
+    function onSortChange(action, state) {
+      console.log(action, state);
+    }
+
     return (
-      <Table data={{ nodes: list }}>
+      <Table data={{ nodes: list }} {...sortTableProps}>
         {tableList => (
           <>
             <Header>
               <HeaderRow>
                 <HeaderCellSort
-                  sortKey="name"
+                  sortKey="NAME"
                   sortFn={array =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
@@ -334,7 +375,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   Name
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="stars"
+                  sortKey="STARS"
                   sortFn={array =>
                     array.sort((a, b) => a.stars - b.stars)
                   }
@@ -345,7 +386,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   Stars
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="light"
+                  sortKey="LIGHT"
                   sortFn={array =>
                     array.sort((a, b) => a.light - b.light)
                   }
@@ -356,7 +397,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   Light
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="count"
+                  sortKey="COUNT"
                   sortFn={array =>
                     array.sort((a, b) => a.count - b.count)
                   }
@@ -391,14 +432,22 @@ storiesOf('01. Features/ 05. Sort', module)
     );
   })
   .add('no sort icon', () => {
+    const [sortState, sortFns, sortTableProps] = useSort({
+      onChange: onSortChange
+    });
+
+    function onSortChange(action, state) {
+      console.log(action, state);
+    }
+
     return (
-      <Table data={{ nodes: list }}>
+      <Table data={{ nodes: list }} {...sortTableProps}>
         {tableList => (
           <>
             <Header>
               <HeaderRow>
                 <HeaderCellSort
-                  sortKey="name"
+                  sortKey="NAME"
                   sortFn={array =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
@@ -411,7 +460,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   Name
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="stars"
+                  sortKey="STARS"
                   sortFn={array =>
                     array.sort((a, b) => a.stars - b.stars)
                   }
@@ -424,7 +473,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   Stars
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="light"
+                  sortKey="LIGHT"
                   sortFn={array =>
                     array.sort((a, b) => a.light - b.light)
                   }
@@ -437,7 +486,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   Light
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="count"
+                  sortKey="COUNT"
                   sortFn={array =>
                     array.sort((a, b) => a.count - b.count)
                   }
@@ -472,14 +521,22 @@ storiesOf('01. Features/ 05. Sort', module)
     );
   })
   .add('custom sort icon (Material UI)', () => {
+    const [sortState, sortFns, sortTableProps] = useSort({
+      onChange: onSortChange
+    });
+
+    function onSortChange(action, state) {
+      console.log(action, state);
+    }
+
     return (
-      <Table data={{ nodes: list }}>
+      <Table data={{ nodes: list }} {...sortTableProps}>
         {tableList => (
           <>
             <Header>
               <HeaderRow>
                 <HeaderCellSort
-                  sortKey="name"
+                  sortKey="NAME"
                   sortFn={array =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
@@ -499,7 +556,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   Name
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="stars"
+                  sortKey="STARS"
                   sortFn={array =>
                     array.sort((a, b) => a.stars - b.stars)
                   }
@@ -519,7 +576,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   Stars
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="light"
+                  sortKey="LIGHT"
                   sortFn={array =>
                     array.sort((a, b) => a.light - b.light)
                   }
@@ -539,7 +596,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   Light
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="count"
+                  sortKey="COUNT"
                   sortFn={array =>
                     array.sort((a, b) => a.count - b.count)
                   }
@@ -582,102 +639,96 @@ storiesOf('01. Features/ 05. Sort', module)
   })
   .add('custom sort button (Material UI)', () => {
     const getIcon = (sortState, sortKey) => {
-      if (sortState.key === sortKey && sortState.reverse) {
+      if (sortState.sortKey === sortKey && sortState.reverse) {
         return <KeyboardArrowDownOutlinedIcon />;
       }
 
-      if (sortState.key === sortKey && !sortState.reverse) {
+      if (sortState.sortKey === sortKey && !sortState.reverse) {
         return <KeyboardArrowUpOutlinedIcon />;
       }
 
       return <UnfoldMoreOutlinedIcon />;
     };
 
+    const [sortState, sortFns, sortTableProps] = useSort({
+      onChange: onSortChange
+    });
+
+    function onSortChange(action, state) {
+      console.log(action, state);
+    }
+
     return (
-      <Table data={{ nodes: list }}>
+      <Table data={{ nodes: list }} {...sortTableProps}>
         {tableList => (
           <>
             <Header>
               <HeaderRow>
-                <HeaderCellSort
-                  sortKey="count"
-                  sortFn={array =>
-                    array.sort((a, b) => a.name.localeCompare(b.name))
-                  }
-                >
-                  {(sort, sortProps) => (
-                    <Button
-                      fullWidth
-                      style={{ justifyContent: 'flex-start' }}
-                      endIcon={getIcon(
-                        sort.sortState,
-                        sortProps.sortKey
-                      )}
-                      onClick={sortProps.onToggleSort}
-                    >
-                      Name
-                    </Button>
-                  )}
+                <HeaderCellSort custom>
+                  <Button
+                    fullWidth
+                    style={{ justifyContent: 'flex-start' }}
+                    endIcon={getIcon(sortState, 'COUNT')}
+                    onClick={() =>
+                      sortFns.onToggleSort({
+                        sortKey: 'COUNT',
+                        sortFn: array =>
+                          array.sort((a, b) =>
+                            a.name.localeCompare(b.name)
+                          )
+                      })
+                    }
+                  >
+                    Name
+                  </Button>
                 </HeaderCellSort>
-                <HeaderCellSort
-                  sortKey="stars"
-                  sortFn={array =>
-                    array.sort((a, b) => a.stars - b.stars)
-                  }
-                >
-                  {(sort, sortProps) => (
-                    <Button
-                      fullWidth
-                      style={{ justifyContent: 'flex-start' }}
-                      endIcon={getIcon(
-                        sort.sortState,
-                        sortProps.sortKey
-                      )}
-                      onClick={sortProps.onToggleSort}
-                    >
-                      Stars
-                    </Button>
-                  )}
+                <HeaderCellSort custom>
+                  <Button
+                    fullWidth
+                    style={{ justifyContent: 'flex-start' }}
+                    endIcon={getIcon(sortState, 'STARS')}
+                    onClick={() =>
+                      sortFns.onToggleSort({
+                        sortKey: 'STARS',
+                        sortFn: array =>
+                          array.sort((a, b) => a.stars - b.stars)
+                      })
+                    }
+                  >
+                    Stars
+                  </Button>
                 </HeaderCellSort>
-                <HeaderCellSort
-                  sortKey="light"
-                  sortFn={array =>
-                    array.sort((a, b) => a.light - b.light)
-                  }
-                >
-                  {(sort, sortProps) => (
-                    <Button
-                      fullWidth
-                      style={{ justifyContent: 'flex-start' }}
-                      endIcon={getIcon(
-                        sort.sortState,
-                        sortProps.sortKey
-                      )}
-                      onClick={sortProps.onToggleSort}
-                    >
-                      Light
-                    </Button>
-                  )}
+                <HeaderCellSort custom>
+                  <Button
+                    fullWidth
+                    style={{ justifyContent: 'flex-start' }}
+                    endIcon={getIcon(sortState, 'LIGHT')}
+                    onClick={() =>
+                      sortFns.onToggleSort({
+                        sortKey: 'LIGHT',
+                        sortFn: array =>
+                          array.sort((a, b) => a.light - b.light)
+                      })
+                    }
+                  >
+                    Light
+                  </Button>
                 </HeaderCellSort>
-                <HeaderCellSort
-                  sortKey="count"
-                  sortFn={array =>
-                    array.sort((a, b) => a.count - b.count)
-                  }
-                >
-                  {(sort, sortProps) => (
-                    <Button
-                      fullWidth
-                      style={{ justifyContent: 'flex-start' }}
-                      endIcon={getIcon(
-                        sort.sortState,
-                        sortProps.sortKey
-                      )}
-                      onClick={sortProps.onToggleSort}
-                    >
-                      Count
-                    </Button>
-                  )}
+                <HeaderCellSort custom>
+                  <Button
+                    fullWidth
+                    style={{ justifyContent: 'flex-start' }}
+                    endIcon={getIcon(sortState, 'COUNT')}
+                    onClick={() =>
+                      sortFns.onToggleSort({
+                        sortKey: 'COUNT',
+                        sortFn: array =>
+                          array.sort((a, b) => a.count - b.count)
+                      })
+                    }
+                  >
+                    Count
+                  </Button>
                 </HeaderCellSort>
               </HeaderRow>
             </Header>

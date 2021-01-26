@@ -54,30 +54,19 @@ const getFetchProps = (
 });
 
 const Body = ({ children }) => {
-  const size = React.Children.count(children);
-
-  const { data, tableFeatureRef } = React.useContext(TableContext);
-
-  const select = React.useContext(SelectContext);
-  const tree = React.useContext(TreeContext);
-  const expand = React.useContext(ExpandContext);
-  const fetching = React.useContext(FetchContext);
-
   return (
     <>
       {React.Children.map(children, (child, index) =>
         React.cloneElement(child, {
-          tableState: tableFeatureRef.current,
-
-          parentItem: getParentItem(data, child.props.item.id),
-          firstRow: index === 0,
-          lastRow: size === index + 1,
-          id: child.props.item.id,
-
-          select: getSelectProps(child, select),
-          tree: getTreeProps(child, tree),
-          expand: getExpandProps(child, expand),
-          fetching: getFetchProps(child, fetching)
+          // tableState: tableFeatureRef.current,
+          // parentItem: getParentItem(data, child.props.item.id),
+          // firstRow: index === 0,
+          // lastRow: size === index + 1,
+          // id: child.props.item.id,
+          // select: getSelectProps(child, select),
+          // tree: getTreeProps(child, tree),
+          // expand: getExpandProps(child, expand),
+          // fetching: getFetchProps(child, fetching)
         })
       )}
     </>

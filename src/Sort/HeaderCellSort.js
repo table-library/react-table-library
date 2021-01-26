@@ -10,6 +10,7 @@ import { SORT_ICON_POSITIONS } from './config';
 
 const HeaderCellSort = React.memo(
   ({
+    custom,
     sortKey,
     sortFn,
     sortIcon = {},
@@ -24,20 +25,25 @@ const HeaderCellSort = React.memo(
         className={cs('th-sort', className)}
         {...passThrough}
       >
-        <SortButton
-          sort={sort}
-          sortKey={sortKey}
-          sortFn={sortFn}
-          sortIcon={sortIcon}
-        >
-          {children}
-        </SortButton>
+        {custom ? (
+          children
+        ) : (
+          <SortButton
+            sort={sort}
+            sortKey={sortKey}
+            sortFn={sortFn}
+            sortIcon={sortIcon}
+          >
+            {children}
+          </SortButton>
+        )}
       </HeaderCell>
     );
   }
 );
 
 HeaderCellSort.propTypes = {
+  custom: PropTypes.bool,
   sortKey: PropTypes.string,
   sortFn: PropTypes.func,
   sortIcon: PropTypes.shape({
