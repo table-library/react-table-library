@@ -8,21 +8,22 @@ const applyMemo = (prevProps, nextProps) => {
   // eslint-disable-next-line react/prop-types
   const {
     children: childrenNext,
-    plugins: pluginsNext,
+    rowPropsByFeature: rowPropsByFeatureNext,
     ...restNext
   } = nextProps;
   // eslint-disable-next-line react/prop-types
   const {
     children: childrenPrev,
-    plugins: pluginsPrev,
+    rowPropsByFeature: rowPropsByFeaturePrev,
     ...restPrev
   } = prevProps;
 
   const preventRenderFromChildren =
     JSON.stringify(childrenNext) === JSON.stringify(childrenPrev);
 
-  const preventRenderFromPlugins =
-    JSON.stringify(pluginsNext) === JSON.stringify(pluginsPrev);
+  const preventRenderFromRowPropsByFeature =
+    JSON.stringify(rowPropsByFeatureNext) ===
+    JSON.stringify(rowPropsByFeaturePrev);
 
   const preventRenderFromRest = Object.keys(restNext).reduce(
     (acc, key) => {
@@ -39,7 +40,7 @@ const applyMemo = (prevProps, nextProps) => {
 
   return (
     preventRenderFromRest &&
-    preventRenderFromPlugins &&
+    preventRenderFromRowPropsByFeature &&
     preventRenderFromChildren
   );
 };
