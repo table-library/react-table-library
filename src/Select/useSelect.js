@@ -42,10 +42,10 @@ const getRowProps = (props, features) => {
   };
 
   return {
-    name: 'select',
     theme,
     className,
-    onClick
+    onClick,
+    panels: []
   };
 };
 

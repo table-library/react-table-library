@@ -47,22 +47,10 @@ const getRowProps = (props, features) => {
     }
   };
 
-  let treePanel = null;
-
-  // if (
-  //   isTreeExpanded &&
-  //   !hasLeaves(item) &&
-  //   panelShowCondition(item) &&
-  //   loadingPanel
-  // ) {
-  //   treePanel = loadingPanel(item, {
-  //     treeXLevel,
-  //     treeYLevel
-  //   });
-  // }
+  let panels = [];
 
   if (isTreeExpanded && hasLeaves(item)) {
-    treePanel = (
+    panels = panels.concat(
       <Body>
         {item.nodes.map(node => (
           <Row
@@ -80,13 +68,10 @@ const getRowProps = (props, features) => {
   }
 
   return {
-    name: 'tree',
     theme,
     className,
     onClick,
-    tree: {
-      treePanel
-    }
+    panels
   };
 };
 

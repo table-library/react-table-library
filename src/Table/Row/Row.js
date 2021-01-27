@@ -12,22 +12,13 @@ import { useDoubleClick } from './useDoubleClick';
 
 const evaluateProps = (rowPropsByFeature, onSingleClick) => {
   const {
-    namesByFeature,
     themeByFeature,
     classNamesByFeature,
     onClickByFeature,
     ...specificsByFeature
   } = rowPropsByFeature.reduce(
     (acc, value) => {
-      const {
-        name,
-        theme,
-        className,
-        onClick,
-        ...featureSpecific
-      } = value;
-
-      const mergedNames = acc.namesByFeature.concat(name);
+      const { theme, className, onClick, panels } = value;
 
       const mergedTheme = css`
         ${acc.themeByFeature}
@@ -41,29 +32,29 @@ const evaluateProps = (rowPropsByFeature, onSingleClick) => {
         acc.onClickByFeature(tableItem, event);
       };
 
+      const mergedPanels = acc.panelsByFeature.concat(panels || []);
+
       return {
         ...acc,
-        namesByFeature: mergedNames,
         themeByFeature: mergedTheme,
         classNamesByFeature: mergedClassName,
         onClickByFeature: mergedOnClick,
-        ...featureSpecific
+        panelsByFeature: mergedPanels
       };
     },
     {
-      namesByFeature: [],
       themeByFeature: '',
       classNamesByFeature: '',
       onClickByFeature: (tableItem, event) => {
         if (onSingleClick && isRowClick(event)) {
           onSingleClick(tableItem, event);
         }
-      }
+      },
+      panelsByFeature: []
     }
   );
 
   return {
-    namesByFeature,
     themeByFeature,
     classNamesByFeature,
     onClickByFeature,
@@ -84,15 +75,10 @@ const Row = ({
   const theme = React.useContext(ThemeContext);
 
   const {
-    namesByFeature,
     themeByFeature,
     classNamesByFeature,
     onClickByFeature,
-    // specificsByFeature
-    // TODO: exchange with panelByFeature
-    tree,
-    expand,
-    fetching
+    panelsByFeature
   } = evaluateProps(rowPropsByFeature, onClick);
 
   const ref = React.useRef();
@@ -124,19 +110,7 @@ const Row = ({
         {children(item)}
       </RowContainer>
 
-      {/* {expand?.expansionPanel &&
-        namesByFeature.findIndex(name => name === 'expand') <
-          namesByFeature.findIndex(name => name === 'tree') &&
-        expand?.expansionPanel} */}
-
-      {tree?.treePanel}
-
-      {/* {expand?.expansionPanel &&
-        namesByFeature.findIndex(name => name === 'expand') >
-          namesByFeature.findIndex(name => name === 'tree') &&
-        expand?.expansionPanel}
-
-      {fetching?.fetchPanel} */}
+      {panelsByFeature}
     </>
   );
 };
