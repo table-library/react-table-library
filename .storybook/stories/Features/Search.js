@@ -58,7 +58,7 @@ storiesOf('02. Features/ 07. Search', module)
                         <Cell>{tableItem.name}</Cell>
                         <Cell>
                           {tableItem.deadline.toLocaleDateString(
-                            'de-DE',
+                            'fr-CA',
                             {
                               year: 'numeric',
                               month: '2-digit',

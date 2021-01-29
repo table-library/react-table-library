@@ -48,7 +48,7 @@ storiesOf('01. First Steps/ 03. Row Double Click', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'de-DE',
+                          'fr-CA',
                           {
                             year: 'numeric',
                             month: '2-digit',

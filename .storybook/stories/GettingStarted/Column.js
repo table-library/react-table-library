@@ -25,7 +25,7 @@ storiesOf('01. First Steps/ 05. Column Configuration', module)
       {
         label: 'Deadline',
         get: item =>
-          item.deadline.toLocaleDateString('de-DE', {
+          item.deadline.toLocaleDateString('fr-CA', {
             year: 'numeric',
             month: '2-digit',
             day: '2-digit'

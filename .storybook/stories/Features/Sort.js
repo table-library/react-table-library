@@ -81,7 +81,9 @@ storiesOf('02. Features/ 05. Sort', module)
                   sortKey="TASKS"
                   sortFn={array =>
                     array.sort(
-                      (a, b) => a.nodes.length - b.nodes.length
+                      (a, b) =>
+                        (a.nodes || []).length -
+                        (b.nodes || []).length
                     )
                   }
                 >
@@ -98,7 +100,7 @@ storiesOf('02. Features/ 05. Sort', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'de-DE',
+                          'fr-CA',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -178,7 +180,9 @@ storiesOf('02. Features/ 05. Sort', module)
                   sortKey="TASKS"
                   sortFn={array =>
                     array.sort(
-                      (a, b) => a.nodes.length - b.nodes.length
+                      (a, b) =>
+                        (a.nodes || []).length -
+                        (b.nodes || []).length
                     )
                   }
                 >
@@ -195,7 +199,7 @@ storiesOf('02. Features/ 05. Sort', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'de-DE',
+                          'fr-CA',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -281,7 +285,9 @@ storiesOf('02. Features/ 05. Sort', module)
                   sortKey="TASKS"
                   sortFn={array =>
                     array.sort(
-                      (a, b) => a.nodes.length - b.nodes.length
+                      (a, b) =>
+                        (a.nodes || []).length -
+                        (b.nodes || []).length
                     )
                   }
                   sortIcon={{
@@ -301,7 +307,7 @@ storiesOf('02. Features/ 05. Sort', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'de-DE',
+                          'fr-CA',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -387,7 +393,9 @@ storiesOf('02. Features/ 05. Sort', module)
                   sortKey="TASKS"
                   sortFn={array =>
                     array.sort(
-                      (a, b) => a.nodes.length - b.nodes.length
+                      (a, b) =>
+                        (a.nodes || []).length -
+                        (b.nodes || []).length
                     )
                   }
                   sortIcon={{
@@ -407,7 +415,7 @@ storiesOf('02. Features/ 05. Sort', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'de-DE',
+                          'fr-CA',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -493,7 +501,9 @@ storiesOf('02. Features/ 05. Sort', module)
                   sortKey="TASKS"
                   sortFn={array =>
                     array.sort(
-                      (a, b) => a.nodes.length - b.nodes.length
+                      (a, b) =>
+                        (a.nodes || []).length -
+                        (b.nodes || []).length
                     )
                   }
                   sortIcon={{
@@ -513,7 +523,7 @@ storiesOf('02. Features/ 05. Sort', module)
                       <Cell indentation={18}>{tableItem.name}</Cell>
                       <Cell indentation={18}>
                         {tableItem.deadline.toLocaleDateString(
-                          'de-DE',
+                          'fr-CA',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -611,7 +621,9 @@ storiesOf('02. Features/ 05. Sort', module)
                   sortKey="TASKS"
                   sortFn={array =>
                     array.sort(
-                      (a, b) => a.nodes.length - b.nodes.length
+                      (a, b) =>
+                        (a.nodes || []).length -
+                        (b.nodes || []).length
                     )
                   }
                   sortIcon={{
@@ -633,7 +645,7 @@ storiesOf('02. Features/ 05. Sort', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'de-DE',
+                          'fr-CA',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -755,7 +767,9 @@ storiesOf('02. Features/ 05. Sort', module)
                   sortKey="TASKS"
                   sortFn={array =>
                     array.sort(
-                      (a, b) => a.nodes.length - b.nodes.length
+                      (a, b) =>
+                        (a.nodes || []).length -
+                        (b.nodes || []).length
                     )
                   }
                   sortIcon={{
@@ -784,7 +798,7 @@ storiesOf('02. Features/ 05. Sort', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'de-DE',
+                          'fr-CA',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -916,7 +930,9 @@ storiesOf('02. Features/ 05. Sort', module)
                         sortKey: 'TASKS',
                         sortFn: array =>
                           array.sort(
-                            (a, b) => a.nodes.length - b.nodes.length
+                            (a, b) =>
+                              (a.nodes || []).length -
+                              (b.nodes || []).length
                           )
                       })
                     }
@@ -935,7 +951,7 @@ storiesOf('02. Features/ 05. Sort', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'de-DE',
+                          'fr-CA',
                           {
                             year: 'numeric',
                             month: '2-digit',

@@ -4,6 +4,52 @@ import { nodes as NODES } from './data';
 
 const TIMEOUT = 500;
 
+const SORTS = {
+  NONE: {
+    label: 'None',
+    sortKey: 'NONE',
+    sortFn: array => array
+  },
+  TASK: {
+    label: 'Task',
+    sortKey: 'TASK',
+    sortFn: array =>
+      array.sort((a, b) => a.name.localeCompare(b.name))
+  },
+  DEADLINE: {
+    label: 'Deadline',
+    sortKey: 'DEADLINE',
+    sortFn: array => array.sort((a, b) => a.deadline - b.deadline)
+  },
+  TYPE: {
+    label: 'Type',
+    sortKey: 'TYPE',
+    sortFn: array =>
+      array.sort((a, b) => a.type.localeCompare(b.type))
+  },
+  COMPLETE: {
+    label: 'Complete',
+    sortKey: 'COMPLETE',
+    sortFn: array => array.sort((a, b) => a.isComplete - b.isComplete)
+  },
+  TASKS: {
+    label: 'Tasks',
+    sortKey: 'TASKS',
+    sortFn: array =>
+      array.sort(
+        (a, b) => (a.nodes || []).length - (b.nodes || []).length
+      )
+  }
+};
+
+const sortNodes = (nodes, sort) => {
+  const { sortKey, reverse } = sort;
+
+  return reverse
+    ? SORTS[sortKey].sortFn(nodes).reverse()
+    : SORTS[sortKey].sortFn(nodes);
+};
+
 const findBySearch = (nodes, conditionFn, path = []) =>
   nodes.reduce((acc, value) => {
     const currentPath = [...path, value.id];
@@ -50,7 +96,8 @@ const getPaginatedNodes = (nodes, offset, nextOffset) =>
       if (value.nodes) {
         acc.nodes = acc.nodes.concat({
           ...value,
-          ...getPaginatedNodes(value.nodes, 0, nextOffset) // offset 0, because we want to this for nested search
+          // offset 0, because we want to include it for nested search
+          ...getPaginatedNodes(value.nodes, 0, nextOffset)
         });
       } else {
         acc.nodes = acc.nodes.concat(value);
@@ -83,19 +130,28 @@ const getSimple = () =>
 
 const getAdvanced = ({
   id,
-  offset,
-  limit,
+  offset = 0,
+  limit = 100,
   searchText = '',
-  filters = []
+  filters = [],
+  sort = { sortKey: 'NONE', reverse: false },
+  isShallow = false
 }) =>
   new Promise(resolve => {
     let nodes = [...NODES];
 
-    console.log({ id, offset, limit, searchText });
+    console.log({
+      id,
+      offset,
+      limit,
+      searchText,
+      filters,
+      sort,
+      isShallow
+    });
 
     const isSearch = !!searchText;
     const isFilter = !!filters.length;
-    const isLookup = isSearch || isFilter;
 
     const searchFn = isSearch
       ? value =>
@@ -106,7 +162,11 @@ const getAdvanced = ({
       ? value => filters.includes(value.type)
       : () => true;
 
-    const lookupNodes = id ? findNodeById(nodes, id).nodes : nodes;
+    const sortedNodes = sortNodes(nodes, sort);
+
+    const lookupNodes = id
+      ? findNodeById(sortedNodes, id).nodes
+      : sortedNodes;
 
     const searchedNodes = isSearch
       ? getSearchedNodes(lookupNodes, searchFn)
@@ -122,9 +182,9 @@ const getAdvanced = ({
     } = getPaginatedNodes(filteredNodes, offset, offset + limit);
 
     const result = {
-      nodes: isLookup
-        ? paginatedNodes
-        : getShallowNodes(paginatedNodes),
+      nodes: isShallow
+        ? getShallowNodes(paginatedNodes)
+        : paginatedNodes,
       pageInfo: paginatedPageInfo
     };
 

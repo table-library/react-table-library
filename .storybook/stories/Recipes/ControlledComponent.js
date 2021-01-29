@@ -55,7 +55,9 @@ storiesOf('06. Recipes/ 01. Controlled Component', module)
         label: 'Tasks',
         sortKey: 'TASKS',
         sortFn: array =>
-          array.sort((a, b) => a.nodes.length - b.nodes.length)
+          array.sort(
+            (a, b) => (a.nodes || []).length - (b.nodes || []).length
+          )
       }
     };
 
@@ -111,7 +113,7 @@ storiesOf('06. Recipes/ 01. Controlled Component', module)
                         <Cell>{tableItem.name}</Cell>
                         <Cell>
                           {tableItem.deadline.toLocaleDateString(
-                            'de-DE',
+                            'fr-CA',
                             {
                               year: 'numeric',
                               month: '2-digit',

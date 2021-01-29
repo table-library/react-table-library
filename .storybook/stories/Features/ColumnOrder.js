@@ -26,7 +26,7 @@ storiesOf('02. Features/ 13. Column Ordering', module)
       {
         label: 'Deadline',
         get: item =>
-          item.deadline.toLocaleDateString('de-DE', {
+          item.deadline.toLocaleDateString('fr-CA', {
             year: 'numeric',
             month: '2-digit',
             day: '2-digit'

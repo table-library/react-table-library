@@ -60,7 +60,7 @@ storiesOf('02. Features/06. Select', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'de-DE',
+                          'fr-CA',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -116,7 +116,7 @@ storiesOf('02. Features/06. Select', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'de-DE',
+                          'fr-CA',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -173,7 +173,7 @@ storiesOf('02. Features/06. Select', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'de-DE',
+                          'fr-CA',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -235,7 +235,7 @@ storiesOf('02. Features/06. Select', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'de-DE',
+                          'fr-CA',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -311,7 +311,7 @@ storiesOf('02. Features/06. Select', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'de-DE',
+                          'fr-CA',
                           {
                             year: 'numeric',
                             month: '2-digit',

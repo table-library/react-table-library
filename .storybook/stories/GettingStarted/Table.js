@@ -42,7 +42,7 @@ storiesOf('01. First Steps/ 01. Table', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'de-DE',
+                          'fr-CA',
                           {
                             year: 'numeric',
                             month: '2-digit',

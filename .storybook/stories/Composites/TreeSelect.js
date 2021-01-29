@@ -72,7 +72,7 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'de-DE',
+                          'fr-CA',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -151,7 +151,7 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
                       </CellTree>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'de-DE',
+                          'fr-CA',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -230,7 +230,7 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
                       </CellTree>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'de-DE',
+                          'fr-CA',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -309,7 +309,7 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
                       </CellTree>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'de-DE',
+                          'fr-CA',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -382,7 +382,7 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
                         </CellTree>
                         <Cell>
                           {tableItem.deadline.toLocaleDateString(
-                            'de-DE',
+                            'fr-CA',
                             {
                               year: 'numeric',
                               month: '2-digit',
@@ -461,7 +461,7 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
                         <Cell>{tableItem.name}</Cell>
                         <Cell>
                           {tableItem.deadline.toLocaleDateString(
-                            'de-DE',
+                            'fr-CA',
                             {
                               year: 'numeric',
                               month: '2-digit',

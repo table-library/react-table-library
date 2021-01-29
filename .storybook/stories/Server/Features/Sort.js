@@ -8,46 +8,78 @@ import {
   Header,
   HeaderRow,
   Body,
-  MemoizedRow,
+  Row,
   HeaderCell,
   Cell
 } from '@table-library/react-table-library/lib/table';
 
-import { useSelect } from '@table-library/react-table-library/lib/select';
+import {
+  useSort,
+  HeaderCellSort
+} from '@table-library/react-table-library/lib/sort';
 
-import { nodes } from '../data';
+import { getAdvanced } from '../../server';
 
-storiesOf('06. Recipes/02. Memoized Row', module)
+storiesOf('07. Server/ 02. Sort', module)
   .addParameters({ component: Table })
   .add('default', () => {
-    const data = { nodes };
-
-    const select = useSelect({
-      data,
-      onChange: onSelectChange
+    const [data, setData] = React.useState({
+      nodes: []
     });
 
-    function onSelectChange(action, state) {
-      console.log(action, state);
+    // initial fetching
+
+    const doGet = React.useCallback(async params => {
+      setData(await getAdvanced(params));
+    }, []);
+
+    React.useEffect(() => {
+      doGet({});
+    }, [doGet]);
+
+    // features
+
+    const sort = useSort(
+      {
+        onChange: onSortChange
+      },
+      {
+        isServer: true
+      }
+    );
+
+    function onSortChange(action, state) {
+      const params = {
+        sort: {
+          sortKey: state.sortKey,
+          reverse: state.reverse
+        }
+      };
+
+      doGet(params);
     }
 
     return (
-      <Table data={data} select={select}>
+      <Table data={data} sort={sort}>
         {tableList => (
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell>Task</HeaderCell>
-                <HeaderCell>Deadline</HeaderCell>
-                <HeaderCell>Type</HeaderCell>
-                <HeaderCell>Complete</HeaderCell>
-                <HeaderCell>Tasks</HeaderCell>
+                <HeaderCellSort sortKey="TASK">Task</HeaderCellSort>
+                <HeaderCellSort sortKey="DEADLINE">
+                  Deadline
+                </HeaderCellSort>
+                <HeaderCellSort sortKey="TYPE">Type</HeaderCellSort>
+                <HeaderCellSort sortKey="COMPLETE">
+                  Complete
+                </HeaderCellSort>
+                <HeaderCellSort sortKey="TASKS">Tasks</HeaderCellSort>
               </HeaderRow>
             </Header>
 
             <Body>
               {tableList.map(item => (
-                <MemoizedRow item={item} key={item.id}>
+                <Row key={item.id} item={item}>
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
@@ -66,7 +98,7 @@ storiesOf('06. Recipes/02. Memoized Row', module)
                       <Cell>{tableItem.nodes?.length}</Cell>
                     </React.Fragment>
                   )}
-                </MemoizedRow>
+                </Row>
               ))}
             </Body>
           </>

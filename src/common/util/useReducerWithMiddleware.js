@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 const useReducerWithMiddleware = (
-  myreducer,
+  reducer,
   initialState,
   middlewareFns,
   afterwareFns
 ) => {
-  const [state, dispatch] = React.useReducer(myreducer, initialState);
+  const [state, dispatch] = React.useReducer(reducer, initialState);
 
   const aRef = React.useRef();
 
@@ -26,6 +26,8 @@ const useReducerWithMiddleware = (
     afterwareFns.forEach(afterwareFn =>
       afterwareFn(aRef.current, state)
     );
+
+    aRef.current = null;
   }, [afterwareFns, state]);
 
   return [state, dispatchWithMiddleware];
