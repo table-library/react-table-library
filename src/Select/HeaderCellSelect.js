@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import cs from 'classnames';
 
 import { SelectContext } from '@common/context/Select';
 import { HeaderCell } from '@table-library/react-table-library/lib/table/Cell';
@@ -8,31 +7,26 @@ import { HeaderCell } from '@table-library/react-table-library/lib/table/Cell';
 import { ImperativeCheckbox } from './Checkbox';
 
 const HeaderCellSelect = React.memo(
-  ({ custom, className, children, ...passThrough }) => {
+  ({ children, ...passThrough }) => {
     const select = React.useContext(SelectContext);
 
+    const isSelected = select.state.all;
+    const isIndeterminate = !select.state.all && !select.state.none;
+    const handleChange = () => select.fns.onToggleAll();
+
     return (
-      <HeaderCell
-        className={cs('th-select', 'shrink', className)}
-        {...passThrough}
-      >
-        {custom ? (
-          children
-        ) : (
-          <ImperativeCheckbox
-            checked={select.state.all}
-            isIndeterminate={!select.state.all && !select.state.none}
-            onChange={select.fns.onToggleAll}
-          />
-        )}
+      <HeaderCell shrink {...passThrough}>
+        <ImperativeCheckbox
+          checked={isSelected}
+          isIndeterminate={isIndeterminate}
+          onChange={handleChange}
+        />
       </HeaderCell>
     );
   }
 );
 
 HeaderCellSelect.propTypes = {
-  custom: PropTypes.bool,
-  className: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

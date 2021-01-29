@@ -244,7 +244,7 @@ storiesOf('01. Features/06. Select', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCellSelect custom>
+                <HeaderCell shrink>
                   <Checkbox
                     size="small"
                     checked={select.state.all}
@@ -253,7 +253,7 @@ storiesOf('01. Features/06. Select', module)
                     }
                     onChange={select.fns.onToggleAll}
                   />
-                </HeaderCellSelect>
+                </HeaderCell>
                 <HeaderCell>Name</HeaderCell>
                 <HeaderCell>Stars</HeaderCell>
                 <HeaderCell>Light</HeaderCell>
@@ -266,7 +266,7 @@ storiesOf('01. Features/06. Select', module)
                 <Row key={item.id} item={item}>
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
-                      <CellSelect item={tableItem} custom>
+                      <Cell item={tableItem} shrink>
                         <Checkbox
                           size="small"
                           checked={select.state.ids.includes(
@@ -276,7 +276,7 @@ storiesOf('01. Features/06. Select', module)
                             select.fns.onToggleById(tableItem.id)
                           }
                         />
-                      </CellSelect>
+                      </Cell>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>{tableItem.stars}</Cell>
                       <Cell>{tableItem.light.toString()}</Cell>

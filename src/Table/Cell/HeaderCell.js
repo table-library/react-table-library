@@ -15,6 +15,7 @@ const HeaderCell = ({
   className,
   indentation,
   hide,
+  shrink,
   // resize,
   children
 }) => {
@@ -25,7 +26,7 @@ const HeaderCell = ({
   return (
     <HeaderCellContainer
       role="columnheader"
-      className={cs('th', className, { hide })}
+      className={cs('th', className, { hide, shrink })}
       css={css`
         ${theme?.BaseCell}
         ${theme?.HeaderCell}
@@ -44,6 +45,7 @@ HeaderCell.propTypes = {
   className: PropTypes.string,
   indentation: PropTypes.number,
   hide: PropTypes.bool,
+  shrink: PropTypes.bool,
   // resize: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

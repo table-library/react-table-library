@@ -680,7 +680,7 @@ storiesOf('01. Features/ 05. Sort', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCellSort custom>
+                <HeaderCell>
                   <Button
                     fullWidth
                     style={{ justifyContent: 'flex-start' }}
@@ -697,8 +697,8 @@ storiesOf('01. Features/ 05. Sort', module)
                   >
                     Name
                   </Button>
-                </HeaderCellSort>
-                <HeaderCellSort custom>
+                </HeaderCell>
+                <HeaderCell>
                   <Button
                     fullWidth
                     style={{ justifyContent: 'flex-start' }}
@@ -713,8 +713,8 @@ storiesOf('01. Features/ 05. Sort', module)
                   >
                     Stars
                   </Button>
-                </HeaderCellSort>
-                <HeaderCellSort custom>
+                </HeaderCell>
+                <HeaderCell>
                   <Button
                     fullWidth
                     style={{ justifyContent: 'flex-start' }}
@@ -729,8 +729,8 @@ storiesOf('01. Features/ 05. Sort', module)
                   >
                     Light
                   </Button>
-                </HeaderCellSort>
-                <HeaderCellSort custom>
+                </HeaderCell>
+                <HeaderCell>
                   <Button
                     fullWidth
                     style={{ justifyContent: 'flex-start' }}
@@ -745,7 +745,7 @@ storiesOf('01. Features/ 05. Sort', module)
                   >
                     Count
                   </Button>
-                </HeaderCellSort>
+                </HeaderCell>
               </HeaderRow>
             </Header>
 

@@ -59,7 +59,7 @@ const getTreeIcon = (
 };
 
 const CellTree = React.memo(
-  ({ item, treeIcon = {}, className, children, ...passThrough }) => {
+  ({ item, treeIcon = {}, children, ...passThrough }) => {
     const tree = React.useContext(TreeContext);
 
     const treeIconSize = treeIcon.size || TREE_ICON_SIZE;
@@ -90,7 +90,7 @@ const CellTree = React.memo(
     );
 
     return (
-      <Cell className={cs('td-tree', className)} {...passThrough}>
+      <Cell {...passThrough}>
         <TreeContent>
           <Button
             className="prefix narrow"
@@ -115,7 +115,6 @@ CellTree.propTypes = {
     iconRight: PropTypes.node,
     iconDown: PropTypes.node
   }),
-  className: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
