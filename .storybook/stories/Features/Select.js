@@ -22,23 +22,9 @@ import {
   useSelect
 } from '@table-library/react-table-library/lib/select';
 
-const nodes = [
-  { id: '1', name: 'Hello', stars: 24, count: 42, light: true },
-  { id: '2', name: 'There', stars: 42, count: 24, light: false },
-  { id: '3', name: 'Nice', stars: 111, count: 111, light: true },
-  { id: '4', name: 'To', stars: 122, count: 133, light: false },
-  { id: '5', name: 'Meet', stars: 133, count: 122, light: true },
-  { id: '6', name: 'You', stars: 155, count: 155, light: true },
-  {
-    id: '7',
-    name: 'And Welcome To This Table Folks',
-    stars: 155,
-    count: 155,
-    light: true
-  }
-];
+import { nodes } from '../data';
 
-storiesOf('01. Features/06. Select', module)
+storiesOf('02. Features/06. Select', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };
@@ -58,10 +44,11 @@ storiesOf('01. Features/06. Select', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell>Name</HeaderCell>
-                <HeaderCell>Stars</HeaderCell>
-                <HeaderCell>Light</HeaderCell>
-                <HeaderCell>Count</HeaderCell>
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -71,9 +58,19 @@ storiesOf('01. Features/06. Select', module)
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
-                      <Cell>{tableItem.stars}</Cell>
-                      <Cell>{tableItem.light.toString()}</Cell>
-                      <Cell>{tableItem.count}</Cell>
+                      <Cell>
+                        {tableItem.deadline.toLocaleDateString(
+                          'de-DE',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                          }
+                        )}
+                      </Cell>
+                      <Cell>{tableItem.type}</Cell>
+                      <Cell>{tableItem.isComplete.toString()}</Cell>
+                      <Cell>{tableItem.nodes?.length}</Cell>
                     </React.Fragment>
                   )}
                 </Row>
@@ -103,10 +100,11 @@ storiesOf('01. Features/06. Select', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell>Name</HeaderCell>
-                <HeaderCell>Stars</HeaderCell>
-                <HeaderCell>Light</HeaderCell>
-                <HeaderCell>Count</HeaderCell>
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -114,12 +112,22 @@ storiesOf('01. Features/06. Select', module)
               {tableList.map(item => (
                 <Row item={item} key={item.id}>
                   {tableItem => (
-                    <>
+                    <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
-                      <Cell>{tableItem.stars}</Cell>
-                      <Cell>{tableItem.light.toString()}</Cell>
-                      <Cell>{tableItem.count}</Cell>
-                    </>
+                      <Cell>
+                        {tableItem.deadline.toLocaleDateString(
+                          'de-DE',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                          }
+                        )}
+                      </Cell>
+                      <Cell>{tableItem.type}</Cell>
+                      <Cell>{tableItem.isComplete.toString()}</Cell>
+                      <Cell>{tableItem.nodes?.length}</Cell>
+                    </React.Fragment>
                   )}
                 </Row>
               ))}
@@ -148,10 +156,11 @@ storiesOf('01. Features/06. Select', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSelect />
-                <HeaderCell>Name</HeaderCell>
-                <HeaderCell>Stars</HeaderCell>
-                <HeaderCell>Light</HeaderCell>
-                <HeaderCell>Count</HeaderCell>
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -162,9 +171,19 @@ storiesOf('01. Features/06. Select', module)
                     <React.Fragment key={tableItem.id}>
                       <CellSelect item={tableItem} />
                       <Cell>{tableItem.name}</Cell>
-                      <Cell>{tableItem.stars}</Cell>
-                      <Cell>{tableItem.light.toString()}</Cell>
-                      <Cell>{tableItem.count}</Cell>
+                      <Cell>
+                        {tableItem.deadline.toLocaleDateString(
+                          'de-DE',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                          }
+                        )}
+                      </Cell>
+                      <Cell>{tableItem.type}</Cell>
+                      <Cell>{tableItem.isComplete.toString()}</Cell>
+                      <Cell>{tableItem.nodes?.length}</Cell>
                     </React.Fragment>
                   )}
                 </Row>
@@ -199,10 +218,11 @@ storiesOf('01. Features/06. Select', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSelect />
-                <HeaderCell>Name</HeaderCell>
-                <HeaderCell>Stars</HeaderCell>
-                <HeaderCell>Light</HeaderCell>
-                <HeaderCell>Count</HeaderCell>
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -213,9 +233,19 @@ storiesOf('01. Features/06. Select', module)
                     <React.Fragment key={tableItem.id}>
                       <CellSelect item={tableItem} />
                       <Cell>{tableItem.name}</Cell>
-                      <Cell>{tableItem.stars}</Cell>
-                      <Cell>{tableItem.light.toString()}</Cell>
-                      <Cell>{tableItem.count}</Cell>
+                      <Cell>
+                        {tableItem.deadline.toLocaleDateString(
+                          'de-DE',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                          }
+                        )}
+                      </Cell>
+                      <Cell>{tableItem.type}</Cell>
+                      <Cell>{tableItem.isComplete.toString()}</Cell>
+                      <Cell>{tableItem.nodes?.length}</Cell>
                     </React.Fragment>
                   )}
                 </Row>
@@ -254,10 +284,11 @@ storiesOf('01. Features/06. Select', module)
                     onChange={select.fns.onToggleAll}
                   />
                 </HeaderCell>
-                <HeaderCell>Name</HeaderCell>
-                <HeaderCell>Stars</HeaderCell>
-                <HeaderCell>Light</HeaderCell>
-                <HeaderCell>Count</HeaderCell>
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -278,9 +309,19 @@ storiesOf('01. Features/06. Select', module)
                         />
                       </Cell>
                       <Cell>{tableItem.name}</Cell>
-                      <Cell>{tableItem.stars}</Cell>
-                      <Cell>{tableItem.light.toString()}</Cell>
-                      <Cell>{tableItem.count}</Cell>
+                      <Cell>
+                        {tableItem.deadline.toLocaleDateString(
+                          'de-DE',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                          }
+                        )}
+                      </Cell>
+                      <Cell>{tableItem.type}</Cell>
+                      <Cell>{tableItem.isComplete.toString()}</Cell>
+                      <Cell>{tableItem.nodes?.length}</Cell>
                     </React.Fragment>
                   )}
                 </Row>

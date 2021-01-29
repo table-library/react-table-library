@@ -24,23 +24,9 @@ import {
   SORT_ICON_POSITIONS
 } from '@table-library/react-table-library/lib/sort';
 
-const nodes = [
-  { id: '1', name: 'Hello', stars: 24, count: 42, light: true },
-  { id: '2', name: 'There', stars: 42, count: 24, light: false },
-  { id: '3', name: 'Nice', stars: 111, count: 111, light: true },
-  { id: '4', name: 'To', stars: 122, count: 133, light: false },
-  { id: '5', name: 'Meet', stars: 133, count: 122, light: true },
-  { id: '6', name: 'You', stars: 155, count: 155, light: true },
-  {
-    id: '7',
-    name: 'And Welcome To This Table Folks',
-    stars: 155,
-    count: 155,
-    light: true
-  }
-];
+import { nodes } from '../data';
 
-storiesOf('01. Features/ 05. Sort', module)
+storiesOf('02. Features/ 05. Sort', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };
@@ -60,36 +46,46 @@ storiesOf('01. Features/ 05. Sort', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSort
-                  sortKey="NAME"
+                  sortKey="TASK"
                   sortFn={array =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
                 >
-                  Name
+                  Task
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="STARS"
+                  sortKey="DEADLINE"
                   sortFn={array =>
-                    array.sort((a, b) => a.stars - b.stars)
+                    array.sort((a, b) => a.deadline - b.deadline)
                   }
                 >
-                  Stars
+                  Deadline
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="LIGHT"
+                  sortKey="TYPE"
                   sortFn={array =>
-                    array.sort((a, b) => a.light - b.light)
+                    array.sort((a, b) => a.type.localeCompare(b.type))
                   }
                 >
-                  Light
+                  Type
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="COUNT"
+                  sortKey="COMPLETE"
                   sortFn={array =>
-                    array.sort((a, b) => a.count - b.count)
+                    array.sort((a, b) => a.isComplete - b.isComplete)
                   }
                 >
-                  Count
+                  Complete
+                </HeaderCellSort>
+                <HeaderCellSort
+                  sortKey="TASKS"
+                  sortFn={array =>
+                    array.sort(
+                      (a, b) => a.nodes.length - b.nodes.length
+                    )
+                  }
+                >
+                  Tasks
                 </HeaderCellSort>
               </HeaderRow>
             </Header>
@@ -100,9 +96,19 @@ storiesOf('01. Features/ 05. Sort', module)
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
-                      <Cell>{tableItem.stars}</Cell>
-                      <Cell>{tableItem.light.toString()}</Cell>
-                      <Cell>{tableItem.count}</Cell>
+                      <Cell>
+                        {tableItem.deadline.toLocaleDateString(
+                          'de-DE',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                          }
+                        )}
+                      </Cell>
+                      <Cell>{tableItem.type}</Cell>
+                      <Cell>{tableItem.isComplete.toString()}</Cell>
+                      <Cell>{tableItem.nodes?.length}</Cell>
                     </React.Fragment>
                   )}
                 </Row>
@@ -118,7 +124,7 @@ storiesOf('01. Features/ 05. Sort', module)
 
     const sort = useSort({
       initialState: {
-        sortKey: 'NAME',
+        sortKey: 'TASK',
         sortFn: array =>
           array.sort((a, b) => a.name.localeCompare(b.name)),
         reverse: false
@@ -137,36 +143,46 @@ storiesOf('01. Features/ 05. Sort', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSort
-                  sortKey="NAME"
+                  sortKey="TASK"
                   sortFn={array =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
                 >
-                  Name
+                  Task
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="STARS"
+                  sortKey="DEADLINE"
                   sortFn={array =>
-                    array.sort((a, b) => a.stars - b.stars)
+                    array.sort((a, b) => a.deadline - b.deadline)
                   }
                 >
-                  Stars
+                  Deadline
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="LIGHT"
+                  sortKey="TYPE"
                   sortFn={array =>
-                    array.sort((a, b) => a.light - b.light)
+                    array.sort((a, b) => a.type.localeCompare(b.type))
                   }
                 >
-                  Light
+                  Type
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="COUNT"
+                  sortKey="COMPLETE"
                   sortFn={array =>
-                    array.sort((a, b) => a.count - b.count)
+                    array.sort((a, b) => a.isComplete - b.isComplete)
                   }
                 >
-                  Count
+                  Complete
+                </HeaderCellSort>
+                <HeaderCellSort
+                  sortKey="TASKS"
+                  sortFn={array =>
+                    array.sort(
+                      (a, b) => a.nodes.length - b.nodes.length
+                    )
+                  }
+                >
+                  Tasks
                 </HeaderCellSort>
               </HeaderRow>
             </Header>
@@ -177,9 +193,19 @@ storiesOf('01. Features/ 05. Sort', module)
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
-                      <Cell>{tableItem.stars}</Cell>
-                      <Cell>{tableItem.light.toString()}</Cell>
-                      <Cell>{tableItem.count}</Cell>
+                      <Cell>
+                        {tableItem.deadline.toLocaleDateString(
+                          'de-DE',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                          }
+                        )}
+                      </Cell>
+                      <Cell>{tableItem.type}</Cell>
+                      <Cell>{tableItem.isComplete.toString()}</Cell>
+                      <Cell>{tableItem.nodes?.length}</Cell>
                     </React.Fragment>
                   )}
                 </Row>
@@ -208,7 +234,7 @@ storiesOf('01. Features/ 05. Sort', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSort
-                  sortKey="NAME"
+                  sortKey="TASK"
                   sortFn={array =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
@@ -216,40 +242,53 @@ storiesOf('01. Features/ 05. Sort', module)
                     size: '10px'
                   }}
                 >
-                  Name
+                  Task
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="STARS"
+                  sortKey="DEADLINE"
                   sortFn={array =>
-                    array.sort((a, b) => a.stars - b.stars)
+                    array.sort((a, b) => a.deadline - b.deadline)
                   }
                   sortIcon={{
                     size: '10px'
                   }}
                 >
-                  Stars
+                  Deadline
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="LIGHT"
+                  sortKey="TYPE"
                   sortFn={array =>
-                    array.sort((a, b) => a.light - b.light)
+                    array.sort((a, b) => a.type.localeCompare(b.type))
                   }
                   sortIcon={{
                     size: '10px'
                   }}
                 >
-                  Light
+                  Type
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="COUNT"
+                  sortKey="COMPLETE"
                   sortFn={array =>
-                    array.sort((a, b) => a.count - b.count)
+                    array.sort((a, b) => a.isComplete - b.isComplete)
                   }
                   sortIcon={{
                     size: '10px'
                   }}
                 >
-                  Count
+                  Complete
+                </HeaderCellSort>
+                <HeaderCellSort
+                  sortKey="TASKS"
+                  sortFn={array =>
+                    array.sort(
+                      (a, b) => a.nodes.length - b.nodes.length
+                    )
+                  }
+                  sortIcon={{
+                    size: '10px'
+                  }}
+                >
+                  Tasks
                 </HeaderCellSort>
               </HeaderRow>
             </Header>
@@ -260,9 +299,19 @@ storiesOf('01. Features/ 05. Sort', module)
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
-                      <Cell>{tableItem.stars}</Cell>
-                      <Cell>{tableItem.light.toString()}</Cell>
-                      <Cell>{tableItem.count}</Cell>
+                      <Cell>
+                        {tableItem.deadline.toLocaleDateString(
+                          'de-DE',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                          }
+                        )}
+                      </Cell>
+                      <Cell>{tableItem.type}</Cell>
+                      <Cell>{tableItem.isComplete.toString()}</Cell>
+                      <Cell>{tableItem.nodes?.length}</Cell>
                     </React.Fragment>
                   )}
                 </Row>
@@ -291,7 +340,7 @@ storiesOf('01. Features/ 05. Sort', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSort
-                  sortKey="NAME"
+                  sortKey="TASK"
                   sortFn={array =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
@@ -299,40 +348,53 @@ storiesOf('01. Features/ 05. Sort', module)
                     position: SORT_ICON_POSITIONS.Prefix
                   }}
                 >
-                  Name
+                  Task
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="STARS"
+                  sortKey="DEADLINE"
                   sortFn={array =>
-                    array.sort((a, b) => a.stars - b.stars)
+                    array.sort((a, b) => a.deadline - b.deadline)
                   }
                   sortIcon={{
                     position: SORT_ICON_POSITIONS.Prefix
                   }}
                 >
-                  Stars
+                  Deadline
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="LIGHT"
+                  sortKey="TYPE"
                   sortFn={array =>
-                    array.sort((a, b) => a.light - b.light)
+                    array.sort((a, b) => a.type.localeCompare(b.type))
                   }
                   sortIcon={{
                     position: SORT_ICON_POSITIONS.Prefix
                   }}
                 >
-                  Light
+                  Type
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="COUNT"
+                  sortKey="COMPLETE"
                   sortFn={array =>
-                    array.sort((a, b) => a.count - b.count)
+                    array.sort((a, b) => a.isComplete - b.isComplete)
                   }
                   sortIcon={{
                     position: SORT_ICON_POSITIONS.Prefix
                   }}
                 >
-                  Count
+                  Complete
+                </HeaderCellSort>
+                <HeaderCellSort
+                  sortKey="TASKS"
+                  sortFn={array =>
+                    array.sort(
+                      (a, b) => a.nodes.length - b.nodes.length
+                    )
+                  }
+                  sortIcon={{
+                    position: SORT_ICON_POSITIONS.Prefix
+                  }}
+                >
+                  Tasks
                 </HeaderCellSort>
               </HeaderRow>
             </Header>
@@ -343,9 +405,19 @@ storiesOf('01. Features/ 05. Sort', module)
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
-                      <Cell>{tableItem.stars}</Cell>
-                      <Cell>{tableItem.light.toString()}</Cell>
-                      <Cell>{tableItem.count}</Cell>
+                      <Cell>
+                        {tableItem.deadline.toLocaleDateString(
+                          'de-DE',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                          }
+                        )}
+                      </Cell>
+                      <Cell>{tableItem.type}</Cell>
+                      <Cell>{tableItem.isComplete.toString()}</Cell>
+                      <Cell>{tableItem.nodes?.length}</Cell>
                     </React.Fragment>
                   )}
                 </Row>
@@ -374,7 +446,7 @@ storiesOf('01. Features/ 05. Sort', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSort
-                  sortKey="NAME"
+                  sortKey="TASK"
                   sortFn={array =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
@@ -382,40 +454,53 @@ storiesOf('01. Features/ 05. Sort', module)
                     position: SORT_ICON_POSITIONS.Prefix
                   }}
                 >
-                  Name
+                  Task
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="STARS"
+                  sortKey="DEADLINE"
                   sortFn={array =>
-                    array.sort((a, b) => a.stars - b.stars)
+                    array.sort((a, b) => a.deadline - b.deadline)
                   }
                   sortIcon={{
                     position: SORT_ICON_POSITIONS.Prefix
                   }}
                 >
-                  Stars
+                  Deadline
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="LIGHT"
+                  sortKey="TYPE"
                   sortFn={array =>
-                    array.sort((a, b) => a.light - b.light)
+                    array.sort((a, b) => a.type.localeCompare(b.type))
                   }
                   sortIcon={{
                     position: SORT_ICON_POSITIONS.Prefix
                   }}
                 >
-                  Light
+                  Type
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="COUNT"
+                  sortKey="COMPLETE"
                   sortFn={array =>
-                    array.sort((a, b) => a.count - b.count)
+                    array.sort((a, b) => a.isComplete - b.isComplete)
                   }
                   sortIcon={{
                     position: SORT_ICON_POSITIONS.Prefix
                   }}
                 >
-                  Count
+                  Complete
+                </HeaderCellSort>
+                <HeaderCellSort
+                  sortKey="TASKS"
+                  sortFn={array =>
+                    array.sort(
+                      (a, b) => a.nodes.length - b.nodes.length
+                    )
+                  }
+                  sortIcon={{
+                    position: SORT_ICON_POSITIONS.Prefix
+                  }}
+                >
+                  Tasks
                 </HeaderCellSort>
               </HeaderRow>
             </Header>
@@ -426,11 +511,23 @@ storiesOf('01. Features/ 05. Sort', module)
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <Cell indentation={18}>{tableItem.name}</Cell>
-                      <Cell indentation={18}>{tableItem.stars}</Cell>
                       <Cell indentation={18}>
-                        {tableItem.light.toString()}
+                        {tableItem.deadline.toLocaleDateString(
+                          'de-DE',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                          }
+                        )}
                       </Cell>
-                      <Cell indentation={18}>{tableItem.count}</Cell>
+                      <Cell indentation={18}>{tableItem.type}</Cell>
+                      <Cell indentation={18}>
+                        {tableItem.isComplete.toString()}
+                      </Cell>
+                      <Cell indentation={18}>
+                        {tableItem.nodes?.length}
+                      </Cell>
                     </React.Fragment>
                   )}
                 </Row>
@@ -459,7 +556,7 @@ storiesOf('01. Features/ 05. Sort', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSort
-                  sortKey="NAME"
+                  sortKey="TASK"
                   sortFn={array =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
@@ -469,12 +566,12 @@ storiesOf('01. Features/ 05. Sort', module)
                     iconDown: null
                   }}
                 >
-                  Name
+                  Task
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="STARS"
+                  sortKey="DEADLINE"
                   sortFn={array =>
-                    array.sort((a, b) => a.stars - b.stars)
+                    array.sort((a, b) => a.deadline - b.deadline)
                   }
                   sortIcon={{
                     iconDefault: null,
@@ -482,12 +579,12 @@ storiesOf('01. Features/ 05. Sort', module)
                     iconDown: null
                   }}
                 >
-                  Stars
+                  Deadline
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="LIGHT"
+                  sortKey="TYPE"
                   sortFn={array =>
-                    array.sort((a, b) => a.light - b.light)
+                    array.sort((a, b) => a.type.localeCompare(b.type))
                   }
                   sortIcon={{
                     iconDefault: null,
@@ -495,12 +592,12 @@ storiesOf('01. Features/ 05. Sort', module)
                     iconDown: null
                   }}
                 >
-                  Light
+                  Type
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="COUNT"
+                  sortKey="COMPLETE"
                   sortFn={array =>
-                    array.sort((a, b) => a.count - b.count)
+                    array.sort((a, b) => a.isComplete - b.isComplete)
                   }
                   sortIcon={{
                     iconDefault: null,
@@ -508,7 +605,22 @@ storiesOf('01. Features/ 05. Sort', module)
                     iconDown: null
                   }}
                 >
-                  Count
+                  Complete
+                </HeaderCellSort>
+                <HeaderCellSort
+                  sortKey="TASKS"
+                  sortFn={array =>
+                    array.sort(
+                      (a, b) => a.nodes.length - b.nodes.length
+                    )
+                  }
+                  sortIcon={{
+                    iconDefault: null,
+                    iconUp: null,
+                    iconDown: null
+                  }}
+                >
+                  Tasks
                 </HeaderCellSort>
               </HeaderRow>
             </Header>
@@ -519,9 +631,19 @@ storiesOf('01. Features/ 05. Sort', module)
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
-                      <Cell>{tableItem.stars}</Cell>
-                      <Cell>{tableItem.light.toString()}</Cell>
-                      <Cell>{tableItem.count}</Cell>
+                      <Cell>
+                        {tableItem.deadline.toLocaleDateString(
+                          'de-DE',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                          }
+                        )}
+                      </Cell>
+                      <Cell>{tableItem.type}</Cell>
+                      <Cell>{tableItem.isComplete.toString()}</Cell>
+                      <Cell>{tableItem.nodes?.length}</Cell>
                     </React.Fragment>
                   )}
                 </Row>
@@ -550,7 +672,7 @@ storiesOf('01. Features/ 05. Sort', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSort
-                  sortKey="NAME"
+                  sortKey="TASK"
                   sortFn={array =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
@@ -567,12 +689,12 @@ storiesOf('01. Features/ 05. Sort', module)
                     )
                   }}
                 >
-                  Name
+                  Task
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="STARS"
+                  sortKey="DEADLINE"
                   sortFn={array =>
-                    array.sort((a, b) => a.stars - b.stars)
+                    array.sort((a, b) => a.deadline - b.deadline)
                   }
                   sortIcon={{
                     margin: '0px',
@@ -587,12 +709,12 @@ storiesOf('01. Features/ 05. Sort', module)
                     )
                   }}
                 >
-                  Stars
+                  Deadline
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="LIGHT"
+                  sortKey="TYPE"
                   sortFn={array =>
-                    array.sort((a, b) => a.light - b.light)
+                    array.sort((a, b) => a.type.localeCompare(b.type))
                   }
                   sortIcon={{
                     margin: '0px',
@@ -607,12 +729,12 @@ storiesOf('01. Features/ 05. Sort', module)
                     )
                   }}
                 >
-                  Light
+                  Type
                 </HeaderCellSort>
                 <HeaderCellSort
-                  sortKey="COUNT"
+                  sortKey="COMPLETE"
                   sortFn={array =>
-                    array.sort((a, b) => a.count - b.count)
+                    array.sort((a, b) => a.isComplete - b.isComplete)
                   }
                   sortIcon={{
                     margin: '0px',
@@ -627,7 +749,29 @@ storiesOf('01. Features/ 05. Sort', module)
                     )
                   }}
                 >
-                  Count
+                  Complete
+                </HeaderCellSort>
+                <HeaderCellSort
+                  sortKey="TASKS"
+                  sortFn={array =>
+                    array.sort(
+                      (a, b) => a.nodes.length - b.nodes.length
+                    )
+                  }
+                  sortIcon={{
+                    margin: '0px',
+                    iconDefault: (
+                      <UnfoldMoreOutlinedIcon fontSize="small" />
+                    ),
+                    iconUp: (
+                      <KeyboardArrowUpOutlinedIcon fontSize="small" />
+                    ),
+                    iconDown: (
+                      <KeyboardArrowDownOutlinedIcon fontSize="small" />
+                    )
+                  }}
+                >
+                  Tasks
                 </HeaderCellSort>
               </HeaderRow>
             </Header>
@@ -638,9 +782,19 @@ storiesOf('01. Features/ 05. Sort', module)
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
-                      <Cell>{tableItem.stars}</Cell>
-                      <Cell>{tableItem.light.toString()}</Cell>
-                      <Cell>{tableItem.count}</Cell>
+                      <Cell>
+                        {tableItem.deadline.toLocaleDateString(
+                          'de-DE',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                          }
+                        )}
+                      </Cell>
+                      <Cell>{tableItem.type}</Cell>
+                      <Cell>{tableItem.isComplete.toString()}</Cell>
+                      <Cell>{tableItem.nodes?.length}</Cell>
                     </React.Fragment>
                   )}
                 </Row>
@@ -684,10 +838,10 @@ storiesOf('01. Features/ 05. Sort', module)
                   <Button
                     fullWidth
                     style={{ justifyContent: 'flex-start' }}
-                    endIcon={getIcon('COUNT')}
+                    endIcon={getIcon('TASK')}
                     onClick={() =>
                       sort.fns.onToggleSort({
-                        sortKey: 'COUNT',
+                        sortKey: 'TASK',
                         sortFn: array =>
                           array.sort((a, b) =>
                             a.name.localeCompare(b.name)
@@ -695,55 +849,79 @@ storiesOf('01. Features/ 05. Sort', module)
                       })
                     }
                   >
-                    Name
+                    Task
                   </Button>
                 </HeaderCell>
                 <HeaderCell>
                   <Button
                     fullWidth
                     style={{ justifyContent: 'flex-start' }}
-                    endIcon={getIcon('STARS')}
+                    endIcon={getIcon('DEADLINE')}
                     onClick={() =>
                       sort.fns.onToggleSort({
-                        sortKey: 'STARS',
+                        sortKey: 'DEADLINE',
                         sortFn: array =>
-                          array.sort((a, b) => a.stars - b.stars)
+                          array.sort(
+                            (a, b) => a.deadline - b.deadline
+                          )
                       })
                     }
                   >
-                    Stars
+                    Deadline
                   </Button>
                 </HeaderCell>
                 <HeaderCell>
                   <Button
                     fullWidth
                     style={{ justifyContent: 'flex-start' }}
-                    endIcon={getIcon('LIGHT')}
+                    endIcon={getIcon('TYPE')}
                     onClick={() =>
                       sort.fns.onToggleSort({
-                        sortKey: 'LIGHT',
+                        sortKey: 'TYPE',
                         sortFn: array =>
-                          array.sort((a, b) => a.light - b.light)
+                          array.sort((a, b) =>
+                            a.type.localeCompare(b.type)
+                          )
                       })
                     }
                   >
-                    Light
+                    Type
                   </Button>
                 </HeaderCell>
                 <HeaderCell>
                   <Button
                     fullWidth
                     style={{ justifyContent: 'flex-start' }}
-                    endIcon={getIcon('COUNT')}
+                    endIcon={getIcon('COMPLETE')}
                     onClick={() =>
                       sort.fns.onToggleSort({
-                        sortKey: 'COUNT',
+                        sortKey: 'COMPLETE',
                         sortFn: array =>
-                          array.sort((a, b) => a.count - b.count)
+                          array.sort(
+                            (a, b) => a.isComplete - b.isComplete
+                          )
                       })
                     }
                   >
-                    Count
+                    Complete
+                  </Button>
+                </HeaderCell>
+                <HeaderCell>
+                  <Button
+                    fullWidth
+                    style={{ justifyContent: 'flex-start' }}
+                    endIcon={getIcon('TASKS')}
+                    onClick={() =>
+                      sort.fns.onToggleSort({
+                        sortKey: 'TASKS',
+                        sortFn: array =>
+                          array.sort(
+                            (a, b) => a.nodes.length - b.nodes.length
+                          )
+                      })
+                    }
+                  >
+                    Tasks
                   </Button>
                 </HeaderCell>
               </HeaderRow>
@@ -755,9 +933,19 @@ storiesOf('01. Features/ 05. Sort', module)
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
-                      <Cell>{tableItem.stars}</Cell>
-                      <Cell>{tableItem.light.toString()}</Cell>
-                      <Cell>{tableItem.count}</Cell>
+                      <Cell>
+                        {tableItem.deadline.toLocaleDateString(
+                          'de-DE',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                          }
+                        )}
+                      </Cell>
+                      <Cell>{tableItem.type}</Cell>
+                      <Cell>{tableItem.isComplete.toString()}</Cell>
+                      <Cell>{tableItem.nodes?.length}</Cell>
                     </React.Fragment>
                   )}
                 </Row>

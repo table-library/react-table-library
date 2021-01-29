@@ -14,12 +14,12 @@ import { TreeContext } from '@common/context/Tree';
 
 import { TableContainer } from './styles';
 
-const applySort = (nodes, sortFn) => {
+const applyRecursiveSort = (nodes, sortFn) => {
   return sortFn(nodes).reduce((acc, value) => {
     if (value.nodes) {
       return acc.concat({
         ...value,
-        nodes: applySort(value.nodes, sortFn)
+        nodes: applyRecursiveSort(value.nodes, sortFn)
       });
     }
 
@@ -34,7 +34,9 @@ const Table = ({ data, theme, sort, select, tree, children }) => {
   let modifiedNodes = [...data.nodes];
 
   if (sort && !sort._options.isServer) {
-    modifiedNodes = applySort(modifiedNodes, sort.state.sortFn);
+    modifiedNodes = tree
+      ? applyRecursiveSort(modifiedNodes, sort.state.sortFn)
+      : sort.state.sortFn(modifiedNodes);
   }
 
   return (
