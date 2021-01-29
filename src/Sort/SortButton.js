@@ -6,7 +6,6 @@ import IconChevronSingleDown from '@common/icons/IconChevronSingleDown';
 import IconChevronSingleUp from '@common/icons/IconChevronSingleUp';
 import IconChevronSingleUpDown from '@common/icons/IconChevronSingleUpDown';
 import { getIcon } from '@common/util/getIcon';
-import { isRenderProp } from '@common/util/isRenderProp';
 import { Button } from '@common/components/Button';
 
 import { SORT_ICON_POSITIONS } from './config';

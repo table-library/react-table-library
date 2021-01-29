@@ -1,11 +1,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-import { TableContext } from '@common/context/Table';
 import { SelectContext } from '@common/context/Select';
 import { TreeContext } from '@common/context/Tree';
-import { ExpandContext } from '@common/context/Expand';
-import { FetchContext } from '@common/context/Fetch';
 
 const findParentItem = (rootItem, id) =>
   rootItem.nodes.reduce((acc, value) => {
@@ -38,6 +35,8 @@ const getFetchProps = (
   onAddById,
   onRemoveById
 });
+
+// TODO
 
 const Body = ({ children }) => {
   const select = React.useContext(SelectContext);

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { css } from 'styled-components';
 
 import { TableContext } from '@common/context/Table';
-import { ThemeProvider, ThemeContext } from '@common/context/Theme';
+import { ThemeContext } from '@common/context/Theme';
 import {
   ResizeProvider,
   ResizeContext
@@ -49,7 +49,7 @@ const Table = ({ data, theme, sort, select, tree, children }) => {
       ref={tableRef}
     >
       <TableContext.Provider value={data}>
-        <ThemeProvider theme={theme}>
+        <ThemeContext.Provider value={theme}>
           <ResizeProvider tableRef={tableRef}>
             <SortContext.Provider value={sort}>
               <SelectContext.Provider value={select}>
@@ -61,7 +61,7 @@ const Table = ({ data, theme, sort, select, tree, children }) => {
               </SelectContext.Provider>
             </SortContext.Provider>
           </ResizeProvider>
-        </ThemeProvider>
+        </ThemeContext.Provider>
       </TableContext.Provider>
     </TableContainer>
   );
