@@ -62,58 +62,60 @@ const evaluateProps = (rowPropsByFeature, onSingleClick) => {
   };
 };
 
-const Row = ({
-  item,
-  className,
-  disabled,
-  rowLayout,
-  rowPropsByFeature,
-  onClick,
-  onDoubleClick,
-  children
-}) => {
-  const theme = React.useContext(ThemeContext);
+const Row = React.memo(
+  ({
+    item,
+    className,
+    disabled,
+    rowLayout,
+    rowPropsByFeature,
+    onClick,
+    onDoubleClick,
+    children
+  }) => {
+    const theme = React.useContext(ThemeContext);
 
-  const {
-    themeByFeature,
-    classNamesByFeature,
-    onClickByFeature,
-    panelsByFeature
-  } = evaluateProps(rowPropsByFeature, onClick);
+    const {
+      themeByFeature,
+      classNamesByFeature,
+      onClickByFeature,
+      panelsByFeature
+    } = evaluateProps(rowPropsByFeature, onClick);
 
-  const ref = React.useRef();
+    const ref = React.useRef();
 
-  useDoubleClick(ref, onClickByFeature, onDoubleClick, item);
-  useRowLayout(ref, '.td', rowLayout, children);
+    useDoubleClick(ref, onClickByFeature, onDoubleClick, item);
+    useRowLayout(ref, '.td', rowLayout, children);
 
-  return (
-    <>
-      <RowContainer
-        role="row"
-        className={cs(
-          'tr',
-          'tr-body',
-          classNamesByFeature,
-          className,
-          {
-            disabled,
-            clickable: onClickByFeature || onDoubleClick
-          }
-        )}
-        css={css`
-          ${themeByFeature}
-          ${theme?.BaseRow}
-          ${theme?.Row}
-        `}
-        ref={ref}
-      >
-        {children(item)}
-      </RowContainer>
+    return (
+      <>
+        <RowContainer
+          role="row"
+          className={cs(
+            'tr',
+            'tr-body',
+            classNamesByFeature,
+            className,
+            {
+              disabled,
+              clickable: onClickByFeature || onDoubleClick
+            }
+          )}
+          css={css`
+            ${themeByFeature}
+            ${theme?.BaseRow}
+            ${theme?.Row}
+          `}
+          ref={ref}
+        >
+          {children(item)}
+        </RowContainer>
 
-      {panelsByFeature}
-    </>
-  );
-};
+        {panelsByFeature}
+      </>
+    );
+  }
+);
 
 Row.propTypes = {
   item: PropTypes.objectOf(PropTypes.any),

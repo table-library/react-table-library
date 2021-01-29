@@ -6,8 +6,13 @@ const ResizeContext = React.createContext(false);
 const ResizeProvider = ({ tableRef, children }) => {
   const resizedLayout = React.useRef();
 
+  const value = React.useMemo(() => ({ resizedLayout, tableRef }), [
+    resizedLayout,
+    tableRef
+  ]);
+
   return (
-    <ResizeContext.Provider value={{ resizedLayout, tableRef }}>
+    <ResizeContext.Provider value={value}>
       {children}
     </ResizeContext.Provider>
   );
