@@ -52,9 +52,7 @@ const Table = ({ data, theme, sort, select, tree, children }) => {
             <SelectContext.Provider value={select}>
               <TreeContext.Provider value={tree}>
                 <ResizeProvider tableRef={tableRef}>
-                  {children(modifiedNodes, {
-                    theme
-                  })}
+                  {children(modifiedNodes)}
                 </ResizeProvider>
               </TreeContext.Provider>
             </SelectContext.Provider>

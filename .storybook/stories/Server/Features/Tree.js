@@ -30,31 +30,24 @@ import { getData } from '../../server';
 //   return item && item.hasContent && item.nodes && !item.nodes.length;
 // };
 
-// const insertTree = (targetId, nodes) => state => {
-//   if (!targetId) {
-//     return nodes;
-//   }
+// TODO pageInfo -> ...rest
+const insertTree = (targetId, nodes, pageInfo) => state => {
+  if (!targetId) {
+    return {
+      pageInfo,
+      nodes: [...state.nodes, ...nodes]
+    };
+  }
 
-//   return state.map(recursiveMergeInsert(targetId, nodes));
-// };
+  return {
+    pageInfo: state.pageInfo,
+    nodes: state.nodes.map(
+      recursiveMergeInsert(targetId, nodes, { pageInfo })
+    )
+  };
+};
 
-// const insertPaginatedTree = (targetId, nodes, pageInfo) => state => {
-//   if (!targetId) {
-//     return {
-//       pageInfo,
-//       nodes: [...state.nodes, ...nodes]
-//     };
-//   }
-
-//   return {
-//     pageInfo: state.pageInfo,
-//     nodes: state.nodes.map(
-//       recursiveMergeInsert(targetId, nodes, { pageInfo })
-//     )
-//   };
-// };
-
-storiesOf('07. Server/ 05. Tree (WIP)', module)
+storiesOf('07. Server/ 05. Tree', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [data, setData] = React.useState({
@@ -99,7 +92,88 @@ storiesOf('07. Server/ 05. Tree (WIP)', module)
                 <Row key={item.id} item={item}>
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
-                      <Cell>{tableItem.name}</Cell>
+                      <CellTree item={tableItem}>
+                        {tableItem.name}
+                      </CellTree>
+                      <Cell>
+                        {tableItem.deadline.toLocaleDateString(
+                          'fr-CA',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                          }
+                        )}
+                      </Cell>
+                      <Cell>{tableItem.type}</Cell>
+                      <Cell>{tableItem.isComplete.toString()}</Cell>
+                      <Cell>{tableItem.nodes?.length}</Cell>
+                    </React.Fragment>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('fetch iterative', () => {
+    const [data, setData] = React.useState({
+      nodes: []
+    });
+
+    const doGet = React.useCallback(async params => {
+      const { nodes } = await getData(params);
+
+      setData(insertTree(params.id, nodes));
+    }, []);
+
+    React.useEffect(() => {
+      doGet({
+        isShallow: true
+      });
+    }, [doGet]);
+
+    // features
+
+    const tree = useTree({
+      data,
+      onChange: onTreeChange
+    });
+
+    function onTreeChange(action, state) {
+      if (action.type === 'ADD_BY_ID') {
+        const params = {
+          id: action.payload.id,
+          isShallow: true
+        };
+
+        doGet(params);
+      }
+    }
+
+    return (
+      <Table data={data} tree={tree}>
+        {tableList => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Name</HeaderCell>
+                <HeaderCell>Stars</HeaderCell>
+                <HeaderCell>Light</HeaderCell>
+                <HeaderCell>Count</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map(item => (
+                <Row key={item.id} item={item}>
+                  {tableItem => (
+                    <React.Fragment key={tableItem.id}>
+                      <CellTree item={tableItem}>
+                        {tableItem.name}
+                      </CellTree>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
                           'fr-CA',
@@ -123,84 +197,6 @@ storiesOf('07. Server/ 05. Tree (WIP)', module)
       </Table>
     );
   });
-// .add('fetch iterative', () => {
-//   const [tree, setList] = React.useState([]);
-
-//   const doGet = React.useCallback(async params => {
-//     const nodes = await getIterativeTree(params);
-
-//     setList(insertTree(params.id, nodes));
-//   }, []);
-
-//   React.useEffect(() => {
-//     doGet({});
-//   }, [doGet]);
-
-//   const handleTableStateChange = React.useCallback(
-//     (type, tableState, action) => {
-//       console.log(type, tableState, action);
-
-//       const SERVER_SIDE_OPERATIONS = ['tree'];
-
-//       let params = {};
-
-//       if (type === 'tree' && action.type === 'ADD_BY_ID') {
-//         params = {
-//           id: action.payload.id
-//         };
-//       }
-
-//       if (
-//         SERVER_SIDE_OPERATIONS.includes(type) &&
-//         needsToFetch(tableState.data.nodes, params.id)
-//       ) {
-//         doGet(params);
-//       }
-//     },
-//     [doGet]
-//   );
-
-//   return (
-//     <Table
-//       data={{ nodes: tree }}
-//       onTableStateChange={handleTableStateChange}
-//     >
-//       {tableList => (
-//         <>
-//           <Header>
-//             <HeaderRow>
-//               <HeaderCell>Name</HeaderCell>
-//               <HeaderCell>Stars</HeaderCell>
-//               <HeaderCell>Light</HeaderCell>
-//               <HeaderCell>Count</HeaderCell>
-//             </HeaderRow>
-//           </Header>
-
-//           <Body>
-//             {tableList.map(item => (
-//               <Row
-//                 key={item.id}
-//                 item={item}
-//                 plugins={[{ plugin: useTreeRow }]}
-//               >
-//                 {tableItem => (
-//                   <React.Fragment key={tableItem.id}>
-//                     <CellTree item={tableItem}>
-//                       {tableItem.name}
-//                     </CellTree>
-//                     <Cell>{tableItem.stars}</Cell>
-//                     <Cell>{tableItem.light.toString()}</Cell>
-//                     <Cell>{tableItem.count}</Cell>
-//                   </React.Fragment>
-//                 )}
-//               </Row>
-//             ))}
-//           </Body>
-//         </>
-//       )}
-//     </Table>
-//   );
-// })
 // .add('fetch iterative (loading)', () => {
 //   const [tree, setList] = React.useState([]);
 
@@ -304,7 +300,7 @@ storiesOf('07. Server/ 05. Tree (WIP)', module)
 //   const doGet = React.useCallback(async params => {
 //     const { nodes, pageInfo } = await getPaginatedTree(params);
 
-//     setData(insertPaginatedTree(params.id, nodes, pageInfo));
+//     setData(insertTree(params.id, nodes, pageInfo));
 //   }, []);
 
 //   React.useEffect(() => {
