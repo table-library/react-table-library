@@ -159,10 +159,11 @@ storiesOf('07. Server/ 05. Tree', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell>Name</HeaderCell>
-                <HeaderCell>Stars</HeaderCell>
-                <HeaderCell>Light</HeaderCell>
-                <HeaderCell>Count</HeaderCell>
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
               </HeaderRow>
             </Header>
 
