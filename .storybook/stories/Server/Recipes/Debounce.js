@@ -13,22 +13,44 @@ import {
   Cell
 } from '@table-library/react-table-library/lib/table';
 
-import { nodes } from '../data';
+import { getData } from '../../server';
 
-storiesOf('02. Features/ 07. Search', module)
+storiesOf('08. Server Recipes/ 04. Debounce', module)
   .addParameters({ component: Table })
   .add('default', () => {
+    const [data, setData] = React.useState({
+      nodes: []
+    });
+
+    // initial fetching
+
+    const doGet = React.useCallback(async params => {
+      setData(await getData(params));
+    }, []);
+
+    React.useEffect(() => {
+      doGet({});
+    }, [doGet]);
+
+    // features
+
     const [search, setSearch] = React.useState('');
 
     const handleSearch = event => {
       setSearch(event.target.value);
     };
 
-    const data = {
-      nodes: nodes.filter(item =>
-        item.name.toLowerCase().includes(search.toLowerCase())
-      )
-    };
+    const timeout = React.useRef();
+
+    React.useEffect(() => {
+      const params = {
+        search
+      };
+
+      if (timeout.current) clearTimeout(timeout.current);
+
+      timeout.current = setTimeout(() => doGet(params), 500);
+    }, [search]);
 
     return (
       <>

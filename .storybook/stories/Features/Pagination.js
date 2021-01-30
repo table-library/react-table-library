@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import {

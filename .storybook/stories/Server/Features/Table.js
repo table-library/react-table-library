@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import {
@@ -13,22 +13,22 @@ import {
   Cell
 } from '@table-library/react-table-library/lib/table';
 
-import { getSimple } from '../../server';
+import { getData } from '../../server';
 
 storiesOf('07. Server/ 01. Table', module)
   .addParameters({ component: Table })
   .add('default', () => {
-    const [nodes, setNodes] = React.useState([]);
+    const [data, setData] = React.useState({
+      nodes: []
+    });
 
     const doGet = React.useCallback(async params => {
-      setNodes(await getSimple(params));
+      setData(await getData(params));
     }, []);
 
     React.useEffect(() => {
       doGet({});
     }, [doGet]);
-
-    const data = { nodes };
 
     return (
       <Table data={data}>

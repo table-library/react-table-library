@@ -13,22 +13,72 @@ import {
   Cell
 } from '@table-library/react-table-library/lib/table';
 
-import { nodes } from '../data';
+import {
+  useSort,
+  HeaderCellSort
+} from '@table-library/react-table-library/lib/sort';
 
-storiesOf('02. Features/ 07. Search', module)
+import { getData } from '../../server';
+
+storiesOf('08. Server Recipes/ 03. Origin Mixed', module)
   .addParameters({ component: Table })
   .add('default', () => {
+    const [data, setData] = React.useState({
+      nodes: []
+    });
+
+    // initial fetching
+
+    const doGet = React.useCallback(async params => {
+      setData(await getData(params));
+    }, []);
+
+    React.useEffect(() => {
+      doGet({});
+    }, [doGet]);
+
+    // features: state
+
     const [search, setSearch] = React.useState('');
+
+    const sort = useSort(
+      {
+        onChange: onSortChange
+      },
+      {
+        isServer: true
+      }
+    );
+
+    // features: handler
 
     const handleSearch = event => {
       setSearch(event.target.value);
     };
 
-    const data = {
-      nodes: nodes.filter(item =>
-        item.name.toLowerCase().includes(search.toLowerCase())
-      )
-    };
+    React.useEffect(() => {
+      const params = {
+        search,
+        sort: {
+          sortKey: sort.state.sortKey,
+          reverse: sort.state.reverse
+        }
+      };
+
+      doGet(params);
+    }, [sort, search]);
+
+    function onSortChange(action, state) {
+      const params = {
+        search,
+        sort: {
+          sortKey: state.sortKey,
+          reverse: state.reverse
+        }
+      };
+
+      doGet(params);
+    }
 
     return (
       <>
@@ -37,16 +87,22 @@ storiesOf('02. Features/ 07. Search', module)
           <input id="search" type="text" onChange={handleSearch} />
         </label>
 
-        <Table data={data}>
+        <Table data={data} sort={sort}>
           {tableList => (
             <>
               <Header>
                 <HeaderRow>
-                  <HeaderCell>Task</HeaderCell>
-                  <HeaderCell>Deadline</HeaderCell>
-                  <HeaderCell>Type</HeaderCell>
-                  <HeaderCell>Complete</HeaderCell>
-                  <HeaderCell>Tasks</HeaderCell>
+                  <HeaderCellSort sortKey="TASK">Task</HeaderCellSort>
+                  <HeaderCellSort sortKey="DEADLINE">
+                    Deadline
+                  </HeaderCellSort>
+                  <HeaderCellSort sortKey="TYPE">Type</HeaderCellSort>
+                  <HeaderCellSort sortKey="COMPLETE">
+                    Complete
+                  </HeaderCellSort>
+                  <HeaderCellSort sortKey="TASKS">
+                    Tasks
+                  </HeaderCellSort>
                 </HeaderRow>
               </Header>
 

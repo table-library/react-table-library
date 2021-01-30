@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
 storiesOf('00. Intro/ 01. Hello World', module).add('default', () => {

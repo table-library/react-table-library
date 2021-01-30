@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import {
@@ -18,7 +18,7 @@ import {
   HeaderCellSort
 } from '@table-library/react-table-library/lib/sort';
 
-import { getAdvanced } from '../../server';
+import { getData } from '../../server';
 
 storiesOf('07. Server/ 02. Sort', module)
   .addParameters({ component: Table })
@@ -30,7 +30,7 @@ storiesOf('07. Server/ 02. Sort', module)
     // initial fetching
 
     const doGet = React.useCallback(async params => {
-      setData(await getAdvanced(params));
+      setData(await getData(params));
     }, []);
 
     React.useEffect(() => {

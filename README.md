@@ -40,7 +40,7 @@ body {
 And last but not least, in one of your React components:
 
 ```
-import React from 'react';
+import * as React from 'react';
 
 import { Atoms } from '@table-library/react-table-library';
 

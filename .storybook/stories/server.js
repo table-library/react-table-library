@@ -123,16 +123,11 @@ const getShallowNodes = nodes =>
     }
   });
 
-const getSimple = () =>
-  new Promise(resolve => {
-    setTimeout(() => resolve([...NODES]), TIMEOUT);
-  });
-
-const getAdvanced = ({
+const getData = ({
   id,
   offset = 0,
   limit = 100,
-  searchText = '',
+  search = '',
   filters = [],
   sort = { sortKey: 'NONE', reverse: false },
   isShallow = false
@@ -144,18 +139,18 @@ const getAdvanced = ({
       id,
       offset,
       limit,
-      searchText,
+      search,
       filters,
       sort,
       isShallow
     });
 
-    const isSearch = !!searchText;
+    const isSearch = !!search;
     const isFilter = !!filters.length;
 
     const searchFn = isSearch
       ? value =>
-          value.name.toLowerCase().includes(searchText.toLowerCase())
+          value.name.toLowerCase().includes(search.toLowerCase())
       : () => true;
 
     const filterFn = isFilter
@@ -193,4 +188,4 @@ const getAdvanced = ({
     setTimeout(() => resolve(result), TIMEOUT);
   });
 
-export { getSimple, getAdvanced };
+export { getData };

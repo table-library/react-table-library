@@ -13,22 +13,40 @@ import {
   Cell
 } from '@table-library/react-table-library/lib/table';
 
-import { nodes } from '../data';
+import { getData } from '../../server';
 
-storiesOf('02. Features/ 07. Search', module)
+storiesOf('07. Server/ 03. Search', module)
   .addParameters({ component: Table })
   .add('default', () => {
+    const [data, setData] = React.useState({
+      nodes: []
+    });
+
+    // initial fetching
+
+    const doGet = React.useCallback(async params => {
+      setData(await getData(params));
+    }, []);
+
+    React.useEffect(() => {
+      doGet({});
+    }, [doGet]);
+
+    // features
+
     const [search, setSearch] = React.useState('');
 
     const handleSearch = event => {
       setSearch(event.target.value);
     };
 
-    const data = {
-      nodes: nodes.filter(item =>
-        item.name.toLowerCase().includes(search.toLowerCase())
-      )
-    };
+    React.useEffect(() => {
+      const params = {
+        search
+      };
+
+      doGet(params);
+    }, [search]);
 
     return (
       <>
