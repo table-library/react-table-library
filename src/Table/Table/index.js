@@ -4,10 +4,7 @@ import { css } from 'styled-components';
 
 import { TableContext } from '@common/context/Table';
 import { ThemeContext } from '@common/context/Theme';
-import {
-  ResizeProvider,
-  ResizeContext
-} from '@common/context/Resize';
+import { ResizeProvider } from '@common/context/Resize';
 import { SortContext } from '@common/context/Sort';
 import { SelectContext } from '@common/context/Select';
 import { TreeContext } from '@common/context/Tree';
@@ -27,6 +24,7 @@ const applyRecursiveSort = (nodes, sortFn) => {
   }, []);
 };
 
+// TODO
 const Table = ({ data, theme, sort, select, tree, children }) => {
   const tableRef = React.useRef();
 
@@ -50,17 +48,17 @@ const Table = ({ data, theme, sort, select, tree, children }) => {
     >
       <TableContext.Provider value={data}>
         <ThemeContext.Provider value={theme}>
-          <ResizeProvider tableRef={tableRef}>
-            <SortContext.Provider value={sort}>
-              <SelectContext.Provider value={select}>
-                <TreeContext.Provider value={tree}>
+          <SortContext.Provider value={sort}>
+            <SelectContext.Provider value={select}>
+              <TreeContext.Provider value={tree}>
+                <ResizeProvider tableRef={tableRef}>
                   {children(modifiedNodes, {
                     theme
                   })}
-                </TreeContext.Provider>
-              </SelectContext.Provider>
-            </SortContext.Provider>
-          </ResizeProvider>
+                </ResizeProvider>
+              </TreeContext.Provider>
+            </SelectContext.Provider>
+          </SortContext.Provider>
         </ThemeContext.Provider>
       </TableContext.Provider>
     </TableContainer>
