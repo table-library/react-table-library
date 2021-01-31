@@ -14,24 +14,12 @@ import {
 } from '@table-library/react-table-library/lib/table';
 import { createPanel } from '@table-library/react-table-library/lib/panel';
 
-import { getData } from '../../server';
+import { nodes } from '../data';
 
-storiesOf('07. Server/ 06. Expand (WIP)', module)
+storiesOf('02. Features/ 10. Expand', module)
   .addParameters({ component: Table })
   .add('default', () => {
-    const [data, setData] = React.useState({
-      nodes: []
-    });
-
-    const doGet = React.useCallback(async params => {
-      setData(await getData(params));
-    }, []);
-
-    React.useEffect(() => {
-      doGet({});
-    }, [doGet]);
-
-    // features
+    const data = { nodes };
 
     const [ids, setIds] = React.useState([]);
 
