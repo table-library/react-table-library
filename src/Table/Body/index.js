@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { SelectContext } from '@common/context/Select';
 import { TreeContext } from '@common/context/Tree';
+import { PanelContext } from '@common/context/Panel';
 
 const findParentItem = (rootItem, id) =>
   rootItem.nodes.reduce((acc, value) => {
@@ -41,6 +42,7 @@ const getFetchProps = (
 const Body = ({ children }) => {
   const select = React.useContext(SelectContext);
   const tree = React.useContext(TreeContext);
+  const panels = React.useContext(PanelContext);
 
   const getRowProps = props =>
     [select, tree]
@@ -54,6 +56,9 @@ const Body = ({ children }) => {
         })
       );
 
+  const getPanels = (props, index) =>
+    (panels || []).map(panel => panel(props, index)).filter(Boolean);
+
   return (
     <>
       {React.Children.map(children, (child, index) =>
@@ -63,7 +68,8 @@ const Body = ({ children }) => {
           // firstRow: index === 0,
           // lastRow: size === index + 1,
           // id: child.props.item.id,
-          rowPropsByFeature: getRowProps(child.props)
+          rowPropsByFeature: getRowProps(child.props),
+          panels: getPanels(child.props, index)
           // tree: getTreeProps(child, tree),
           // expand: getExpandProps(child, expand),
           // fetching: getFetchProps(child, fetching)

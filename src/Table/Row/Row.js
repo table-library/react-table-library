@@ -69,6 +69,7 @@ const Row = React.memo(
     disabled,
     rowLayout,
     rowPropsByFeature,
+    panels,
     onClick,
     onDoubleClick,
     children
@@ -111,7 +112,13 @@ const Row = React.memo(
           {children(item)}
         </RowContainer>
 
-        {panelsByFeature}
+        {panelsByFeature.map(panel =>
+          React.cloneElement(panel, { key: item.id })
+        )}
+
+        {panels.map(panel =>
+          React.cloneElement(panel, { key: item.id })
+        )}
       </>
     );
   }
