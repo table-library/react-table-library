@@ -10,9 +10,7 @@ module.exports = {
     sort: './src/Sort/index.js',
     select: './src/Select/index.js',
     tree: './src/Tree/index.js',
-    resize: './src/Resize/index.js',
-    expand: './src/Expand/index.js',
-    fetch: './src/Fetch/index.js'
+    resize: './src/Resize/index.js'
   },
   // Webpack 4: https://v4.webpack.js.org/guides/code-splitting/#prevent-duplication
   // optimization: {

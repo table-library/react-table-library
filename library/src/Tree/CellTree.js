@@ -1,7 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import cs from 'classnames';
 
 import IconChevronSingleDown from '@common/icons/IconChevronSingleDown';
 import IconChevronSingleRight from '@common/icons/IconChevronSingleRight';

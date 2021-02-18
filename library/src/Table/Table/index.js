@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */ // TODO
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'styled-components';
@@ -25,7 +26,6 @@ const applyRecursiveSort = (nodes, sortFn) => {
   }, []);
 };
 
-// TODO
 const Table = ({
   data,
   theme,
