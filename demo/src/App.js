@@ -13,7 +13,6 @@ import {
 import {
   HeaderCellSelect,
   CellSelect,
-  SELECT_TYPES,
   useSelect,
 } from "@table-library/react-table-library/lib/select";
 

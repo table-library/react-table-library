@@ -35,6 +35,7 @@ export const removeByIds = (state, action) => {
     ids: state.ids.filter(id => !action.payload.ids.includes(id))
   };
 };
+
 export const byAll = (state, action) => {
   const all = action.payload.ids.length === state.ids.length;
 
