@@ -17,7 +17,7 @@ import { useSelect } from '@table-library/react-table-library/lib/select';
 
 import { nodes } from '../data';
 
-storiesOf('06. Recipes/02. Memoized Row', module)
+storiesOf('06. Recipes/02. Memoized Row (WIP)', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };

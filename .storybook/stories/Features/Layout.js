@@ -16,21 +16,21 @@ import { useTheme } from '@table-library/react-table-library/lib/theme';
 
 import { nodes } from '../data';
 
-storiesOf('02. Features/ 03. Layout', module)
+storiesOf('02. Features/ 02. Layout', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const theme = useTheme({
       BaseCell: `
         &:nth-child(1) {
-          flex: 1;
+          width: 35%;
         }
 
         &:nth-child(2), &:nth-child(3), &:nth-child(4) {
-          width: 20%;
+          width: 15%;
         }
 
         &:nth-child(5) {
-          width: 100px;
+          width: 10%;
         }
       `
     });

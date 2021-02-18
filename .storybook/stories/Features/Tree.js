@@ -25,7 +25,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('02. Features/09. Tree', module)
+storiesOf('02. Features/08. Tree', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };

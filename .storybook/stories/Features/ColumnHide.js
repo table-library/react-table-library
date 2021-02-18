@@ -15,7 +15,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('02. Features/ 12. Column Hiding', module)
+storiesOf('02. Features/ 11. Column Hiding', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };

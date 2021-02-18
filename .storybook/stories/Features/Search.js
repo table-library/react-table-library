@@ -15,7 +15,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('02. Features/ 07. Search', module)
+storiesOf('02. Features/ 06. Search', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [search, setSearch] = React.useState('');

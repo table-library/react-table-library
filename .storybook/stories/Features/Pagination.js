@@ -13,7 +13,7 @@ import {
   Cell
 } from '@table-library/react-table-library/lib/table';
 
-storiesOf('02. Features/ 11. Pagination (WIP)', module)
+storiesOf('02. Features/ 10. Pagination (WIP)', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return <>WIP</>;
