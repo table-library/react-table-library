@@ -261,67 +261,6 @@ storiesOf('02. Features/09. Tree', module)
       </Table>
     );
   })
-  .add('zoom on double click (WIP)', () => {
-    const data = { nodes };
-
-    const tree = useTree({
-      data,
-      onChange: onTreeChange
-    });
-
-    function onTreeChange(action, state) {
-      console.log(action, state);
-    }
-
-    return (
-      <Table data={data} tree={tree}>
-        {tableList => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCell>Task</HeaderCell>
-                <HeaderCell>Deadline</HeaderCell>
-                <HeaderCell>Type</HeaderCell>
-                <HeaderCell>Complete</HeaderCell>
-                <HeaderCell>Tasks</HeaderCell>
-              </HeaderRow>
-            </Header>
-
-            <Body>
-              {tableList.map(item => (
-                <Row
-                  key={item.id}
-                  item={item}
-                  onDoubleClick={tableItem => console.log(tableItem)}
-                >
-                  {tableItem => (
-                    <React.Fragment key={tableItem.id}>
-                      <CellTree item={tableItem}>
-                        {tableItem.name}
-                      </CellTree>
-                      <Cell>
-                        {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
-                          {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit'
-                          }
-                        )}
-                      </Cell>
-                      <Cell>{tableItem.type}</Cell>
-                      <Cell>{tableItem.isComplete.toString()}</Cell>
-                      <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
-                  )}
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
-    );
-  })
   .add('tree icon size', () => {
     const data = { nodes };
 
