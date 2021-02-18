@@ -15,7 +15,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('01. First Steps/ 03. Row Click', module)
+storiesOf('01. First Steps/ 04. Row Double Click', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };
@@ -39,8 +39,8 @@ storiesOf('01. First Steps/ 03. Row Click', module)
                 <Row
                   key={item.id}
                   item={item}
-                  onClick={(tableItem, event) =>
-                    console.log('Click Row', tableItem, event)
+                  onDoubleClick={(tableItem, event) =>
+                    console.log('Doubl Click Row', tableItem, event)
                   }
                 >
                   {tableItem => (

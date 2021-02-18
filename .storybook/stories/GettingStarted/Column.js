@@ -15,7 +15,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('01. First Steps/ 05. Column Configuration', module)
+storiesOf('01. First Steps/ 06. Column Configuration', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };

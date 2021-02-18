@@ -15,7 +15,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('01. First Steps/ 03. Row Double Click', module)
+storiesOf('01. First Steps/ 02. Cell Click', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };
@@ -36,16 +36,16 @@ storiesOf('01. First Steps/ 03. Row Double Click', module)
 
             <Body>
               {tableList.map(item => (
-                <Row
-                  key={item.id}
-                  item={item}
-                  onDoubleClick={(tableItem, event) =>
-                    console.log(tableItem, event)
-                  }
-                >
+                <Row key={item.id} item={item}>
                   {tableItem => (
                     <React.Fragment key={tableItem.id}>
-                      <Cell>{tableItem.name}</Cell>
+                      <Cell
+                        onClick={event =>
+                          console.log('Click Cell', event)
+                        }
+                      >
+                        {tableItem.name}
+                      </Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
                           'fr-CA',

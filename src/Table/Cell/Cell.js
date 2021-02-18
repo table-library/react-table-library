@@ -6,7 +6,14 @@ import cs from 'classnames';
 import { CellContainer } from '@common/components/Cell';
 import { ThemeContext } from '@common/context/Theme';
 
-const Cell = ({ className, indentation, hide, shrink, children }) => {
+const Cell = ({
+  className,
+  indentation,
+  hide,
+  shrink,
+  onClick,
+  children
+}) => {
   const theme = React.useContext(ThemeContext);
 
   return (
@@ -21,6 +28,7 @@ const Cell = ({ className, indentation, hide, shrink, children }) => {
         ${theme?.Cell}
       `}
       indentation={indentation}
+      onClick={onClick}
     >
       <div>{children}</div>
     </CellContainer>
@@ -32,6 +40,7 @@ Cell.propTypes = {
   indentation: PropTypes.number,
   hide: PropTypes.bool,
   shrink: PropTypes.bool,
+  onClick: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
