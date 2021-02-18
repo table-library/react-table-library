@@ -2,7 +2,7 @@ import { findNodeById } from '@common/util/tree';
 
 import { nodes as NODES } from './data';
 
-const TIMEOUT = 500;
+const TIMEOUT = 1000;
 
 const SORTS = {
   NONE: {
@@ -126,7 +126,7 @@ const getShallowNodes = nodes =>
 const getData = ({
   id,
   offset = 0,
-  limit = 100,
+  limit = 999,
   search = '',
   filters = [],
   sort = { sortKey: 'NONE', reverse: false },

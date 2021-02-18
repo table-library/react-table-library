@@ -14,9 +14,34 @@ import {
 } from '@table-library/react-table-library/lib/table';
 import { createPanel } from '@table-library/react-table-library/lib/panel';
 
+import { findNodeById, recursiveMergeInsert } from '@common/util';
+
 import { getData } from '../../server';
 
-storiesOf('07. Server/ 06. Expand (WIP)', module)
+const needsToFetch = (nodes, id) => {
+  const item = findNodeById(nodes, id);
+
+  return item && item._hasContent && item.nodes && !item.nodes.length;
+};
+
+// TODO pageInfo -> ...rest // same in Server/Tree
+const insertTree = (targetId, nodes, pageInfo) => state => {
+  if (!targetId) {
+    return {
+      pageInfo,
+      nodes: [...state.nodes, ...nodes]
+    };
+  }
+
+  return {
+    pageInfo: state.pageInfo,
+    nodes: state.nodes.map(
+      recursiveMergeInsert(targetId, nodes, { pageInfo })
+    )
+  };
+};
+
+storiesOf('07. Server/ 06. Expand', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [data, setData] = React.useState({
@@ -24,11 +49,15 @@ storiesOf('07. Server/ 06. Expand (WIP)', module)
     });
 
     const doGet = React.useCallback(async params => {
-      setData(await getData(params));
+      const { nodes } = await getData(params);
+
+      setData(insertTree(params.id, nodes));
     }, []);
 
     React.useEffect(() => {
-      doGet({});
+      doGet({
+        isShallow: true
+      });
     }, [doGet]);
 
     // features
@@ -36,15 +65,24 @@ storiesOf('07. Server/ 06. Expand (WIP)', module)
     const [ids, setIds] = React.useState([]);
 
     const expansionPanel = createPanel({
-      panel: item => <strong>{item.name.toUpperCase()}</strong>,
+      panel: item => <strong>{JSON.stringify(item.nodes)}</strong>,
       condition: item => ids.includes(item.id)
     });
 
-    const handleExpand = item => {
+    const handleExpand = async item => {
       if (ids.includes(item.id)) {
         setIds(ids.filter(id => id !== item.id));
       } else {
         setIds(ids.concat(item.id));
+
+        if (!needsToFetch(data.nodes, item.id)) return;
+
+        const params = {
+          id: item.id,
+          isShallow: true
+        };
+
+        doGet(params);
       }
     };
 
