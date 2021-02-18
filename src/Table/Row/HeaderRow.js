@@ -8,12 +8,12 @@ import { ThemeContext } from '@common/context/Theme';
 
 import { useRowLayout } from './useRowLayout';
 
-const HeaderRow = ({ className, rowLayout, disabled, children }) => {
+const HeaderRow = ({ className, disabled, children }) => {
   const theme = React.useContext(ThemeContext);
 
   const ref = React.useRef();
 
-  useRowLayout(ref, '.th', rowLayout, children);
+  useRowLayout(ref, '.th');
 
   return (
     <HeaderRowContainer
@@ -38,7 +38,6 @@ const HeaderRow = ({ className, rowLayout, disabled, children }) => {
 
 HeaderRow.propTypes = {
   className: PropTypes.string,
-  rowLayout: PropTypes.arrayOf(PropTypes.any),
   disabled: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

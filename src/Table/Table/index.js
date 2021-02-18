@@ -29,6 +29,7 @@ const applyRecursiveSort = (nodes, sortFn) => {
 const Table = ({
   data,
   theme,
+  layout,
   sort,
   select,
   tree,
@@ -61,7 +62,7 @@ const Table = ({
             <SortContext.Provider value={sort}>
               <SelectContext.Provider value={select}>
                 <TreeContext.Provider value={tree}>
-                  <ResizeProvider tableRef={tableRef}>
+                  <ResizeProvider layout={layout} tableRef={tableRef}>
                     {children(modifiedNodes)}
                   </ResizeProvider>
                 </TreeContext.Provider>
@@ -80,6 +81,9 @@ Table.propTypes = {
     sort: PropTypes.bool
   }),
   theme: PropTypes.objectOf(PropTypes.any),
+  layout: PropTypes.shape({
+    custom: PropTypes.bool
+  }),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import { ResizeContext } from '@common/context/Resize';
 
-export const useRowLayout = (ref, selector, rowLayout, children) => {
-  const { resizedLayout } = React.useContext(ResizeContext);
+export const useRowLayout = (ref, selector) => {
+  const { layout, resizedLayout } = React.useContext(ResizeContext);
 
   React.useLayoutEffect(() => {
     const allCells = Array.from(
@@ -26,20 +26,14 @@ export const useRowLayout = (ref, selector, rowLayout, children) => {
     allCells.forEach((cell, index) => {
       if (resizedLayout.current?.[index]) {
         cell.style.width = resizedLayout.current[index];
-      } else if (rowLayout) {
-        if (typeof rowLayout[index] === 'string') {
-          cell.style.width = rowLayout[index];
-        } else {
-          cell.style[rowLayout[index].key] = rowLayout[index].value;
-        }
       } else if (shrinkCells.includes(cell)) {
         cell.style.width = `${cell.getBoundingClientRect().width}px`;
-      } else {
+      } else if (!layout?.custom) {
         const percentage = 100 / normalCells.length;
         const diff = shrinkCellsWidth / normalCells.length;
 
         cell.style.width = `calc(${percentage}% - ${diff}px)`;
       }
     });
-  }, [ref, resizedLayout, rowLayout, selector, children]);
+  }, [ref, layout, resizedLayout, selector]);
 };

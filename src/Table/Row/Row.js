@@ -67,7 +67,6 @@ const Row = React.memo(
     item,
     className,
     disabled,
-    rowLayout,
     rowPropsByFeature,
     panels,
     onClick,
@@ -86,7 +85,7 @@ const Row = React.memo(
     const ref = React.useRef();
 
     useDoubleClick(ref, onClickByFeature, onDoubleClick, item);
-    useRowLayout(ref, '.td', rowLayout, children);
+    useRowLayout(ref, '.td');
 
     return (
       <>
@@ -126,8 +125,8 @@ const Row = React.memo(
 
 Row.propTypes = {
   item: PropTypes.objectOf(PropTypes.any),
-  rowLayout: PropTypes.arrayOf(PropTypes.any),
   rowPropsByFeature: PropTypes.arrayOf(PropTypes.any),
+  panels: PropTypes.arrayOf(PropTypes.any),
   className: PropTypes.string,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,

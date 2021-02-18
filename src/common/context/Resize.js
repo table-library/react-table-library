@@ -1,15 +1,15 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-const ResizeContext = React.createContext(false);
+const ResizeContext = React.createContext({});
 
-const ResizeProvider = ({ tableRef, children }) => {
+const ResizeProvider = ({ tableRef, layout, children }) => {
   const resizedLayout = React.useRef();
 
-  const value = React.useMemo(() => ({ resizedLayout, tableRef }), [
-    resizedLayout,
-    tableRef
-  ]);
+  const value = React.useMemo(
+    () => ({ layout, resizedLayout, tableRef }),
+    [layout, resizedLayout, tableRef]
+  );
 
   return (
     <ResizeContext.Provider value={value}>
@@ -23,6 +23,9 @@ ResizeProvider.propTypes = {
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) })
   ]),
+  layout: PropTypes.shape({
+    custom: PropTypes.bool
+  }),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

@@ -67,21 +67,21 @@ storiesOf('02. Features/ 02. Theme', module)
   .add('Ocean Blue', () => {
     const theme = useTheme({
       HeaderRow: `
-      font-size: 14px;
+        font-size: 14px;
 
-      background-color: #eaf5fd;
-    `,
-      Row: `
-      font-size: 14px;
-
-      &:nth-child(odd) {
-        background-color: #d2e9fb;
-      }
-
-      &:nth-child(even) {
         background-color: #eaf5fd;
-      }
-    `
+      `,
+      Row: `
+        font-size: 14px;
+
+        &:nth-child(odd) {
+          background-color: #d2e9fb;
+        }
+
+        &:nth-child(even) {
+          background-color: #eaf5fd;
+        }
+      `
     });
 
     const data = { nodes };
@@ -132,21 +132,21 @@ storiesOf('02. Features/ 02. Theme', module)
   .add('Grey Wolf', () => {
     const theme = useTheme({
       HeaderRow: `
-      font-size: 14px;
+        font-size: 14px;
 
-      background-color: #fafafa;
-    `,
-      Row: `
-      font-size: 14px;
-
-      &:nth-child(odd) {
-        background-color: #f5f5f5;
-      }
-
-      &:nth-child(even) {
         background-color: #fafafa;
-      }
-    `
+      `,
+      Row: `
+        font-size: 14px;
+
+        &:nth-child(odd) {
+          background-color: #f5f5f5;
+        }
+
+        &:nth-child(even) {
+          background-color: #fafafa;
+        }
+      `
     });
 
     const data = { nodes };
@@ -197,33 +197,33 @@ storiesOf('02. Features/ 02. Theme', module)
   .add('Machine', () => {
     const theme = useTheme({
       HeaderRow: `
-      color: #000000;
-      border-bottom: 1px solid transparent;
-    `,
+        color: #000000;
+        border-bottom: 1px solid transparent;
+      `,
       Row: `
-      color: #363636;
+        color: #363636;
 
-      border-top: 1px solid #a0a8ae;
-      border-bottom: 1px solid #a0a8ae;
+        border-top: 1px solid #a0a8ae;
+        border-bottom: 1px solid #a0a8ae;
 
-      &:hover {
-        border-top: 1px solid #177ac9;
-        border-bottom: 1px solid #177ac9;
+        &:hover {
+          border-top: 1px solid #177ac9;
+          border-bottom: 1px solid #177ac9;
 
-        color: #177ac9;
-      }
-    `,
+          color: #177ac9;
+        }
+      `,
       HeaderCell: `
-      margin-top: 9px;
-      margin-bottom: 9px;
+        margin-top: 9px;
+        margin-bottom: 9px;
 
-      padding-top: 11px;
-      padding-bottom: 11px;
-    `,
+        padding-top: 11px;
+        padding-bottom: 11px;
+      `,
       Cell: `
-      margin-top: 8px;
-      margin-bottom: 9px;
-    `
+        margin-top: 8px;
+        margin-bottom: 9px;
+      `
     });
 
     const data = { nodes };
