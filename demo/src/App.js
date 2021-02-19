@@ -316,7 +316,7 @@ function App() {
         <>
           <Header>
             <HeaderRow>
-              {/* <HeaderCellSelect /> */}
+              <HeaderCellSelect />
               <HeaderCell>Task</HeaderCell>
               <HeaderCell>Deadline</HeaderCell>
               <HeaderCell>Type</HeaderCell>
@@ -330,7 +330,7 @@ function App() {
               <Row key={item.id} item={item}>
                 {(tableItem) => (
                   <React.Fragment key={tableItem.id}>
-                    {/* <CellSelect item={tableItem} /> */}
+                    <CellSelect item={tableItem} />
                     <Cell>{tableItem.name}</Cell>
                     <Cell>
                       {tableItem.deadline.toLocaleDateString("fr-CA", {

@@ -2,6 +2,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
+import del from 'rollup-plugin-delete';
 // import typescript from '@rollup/plugin-typescript';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 // import ts from '@wessberg/rollup-plugin-ts';
@@ -11,6 +12,7 @@ import pkg from './package.json';
 export default {
   input: {
     main: './src/index.js', // ts
+    table: './src/Table/index.js', // ts
     select: './src/Select/index.js', // ts
     common: './src/common/index.js' // ts
   },
@@ -37,6 +39,7 @@ export default {
     ...Object.keys(pkg.peerDependencies || {})
   ],
   plugins: [
+    del({ targets: 'lib/*' }),
     peerDepsExternal(),
     postcss({
       modules: true

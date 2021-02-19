@@ -2,8 +2,8 @@ export const isLeaf = node => !node.nodes;
 
 export const hasLeaves = node => !!node.nodes?.length;
 
-export const fromNodesToList = (nodes = []) =>
-  nodes.reduce((acc, value) => {
+export const fromNodesToList = nodes =>
+  (nodes || []).reduce((acc, value) => {
     // eslint-disable-next-line no-param-reassign
     acc = acc.concat(value);
 
