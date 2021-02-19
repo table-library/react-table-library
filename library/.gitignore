@@ -8,6 +8,5 @@ dist
 
 .npmrc
 .orig
-public/
 
 .vscode/
