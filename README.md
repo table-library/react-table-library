@@ -1,6 +1,6 @@
 # React Table Library
 
-- [Live TODO](https://www.react-table-library.com)
+- [Live](https://www.react-table-library.com)
 
 ## Requirements
 
