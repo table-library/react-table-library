@@ -115,7 +115,7 @@
     "react-datatable",
     "react-table-library"
   ],
-  "author": "Robin Wieruch <opensource@rwieruch.com> (https://www.robinwieruch.de)",
+  "author": "Robin Wieruch <hello@rwieruch.com> (https://www.robinwieruch.de)",
   "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/table-library/react-table-library/issues"
