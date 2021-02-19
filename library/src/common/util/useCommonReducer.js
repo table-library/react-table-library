@@ -4,9 +4,9 @@ import {
   findNodeById,
   fromNodesToList,
   includesAll
-} from '@common/util/tree';
+} from '@table-library/react-table-library/lib/common/util/tree';
 
-import { useReducerWithMiddleware } from '@common/util/useReducerWithMiddleware';
+import { useReducerWithMiddleware } from '@table-library/react-table-library/lib/common/util/useReducerWithMiddleware';
 
 export const addById = (state, action) => {
   return {

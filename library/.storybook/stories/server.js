@@ -1,4 +1,4 @@
-import { findNodeById } from '@common/util/tree';
+import { findNodeById } from '@table-library/react-table-library/lib/common';
 
 import { nodes as NODES } from './data';
 

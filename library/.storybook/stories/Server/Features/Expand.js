@@ -13,8 +13,10 @@ import {
   Cell
 } from '@table-library/react-table-library/lib/table';
 import { createPanel } from '@table-library/react-table-library/lib/panel';
-
-import { findNodeById, recursiveMergeInsert } from '@common/util';
+import {
+  findNodeById,
+  recursiveMergeInsert
+} from '@table-library/react-table-library/lib/common/util';
 
 import { getData } from '../../server';
 

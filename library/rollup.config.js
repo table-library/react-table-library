@@ -12,8 +12,8 @@ import pkg from './package.json';
 export default {
   input: {
     main: './src/index.js', // ts
-    table: './src/Table/index.js', // ts
-    select: './src/Select/index.js', // ts
+    table: './src/table/index.js', // ts
+    select: './src/select/index.js', // ts
     common: './src/common/index.js' // ts
   },
 

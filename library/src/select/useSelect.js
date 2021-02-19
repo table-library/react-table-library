@@ -1,9 +1,9 @@
 import { css } from 'styled-components';
 import cs from 'classnames';
 
-import * as COLORS from '@common/colors';
-import { isRowClick } from '@common/util/isRowClick';
-import { useCommonReducer } from '@common/util/useCommonReducer';
+import * as COLORS from '@table-library/react-table-library/lib/common/colors';
+import { isRowClick } from '@table-library/react-table-library/lib/common/util/isRowClick';
+import { useCommonReducer } from '@table-library/react-table-library/lib/common/util/useCommonReducer';
 
 import { SELECT_TYPES } from './config';
 

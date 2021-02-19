@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-import { Checkbox } from '@common/components/Checkbox';
+import { Checkbox } from '@table-library/react-table-library/lib/common/components/Checkbox';
 
 const ImperativeCheckbox = ({
   checked,

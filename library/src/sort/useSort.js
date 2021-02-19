@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { useReducerWithMiddleware } from '@common/util/useReducerWithMiddleware';
+import { useReducerWithMiddleware } from '@table-library/react-table-library/lib/common/util/useReducerWithMiddleware';
 
 const TOGGLE_SORT = 'TOGGLE_SORT';
 

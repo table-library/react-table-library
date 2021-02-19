@@ -2,11 +2,11 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
 
-import IconChevronSingleDown from '@common/icons/IconChevronSingleDown';
-import IconChevronSingleUp from '@common/icons/IconChevronSingleUp';
-import IconChevronSingleUpDown from '@common/icons/IconChevronSingleUpDown';
-import { getIcon } from '@common/util/getIcon';
-import { Button } from '@common/components/Button';
+import IconChevronSingleDown from '@table-library/react-table-library/lib/common/icons/IconChevronSingleDown';
+import IconChevronSingleUp from '@table-library/react-table-library/lib/common/icons/IconChevronSingleUp';
+import IconChevronSingleUpDown from '@table-library/react-table-library/lib/common/icons/IconChevronSingleUpDown';
+import { getIcon } from '@table-library/react-table-library/lib/common/util/getIcon';
+import { Button } from '@table-library/react-table-library/lib/common/components/Button';
 
 import { SORT_ICON_POSITIONS } from './config';
 

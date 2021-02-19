@@ -2,13 +2,13 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import IconChevronSingleDown from '@common/icons/IconChevronSingleDown';
-import IconChevronSingleRight from '@common/icons/IconChevronSingleRight';
-import { getIcon } from '@common/util/getIcon';
-import { Button } from '@common/components/Button';
+import IconChevronSingleDown from '@table-library/react-table-library/lib/common/icons/IconChevronSingleDown';
+import IconChevronSingleRight from '@table-library/react-table-library/lib/common/icons/IconChevronSingleRight';
+import { getIcon } from '@table-library/react-table-library/lib/common/util/getIcon';
+import { Button } from '@table-library/react-table-library/lib/common/components/Button';
 import { Cell } from '@table-library/react-table-library/lib/table/Cell';
-import { TreeContext } from '@common/context/Tree';
-import { isLeaf } from '@common/util/tree';
+import { TreeContext } from '@table-library/react-table-library/lib/common/context/Tree';
+import { isLeaf } from '@table-library/react-table-library/lib/common/util/tree';
 
 const TREE_ICON_SIZE = '14px';
 const TREE_ICON_MARGIN = '4px';

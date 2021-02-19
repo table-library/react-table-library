@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { css } from 'styled-components';
 import cs from 'classnames';
 
-import { CellContainer } from '@common/components/Cell';
-import { ThemeContext } from '@common/context/Theme';
+import { CellContainer } from '@table-library/react-table-library/lib/common/components/Cell';
+import { ThemeContext } from '@table-library/react-table-library/lib/common/context/Theme';
 
 const Cell = ({
   className,
