@@ -1,0 +1,33 @@
+{
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
+  "plugins": [
+    "@babel/plugin-proposal-export-default-from",
+    "@babel/plugin-proposal-optional-chaining",
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "@common": "./src/common",
+          "@table-library/react-table-library/lib/table": "./src/Table",
+          "@table-library/react-table-library/lib/theme": "./src/Theme",
+          "@table-library/react-table-library/lib/resize": "./src/Resize",
+          "@table-library/react-table-library/lib/panel": "./src/Panel",
+          "@table-library/react-table-library/lib/sort": "./src/Sort",
+          "@table-library/react-table-library/lib/select": "./src/Select",
+          "@table-library/react-table-library/lib/tree": "./src/Tree"
+        }
+      }
+    ],
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ]
+  ],
+  "env": {
+    "test": {
+      "presets": ["@babel/preset-env", "@babel/preset-react"]
+    }
+  }
+}
