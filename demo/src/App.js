@@ -8,13 +8,13 @@ import {
   Row,
   HeaderCell,
   Cell,
-} from "@table-library/react-table-library/lib/table";
+} from "@table-library/react-table-library/table";
 
 import {
   HeaderCellSelect,
   CellSelect,
   useSelect,
-} from "@table-library/react-table-library/lib/select";
+} from "@table-library/react-table-library/select";
 
 const nodes = [
   {

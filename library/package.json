@@ -1,17 +1,11 @@
 {
   "name": "@table-library/react-table-library",
-  "version": "0.0.66",
+  "version": "0.0.72",
   "description": "react-table-library",
-  "main": "lib/main.js",
-  "directories": {
-    "lib": "lib"
-  },
+  "main": "src/index.js",
   "resolutions": {
     "@babel/preset-env": "7.5.5"
   },
-  "files": [
-    "/lib"
-  ],
   "peerDependencies": {
     "react": "^16.13.1 || ^17",
     "react-dom": "^16.13.1 || ^17"
@@ -88,8 +82,11 @@
     "loki:update": "loki update",
     "storybook:dev": "start-storybook --docs -s ./static -c .storybook -p 9001",
     "storybook:build": "build-storybook --docs -s ./static -c .storybook -o dist",
-    "library:build": "rollup -c",
-    "prepublishOnly": "npm run test && npm run prettier:check && npm run lint:check && npm run library:build"
+    "library:build": "rollup -c && npm run copypackage",
+    "check": "npm run test && npm run prettier:check && npm run lint:check",
+    "copypackage": "cp -rf package.json lib",
+    "dist": "npm run check && npm run library:build && cd lib && npm publish",
+    "prepublishOnly": "echo \"Warning: Don't run 'npm publish' in root. Use 'npm run dist' instead.\" && exit 0"
   },
   "husky": {
     "hooks": {
