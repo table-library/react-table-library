@@ -19,7 +19,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('06. Recipes/ 01. Controlled Component', module)
+storiesOf('06. Recipes/ 01. Controlled', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const SORTS = {
