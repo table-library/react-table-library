@@ -4,6 +4,8 @@ import { storiesOf } from '@storybook/react';
 storiesOf('00. Intro/ 06. Roadmap', module).add('default', () => {
   return (
     <div>
+      Discussions:
+      https://github.com/table-library/react-table-library/discussions
       links to github issues
       <ul>
         <li>
@@ -12,7 +14,6 @@ storiesOf('00. Intro/ 06. Roadmap', module).add('default', () => {
         </li>
         <li>TypeScript Support: ...</li>
         <li>Zero Dependencies: ...</li>
-        <li>Code Splitting: ...</li>
       </ul>
     </div>
   );
