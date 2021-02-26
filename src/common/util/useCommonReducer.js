@@ -87,10 +87,10 @@ const reducer = (state, action) => {
   }
 };
 
-const useCommonReducer = (data, initialState, onChange) => {
+const useCommonReducer = (data, incomingState, onChange) => {
   const [state, dispatchWithMiddleware] = useReducerWithMiddleware(
     reducer,
-    initialState,
+    incomingState,
     [],
     [onChange]
   );
@@ -182,17 +182,17 @@ const useCommonReducer = (data, initialState, onChange) => {
     }
   }, [data, state, onAddAll, onRemoveAll]);
 
-  const previousInitialState = React.useRef(initialState);
+  const previousIncomingState = React.useRef(incomingState);
   React.useEffect(() => {
-    if (!isEqual(previousInitialState.current, initialState)) {
+    if (!isEqual(previousIncomingState.current, incomingState)) {
       dispatchWithMiddleware({
         type: SET,
-        payload: initialState,
+        payload: incomingState,
       });
 
-      previousInitialState.current = initialState;
+      previousIncomingState.current = incomingState;
     }
-  }, [dispatchWithMiddleware, initialState]);
+  }, [dispatchWithMiddleware, incomingState]);
 
   const none = !state.ids.length;
 

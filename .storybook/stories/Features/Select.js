@@ -12,14 +12,14 @@ import {
   Body,
   Row,
   HeaderCell,
-  Cell
+  Cell,
 } from '@table-library/react-table-library/lib/table';
 
 import {
   HeaderCellSelect,
   CellSelect,
   SELECT_TYPES,
-  useSelect
+  useSelect,
 } from '@table-library/react-table-library/lib/select';
 
 import { nodes } from '../data';
@@ -31,7 +31,7 @@ storiesOf('02. Features/05. Select', module)
 
     const select = useSelect({
       data,
-      onChange: onSelectChange
+      onChange: onSelectChange,
     });
 
     function onSelectChange(action, state) {
@@ -40,7 +40,7 @@ storiesOf('02. Features/05. Select', module)
 
     return (
       <Table data={data} select={select}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -53,9 +53,9 @@ storiesOf('02. Features/05. Select', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row item={item} key={item.id}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -64,7 +64,7 @@ storiesOf('02. Features/05. Select', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -86,8 +86,8 @@ storiesOf('02. Features/05. Select', module)
 
     const select = useSelect({
       data,
-      initialState: { ids: ['2', '4'] },
-      onChange: onSelectChange
+      state: { ids: ['2', '4'] },
+      onChange: onSelectChange,
     });
 
     function onSelectChange(action, state) {
@@ -96,7 +96,7 @@ storiesOf('02. Features/05. Select', module)
 
     return (
       <Table data={data} select={select}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -109,9 +109,9 @@ storiesOf('02. Features/05. Select', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row item={item} key={item.id}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -120,7 +120,7 @@ storiesOf('02. Features/05. Select', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -142,7 +142,7 @@ storiesOf('02. Features/05. Select', module)
 
     const select = useSelect({
       data,
-      onChange: onSelectChange
+      onChange: onSelectChange,
     });
 
     function onSelectChange(action, state) {
@@ -151,7 +151,7 @@ storiesOf('02. Features/05. Select', module)
 
     return (
       <Table data={data} select={select}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -165,9 +165,9 @@ storiesOf('02. Features/05. Select', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <CellSelect item={tableItem} />
                       <Cell>{tableItem.name}</Cell>
@@ -177,7 +177,7 @@ storiesOf('02. Features/05. Select', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -200,10 +200,10 @@ storiesOf('02. Features/05. Select', module)
     const select = useSelect(
       {
         data,
-        onChange: onSelectChange
+        onChange: onSelectChange,
       },
       {
-        selectType: SELECT_TYPES.ButtonClick
+        selectType: SELECT_TYPES.ButtonClick,
       }
     );
 
@@ -213,7 +213,7 @@ storiesOf('02. Features/05. Select', module)
 
     return (
       <Table data={data} select={select}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -227,9 +227,9 @@ storiesOf('02. Features/05. Select', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <CellSelect item={tableItem} />
                       <Cell>{tableItem.name}</Cell>
@@ -239,7 +239,7 @@ storiesOf('02. Features/05. Select', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -261,7 +261,7 @@ storiesOf('02. Features/05. Select', module)
 
     const select = useSelect({
       data,
-      onChange: onSelectChange
+      onChange: onSelectChange,
     });
 
     function onSelectChange(action, state) {
@@ -270,7 +270,7 @@ storiesOf('02. Features/05. Select', module)
 
     return (
       <Table data={data} select={select}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -293,9 +293,9 @@ storiesOf('02. Features/05. Select', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell item={tableItem} shrink>
                         <Checkbox
@@ -315,7 +315,7 @@ storiesOf('02. Features/05. Select', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>

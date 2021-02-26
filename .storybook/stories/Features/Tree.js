@@ -14,13 +14,13 @@ import {
   Body,
   Row,
   HeaderCell,
-  Cell
+  Cell,
 } from '@table-library/react-table-library/lib/table';
 
 import {
   useTree,
   CellTree,
-  TREE_EXPAND_TYPES
+  TREE_EXPAND_TYPES,
 } from '@table-library/react-table-library/lib/tree';
 
 import { nodes } from '../data';
@@ -32,7 +32,7 @@ storiesOf('02. Features/08. Tree', module)
 
     const tree = useTree({
       data,
-      onChange: onTreeChange
+      onChange: onTreeChange,
     });
 
     function onTreeChange(action, state) {
@@ -41,7 +41,7 @@ storiesOf('02. Features/08. Tree', module)
 
     return (
       <Table data={data} tree={tree}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -54,9 +54,9 @@ storiesOf('02. Features/08. Tree', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -65,7 +65,7 @@ storiesOf('02. Features/08. Tree', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -87,7 +87,7 @@ storiesOf('02. Features/08. Tree', module)
 
     const tree = useTree({
       data,
-      onChange: onTreeChange
+      onChange: onTreeChange,
     });
 
     function onTreeChange(action, state) {
@@ -96,7 +96,7 @@ storiesOf('02. Features/08. Tree', module)
 
     return (
       <Table data={data} tree={tree}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -109,9 +109,9 @@ storiesOf('02. Features/08. Tree', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <CellTree item={tableItem}>
                         {tableItem.name}
@@ -122,7 +122,7 @@ storiesOf('02. Features/08. Tree', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -145,10 +145,10 @@ storiesOf('02. Features/08. Tree', module)
     const tree = useTree(
       {
         data,
-        onChange: onTreeChange
+        onChange: onTreeChange,
       },
       {
-        treeExpandType: TREE_EXPAND_TYPES.ButtonClick
+        treeExpandType: TREE_EXPAND_TYPES.ButtonClick,
       }
     );
 
@@ -158,7 +158,7 @@ storiesOf('02. Features/08. Tree', module)
 
     return (
       <Table data={data} tree={tree}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -171,9 +171,9 @@ storiesOf('02. Features/08. Tree', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <CellTree item={tableItem}>
                         {tableItem.name}
@@ -184,7 +184,7 @@ storiesOf('02. Features/08. Tree', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -205,11 +205,11 @@ storiesOf('02. Features/08. Tree', module)
     const data = { nodes };
 
     const tree = useTree({
-      initialState: {
-        ids: ['2', '62', '4']
+      state: {
+        ids: ['2', '62', '4'],
       },
       data,
-      onChange: onTreeChange
+      onChange: onTreeChange,
     });
 
     function onTreeChange(action, state) {
@@ -218,7 +218,7 @@ storiesOf('02. Features/08. Tree', module)
 
     return (
       <Table data={data} tree={tree}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -231,9 +231,9 @@ storiesOf('02. Features/08. Tree', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <CellTree item={tableItem}>
                         {tableItem.name}
@@ -244,7 +244,7 @@ storiesOf('02. Features/08. Tree', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -266,7 +266,7 @@ storiesOf('02. Features/08. Tree', module)
 
     const tree = useTree({
       data,
-      onChange: onTreeChange
+      onChange: onTreeChange,
     });
 
     function onTreeChange(action, state) {
@@ -275,7 +275,7 @@ storiesOf('02. Features/08. Tree', module)
 
     return (
       <Table data={data} tree={tree}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -288,14 +288,14 @@ storiesOf('02. Features/08. Tree', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <CellTree
                         item={tableItem}
                         treeIcon={{
-                          size: '10px'
+                          size: '10px',
                         }}
                       >
                         {tableItem.name}
@@ -306,7 +306,7 @@ storiesOf('02. Features/08. Tree', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -328,7 +328,7 @@ storiesOf('02. Features/08. Tree', module)
 
     const tree = useTree({
       data,
-      onChange: onTreeChange
+      onChange: onTreeChange,
     });
 
     function onTreeChange(action, state) {
@@ -337,7 +337,7 @@ storiesOf('02. Features/08. Tree', module)
 
     return (
       <Table data={data} tree={tree}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -350,9 +350,9 @@ storiesOf('02. Features/08. Tree', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <CellTree
                         item={tableItem}
@@ -364,7 +364,7 @@ storiesOf('02. Features/08. Tree', module)
                           iconRight: <FolderIcon fontSize="small" />,
                           iconDown: (
                             <FolderOpenIcon fontSize="small" />
-                          )
+                          ),
                         }}
                       >
                         {tableItem.name}
@@ -375,7 +375,7 @@ storiesOf('02. Features/08. Tree', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>

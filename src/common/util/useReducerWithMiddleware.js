@@ -2,11 +2,11 @@ import * as React from 'react';
 
 const useReducerWithMiddleware = (
   reducer,
-  initialState,
+  incomingState,
   middlewareFns,
   afterwareFns
 ) => {
-  const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [state, dispatch] = React.useReducer(reducer, incomingState);
 
   const aRef = React.useRef();
 

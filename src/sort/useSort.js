@@ -34,12 +34,12 @@ const DEFAULT_OPTIONS = {
 };
 
 const useSort = (primary = {}, options = {}) => {
-  const initialState = primary.initialState || DEFAULT_STATE;
+  const incomingState = primary.state || DEFAULT_STATE;
   const onChange = primary.onChange || (() => {});
 
   const [state, dispatchWithMiddleware] = useReducerWithMiddleware(
     reducer,
-    initialState,
+    incomingState,
     [],
     [onChange]
   );

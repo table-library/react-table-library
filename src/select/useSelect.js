@@ -59,10 +59,14 @@ const DEFAULT_OPTIONS = {
 
 const useSelect = (primary = {}, options = {}) => {
   const data = primary.data || undefined;
-  const initialState = primary.initialState || DEFAULT_STATE;
+  const incomingState = primary.state || DEFAULT_STATE;
   const onChange = primary.onChange || (() => {});
 
-  const [state, fns] = useCommonReducer(data, initialState, onChange);
+  const [state, fns] = useCommonReducer(
+    data,
+    incomingState,
+    onChange
+  );
 
   const mergedOptions = {
     ...DEFAULT_OPTIONS,
