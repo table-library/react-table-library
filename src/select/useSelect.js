@@ -3,7 +3,7 @@ import cs from 'classnames';
 
 import * as COLORS from '@table-library/react-table-library/lib/common/colors';
 import { isRowClick } from '@table-library/react-table-library/lib/common/util/isRowClick';
-import { useCommonReducer } from '@table-library/react-table-library/lib/common/util/useCommonReducer';
+import { useIdReducer } from '@table-library/react-table-library/lib/common/util/useIdReducer';
 
 import { SELECT_TYPES } from './config';
 
@@ -62,11 +62,7 @@ const useSelect = (primary = {}, options = {}) => {
   const incomingState = primary.state || DEFAULT_STATE;
   const onChange = primary.onChange || (() => {});
 
-  const [state, fns] = useCommonReducer(
-    data,
-    incomingState,
-    onChange
-  );
+  const [state, fns] = useIdReducer(data, incomingState, onChange);
 
   const mergedOptions = {
     ...DEFAULT_OPTIONS,

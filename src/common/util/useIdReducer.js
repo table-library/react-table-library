@@ -87,7 +87,7 @@ const reducer = (state, action) => {
   }
 };
 
-const useCommonReducer = (data, incomingState, onChange) => {
+const useIdReducer = (data, incomingState, onChange) => {
   const [state, dispatchWithMiddleware] = useReducerWithMiddleware(
     reducer,
     incomingState,
@@ -220,4 +220,4 @@ const useCommonReducer = (data, incomingState, onChange) => {
   return [{ ...state, none, all }, fns];
 };
 
-export { useCommonReducer };
+export { useIdReducer };

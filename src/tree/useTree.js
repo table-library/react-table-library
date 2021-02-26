@@ -9,7 +9,7 @@ import {
   isLeaf,
   hasLeaves,
 } from '@table-library/react-table-library/lib/common/util/tree';
-import { useCommonReducer } from '@table-library/react-table-library/lib/common/util/useCommonReducer';
+import { useIdReducer } from '@table-library/react-table-library/lib/common/util/useIdReducer';
 
 import { TREE_EXPAND_TYPES } from './config';
 
@@ -93,11 +93,7 @@ const useTree = (primary = {}, options = {}) => {
   const incomingState = primary.state || DEFAULT_STATE;
   const onChange = primary.onChange || (() => {});
 
-  const [state, fns] = useCommonReducer(
-    data,
-    incomingState,
-    onChange
-  );
+  const [state, fns] = useIdReducer(data, incomingState, onChange);
 
   const mergedOptions = {
     ...DEFAULT_OPTIONS,
