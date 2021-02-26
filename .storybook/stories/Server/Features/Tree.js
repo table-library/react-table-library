@@ -307,6 +307,8 @@ storiesOf('07. Server/ 05. Tree', module)
     const doGet = React.useCallback(async (params) => {
       const { nodes, pageInfo } = await getData(params);
 
+      console.log(nodes, pageInfo);
+
       setData(insertTree(params.id, nodes, pageInfo));
     }, []);
 
@@ -332,6 +334,8 @@ storiesOf('07. Server/ 05. Tree', module)
         if (!needsToFetch(data.nodes, action.payload.id)) return;
 
         const params = {
+          offset: 0,
+          limit: 2,
           id: action.payload.id,
           isShallow: true,
         };
@@ -353,28 +357,33 @@ storiesOf('07. Server/ 05. Tree', module)
       condition: (item) => loadingIds.includes(item.id),
     });
 
-    const handleLoadMore = (item) => {
-      setLoadingIds(loadingIds.concat(item.id));
+    const handleLoadMore = (parentItem) => {
+      setLoadingIds(loadingIds.concat(parentItem.id));
       doGet({
-        offset: item.pageInfo.nextOffset,
+        offset: parentItem.pageInfo.nextOffset,
         limit: 2,
+        id: parentItem.id,
         isShallow: true,
       });
-      setLoadingIds(loadingIds.filter((id) => id !== item.id));
+      setLoadingIds(loadingIds.filter((id) => id !== parentItem.id));
     };
 
     const fetchPanel = createPanel({
-      panel: (item) => (
+      panel: (item, props, parentItem) => (
         <div>
-          <button type="button" onClick={() => handleLoadMore(item)}>
+          <button
+            type="button"
+            onClick={() => handleLoadMore(parentItem)}
+          >
             Load More ...
           </button>
         </div>
       ),
-      condition: (item) =>
-        data.pageInfo &&
-        data.pageInfo.nextOffset < data.pageInfo.total &&
-        data.nodes[data.nodes.length - 1].id === item.id,
+      condition: (item, props, parentItem) =>
+        parentItem &&
+        parentItem.pageInfo &&
+        parentItem.pageInfo.nextOffset < parentItem.pageInfo.total &&
+        parentItem.nodes[parentItem.nodes.length - 1].id === item.id,
     });
 
     return (
