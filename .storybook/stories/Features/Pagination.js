@@ -10,8 +10,8 @@ import {
   Body,
   Row,
   HeaderCell,
-  Cell
-} from '@table-library/react-table-library/lib/table';
+  Cell,
+} from '@table-library/react-table-library/table';
 
 storiesOf('02. Features/ 10. Pagination (WIP)', module)
   .addParameters({ component: Table })

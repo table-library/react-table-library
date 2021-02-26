@@ -1,9 +1,9 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-import { SelectContext } from '@table-library/react-table-library/lib/common/context/Select';
-import { TreeContext } from '@table-library/react-table-library/lib/common/context/Tree';
-import { PanelContext } from '@table-library/react-table-library/lib/common/context/Panel';
+import { SelectContext } from '@table-library/react-table-library/common/context/Select';
+import { TreeContext } from '@table-library/react-table-library/common/context/Tree';
+import { PanelContext } from '@table-library/react-table-library/common/context/Panel';
 
 const Body = ({ children }) => {
   const select = React.useContext(SelectContext);

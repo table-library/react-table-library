@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { useReducerWithMiddleware } from '@table-library/react-table-library/lib/common/util/useReducerWithMiddleware';
+import { useReducerWithMiddleware } from '@table-library/react-table-library/common/util/useReducerWithMiddleware';
 
-import { useSyncState } from '@table-library/react-table-library/lib/common/util//useSyncState';
+import { useSyncState } from '@table-library/react-table-library/common/util//useSyncState';
 
 const TOGGLE_SORT = 'TOGGLE_SORT';
 const SET = 'SET';

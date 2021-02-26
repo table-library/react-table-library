@@ -10,8 +10,8 @@ import {
   Body,
   Row,
   HeaderCell,
-  Cell
-} from '@table-library/react-table-library/lib/table';
+  Cell,
+} from '@table-library/react-table-library/table';
 
 import { nodes } from '../data';
 
@@ -22,7 +22,7 @@ storiesOf('01. First Steps/ 04. CRUD', module)
 
     return (
       <Table data={data}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -35,9 +35,9 @@ storiesOf('01. First Steps/ 04. CRUD', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -46,7 +46,7 @@ storiesOf('01. First Steps/ 04. CRUD', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -67,14 +67,14 @@ storiesOf('01. First Steps/ 04. CRUD', module)
     const [data, setData] = React.useState({ nodes });
     const [value, setValue] = React.useState('');
 
-    const handleChange = event => {
+    const handleChange = (event) => {
       setValue(event.target.value);
     };
 
-    const handleSubmit = event => {
+    const handleSubmit = (event) => {
       const id = Math.floor(Math.random() * (9990 - 0 + 1)) + 0;
 
-      setData(state => ({
+      setData((state) => ({
         ...state,
         nodes: state.nodes.concat({
           id,
@@ -82,8 +82,8 @@ storiesOf('01. First Steps/ 04. CRUD', module)
           deadline: new Date(),
           type: 'LEARN',
           isComplete: false,
-          nodes: null
-        })
+          nodes: null,
+        }),
       }));
 
       event.preventDefault();
@@ -97,7 +97,7 @@ storiesOf('01. First Steps/ 04. CRUD', module)
         </form>
 
         <Table data={data}>
-          {tableList => (
+          {(tableList) => (
             <>
               <Header>
                 <HeaderRow>
@@ -110,9 +110,9 @@ storiesOf('01. First Steps/ 04. CRUD', module)
               </Header>
 
               <Body>
-                {tableList.map(item => (
+                {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    {tableItem => (
+                    {(tableItem) => (
                       <React.Fragment key={tableItem.id}>
                         <Cell>{tableItem.name}</Cell>
                         <Cell>
@@ -121,7 +121,7 @@ storiesOf('01. First Steps/ 04. CRUD', module)
                             {
                               year: 'numeric',
                               month: '2-digit',
-                              day: '2-digit'
+                              day: '2-digit',
                             }
                           )}
                         </Cell>
@@ -142,16 +142,16 @@ storiesOf('01. First Steps/ 04. CRUD', module)
   .add('delete', () => {
     const [data, setData] = React.useState({ nodes });
 
-    const handleRemove = id => {
-      setData(state => ({
+    const handleRemove = (id) => {
+      setData((state) => ({
         ...state,
-        nodes: state.nodes.filter(node => node.id !== id)
+        nodes: state.nodes.filter((node) => node.id !== id),
       }));
     };
 
     return (
       <Table data={data}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -165,9 +165,9 @@ storiesOf('01. First Steps/ 04. CRUD', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -176,7 +176,7 @@ storiesOf('01. First Steps/ 04. CRUD', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -205,21 +205,21 @@ storiesOf('01. First Steps/ 04. CRUD', module)
     const [data, setData] = React.useState({ nodes });
 
     const handleUpdate = (value, id) => {
-      setData(state => ({
+      setData((state) => ({
         ...state,
-        nodes: state.nodes.map(node => {
+        nodes: state.nodes.map((node) => {
           if (node.id === id) {
             return { ...node, name: value };
           } else {
             return node;
           }
-        })
+        }),
       }));
     };
 
     return (
       <Table data={data}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -232,16 +232,16 @@ storiesOf('01. First Steps/ 04. CRUD', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>
                         <input
                           style={{ width: '100%' }}
                           type="text"
                           value={tableItem.name}
-                          onChange={event =>
+                          onChange={(event) =>
                             handleUpdate(
                               event.target.value,
                               tableItem.id
@@ -255,7 +255,7 @@ storiesOf('01. First Steps/ 04. CRUD', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>

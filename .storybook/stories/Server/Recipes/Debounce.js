@@ -10,8 +10,8 @@ import {
   Body,
   Row,
   HeaderCell,
-  Cell
-} from '@table-library/react-table-library/lib/table';
+  Cell,
+} from '@table-library/react-table-library/table';
 
 import { getData } from '../../server';
 
@@ -19,12 +19,12 @@ storiesOf('08. Server Recipes/ 04. Debounce', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [data, setData] = React.useState({
-      nodes: []
+      nodes: [],
     });
 
     // initial fetching
 
-    const doGet = React.useCallback(async params => {
+    const doGet = React.useCallback(async (params) => {
       setData(await getData(params));
     }, []);
 
@@ -36,7 +36,7 @@ storiesOf('08. Server Recipes/ 04. Debounce', module)
 
     const [search, setSearch] = React.useState('');
 
-    const handleSearch = event => {
+    const handleSearch = (event) => {
       setSearch(event.target.value);
     };
 
@@ -44,7 +44,7 @@ storiesOf('08. Server Recipes/ 04. Debounce', module)
 
     React.useEffect(() => {
       const params = {
-        search
+        search,
       };
 
       if (timeout.current) clearTimeout(timeout.current);
@@ -60,7 +60,7 @@ storiesOf('08. Server Recipes/ 04. Debounce', module)
         </label>
 
         <Table data={data}>
-          {tableList => (
+          {(tableList) => (
             <>
               <Header>
                 <HeaderRow>
@@ -73,9 +73,9 @@ storiesOf('08. Server Recipes/ 04. Debounce', module)
               </Header>
 
               <Body>
-                {tableList.map(item => (
+                {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    {tableItem => (
+                    {(tableItem) => (
                       <React.Fragment key={tableItem.id}>
                         <Cell>{tableItem.name}</Cell>
                         <Cell>
@@ -84,7 +84,7 @@ storiesOf('08. Server Recipes/ 04. Debounce', module)
                             {
                               year: 'numeric',
                               month: '2-digit',
-                              day: '2-digit'
+                              day: '2-digit',
                             }
                           )}
                         </Cell>

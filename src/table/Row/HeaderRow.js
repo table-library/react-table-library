@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { css } from 'styled-components';
 import cs from 'classnames';
 
-import { HeaderRowContainer } from '@table-library/react-table-library/lib/common/components/Row';
-import { ThemeContext } from '@table-library/react-table-library/lib/common/context/Theme';
+import { HeaderRowContainer } from '@table-library/react-table-library/common/components/Row';
+import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
 
 import { useRowLayout } from './useRowLayout';
 

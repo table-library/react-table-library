@@ -10,13 +10,13 @@ import {
   Body,
   Row,
   HeaderCell,
-  Cell
-} from '@table-library/react-table-library/lib/table';
+  Cell,
+} from '@table-library/react-table-library/table';
 
 import {
   useSort,
-  HeaderCellSort
-} from '@table-library/react-table-library/lib/sort';
+  HeaderCellSort,
+} from '@table-library/react-table-library/sort';
 
 import { getData } from '../../server';
 
@@ -24,12 +24,12 @@ storiesOf('08. Server Recipes/ 03. Origin Mixed', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [data, setData] = React.useState({
-      nodes: []
+      nodes: [],
     });
 
     // initial fetching
 
-    const doGet = React.useCallback(async params => {
+    const doGet = React.useCallback(async (params) => {
       setData(await getData(params));
     }, []);
 
@@ -43,16 +43,16 @@ storiesOf('08. Server Recipes/ 03. Origin Mixed', module)
 
     const sort = useSort(
       {
-        onChange: onSortChange
+        onChange: onSortChange,
       },
       {
-        isServer: true
+        isServer: true,
       }
     );
 
     // features: handler
 
-    const handleSearch = event => {
+    const handleSearch = (event) => {
       setSearch(event.target.value);
     };
 
@@ -61,8 +61,8 @@ storiesOf('08. Server Recipes/ 03. Origin Mixed', module)
         search,
         sort: {
           sortKey: sort.state.sortKey,
-          reverse: sort.state.reverse
-        }
+          reverse: sort.state.reverse,
+        },
       };
 
       doGet(params);
@@ -73,8 +73,8 @@ storiesOf('08. Server Recipes/ 03. Origin Mixed', module)
         search,
         sort: {
           sortKey: state.sortKey,
-          reverse: state.reverse
-        }
+          reverse: state.reverse,
+        },
       };
 
       doGet(params);
@@ -88,7 +88,7 @@ storiesOf('08. Server Recipes/ 03. Origin Mixed', module)
         </label>
 
         <Table data={data} sort={sort}>
-          {tableList => (
+          {(tableList) => (
             <>
               <Header>
                 <HeaderRow>
@@ -107,9 +107,9 @@ storiesOf('08. Server Recipes/ 03. Origin Mixed', module)
               </Header>
 
               <Body>
-                {tableList.map(item => (
+                {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    {tableItem => (
+                    {(tableItem) => (
                       <React.Fragment key={tableItem.id}>
                         <Cell>{tableItem.name}</Cell>
                         <Cell>
@@ -118,7 +118,7 @@ storiesOf('08. Server Recipes/ 03. Origin Mixed', module)
                             {
                               year: 'numeric',
                               month: '2-digit',
-                              day: '2-digit'
+                              day: '2-digit',
                             }
                           )}
                         </Cell>

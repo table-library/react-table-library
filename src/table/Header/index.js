@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { ThemeContext } from '@table-library/react-table-library/lib/common/context/Theme';
+import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
 
 const HeaderContainer = styled.div`
   ${({ css }) => css};

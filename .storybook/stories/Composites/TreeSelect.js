@@ -10,20 +10,20 @@ import {
   Body,
   Row,
   HeaderCell,
-  Cell
-} from '@table-library/react-table-library/lib/table';
+  Cell,
+} from '@table-library/react-table-library/table';
 
 import {
   CellTree,
   useTree,
-  TREE_EXPAND_TYPES
-} from '@table-library/react-table-library/lib/tree';
+  TREE_EXPAND_TYPES,
+} from '@table-library/react-table-library/tree';
 import {
   CellSelect,
   HeaderCellSelect,
   useSelect,
-  SELECT_TYPES
-} from '@table-library/react-table-library/lib/select';
+  SELECT_TYPES,
+} from '@table-library/react-table-library/select';
 
 import { nodes } from '../data';
 
@@ -34,12 +34,12 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
 
     const tree = useTree({
       data,
-      onChange: onTreeChange
+      onChange: onTreeChange,
     });
 
     const select = useSelect({
       data,
-      onChange: onSelectChange
+      onChange: onSelectChange,
     });
 
     function onTreeChange(action, state) {
@@ -52,7 +52,7 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
 
     return (
       <Table data={data} tree={tree} select={select}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -65,9 +65,9 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -76,7 +76,7 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -99,21 +99,21 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
     const tree = useTree(
       {
         data,
-        onChange: onTreeChange
+        onChange: onTreeChange,
       },
       {
         treeExpandType: TREE_EXPAND_TYPES.ButtonClick,
-        treeYLevel: 1
+        treeYLevel: 1,
       }
     );
 
     const select = useSelect(
       {
         data,
-        onChange: onSelectChange
+        onChange: onSelectChange,
       },
       {
-        selectType: SELECT_TYPES.ButtonClick
+        selectType: SELECT_TYPES.ButtonClick,
       }
     );
 
@@ -127,7 +127,7 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
 
     return (
       <Table data={data} tree={tree} select={select}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -141,9 +141,9 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <CellSelect item={tableItem} />
                       <CellTree item={tableItem}>
@@ -155,7 +155,7 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -178,21 +178,21 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
     const tree = useTree(
       {
         data,
-        onChange: onTreeChange
+        onChange: onTreeChange,
       },
       {
         treeExpandType: TREE_EXPAND_TYPES.ButtonClick,
-        treeYLevel: 1
+        treeYLevel: 1,
       }
     );
 
     const select = useSelect(
       {
         data,
-        onChange: onSelectChange
+        onChange: onSelectChange,
       },
       {
-        selectType: SELECT_TYPES.RowClick
+        selectType: SELECT_TYPES.RowClick,
       }
     );
 
@@ -206,7 +206,7 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
 
     return (
       <Table data={data} tree={tree} select={select}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -220,9 +220,9 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <CellSelect item={tableItem} />
                       <CellTree item={tableItem}>
@@ -234,7 +234,7 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -257,21 +257,21 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
     const tree = useTree(
       {
         data,
-        onChange: onTreeChange
+        onChange: onTreeChange,
       },
       {
         treeExpandType: TREE_EXPAND_TYPES.RowClick,
-        treeYLevel: 1
+        treeYLevel: 1,
       }
     );
 
     const select = useSelect(
       {
         data,
-        onChange: onSelectChange
+        onChange: onSelectChange,
       },
       {
-        selectType: SELECT_TYPES.ButtonClick
+        selectType: SELECT_TYPES.ButtonClick,
       }
     );
 
@@ -285,7 +285,7 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
 
     return (
       <Table data={data} tree={tree} select={select}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -299,9 +299,9 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <CellSelect item={tableItem} />
                       <CellTree item={tableItem}>
@@ -313,7 +313,7 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -338,16 +338,16 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
       const tree = useTree(
         {
           data,
-          onChange: onTreeChange
+          onChange: onTreeChange,
         },
         {
-          treeExpandType: TREE_EXPAND_TYPES.ButtonClick
+          treeExpandType: TREE_EXPAND_TYPES.ButtonClick,
         }
       );
 
       const select = useSelect({
         data,
-        onChange: onSelectChange
+        onChange: onSelectChange,
       });
 
       function onTreeChange(action, state) {
@@ -360,7 +360,7 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
 
       return (
         <Table data={data} tree={tree} select={select}>
-          {tableList => (
+          {(tableList) => (
             <>
               <Header>
                 <HeaderRow>
@@ -373,9 +373,9 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
               </Header>
 
               <Body>
-                {tableList.map(item => (
+                {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    {tableItem => (
+                    {(tableItem) => (
                       <React.Fragment key={tableItem.id}>
                         <CellTree item={tableItem}>
                           {tableItem.name}
@@ -386,7 +386,7 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
                             {
                               year: 'numeric',
                               month: '2-digit',
-                              day: '2-digit'
+                              day: '2-digit',
                             }
                           )}
                         </Cell>
@@ -412,20 +412,20 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
       const tree = useTree(
         {
           data,
-          onChange: onTreeChange
+          onChange: onTreeChange,
         },
         {
-          treeYLevel: 1
+          treeYLevel: 1,
         }
       );
 
       const select = useSelect(
         {
           data,
-          onChange: onSelectChange
+          onChange: onSelectChange,
         },
         {
-          selectType: SELECT_TYPES.ButtonClick
+          selectType: SELECT_TYPES.ButtonClick,
         }
       );
 
@@ -439,7 +439,7 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
 
       return (
         <Table data={data} tree={tree} select={select}>
-          {tableList => (
+          {(tableList) => (
             <>
               <Header>
                 <HeaderRow>
@@ -453,9 +453,9 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
               </Header>
 
               <Body>
-                {tableList.map(item => (
+                {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    {tableItem => (
+                    {(tableItem) => (
                       <React.Fragment key={tableItem.id}>
                         <CellSelect item={tableItem} />
                         <Cell>{tableItem.name}</Cell>
@@ -465,7 +465,7 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
                             {
                               year: 'numeric',
                               month: '2-digit',
-                              day: '2-digit'
+                              day: '2-digit',
                             }
                           )}
                         </Cell>

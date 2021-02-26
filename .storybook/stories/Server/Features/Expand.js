@@ -10,13 +10,13 @@ import {
   Body,
   Row,
   HeaderCell,
-  Cell
-} from '@table-library/react-table-library/lib/table';
-import { createPanel } from '@table-library/react-table-library/lib/panel';
+  Cell,
+} from '@table-library/react-table-library/table';
+import { createPanel } from '@table-library/react-table-library/panel';
 import {
   findNodeById,
-  recursiveMergeInsert
-} from '@table-library/react-table-library/lib/common/util';
+  recursiveMergeInsert,
+} from '@table-library/react-table-library/common/util';
 
 import { getData } from '../../server';
 
@@ -27,11 +27,11 @@ const needsToFetch = (nodes, id) => {
 };
 
 // TODO pageInfo -> ...rest // same in Server/Tree
-const insertTree = (targetId, nodes, pageInfo) => state => {
+const insertTree = (targetId, nodes, pageInfo) => (state) => {
   if (!targetId) {
     return {
       pageInfo,
-      nodes: [...state.nodes, ...nodes]
+      nodes: [...state.nodes, ...nodes],
     };
   }
 
@@ -39,7 +39,7 @@ const insertTree = (targetId, nodes, pageInfo) => state => {
     pageInfo: state.pageInfo,
     nodes: state.nodes.map(
       recursiveMergeInsert(targetId, nodes, { pageInfo })
-    )
+    ),
   };
 };
 
@@ -47,10 +47,10 @@ storiesOf('07. Server/ 06. Expand', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [data, setData] = React.useState({
-      nodes: []
+      nodes: [],
     });
 
-    const doGet = React.useCallback(async params => {
+    const doGet = React.useCallback(async (params) => {
       const { nodes } = await getData(params);
 
       setData(insertTree(params.id, nodes));
@@ -58,7 +58,7 @@ storiesOf('07. Server/ 06. Expand', module)
 
     React.useEffect(() => {
       doGet({
-        isShallow: true
+        isShallow: true,
       });
     }, [doGet]);
 
@@ -67,13 +67,13 @@ storiesOf('07. Server/ 06. Expand', module)
     const [ids, setIds] = React.useState([]);
 
     const expansionPanel = createPanel({
-      panel: item => <strong>{JSON.stringify(item.nodes)}</strong>,
-      condition: item => ids.includes(item.id)
+      panel: (item) => <strong>{JSON.stringify(item.nodes)}</strong>,
+      condition: (item) => ids.includes(item.id),
     });
 
-    const handleExpand = async item => {
+    const handleExpand = async (item) => {
       if (ids.includes(item.id)) {
-        setIds(ids.filter(id => id !== item.id));
+        setIds(ids.filter((id) => id !== item.id));
       } else {
         setIds(ids.concat(item.id));
 
@@ -81,7 +81,7 @@ storiesOf('07. Server/ 06. Expand', module)
 
         const params = {
           id: item.id,
-          isShallow: true
+          isShallow: true,
         };
 
         doGet(params);
@@ -90,7 +90,7 @@ storiesOf('07. Server/ 06. Expand', module)
 
     return (
       <Table data={data} panels={[expansionPanel]}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -103,9 +103,9 @@ storiesOf('07. Server/ 06. Expand', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item} onClick={handleExpand}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -114,7 +114,7 @@ storiesOf('07. Server/ 06. Expand', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>

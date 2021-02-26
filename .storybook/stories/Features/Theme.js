@@ -10,9 +10,9 @@ import {
   Body,
   Row,
   HeaderCell,
-  Cell
-} from '@table-library/react-table-library/lib/table';
-import { useTheme } from '@table-library/react-table-library/lib/theme';
+  Cell,
+} from '@table-library/react-table-library/table';
+import { useTheme } from '@table-library/react-table-library/theme';
 
 import { nodes } from '../data';
 
@@ -23,7 +23,7 @@ storiesOf('02. Features/ 01. Theme', module)
 
     return (
       <Table data={data}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -36,9 +36,9 @@ storiesOf('02. Features/ 01. Theme', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -47,7 +47,7 @@ storiesOf('02. Features/ 01. Theme', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -81,14 +81,14 @@ storiesOf('02. Features/ 01. Theme', module)
         &:nth-child(even) {
           background-color: #eaf5fd;
         }
-      `
+      `,
     });
 
     const data = { nodes };
 
     return (
       <Table data={data} theme={theme}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -101,9 +101,9 @@ storiesOf('02. Features/ 01. Theme', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -112,7 +112,7 @@ storiesOf('02. Features/ 01. Theme', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -146,14 +146,14 @@ storiesOf('02. Features/ 01. Theme', module)
         &:nth-child(even) {
           background-color: #fafafa;
         }
-      `
+      `,
     });
 
     const data = { nodes };
 
     return (
       <Table data={data} theme={theme}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -166,9 +166,9 @@ storiesOf('02. Features/ 01. Theme', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -177,7 +177,7 @@ storiesOf('02. Features/ 01. Theme', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -223,14 +223,14 @@ storiesOf('02. Features/ 01. Theme', module)
       Cell: `
         margin-top: 8px;
         margin-bottom: 9px;
-      `
+      `,
     });
 
     const data = { nodes };
 
     return (
       <Table data={data} theme={theme}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -243,9 +243,9 @@ storiesOf('02. Features/ 01. Theme', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -254,7 +254,7 @@ storiesOf('02. Features/ 01. Theme', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>

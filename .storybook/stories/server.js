@@ -1,4 +1,4 @@
-import { findNodeById } from '@table-library/react-table-library/lib/common';
+import { findNodeById } from '@table-library/react-table-library/common';
 
 import { nodes as NODES } from './data';
 
@@ -8,38 +8,39 @@ const SORTS = {
   NONE: {
     label: 'None',
     sortKey: 'NONE',
-    sortFn: array => array
+    sortFn: (array) => array,
   },
   TASK: {
     label: 'Task',
     sortKey: 'TASK',
-    sortFn: array =>
-      array.sort((a, b) => a.name.localeCompare(b.name))
+    sortFn: (array) =>
+      array.sort((a, b) => a.name.localeCompare(b.name)),
   },
   DEADLINE: {
     label: 'Deadline',
     sortKey: 'DEADLINE',
-    sortFn: array => array.sort((a, b) => a.deadline - b.deadline)
+    sortFn: (array) => array.sort((a, b) => a.deadline - b.deadline),
   },
   TYPE: {
     label: 'Type',
     sortKey: 'TYPE',
-    sortFn: array =>
-      array.sort((a, b) => a.type.localeCompare(b.type))
+    sortFn: (array) =>
+      array.sort((a, b) => a.type.localeCompare(b.type)),
   },
   COMPLETE: {
     label: 'Complete',
     sortKey: 'COMPLETE',
-    sortFn: array => array.sort((a, b) => a.isComplete - b.isComplete)
+    sortFn: (array) =>
+      array.sort((a, b) => a.isComplete - b.isComplete),
   },
   TASKS: {
     label: 'Tasks',
     sortKey: 'TASKS',
-    sortFn: array =>
+    sortFn: (array) =>
       array.sort(
         (a, b) => (a.nodes || []).length - (b.nodes || []).length
-      )
-  }
+      ),
+  },
 };
 
 const sortNodes = (nodes, sort) => {
@@ -73,7 +74,7 @@ const createTree = (nodes, paths) =>
       if (value.nodes) {
         return acc.concat({
           ...value,
-          nodes: createTree(value.nodes, paths)
+          nodes: createTree(value.nodes, paths),
         });
       }
 
@@ -97,7 +98,7 @@ const getPaginatedNodes = (nodes, offset, nextOffset) =>
         acc.nodes = acc.nodes.concat({
           ...value,
           // offset 0, because we want to include it for nested search
-          ...getPaginatedNodes(value.nodes, 0, nextOffset)
+          ...getPaginatedNodes(value.nodes, 0, nextOffset),
         });
       } else {
         acc.nodes = acc.nodes.concat(value);
@@ -109,13 +110,13 @@ const getPaginatedNodes = (nodes, offset, nextOffset) =>
       nodes: [],
       pageInfo: {
         total: nodes.length,
-        nextOffset
-      }
+        nextOffset,
+      },
     }
   );
 
-const getShallowNodes = nodes =>
-  nodes.map(value => {
+const getShallowNodes = (nodes) =>
+  nodes.map((value) => {
     if (value.nodes) {
       return { ...value, nodes: [] };
     } else {
@@ -130,9 +131,9 @@ const getData = ({
   search = '',
   filters = [],
   sort = { sortKey: 'NONE', reverse: false },
-  isShallow = false
+  isShallow = false,
 }) =>
-  new Promise(resolve => {
+  new Promise((resolve) => {
     let nodes = [...NODES];
 
     console.log({
@@ -142,19 +143,19 @@ const getData = ({
       search,
       filters,
       sort,
-      isShallow
+      isShallow,
     });
 
     const isSearch = !!search;
     const isFilter = !!filters.length;
 
     const searchFn = isSearch
-      ? value =>
+      ? (value) =>
           value.name.toLowerCase().includes(search.toLowerCase())
       : () => true;
 
     const filterFn = isFilter
-      ? value => filters.includes(value.type)
+      ? (value) => filters.includes(value.type)
       : () => true;
 
     const sortedNodes = sortNodes(nodes, sort);
@@ -173,14 +174,14 @@ const getData = ({
 
     const {
       nodes: paginatedNodes,
-      pageInfo: paginatedPageInfo
+      pageInfo: paginatedPageInfo,
     } = getPaginatedNodes(filteredNodes, offset, offset + limit);
 
     const result = {
       nodes: isShallow
         ? getShallowNodes(paginatedNodes)
         : paginatedNodes,
-      pageInfo: paginatedPageInfo
+      pageInfo: paginatedPageInfo,
     };
 
     console.log(result);

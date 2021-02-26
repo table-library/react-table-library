@@ -14,14 +14,14 @@ import {
   Body,
   Row,
   HeaderCell,
-  Cell
-} from '@table-library/react-table-library/lib/table';
+  Cell,
+} from '@table-library/react-table-library/table';
 
 import {
   useTree,
   CellTree,
-  TREE_EXPAND_TYPES
-} from '@table-library/react-table-library/lib/tree';
+  TREE_EXPAND_TYPES,
+} from '@table-library/react-table-library/tree';
 
 import { nodes } from '../data';
 
@@ -32,7 +32,7 @@ storiesOf('09. Kitchen Sink/09. Tree', module)
 
     const tree = useTree({
       data,
-      onChange: onTreeChange
+      onChange: onTreeChange,
     });
 
     function onTreeChange(action, state) {
@@ -41,7 +41,7 @@ storiesOf('09. Kitchen Sink/09. Tree', module)
 
     return (
       <Table data={data} tree={tree}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -54,9 +54,9 @@ storiesOf('09. Kitchen Sink/09. Tree', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -65,7 +65,7 @@ storiesOf('09. Kitchen Sink/09. Tree', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -87,7 +87,7 @@ storiesOf('09. Kitchen Sink/09. Tree', module)
 
     const tree = useTree({
       data,
-      onChange: onTreeChange
+      onChange: onTreeChange,
     });
 
     function onTreeChange(action, state) {
@@ -96,7 +96,7 @@ storiesOf('09. Kitchen Sink/09. Tree', module)
 
     return (
       <Table data={data} tree={tree}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -109,13 +109,15 @@ storiesOf('09. Kitchen Sink/09. Tree', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row
                   key={item.id}
                   item={item}
-                  onDoubleClick={tableItem => console.log(tableItem)}
+                  onDoubleClick={(tableItem) =>
+                    console.log(tableItem)
+                  }
                 >
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <CellTree item={tableItem}>
                         {tableItem.name}
@@ -126,7 +128,7 @@ storiesOf('09. Kitchen Sink/09. Tree', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>

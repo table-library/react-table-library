@@ -16,13 +16,13 @@ import {
   Row,
   HeaderCell,
   Cell,
-} from '@table-library/react-table-library/lib/table';
+} from '@table-library/react-table-library/table';
 
 import {
   useSort,
   HeaderCellSort,
   SORT_ICON_POSITIONS,
-} from '@table-library/react-table-library/lib/sort';
+} from '@table-library/react-table-library/sort';
 
 import { nodes } from '../data';
 

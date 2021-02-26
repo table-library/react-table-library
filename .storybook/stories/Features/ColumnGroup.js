@@ -10,8 +10,8 @@ import {
   Body,
   Row,
   HeaderCell,
-  Cell
-} from '@table-library/react-table-library/lib/table';
+  Cell,
+} from '@table-library/react-table-library/table';
 
 const list = [
   { id: '1', name: 'Hello', stars: 24, count: 42, light: true },
@@ -25,8 +25,8 @@ const list = [
     name: 'And Welcome To This Table Folks',
     stars: 155,
     count: 155,
-    light: true
-  }
+    light: true,
+  },
 ];
 
 storiesOf('02. Features/ 13. Column Grouping (WIP)', module)

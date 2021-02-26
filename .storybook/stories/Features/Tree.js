@@ -15,13 +15,13 @@ import {
   Row,
   HeaderCell,
   Cell,
-} from '@table-library/react-table-library/lib/table';
+} from '@table-library/react-table-library/table';
 
 import {
   useTree,
   CellTree,
   TREE_EXPAND_TYPES,
-} from '@table-library/react-table-library/lib/tree';
+} from '@table-library/react-table-library/tree';
 
 import { nodes } from '../data';
 

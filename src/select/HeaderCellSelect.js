@@ -1,8 +1,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-import { SelectContext } from '@table-library/react-table-library/lib/common/context/Select';
-import { HeaderCell } from '@table-library/react-table-library/lib/table/Cell';
+import { SelectContext } from '@table-library/react-table-library/common/context/Select';
+import { HeaderCell } from '@table-library/react-table-library/table/Cell';
 
 import { ImperativeCheckbox } from './Checkbox';
 

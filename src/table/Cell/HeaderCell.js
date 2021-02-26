@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { css } from 'styled-components';
 import cs from 'classnames';
 
-import { HeaderCellContainer } from '@table-library/react-table-library/lib/common/components/Cell';
-import { ThemeContext } from '@table-library/react-table-library/lib/common/context/Theme';
+import { HeaderCellContainer } from '@table-library/react-table-library/common/components/Cell';
+import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
 import {
   Resizer,
   useResize,
-} from '@table-library/react-table-library/lib/resize';
+} from '@table-library/react-table-library/resize';
 
 const HeaderCell = ({
   index,

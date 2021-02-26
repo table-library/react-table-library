@@ -10,8 +10,8 @@ import {
   Body,
   Row,
   HeaderCell,
-  Cell
-} from '@table-library/react-table-library/lib/table';
+  Cell,
+} from '@table-library/react-table-library/table';
 
 import { nodes } from '../data';
 
@@ -20,14 +20,14 @@ storiesOf('02. Features/ 06. Search', module)
   .add('default', () => {
     const [search, setSearch] = React.useState('');
 
-    const handleSearch = event => {
+    const handleSearch = (event) => {
       setSearch(event.target.value);
     };
 
     const data = {
-      nodes: nodes.filter(item =>
+      nodes: nodes.filter((item) =>
         item.name.toLowerCase().includes(search.toLowerCase())
-      )
+      ),
     };
 
     return (
@@ -38,7 +38,7 @@ storiesOf('02. Features/ 06. Search', module)
         </label>
 
         <Table data={data}>
-          {tableList => (
+          {(tableList) => (
             <>
               <Header>
                 <HeaderRow>
@@ -51,9 +51,9 @@ storiesOf('02. Features/ 06. Search', module)
               </Header>
 
               <Body>
-                {tableList.map(item => (
+                {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    {tableItem => (
+                    {(tableItem) => (
                       <React.Fragment key={tableItem.id}>
                         <Cell>{tableItem.name}</Cell>
                         <Cell>
@@ -62,7 +62,7 @@ storiesOf('02. Features/ 06. Search', module)
                             {
                               year: 'numeric',
                               month: '2-digit',
-                              day: '2-digit'
+                              day: '2-digit',
                             }
                           )}
                         </Cell>

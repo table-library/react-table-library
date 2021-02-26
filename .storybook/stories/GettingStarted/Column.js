@@ -10,8 +10,8 @@ import {
   Body,
   Row,
   HeaderCell,
-  Cell
-} from '@table-library/react-table-library/lib/table';
+  Cell,
+} from '@table-library/react-table-library/table';
 
 import { nodes } from '../data';
 
@@ -21,24 +21,27 @@ storiesOf('01. First Steps/ 05. Column', module)
     const data = { nodes };
 
     const columns = [
-      { label: 'Task', get: item => item.name },
+      { label: 'Task', get: (item) => item.name },
       {
         label: 'Deadline',
-        get: item =>
+        get: (item) =>
           item.deadline.toLocaleDateString('fr-CA', {
             year: 'numeric',
             month: '2-digit',
-            day: '2-digit'
-          })
+            day: '2-digit',
+          }),
       },
-      { label: 'Type', get: item => item.type },
-      { label: 'Complete', get: item => item.isComplete.toString() },
-      { label: 'Tasks', get: item => item.nodes?.length }
+      { label: 'Type', get: (item) => item.type },
+      {
+        label: 'Complete',
+        get: (item) => item.isComplete.toString(),
+      },
+      { label: 'Tasks', get: (item) => item.nodes?.length },
     ];
 
     return (
       <Table data={data}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -49,9 +52,9 @@ storiesOf('01. First Steps/ 05. Column', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       {columns.map((column, index) => (
                         <Cell key={index}>

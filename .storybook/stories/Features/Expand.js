@@ -10,9 +10,9 @@ import {
   Body,
   Row,
   HeaderCell,
-  Cell
-} from '@table-library/react-table-library/lib/table';
-import { createPanel } from '@table-library/react-table-library/lib/panel';
+  Cell,
+} from '@table-library/react-table-library/table';
+import { createPanel } from '@table-library/react-table-library/panel';
 
 import { nodes } from '../data';
 
@@ -24,13 +24,13 @@ storiesOf('02. Features/ 09. Expand', module)
     const [ids, setIds] = React.useState([]);
 
     const expansionPanel = createPanel({
-      panel: item => <strong>{item.name.toUpperCase()}</strong>,
-      condition: item => ids.includes(item.id)
+      panel: (item) => <strong>{item.name.toUpperCase()}</strong>,
+      condition: (item) => ids.includes(item.id),
     });
 
-    const handleExpand = item => {
+    const handleExpand = (item) => {
       if (ids.includes(item.id)) {
-        setIds(ids.filter(id => id !== item.id));
+        setIds(ids.filter((id) => id !== item.id));
       } else {
         setIds(ids.concat(item.id));
       }
@@ -38,7 +38,7 @@ storiesOf('02. Features/ 09. Expand', module)
 
     return (
       <Table data={data} panels={[expansionPanel]}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -51,9 +51,9 @@ storiesOf('02. Features/ 09. Expand', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item} onClick={handleExpand}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -62,7 +62,7 @@ storiesOf('02. Features/ 09. Expand', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>

@@ -10,8 +10,8 @@ import {
   Body,
   Row,
   HeaderCell,
-  Cell
-} from '@table-library/react-table-library/lib/table';
+  Cell,
+} from '@table-library/react-table-library/table';
 
 import { nodes } from '../data';
 
@@ -25,12 +25,12 @@ storiesOf('02. Features/ 11. Column Hiding', module)
       'deadline',
       'type',
       'complete',
-      'tasks'
+      'tasks',
     ]);
 
-    const handleColumns = column => {
+    const handleColumns = (column) => {
       if (columns.includes(column)) {
-        setColumns(columns.filter(value => value !== column));
+        setColumns(columns.filter((value) => value !== column));
       } else {
         setColumns(columns.concat(column));
       }
@@ -104,7 +104,7 @@ storiesOf('02. Features/ 11. Column Hiding', module)
         </div>
 
         <Table data={data}>
-          {tableList => (
+          {(tableList) => (
             <>
               <Header>
                 <HeaderRow>
@@ -127,9 +127,9 @@ storiesOf('02. Features/ 11. Column Hiding', module)
               </Header>
 
               <Body>
-                {tableList.map(item => (
+                {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    {tableItem => (
+                    {(tableItem) => (
                       <React.Fragment key={tableItem.id}>
                         <Cell hide={!columns.includes('name')}>
                           {tableItem.name}
@@ -140,7 +140,7 @@ storiesOf('02. Features/ 11. Column Hiding', module)
                             {
                               year: 'numeric',
                               month: '2-digit',
-                              day: '2-digit'
+                              day: '2-digit',
                             }
                           )}
                         </Cell>

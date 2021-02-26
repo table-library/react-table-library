@@ -68,15 +68,15 @@ Keep the bundle size small with relative imports:
 import { Atoms } from '@table-library/react-table-library';
 
 // imports all Atoms from the library
-import { ContentButtonPrimary } from '@table-library/react-table-library/lib/Atoms';
+import { ContentButtonPrimary } from '@table-library/react-table-library/Atoms';
 
 // imports only the component and its dependencies
-import ContentButtonPrimary from '@table-library/react-table-library/lib/ContentButtonPrimary';
+import ContentButtonPrimary from '@table-library/react-table-library/ContentButtonPrimary';
 
 // same goes for icons
 // which is why its better to import them directly
 // instead of importing all icons at once
-import IconCockpit from '@table-library/react-table-library/lib/IconCockpit';
+import IconCockpit from '@table-library/react-table-library/IconCockpit';
 ```
 
 ## Contribution to Library

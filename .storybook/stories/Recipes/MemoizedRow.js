@@ -10,10 +10,10 @@ import {
   Body,
   MemoizedRow,
   HeaderCell,
-  Cell
-} from '@table-library/react-table-library/lib/table';
+  Cell,
+} from '@table-library/react-table-library/table';
 
-import { useSelect } from '@table-library/react-table-library/lib/select';
+import { useSelect } from '@table-library/react-table-library/select';
 
 import { nodes } from '../data';
 
@@ -24,7 +24,7 @@ storiesOf('06. Recipes/02. Memoized Row (WIP)', module)
 
     const select = useSelect({
       data,
-      onChange: onSelectChange
+      onChange: onSelectChange,
     });
 
     function onSelectChange(action, state) {
@@ -33,7 +33,7 @@ storiesOf('06. Recipes/02. Memoized Row (WIP)', module)
 
     return (
       <Table data={data} select={select}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -46,9 +46,9 @@ storiesOf('06. Recipes/02. Memoized Row (WIP)', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <MemoizedRow item={item} key={item.id}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -57,7 +57,7 @@ storiesOf('06. Recipes/02. Memoized Row (WIP)', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>

@@ -9,13 +9,13 @@ import {
   HeaderRow,
   Body,
   Row,
-  Cell
-} from '@table-library/react-table-library/lib/table';
+  Cell,
+} from '@table-library/react-table-library/table';
 
 import {
   useSort,
-  HeaderCellSort
-} from '@table-library/react-table-library/lib/sort';
+  HeaderCellSort,
+} from '@table-library/react-table-library/sort';
 
 import { nodes } from '../data';
 
@@ -25,7 +25,7 @@ storiesOf('03. Composites/01. Sort & Select (WIP)', module)
     const data = { nodes };
 
     const sort = useSort({
-      onChange: onSortChange
+      onChange: onSortChange,
     });
 
     function onSortChange(action, state) {
@@ -34,13 +34,13 @@ storiesOf('03. Composites/01. Sort & Select (WIP)', module)
 
     return (
       <Table data={data} sort={sort}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
                 <HeaderCellSort
                   sortKey="TASK"
-                  sortFn={array =>
+                  sortFn={(array) =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
                 >
@@ -48,7 +48,7 @@ storiesOf('03. Composites/01. Sort & Select (WIP)', module)
                 </HeaderCellSort>
                 <HeaderCellSort
                   sortKey="DEADLINE"
-                  sortFn={array =>
+                  sortFn={(array) =>
                     array.sort((a, b) => a.deadline - b.deadline)
                   }
                 >
@@ -56,7 +56,7 @@ storiesOf('03. Composites/01. Sort & Select (WIP)', module)
                 </HeaderCellSort>
                 <HeaderCellSort
                   sortKey="TYPE"
-                  sortFn={array =>
+                  sortFn={(array) =>
                     array.sort((a, b) => a.type.localeCompare(b.type))
                   }
                 >
@@ -64,7 +64,7 @@ storiesOf('03. Composites/01. Sort & Select (WIP)', module)
                 </HeaderCellSort>
                 <HeaderCellSort
                   sortKey="COMPLETE"
-                  sortFn={array =>
+                  sortFn={(array) =>
                     array.sort((a, b) => a.isComplete - b.isComplete)
                   }
                 >
@@ -72,7 +72,7 @@ storiesOf('03. Composites/01. Sort & Select (WIP)', module)
                 </HeaderCellSort>
                 <HeaderCellSort
                   sortKey="TASKS"
-                  sortFn={array =>
+                  sortFn={(array) =>
                     array.sort(
                       (a, b) =>
                         (a.nodes || []).length -
@@ -86,9 +86,9 @@ storiesOf('03. Composites/01. Sort & Select (WIP)', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row item={item} key={item.id}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -97,7 +97,7 @@ storiesOf('03. Composites/01. Sort & Select (WIP)', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>

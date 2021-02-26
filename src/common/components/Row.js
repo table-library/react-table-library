@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import * as COLORS from '@table-library/react-table-library/lib/common/colors';
+import * as COLORS from '@table-library/react-table-library/common/colors';
 
 const RowContainerBase = styled.div`
   display: flex;

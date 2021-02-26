@@ -2,14 +2,14 @@ import * as React from 'react';
 import { css } from 'styled-components';
 import cs from 'classnames';
 
-import { Body } from '@table-library/react-table-library/lib/table/Body';
-import { Row } from '@table-library/react-table-library/lib/table/Row';
-import { isRowClick } from '@table-library/react-table-library/lib/common/util/isRowClick';
+import { Body } from '@table-library/react-table-library/table/Body';
+import { Row } from '@table-library/react-table-library/table/Row';
+import { isRowClick } from '@table-library/react-table-library/common/util/isRowClick';
 import {
   isLeaf,
   hasLeaves,
-} from '@table-library/react-table-library/lib/common/util/tree';
-import { useIdReducer } from '@table-library/react-table-library/lib/common/util/useIdReducer';
+} from '@table-library/react-table-library/common/util/tree';
+import { useIdReducer } from '@table-library/react-table-library/common/util/useIdReducer';
 
 import { TREE_EXPAND_TYPES } from './config';
 

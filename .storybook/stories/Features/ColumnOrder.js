@@ -11,8 +11,8 @@ import {
   Body,
   Row,
   HeaderCell,
-  Cell
-} from '@table-library/react-table-library/lib/table';
+  Cell,
+} from '@table-library/react-table-library/table';
 
 import { nodes } from '../data';
 
@@ -22,19 +22,22 @@ storiesOf('02. Features/ 12. Column Ordering', module)
     const data = { nodes };
 
     const [columns, setColumns] = React.useState([
-      { label: 'Task', get: item => item.name },
+      { label: 'Task', get: (item) => item.name },
       {
         label: 'Deadline',
-        get: item =>
+        get: (item) =>
           item.deadline.toLocaleDateString('fr-CA', {
             year: 'numeric',
             month: '2-digit',
-            day: '2-digit'
-          })
+            day: '2-digit',
+          }),
       },
-      { label: 'Type', get: item => item.type },
-      { label: 'Complete', get: item => item.isComplete.toString() },
-      { label: 'Tasks', get: item => item.nodes?.length }
+      { label: 'Type', get: (item) => item.type },
+      {
+        label: 'Complete',
+        get: (item) => item.isComplete.toString(),
+      },
+      { label: 'Tasks', get: (item) => item.nodes?.length },
     ]);
 
     const handleOrder = () => {
@@ -48,7 +51,7 @@ storiesOf('02. Features/ 12. Column Ordering', module)
         </button>
 
         <Table data={data}>
-          {tableList => (
+          {(tableList) => (
             <>
               <Header>
                 <HeaderRow>
@@ -61,9 +64,9 @@ storiesOf('02. Features/ 12. Column Ordering', module)
               </Header>
 
               <Body>
-                {tableList.map(item => (
+                {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    {tableItem => (
+                    {(tableItem) => (
                       <React.Fragment key={tableItem.id}>
                         {columns.map((column, index) => (
                           <Cell key={index}>

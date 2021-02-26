@@ -10,9 +10,9 @@ import {
   Body,
   Row,
   HeaderCell,
-  Cell
-} from '@table-library/react-table-library/lib/table';
-import { useTheme } from '@table-library/react-table-library/lib/theme';
+  Cell,
+} from '@table-library/react-table-library/table';
+import { useTheme } from '@table-library/react-table-library/theme';
 
 import { nodes } from '../data';
 
@@ -32,14 +32,14 @@ storiesOf('02. Features/ 02. Layout', module)
         &:nth-child(5) {
           width: 10%;
         }
-      `
+      `,
     });
 
     const data = { nodes };
 
     return (
       <Table data={data} theme={theme} layout={{ custom: true }}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -52,9 +52,9 @@ storiesOf('02. Features/ 02. Layout', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -63,7 +63,7 @@ storiesOf('02. Features/ 02. Layout', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>

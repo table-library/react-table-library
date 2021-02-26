@@ -10,8 +10,8 @@ import {
   Body,
   Row,
   HeaderCell,
-  Cell
-} from '@table-library/react-table-library/lib/table';
+  Cell,
+} from '@table-library/react-table-library/table';
 
 import { nodes } from '../data';
 
@@ -22,7 +22,7 @@ storiesOf('01. First Steps/ 03. Row', module)
 
     return (
       <Table data={data}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -35,9 +35,9 @@ storiesOf('01. First Steps/ 03. Row', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -46,7 +46,7 @@ storiesOf('01. First Steps/ 03. Row', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -68,7 +68,7 @@ storiesOf('01. First Steps/ 03. Row', module)
 
     return (
       <Table data={data}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -81,7 +81,7 @@ storiesOf('01. First Steps/ 03. Row', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row
                   key={item.id}
                   item={item}
@@ -89,7 +89,7 @@ storiesOf('01. First Steps/ 03. Row', module)
                     console.log('Click Row', tableItem, event)
                   }
                 >
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -98,7 +98,7 @@ storiesOf('01. First Steps/ 03. Row', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -120,7 +120,7 @@ storiesOf('01. First Steps/ 03. Row', module)
 
     return (
       <Table data={data}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -133,7 +133,7 @@ storiesOf('01. First Steps/ 03. Row', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row
                   key={item.id}
                   item={item}
@@ -141,7 +141,7 @@ storiesOf('01. First Steps/ 03. Row', module)
                     console.log('Doubl Click Row', tableItem, event)
                   }
                 >
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -150,7 +150,7 @@ storiesOf('01. First Steps/ 03. Row', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>

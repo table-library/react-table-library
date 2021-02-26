@@ -10,9 +10,9 @@ import {
   Body,
   Row,
   HeaderCell,
-  Cell
-} from '@table-library/react-table-library/lib/table';
-import { createPanel } from '@table-library/react-table-library/lib/panel';
+  Cell,
+} from '@table-library/react-table-library/table';
+import { createPanel } from '@table-library/react-table-library/panel';
 
 import { getData } from '../../server';
 
@@ -21,15 +21,15 @@ storiesOf('07. Server/ 09. Fetch', module)
   .add('default', () => {
     const [data, setData] = React.useState({
       nodes: [],
-      pageInfo: null
+      pageInfo: null,
     });
 
-    const doGet = React.useCallback(async params => {
+    const doGet = React.useCallback(async (params) => {
       const { nodes, pageInfo } = await getData(params);
 
-      setData(state => ({
+      setData((state) => ({
         pageInfo,
-        nodes: [...state.nodes, ...nodes]
+        nodes: [...state.nodes, ...nodes],
       }));
     }, []);
 
@@ -39,29 +39,29 @@ storiesOf('07. Server/ 09. Fetch', module)
 
     // features
 
-    const handleLoadMore = item => {
+    const handleLoadMore = (item) => {
       doGet({ offset: item.pageInfo.nextOffset, limit: 2 });
     };
 
     console.log(data);
 
     const fetchPanel = createPanel({
-      panel: item => (
+      panel: (item) => (
         <div>
           <button type="button" onClick={() => handleLoadMore(item)}>
             Load More ...
           </button>
         </div>
       ),
-      condition: item =>
+      condition: (item) =>
         data.pageInfo &&
         data.pageInfo.nextOffset < data.pageInfo.total &&
-        data.nodes[data.nodes.length - 1].id === item.id
+        data.nodes[data.nodes.length - 1].id === item.id,
     });
 
     return (
       <Table data={data} panels={[fetchPanel]}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -74,9 +74,9 @@ storiesOf('07. Server/ 09. Fetch', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -85,7 +85,7 @@ storiesOf('07. Server/ 09. Fetch', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -105,15 +105,15 @@ storiesOf('07. Server/ 09. Fetch', module)
   .add('with loading', () => {
     const [data, setData] = React.useState({
       nodes: [],
-      pageInfo: null
+      pageInfo: null,
     });
 
-    const doGet = React.useCallback(async params => {
+    const doGet = React.useCallback(async (params) => {
       const { nodes, pageInfo } = await getData(params);
 
-      setData(state => ({
+      setData((state) => ({
         pageInfo,
-        nodes: [...state.nodes, ...nodes]
+        nodes: [...state.nodes, ...nodes],
       }));
     }, []);
 
@@ -125,36 +125,36 @@ storiesOf('07. Server/ 09. Fetch', module)
 
     const [loadingIds, setLoadingIds] = React.useState([]);
 
-    const handleLoadMore = async item => {
+    const handleLoadMore = async (item) => {
       setLoadingIds(loadingIds.concat(item.id));
 
       await doGet({ offset: item.pageInfo.nextOffset, limit: 2 });
 
-      setLoadingIds(loadingIds.filter(id => id !== item.id));
+      setLoadingIds(loadingIds.filter((id) => id !== item.id));
     };
 
     const fetchPanel = createPanel({
-      panel: item => (
+      panel: (item) => (
         <div>
           <button type="button" onClick={() => handleLoadMore(item)}>
             Load More ...
           </button>
         </div>
       ),
-      condition: item =>
+      condition: (item) =>
         data.pageInfo.nextOffset < data.pageInfo.total &&
         data.nodes[data.nodes.length - 1].id === item.id &&
-        !loadingIds.includes(item.id)
+        !loadingIds.includes(item.id),
     });
 
     const loadingPanel = createPanel({
       panel: () => <div>Loading ...</div>,
-      condition: item => loadingIds.includes(item.id)
+      condition: (item) => loadingIds.includes(item.id),
     });
 
     return (
       <Table data={data} panels={[fetchPanel, loadingPanel]}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -167,9 +167,9 @@ storiesOf('07. Server/ 09. Fetch', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -178,7 +178,7 @@ storiesOf('07. Server/ 09. Fetch', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>

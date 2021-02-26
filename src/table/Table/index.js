@@ -3,13 +3,13 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'styled-components';
 
-import { TableContext } from '@table-library/react-table-library/lib/common/context/Table';
-import { ThemeContext } from '@table-library/react-table-library/lib/common/context/Theme';
-import { ResizeProvider } from '@table-library/react-table-library/lib/common/context/Resize';
-import { PanelContext } from '@table-library/react-table-library/lib/common/context/Panel';
-import { SortContext } from '@table-library/react-table-library/lib/common/context/Sort';
-import { SelectContext } from '@table-library/react-table-library/lib/common/context/Select';
-import { TreeContext } from '@table-library/react-table-library/lib/common/context/Tree';
+import { TableContext } from '@table-library/react-table-library/common/context/Table';
+import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
+import { ResizeProvider } from '@table-library/react-table-library/common/context/Resize';
+import { PanelContext } from '@table-library/react-table-library/common/context/Panel';
+import { SortContext } from '@table-library/react-table-library/common/context/Sort';
+import { SelectContext } from '@table-library/react-table-library/common/context/Select';
+import { TreeContext } from '@table-library/react-table-library/common/context/Tree';
 
 import { TableContainer } from './styles';
 

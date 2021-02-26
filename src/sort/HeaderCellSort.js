@@ -1,8 +1,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-import { SortContext } from '@table-library/react-table-library/lib/common/context/Sort';
-import { HeaderCell } from '@table-library/react-table-library/lib/table/Cell';
+import { SortContext } from '@table-library/react-table-library/common/context/Sort';
+import { HeaderCell } from '@table-library/react-table-library/table/Cell';
 
 import { SortButton } from './SortButton';
 import { SORT_ICON_POSITIONS } from './config';

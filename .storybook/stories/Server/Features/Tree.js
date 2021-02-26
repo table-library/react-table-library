@@ -10,18 +10,18 @@ import {
   Body,
   Row,
   HeaderCell,
-  Cell
-} from '@table-library/react-table-library/lib/table';
+  Cell,
+} from '@table-library/react-table-library/table';
 
 import {
   useTree,
-  CellTree
-} from '@table-library/react-table-library/lib/tree';
-import { createPanel } from '@table-library/react-table-library/lib/panel';
+  CellTree,
+} from '@table-library/react-table-library/tree';
+import { createPanel } from '@table-library/react-table-library/panel';
 import {
   findNodeById,
-  recursiveMergeInsert
-} from '@table-library/react-table-library/lib/common/util';
+  recursiveMergeInsert,
+} from '@table-library/react-table-library/common/util';
 
 import { getData } from '../../server';
 
@@ -32,11 +32,11 @@ const needsToFetch = (nodes, id) => {
 };
 
 // TODO pageInfo -> ...rest
-const insertTree = (targetId, nodes, pageInfo) => state => {
+const insertTree = (targetId, nodes, pageInfo) => (state) => {
   if (!targetId) {
     return {
       pageInfo,
-      nodes: [...state.nodes, ...nodes]
+      nodes: [...state.nodes, ...nodes],
     };
   }
 
@@ -44,7 +44,7 @@ const insertTree = (targetId, nodes, pageInfo) => state => {
     pageInfo: state.pageInfo,
     nodes: state.nodes.map(
       recursiveMergeInsert(targetId, nodes, { pageInfo })
-    )
+    ),
   };
 };
 
@@ -52,10 +52,10 @@ storiesOf('07. Server/ 05. Tree', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [data, setData] = React.useState({
-      nodes: []
+      nodes: [],
     });
 
-    const doGet = React.useCallback(async params => {
+    const doGet = React.useCallback(async (params) => {
       setData(await getData(params));
     }, []);
 
@@ -67,7 +67,7 @@ storiesOf('07. Server/ 05. Tree', module)
 
     const tree = useTree({
       data,
-      onChange: onTreeChange
+      onChange: onTreeChange,
     });
 
     function onTreeChange(action, state) {
@@ -76,7 +76,7 @@ storiesOf('07. Server/ 05. Tree', module)
 
     return (
       <Table data={data} tree={tree}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -89,9 +89,9 @@ storiesOf('07. Server/ 05. Tree', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <CellTree item={tableItem}>
                         {tableItem.name}
@@ -102,7 +102,7 @@ storiesOf('07. Server/ 05. Tree', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -121,10 +121,10 @@ storiesOf('07. Server/ 05. Tree', module)
   })
   .add('fetch iterative', () => {
     const [data, setData] = React.useState({
-      nodes: []
+      nodes: [],
     });
 
-    const doGet = React.useCallback(async params => {
+    const doGet = React.useCallback(async (params) => {
       const { nodes } = await getData(params);
 
       setData(insertTree(params.id, nodes));
@@ -132,7 +132,7 @@ storiesOf('07. Server/ 05. Tree', module)
 
     React.useEffect(() => {
       doGet({
-        isShallow: true
+        isShallow: true,
       });
     }, [doGet]);
 
@@ -140,7 +140,7 @@ storiesOf('07. Server/ 05. Tree', module)
 
     const tree = useTree({
       data,
-      onChange: onTreeChange
+      onChange: onTreeChange,
     });
 
     function onTreeChange(action, state) {
@@ -149,7 +149,7 @@ storiesOf('07. Server/ 05. Tree', module)
 
         const params = {
           id: action.payload.id,
-          isShallow: true
+          isShallow: true,
         };
 
         doGet(params);
@@ -158,7 +158,7 @@ storiesOf('07. Server/ 05. Tree', module)
 
     return (
       <Table data={data} tree={tree}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -171,9 +171,9 @@ storiesOf('07. Server/ 05. Tree', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <CellTree item={tableItem}>
                         {tableItem.name}
@@ -184,7 +184,7 @@ storiesOf('07. Server/ 05. Tree', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -203,10 +203,10 @@ storiesOf('07. Server/ 05. Tree', module)
   })
   .add('fetch iterative (loading)', () => {
     const [data, setData] = React.useState({
-      nodes: []
+      nodes: [],
     });
 
-    const doGet = React.useCallback(async params => {
+    const doGet = React.useCallback(async (params) => {
       const { nodes } = await getData(params);
 
       setData(insertTree(params.id, nodes));
@@ -214,7 +214,7 @@ storiesOf('07. Server/ 05. Tree', module)
 
     React.useEffect(() => {
       doGet({
-        isShallow: true
+        isShallow: true,
       });
     }, [doGet]);
 
@@ -224,7 +224,7 @@ storiesOf('07. Server/ 05. Tree', module)
 
     const tree = useTree({
       data,
-      onChange: onTreeChange
+      onChange: onTreeChange,
     });
 
     async function onTreeChange(action, state) {
@@ -233,7 +233,7 @@ storiesOf('07. Server/ 05. Tree', module)
 
         const params = {
           id: action.payload.id,
-          isShallow: true
+          isShallow: true,
         };
 
         setLoadingIds(loadingIds.concat(action.payload.id));
@@ -241,7 +241,7 @@ storiesOf('07. Server/ 05. Tree', module)
         await doGet(params);
 
         setLoadingIds(
-          loadingIds.filter(id => id !== action.payload.id)
+          loadingIds.filter((id) => id !== action.payload.id)
         );
       }
     }
@@ -252,12 +252,12 @@ storiesOf('07. Server/ 05. Tree', module)
           Loading ...
         </div>
       ),
-      condition: item => loadingIds.includes(item.id)
+      condition: (item) => loadingIds.includes(item.id),
     });
 
     return (
       <Table data={data} tree={tree} panels={[loadingPanel]}>
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -270,9 +270,9 @@ storiesOf('07. Server/ 05. Tree', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <CellTree item={tableItem}>
                         {tableItem.name}
@@ -283,7 +283,7 @@ storiesOf('07. Server/ 05. Tree', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>
@@ -303,10 +303,10 @@ storiesOf('07. Server/ 05. Tree', module)
   .add('fetch iterative (paginated)', () => {
     const [data, setData] = React.useState({
       nodes: [],
-      pageInfo: null
+      pageInfo: null,
     });
 
-    const doGet = React.useCallback(async params => {
+    const doGet = React.useCallback(async (params) => {
       const { nodes, pageInfo } = await getData(params);
 
       setData(insertTree(params.id, nodes, pageInfo));
@@ -316,7 +316,7 @@ storiesOf('07. Server/ 05. Tree', module)
       doGet({
         offset: 0,
         limit: 2,
-        isShallow: true
+        isShallow: true,
       });
     }, [doGet]);
 
@@ -328,7 +328,7 @@ storiesOf('07. Server/ 05. Tree', module)
 
     const tree = useTree({
       data,
-      onChange: onTreeChange
+      onChange: onTreeChange,
     });
 
     async function onTreeChange(action, state) {
@@ -337,7 +337,7 @@ storiesOf('07. Server/ 05. Tree', module)
 
         const params = {
           id: action.payload.id,
-          isShallow: true
+          isShallow: true,
         };
 
         setLoadingIds(loadingIds.concat(action.payload.id));
@@ -345,7 +345,7 @@ storiesOf('07. Server/ 05. Tree', module)
         await doGet(params);
 
         setLoadingIds(
-          loadingIds.filter(id => id !== action.payload.id)
+          loadingIds.filter((id) => id !== action.payload.id)
         );
       }
     }
@@ -356,29 +356,29 @@ storiesOf('07. Server/ 05. Tree', module)
           Loading ...
         </div>
       ),
-      condition: item => loadingIds.includes(item.id)
+      condition: (item) => loadingIds.includes(item.id),
     });
 
-    const handleLoadMore = item => {
+    const handleLoadMore = (item) => {
       doGet({
         offset: item.pageInfo.nextOffset,
         limit: 2,
-        isShallow: true
+        isShallow: true,
       });
     };
 
     const fetchPanel = createPanel({
-      panel: item => (
+      panel: (item) => (
         <div>
           <button type="button" onClick={() => handleLoadMore(item)}>
             Load More ...
           </button>
         </div>
       ),
-      condition: item =>
+      condition: (item) =>
         data.pageInfo &&
         data.pageInfo.nextOffset < data.pageInfo.total &&
-        data.nodes[data.nodes.length - 1].id === item.id
+        data.nodes[data.nodes.length - 1].id === item.id,
     });
 
     return (
@@ -387,7 +387,7 @@ storiesOf('07. Server/ 05. Tree', module)
         tree={tree}
         panels={[loadingPanel, fetchPanel]}
       >
-        {tableList => (
+        {(tableList) => (
           <>
             <Header>
               <HeaderRow>
@@ -400,9 +400,9 @@ storiesOf('07. Server/ 05. Tree', module)
             </Header>
 
             <Body>
-              {tableList.map(item => (
+              {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {tableItem => (
+                  {(tableItem) => (
                     <React.Fragment key={tableItem.id}>
                       <CellTree item={tableItem}>
                         {tableItem.name}
@@ -413,7 +413,7 @@ storiesOf('07. Server/ 05. Tree', module)
                           {
                             year: 'numeric',
                             month: '2-digit',
-                            day: '2-digit'
+                            day: '2-digit',
                           }
                         )}
                       </Cell>

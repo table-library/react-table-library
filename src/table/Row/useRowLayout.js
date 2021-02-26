@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ResizeContext } from '@table-library/react-table-library/lib/common/context/Resize';
+import { ResizeContext } from '@table-library/react-table-library/common/context/Resize';
 
 export const useRowLayout = (ref, selector) => {
   const { layout, resizedLayout } = React.useContext(ResizeContext);
