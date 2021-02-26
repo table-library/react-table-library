@@ -10,27 +10,29 @@ const Body = ({ children }) => {
   const tree = React.useContext(TreeContext);
   const panels = React.useContext(PanelContext);
 
-  const getRowProps = props =>
+  const getRowProps = (props) =>
     [select, tree]
       .filter(Boolean)
-      .filter(feature => feature._getRowProps)
-      .map(feature =>
+      .filter((feature) => feature._getRowProps)
+      .map((feature) =>
         feature._getRowProps(props, {
           select,
-          tree
+          tree,
           // others // TODO
         })
       );
 
   const getPanels = (props, index) =>
-    (panels || []).map(panel => panel(props, index)).filter(Boolean);
+    (panels || [])
+      .map((panel) => panel(props, index))
+      .filter(Boolean);
 
   return (
     <>
       {React.Children.map(children, (child, index) =>
         React.cloneElement(child, {
           rowPropsByFeature: getRowProps(child.props),
-          panels: getPanels(child.props, index)
+          panels: getPanels(child.props, index),
         })
       )}
     </>
@@ -41,8 +43,8 @@ Body.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
-    PropTypes.func
-  ])
+    PropTypes.func,
+  ]),
 };
 
 export { Body };

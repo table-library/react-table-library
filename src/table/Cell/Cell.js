@@ -12,7 +12,7 @@ const Cell = ({
   hide,
   shrink,
   onClick,
-  children
+  children,
 }) => {
   const theme = React.useContext(ThemeContext);
 
@@ -21,7 +21,7 @@ const Cell = ({
       role="gridcell"
       className={cs('td', className, {
         hide,
-        shrink
+        shrink,
       })}
       css={css`
         ${theme?.BaseCell}
@@ -44,8 +44,8 @@ Cell.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
-    PropTypes.func
-  ])
+    PropTypes.func,
+  ]),
 };
 
 export { Cell };

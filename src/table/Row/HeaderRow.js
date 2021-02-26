@@ -27,9 +27,11 @@ const HeaderRow = ({ className, disabled, children }) => {
     >
       {React.Children.toArray(children)
         .filter(Boolean)
-        .map(child =>
+        .map((child) =>
           React.cloneElement(child, {
-            index: Number(child.key.replace('.', '').replace('$', ''))
+            index: Number(
+              child.key.replace('.', '').replace('$', '')
+            ),
           })
         )}
     </HeaderRowContainer>
@@ -42,8 +44,8 @@ HeaderRow.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
-    PropTypes.func
-  ])
+    PropTypes.func,
+  ]),
 };
 
 export { HeaderRow };

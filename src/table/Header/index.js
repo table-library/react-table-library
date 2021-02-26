@@ -17,7 +17,7 @@ const Header = ({ children }) => {
       className="thead"
       css={theme?.Header}
     >
-      {React.Children.map(children, child =>
+      {React.Children.map(children, (child) =>
         React.cloneElement(child)
       )}
     </HeaderContainer>
@@ -28,8 +28,8 @@ Header.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
-    PropTypes.func
-  ])
+    PropTypes.func,
+  ]),
 };
 
 export { Header };

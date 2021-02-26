@@ -35,7 +35,7 @@ const getTreeIcon = (
 ) => {
   const size = {
     height: `${treeIconSize}`,
-    width: `${treeIconSize}`
+    width: `${treeIconSize}`,
   };
 
   const isTreeExpanded = treeState.ids.includes(item.id);
@@ -112,13 +112,13 @@ CellTree.propTypes = {
     size: PropTypes.string,
     iconDefault: PropTypes.node,
     iconRight: PropTypes.node,
-    iconDown: PropTypes.node
+    iconDown: PropTypes.node,
   }),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
-    PropTypes.func
-  ])
+    PropTypes.func,
+  ]),
 };
 
 export { CellTree };

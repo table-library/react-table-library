@@ -18,7 +18,7 @@ const applyRecursiveSort = (nodes, sortFn) => {
     if (value.nodes) {
       return acc.concat({
         ...value,
-        nodes: applyRecursiveSort(value.nodes, sortFn)
+        nodes: applyRecursiveSort(value.nodes, sortFn),
       });
     }
 
@@ -34,7 +34,7 @@ const Table = ({
   select,
   tree,
   panels,
-  children
+  children,
 }) => {
   const tableRef = React.useRef();
 
@@ -78,17 +78,17 @@ const Table = ({
 Table.propTypes = {
   data: PropTypes.objectOf(PropTypes.any),
   server: PropTypes.shape({
-    sort: PropTypes.bool
+    sort: PropTypes.bool,
   }),
   theme: PropTypes.objectOf(PropTypes.any),
   layout: PropTypes.shape({
-    custom: PropTypes.bool
+    custom: PropTypes.bool,
   }),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
-    PropTypes.func
-  ])
+    PropTypes.func,
+  ]),
 };
 
 export { Table };

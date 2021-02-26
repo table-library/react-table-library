@@ -6,7 +6,7 @@ const IconChevronSingleUp = ({
   height,
   viewBox,
   strokeWidth,
-  style
+  style,
 }) => {
   return (
     <svg
@@ -29,11 +29,11 @@ IconChevronSingleUp.propTypes = {
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   strokeWidth: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.number
+    PropTypes.number,
   ]),
   style: PropTypes.objectOf(PropTypes.string),
   viewBox: PropTypes.string,
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default IconChevronSingleUp;

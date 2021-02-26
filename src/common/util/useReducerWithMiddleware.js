@@ -10,8 +10,8 @@ const useReducerWithMiddleware = (
 
   const aRef = React.useRef();
 
-  const dispatchWithMiddleware = action => {
-    middlewareFns.forEach(middlewareFn =>
+  const dispatchWithMiddleware = (action) => {
+    middlewareFns.forEach((middlewareFn) =>
       middlewareFn(action, state)
     );
 
@@ -23,7 +23,7 @@ const useReducerWithMiddleware = (
   React.useEffect(() => {
     if (!aRef.current) return;
 
-    afterwareFns.forEach(afterwareFn =>
+    afterwareFns.forEach((afterwareFn) =>
       afterwareFn(aRef.current, state)
     );
 

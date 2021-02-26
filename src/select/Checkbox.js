@@ -6,9 +6,9 @@ import { Checkbox } from '@table-library/react-table-library/lib/common/componen
 const ImperativeCheckbox = ({
   checked,
   isIndeterminate,
-  onChange
+  onChange,
 }) => {
-  const ref = node => {
+  const ref = (node) => {
     if (!node) return;
 
     if (checked) {
@@ -29,7 +29,7 @@ const ImperativeCheckbox = ({
 ImperativeCheckbox.propTypes = {
   checked: PropTypes.bool,
   isIndeterminate: PropTypes.bool,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
 export { ImperativeCheckbox };

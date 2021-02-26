@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { ResizeContext } from '@table-library/react-table-library/lib/common/context/Resize';
 
-export const useResize = columnIndex => {
+export const useResize = (columnIndex) => {
   const { resizedLayout, tableRef } = React.useContext(ResizeContext);
 
   const MIN_RESIZE_WIDTH = 75;
@@ -13,7 +13,7 @@ export const useResize = columnIndex => {
   const startOffset = React.useRef();
   const isMouseDown = React.useRef(false);
 
-  const onMouseDown = React.useCallback(event => {
+  const onMouseDown = React.useCallback((event) => {
     event.preventDefault();
 
     isMouseDown.current = true;
@@ -21,7 +21,7 @@ export const useResize = columnIndex => {
   }, []);
 
   const onMouseMove = React.useCallback(
-    event => {
+    (event) => {
       if (isMouseDown.current) {
         event.preventDefault();
 
@@ -42,7 +42,7 @@ export const useResize = columnIndex => {
           .width;
 
         const columnsWidths = headerColumns.map(
-          headerCell => headerCell.getBoundingClientRect().width
+          (headerCell) => headerCell.getBoundingClientRect().width
         );
 
         const diffWidth = resizeWidth - columnsWidths[columnIndex];
@@ -65,14 +65,14 @@ export const useResize = columnIndex => {
 
             return width;
           })
-          .map(width => `${(width / tableWidth) * 100}%`);
+          .map((width) => `${(width / tableWidth) * 100}%`);
 
         headerColumns.forEach((headerCell, index) => {
           headerCell.style.width = newColumnWidths[index];
         });
 
         Array.from(tableRef.current.querySelectorAll('.tr-body')).map(
-          row =>
+          (row) =>
             Array.from(row.querySelectorAll('.td')).forEach(
               (cell, index) => {
                 cell.style.width = newColumnWidths[index];

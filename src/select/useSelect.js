@@ -30,7 +30,7 @@ const getRowProps = (props, features) => {
   const className = cs('row-select', {
     'row-select-clickable':
       select._options.selectType === SELECT_TYPES.RowClick,
-    'row-select-selected': isSelected
+    'row-select-selected': isSelected,
   });
 
   const onClick = (tableItem, event) => {
@@ -45,34 +45,35 @@ const getRowProps = (props, features) => {
     theme,
     className,
     onClick,
-    panels: []
+    panels: [],
   };
 };
 
 const DEFAULT_STATE = {
-  ids: []
+  ids: [],
 };
 
 const DEFAULT_OPTIONS = {
-  selectType: SELECT_TYPES.RowClick
+  selectType: SELECT_TYPES.RowClick,
 };
 
-const useSelect = (
-  { data, initialState = DEFAULT_STATE, onChange },
-  options = {}
-) => {
+const useSelect = (primary = {}, options = {}) => {
+  const data = primary.data || undefined;
+  const initialState = primary.initialState || DEFAULT_STATE;
+  const onChange = primary.onChange || (() => {});
+
   const [state, fns] = useCommonReducer(data, initialState, onChange);
 
   const mergedOptions = {
     ...DEFAULT_OPTIONS,
-    ...options
+    ...options,
   };
 
   return {
     state,
     fns,
     _options: mergedOptions,
-    _getRowProps: getRowProps
+    _getRowProps: getRowProps,
   };
 };
 

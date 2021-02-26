@@ -7,7 +7,7 @@ import { Row } from '@table-library/react-table-library/lib/table/Row';
 import { isRowClick } from '@table-library/react-table-library/lib/common/util/isRowClick';
 import {
   isLeaf,
-  hasLeaves
+  hasLeaves,
 } from '@table-library/react-table-library/lib/common/util/tree';
 import { useCommonReducer } from '@table-library/react-table-library/lib/common/util/useCommonReducer';
 
@@ -37,7 +37,7 @@ const getRowProps = (props, features) => {
     'row-tree-clickable':
       tree._options.treeExpandType === TREE_EXPAND_TYPES.RowClick,
     'row-tree-expanded': isTreeExpanded,
-    'row-tree-leaf': isLeaf(item)
+    'row-tree-leaf': isLeaf(item),
   });
 
   const onClick = (tableItem, event) => {
@@ -55,7 +55,7 @@ const getRowProps = (props, features) => {
   if (isTreeExpanded && hasLeaves(item)) {
     panels = panels.concat(
       <Body>
-        {item.nodes.map(node => (
+        {item.nodes.map((node) => (
           <Row
             key={node.id}
             item={node}
@@ -63,7 +63,7 @@ const getRowProps = (props, features) => {
             treeYLevel={treeYLevel}
             treeXLevel={treeXLevel + 1}
           >
-            {recursiveNode => children(recursiveNode)}
+            {(recursiveNode) => children(recursiveNode)}
           </Row>
         ))}
       </Body>
@@ -74,36 +74,37 @@ const getRowProps = (props, features) => {
     theme,
     className,
     onClick,
-    panels
+    panels,
   };
 };
 
 const DEFAULT_STATE = {
-  ids: []
+  ids: [],
 };
 
 const DEFAULT_OPTIONS = {
   treeExpandType: TREE_EXPAND_TYPES.RowClick,
   treeXLevel: 0,
-  treeYLevel: 0
+  treeYLevel: 0,
 };
 
-const useTree = (
-  { data, initialState = DEFAULT_STATE, onChange },
-  options = {}
-) => {
+const useTree = (primary = {}, options = {}) => {
+  const data = primary.data || undefined;
+  const initialState = primary.initialState || DEFAULT_STATE;
+  const onChange = primary.onChange || (() => {});
+
   const [state, fns] = useCommonReducer(data, initialState, onChange);
 
   const mergedOptions = {
     ...DEFAULT_OPTIONS,
-    ...options
+    ...options,
   };
 
   return {
     state,
     fns,
     _options: mergedOptions,
-    _getRowProps: getRowProps
+    _getRowProps: getRowProps,
   };
 };
 

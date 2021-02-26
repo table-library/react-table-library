@@ -35,13 +35,13 @@ HeaderCellSort.propTypes = {
     size: PropTypes.string,
     iconDefault: PropTypes.node,
     iconUp: PropTypes.node,
-    iconDown: PropTypes.node
+    iconDown: PropTypes.node,
   }),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
-    PropTypes.func
-  ])
+    PropTypes.func,
+  ]),
 };
 
 export { HeaderCellSort };

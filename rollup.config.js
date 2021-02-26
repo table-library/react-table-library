@@ -12,9 +12,12 @@ import pkg from './package.json';
 export default {
   input: {
     main: './src/index.js', // ts
+    common: './src/common/index.js', // ts
     table: './src/table/index.js', // ts
+    theme: './src/theme/index.js', // ts
+    sort: './src/sort/index.js', // ts
     select: './src/select/index.js', // ts
-    common: './src/common/index.js' // ts
+    tree: './src/tree/index.js', // ts
   },
 
   output: [
@@ -24,9 +27,9 @@ export default {
       dir: `${__dirname}/lib`,
       format: 'es',
       sourcemap: true,
-      entryFileNames: '[name].js'
+      entryFileNames: '[name].js',
       // preserveModules: true,
-    }
+    },
     // SystemJS version, for older browsers
     // {
     //   dir: `${__dirname}/lib/nomodule`,
@@ -36,20 +39,20 @@ export default {
   ],
   external: [
     ...Object.keys(pkg.dependencies || {}),
-    ...Object.keys(pkg.peerDependencies || {})
+    ...Object.keys(pkg.peerDependencies || {}),
   ],
   plugins: [
     del({ targets: 'lib/*' }),
     peerDepsExternal(),
     postcss({
-      modules: true
+      modules: true,
     }),
     resolve({
-      browser: true
+      browser: true,
     }),
     commonjs({
       sourceMap: true,
-      exclude: 'src/**'
+      exclude: 'src/**',
     }),
     // ts({
     //   transpiler: 'babel'
@@ -57,11 +60,11 @@ export default {
 
     babel({
       babelHelpers: 'runtime',
-      exclude: 'node_modules/**'
+      exclude: 'node_modules/**',
     }),
     // typescript({ sourceMap: true }),
     terser({
-      module: true
-    })
-  ]
+      module: true,
+    }),
+  ],
 };

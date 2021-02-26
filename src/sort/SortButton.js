@@ -23,7 +23,7 @@ const getSortIcon = (
 ) => {
   const size = {
     height: `${sortIconSize}`,
-    width: `${sortIconSize}`
+    width: `${sortIconSize}`,
   };
 
   if (sortState.sortKey === sortKey && sortState.reverse) {
@@ -48,7 +48,7 @@ const SortButton = ({
   sortFn,
   sortKey,
   sortIcon,
-  children
+  children,
 }) => {
   const { state, fns } = sort;
 
@@ -89,7 +89,7 @@ const SortButton = ({
       className={cs({
         active: state.sortKey === sortKey,
         prefix,
-        suffix
+        suffix,
       })}
       margin={sortIconMargin}
       onClick={handleToggleSort}
@@ -111,13 +111,13 @@ SortButton.propTypes = {
     size: PropTypes.string,
     iconDefault: PropTypes.node,
     iconUp: PropTypes.node,
-    iconDown: PropTypes.node
+    iconDown: PropTypes.node,
   }),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
-    PropTypes.func
-  ])
+    PropTypes.func,
+  ]),
 };
 
 export { SortButton };

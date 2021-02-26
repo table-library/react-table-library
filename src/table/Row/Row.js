@@ -39,7 +39,7 @@ const evaluateProps = (rowPropsByFeature, onSingleClick) => {
         themeByFeature: mergedTheme,
         classNamesByFeature: mergedClassName,
         onClickByFeature: mergedOnClick,
-        panelsByFeature: mergedPanels
+        panelsByFeature: mergedPanels,
       };
     },
     {
@@ -50,7 +50,7 @@ const evaluateProps = (rowPropsByFeature, onSingleClick) => {
           onSingleClick(tableItem, event);
         }
       },
-      panelsByFeature: []
+      panelsByFeature: [],
     }
   );
 
@@ -58,7 +58,7 @@ const evaluateProps = (rowPropsByFeature, onSingleClick) => {
     themeByFeature,
     classNamesByFeature,
     onClickByFeature,
-    ...specificsByFeature
+    ...specificsByFeature,
   };
 };
 
@@ -71,7 +71,7 @@ const Row = React.memo(
     panels,
     onClick,
     onDoubleClick,
-    children
+    children,
   }) => {
     const theme = React.useContext(ThemeContext);
 
@@ -79,7 +79,7 @@ const Row = React.memo(
       themeByFeature,
       classNamesByFeature,
       onClickByFeature,
-      panelsByFeature
+      panelsByFeature,
     } = evaluateProps(rowPropsByFeature, onClick);
 
     const ref = React.useRef();
@@ -98,7 +98,7 @@ const Row = React.memo(
             className,
             {
               disabled,
-              clickable: onClickByFeature || onDoubleClick
+              clickable: onClickByFeature || onDoubleClick,
             }
           )}
           css={css`
@@ -111,11 +111,11 @@ const Row = React.memo(
           {children(item)}
         </RowContainer>
 
-        {panelsByFeature.map(panel =>
+        {panelsByFeature.map((panel) =>
           React.cloneElement(panel, { key: item.id })
         )}
 
-        {panels.map(panel =>
+        {panels.map((panel) =>
           React.cloneElement(panel, { key: item.id })
         )}
       </>
@@ -134,8 +134,8 @@ Row.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
-    PropTypes.func
-  ])
+    PropTypes.func,
+  ]),
 };
 
 export { Row };

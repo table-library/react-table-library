@@ -7,7 +7,7 @@ import { HeaderCellContainer } from '@table-library/react-table-library/lib/comm
 import { ThemeContext } from '@table-library/react-table-library/lib/common/context/Theme';
 import {
   Resizer,
-  useResize
+  useResize,
 } from '@table-library/react-table-library/lib/resize';
 
 const HeaderCell = ({
@@ -17,7 +17,7 @@ const HeaderCell = ({
   hide,
   shrink,
   resize,
-  children
+  children,
 }) => {
   const theme = React.useContext(ThemeContext);
 
@@ -50,8 +50,8 @@ HeaderCell.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
-    PropTypes.func
-  ])
+    PropTypes.func,
+  ]),
 };
 
 export { HeaderCell };

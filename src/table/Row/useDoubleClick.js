@@ -10,11 +10,11 @@ export const useDoubleClick = (
 ) =>
   useDoubleClickBase({
     onSingleClick: onClick
-      ? event => onClick(tableItem, event)
+      ? (event) => onClick(tableItem, event)
       : NOOP,
     onDoubleClick: onDoubleClick
-      ? event => onDoubleClick(tableItem, event)
+      ? (event) => onDoubleClick(tableItem, event)
       : NOOP,
     latency: onDoubleClick ? 250 : 0,
-    ref
+    ref,
   });

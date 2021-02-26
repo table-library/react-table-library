@@ -13,8 +13,8 @@ const reducer = (state, action) => {
       return needsReverse
         ? {
             ...action.payload,
-            sortFn: array => action.payload.sortFn(array).reverse(),
-            reverse: true
+            sortFn: (array) => action.payload.sortFn(array).reverse(),
+            reverse: true,
           }
         : { ...action.payload, reverse: false };
     }
@@ -25,19 +25,18 @@ const reducer = (state, action) => {
 
 const DEFAULT_STATE = {
   sortKey: 'NONE',
-  sortFn: array => array,
-  reverse: false
+  sortFn: (array) => array,
+  reverse: false,
 };
 
 const DEFAULT_OPTIONS = {
-  isServer: false
+  isServer: false,
 };
 
-const useSort = (
-  // eslint-disable-next-line no-unused-vars
-  { data, initialState = DEFAULT_STATE, onChange },
-  options = {}
-) => {
+const useSort = (primary = {}, options = {}) => {
+  const initialState = primary.initialState || DEFAULT_STATE;
+  const onChange = primary.onChange || (() => {});
+
   const [state, dispatchWithMiddleware] = useReducerWithMiddleware(
     reducer,
     initialState,
@@ -46,21 +45,21 @@ const useSort = (
   );
 
   const onToggleSort = React.useCallback(
-    value =>
+    (value) =>
       dispatchWithMiddleware({
         type: TOGGLE_SORT,
-        payload: value
+        payload: value,
       }),
     [dispatchWithMiddleware]
   );
 
   const fns = {
-    onToggleSort
+    onToggleSort,
   };
 
   const mergedOptions = {
     ...DEFAULT_OPTIONS,
-    ...options
+    ...options,
   };
 
   return { state, fns, _options: mergedOptions };

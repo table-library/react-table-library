@@ -21,16 +21,16 @@ const ResizeProvider = ({ tableRef, layout, children }) => {
 ResizeProvider.propTypes = {
   tableRef: PropTypes.oneOfType([
     PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) })
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
   layout: PropTypes.shape({
-    custom: PropTypes.bool
+    custom: PropTypes.bool,
   }),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
-    PropTypes.func
-  ])
+    PropTypes.func,
+  ]),
 };
 
 export { ResizeContext, ResizeProvider };

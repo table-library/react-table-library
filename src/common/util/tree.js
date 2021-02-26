@@ -1,8 +1,8 @@
-export const isLeaf = node => !node.nodes;
+export const isLeaf = (node) => !node.nodes;
 
-export const hasLeaves = node => !!node.nodes?.length;
+export const hasLeaves = (node) => !!node.nodes?.length;
 
-export const fromNodesToList = nodes =>
+export const fromNodesToList = (nodes) =>
   (nodes || []).reduce((acc, value) => {
     // eslint-disable-next-line no-param-reassign
     acc = acc.concat(value);
@@ -31,19 +31,19 @@ export const findNodeById = (nodes, id) =>
   }, null);
 
 export const includesAll = (idsOne, idsTwo) => {
-  return idsOne.every(id => idsTwo.includes(id));
+  return idsOne.every((id) => idsTwo.includes(id));
 };
 
 export const recursiveMergeInsert = (
   targetId,
   nodes,
   otherProperties
-) => node => {
+) => (node) => {
   if (node.id === targetId) {
     return {
       ...node,
       nodes: [...node.nodes, ...nodes],
-      ...otherProperties
+      ...otherProperties,
     };
   }
 
@@ -52,7 +52,7 @@ export const recursiveMergeInsert = (
       ...node,
       nodes: node.nodes.map(
         recursiveMergeInsert(targetId, nodes, otherProperties)
-      )
+      ),
     };
   }
 
@@ -63,12 +63,12 @@ export const recursiveReplaceInsert = (
   targetId,
   nodes,
   otherProperties
-) => node => {
+) => (node) => {
   if (node.id === targetId) {
     return {
       ...node,
       nodes,
-      ...otherProperties
+      ...otherProperties,
     };
   }
 
@@ -77,7 +77,7 @@ export const recursiveReplaceInsert = (
       ...node,
       nodes: node.nodes.map(
         recursiveReplaceInsert(targetId, nodes, otherProperties)
-      )
+      ),
     };
   }
 
