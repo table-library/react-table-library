@@ -2,21 +2,33 @@ import * as React from 'react';
 
 import { useReducerWithMiddleware } from '@table-library/react-table-library/lib/common/util/useReducerWithMiddleware';
 
+import { useSyncState } from '@table-library/react-table-library/lib/common/util//useSyncState';
+
 const TOGGLE_SORT = 'TOGGLE_SORT';
+const SET = 'SET';
+
+const toggleSort = (state, action) => {
+  const needsReverse =
+    action.payload.sortKey === state.sortKey && !state.reverse;
+
+  return needsReverse
+    ? {
+        ...action.payload,
+        sortFn: (array) => action.payload.sortFn(array).reverse(),
+        reverse: true,
+      }
+    : { ...action.payload, reverse: false };
+};
+
+const set = (state, action) => ({ ...state, ...action.payload });
 
 const reducer = (state, action) => {
   switch (action.type) {
     case TOGGLE_SORT: {
-      const needsReverse =
-        action.payload.sortKey === state.sortKey && !state.reverse;
-
-      return needsReverse
-        ? {
-            ...action.payload,
-            sortFn: (array) => action.payload.sortFn(array).reverse(),
-            reverse: true,
-          }
-        : { ...action.payload, reverse: false };
+      return toggleSort(state, action);
+    }
+    case SET: {
+      return set(state, action);
     }
     default:
       throw new Error();
@@ -51,6 +63,13 @@ const useSort = (primary = {}, options = {}) => {
         payload: value,
       }),
     [dispatchWithMiddleware]
+  );
+
+  useSyncState(incomingState, () =>
+    dispatchWithMiddleware({
+      type: SET,
+      payload: incomingState,
+    })
   );
 
   const fns = {

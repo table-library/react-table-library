@@ -1,13 +1,10 @@
 import * as React from 'react';
-import isEqual from 'lodash.isequal';
 
-import {
-  findNodeById,
-  fromNodesToList,
-  includesAll,
-} from '@table-library/react-table-library/lib/common/util/tree';
-
-import { useReducerWithMiddleware } from '@table-library/react-table-library/lib/common/util/useReducerWithMiddleware';
+import { findNodeById } from './tree/findNodeById';
+import { fromNodesToList } from './tree/fromNodesToList';
+import { includesAll } from './tree/includesAll';
+import { useSyncState } from './useSyncState';
+import { useReducerWithMiddleware } from './useReducerWithMiddleware';
 
 const addById = (state, action) => {
   return {
@@ -51,6 +48,8 @@ const removeAll = (state) => {
   };
 };
 
+const set = (state, action) => ({ ...state, ...action.payload });
+
 const ADD_BY_ID = 'ADD_BY_ID';
 const REMOVE_BY_ID = 'REMOVE_BY_ID';
 const ADD_BY_ID_RECURSIVELY = 'ADD_BY_ID_RECURSIVELY';
@@ -80,7 +79,7 @@ const reducer = (state, action) => {
       return removeAll(state, action);
     }
     case SET: {
-      return { ...state, ...action.payload };
+      return set(state, action);
     }
     default:
       throw new Error();
@@ -182,17 +181,12 @@ const useIdReducer = (data, incomingState, onChange) => {
     }
   }, [data, state, onAddAll, onRemoveAll]);
 
-  const previousIncomingState = React.useRef(incomingState);
-  React.useEffect(() => {
-    if (!isEqual(previousIncomingState.current, incomingState)) {
-      dispatchWithMiddleware({
-        type: SET,
-        payload: incomingState,
-      });
-
-      previousIncomingState.current = incomingState;
-    }
-  }, [dispatchWithMiddleware, incomingState]);
+  useSyncState(incomingState, () =>
+    dispatchWithMiddleware({
+      type: SET,
+      payload: incomingState,
+    })
+  );
 
   const none = !state.ids.length;
 
