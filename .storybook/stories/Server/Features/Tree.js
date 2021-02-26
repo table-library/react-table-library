@@ -237,9 +237,7 @@ storiesOf('07. Server/ 05. Tree', module)
         };
 
         setLoadingIds(loadingIds.concat(action.payload.id));
-
         await doGet(params);
-
         setLoadingIds(
           loadingIds.filter((id) => id !== action.payload.id)
         );
@@ -322,8 +320,6 @@ storiesOf('07. Server/ 05. Tree', module)
 
     // features
 
-    console.log(data);
-
     const [loadingIds, setLoadingIds] = React.useState([]);
 
     const tree = useTree({
@@ -341,9 +337,7 @@ storiesOf('07. Server/ 05. Tree', module)
         };
 
         setLoadingIds(loadingIds.concat(action.payload.id));
-
         await doGet(params);
-
         setLoadingIds(
           loadingIds.filter((id) => id !== action.payload.id)
         );
@@ -360,11 +354,13 @@ storiesOf('07. Server/ 05. Tree', module)
     });
 
     const handleLoadMore = (item) => {
+      setLoadingIds(loadingIds.concat(item.id));
       doGet({
         offset: item.pageInfo.nextOffset,
         limit: 2,
         isShallow: true,
       });
+      setLoadingIds(loadingIds.filter((id) => id !== item.id));
     };
 
     const fetchPanel = createPanel({
