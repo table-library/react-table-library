@@ -348,24 +348,15 @@ storiesOf('07. Server/ 05. Tree', module)
       }
     }
 
-    const loadingPanel = createPanel({
-      panel: (item, { treeXLevel }) => (
-        <div style={{ marginLeft: `${8 + treeXLevel * 20}px` }}>
-          Loading ...
-        </div>
-      ),
-      condition: (item) => loadingIds.includes(item.id),
-    });
-
-    const handleLoadMore = (parentItem) => {
-      setLoadingIds(loadingIds.concat(parentItem.id));
-      doGet({
+    const handleLoadMore = async (item, props, parentItem) => {
+      setLoadingIds(loadingIds.concat(item.id));
+      await doGet({
         offset: parentItem.pageInfo.nextOffset,
         limit: 2,
         id: parentItem.id,
         isShallow: true,
       });
-      setLoadingIds(loadingIds.filter((id) => id !== parentItem.id));
+      setLoadingIds(loadingIds.filter((id) => id !== item.id));
     };
 
     const fetchPanel = createPanel({
@@ -373,17 +364,27 @@ storiesOf('07. Server/ 05. Tree', module)
         <div>
           <button
             type="button"
-            onClick={() => handleLoadMore(parentItem)}
+            onClick={() => handleLoadMore(item, props, parentItem)}
           >
             Load More ...
           </button>
         </div>
       ),
       condition: (item, props, parentItem) =>
+        !loadingIds.includes(item.id) &&
         parentItem &&
         parentItem.pageInfo &&
         parentItem.pageInfo.nextOffset < parentItem.pageInfo.total &&
         parentItem.nodes[parentItem.nodes.length - 1].id === item.id,
+    });
+
+    const loadingPanel = createPanel({
+      panel: (item, { treeXLevel }) => (
+        <div style={{ marginLeft: `${8 + treeXLevel * 20}px` }}>
+          Loading ...
+        </div>
+      ),
+      condition: (item) => loadingIds.includes(item.id),
     });
 
     return (
