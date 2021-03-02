@@ -7,7 +7,7 @@ export const parameters = {
       method: 'alphabetical',
       order: [
         'Getting Started',
-        ['Introduction', 'Code of Conduct', 'Changelog', 'Roadmap'],
+        ['Introduction', 'Roadmap'],
         'First Steps',
         [
           'Table',
