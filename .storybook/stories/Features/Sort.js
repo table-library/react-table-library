@@ -26,12 +26,12 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('02. Features/ 04. Sort', module)
+storiesOf('Features/ 04. Sort', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };
 
-    const sort = useSort({
+    const sort = useSort(data, {
       onChange: onSortChange,
     });
 
@@ -124,7 +124,7 @@ storiesOf('02. Features/ 04. Sort', module)
   .add('default sort', () => {
     const data = { nodes };
 
-    const sort = useSort({
+    const sort = useSort(data, {
       state: {
         sortKey: 'TASK',
         sortFn: (array) =>
@@ -223,7 +223,7 @@ storiesOf('02. Features/ 04. Sort', module)
   .add('sort icon size ', () => {
     const data = { nodes };
 
-    const sort = useSort({
+    const sort = useSort(data, {
       onChange: onSortChange,
     });
 
@@ -331,7 +331,7 @@ storiesOf('02. Features/ 04. Sort', module)
   .add('sort icon position ', () => {
     const data = { nodes };
 
-    const sort = useSort({
+    const sort = useSort(data, {
       onChange: onSortChange,
     });
 
@@ -439,7 +439,7 @@ storiesOf('02. Features/ 04. Sort', module)
   .add('indentation ', () => {
     const data = { nodes };
 
-    const sort = useSort({
+    const sort = useSort(data, {
       onChange: onSortChange,
     });
 
@@ -551,7 +551,7 @@ storiesOf('02. Features/ 04. Sort', module)
   .add('no sort icon', () => {
     const data = { nodes };
 
-    const sort = useSort({
+    const sort = useSort(data, {
       onChange: onSortChange,
     });
 
@@ -669,7 +669,7 @@ storiesOf('02. Features/ 04. Sort', module)
   .add('custom sort icon (Material UI)', () => {
     const data = { nodes };
 
-    const sort = useSort({
+    const sort = useSort(data, {
       onChange: onSortChange,
     });
 
@@ -822,7 +822,7 @@ storiesOf('02. Features/ 04. Sort', module)
   .add('custom sort button (Material UI)', () => {
     const data = { nodes };
 
-    const sort = useSort({
+    const sort = useSort(data, {
       onChange: onSortChange,
     });
 

@@ -16,7 +16,7 @@ import { createPanel } from '@table-library/react-table-library/panel';
 
 import { getData } from '../../server';
 
-storiesOf('07. Server/ 09. Fetch', module)
+storiesOf('Server/ 09. Fetch', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [data, setData] = React.useState({

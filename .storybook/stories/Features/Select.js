@@ -24,13 +24,12 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('02. Features/05. Select', module)
+storiesOf('Features/05. Select', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };
 
-    const select = useSelect({
-      data,
+    const select = useSelect(data, {
       onChange: onSelectChange,
     });
 
@@ -84,8 +83,7 @@ storiesOf('02. Features/05. Select', module)
   .add('default select', () => {
     const data = { nodes };
 
-    const select = useSelect({
-      data,
+    const select = useSelect(data, {
       state: { ids: ['2', '4'] },
       onChange: onSelectChange,
     });
@@ -140,8 +138,7 @@ storiesOf('02. Features/05. Select', module)
   .add('checkbox', () => {
     const data = { nodes };
 
-    const select = useSelect({
-      data,
+    const select = useSelect(data, {
       onChange: onSelectChange,
     });
 
@@ -198,8 +195,8 @@ storiesOf('02. Features/05. Select', module)
     const data = { nodes };
 
     const select = useSelect(
+      data,
       {
-        data,
         onChange: onSelectChange,
       },
       {
@@ -259,8 +256,7 @@ storiesOf('02. Features/05. Select', module)
   .add('custom checkbox (Material UI)', () => {
     const data = { nodes };
 
-    const select = useSelect({
-      data,
+    const select = useSelect(data, {
       onChange: onSelectChange,
     });
 

@@ -15,7 +15,7 @@ import {
 
 import { getData } from '../../server';
 
-storiesOf('08. Server Recipes/ 04. Debounce', module)
+storiesOf('Server Recipes/ 04. Debounce', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [data, setData] = React.useState({

@@ -27,18 +27,16 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('03. Composites/ 02. Tree & Select', module)
+storiesOf('Composites/ 02. Tree & Select', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };
 
-    const tree = useTree({
-      data,
+    const tree = useTree(data, {
       onChange: onTreeChange,
     });
 
-    const select = useSelect({
-      data,
+    const select = useSelect(data, {
       onChange: onSelectChange,
     });
 
@@ -97,8 +95,8 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
     const data = { nodes };
 
     const tree = useTree(
+      data,
       {
-        data,
         onChange: onTreeChange,
       },
       {
@@ -108,8 +106,8 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
     );
 
     const select = useSelect(
+      data,
       {
-        data,
         onChange: onSelectChange,
       },
       {
@@ -176,8 +174,8 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
     const data = { nodes };
 
     const tree = useTree(
+      data,
       {
-        data,
         onChange: onTreeChange,
       },
       {
@@ -187,8 +185,8 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
     );
 
     const select = useSelect(
+      data,
       {
-        data,
         onChange: onSelectChange,
       },
       {
@@ -255,8 +253,8 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
     const data = { nodes };
 
     const tree = useTree(
+      data,
       {
-        data,
         onChange: onTreeChange,
       },
       {
@@ -266,8 +264,8 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
     );
 
     const select = useSelect(
+      data,
       {
-        data,
         onChange: onSelectChange,
       },
       {
@@ -336,8 +334,8 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
       const data = { nodes };
 
       const tree = useTree(
+        data,
         {
-          data,
           onChange: onTreeChange,
         },
         {
@@ -345,8 +343,7 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
         }
       );
 
-      const select = useSelect({
-        data,
+      const select = useSelect(data, {
         onChange: onSelectChange,
       });
 
@@ -410,8 +407,8 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
       const data = { nodes };
 
       const tree = useTree(
+        data,
         {
-          data,
           onChange: onTreeChange,
         },
         {
@@ -420,8 +417,8 @@ storiesOf('03. Composites/ 02. Tree & Select', module)
       );
 
       const select = useSelect(
+        data,
         {
-          data,
           onChange: onSelectChange,
         },
         {

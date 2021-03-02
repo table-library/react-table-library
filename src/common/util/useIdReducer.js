@@ -3,7 +3,7 @@ import * as React from 'react';
 import { findNodeById } from './tree/findNodeById';
 import { fromNodesToList } from './tree/fromNodesToList';
 import { includesAll } from './tree/includesAll';
-import { useSyncState } from './useSyncState';
+import { useSyncControlledState } from './useSyncControlledState';
 import { useReducerWithMiddleware } from './useReducerWithMiddleware';
 
 const addById = (state, action) => {
@@ -86,12 +86,13 @@ const reducer = (state, action) => {
   }
 };
 
-const useIdReducer = (data, incomingState, onChange) => {
+const useIdReducer = (data, controlledState, onChange, context) => {
   const [state, dispatchWithMiddleware] = useReducerWithMiddleware(
     reducer,
-    incomingState,
+    controlledState,
     [],
-    [onChange]
+    [onChange],
+    context
   );
 
   const onAddById = React.useCallback(
@@ -181,10 +182,10 @@ const useIdReducer = (data, incomingState, onChange) => {
     }
   }, [data, state, onAddAll, onRemoveAll]);
 
-  useSyncState(incomingState, () =>
+  useSyncControlledState(controlledState, state, () =>
     dispatchWithMiddleware({
       type: SET,
-      payload: incomingState,
+      payload: controlledState,
     })
   );
 
@@ -197,19 +198,32 @@ const useIdReducer = (data, incomingState, onChange) => {
       state.ids
     );
 
-  const fns = {
-    onAddById,
-    onRemoveById,
-    onToggleById,
+  const fns = React.useMemo(
+    () => ({
+      onAddById,
+      onRemoveById,
+      onToggleById,
 
-    onAddByIdRecursively,
-    onRemoveByIdRecursively,
-    onToggleByIdRecursively,
+      onAddByIdRecursively,
+      onRemoveByIdRecursively,
+      onToggleByIdRecursively,
 
-    onAddAll,
-    onRemoveAll,
-    onToggleAll,
-  };
+      onAddAll,
+      onRemoveAll,
+      onToggleAll,
+    }),
+    [
+      onAddAll,
+      onAddById,
+      onAddByIdRecursively,
+      onRemoveAll,
+      onRemoveById,
+      onRemoveByIdRecursively,
+      onToggleAll,
+      onToggleById,
+      onToggleByIdRecursively,
+    ]
+  );
 
   return [{ ...state, none, all }, fns];
 };

@@ -6,10 +6,6 @@ import { version } from '../package.json';
 addons.setConfig({
   theme: create({
     brandTitle: `React Table Library (v${version})`,
-    brandUrl: '#'
+    brandUrl: 'https://github.com/table-library/react-table-library',
   }),
-  enableShortcuts: false,
-  isToolshown: false,
-  showPanel: false,
-  showRoots: true
 });

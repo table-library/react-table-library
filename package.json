@@ -1,6 +1,6 @@
 {
   "name": "@table-library/react-table-library",
-  "version": "0.0.82",
+  "version": "0.0.95",
   "description": "react-table-library",
   "main": "lib/main.js",
   "peerDependencies": {
@@ -10,7 +10,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "lodash.isequal": "^4.5.0",
-    "styled-components": "^5.0.1",
+    "styled-components": "^5.2.0",
     "use-double-click": "^1.0.5"
   },
   "devDependencies": {
@@ -75,8 +75,8 @@
     "test:update": "npm run test -- --u",
     "loki:test": "loki test",
     "loki:update": "loki update",
-    "storybook:dev": "start-storybook --docs -c .storybook -s .storybook/static -p 9001",
-    "storybook:build": "build-storybook --docs -c .storybook -s .storybook/static -o dist",
+    "storybook:dev": "start-storybook .storybook -s .storybook/static -p 9001",
+    "storybook:build": "build-storybook .storybook -s .storybook/static -o dist",
     "library:build": "rollup -c && npm run copypackage",
     "check": "npm run test && npm run prettier:check && npm run lint:check",
     "copypackage": "cp -rf package.json lib",

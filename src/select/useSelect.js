@@ -4,6 +4,7 @@ import cs from 'classnames';
 import * as COLORS from '@table-library/react-table-library/common/colors';
 import { isRowClick } from '@table-library/react-table-library/common/util/isRowClick';
 import { useIdReducer } from '@table-library/react-table-library/common/util/useIdReducer';
+import { useSyncRefState } from '@table-library/react-table-library/common/util/useSyncRefState';
 
 import { SELECT_TYPES } from './config';
 
@@ -57,12 +58,18 @@ const DEFAULT_OPTIONS = {
   selectType: SELECT_TYPES.RowClick,
 };
 
-const useSelect = (primary = {}, options = {}) => {
-  const data = primary.data || undefined;
-  const incomingState = primary.state || DEFAULT_STATE;
+const useSelect = (data, primary = {}, options = {}, context) => {
+  const controlledState = primary.state || DEFAULT_STATE;
   const onChange = primary.onChange || (() => {});
 
-  const [state, fns] = useIdReducer(data, incomingState, onChange);
+  const [state, fns] = useIdReducer(
+    data,
+    controlledState,
+    onChange,
+    context
+  );
+
+  useSyncRefState('select', context, state);
 
   const mergedOptions = {
     ...DEFAULT_OPTIONS,

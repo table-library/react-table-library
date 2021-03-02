@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import { useReducerWithMiddleware } from '@table-library/react-table-library/common/util/useReducerWithMiddleware';
-
-import { useSyncState } from '@table-library/react-table-library/common/util//useSyncState';
+import { useSyncControlledState } from '@table-library/react-table-library/common/util//useSyncControlledState';
+import { useSyncRefState } from '@table-library/react-table-library/common/util/useSyncRefState';
 
 const TOGGLE_SORT = 'TOGGLE_SORT';
 const SET = 'SET';
@@ -45,15 +45,16 @@ const DEFAULT_OPTIONS = {
   isServer: false,
 };
 
-const useSort = (primary = {}, options = {}) => {
-  const incomingState = primary.state || DEFAULT_STATE;
+const useSort = (data, primary = {}, options = {}, context) => {
+  const controlledState = primary.state || DEFAULT_STATE;
   const onChange = primary.onChange || (() => {});
 
   const [state, dispatchWithMiddleware] = useReducerWithMiddleware(
     reducer,
-    incomingState,
+    controlledState,
     [],
-    [onChange]
+    [onChange],
+    context
   );
 
   const onToggleSort = React.useCallback(
@@ -65,16 +66,21 @@ const useSort = (primary = {}, options = {}) => {
     [dispatchWithMiddleware]
   );
 
-  useSyncState(incomingState, () =>
+  useSyncControlledState(controlledState, state, () =>
     dispatchWithMiddleware({
       type: SET,
-      payload: incomingState,
+      payload: controlledState,
     })
   );
 
-  const fns = {
-    onToggleSort,
-  };
+  const fns = React.useMemo(
+    () => ({
+      onToggleSort,
+    }),
+    [onToggleSort]
+  );
+
+  useSyncRefState('sort', context, state);
 
   const mergedOptions = {
     ...DEFAULT_OPTIONS,

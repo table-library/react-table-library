@@ -20,7 +20,7 @@ import {
 
 import { getData } from '../../server';
 
-storiesOf('07. Server/ 02. Sort', module)
+storiesOf('Server/ 02. Sort', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [data, setData] = React.useState({

@@ -19,12 +19,12 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('03. Composites/01. Sort & Select (WIP)', module)
+storiesOf('Composites/01. Sort & Select (WIP)', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };
 
-    const sort = useSort({
+    const sort = useSort(data, {
       onChange: onSortChange,
     });
 

@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
-storiesOf('07. Server/ 04. Filter (WIP)', module)
+storiesOf('Server/ 04. Filter (WIP)', module)
   // .addParameters({ component: Table })
   .add('default', () => {
     return <div>WIP</div>;

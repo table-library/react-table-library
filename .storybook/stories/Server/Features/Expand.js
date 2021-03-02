@@ -43,7 +43,7 @@ const insertTree = (targetId, nodes, pageInfo) => (state) => {
   };
 };
 
-storiesOf('07. Server/ 06. Expand', module)
+storiesOf('Server/ 06. Expand', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [data, setData] = React.useState({

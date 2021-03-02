@@ -16,7 +16,7 @@ import { createPanel } from '@table-library/react-table-library/panel';
 
 import { nodes } from '../data';
 
-storiesOf('02. Features/ 09. Expand', module)
+storiesOf('Features/ 09. Expand', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };

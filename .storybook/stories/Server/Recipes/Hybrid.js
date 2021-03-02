@@ -16,7 +16,7 @@ import { useTheme } from '@table-library/react-table-library/theme';
 
 import { getData } from '../../server';
 
-storiesOf('08. Server Recipes/ 05. Hybrid', module)
+storiesOf('Server Recipes/ 05. Hybrid', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [data, setData] = React.useState({

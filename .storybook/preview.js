@@ -3,14 +3,37 @@ import 'loki/configure-react';
 
 export const parameters = {
   options: {
-    storySort: (a, b) => a[1].id.localeCompare(b[1].id)
-  }
+    storySort: {
+      method: 'alphabetical',
+      order: [
+        'Introduction',
+        [
+          'Welcome',
+          'Features',
+          'Installation',
+          'License',
+          'Code of Conduct',
+          'Changelog',
+          'Roadmap',
+        ],
+        'Getting Started',
+        'Features',
+        'Composites',
+        'Library Themes',
+        'Product Themes',
+        'Recipes',
+        'Server',
+        'Server Recipes',
+        'Kitchen Sink',
+      ],
+    },
+  },
 };
 
 export const decorators = [
-  Story => (
+  (Story) => (
     <>
       <Story />
     </>
-  )
+  ),
 ];

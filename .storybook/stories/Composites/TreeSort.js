@@ -21,17 +21,16 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('03. Composites/03. Tree & Sort', module)
+storiesOf('Composites/03. Tree & Sort', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };
 
-    const tree = useTree({
-      data,
+    const tree = useTree(data, {
       onChange: onTreeChange,
     });
 
-    const sort = useSort({
+    const sort = useSort(data, {
       onChange: onSortChange,
     });
 

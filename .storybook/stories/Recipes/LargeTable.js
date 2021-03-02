@@ -15,7 +15,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('06. Recipes/ 03. Large Table (WIP)', module)
+storiesOf('Recipes/ 03. Large Table (WIP)', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return <>WIP</>;

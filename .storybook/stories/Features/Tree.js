@@ -25,13 +25,12 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('02. Features/08. Tree', module)
+storiesOf('Features/08. Tree', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };
 
-    const tree = useTree({
-      data,
+    const tree = useTree(data, {
       onChange: onTreeChange,
     });
 
@@ -85,8 +84,7 @@ storiesOf('02. Features/08. Tree', module)
   .add('tree icon', () => {
     const data = { nodes };
 
-    const tree = useTree({
-      data,
+    const tree = useTree(data, {
       onChange: onTreeChange,
     });
 
@@ -143,8 +141,8 @@ storiesOf('02. Features/08. Tree', module)
     const data = { nodes };
 
     const tree = useTree(
+      data,
       {
-        data,
         onChange: onTreeChange,
       },
       {
@@ -204,11 +202,11 @@ storiesOf('02. Features/08. Tree', module)
   .add('default tree', () => {
     const data = { nodes };
 
-    const tree = useTree({
+    const tree = useTree(data, {
       state: {
         ids: ['2', '62', '4'],
       },
-      data,
+
       onChange: onTreeChange,
     });
 
@@ -264,8 +262,7 @@ storiesOf('02. Features/08. Tree', module)
   .add('tree icon size', () => {
     const data = { nodes };
 
-    const tree = useTree({
-      data,
+    const tree = useTree(data, {
       onChange: onTreeChange,
     });
 
@@ -326,8 +323,7 @@ storiesOf('02. Features/08. Tree', module)
   .add('custom tree icon (Material UI)', () => {
     const data = { nodes };
 
-    const tree = useTree({
-      data,
+    const tree = useTree(data, {
       onChange: onTreeChange,
     });
 

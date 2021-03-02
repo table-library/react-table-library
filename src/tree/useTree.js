@@ -10,6 +10,7 @@ import {
   hasLeaves,
 } from '@table-library/react-table-library/common/util/tree';
 import { useIdReducer } from '@table-library/react-table-library/common/util/useIdReducer';
+import { useSyncRefState } from '@table-library/react-table-library/common/util/useSyncRefState';
 
 import { TREE_EXPAND_TYPES } from './config';
 
@@ -88,12 +89,18 @@ const DEFAULT_OPTIONS = {
   treeYLevel: 0,
 };
 
-const useTree = (primary = {}, options = {}) => {
-  const data = primary.data || undefined;
-  const incomingState = primary.state || DEFAULT_STATE;
+const useTree = (data, primary = {}, options = {}, context) => {
+  const controlledState = primary.state || DEFAULT_STATE;
   const onChange = primary.onChange || (() => {});
 
-  const [state, fns] = useIdReducer(data, incomingState, onChange);
+  const [state, fns] = useIdReducer(
+    data,
+    controlledState,
+    onChange,
+    context
+  );
+
+  useSyncRefState('tree', context, state);
 
   const mergedOptions = {
     ...DEFAULT_OPTIONS,

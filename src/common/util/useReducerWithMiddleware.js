@@ -2,17 +2,25 @@ import * as React from 'react';
 
 const useReducerWithMiddleware = (
   reducer,
-  incomingState,
+  controlledState,
   middlewareFns,
-  afterwareFns
+  afterwareFns,
+  context
 ) => {
-  const [state, dispatch] = React.useReducer(reducer, incomingState);
+  const [state, dispatch] = React.useReducer(
+    reducer,
+    controlledState
+  );
 
   const aRef = React.useRef();
 
   const dispatchWithMiddleware = (action) => {
     middlewareFns.forEach((middlewareFn) =>
-      middlewareFn(action, state)
+      middlewareFn(
+        action,
+        state,
+        context ? context.current : undefined
+      )
     );
 
     aRef.current = action;
@@ -24,11 +32,15 @@ const useReducerWithMiddleware = (
     if (!aRef.current) return;
 
     afterwareFns.forEach((afterwareFn) =>
-      afterwareFn(aRef.current, state)
+      afterwareFn(
+        aRef.current,
+        state,
+        context ? context.current : undefined
+      )
     );
 
     aRef.current = null;
-  }, [afterwareFns, state]);
+  }, [context, afterwareFns, state]);
 
   return [state, dispatchWithMiddleware];
 };
