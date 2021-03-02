@@ -6,17 +6,9 @@ export const parameters = {
     storySort: {
       method: 'alphabetical',
       order: [
-        'Introduction',
-        [
-          'Welcome',
-          'Features',
-          'Installation',
-          'License',
-          'Code of Conduct',
-          'Changelog',
-          'Roadmap',
-        ],
         'Getting Started',
+        ['Introduction', 'Code of Conduct', 'Changelog', 'Roadmap'],
+        'First Steps',
         [
           'Table',
           'Cell',

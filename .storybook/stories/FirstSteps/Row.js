@@ -15,7 +15,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('Getting Started/Row', module)
+storiesOf('First Steps/Row', module)
   .addParameters({ component: Table })
   .add('row click', () => {
     const data = { nodes };

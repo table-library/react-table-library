@@ -15,7 +15,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('Getting Started/CRUD', module)
+storiesOf('First Steps/CRUD', module)
   .addParameters({ component: Table })
   .add('create', () => {
     const [data, setData] = React.useState({ nodes });
