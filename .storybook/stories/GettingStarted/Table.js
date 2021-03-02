@@ -15,9 +15,9 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('Getting Started/ 01. Table', module)
+storiesOf('Getting Started', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('Table', () => {
     const data = { nodes };
 
     return (

@@ -48,9 +48,9 @@ const insertTree = (targetId, nodes, pageInfo) => (state) => {
   };
 };
 
-storiesOf('Server/ 05. Tree', module)
+storiesOf('Server/Tree', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('fetch once', () => {
     const [data, setData] = React.useState({
       nodes: [],
     });
@@ -65,8 +65,7 @@ storiesOf('Server/ 05. Tree', module)
 
     // features
 
-    const tree = useTree({
-      data,
+    const tree = useTree(data, {
       onChange: onTreeChange,
     });
 
@@ -119,7 +118,7 @@ storiesOf('Server/ 05. Tree', module)
       </Table>
     );
   })
-  .add('fetch iterative', () => {
+  .add('fetch nested', () => {
     const [data, setData] = React.useState({
       nodes: [],
     });
@@ -138,22 +137,20 @@ storiesOf('Server/ 05. Tree', module)
 
     // features
 
-    const tree = useTree({
-      data,
+    const tree = useTree(data, {
       onChange: onTreeChange,
     });
 
     function onTreeChange(action, state) {
-      if (action.type === 'ADD_BY_ID') {
-        if (!needsToFetch(data.nodes, action.payload.id)) return;
+      if (action.type !== 'ADD_BY_ID') return;
+      if (!needsToFetch(data.nodes, action.payload.id)) return;
 
-        const params = {
-          id: action.payload.id,
-          isShallow: true,
-        };
+      const params = {
+        id: action.payload.id,
+        isShallow: true,
+      };
 
-        doGet(params);
-      }
+      doGet(params);
     }
 
     return (
@@ -201,7 +198,7 @@ storiesOf('Server/ 05. Tree', module)
       </Table>
     );
   })
-  .add('fetch iterative (loading)', () => {
+  .add('fetch nested (loading)', () => {
     const [data, setData] = React.useState({
       nodes: [],
     });
@@ -222,26 +219,24 @@ storiesOf('Server/ 05. Tree', module)
 
     const [loadingIds, setLoadingIds] = React.useState([]);
 
-    const tree = useTree({
-      data,
+    const tree = useTree(data, {
       onChange: onTreeChange,
     });
 
     async function onTreeChange(action, state) {
-      if (action.type === 'ADD_BY_ID') {
-        if (!needsToFetch(data.nodes, action.payload.id)) return;
+      if (action.type !== 'ADD_BY_ID') return;
+      if (!needsToFetch(data.nodes, action.payload.id)) return;
 
-        const params = {
-          id: action.payload.id,
-          isShallow: true,
-        };
+      const params = {
+        id: action.payload.id,
+        isShallow: true,
+      };
 
-        setLoadingIds(loadingIds.concat(action.payload.id));
-        await doGet(params);
-        setLoadingIds(
-          loadingIds.filter((id) => id !== action.payload.id)
-        );
-      }
+      setLoadingIds(loadingIds.concat(action.payload.id));
+      await doGet(params);
+      setLoadingIds(
+        loadingIds.filter((id) => id !== action.payload.id)
+      );
     }
 
     const loadingPanel = createPanel({
@@ -298,7 +293,7 @@ storiesOf('Server/ 05. Tree', module)
       </Table>
     );
   })
-  .add('fetch iterative (paginated)', () => {
+  .add('fetch nested & paginated', () => {
     const [data, setData] = React.useState({
       nodes: [],
       pageInfo: null,
@@ -306,8 +301,6 @@ storiesOf('Server/ 05. Tree', module)
 
     const doGet = React.useCallback(async (params) => {
       const { nodes, pageInfo } = await getData(params);
-
-      console.log(nodes, pageInfo);
 
       setData(insertTree(params.id, nodes, pageInfo));
     }, []);
@@ -324,28 +317,26 @@ storiesOf('Server/ 05. Tree', module)
 
     const [loadingIds, setLoadingIds] = React.useState([]);
 
-    const tree = useTree({
-      data,
+    const tree = useTree(data, {
       onChange: onTreeChange,
     });
 
     async function onTreeChange(action, state) {
-      if (action.type === 'ADD_BY_ID') {
-        if (!needsToFetch(data.nodes, action.payload.id)) return;
+      if (action.type !== 'ADD_BY_ID') return;
+      if (!needsToFetch(data.nodes, action.payload.id)) return;
 
-        const params = {
-          offset: 0,
-          limit: 2,
-          id: action.payload.id,
-          isShallow: true,
-        };
+      const params = {
+        offset: 0,
+        limit: 2,
+        id: action.payload.id,
+        isShallow: true,
+      };
 
-        setLoadingIds(loadingIds.concat(action.payload.id));
-        await doGet(params);
-        setLoadingIds(
-          loadingIds.filter((id) => id !== action.payload.id)
-        );
-      }
+      setLoadingIds(loadingIds.concat(action.payload.id));
+      await doGet(params);
+      setLoadingIds(
+        loadingIds.filter((id) => id !== action.payload.id)
+      );
     }
 
     const handleLoadMore = async (item, props, parentItem) => {

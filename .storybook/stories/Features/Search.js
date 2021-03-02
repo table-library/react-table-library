@@ -16,7 +16,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('Features/ 06. Search', module)
+storiesOf('Features/Search', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [search, setSearch] = React.useState('');
@@ -81,7 +81,7 @@ storiesOf('Features/ 06. Search', module)
       </>
     );
   })
-  .add('with notification', () => {
+  .add('with callback', () => {
     const [search, setSearch] = React.useState('');
 
     const handleSearch = (event) => {

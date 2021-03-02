@@ -4,6 +4,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import {
+  useCustom,
   Table,
   Header,
   HeaderRow,
@@ -43,7 +44,7 @@ const insertTree = (targetId, nodes, pageInfo) => (state) => {
   };
 };
 
-storiesOf('Server/ 06. Expand', module)
+storiesOf('Server/Expand', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [data, setData] = React.useState({

@@ -27,7 +27,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('Composites/ 02. Tree & Select', module)
+storiesOf('Composites/Tree & Select', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };

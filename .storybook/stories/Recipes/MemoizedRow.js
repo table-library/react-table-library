@@ -17,13 +17,12 @@ import { useSelect } from '@table-library/react-table-library/select';
 
 import { nodes } from '../data';
 
-storiesOf('Recipes/02. Memoized Row (WIP)', module)
+storiesOf('Recipes/Memoized Row (WIP)', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };
 
-    const select = useSelect({
-      data,
+    const select = useSelect(data, {
       onChange: onSelectChange,
     });
 

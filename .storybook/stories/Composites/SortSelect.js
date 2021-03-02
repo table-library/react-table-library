@@ -17,9 +17,11 @@ import {
   HeaderCellSort,
 } from '@table-library/react-table-library/sort';
 
+import { useSelect } from '@table-library/react-table-library/select';
+
 import { nodes } from '../data';
 
-storiesOf('Composites/01. Sort & Select (WIP)', module)
+storiesOf('Composites/Sort & Select (WIP)', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };
@@ -28,12 +30,20 @@ storiesOf('Composites/01. Sort & Select (WIP)', module)
       onChange: onSortChange,
     });
 
+    const select = useSelect(data, {
+      onChange: onSelectChange,
+    });
+
     function onSortChange(action, state) {
       console.log(action, state);
     }
 
+    function onSelectChange(action, state) {
+      console.log(action, state);
+    }
+
     return (
-      <Table data={data} sort={sort}>
+      <Table data={data} sort={sort} select={select}>
         {(tableList) => (
           <>
             <Header>

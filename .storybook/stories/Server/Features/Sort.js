@@ -20,7 +20,7 @@ import {
 
 import { getData } from '../../server';
 
-storiesOf('Server/ 02. Sort', module)
+storiesOf('Server/Sort', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [data, setData] = React.useState({
@@ -40,6 +40,7 @@ storiesOf('Server/ 02. Sort', module)
     // features
 
     const sort = useSort(
+      data,
       {
         onChange: onSortChange,
       },

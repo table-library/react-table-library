@@ -15,7 +15,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('Features/ 03. Resize', module)
+storiesOf('Features/Resize', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };

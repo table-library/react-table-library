@@ -4,6 +4,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import {
+  useCustom,
   Table,
   Header,
   HeaderRow,
@@ -15,7 +16,7 @@ import {
 
 import { getData } from '../../server';
 
-storiesOf('Server Recipes/ 04. Debounce', module)
+storiesOf('Server Recipes/Debounce', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [data, setData] = React.useState({
@@ -36,21 +37,26 @@ storiesOf('Server Recipes/ 04. Debounce', module)
 
     const [search, setSearch] = React.useState('');
 
-    const handleSearch = (event) => {
-      setSearch(event.target.value);
-    };
+    useCustom('search', data, {
+      state: { search },
+      onChange: onSearchChange,
+    });
 
     const timeout = React.useRef();
 
-    React.useEffect(() => {
+    function onSearchChange(action, state) {
       const params = {
-        search,
+        search: state.search,
       };
 
       if (timeout.current) clearTimeout(timeout.current);
 
       timeout.current = setTimeout(() => doGet(params), 500);
-    }, [search]);
+    }
+
+    const handleSearch = (event) => {
+      setSearch(event.target.value);
+    };
 
     return (
       <>

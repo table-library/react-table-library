@@ -26,7 +26,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('Features/ 04. Sort', module)
+storiesOf('Features/Sort', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };

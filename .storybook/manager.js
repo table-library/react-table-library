@@ -8,4 +8,5 @@ addons.setConfig({
     brandTitle: `React Table Library (v${version})`,
     brandUrl: 'https://github.com/table-library/react-table-library',
   }),
+  showPanel: false,
 });

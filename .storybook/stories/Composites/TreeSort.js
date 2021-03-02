@@ -21,7 +21,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('Composites/03. Tree & Sort', module)
+storiesOf('Composites/Tree & Sort', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };

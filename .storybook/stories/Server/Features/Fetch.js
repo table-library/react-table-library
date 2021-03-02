@@ -16,7 +16,7 @@ import { createPanel } from '@table-library/react-table-library/panel';
 
 import { getData } from '../../server';
 
-storiesOf('Server/ 09. Fetch', module)
+storiesOf('Server/Fetch', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [data, setData] = React.useState({
@@ -42,8 +42,6 @@ storiesOf('Server/ 09. Fetch', module)
     const handleLoadMore = (item) => {
       doGet({ offset: item.pageInfo.nextOffset, limit: 2 });
     };
-
-    console.log(data);
 
     const fetchPanel = createPanel({
       panel: (item) => (

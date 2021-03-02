@@ -19,7 +19,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('Recipes/ 01. Controlled', module)
+storiesOf('Recipes/Controlled', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const SORTS = {
@@ -64,7 +64,7 @@ storiesOf('Recipes/ 01. Controlled', module)
 
     const data = { nodes };
 
-    const sort = useSort({
+    const sort = useSort(data, {
       onChange: onSortChange,
     });
 

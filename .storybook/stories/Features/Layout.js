@@ -16,7 +16,7 @@ import { useTheme } from '@table-library/react-table-library/theme';
 
 import { nodes } from '../data';
 
-storiesOf('Features/ 02. Layout', module)
+storiesOf('Features/Layout', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const theme = useTheme({

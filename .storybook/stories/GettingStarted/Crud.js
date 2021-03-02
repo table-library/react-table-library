@@ -15,54 +15,8 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('Getting Started/ 04. CRUD', module)
+storiesOf('Getting Started/CRUD', module)
   .addParameters({ component: Table })
-  .add('default', () => {
-    const data = { nodes };
-
-    return (
-      <Table data={data}>
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCell>Task</HeaderCell>
-                <HeaderCell>Deadline</HeaderCell>
-                <HeaderCell>Type</HeaderCell>
-                <HeaderCell>Complete</HeaderCell>
-                <HeaderCell>Tasks</HeaderCell>
-              </HeaderRow>
-            </Header>
-
-            <Body>
-              {tableList.map((item) => (
-                <Row key={item.id} item={item}>
-                  {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
-                      <Cell>{tableItem.name}</Cell>
-                      <Cell>
-                        {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
-                          {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit',
-                          }
-                        )}
-                      </Cell>
-                      <Cell>{tableItem.type}</Cell>
-                      <Cell>{tableItem.isComplete.toString()}</Cell>
-                      <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
-                  )}
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
-    );
-  })
   .add('create', () => {
     const [data, setData] = React.useState({ nodes });
     const [value, setValue] = React.useState('');

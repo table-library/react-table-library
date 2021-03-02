@@ -4,6 +4,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import {
+  useCustom,
   Table,
   Header,
   HeaderRow,
@@ -20,7 +21,7 @@ import {
 
 import { getData } from '../../server';
 
-storiesOf('Server Recipes/ 03. Origin Mixed', module)
+storiesOf('Server Recipes/Origin Mixed', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [data, setData] = React.useState({
@@ -41,7 +42,13 @@ storiesOf('Server Recipes/ 03. Origin Mixed', module)
 
     const [search, setSearch] = React.useState('');
 
+    useCustom('search', data, {
+      state: { search },
+      onChange: onSearchChange,
+    });
+
     const sort = useSort(
+      data,
       {
         onChange: onSortChange,
       },
@@ -50,15 +57,9 @@ storiesOf('Server Recipes/ 03. Origin Mixed', module)
       }
     );
 
-    // features: handler
-
-    const handleSearch = (event) => {
-      setSearch(event.target.value);
-    };
-
-    React.useEffect(() => {
+    function onSearchChange(action, state) {
       const params = {
-        search,
+        search: state.search,
         sort: {
           sortKey: sort.state.sortKey,
           reverse: sort.state.reverse,
@@ -66,7 +67,7 @@ storiesOf('Server Recipes/ 03. Origin Mixed', module)
       };
 
       doGet(params);
-    }, [sort, search]);
+    }
 
     function onSortChange(action, state) {
       const params = {
@@ -79,6 +80,10 @@ storiesOf('Server Recipes/ 03. Origin Mixed', module)
 
       doGet(params);
     }
+
+    const handleSearch = (event) => {
+      setSearch(event.target.value);
+    };
 
     return (
       <>

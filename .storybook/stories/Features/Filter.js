@@ -13,8 +13,11 @@ import {
   Cell,
 } from '@table-library/react-table-library/table';
 
-storiesOf('Features/ 07. Filter (WIP)', module)
+storiesOf('Features/Filter (WIP)', module)
   .addParameters({ component: Table })
   .add('default', () => {
+    return <>WIP</>;
+  })
+  .add('with callback', () => {
     return <>WIP</>;
   });

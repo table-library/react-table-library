@@ -29,7 +29,7 @@ const list = [
   },
 ];
 
-storiesOf('Features/ 13. Column Grouping (WIP)', module)
+storiesOf('Features/Column Grouping (WIP)', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return <>WIP</>;

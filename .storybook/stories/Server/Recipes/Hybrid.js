@@ -4,6 +4,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import {
+  useCustom,
   Table,
   Header,
   HeaderRow,
@@ -16,7 +17,7 @@ import { useTheme } from '@table-library/react-table-library/theme';
 
 import { getData } from '../../server';
 
-storiesOf('Server Recipes/ 05. Hybrid', module)
+storiesOf('Server Recipes/Hybrid', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const [data, setData] = React.useState({
@@ -45,7 +46,12 @@ storiesOf('Server Recipes/ 05. Hybrid', module)
 
     const timeout = React.useRef();
 
-    React.useEffect(() => {
+    useCustom('search', data, {
+      state: { search },
+      onChange: onSearchChange,
+    });
+
+    function onSearchChange(action, state) {
       const params = {
         search,
       };
@@ -53,7 +59,7 @@ storiesOf('Server Recipes/ 05. Hybrid', module)
       if (timeout.current) clearTimeout(timeout.current);
 
       timeout.current = setTimeout(() => doGet(params), 500);
-    }, [search]);
+    }
 
     // client
 
