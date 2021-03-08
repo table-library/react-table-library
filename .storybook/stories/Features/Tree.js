@@ -56,7 +56,7 @@ storiesOf('Features/Tree', module)
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
@@ -71,7 +71,7 @@ storiesOf('Features/Tree', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}
@@ -114,7 +114,7 @@ storiesOf('Features/Tree', module)
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <CellTree item={tableItem}>
                         {tableItem.name}
                       </CellTree>
@@ -131,7 +131,7 @@ storiesOf('Features/Tree', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}
@@ -170,7 +170,7 @@ storiesOf('Features/Tree', module)
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <CellTree item={tableItem}>
                         {tableItem.name}
                       </CellTree>
@@ -187,7 +187,7 @@ storiesOf('Features/Tree', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}
@@ -232,7 +232,7 @@ storiesOf('Features/Tree', module)
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <CellTree item={tableItem}>
                         {tableItem.name}
                       </CellTree>
@@ -249,7 +249,7 @@ storiesOf('Features/Tree', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}
@@ -288,7 +288,7 @@ storiesOf('Features/Tree', module)
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <CellTree
                         item={tableItem}
                         treeIcon={{
@@ -310,7 +310,7 @@ storiesOf('Features/Tree', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}
@@ -349,7 +349,7 @@ storiesOf('Features/Tree', module)
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <CellTree
                         item={tableItem}
                         treeIcon={{
@@ -378,7 +378,7 @@ storiesOf('Features/Tree', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}

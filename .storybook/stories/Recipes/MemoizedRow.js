@@ -48,7 +48,7 @@ storiesOf('Recipes/Memoized Row (WIP)', module)
               {tableList.map((item) => (
                 <MemoizedRow item={item} key={item.id}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
@@ -63,7 +63,7 @@ storiesOf('Recipes/Memoized Row (WIP)', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </MemoizedRow>
               ))}

@@ -55,13 +55,13 @@ storiesOf('First Steps/Column', module)
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       {columns.map((column, index) => (
                         <Cell key={index}>
                           {column.get(tableItem)}
                         </Cell>
                       ))}
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}

@@ -99,7 +99,7 @@ storiesOf('Composites/Sort & Select (WIP)', module)
               {tableList.map((item) => (
                 <Row item={item} key={item.id}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
@@ -114,7 +114,7 @@ storiesOf('Composites/Sort & Select (WIP)', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}

@@ -55,7 +55,7 @@ storiesOf('Features/Select', module)
               {tableList.map((item) => (
                 <Row item={item} key={item.id}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
@@ -70,7 +70,7 @@ storiesOf('Features/Select', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}
@@ -110,7 +110,7 @@ storiesOf('Features/Select', module)
               {tableList.map((item) => (
                 <Row item={item} key={item.id}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
@@ -125,7 +125,7 @@ storiesOf('Features/Select', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}
@@ -165,7 +165,7 @@ storiesOf('Features/Select', module)
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <CellSelect item={tableItem} />
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -181,7 +181,7 @@ storiesOf('Features/Select', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}
@@ -227,7 +227,7 @@ storiesOf('Features/Select', module)
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <CellSelect item={tableItem} />
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
@@ -243,7 +243,7 @@ storiesOf('Features/Select', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}
@@ -292,7 +292,7 @@ storiesOf('Features/Select', module)
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <Cell item={tableItem} shrink>
                         <Checkbox
                           size="small"
@@ -318,7 +318,7 @@ storiesOf('Features/Select', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}

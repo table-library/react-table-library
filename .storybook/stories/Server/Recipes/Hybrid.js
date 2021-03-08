@@ -102,7 +102,7 @@ storiesOf('Server Recipes/Hybrid', module)
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
                     {(tableItem) => (
-                      <React.Fragment key={tableItem.id}>
+                      <>
                         <Cell>
                           <span
                             dangerouslySetInnerHTML={{
@@ -126,7 +126,7 @@ storiesOf('Server Recipes/Hybrid', module)
                         <Cell>{tableItem.type}</Cell>
                         <Cell>{tableItem.isComplete.toString()}</Cell>
                         <Cell>{tableItem.nodes?.length}</Cell>
-                      </React.Fragment>
+                      </>
                     )}
                   </Row>
                 ))}
