@@ -62,7 +62,7 @@ storiesOf('Kitchen Sink/Tree', module)
                   }
                 >
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <CellTree item={tableItem}>
                         {tableItem.name}
                       </CellTree>
@@ -79,7 +79,7 @@ storiesOf('Kitchen Sink/Tree', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}

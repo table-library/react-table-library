@@ -67,7 +67,7 @@ storiesOf('First Steps/CRUD', module)
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
                     {(tableItem) => (
-                      <React.Fragment key={tableItem.id}>
+                      <>
                         <Cell>{tableItem.name}</Cell>
                         <Cell>
                           {tableItem.deadline.toLocaleDateString(
@@ -82,7 +82,7 @@ storiesOf('First Steps/CRUD', module)
                         <Cell>{tableItem.type}</Cell>
                         <Cell>{tableItem.isComplete.toString()}</Cell>
                         <Cell>{tableItem.nodes?.length}</Cell>
-                      </React.Fragment>
+                      </>
                     )}
                   </Row>
                 ))}
@@ -122,7 +122,7 @@ storiesOf('First Steps/CRUD', module)
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
@@ -145,7 +145,7 @@ storiesOf('First Steps/CRUD', module)
                           Remove
                         </button>
                       </Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}
@@ -189,7 +189,7 @@ storiesOf('First Steps/CRUD', module)
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <Cell>
                         <input
                           style={{ width: '100%' }}
@@ -216,7 +216,7 @@ storiesOf('First Steps/CRUD', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}

@@ -107,7 +107,7 @@ storiesOf('Server/Expand', module)
               {tableList.map((item) => (
                 <Row key={item.id} item={item} onClick={handleExpand}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
@@ -122,7 +122,7 @@ storiesOf('Server/Expand', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}

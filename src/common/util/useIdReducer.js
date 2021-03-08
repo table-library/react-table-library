@@ -9,6 +9,7 @@ import { useReducerWithMiddleware } from './useReducerWithMiddleware';
 const addById = (state, action) => {
   return {
     ...state,
+    id: null,
     ids: state.ids.concat(action.payload.id),
   };
 };
@@ -16,27 +17,47 @@ const addById = (state, action) => {
 const removeById = (state, action) => {
   return {
     ...state,
+    id: null,
     ids: state.ids.filter((id) => id !== action.payload.id),
   };
 };
 
-const addByIds = (state, action) => {
+const addByIdRecursively = (state, action) => {
   return {
     ...state,
+    id: null,
     ids: state.ids.concat(action.payload.ids),
   };
 };
 
-const removeByIds = (state, action) => {
+const removeByIdRecursively = (state, action) => {
   return {
     ...state,
+    id: null,
     ids: state.ids.filter((id) => !action.payload.ids.includes(id)),
+  };
+};
+
+const addByIdExclusively = (state, action) => {
+  return {
+    ...state,
+    id: action.payload.id,
+    ids: [],
+  };
+};
+
+const removeByIdExclusively = (state) => {
+  return {
+    ...state,
+    id: null,
+    ids: [],
   };
 };
 
 const addAll = (state, action) => {
   return {
     ...state,
+    id: null,
     ids: [...new Set([...state.ids, ...action.payload.ids])],
   };
 };
@@ -44,6 +65,7 @@ const addAll = (state, action) => {
 const removeAll = (state) => {
   return {
     ...state,
+    id: null,
     ids: [],
   };
 };
@@ -54,6 +76,8 @@ const ADD_BY_ID = 'ADD_BY_ID';
 const REMOVE_BY_ID = 'REMOVE_BY_ID';
 const ADD_BY_ID_RECURSIVELY = 'ADD_BY_ID_RECURSIVELY';
 const REMOVE_BY_ID_RECURSIVELY = 'REMOVE_BY_ID_RECURSIVELY';
+const ADD_BY_ID_EXCLUSIVELY = 'ADD_BY_ID_EXCLUSIVELY';
+const REMOVE_BY_ID_EXCLUSIVELY = 'REMOVE_BY_ID_EXCLUSIVELY';
 const ADD_ALL = 'ADD_ALL';
 const REMOVE_ALL = 'REMOVE_ALL';
 const SET = 'SET';
@@ -67,10 +91,16 @@ const reducer = (state, action) => {
       return removeById(state, action);
     }
     case ADD_BY_ID_RECURSIVELY: {
-      return addByIds(state, action);
+      return addByIdRecursively(state, action);
     }
     case REMOVE_BY_ID_RECURSIVELY: {
-      return removeByIds(state, action);
+      return removeByIdRecursively(state, action);
+    }
+    case ADD_BY_ID_EXCLUSIVELY: {
+      return addByIdExclusively(state, action);
+    }
+    case REMOVE_BY_ID_EXCLUSIVELY: {
+      return removeByIdExclusively(state, action);
     }
     case ADD_ALL: {
       return addAll(state, action);
@@ -156,6 +186,33 @@ const useIdReducer = (data, controlledState, onChange, context) => {
     [data, state, onAddByIdRecursively, onRemoveByIdRecursively]
   );
 
+  const onAddByIdExclusively = React.useCallback(
+    (id) => {
+      dispatchWithMiddleware({
+        type: ADD_BY_ID_EXCLUSIVELY,
+        payload: { id },
+      });
+    },
+    [dispatchWithMiddleware]
+  );
+
+  const onRemoveByIdExclusively = React.useCallback(() => {
+    dispatchWithMiddleware({
+      type: REMOVE_BY_ID_EXCLUSIVELY,
+    });
+  }, [dispatchWithMiddleware]);
+
+  const onToggleByIdExclusively = React.useCallback(
+    (id) => {
+      if (id === state.id) {
+        onRemoveByIdExclusively();
+      } else {
+        onAddByIdExclusively(id);
+      }
+    },
+    [state, onRemoveByIdExclusively, onAddByIdExclusively]
+  );
+
   const onAddAll = React.useCallback(
     (ids) => {
       dispatchWithMiddleware({
@@ -208,6 +265,10 @@ const useIdReducer = (data, controlledState, onChange, context) => {
       onRemoveByIdRecursively,
       onToggleByIdRecursively,
 
+      onAddByIdExclusively,
+      onRemoveByIdExclusively,
+      onToggleByIdExclusively,
+
       onAddAll,
       onRemoveAll,
       onToggleAll,
@@ -219,6 +280,9 @@ const useIdReducer = (data, controlledState, onChange, context) => {
       onRemoveAll,
       onRemoveById,
       onRemoveByIdRecursively,
+      onAddByIdExclusively,
+      onRemoveByIdExclusively,
+      onToggleByIdExclusively,
       onToggleAll,
       onToggleById,
       onToggleByIdRecursively,

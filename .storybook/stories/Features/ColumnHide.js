@@ -131,7 +131,7 @@ storiesOf('Features/Column Hiding', module)
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
                     {(tableItem) => (
-                      <React.Fragment key={tableItem.id}>
+                      <>
                         <Cell hide={!columns.includes('name')}>
                           {tableItem.name}
                         </Cell>
@@ -154,7 +154,7 @@ storiesOf('Features/Column Hiding', module)
                         <Cell hide={!columns.includes('tasks')}>
                           {tableItem.nodes?.length}
                         </Cell>
-                      </React.Fragment>
+                      </>
                     )}
                   </Row>
                 ))}
@@ -287,7 +287,7 @@ storiesOf('Features/Column Hiding', module)
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
                     {(tableItem) => (
-                      <React.Fragment key={tableItem.id}>
+                      <>
                         <Cell hide={!columns.includes('name')}>
                           {tableItem.name}
                         </Cell>
@@ -310,7 +310,7 @@ storiesOf('Features/Column Hiding', module)
                         <Cell hide={!columns.includes('tasks')}>
                           {tableItem.nodes?.length}
                         </Cell>
-                      </React.Fragment>
+                      </>
                     )}
                   </Row>
                 ))}

@@ -38,7 +38,7 @@ storiesOf('First Steps/Cell', module)
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <Cell
                         onClick={(event) =>
                           console.log('Click Cell', event)
@@ -59,7 +59,7 @@ storiesOf('First Steps/Cell', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}

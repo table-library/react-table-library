@@ -91,7 +91,7 @@ storiesOf('Server/Tree', module)
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <CellTree item={tableItem}>
                         {tableItem.name}
                       </CellTree>
@@ -108,7 +108,7 @@ storiesOf('Server/Tree', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}
@@ -171,7 +171,7 @@ storiesOf('Server/Tree', module)
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <CellTree item={tableItem}>
                         {tableItem.name}
                       </CellTree>
@@ -188,7 +188,7 @@ storiesOf('Server/Tree', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}
@@ -266,7 +266,7 @@ storiesOf('Server/Tree', module)
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <CellTree item={tableItem}>
                         {tableItem.name}
                       </CellTree>
@@ -283,7 +283,7 @@ storiesOf('Server/Tree', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}
@@ -400,7 +400,7 @@ storiesOf('Server/Tree', module)
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
                   {(tableItem) => (
-                    <React.Fragment key={tableItem.id}>
+                    <>
                       <CellTree item={tableItem}>
                         {tableItem.name}
                       </CellTree>
@@ -417,7 +417,7 @@ storiesOf('Server/Tree', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
-                    </React.Fragment>
+                    </>
                   )}
                 </Row>
               ))}
