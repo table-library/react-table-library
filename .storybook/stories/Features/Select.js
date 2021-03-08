@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Checkbox from '@material-ui/core/Checkbox';
+import MaterialCheckbox from '@material-ui/core/Checkbox';
 
 import {
   Table,
@@ -20,6 +20,7 @@ import {
   CellSelect,
   SELECT_TYPES,
   useSelect,
+  Checkbox,
 } from '@table-library/react-table-library/select';
 
 import { nodes } from '../data';
@@ -271,7 +272,7 @@ storiesOf('Features/Select', module)
             <Header>
               <HeaderRow>
                 <HeaderCell shrink>
-                  <Checkbox
+                  <MaterialCheckbox
                     size="small"
                     checked={select.state.all}
                     indeterminate={
@@ -293,9 +294,142 @@ storiesOf('Features/Select', module)
                 <Row key={item.id} item={item}>
                   {(tableItem) => (
                     <>
-                      <Cell item={tableItem} shrink>
-                        <Checkbox
+                      <Cell shrink>
+                        <MaterialCheckbox
                           size="small"
+                          checked={select.state.ids.includes(
+                            tableItem.id
+                          )}
+                          onChange={() =>
+                            select.fns.onToggleById(tableItem.id)
+                          }
+                        />
+                      </Cell>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>
+                        {tableItem.deadline.toLocaleDateString(
+                          'fr-CA',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                          }
+                        )}
+                      </Cell>
+                      <Cell>{tableItem.type}</Cell>
+                      <Cell>{tableItem.isComplete.toString()}</Cell>
+                      <Cell>{tableItem.nodes?.length}</Cell>
+                    </>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('single select', () => {
+    const data = { nodes };
+
+    const select = useSelect(
+      data,
+      {
+        onChange: onSelectChange,
+      },
+      {
+        isSingle: true,
+      }
+    );
+
+    function onSelectChange(action, state) {
+      console.log(action, state);
+    }
+
+    return (
+      <Table data={data} select={select}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSelect />
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row key={item.id} item={item}>
+                  {(tableItem) => (
+                    <>
+                      <CellSelect item={tableItem} />
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>
+                        {tableItem.deadline.toLocaleDateString(
+                          'fr-CA',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                          }
+                        )}
+                      </Cell>
+                      <Cell>{tableItem.type}</Cell>
+                      <Cell>{tableItem.isComplete.toString()}</Cell>
+                      <Cell>{tableItem.nodes?.length}</Cell>
+                    </>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('single/multi select', () => {
+    const data = { nodes };
+
+    const select = useSelect(
+      data,
+      {
+        onChange: onSelectChange,
+      },
+      {
+        isSingle: true,
+      }
+    );
+
+    function onSelectChange(action, state) {
+      console.log(action, state);
+    }
+
+    return (
+      <Table data={data} select={select}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSelect />
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row key={item.id} item={item}>
+                  {(tableItem) => (
+                    <>
+                      <Cell shrink>
+                        <Checkbox
                           checked={select.state.ids.includes(
                             tableItem.id
                           )}

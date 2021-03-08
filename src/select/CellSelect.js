@@ -4,19 +4,23 @@ import PropTypes from 'prop-types';
 import { Cell } from '@table-library/react-table-library/table/Cell';
 import { SelectContext } from '@table-library/react-table-library/common/context/Select';
 
-import { ImperativeCheckbox } from './Checkbox';
+import { Checkbox } from './Checkbox';
 
 const CellSelect = React.memo(
   ({ item, children, ...passThrough }) => {
     const select = React.useContext(SelectContext);
 
-    const isSelected = select.state.ids.includes(item.id);
+    const isSelected =
+      select.state.ids.includes(item.id) ||
+      select.state.id === item.id;
     const handleChange = () =>
-      select.fns.onToggleByIdRecursively(item.id);
+      select._options.isSingle
+        ? select.fns.onToggleByIdExclusively(item.id)
+        : select.fns.onToggleByIdRecursively(item.id);
 
     return (
       <Cell shrink {...passThrough}>
-        <ImperativeCheckbox
+        <Checkbox
           select={select}
           checked={isSelected}
           onChange={handleChange}

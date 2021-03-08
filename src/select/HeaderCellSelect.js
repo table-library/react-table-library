@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { SelectContext } from '@table-library/react-table-library/common/context/Select';
 import { HeaderCell } from '@table-library/react-table-library/table/Cell';
 
-import { ImperativeCheckbox } from './Checkbox';
+import { Checkbox } from './Checkbox';
 
 const HeaderCellSelect = React.memo(
   ({ children, ...passThrough }) => {
@@ -16,7 +16,7 @@ const HeaderCellSelect = React.memo(
 
     return (
       <HeaderCell shrink {...passThrough}>
-        <ImperativeCheckbox
+        <Checkbox
           checked={isSelected}
           isIndeterminate={isIndeterminate}
           onChange={handleChange}

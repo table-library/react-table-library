@@ -1,13 +1,9 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-import { Checkbox } from '@table-library/react-table-library/common/components/Checkbox';
+import { Checkbox as CheckboxBase } from '@table-library/react-table-library/common/components/Checkbox';
 
-const ImperativeCheckbox = ({
-  checked,
-  isIndeterminate,
-  onChange,
-}) => {
+const Checkbox = ({ checked, isIndeterminate, onChange }) => {
   const ref = (node) => {
     if (!node) return;
 
@@ -23,13 +19,15 @@ const ImperativeCheckbox = ({
     }
   };
 
-  return <Checkbox ref={ref} type="checkbox" onChange={onChange} />;
+  return (
+    <CheckboxBase ref={ref} type="checkbox" onChange={onChange} />
+  );
 };
 
-ImperativeCheckbox.propTypes = {
+Checkbox.propTypes = {
   checked: PropTypes.bool,
   isIndeterminate: PropTypes.bool,
   onChange: PropTypes.func,
 };
 
-export { ImperativeCheckbox };
+export { Checkbox };
