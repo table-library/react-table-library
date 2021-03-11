@@ -2,4 +2,5 @@
 //   return event.target.tagName !== 'DIV' || event.target.title;
 // };
 
-export const isRowClick = (event) => event.target.tagName === 'DIV';
+export const isRowClick = (event) =>
+  event.target.tagName === 'DIV' || event.target.tagName === 'SPAN';
