@@ -5,16 +5,15 @@ import { Cell } from '@table-library/react-table-library/table/Cell';
 import { SelectContext } from '@table-library/react-table-library/common/context/Select';
 
 import { Checkbox } from './Checkbox';
+import { SELECT_TYPES } from './config';
 
 const CellSelect = React.memo(
   ({ item, children, ...passThrough }) => {
     const select = React.useContext(SelectContext);
 
-    const isSelected =
-      select.state.ids.includes(item.id) ||
-      select.state.id === item.id;
+    const isSelected = select.state.ids.includes(item.id);
     const handleChange = () =>
-      select._options.isSingle
+      select._options.buttonSelect === SELECT_TYPES.SingleSelect
         ? select.fns.onToggleByIdExclusively(item.id)
         : select.fns.onToggleByIdRecursively(item.id);
 

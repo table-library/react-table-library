@@ -12,7 +12,7 @@ import {
 import { useIdReducer } from '@table-library/react-table-library/common/util/useIdReducer';
 import { useSyncRefState } from '@table-library/react-table-library/common/util/useSyncRefState';
 
-import { TREE_EXPAND_TYPES } from './config';
+import { TREE_EXPAND_CLICK_TYPES } from './config';
 
 const getRowProps = (props, features) => {
   const { item, children, ...passThrough } = props;
@@ -36,7 +36,7 @@ const getRowProps = (props, features) => {
 
   const className = cs('row-tree', {
     'row-tree-clickable':
-      tree._options.treeExpandType === TREE_EXPAND_TYPES.RowClick,
+      tree._options.clickType === TREE_EXPAND_CLICK_TYPES.RowClick,
     'row-tree-expanded': isTreeExpanded,
     'row-tree-leaf': isLeaf(item),
   });
@@ -46,7 +46,9 @@ const getRowProps = (props, features) => {
 
     if (isLeaf(tableItem)) return;
 
-    if (tree._options.treeExpandType === TREE_EXPAND_TYPES.RowClick) {
+    if (
+      tree._options.clickType === TREE_EXPAND_CLICK_TYPES.RowClick
+    ) {
       tree.fns.onToggleById(tableItem.id);
     }
   };
@@ -84,13 +86,13 @@ const DEFAULT_STATE = {
 };
 
 const DEFAULT_OPTIONS = {
-  treeExpandType: TREE_EXPAND_TYPES.RowClick,
+  clickType: TREE_EXPAND_CLICK_TYPES.RowClick,
   treeXLevel: 0,
   treeYLevel: 0,
 };
 
 const useTree = (data, primary = {}, options = {}, context) => {
-  const controlledState = primary.state || DEFAULT_STATE;
+  const controlledState = { ...DEFAULT_STATE, ...primary.state };
   const onChange = primary.onChange || (() => {});
 
   const [state, fns] = useIdReducer(

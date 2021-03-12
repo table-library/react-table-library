@@ -6,15 +6,19 @@ import { isRowClick } from '@table-library/react-table-library/common/util/isRow
 import { useIdReducer } from '@table-library/react-table-library/common/util/useIdReducer';
 import { useSyncRefState } from '@table-library/react-table-library/common/util/useSyncRefState';
 
-import { SELECT_TYPES } from './config';
+import {
+  SELECT_TYPES,
+  SELECT_CLICK_TYPES,
+  SELECT_TRANSITION_TYPES,
+} from './config';
 
 const getRowProps = (props, features) => {
   const { item } = props;
 
   const { select } = features;
 
-  const isSelected = select.state.ids.includes(item.id);
-  const isSingle = select.state.id === item.id;
+  const isMultiSelected = select.state.ids.includes(item.id);
+  const isSingleSelect = select.state.id === item.id;
 
   const theme = css`
     &.row-select-selected,
@@ -32,17 +36,18 @@ const getRowProps = (props, features) => {
 
   const className = cs('row-select', {
     'row-select-clickable':
-      select._options.selectType === SELECT_TYPES.RowClick,
-    'row-select-selected': isSelected,
-    'row-select-single-selected': isSingle,
+      select._options.clickType === SELECT_CLICK_TYPES.RowClick,
+    'row-select-selected': isMultiSelected,
+    'row-select-single-selected': isSingleSelect,
   });
 
   const onClick = (tableItem, event) => {
     if (!isRowClick(event)) return;
 
-    if (select._options.selectType !== SELECT_TYPES.RowClick) return;
+    if (select._options.clickType !== SELECT_CLICK_TYPES.RowClick)
+      return;
 
-    if (select._options.isSingle) {
+    if (select._options.rowSelect === SELECT_TYPES.SingleSelect) {
       select.fns.onToggleByIdExclusively(tableItem.id);
     } else {
       select.fns.onToggleById(tableItem.id);
@@ -63,12 +68,14 @@ const DEFAULT_STATE = {
 };
 
 const DEFAULT_OPTIONS = {
-  selectType: SELECT_TYPES.RowClick,
-  isSingle: false,
+  clickType: SELECT_CLICK_TYPES.RowClick,
+  rowSelect: SELECT_TYPES.SingleSelect,
+  buttonSelect: SELECT_TYPES.MultiSelect,
+  transitionType: SELECT_TRANSITION_TYPES.Rough,
 };
 
 const useSelect = (data, primary = {}, options = {}, context) => {
-  const controlledState = primary.state || DEFAULT_STATE;
+  const controlledState = { ...DEFAULT_STATE, ...primary.state };
   const onChange = primary.onChange || (() => {});
 
   const [state, fns] = useIdReducer(

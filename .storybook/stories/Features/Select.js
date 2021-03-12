@@ -18,7 +18,9 @@ import {
 import {
   HeaderCellSelect,
   CellSelect,
+  SELECT_CLICK_TYPES,
   SELECT_TYPES,
+  SELECT_TRANSITION_TYPES,
   useSelect,
   Checkbox,
 } from '@table-library/react-table-library/select';
@@ -31,61 +33,6 @@ storiesOf('Features/Select', module)
     const data = { nodes };
 
     const select = useSelect(data, {
-      onChange: onSelectChange,
-    });
-
-    function onSelectChange(action, state) {
-      console.log(action, state);
-    }
-
-    return (
-      <Table data={data} select={select}>
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCell>Task</HeaderCell>
-                <HeaderCell>Deadline</HeaderCell>
-                <HeaderCell>Type</HeaderCell>
-                <HeaderCell>Complete</HeaderCell>
-                <HeaderCell>Tasks</HeaderCell>
-              </HeaderRow>
-            </Header>
-
-            <Body>
-              {tableList.map((item) => (
-                <Row item={item} key={item.id}>
-                  {(tableItem) => (
-                    <>
-                      <Cell>{tableItem.name}</Cell>
-                      <Cell>
-                        {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
-                          {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit',
-                          }
-                        )}
-                      </Cell>
-                      <Cell>{tableItem.type}</Cell>
-                      <Cell>{tableItem.isComplete.toString()}</Cell>
-                      <Cell>{tableItem.nodes?.length}</Cell>
-                    </>
-                  )}
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
-    );
-  })
-  .add('default select', () => {
-    const data = { nodes };
-
-    const select = useSelect(data, {
-      state: { ids: ['2', '4'] },
       onChange: onSelectChange,
     });
 
@@ -201,9 +148,250 @@ storiesOf('Features/Select', module)
         onChange: onSelectChange,
       },
       {
-        selectType: SELECT_TYPES.ButtonClick,
+        clickType: SELECT_CLICK_TYPES.ButtonClick,
       }
     );
+
+    function onSelectChange(action, state) {
+      console.log(action, state);
+    }
+
+    return (
+      <Table data={data} select={select}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSelect />
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row key={item.id} item={item}>
+                  {(tableItem) => (
+                    <>
+                      <CellSelect item={tableItem} />
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>
+                        {tableItem.deadline.toLocaleDateString(
+                          'fr-CA',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                          }
+                        )}
+                      </Cell>
+                      <Cell>{tableItem.type}</Cell>
+                      <Cell>{tableItem.isComplete.toString()}</Cell>
+                      <Cell>{tableItem.nodes?.length}</Cell>
+                    </>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+
+  .add('all single select', () => {
+    const data = { nodes };
+
+    const select = useSelect(
+      data,
+      {
+        onChange: onSelectChange,
+      },
+      {
+        rowSelect: SELECT_TYPES.SingleSelect,
+        buttonSelect: SELECT_TYPES.SingleSelect,
+      }
+    );
+
+    function onSelectChange(action, state) {
+      console.log(action, state);
+    }
+
+    return (
+      <Table data={data} select={select}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSelect />
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row key={item.id} item={item}>
+                  {(tableItem) => (
+                    <>
+                      <CellSelect item={tableItem} />
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>
+                        {tableItem.deadline.toLocaleDateString(
+                          'fr-CA',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                          }
+                        )}
+                      </Cell>
+                      <Cell>{tableItem.type}</Cell>
+                      <Cell>{tableItem.isComplete.toString()}</Cell>
+                      <Cell>{tableItem.nodes?.length}</Cell>
+                    </>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('all multi select', () => {
+    const data = { nodes };
+
+    const select = useSelect(
+      data,
+      {
+        onChange: onSelectChange,
+      },
+      {
+        rowSelect: SELECT_TYPES.MultiSelect,
+        buttonSelect: SELECT_TYPES.MultiSelect,
+      }
+    );
+
+    function onSelectChange(action, state) {
+      console.log(action, state);
+    }
+
+    return (
+      <Table data={data} select={select}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSelect />
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row key={item.id} item={item}>
+                  {(tableItem) => (
+                    <>
+                      <CellSelect item={tableItem} />
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>
+                        {tableItem.deadline.toLocaleDateString(
+                          'fr-CA',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                          }
+                        )}
+                      </Cell>
+                      <Cell>{tableItem.type}</Cell>
+                      <Cell>{tableItem.isComplete.toString()}</Cell>
+                      <Cell>{tableItem.nodes?.length}</Cell>
+                    </>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('default single select', () => {
+    const data = { nodes };
+
+    const select = useSelect(data, {
+      state: { id: '3' },
+      onChange: onSelectChange,
+    });
+
+    function onSelectChange(action, state) {
+      console.log(action, state);
+    }
+
+    return (
+      <Table data={data} select={select}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSelect />
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row key={item.id} item={item}>
+                  {(tableItem) => (
+                    <>
+                      <CellSelect item={tableItem} />
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>
+                        {tableItem.deadline.toLocaleDateString(
+                          'fr-CA',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                          }
+                        )}
+                      </Cell>
+                      <Cell>{tableItem.type}</Cell>
+                      <Cell>{tableItem.isComplete.toString()}</Cell>
+                      <Cell>{tableItem.nodes?.length}</Cell>
+                    </>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('default multi select', () => {
+    const data = { nodes };
+
+    const select = useSelect(data, {
+      state: { ids: ['2', '4'] },
+      onChange: onSelectChange,
+    });
 
     function onSelectChange(action, state) {
       console.log(action, state);
@@ -297,139 +485,6 @@ storiesOf('Features/Select', module)
                       <Cell shrink>
                         <MaterialCheckbox
                           size="small"
-                          checked={select.state.ids.includes(
-                            tableItem.id
-                          )}
-                          onChange={() =>
-                            select.fns.onToggleById(tableItem.id)
-                          }
-                        />
-                      </Cell>
-                      <Cell>{tableItem.name}</Cell>
-                      <Cell>
-                        {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
-                          {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit',
-                          }
-                        )}
-                      </Cell>
-                      <Cell>{tableItem.type}</Cell>
-                      <Cell>{tableItem.isComplete.toString()}</Cell>
-                      <Cell>{tableItem.nodes?.length}</Cell>
-                    </>
-                  )}
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
-    );
-  })
-  .add('single select', () => {
-    const data = { nodes };
-
-    const select = useSelect(
-      data,
-      {
-        onChange: onSelectChange,
-      },
-      {
-        isSingle: true,
-      }
-    );
-
-    function onSelectChange(action, state) {
-      console.log(action, state);
-    }
-
-    return (
-      <Table data={data} select={select}>
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCellSelect />
-                <HeaderCell>Task</HeaderCell>
-                <HeaderCell>Deadline</HeaderCell>
-                <HeaderCell>Type</HeaderCell>
-                <HeaderCell>Complete</HeaderCell>
-                <HeaderCell>Tasks</HeaderCell>
-              </HeaderRow>
-            </Header>
-
-            <Body>
-              {tableList.map((item) => (
-                <Row key={item.id} item={item}>
-                  {(tableItem) => (
-                    <>
-                      <CellSelect item={tableItem} />
-                      <Cell>{tableItem.name}</Cell>
-                      <Cell>
-                        {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
-                          {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit',
-                          }
-                        )}
-                      </Cell>
-                      <Cell>{tableItem.type}</Cell>
-                      <Cell>{tableItem.isComplete.toString()}</Cell>
-                      <Cell>{tableItem.nodes?.length}</Cell>
-                    </>
-                  )}
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
-    );
-  })
-  .add('single/multi select', () => {
-    const data = { nodes };
-
-    const select = useSelect(
-      data,
-      {
-        onChange: onSelectChange,
-      },
-      {
-        isSingle: true,
-      }
-    );
-
-    function onSelectChange(action, state) {
-      console.log(action, state);
-    }
-
-    return (
-      <Table data={data} select={select}>
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCellSelect />
-                <HeaderCell>Task</HeaderCell>
-                <HeaderCell>Deadline</HeaderCell>
-                <HeaderCell>Type</HeaderCell>
-                <HeaderCell>Complete</HeaderCell>
-                <HeaderCell>Tasks</HeaderCell>
-              </HeaderRow>
-            </Header>
-
-            <Body>
-              {tableList.map((item) => (
-                <Row key={item.id} item={item}>
-                  {(tableItem) => (
-                    <>
-                      <Cell shrink>
-                        <Checkbox
                           checked={select.state.ids.includes(
                             tableItem.id
                           )}

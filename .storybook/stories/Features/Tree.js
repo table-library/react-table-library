@@ -20,7 +20,7 @@ import {
 import {
   useTree,
   CellTree,
-  TREE_EXPAND_TYPES,
+  TREE_EXPAND_CLICK_TYPES,
 } from '@table-library/react-table-library/tree';
 
 import { nodes } from '../data';
@@ -206,7 +206,7 @@ storiesOf('Features/Tree', module)
         onChange: onTreeChange,
       },
       {
-        treeExpandType: TREE_EXPAND_TYPES.ButtonClick,
+        clickType: TREE_EXPAND_CLICK_TYPES.ButtonClick,
       }
     );
 

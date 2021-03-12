@@ -16,13 +16,13 @@ import {
 import {
   CellTree,
   useTree,
-  TREE_EXPAND_TYPES,
+  TREE_EXPAND_CLICK_TYPES,
 } from '@table-library/react-table-library/tree';
 import {
   CellSelect,
   HeaderCellSelect,
   useSelect,
-  SELECT_TYPES,
+  SELECT_CLICK_TYPES,
 } from '@table-library/react-table-library/select';
 
 import { nodes } from '../data';
@@ -100,7 +100,7 @@ storiesOf('Composites/Tree & Select', module)
         onChange: onTreeChange,
       },
       {
-        treeExpandType: TREE_EXPAND_TYPES.ButtonClick,
+        clickType: TREE_EXPAND_CLICK_TYPES.ButtonClick,
         treeYLevel: 1,
       }
     );
@@ -111,7 +111,7 @@ storiesOf('Composites/Tree & Select', module)
         onChange: onSelectChange,
       },
       {
-        selectType: SELECT_TYPES.ButtonClick,
+        clickType: SELECT_CLICK_TYPES.ButtonClick,
       }
     );
 
@@ -179,7 +179,7 @@ storiesOf('Composites/Tree & Select', module)
         onChange: onTreeChange,
       },
       {
-        treeExpandType: TREE_EXPAND_TYPES.ButtonClick,
+        clickType: TREE_EXPAND_CLICK_TYPES.ButtonClick,
         treeYLevel: 1,
       }
     );
@@ -190,7 +190,7 @@ storiesOf('Composites/Tree & Select', module)
         onChange: onSelectChange,
       },
       {
-        selectType: SELECT_TYPES.RowClick,
+        clickType: SELECT_CLICK_TYPES.RowClick,
       }
     );
 
@@ -258,7 +258,7 @@ storiesOf('Composites/Tree & Select', module)
         onChange: onTreeChange,
       },
       {
-        treeExpandType: TREE_EXPAND_TYPES.RowClick,
+        clickType: TREE_EXPAND_CLICK_TYPES.RowClick,
         treeYLevel: 1,
       }
     );
@@ -269,7 +269,7 @@ storiesOf('Composites/Tree & Select', module)
         onChange: onSelectChange,
       },
       {
-        selectType: SELECT_TYPES.ButtonClick,
+        clickType: SELECT_CLICK_TYPES.ButtonClick,
       }
     );
 
@@ -339,7 +339,7 @@ storiesOf('Composites/Tree & Select', module)
           onChange: onTreeChange,
         },
         {
-          treeExpandType: TREE_EXPAND_TYPES.ButtonClick,
+          clickType: TREE_EXPAND_CLICK_TYPES.ButtonClick,
         }
       );
 
@@ -422,7 +422,7 @@ storiesOf('Composites/Tree & Select', module)
           onChange: onSelectChange,
         },
         {
-          selectType: SELECT_TYPES.ButtonClick,
+          clickType: SELECT_CLICK_TYPES.ButtonClick,
         }
       );
 

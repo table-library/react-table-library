@@ -46,7 +46,7 @@ const DEFAULT_OPTIONS = {
 };
 
 const useSort = (data, primary = {}, options = {}, context) => {
-  const controlledState = primary.state || DEFAULT_STATE;
+  const controlledState = { ...DEFAULT_STATE, ...primary.state };
   const onChange = primary.onChange || (() => {});
 
   const [state, dispatchWithMiddleware] = useReducerWithMiddleware(
