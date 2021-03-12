@@ -7,8 +7,3 @@ export const SELECT_TYPES = {
   SingleSelect: 'SingleSelect',
   MultiSelect: 'MultiSelect',
 };
-
-export const SELECT_TRANSITION_TYPES = {
-  Rough: 'Rough',
-  Seamless: 'Seamless',
-};

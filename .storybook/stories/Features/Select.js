@@ -20,7 +20,6 @@ import {
   CellSelect,
   SELECT_CLICK_TYPES,
   SELECT_TYPES,
-  SELECT_TRANSITION_TYPES,
   useSelect,
   Checkbox,
 } from '@table-library/react-table-library/select';
@@ -392,6 +391,68 @@ storiesOf('Features/Select', module)
       state: { ids: ['2', '4'] },
       onChange: onSelectChange,
     });
+
+    function onSelectChange(action, state) {
+      console.log(action, state);
+    }
+
+    return (
+      <Table data={data} select={select}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSelect />
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row key={item.id} item={item}>
+                  {(tableItem) => (
+                    <>
+                      <CellSelect item={tableItem} />
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>
+                        {tableItem.deadline.toLocaleDateString(
+                          'fr-CA',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                          }
+                        )}
+                      </Cell>
+                      <Cell>{tableItem.type}</Cell>
+                      <Cell>{tableItem.isComplete.toString()}</Cell>
+                      <Cell>{tableItem.nodes?.length}</Cell>
+                    </>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('carry-forward', () => {
+    const data = { nodes };
+
+    const select = useSelect(
+      data,
+      {
+        onChange: onSelectChange,
+      },
+      {
+        isCarryForward: true,
+      }
+    );
 
     function onSelectChange(action, state) {
       console.log(action, state);

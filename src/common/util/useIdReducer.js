@@ -170,7 +170,7 @@ const useIdReducer = (data, controlledState, onChange, context) => {
   );
 
   const onToggleByIdRecursively = React.useCallback(
-    (id) => {
+    (id, isCarryForward) => {
       const node = findNodeById(data.nodes, id);
 
       const ids = [node, ...fromNodesToList(node.nodes)].map(
@@ -179,8 +179,12 @@ const useIdReducer = (data, controlledState, onChange, context) => {
 
       if (includesAll(ids, state.ids)) {
         onRemoveByIdRecursively(ids);
-      } else {
+      } else if (!isCarryForward) {
         onAddByIdRecursively(ids);
+      } else {
+        onAddByIdRecursively(
+          state.id != null ? [...new Set(ids.concat(state.id))] : ids
+        );
       }
     },
     [data, state, onAddByIdRecursively, onRemoveByIdRecursively]

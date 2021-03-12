@@ -6,11 +6,7 @@ import { isRowClick } from '@table-library/react-table-library/common/util/isRow
 import { useIdReducer } from '@table-library/react-table-library/common/util/useIdReducer';
 import { useSyncRefState } from '@table-library/react-table-library/common/util/useSyncRefState';
 
-import {
-  SELECT_TYPES,
-  SELECT_CLICK_TYPES,
-  SELECT_TRANSITION_TYPES,
-} from './config';
+import { SELECT_TYPES, SELECT_CLICK_TYPES } from './config';
 
 const getRowProps = (props, features) => {
   const { item } = props;
@@ -71,7 +67,7 @@ const DEFAULT_OPTIONS = {
   clickType: SELECT_CLICK_TYPES.RowClick,
   rowSelect: SELECT_TYPES.SingleSelect,
   buttonSelect: SELECT_TYPES.MultiSelect,
-  transitionType: SELECT_TRANSITION_TYPES.Rough,
+  isCarryForward: false,
 };
 
 const useSelect = (data, primary = {}, options = {}, context) => {

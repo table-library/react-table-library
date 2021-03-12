@@ -12,10 +12,20 @@ const CellSelect = React.memo(
     const select = React.useContext(SelectContext);
 
     const isSelected = select.state.ids.includes(item.id);
-    const handleChange = () =>
-      select._options.buttonSelect === SELECT_TYPES.SingleSelect
-        ? select.fns.onToggleByIdExclusively(item.id)
-        : select.fns.onToggleByIdRecursively(item.id);
+
+    const handleChange = () => {
+      const isSingleSelect =
+        select._options.buttonSelect === SELECT_TYPES.SingleSelect;
+
+      if (isSingleSelect) {
+        select.fns.onToggleByIdExclusively(item.id);
+      } else {
+        select.fns.onToggleByIdRecursively(
+          item.id,
+          select._options.isCarryForward
+        );
+      }
+    };
 
     return (
       <Cell shrink {...passThrough}>
