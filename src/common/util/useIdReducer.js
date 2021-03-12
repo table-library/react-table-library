@@ -23,10 +23,15 @@ const removeById = (state, action) => {
 };
 
 const addByIdRecursively = (state, action) => {
+  const ids =
+    action.payload.options.isCarryForward && state.id != null
+      ? [...new Set(action.payload.ids.concat(state.id))]
+      : state.ids.concat(action.payload.ids);
+
   return {
     ...state,
     id: null,
-    ids: state.ids.concat(action.payload.ids),
+    ids,
   };
 };
 
@@ -150,10 +155,22 @@ const useIdReducer = (data, controlledState, onChange, context) => {
   );
 
   const onAddByIdRecursively = React.useCallback(
-    (ids) => {
+    (ids, options) => {
+      const DEFAULT_OPTIONS = {
+        isCarryForward: false,
+      };
+
+      const mergedOptions = {
+        ...DEFAULT_OPTIONS,
+        ...options,
+      };
+
       dispatchWithMiddleware({
         type: ADD_BY_ID_RECURSIVELY,
-        payload: { ids },
+        payload: {
+          ids,
+          options: mergedOptions,
+        },
       });
     },
     [dispatchWithMiddleware]
@@ -170,7 +187,16 @@ const useIdReducer = (data, controlledState, onChange, context) => {
   );
 
   const onToggleByIdRecursively = React.useCallback(
-    (id, isCarryForward) => {
+    (id, options) => {
+      const DEFAULT_OPTIONS = {
+        isCarryForward: false,
+      };
+
+      const mergedOptions = {
+        ...DEFAULT_OPTIONS,
+        ...options,
+      };
+
       const node = findNodeById(data.nodes, id);
 
       const ids = [node, ...fromNodesToList(node.nodes)].map(
@@ -179,12 +205,8 @@ const useIdReducer = (data, controlledState, onChange, context) => {
 
       if (includesAll(ids, state.ids)) {
         onRemoveByIdRecursively(ids);
-      } else if (!isCarryForward) {
-        onAddByIdRecursively(ids);
       } else {
-        onAddByIdRecursively(
-          state.id != null ? [...new Set(ids.concat(state.id))] : ids
-        );
+        onAddByIdRecursively(ids, mergedOptions);
       }
     },
     [data, state, onAddByIdRecursively, onRemoveByIdRecursively]

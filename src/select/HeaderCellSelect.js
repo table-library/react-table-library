@@ -5,13 +5,18 @@ import { SelectContext } from '@table-library/react-table-library/common/context
 import { HeaderCell } from '@table-library/react-table-library/table/Cell';
 
 import { Checkbox } from './Checkbox';
+import { SELECT_TYPES } from './config';
 
 const HeaderCellSelect = React.memo(
   ({ children, ...passThrough }) => {
     const select = React.useContext(SelectContext);
 
     const isSelected = select.state.all;
-    const isIndeterminate = !select.state.all && !select.state.none;
+    const isIndeterminate =
+      (!select.state.all && !select.state.none) ||
+      (select._options.buttonSelect === SELECT_TYPES.SingleSelect &&
+        select.state.id != null);
+
     const handleChange = () => select.fns.onToggleAll();
 
     return (

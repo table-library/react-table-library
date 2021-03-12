@@ -11,7 +11,11 @@ const CellSelect = React.memo(
   ({ item, children, ...passThrough }) => {
     const select = React.useContext(SelectContext);
 
-    const isSelected = select.state.ids.includes(item.id);
+    const isSelected =
+      select._options.buttonSelect === SELECT_TYPES.SingleSelect
+        ? select.state.id === item.id ||
+          select.state.ids.includes(item.id)
+        : select.state.ids.includes(item.id);
 
     const handleChange = () => {
       const isSingleSelect =
@@ -20,10 +24,9 @@ const CellSelect = React.memo(
       if (isSingleSelect) {
         select.fns.onToggleByIdExclusively(item.id);
       } else {
-        select.fns.onToggleByIdRecursively(
-          item.id,
-          select._options.isCarryForward
-        );
+        select.fns.onToggleByIdRecursively(item.id, {
+          isCarryForward: select._options.isCarryForward,
+        });
       }
     };
 
