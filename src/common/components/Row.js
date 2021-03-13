@@ -28,17 +28,6 @@ const RowContainer = styled(RowContainerBase)`
     cursor: pointer;
   }
 
-  position: relative;
-  z-index: 1;
-
-  &:hover {
-    z-index: 2;
-  }
-
-  &:not(:last-child) {
-    margin-bottom: -1px;
-  }
-
   ${({ css }) => css};
 `;
 

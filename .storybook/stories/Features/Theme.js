@@ -160,7 +160,15 @@ storiesOf('Features/Theme', module)
         border-top: 1px solid #a0a8ae;
         border-bottom: 1px solid #a0a8ae;
 
+        position: relative;
+        z-index: 1;
+
+        &:not(:last-child) {
+          margin-bottom: -1px;
+        }
+
         &:hover {
+          z-index: 2;
           border-top: 1px solid #177ac9;
           border-bottom: 1px solid #177ac9;
 
