@@ -20,7 +20,7 @@ const HeaderCell = ({
 }) => {
   const theme = React.useContext(ThemeContext);
 
-  const { resizeRef, cellRef } = useResize(index);
+  const { resizeRef, cellRef } = useResize(index, resize);
 
   return (
     <HeaderCellContainer
