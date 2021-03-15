@@ -2,7 +2,6 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { getIcon } from '@table-library/react-table-library/common/util/getIcon';
 import { Button } from '@table-library/react-table-library/common/components/Button';
 import { Cell } from '@table-library/react-table-library/table/Cell';
 import { TreeContext } from '@table-library/react-table-library/common/context/Tree';

@@ -2,7 +2,6 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
 
-import { getIcon } from '@table-library/react-table-library/common/util/getIcon';
 import { Button } from '@table-library/react-table-library/common/components/Button';
 
 import { SORT_ICON_POSITIONS } from './config';
