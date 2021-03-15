@@ -19,8 +19,9 @@ const reducer = (state, action) => {
 const DEFAULT_STATE = {};
 
 const useCustom = (name, data, primary = {}, context) => {
-  const controlledState = primary.state || DEFAULT_STATE;
-  const onChange = primary.onChange || (() => {});
+  const primaryNullFallback = primary || {};
+  const controlledState = primaryNullFallback.state || DEFAULT_STATE;
+  const onChange = primaryNullFallback.onChange || (() => {});
 
   const [state, dispatchWithMiddleware] = useReducerWithMiddleware(
     reducer,
