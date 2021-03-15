@@ -13,7 +13,6 @@ import {
 const HeaderCell = ({
   index,
   className,
-  indentation,
   hide,
   shrink,
   resize,
@@ -31,7 +30,6 @@ const HeaderCell = ({
         ${theme?.BaseCell}
         ${theme?.HeaderCell}
       `}
-      indentation={indentation}
       ref={cellRef}
     >
       <div>{children}</div>
@@ -43,7 +41,6 @@ const HeaderCell = ({
 HeaderCell.propTypes = {
   index: PropTypes.number,
   className: PropTypes.string,
-  indentation: PropTypes.number,
   hide: PropTypes.bool,
   shrink: PropTypes.bool,
   resize: PropTypes.bool,

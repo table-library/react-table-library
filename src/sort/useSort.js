@@ -3,6 +3,11 @@ import * as React from 'react';
 import { useReducerWithMiddleware } from '@table-library/react-table-library/common/util/useReducerWithMiddleware';
 import { useSyncControlledState } from '@table-library/react-table-library/common/util//useSyncControlledState';
 import { useSyncRefState } from '@table-library/react-table-library/common/util/useSyncRefState';
+import IconChevronSingleDown from '@table-library/react-table-library/common/icons/IconChevronSingleDown';
+import IconChevronSingleUp from '@table-library/react-table-library/common/icons/IconChevronSingleUp';
+import IconChevronSingleUpDown from '@table-library/react-table-library/common/icons/IconChevronSingleUpDown';
+
+import { SORT_ICON_POSITIONS } from './config';
 
 const TOGGLE_SORT = 'TOGGLE_SORT';
 const SET = 'SET';
@@ -41,7 +46,17 @@ const DEFAULT_STATE = {
   reverse: false,
 };
 
+const DEFAULT_SORT_ICON = {
+  position: SORT_ICON_POSITIONS.Suffix,
+  margin: '4px',
+  size: '14px',
+  iconDefault: <IconChevronSingleUpDown />,
+  iconUp: <IconChevronSingleUp />,
+  iconDown: <IconChevronSingleDown />,
+};
+
 const DEFAULT_OPTIONS = {
+  sortIcon: DEFAULT_SORT_ICON,
   isServer: false,
 };
 
@@ -85,6 +100,10 @@ const useSort = (data, primary = {}, options = {}, context) => {
   const mergedOptions = {
     ...DEFAULT_OPTIONS,
     ...options,
+    sortIcon: {
+      ...DEFAULT_SORT_ICON,
+      ...options.sortIcon,
+    },
   };
 
   return { state, fns, _options: mergedOptions };

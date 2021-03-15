@@ -81,14 +81,11 @@ storiesOf('Features/Tree', module)
       </Table>
     );
   })
-  .add('default tree', () => {
+
+  .add('tree icon', () => {
     const data = { nodes };
 
     const tree = useTree(data, {
-      state: {
-        ids: ['2', '62', '4'],
-      },
-
       onChange: onTreeChange,
     });
 
@@ -141,10 +138,14 @@ storiesOf('Features/Tree', module)
       </Table>
     );
   })
-  .add('tree icon', () => {
+  .add('default tree', () => {
     const data = { nodes };
 
     const tree = useTree(data, {
+      state: {
+        ids: ['2', '62', '4'],
+      },
+
       onChange: onTreeChange,
     });
 
@@ -262,9 +263,17 @@ storiesOf('Features/Tree', module)
   .add('tree icon size', () => {
     const data = { nodes };
 
-    const tree = useTree(data, {
-      onChange: onTreeChange,
-    });
+    const tree = useTree(
+      data,
+      {
+        onChange: onTreeChange,
+      },
+      {
+        treeIcon: {
+          size: '10px',
+        },
+      }
+    );
 
     function onTreeChange(action, state) {
       console.log(action, state);
@@ -289,12 +298,7 @@ storiesOf('Features/Tree', module)
                 <Row key={item.id} item={item}>
                   {(tableItem) => (
                     <>
-                      <CellTree
-                        item={tableItem}
-                        treeIcon={{
-                          size: '10px',
-                        }}
-                      >
+                      <CellTree item={tableItem}>
                         {tableItem.name}
                       </CellTree>
                       <Cell>
@@ -323,9 +327,22 @@ storiesOf('Features/Tree', module)
   .add('custom tree icon (Material UI)', () => {
     const data = { nodes };
 
-    const tree = useTree(data, {
-      onChange: onTreeChange,
-    });
+    const tree = useTree(
+      data,
+      {
+        onChange: onTreeChange,
+      },
+      {
+        treeIcon: {
+          margin: '4px',
+          iconDefault: (
+            <InsertDriveFileOutlinedIcon fontSize="small" />
+          ),
+          iconRight: <FolderIcon fontSize="small" />,
+          iconDown: <FolderOpenIcon fontSize="small" />,
+        },
+      }
+    );
 
     function onTreeChange(action, state) {
       console.log(action, state);
@@ -350,19 +367,7 @@ storiesOf('Features/Tree', module)
                 <Row key={item.id} item={item}>
                   {(tableItem) => (
                     <>
-                      <CellTree
-                        item={tableItem}
-                        treeIcon={{
-                          margin: '4px',
-                          iconDefault: (
-                            <InsertDriveFileOutlinedIcon fontSize="small" />
-                          ),
-                          iconRight: <FolderIcon fontSize="small" />,
-                          iconDown: (
-                            <FolderOpenIcon fontSize="small" />
-                          ),
-                        }}
-                      >
+                      <CellTree item={tableItem}>
                         {tableItem.name}
                       </CellTree>
                       <Cell>

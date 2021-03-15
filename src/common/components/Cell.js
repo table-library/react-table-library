@@ -21,12 +21,12 @@ const CellContainerBase = styled.div`
   }
 
   &:first-child > div {
-    padding-left: ${({ indentation = 0 }) => GUTTER + indentation}px;
+    padding-left: ${GUTTER}px;
   }
 
   & > div {
-    padding-right: ${({ indentation = 0 }) => 20 + indentation}px;
-    padding-left: ${({ indentation = 0 }) => 20 + indentation}px;
+    padding-right: 20px;
+    padding-left: 20px;
   }
 
   &:last-child > div {

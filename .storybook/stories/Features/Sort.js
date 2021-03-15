@@ -223,9 +223,17 @@ storiesOf('Features/Sort', module)
   .add('sort icon size ', () => {
     const data = { nodes };
 
-    const sort = useSort(data, {
-      onChange: onSortChange,
-    });
+    const sort = useSort(
+      data,
+      {
+        onChange: onSortChange,
+      },
+      {
+        sortIcon: {
+          size: '10px',
+        },
+      }
+    );
 
     function onSortChange(action, state) {
       console.log(action, state);
@@ -242,9 +250,6 @@ storiesOf('Features/Sort', module)
                   sortFn={(array) =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
-                  sortIcon={{
-                    size: '10px',
-                  }}
                 >
                   Task
                 </HeaderCellSort>
@@ -253,9 +258,6 @@ storiesOf('Features/Sort', module)
                   sortFn={(array) =>
                     array.sort((a, b) => a.deadline - b.deadline)
                   }
-                  sortIcon={{
-                    size: '10px',
-                  }}
                 >
                   Deadline
                 </HeaderCellSort>
@@ -264,9 +266,6 @@ storiesOf('Features/Sort', module)
                   sortFn={(array) =>
                     array.sort((a, b) => a.type.localeCompare(b.type))
                   }
-                  sortIcon={{
-                    size: '10px',
-                  }}
                 >
                   Type
                 </HeaderCellSort>
@@ -275,9 +274,6 @@ storiesOf('Features/Sort', module)
                   sortFn={(array) =>
                     array.sort((a, b) => a.isComplete - b.isComplete)
                   }
-                  sortIcon={{
-                    size: '10px',
-                  }}
                 >
                   Complete
                 </HeaderCellSort>
@@ -290,9 +286,6 @@ storiesOf('Features/Sort', module)
                         (b.nodes || []).length
                     )
                   }
-                  sortIcon={{
-                    size: '10px',
-                  }}
                 >
                   Tasks
                 </HeaderCellSort>
@@ -331,9 +324,17 @@ storiesOf('Features/Sort', module)
   .add('sort icon position ', () => {
     const data = { nodes };
 
-    const sort = useSort(data, {
-      onChange: onSortChange,
-    });
+    const sort = useSort(
+      data,
+      {
+        onChange: onSortChange,
+      },
+      {
+        sortIcon: {
+          position: SORT_ICON_POSITIONS.Prefix,
+        },
+      }
+    );
 
     function onSortChange(action, state) {
       console.log(action, state);
@@ -350,9 +351,6 @@ storiesOf('Features/Sort', module)
                   sortFn={(array) =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
-                  sortIcon={{
-                    position: SORT_ICON_POSITIONS.Prefix,
-                  }}
                 >
                   Task
                 </HeaderCellSort>
@@ -361,9 +359,6 @@ storiesOf('Features/Sort', module)
                   sortFn={(array) =>
                     array.sort((a, b) => a.deadline - b.deadline)
                   }
-                  sortIcon={{
-                    position: SORT_ICON_POSITIONS.Prefix,
-                  }}
                 >
                   Deadline
                 </HeaderCellSort>
@@ -372,9 +367,6 @@ storiesOf('Features/Sort', module)
                   sortFn={(array) =>
                     array.sort((a, b) => a.type.localeCompare(b.type))
                   }
-                  sortIcon={{
-                    position: SORT_ICON_POSITIONS.Prefix,
-                  }}
                 >
                   Type
                 </HeaderCellSort>
@@ -383,9 +375,6 @@ storiesOf('Features/Sort', module)
                   sortFn={(array) =>
                     array.sort((a, b) => a.isComplete - b.isComplete)
                   }
-                  sortIcon={{
-                    position: SORT_ICON_POSITIONS.Prefix,
-                  }}
                 >
                   Complete
                 </HeaderCellSort>
@@ -398,9 +387,6 @@ storiesOf('Features/Sort', module)
                         (b.nodes || []).length
                     )
                   }
-                  sortIcon={{
-                    position: SORT_ICON_POSITIONS.Prefix,
-                  }}
                 >
                   Tasks
                 </HeaderCellSort>
@@ -436,124 +422,22 @@ storiesOf('Features/Sort', module)
       </Table>
     );
   })
-  .add('indentation ', () => {
-    const data = { nodes };
-
-    const sort = useSort(data, {
-      onChange: onSortChange,
-    });
-
-    function onSortChange(action, state) {
-      console.log(action, state);
-    }
-
-    return (
-      <Table data={data} sort={sort}>
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCellSort
-                  sortKey="TASK"
-                  sortFn={(array) =>
-                    array.sort((a, b) => a.name.localeCompare(b.name))
-                  }
-                  sortIcon={{
-                    position: SORT_ICON_POSITIONS.Prefix,
-                  }}
-                >
-                  Task
-                </HeaderCellSort>
-                <HeaderCellSort
-                  sortKey="DEADLINE"
-                  sortFn={(array) =>
-                    array.sort((a, b) => a.deadline - b.deadline)
-                  }
-                  sortIcon={{
-                    position: SORT_ICON_POSITIONS.Prefix,
-                  }}
-                >
-                  Deadline
-                </HeaderCellSort>
-                <HeaderCellSort
-                  sortKey="TYPE"
-                  sortFn={(array) =>
-                    array.sort((a, b) => a.type.localeCompare(b.type))
-                  }
-                  sortIcon={{
-                    position: SORT_ICON_POSITIONS.Prefix,
-                  }}
-                >
-                  Type
-                </HeaderCellSort>
-                <HeaderCellSort
-                  sortKey="COMPLETE"
-                  sortFn={(array) =>
-                    array.sort((a, b) => a.isComplete - b.isComplete)
-                  }
-                  sortIcon={{
-                    position: SORT_ICON_POSITIONS.Prefix,
-                  }}
-                >
-                  Complete
-                </HeaderCellSort>
-                <HeaderCellSort
-                  sortKey="TASKS"
-                  sortFn={(array) =>
-                    array.sort(
-                      (a, b) =>
-                        (a.nodes || []).length -
-                        (b.nodes || []).length
-                    )
-                  }
-                  sortIcon={{
-                    position: SORT_ICON_POSITIONS.Prefix,
-                  }}
-                >
-                  Tasks
-                </HeaderCellSort>
-              </HeaderRow>
-            </Header>
-
-            <Body>
-              {tableList.map((item) => (
-                <Row item={item} key={item.id}>
-                  {(tableItem) => (
-                    <>
-                      <Cell indentation={18}>{tableItem.name}</Cell>
-                      <Cell indentation={18}>
-                        {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
-                          {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit',
-                          }
-                        )}
-                      </Cell>
-                      <Cell indentation={18}>{tableItem.type}</Cell>
-                      <Cell indentation={18}>
-                        {tableItem.isComplete.toString()}
-                      </Cell>
-                      <Cell indentation={18}>
-                        {tableItem.nodes?.length}
-                      </Cell>
-                    </>
-                  )}
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
-    );
-  })
   .add('no sort icon', () => {
     const data = { nodes };
 
-    const sort = useSort(data, {
-      onChange: onSortChange,
-    });
+    const sort = useSort(
+      data,
+      {
+        onChange: onSortChange,
+      },
+      {
+        sortIcon: {
+          iconDefault: null,
+          iconUp: null,
+          iconDown: null,
+        },
+      }
+    );
 
     function onSortChange(action, state) {
       console.log(action, state);
@@ -570,11 +454,6 @@ storiesOf('Features/Sort', module)
                   sortFn={(array) =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
-                  sortIcon={{
-                    iconDefault: null,
-                    iconUp: null,
-                    iconDown: null,
-                  }}
                 >
                   Task
                 </HeaderCellSort>
@@ -583,11 +462,6 @@ storiesOf('Features/Sort', module)
                   sortFn={(array) =>
                     array.sort((a, b) => a.deadline - b.deadline)
                   }
-                  sortIcon={{
-                    iconDefault: null,
-                    iconUp: null,
-                    iconDown: null,
-                  }}
                 >
                   Deadline
                 </HeaderCellSort>
@@ -596,11 +470,6 @@ storiesOf('Features/Sort', module)
                   sortFn={(array) =>
                     array.sort((a, b) => a.type.localeCompare(b.type))
                   }
-                  sortIcon={{
-                    iconDefault: null,
-                    iconUp: null,
-                    iconDown: null,
-                  }}
                 >
                   Type
                 </HeaderCellSort>
@@ -609,11 +478,6 @@ storiesOf('Features/Sort', module)
                   sortFn={(array) =>
                     array.sort((a, b) => a.isComplete - b.isComplete)
                   }
-                  sortIcon={{
-                    iconDefault: null,
-                    iconUp: null,
-                    iconDown: null,
-                  }}
                 >
                   Complete
                 </HeaderCellSort>
@@ -626,11 +490,6 @@ storiesOf('Features/Sort', module)
                         (b.nodes || []).length
                     )
                   }
-                  sortIcon={{
-                    iconDefault: null,
-                    iconUp: null,
-                    iconDown: null,
-                  }}
                 >
                   Tasks
                 </HeaderCellSort>
@@ -669,9 +528,22 @@ storiesOf('Features/Sort', module)
   .add('custom sort icon (Material UI)', () => {
     const data = { nodes };
 
-    const sort = useSort(data, {
-      onChange: onSortChange,
-    });
+    const sort = useSort(
+      data,
+      {
+        onChange: onSortChange,
+      },
+      {
+        sortIcon: {
+          margin: '0px',
+          iconDefault: <UnfoldMoreOutlinedIcon fontSize="small" />,
+          iconUp: <KeyboardArrowUpOutlinedIcon fontSize="small" />,
+          iconDown: (
+            <KeyboardArrowDownOutlinedIcon fontSize="small" />
+          ),
+        },
+      }
+    );
 
     function onSortChange(action, state) {
       console.log(action, state);
@@ -688,18 +560,6 @@ storiesOf('Features/Sort', module)
                   sortFn={(array) =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
                   }
-                  sortIcon={{
-                    margin: '0px',
-                    iconDefault: (
-                      <UnfoldMoreOutlinedIcon fontSize="small" />
-                    ),
-                    iconUp: (
-                      <KeyboardArrowUpOutlinedIcon fontSize="small" />
-                    ),
-                    iconDown: (
-                      <KeyboardArrowDownOutlinedIcon fontSize="small" />
-                    ),
-                  }}
                 >
                   Task
                 </HeaderCellSort>
@@ -708,18 +568,6 @@ storiesOf('Features/Sort', module)
                   sortFn={(array) =>
                     array.sort((a, b) => a.deadline - b.deadline)
                   }
-                  sortIcon={{
-                    margin: '0px',
-                    iconDefault: (
-                      <UnfoldMoreOutlinedIcon fontSize="small" />
-                    ),
-                    iconUp: (
-                      <KeyboardArrowUpOutlinedIcon fontSize="small" />
-                    ),
-                    iconDown: (
-                      <KeyboardArrowDownOutlinedIcon fontSize="small" />
-                    ),
-                  }}
                 >
                   Deadline
                 </HeaderCellSort>
@@ -728,18 +576,6 @@ storiesOf('Features/Sort', module)
                   sortFn={(array) =>
                     array.sort((a, b) => a.type.localeCompare(b.type))
                   }
-                  sortIcon={{
-                    margin: '0px',
-                    iconDefault: (
-                      <UnfoldMoreOutlinedIcon fontSize="small" />
-                    ),
-                    iconUp: (
-                      <KeyboardArrowUpOutlinedIcon fontSize="small" />
-                    ),
-                    iconDown: (
-                      <KeyboardArrowDownOutlinedIcon fontSize="small" />
-                    ),
-                  }}
                 >
                   Type
                 </HeaderCellSort>
@@ -748,18 +584,6 @@ storiesOf('Features/Sort', module)
                   sortFn={(array) =>
                     array.sort((a, b) => a.isComplete - b.isComplete)
                   }
-                  sortIcon={{
-                    margin: '0px',
-                    iconDefault: (
-                      <UnfoldMoreOutlinedIcon fontSize="small" />
-                    ),
-                    iconUp: (
-                      <KeyboardArrowUpOutlinedIcon fontSize="small" />
-                    ),
-                    iconDown: (
-                      <KeyboardArrowDownOutlinedIcon fontSize="small" />
-                    ),
-                  }}
                 >
                   Complete
                 </HeaderCellSort>
@@ -772,18 +596,6 @@ storiesOf('Features/Sort', module)
                         (b.nodes || []).length
                     )
                   }
-                  sortIcon={{
-                    margin: '0px',
-                    iconDefault: (
-                      <UnfoldMoreOutlinedIcon fontSize="small" />
-                    ),
-                    iconUp: (
-                      <KeyboardArrowUpOutlinedIcon fontSize="small" />
-                    ),
-                    iconDown: (
-                      <KeyboardArrowDownOutlinedIcon fontSize="small" />
-                    ),
-                  }}
                 >
                   Tasks
                 </HeaderCellSort>

@@ -2,16 +2,11 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import IconChevronSingleDown from '@table-library/react-table-library/common/icons/IconChevronSingleDown';
-import IconChevronSingleRight from '@table-library/react-table-library/common/icons/IconChevronSingleRight';
 import { getIcon } from '@table-library/react-table-library/common/util/getIcon';
 import { Button } from '@table-library/react-table-library/common/components/Button';
 import { Cell } from '@table-library/react-table-library/table/Cell';
 import { TreeContext } from '@table-library/react-table-library/common/context/Tree';
 import { isLeaf } from '@table-library/react-table-library/common/util/tree';
-
-const TREE_ICON_SIZE = '14px';
-const TREE_ICON_MARGIN = '4px';
 
 const TreeContent = styled.div`
   display: flex;
@@ -59,33 +54,26 @@ const getTreeIcon = (
 
 const CellTree = React.memo(
   ({ item, treeIcon = {}, children, ...passThrough }) => {
-    const tree = React.useContext(TreeContext);
+    const { state, fns, _options } = React.useContext(TreeContext);
 
-    const treeIconSize = treeIcon.size || TREE_ICON_SIZE;
-    const treeIconMargin = treeIcon.margin || TREE_ICON_MARGIN;
-    const treeIconDefault = getIcon(treeIcon.iconDefault, null);
-    const treeIconRight = getIcon(
-      treeIcon.iconRight,
-      <IconChevronSingleRight />
-    );
-    const treeIconDown = getIcon(
-      treeIcon.iconDown,
-      <IconChevronSingleDown />
-    );
+    const mergedTreeIconOptions = {
+      ..._options.treeIcon,
+      ...treeIcon,
+    };
 
     const handleClick = () => {
       if (isLeaf(item)) return;
 
-      tree.fns.onToggleById(item.id);
+      fns.onToggleById(item.id);
     };
 
     const icon = getTreeIcon(
       item,
-      tree.state,
-      treeIconSize,
-      treeIconDefault,
-      treeIconRight,
-      treeIconDown
+      state,
+      mergedTreeIconOptions.size,
+      mergedTreeIconOptions.iconDefault,
+      mergedTreeIconOptions.iconRight,
+      mergedTreeIconOptions.iconDown
     );
 
     return (
@@ -93,7 +81,7 @@ const CellTree = React.memo(
         <TreeContent>
           <Button
             className="prefix narrow"
-            margin={treeIconMargin}
+            margin={mergedTreeIconOptions.margin}
             onClick={handleClick}
           >
             {icon && <span>{icon}</span>}

@@ -11,6 +11,8 @@ import {
 } from '@table-library/react-table-library/common/util/tree';
 import { useIdReducer } from '@table-library/react-table-library/common/util/useIdReducer';
 import { useSyncRefState } from '@table-library/react-table-library/common/util/useSyncRefState';
+import IconChevronSingleDown from '@table-library/react-table-library/common/icons/IconChevronSingleDown';
+import IconChevronSingleRight from '@table-library/react-table-library/common/icons/IconChevronSingleRight';
 
 import { TREE_EXPAND_CLICK_TYPES } from './config';
 
@@ -85,7 +87,16 @@ const DEFAULT_STATE = {
   ids: [],
 };
 
+const DEFAULT_TREE_ICON = {
+  margin: '4px',
+  size: '14px',
+  iconDefault: null,
+  iconRight: <IconChevronSingleRight />,
+  iconDown: <IconChevronSingleDown />,
+};
+
 const DEFAULT_OPTIONS = {
+  treeIcon: DEFAULT_TREE_ICON,
   clickType: TREE_EXPAND_CLICK_TYPES.RowClick,
   treeXLevel: 0,
   treeYLevel: 0,
@@ -107,6 +118,10 @@ const useTree = (data, primary = {}, options = {}, context) => {
   const mergedOptions = {
     ...DEFAULT_OPTIONS,
     ...options,
+    treeIcon: {
+      ...DEFAULT_TREE_ICON,
+      ...options.treeIcon,
+    },
   };
 
   return {

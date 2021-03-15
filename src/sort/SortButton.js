@@ -2,16 +2,10 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
 
-import IconChevronSingleDown from '@table-library/react-table-library/common/icons/IconChevronSingleDown';
-import IconChevronSingleUp from '@table-library/react-table-library/common/icons/IconChevronSingleUp';
-import IconChevronSingleUpDown from '@table-library/react-table-library/common/icons/IconChevronSingleUpDown';
 import { getIcon } from '@table-library/react-table-library/common/util/getIcon';
 import { Button } from '@table-library/react-table-library/common/components/Button';
 
 import { SORT_ICON_POSITIONS } from './config';
-
-const SORT_ICON_SIZE = '14px';
-const SORT_ICON_MARGIN = '4px';
 
 const getSortIcon = (
   sortState,
@@ -47,38 +41,28 @@ const SortButton = ({
   sort,
   sortFn,
   sortKey,
-  sortIcon,
+  sortIcon = {},
   children,
 }) => {
-  const { state, fns } = sort;
+  const { state, fns, _options } = sort;
 
-  const sortIconPosition =
-    sortIcon.position || SORT_ICON_POSITIONS.Suffix;
-  const sortIconSize = sortIcon.size || SORT_ICON_SIZE;
-  const sortIconMargin = sortIcon.margin || SORT_ICON_MARGIN;
-  const sortIconDefault = getIcon(
-    sortIcon.iconDefault,
-    <IconChevronSingleUpDown />
-  );
-  const sortIconUp = getIcon(
-    sortIcon.iconUp,
-    <IconChevronSingleUp />
-  );
-  const sortIconDown = getIcon(
-    sortIcon.iconDown,
-    <IconChevronSingleDown />
-  );
+  const mergedSortIconOptions = {
+    ..._options.sortIcon,
+    ...sortIcon,
+  };
 
-  const prefix = sortIconPosition === SORT_ICON_POSITIONS.Prefix;
-  const suffix = sortIconPosition === SORT_ICON_POSITIONS.Suffix;
+  const prefix =
+    mergedSortIconOptions.position === SORT_ICON_POSITIONS.Prefix;
+  const suffix =
+    mergedSortIconOptions.position === SORT_ICON_POSITIONS.Suffix;
 
   const icon = getSortIcon(
     state,
     sortKey,
-    sortIconSize,
-    sortIconDefault,
-    sortIconUp,
-    sortIconDown
+    mergedSortIconOptions.size,
+    mergedSortIconOptions.iconDefault,
+    mergedSortIconOptions.iconUp,
+    mergedSortIconOptions.iconDown
   );
 
   const handleToggleSort = () =>
@@ -91,7 +75,7 @@ const SortButton = ({
         prefix,
         suffix,
       })}
-      margin={sortIconMargin}
+      margin={mergedSortIconOptions.margin}
       onClick={handleToggleSort}
     >
       {prefix && icon && <span>{icon}</span>}
