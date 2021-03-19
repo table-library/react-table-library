@@ -9,6 +9,7 @@ import {
   HeaderRow,
   Body,
   Row,
+  HeaderCell,
   Cell,
 } from '@table-library/react-table-library/table';
 
@@ -17,11 +18,16 @@ import {
   HeaderCellSort,
 } from '@table-library/react-table-library/sort';
 
+import {
+  useSelect,
+  SELECT_TYPES,
+} from '@table-library/react-table-library/select';
+
 import { nodes } from '../data';
 
 storiesOf('Recipes/Controlled', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('sort', () => {
     const SORTS = {
       NONE: {
         label: 'None',
@@ -103,6 +109,88 @@ storiesOf('Recipes/Controlled', module)
                         {SORTS[key].label}
                       </HeaderCellSort>
                     ))}
+                </HeaderRow>
+              </Header>
+
+              <Body>
+                {tableList.map((item) => (
+                  <Row item={item} key={item.id}>
+                    {(tableItem) => (
+                      <>
+                        <Cell>{tableItem.name}</Cell>
+                        <Cell>
+                          {tableItem.deadline.toLocaleDateString(
+                            'fr-CA',
+                            {
+                              year: 'numeric',
+                              month: '2-digit',
+                              day: '2-digit',
+                            }
+                          )}
+                        </Cell>
+                        <Cell>{tableItem.type}</Cell>
+                        <Cell>{tableItem.isComplete.toString()}</Cell>
+                        <Cell>{tableItem.nodes?.length}</Cell>
+                      </>
+                    )}
+                  </Row>
+                ))}
+              </Body>
+            </>
+          )}
+        </Table>
+      </>
+    );
+  })
+  .add('select', () => {
+    const data = { nodes };
+
+    const [
+      controlledSelectState,
+      setControlledSelectState,
+    ] = React.useState({ ids: [] });
+
+    const select = useSelect(
+      data,
+      {
+        state: controlledSelectState,
+        onChange: onSelectChange,
+      },
+      {
+        rowSelect: SELECT_TYPES.MultiSelect,
+      }
+    );
+
+    function onSelectChange(action, state) {
+      console.log(action, state);
+      setControlledSelectState(state);
+    }
+
+    const handleShuffle = () => {
+      setControlledSelectState({
+        ids: [...nodes]
+          .sort(() => 0.5 - Math.random())
+          .slice(0, 2)
+          .map((node) => node.id),
+      });
+    };
+
+    return (
+      <>
+        <button type="button" onClick={handleShuffle}>
+          Shuffle
+        </button>
+
+        <Table data={data} select={select}>
+          {(tableList) => (
+            <>
+              <Header>
+                <HeaderRow>
+                  <HeaderCell>Task</HeaderCell>
+                  <HeaderCell>Deadline</HeaderCell>
+                  <HeaderCell>Type</HeaderCell>
+                  <HeaderCell>Complete</HeaderCell>
+                  <HeaderCell>Tasks</HeaderCell>
                 </HeaderRow>
               </Header>
 

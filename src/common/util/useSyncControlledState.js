@@ -2,19 +2,21 @@ import * as React from 'react';
 import isEqual from 'lodash.isequal';
 
 const useSyncControlledState = (controlledState, state, callback) => {
-  const previous = React.useRef(controlledState);
+  const previousControlledState = React.useRef(controlledState);
+  const previousState = React.useRef(controlledState);
 
   React.useEffect(() => {
-    if (
-      !isEqual(controlledState, previous.current) &&
+    if (!isEqual(state, previousState.current)) {
+      // do nothing, because it's a internal state change
+    } else if (
+      !isEqual(controlledState, previousControlledState.current) &&
       !isEqual(controlledState, state)
     ) {
       callback();
     }
 
-    if (!isEqual(controlledState, previous.current)) {
-      previous.current = state;
-    }
+    previousControlledState.current = controlledState;
+    previousState.current = state;
   }, [state, callback, controlledState]);
 };
 
