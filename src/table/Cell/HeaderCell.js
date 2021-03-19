@@ -43,7 +43,13 @@ HeaderCell.propTypes = {
   className: PropTypes.string,
   hide: PropTypes.bool,
   shrink: PropTypes.bool,
-  resize: PropTypes.bool,
+  resize: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({
+      minWidth: PropTypes.number,
+      offset: PropTypes.number,
+    }),
+  ]),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
