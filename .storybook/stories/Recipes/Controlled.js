@@ -162,7 +162,6 @@ storiesOf('Recipes/Controlled', module)
     );
 
     function onSelectChange(action, state) {
-      console.log(action, state);
       setControlledSelectState(state);
     }
 
