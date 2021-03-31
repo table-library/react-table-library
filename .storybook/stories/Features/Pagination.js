@@ -85,6 +85,7 @@ storiesOf('Features/Pagination', module)
           </span>
 
           <span>
+            Page:{' '}
             {pagination.state.getPages(data.nodes).map((_, index) => (
               <button
                 key={index}
@@ -200,6 +201,7 @@ storiesOf('Features/Pagination', module)
           </span>
 
           <span>
+            Page:{' '}
             {pagination.state.getPages(data.nodes).map((_, index) => (
               <button
                 key={index}
@@ -285,7 +287,7 @@ storiesOf('Features/Pagination', module)
           <span>
             Rows per page:{' '}
             {pagination.state.getPageBoundaries(data.nodes).start}
-            {' - '}
+            {'-'}
             {pagination.state.getPageBoundaries(data.nodes).end}
             {' of '}
             {data.nodes.length}{' '}

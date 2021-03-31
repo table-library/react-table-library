@@ -109,8 +109,14 @@ const getPaginatedNodes = (nodes, offset, nextOffset) =>
     {
       nodes: [],
       pageInfo: {
+        // paginated fetch
         total: nodes.length,
         nextOffset,
+        // pagination
+        totalPages: Math.ceil(nodes.length / (nextOffset - offset)),
+        startSize: offset + 1,
+        endSize:
+          nodes.length > nextOffset ? nextOffset : nodes.length,
       },
     }
   );
