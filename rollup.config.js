@@ -19,6 +19,7 @@ export default {
     sort: './src/sort/index.js', // ts
     select: './src/select/index.js', // ts
     tree: './src/tree/index.js', // ts
+    pagination: './src/pagination/index.js', // ts
   },
 
   output: [

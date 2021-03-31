@@ -13,24 +13,12 @@ import { TreeContext } from '@table-library/react-table-library/common/context/T
 
 import { TableContainer } from './styles';
 
-const applyRecursiveSort = (nodes, sortFn) => {
-  return sortFn(nodes).reduce((acc, value) => {
-    if (value.nodes) {
-      return acc.concat({
-        ...value,
-        nodes: applyRecursiveSort(value.nodes, sortFn),
-      });
-    }
-
-    return acc.concat(value);
-  }, []);
-};
-
 const Table = ({
   data,
   theme,
   layout,
   sort,
+  pagination,
   select,
   tree,
   panels,
@@ -38,13 +26,19 @@ const Table = ({
 }) => {
   const tableRef = React.useRef();
 
-  // do any nodes operations (e.g. sort, pagination), if not server-side
   let modifiedNodes = [...data.nodes];
 
   if (sort && !sort._options.isServer) {
     modifiedNodes = tree
-      ? applyRecursiveSort(modifiedNodes, sort.state.sortFn)
+      ? sort.state.recursiveSortFn(modifiedNodes)
       : sort.state.sortFn(modifiedNodes);
+  }
+
+  if (pagination && !pagination._options.isServer) {
+    // TODO tree?
+    modifiedNodes = pagination.state.getPages(modifiedNodes)[
+      pagination.state.page
+    ];
   }
 
   return (
@@ -77,9 +71,6 @@ const Table = ({
 
 Table.propTypes = {
   data: PropTypes.objectOf(PropTypes.any),
-  server: PropTypes.shape({
-    sort: PropTypes.bool,
-  }),
   theme: PropTypes.objectOf(PropTypes.any),
   layout: PropTypes.shape({
     custom: PropTypes.bool,

@@ -56,8 +56,8 @@ const DEFAULT_SORT_ICON = {
 };
 
 const DEFAULT_OPTIONS = {
-  sortIcon: DEFAULT_SORT_ICON,
   isServer: false,
+  sortIcon: DEFAULT_SORT_ICON,
 };
 
 const useSort = (data, primary = {}, options = {}, context) => {
@@ -92,6 +92,22 @@ const useSort = (data, primary = {}, options = {}, context) => {
     })
   );
 
+  const recursiveSortFn = React.useCallback(
+    (nodes) => {
+      return state.sortFn(nodes).reduce((acc, value) => {
+        if (value.nodes) {
+          return acc.concat({
+            ...value,
+            nodes: recursiveSortFn(value.nodes, state.sortFn),
+          });
+        }
+
+        return acc.concat(value);
+      }, []);
+    },
+    [state]
+  );
+
   const fns = React.useMemo(
     () => ({
       onToggleSort,
@@ -110,7 +126,11 @@ const useSort = (data, primary = {}, options = {}, context) => {
     },
   };
 
-  return { state, fns, _options: mergedOptions };
+  return {
+    state: { ...state, recursiveSortFn },
+    fns,
+    _options: mergedOptions,
+  };
 };
 
 export { useSort };
