@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import styles from './styles.module.css';
+import styles from './styles.module.scss';
 
 const Checkbox = React.forwardRef((props, ref) => {
   return (

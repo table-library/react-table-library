@@ -48,6 +48,7 @@ export default {
     peerDepsExternal(),
     postcss({
       modules: true,
+      extensions: ['.scss', '.css'],
     }),
     resolve({
       browser: true,

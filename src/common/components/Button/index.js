@@ -1,57 +1,35 @@
-import styled from 'styled-components';
+import * as React from 'react';
+import PropTypes from 'prop-types';
 
-const Button = styled.button`
-  display: flex;
-  align-items: center;
+import { classnames } from '@table-library/react-table-library/common/classnames';
 
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
+import styles from './styles.module.scss';
 
-  width: 100%;
-  height: 100%;
+const Button = React.forwardRef(
+  ({ className, margin, ...props }, ref) => {
+    return (
+      <button
+        type="button"
+        ref={ref}
+        {...props}
+        className={classnames([styles.button], className, styles)}
+        // css={`
+        //   &.prefix span {
+        //     margin-right: ${({ margin }) => margin};
+        //   }
 
-  &.narrow {
-    width: auto;
+        //   &.suffix span {
+        //     margin-left: ${({ margin }) => margin};
+        //   }
+        // `}
+      />
+    );
   }
+);
 
-  &.active {
-    font-weight: bold;
-  }
-
-  span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &.prefix span {
-    margin-right: ${({ margin }) => margin};
-  }
-
-  &.suffix span {
-    margin-left: ${({ margin }) => margin};
-  }
-
-  div {
-    text-align: left;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  div:after {
-    display: block;
-    content: attr(title);
-    font-weight: bold;
-    height: 0;
-    overflow: hidden;
-    visibility: hidden;
-  }
-`;
+Button.propTypes = {
+  className: PropTypes.string,
+  margin: PropTypes.string,
+};
 
 export { Button };
