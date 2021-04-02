@@ -1,4 +1,3 @@
-import { css } from 'styled-components';
 import cs from 'classnames';
 
 import * as COLORS from '@table-library/react-table-library/common/colors';
@@ -16,7 +15,7 @@ const getRowProps = (props, features) => {
   const isMultiSelected = select.state.ids.includes(item.id);
   const isSingleSelect = select.state.id === item.id;
 
-  const theme = css`
+  const theme = `
     &.row-select-selected,
     &.row-select-single-selected {
       color: ${COLORS.FONT_PRIMARY};

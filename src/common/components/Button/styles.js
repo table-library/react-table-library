@@ -1,4 +1,4 @@
-.button {
+export default ({ margin }) => `
   display: flex;
   align-items: center;
 
@@ -13,10 +13,26 @@
   width: 100%;
   height: 100%;
 
+  &.narrow {
+    width: auto;
+  }
+
+  &.active {
+    font-weight: bold;
+  }
+
   span {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  &.prefix span {
+    margin-right: ${margin};
+  }
+
+  &.suffix span {
+    margin-left: ${margin};
   }
 
   div {
@@ -34,12 +50,4 @@
     overflow: hidden;
     visibility: hidden;
   }
-}
-
-.active {
-  font-weight: bold;
-}
-
-.narrow {
-  width: auto;
-}
+`;

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { css } from 'styled-components';
 import cs from 'classnames';
 
 import { HeaderRowContainer } from '@table-library/react-table-library/common/components/Row';
@@ -19,7 +18,7 @@ const HeaderRow = ({ className, disabled, children }) => {
     <HeaderRowContainer
       role="rowheader"
       className={cs('tr', 'tr-header', className, { disabled })}
-      css={css`
+      css={`
         ${theme?.BaseRow}
         ${theme?.HeaderRow}
       `}

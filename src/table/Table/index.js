@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */ // TODO
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { css } from 'styled-components';
 
 import { TableContext } from '@table-library/react-table-library/common/context/Table';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
@@ -44,7 +43,7 @@ const Table = ({
   return (
     <TableContainer
       className="table"
-      css={css`
+      css={`
         ${theme?.Table}
       `}
       role="grid"

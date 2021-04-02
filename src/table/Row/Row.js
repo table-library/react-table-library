@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { css } from 'styled-components';
 import cs from 'classnames';
 
 import { RowContainer } from '@table-library/react-table-library/common/components/Row';
@@ -20,7 +19,7 @@ const evaluateProps = (rowPropsByFeature, onSingleClick) => {
     (acc, value) => {
       const { theme, className, onClick, panels } = value;
 
-      const mergedTheme = css`
+      const mergedTheme = `
         ${acc.themeByFeature}
         ${theme}
       `;
@@ -101,7 +100,7 @@ const Row = React.memo(
               clickable: onClickByFeature || onDoubleClick,
             }
           )}
-          css={css`
+          css={`
             ${themeByFeature}
             ${theme?.BaseRow}
             ${theme?.Row}

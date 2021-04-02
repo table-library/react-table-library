@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { css } from 'styled-components';
 import cs from 'classnames';
 
 import { CellContainer } from '@table-library/react-table-library/common/components/Cell';
@@ -16,7 +15,7 @@ const Cell = ({ className, hide, shrink, onClick, children }) => {
         hide,
         shrink,
       })}
-      css={css`
+      css={`
         ${theme?.BaseCell}
         ${theme?.Cell}
       `}

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { css } from 'styled-components';
 import cs from 'classnames';
 
 import { Body } from '@table-library/react-table-library/table/Body';
@@ -26,7 +25,7 @@ const getRowProps = (props, features) => {
   const treeYLevel = props.treeYLevel || tree._options.treeYLevel;
   const treeXLevel = props.treeXLevel || tree._options.treeXLevel;
 
-  const theme = css`
+  const theme = `
     &.row-tree-clickable {
       cursor: pointer;
     }
