@@ -1,6 +1,4 @@
-import styled from 'styled-components';
-
-export const Resizer = styled.span`
+const resizerStyle = () => `
   position: absolute;
   top: 0;
   right: 0;
@@ -8,3 +6,5 @@ export const Resizer = styled.span`
   cursor: col-resize;
   width: 3px;
 `;
+
+export { resizerStyle };

@@ -10,7 +10,7 @@ import { SortContext } from '@table-library/react-table-library/common/context/S
 import { SelectContext } from '@table-library/react-table-library/common/context/Select';
 import { TreeContext } from '@table-library/react-table-library/common/context/Tree';
 
-import { TableContainer } from './styles';
+import styles from './styles';
 
 const Table = ({
   data,
@@ -41,10 +41,11 @@ const Table = ({
   }
 
   return (
-    <TableContainer
+    <div
       className="table"
       css={`
         ${theme?.Table}
+        ${styles()}
       `}
       role="grid"
       ref={tableRef}
@@ -64,7 +65,7 @@ const Table = ({
           </PanelContext.Provider>
         </ThemeContext.Provider>
       </TableContext.Provider>
-    </TableContainer>
+    </div>
   );
 };
 

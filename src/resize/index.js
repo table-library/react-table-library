@@ -1,2 +1,2 @@
-export * from './Resizer';
+export * from './styles';
 export * from './useResize';

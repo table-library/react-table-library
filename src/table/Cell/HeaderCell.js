@@ -5,7 +5,7 @@ import cs from 'classnames';
 import { HeaderCellContainer } from '@table-library/react-table-library/common/components/Cell';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
 import {
-  Resizer,
+  resizerStyle,
   useResize,
 } from '@table-library/react-table-library/resize';
 
@@ -32,7 +32,7 @@ const HeaderCell = ({
       ref={cellRef}
     >
       <div>{children}</div>
-      {resize && <Resizer ref={resizeRef} />}
+      {resize && <span ref={resizeRef} css={resizerStyle()} />}
     </HeaderCellContainer>
   );
 };

@@ -1,11 +1,7 @@
-import styled from 'styled-components';
-
-export const TableContainer = styled.div`
+export default () => `
   *,
   *:before,
   *:after {
     box-sizing: border-box;
   }
-
-  ${({ css }) => css};
 `;

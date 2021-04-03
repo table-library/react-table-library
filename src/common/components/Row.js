@@ -1,13 +1,15 @@
-import styled from 'styled-components';
+import * as React from 'react';
 
 import * as COLORS from '@table-library/react-table-library/common/colors';
 
-const RowContainerBase = styled.div`
+const baseStyle = `
   display: flex;
   align-items: stretch;
 `;
 
-const RowContainer = styled(RowContainerBase)`
+const rowContainerStyle = `
+  ${baseStyle}
+
   ${() => {
     /* #1 */
   }}
@@ -27,17 +29,23 @@ const RowContainer = styled(RowContainerBase)`
   &.clickable {
     cursor: pointer;
   }
-
-  ${({ css }) => css};
 `;
 
-const HeaderRowContainer = styled(RowContainerBase)`
+const RowContainer = React.forwardRef((props, ref) => {
+  return <div {...props} css={rowContainerStyle} ref={ref} />;
+});
+
+const headerRowContainerStyle = `
+  ${baseStyle}
+
   border-bottom: 1px solid ${COLORS.BORDER};
 
   font-size: 18px;
   color: ${COLORS.FONT_PRIMARY};
-
-  ${({ css }) => css};
 `;
 
-export { RowContainerBase, RowContainer, HeaderRowContainer };
+const HeaderRowContainer = React.forwardRef((props, ref) => {
+  return <div {...props} css={headerRowContainerStyle} ref={ref} />;
+});
+
+export { RowContainer, HeaderRowContainer };

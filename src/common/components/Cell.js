@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import * as React from 'react';
 
 import * as COLORS from '@table-library/react-table-library/common/colors';
 
 const GUTTER = 8;
 
-const CellContainerBase = styled.div`
+const baseStyle = `
   display: flex;
   align-items: center;
 
@@ -47,18 +47,24 @@ const CellContainerBase = styled.div`
   &.hide {
     display: none;
   }
-
-  ${({ css }) => css};
 `;
 
-const CellContainer = styled(CellContainerBase)`
+const cellContainerStyle = `
+  ${baseStyle}
+
   ${() => {
     /* #1 otherwise tree + resize would have overflow icons */
   }}
   background-color: inherit;
 `;
 
-const HeaderCellContainer = styled(CellContainerBase)`
+const CellContainer = React.forwardRef((props, ref) => {
+  return <div {...props} css={cellContainerStyle} ref={ref} />;
+});
+
+const headerCellContainerStyle = `
+  ${baseStyle}
+
   position: relative;
 
   svg,
@@ -67,4 +73,8 @@ const HeaderCellContainer = styled(CellContainerBase)`
   }
 `;
 
-export { CellContainerBase, CellContainer, HeaderCellContainer };
+const HeaderCellContainer = React.forwardRef((props, ref) => {
+  return <div {...props} css={headerCellContainerStyle} ref={ref} />;
+});
+
+export { CellContainer, HeaderCellContainer };

@@ -1,6 +1,6 @@
 {
   "name": "@table-library/react-table-library",
-  "version": "0.2.114",
+  "version": "0.2.116",
   "description": "react-table-library",
   "main": "lib/main.js",
   "peerDependencies": {
@@ -10,7 +10,6 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "lodash.isequal": "^4.5.0",
-    "styled-components": "^5.2.0",
     "use-double-click": "^1.0.5"
   },
   "devDependencies": {

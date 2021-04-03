@@ -1,13 +1,12 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 import { Button } from '@table-library/react-table-library/common/components/Button';
 import { Cell } from '@table-library/react-table-library/table/Cell';
 import { TreeContext } from '@table-library/react-table-library/common/context/Tree';
 import { isLeaf } from '@table-library/react-table-library/common/util/tree';
 
-const TreeContent = styled.div`
+const style = () => `
   display: flex;
   align-items: center;
 
@@ -77,7 +76,7 @@ const CellTree = React.memo(
 
     return (
       <Cell {...passThrough}>
-        <TreeContent>
+        <div css={style()}>
           <Button
             className="prefix narrow"
             margin={mergedTreeIconOptions.margin}
@@ -86,7 +85,7 @@ const CellTree = React.memo(
             {icon && <span>{icon}</span>}
           </Button>
           <div>{children}</div>
-        </TreeContent>
+        </div>
       </Cell>
     );
   }
