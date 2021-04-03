@@ -44,7 +44,7 @@ In 2020, [Robin Wieruch](https://www.robinwieruch.de) created React Table Librar
 
 [version-badge]: https://img.shields.io/npm/v/@table-library/react-table-library
 [package]: https://www.npmjs.com/package/@table-library/react-table-library
-[license-badge]: https://img.shields.io/github/license/table-library/react-table-library
+[license-badge]: https://img.shields.io/npm/l/@table-library/react-table-library.svg?style=flat-square
 [license]: https://github.com/table-library/react-table-library/blob/master/LICENSE
 [github-star-badge]: https://img.shields.io/github/stars/table-library/react-table-library?style=social
 [github-star]: https://github.com/table-library/react-table-library/
