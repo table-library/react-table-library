@@ -16,6 +16,8 @@ React Table Library -- yet another table library for React -- which prioritzes:
 - server-side
 - developer experience
 
+**[Documentation](https://react-table-library.com/)**
+
 ## Installation
 
 ```
