@@ -14,7 +14,6 @@ const baseStyle = `
   &:not(.shrink) > div {
     width: 100%;
 
-    text-align: left;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

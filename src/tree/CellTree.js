@@ -11,7 +11,6 @@ const style = () => `
   align-items: center;
 
   & > div {
-    text-align: left;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
