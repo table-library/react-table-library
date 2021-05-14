@@ -69,7 +69,7 @@ const DEFAULT_OPTIONS = {
   isCarryForward: false,
 };
 
-const useSelect = (data, primary = {}, options = {}, context) => {
+const useRowSelect = (data, primary = {}, options = {}, context) => {
   const primaryNullFallback = primary || {};
   const controlledState = {
     ...DEFAULT_STATE,
@@ -99,4 +99,4 @@ const useSelect = (data, primary = {}, options = {}, context) => {
   };
 };
 
-export { useSelect };
+export { useRowSelect };

@@ -8,30 +8,20 @@ import {
   Header,
   HeaderRow,
   Body,
-  MemoizedRow,
+  Row,
   HeaderCell,
   Cell,
 } from '@table-library/react-table-library/table';
 
-import { useRowSelect } from '@table-library/react-table-library/select';
-
 import { nodes } from '../data';
 
-storiesOf('Recipes/Memoized Row (WIP)', module)
+storiesOf('Misc/Cell', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('cell click', () => {
     const data = { nodes };
 
-    const select = useRowSelect(data, {
-      onChange: onSelectChange,
-    });
-
-    function onSelectChange(action, state) {
-      console.log(action, state);
-    }
-
     return (
-      <Table data={data} select={select}>
+      <Table data={data}>
         {(tableList) => (
           <>
             <Header>
@@ -46,10 +36,16 @@ storiesOf('Recipes/Memoized Row (WIP)', module)
 
             <Body>
               {tableList.map((item) => (
-                <MemoizedRow item={item} key={item.id}>
+                <Row key={item.id} item={item}>
                   {(tableItem) => (
                     <>
-                      <Cell>{tableItem.name}</Cell>
+                      <Cell
+                        onClick={(event) =>
+                          console.log('Click Cell', event)
+                        }
+                      >
+                        {tableItem.name}
+                      </Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
                           'en-US',
@@ -65,7 +61,7 @@ storiesOf('Recipes/Memoized Row (WIP)', module)
                       <Cell>{tableItem.nodes?.length}</Cell>
                     </>
                   )}
-                </MemoizedRow>
+                </Row>
               ))}
             </Body>
           </>

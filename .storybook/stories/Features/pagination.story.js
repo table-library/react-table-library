@@ -57,7 +57,7 @@ storiesOf('Features/Pagination', module)
                         <Cell>{tableItem.name}</Cell>
                         <Cell>
                           {tableItem.deadline.toLocaleDateString(
-                            'fr-CA',
+                            'en-US',
                             {
                               year: 'numeric',
                               month: '2-digit',
@@ -146,7 +146,7 @@ storiesOf('Features/Pagination', module)
                         <Cell>{tableItem.name}</Cell>
                         <Cell>
                           {tableItem.deadline.toLocaleDateString(
-                            'fr-CA',
+                            'en-US',
                             {
                               year: 'numeric',
                               month: '2-digit',
@@ -260,7 +260,7 @@ storiesOf('Features/Pagination', module)
                         <Cell>{tableItem.name}</Cell>
                         <Cell>
                           {tableItem.deadline.toLocaleDateString(
-                            'fr-CA',
+                            'en-US',
                             {
                               year: 'numeric',
                               month: '2-digit',

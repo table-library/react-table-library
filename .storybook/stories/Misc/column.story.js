@@ -15,7 +15,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('First Steps/Column', module)
+storiesOf('Misc/Column', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };
@@ -25,7 +25,7 @@ storiesOf('First Steps/Column', module)
       {
         label: 'Deadline',
         get: (item) =>
-          item.deadline.toLocaleDateString('fr-CA', {
+          item.deadline.toLocaleDateString('en-US', {
             year: 'numeric',
             month: '2-digit',
             day: '2-digit',

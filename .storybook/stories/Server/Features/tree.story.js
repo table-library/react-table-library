@@ -97,7 +97,7 @@ storiesOf('Server/Tree', module)
                       </CellTree>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -177,7 +177,7 @@ storiesOf('Server/Tree', module)
                       </CellTree>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -272,7 +272,7 @@ storiesOf('Server/Tree', module)
                       </CellTree>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -406,7 +406,7 @@ storiesOf('Server/Tree', module)
                       </CellTree>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',

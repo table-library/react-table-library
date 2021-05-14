@@ -137,7 +137,7 @@ storiesOf('Features/Column Hiding', module)
                         </Cell>
                         <Cell hide={!columns.includes('deadline')}>
                           {tableItem.deadline.toLocaleDateString(
-                            'fr-CA',
+                            'en-US',
                             {
                               year: 'numeric',
                               month: '2-digit',
@@ -293,7 +293,7 @@ storiesOf('Features/Column Hiding', module)
                         </Cell>
                         <Cell hide={!columns.includes('deadline')}>
                           {tableItem.deadline.toLocaleDateString(
-                            'fr-CA',
+                            'en-US',
                             {
                               year: 'numeric',
                               month: '2-digit',

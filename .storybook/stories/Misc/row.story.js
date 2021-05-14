@@ -15,7 +15,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('First Steps/Row', module)
+storiesOf('Misc/Row', module)
   .addParameters({ component: Table })
   .add('row click', () => {
     const data = { nodes };
@@ -48,7 +48,7 @@ storiesOf('First Steps/Row', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -100,7 +100,7 @@ storiesOf('First Steps/Row', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',

@@ -60,7 +60,7 @@ storiesOf('Features/Tree', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -117,7 +117,7 @@ storiesOf('Features/Tree', module)
                       </CellTree>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -177,7 +177,7 @@ storiesOf('Features/Tree', module)
                       </CellTree>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -239,7 +239,7 @@ storiesOf('Features/Tree', module)
                       </CellTree>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -303,7 +303,7 @@ storiesOf('Features/Tree', module)
                       </CellTree>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -372,7 +372,7 @@ storiesOf('Features/Tree', module)
                       </CellTree>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',

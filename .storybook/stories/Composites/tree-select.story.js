@@ -21,7 +21,7 @@ import {
 import {
   CellSelect,
   HeaderCellSelect,
-  useSelect,
+  useRowSelect,
   SELECT_CLICK_TYPES,
 } from '@table-library/react-table-library/select';
 
@@ -36,7 +36,7 @@ storiesOf('Composites/Tree & Select', module)
       onChange: onTreeChange,
     });
 
-    const select = useSelect(data, {
+    const select = useRowSelect(data, {
       onChange: onSelectChange,
     });
 
@@ -70,7 +70,7 @@ storiesOf('Composites/Tree & Select', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -105,7 +105,7 @@ storiesOf('Composites/Tree & Select', module)
       }
     );
 
-    const select = useSelect(
+    const select = useRowSelect(
       data,
       {
         onChange: onSelectChange,
@@ -149,7 +149,7 @@ storiesOf('Composites/Tree & Select', module)
                       </CellTree>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -184,7 +184,7 @@ storiesOf('Composites/Tree & Select', module)
       }
     );
 
-    const select = useSelect(
+    const select = useRowSelect(
       data,
       {
         onChange: onSelectChange,
@@ -228,7 +228,7 @@ storiesOf('Composites/Tree & Select', module)
                       </CellTree>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -263,7 +263,7 @@ storiesOf('Composites/Tree & Select', module)
       }
     );
 
-    const select = useSelect(
+    const select = useRowSelect(
       data,
       {
         onChange: onSelectChange,
@@ -307,7 +307,7 @@ storiesOf('Composites/Tree & Select', module)
                       </CellTree>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -343,7 +343,7 @@ storiesOf('Composites/Tree & Select', module)
         }
       );
 
-      const select = useSelect(data, {
+      const select = useRowSelect(data, {
         onChange: onSelectChange,
       });
 
@@ -379,7 +379,7 @@ storiesOf('Composites/Tree & Select', module)
                         </CellTree>
                         <Cell>
                           {tableItem.deadline.toLocaleDateString(
-                            'fr-CA',
+                            'en-US',
                             {
                               year: 'numeric',
                               month: '2-digit',
@@ -416,7 +416,7 @@ storiesOf('Composites/Tree & Select', module)
         }
       );
 
-      const select = useSelect(
+      const select = useRowSelect(
         data,
         {
           onChange: onSelectChange,
@@ -458,7 +458,7 @@ storiesOf('Composites/Tree & Select', module)
                         <Cell>{tableItem.name}</Cell>
                         <Cell>
                           {tableItem.deadline.toLocaleDateString(
-                            'fr-CA',
+                            'en-US',
                             {
                               year: 'numeric',
                               month: '2-digit',

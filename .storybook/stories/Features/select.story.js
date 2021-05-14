@@ -20,7 +20,7 @@ import {
   CellSelect,
   SELECT_CLICK_TYPES,
   SELECT_TYPES,
-  useSelect,
+  useRowSelect,
   Checkbox,
 } from '@table-library/react-table-library/select';
 
@@ -31,7 +31,7 @@ storiesOf('Features/Select', module)
   .add('default', () => {
     const data = { nodes };
 
-    const select = useSelect(data, {
+    const select = useRowSelect(data, {
       onChange: onSelectChange,
     });
 
@@ -61,7 +61,7 @@ storiesOf('Features/Select', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -85,7 +85,7 @@ storiesOf('Features/Select', module)
   .add('checkbox', () => {
     const data = { nodes };
 
-    const select = useSelect(data, {
+    const select = useRowSelect(data, {
       onChange: onSelectChange,
     });
 
@@ -117,7 +117,7 @@ storiesOf('Features/Select', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -141,7 +141,7 @@ storiesOf('Features/Select', module)
   .add('select on checkbox ', () => {
     const data = { nodes };
 
-    const select = useSelect(
+    const select = useRowSelect(
       data,
       {
         onChange: onSelectChange,
@@ -179,7 +179,7 @@ storiesOf('Features/Select', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -204,7 +204,7 @@ storiesOf('Features/Select', module)
   .add('all single select', () => {
     const data = { nodes };
 
-    const select = useSelect(
+    const select = useRowSelect(
       data,
       {
         onChange: onSelectChange,
@@ -243,7 +243,7 @@ storiesOf('Features/Select', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -267,7 +267,7 @@ storiesOf('Features/Select', module)
   .add('all multi select', () => {
     const data = { nodes };
 
-    const select = useSelect(
+    const select = useRowSelect(
       data,
       {
         onChange: onSelectChange,
@@ -306,7 +306,7 @@ storiesOf('Features/Select', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -330,7 +330,7 @@ storiesOf('Features/Select', module)
   .add('default single select', () => {
     const data = { nodes };
 
-    const select = useSelect(data, {
+    const select = useRowSelect(data, {
       state: { id: '3' },
       onChange: onSelectChange,
     });
@@ -363,7 +363,7 @@ storiesOf('Features/Select', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -387,7 +387,7 @@ storiesOf('Features/Select', module)
   .add('default multi select', () => {
     const data = { nodes };
 
-    const select = useSelect(data, {
+    const select = useRowSelect(data, {
       state: { ids: ['2', '4'] },
       onChange: onSelectChange,
     });
@@ -420,7 +420,7 @@ storiesOf('Features/Select', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -444,7 +444,7 @@ storiesOf('Features/Select', module)
   .add('carry-forward', () => {
     const data = { nodes };
 
-    const select = useSelect(
+    const select = useRowSelect(
       data,
       {
         onChange: onSelectChange,
@@ -482,7 +482,7 @@ storiesOf('Features/Select', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
@@ -506,7 +506,7 @@ storiesOf('Features/Select', module)
   .add('custom checkbox (Material UI)', () => {
     const data = { nodes };
 
-    const select = useSelect(data, {
+    const select = useRowSelect(data, {
       onChange: onSelectChange,
     });
 
@@ -557,7 +557,7 @@ storiesOf('Features/Select', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',

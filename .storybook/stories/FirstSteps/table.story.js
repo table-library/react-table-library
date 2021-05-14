@@ -15,9 +15,9 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('First Steps', module)
+storiesOf('First Steps/Table', module)
   .addParameters({ component: Table })
-  .add('Table', () => {
+  .add('default', () => {
     const data = { nodes };
 
     return (
@@ -42,7 +42,7 @@ storiesOf('First Steps', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',

@@ -15,10 +15,23 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('First Steps/Cell', module)
+storiesOf('First Steps/Update', module)
   .addParameters({ component: Table })
-  .add('cell click', () => {
-    const data = { nodes };
+  .add('default', () => {
+    const [data, setData] = React.useState({ nodes });
+
+    const handleUpdate = (value, id) => {
+      setData((state) => ({
+        ...state,
+        nodes: state.nodes.map((node) => {
+          if (node.id === id) {
+            return { ...node, name: value };
+          } else {
+            return node;
+          }
+        }),
+      }));
+    };
 
     return (
       <Table data={data}>
@@ -39,16 +52,22 @@ storiesOf('First Steps/Cell', module)
                 <Row key={item.id} item={item}>
                   {(tableItem) => (
                     <>
-                      <Cell
-                        onClick={(event) =>
-                          console.log('Click Cell', event)
-                        }
-                      >
-                        {tableItem.name}
+                      <Cell>
+                        <input
+                          style={{ width: '100%' }}
+                          type="text"
+                          value={tableItem.name}
+                          onChange={(event) =>
+                            handleUpdate(
+                              event.target.value,
+                              tableItem.id
+                            )
+                          }
+                        />
                       </Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',

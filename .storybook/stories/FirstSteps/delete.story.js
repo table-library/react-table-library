@@ -8,30 +8,27 @@ import {
   Header,
   HeaderRow,
   Body,
-  MemoizedRow,
+  Row,
   HeaderCell,
   Cell,
 } from '@table-library/react-table-library/table';
 
-import { useRowSelect } from '@table-library/react-table-library/select';
-
 import { nodes } from '../data';
 
-storiesOf('Recipes/Memoized Row (WIP)', module)
+storiesOf('First Steps/Delete', module)
   .addParameters({ component: Table })
   .add('default', () => {
-    const data = { nodes };
+    const [data, setData] = React.useState({ nodes });
 
-    const select = useRowSelect(data, {
-      onChange: onSelectChange,
-    });
-
-    function onSelectChange(action, state) {
-      console.log(action, state);
-    }
+    const handleRemove = (id) => {
+      setData((state) => ({
+        ...state,
+        nodes: state.nodes.filter((node) => node.id !== id),
+      }));
+    };
 
     return (
-      <Table data={data} select={select}>
+      <Table data={data}>
         {(tableList) => (
           <>
             <Header>
@@ -41,12 +38,13 @@ storiesOf('Recipes/Memoized Row (WIP)', module)
                 <HeaderCell>Type</HeaderCell>
                 <HeaderCell>Complete</HeaderCell>
                 <HeaderCell>Tasks</HeaderCell>
+                <HeaderCell>Actions</HeaderCell>
               </HeaderRow>
             </Header>
 
             <Body>
               {tableList.map((item) => (
-                <MemoizedRow item={item} key={item.id}>
+                <Row key={item.id} item={item}>
                   {(tableItem) => (
                     <>
                       <Cell>{tableItem.name}</Cell>
@@ -63,9 +61,17 @@ storiesOf('Recipes/Memoized Row (WIP)', module)
                       <Cell>{tableItem.type}</Cell>
                       <Cell>{tableItem.isComplete.toString()}</Cell>
                       <Cell>{tableItem.nodes?.length}</Cell>
+                      <Cell>
+                        <button
+                          type="button"
+                          onClick={() => handleRemove(tableItem.id)}
+                        >
+                          Remove
+                        </button>
+                      </Cell>
                     </>
                   )}
-                </MemoizedRow>
+                </Row>
               ))}
             </Body>
           </>

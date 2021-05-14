@@ -19,7 +19,7 @@ import {
 } from '@table-library/react-table-library/sort';
 
 import {
-  useSelect,
+  useRowSelect,
   SELECT_TYPES,
 } from '@table-library/react-table-library/select';
 
@@ -120,7 +120,7 @@ storiesOf('Recipes/Controlled', module)
                         <Cell>{tableItem.name}</Cell>
                         <Cell>
                           {tableItem.deadline.toLocaleDateString(
-                            'fr-CA',
+                            'en-US',
                             {
                               year: 'numeric',
                               month: '2-digit',
@@ -150,7 +150,7 @@ storiesOf('Recipes/Controlled', module)
       setControlledSelectState,
     ] = React.useState({ ids: [] });
 
-    const select = useSelect(
+    const select = useRowSelect(
       data,
       {
         state: controlledSelectState,
@@ -201,7 +201,7 @@ storiesOf('Recipes/Controlled', module)
                         <Cell>{tableItem.name}</Cell>
                         <Cell>
                           {tableItem.deadline.toLocaleDateString(
-                            'fr-CA',
+                            'en-US',
                             {
                               year: 'numeric',
                               month: '2-digit',

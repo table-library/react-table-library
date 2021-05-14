@@ -15,7 +15,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('First Steps/Configuration (WIP)', module)
+storiesOf('Misc/Configuration (WIP)', module)
   .addParameters({ component: Table })
   .add('default', () => {
     return <div>IP</div>;

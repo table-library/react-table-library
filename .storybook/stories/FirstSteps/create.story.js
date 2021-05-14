@@ -4,7 +4,6 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import {
-  useCustom,
   Table,
   Header,
   HeaderRow,
@@ -14,56 +13,42 @@ import {
   Cell,
 } from '@table-library/react-table-library/table';
 
-import { getData } from '../../server';
+import { nodes } from '../data';
 
-storiesOf('Server Recipes/Debounce', module)
+storiesOf('First Steps/Create', module)
   .addParameters({ component: Table })
   .add('default', () => {
-    const [data, setData] = React.useState({
-      nodes: [],
-    });
+    const [data, setData] = React.useState({ nodes });
+    const [value, setValue] = React.useState('');
 
-    // initial fetching
+    const handleChange = (event) => {
+      setValue(event.target.value);
+    };
 
-    const doGet = React.useCallback(async (params) => {
-      setData(await getData(params));
-    }, []);
+    const handleSubmit = (event) => {
+      const id = Math.floor(Math.random() * (9990 - 0 + 1)) + 0;
 
-    React.useEffect(() => {
-      doGet({});
-    }, [doGet]);
+      setData((state) => ({
+        ...state,
+        nodes: state.nodes.concat({
+          id,
+          name: value,
+          deadline: new Date(),
+          type: 'LEARN',
+          isComplete: false,
+          nodes: null,
+        }),
+      }));
 
-    // features
-
-    const [search, setSearch] = React.useState('');
-
-    useCustom('search', data, {
-      state: { search },
-      onChange: onSearchChange,
-    });
-
-    const timeout = React.useRef();
-
-    function onSearchChange(action, state) {
-      const params = {
-        search: state.search,
-      };
-
-      if (timeout.current) clearTimeout(timeout.current);
-
-      timeout.current = setTimeout(() => doGet(params), 500);
-    }
-
-    const handleSearch = (event) => {
-      setSearch(event.target.value);
+      event.preventDefault();
     };
 
     return (
       <>
-        <label htmlFor="search">
-          Search by Task:
-          <input id="search" type="text" onChange={handleSearch} />
-        </label>
+        <form onSubmit={handleSubmit}>
+          <input type="text" value={value} onChange={handleChange} />
+          <button type="submit">Create</button>
+        </form>
 
         <Table data={data}>
           {(tableList) => (

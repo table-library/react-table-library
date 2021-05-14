@@ -17,7 +17,7 @@ import {
   HeaderCellSort,
 } from '@table-library/react-table-library/sort';
 
-import { useSelect } from '@table-library/react-table-library/select';
+import { useRowSelect } from '@table-library/react-table-library/select';
 
 import { nodes } from '../data';
 
@@ -30,7 +30,7 @@ storiesOf('Composites/Sort & Select (WIP)', module)
       onChange: onSortChange,
     });
 
-    const select = useSelect(data, {
+    const select = useRowSelect(data, {
       onChange: onSelectChange,
     });
 
@@ -103,7 +103,7 @@ storiesOf('Composites/Sort & Select (WIP)', module)
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
-                          'fr-CA',
+                          'en-US',
                           {
                             year: 'numeric',
                             month: '2-digit',
