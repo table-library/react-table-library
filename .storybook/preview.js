@@ -22,6 +22,7 @@ export const parameters = {
           'Tree',
           'Expand',
           'Pagination',
+          'Fixed Header',
           'Column Hiding',
           'Column Ordering',
           'Column Grouping (WIP)',
