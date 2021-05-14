@@ -135,7 +135,7 @@ const getData = ({
   offset = 0,
   limit = 999,
   search = '',
-  filters = [],
+  filters,
   sort = { sortKey: 'NONE', reverse: false },
   isShallow = false,
 }) =>
@@ -153,7 +153,7 @@ const getData = ({
     });
 
     const isSearch = !!search;
-    const isFilter = !!filters.length;
+    const isFilter = Array.isArray(filters);
 
     const searchFn = isSearch
       ? (value) =>
