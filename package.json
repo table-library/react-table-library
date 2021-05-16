@@ -1,6 +1,6 @@
 {
   "name": "@table-library/react-table-library",
-  "version": "0.5.121",
+  "version": "0.5.122",
   "description": "react-table-library",
   "main": "lib/main.js",
   "peerDependencies": {
@@ -56,6 +56,7 @@
     "prettier": "2.2.1",
     "prop-types": "15.7.2",
     "react": "16.13.1",
+    "react-animate-height": "^2.0.23",
     "react-dom": "16.13.1",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
