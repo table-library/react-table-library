@@ -17,7 +17,11 @@ import {
   HeaderCellSort,
 } from '@table-library/react-table-library/sort';
 
-import { useRowSelect } from '@table-library/react-table-library/select';
+import {
+  HeaderCellSelect,
+  CellSelect,
+  useRowSelect,
+} from '@table-library/react-table-library/select';
 
 import { nodes } from '../data';
 
@@ -48,6 +52,7 @@ storiesOf('Composites/Sort & Select (WIP)', module)
           <>
             <Header>
               <HeaderRow>
+                <HeaderCellSelect />
                 <HeaderCellSort
                   sortKey="TASK"
                   sortFn={(array) =>
@@ -100,6 +105,7 @@ storiesOf('Composites/Sort & Select (WIP)', module)
                 <Row item={item} key={item.id}>
                   {(tableItem) => (
                     <>
+                      <CellSelect item={tableItem} />
                       <Cell>{tableItem.name}</Cell>
                       <Cell>
                         {tableItem.deadline.toLocaleDateString(
