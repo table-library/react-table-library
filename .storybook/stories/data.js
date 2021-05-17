@@ -6,7 +6,7 @@ export const nodes = [
     type: 'SETUP',
     isComplete: true,
     _hasContent: false,
-    nodes: null
+    nodes: null,
   },
   {
     id: '1',
@@ -15,7 +15,7 @@ export const nodes = [
     type: 'SETUP',
     isComplete: true,
     _hasContent: false,
-    nodes: []
+    nodes: [],
   },
   {
     id: '2',
@@ -40,7 +40,7 @@ export const nodes = [
             type: 'LEARN',
             isComplete: true,
             _hasContent: false,
-            nodes: null
+            nodes: null,
           },
           {
             id: '222',
@@ -49,9 +49,9 @@ export const nodes = [
             type: 'LEARN',
             isComplete: true,
             _hasContent: false,
-            nodes: null
-          }
-        ]
+            nodes: null,
+          },
+        ],
       },
       {
         id: '23',
@@ -68,7 +68,7 @@ export const nodes = [
             type: 'LEARN',
             isComplete: true,
             _hasContent: false,
-            nodes: null
+            nodes: null,
           },
           {
             id: '232',
@@ -77,9 +77,9 @@ export const nodes = [
             type: 'LEARN',
             isComplete: true,
             _hasContent: false,
-            nodes: null
-          }
-        ]
+            nodes: null,
+          },
+        ],
       },
       {
         id: '24',
@@ -88,9 +88,9 @@ export const nodes = [
         type: 'LEARN',
         isComplete: true,
         _hasContent: false,
-        nodes: []
-      }
-    ]
+        nodes: [],
+      },
+    ],
   },
   {
     id: '3',
@@ -107,7 +107,7 @@ export const nodes = [
         type: 'SETUP',
         isComplete: true,
         _hasContent: false,
-        nodes: null
+        nodes: null,
       },
       {
         id: '32',
@@ -116,7 +116,7 @@ export const nodes = [
         type: 'LEARN',
         isComplete: true,
         _hasContent: false,
-        nodes: null
+        nodes: null,
       },
       {
         id: '33',
@@ -125,7 +125,7 @@ export const nodes = [
         type: 'LEARN',
         isComplete: false,
         _hasContent: false,
-        nodes: []
+        nodes: [],
       },
       {
         id: '34',
@@ -134,7 +134,7 @@ export const nodes = [
         type: 'LEARN',
         isComplete: false,
         _hasContent: false,
-        nodes: null
+        nodes: null,
       },
       {
         id: '35',
@@ -151,20 +151,20 @@ export const nodes = [
             type: 'LEARN',
             isComplete: true,
             _hasContent: false,
-            nodes: []
+            nodes: [],
           },
           {
-            id: '351',
+            id: '352',
             name: 'Local State',
             deadline: new Date(2020, 7, 1),
             type: 'LEARN',
             isComplete: false,
             _hasContent: false,
-            nodes: []
-          }
-        ]
-      }
-    ]
+            nodes: [],
+          },
+        ],
+      },
+    ],
   },
   {
     id: '4',
@@ -173,7 +173,7 @@ export const nodes = [
     type: 'SETUP',
     isComplete: false,
     _hasContent: false,
-    nodes: []
+    nodes: [],
   },
   {
     id: '5',
@@ -190,9 +190,9 @@ export const nodes = [
         type: 'LEARN',
         isComplete: false,
         _hasContent: false,
-        nodes: null
-      }
-    ]
+        nodes: null,
+      },
+    ],
   },
   {
     id: '6',
@@ -217,7 +217,7 @@ export const nodes = [
             type: 'LEARN',
             isComplete: false,
             _hasContent: false,
-            nodes: null
+            nodes: null,
           },
           {
             id: '612',
@@ -226,7 +226,7 @@ export const nodes = [
             type: 'LEARN',
             isComplete: false,
             _hasContent: false,
-            nodes: null
+            nodes: null,
           },
           {
             id: '613',
@@ -235,7 +235,7 @@ export const nodes = [
             type: 'LEARN',
             isComplete: false,
             _hasContent: false,
-            nodes: null
+            nodes: null,
           },
           {
             id: '614',
@@ -252,9 +252,9 @@ export const nodes = [
                 type: 'LEARN',
                 isComplete: false,
                 _hasContent: false,
-                nodes: null
-              }
-            ]
+                nodes: null,
+              },
+            ],
           },
           {
             id: '615',
@@ -263,7 +263,7 @@ export const nodes = [
             type: 'LEARN',
             isComplete: false,
             _hasContent: false,
-            nodes: null
+            nodes: null,
           },
           {
             id: '616',
@@ -272,10 +272,10 @@ export const nodes = [
             type: 'LEARN',
             isComplete: false,
             _hasContent: false,
-            nodes: null
-          }
-        ]
-      }
-    ]
-  }
+            nodes: null,
+          },
+        ],
+      },
+    ],
+  },
 ];

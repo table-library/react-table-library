@@ -35,9 +35,10 @@ const Table = ({
 
   if (pagination && !pagination._options.isServer) {
     // TODO tree?
-    modifiedNodes = pagination.state.getPages(modifiedNodes)[
-      pagination.state.page
-    ];
+    modifiedNodes =
+      pagination.state.getPages(modifiedNodes)[
+        pagination.state.page
+      ] || [];
   }
 
   return (

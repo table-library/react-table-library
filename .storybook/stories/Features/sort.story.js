@@ -46,6 +46,7 @@ storiesOf('Features/Sort', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSort
+                  resize
                   sortKey="TASK"
                   sortFn={(array) =>
                     array.sort((a, b) => a.name.localeCompare(b.name))
@@ -54,6 +55,7 @@ storiesOf('Features/Sort', module)
                   Task
                 </HeaderCellSort>
                 <HeaderCellSort
+                  resize
                   sortKey="DEADLINE"
                   sortFn={(array) =>
                     array.sort((a, b) => a.deadline - b.deadline)
@@ -62,6 +64,7 @@ storiesOf('Features/Sort', module)
                   Deadline
                 </HeaderCellSort>
                 <HeaderCellSort
+                  resize
                   sortKey="TYPE"
                   sortFn={(array) =>
                     array.sort((a, b) => a.type.localeCompare(b.type))
@@ -70,6 +73,7 @@ storiesOf('Features/Sort', module)
                   Type
                 </HeaderCellSort>
                 <HeaderCellSort
+                  resize
                   sortKey="COMPLETE"
                   sortFn={(array) =>
                     array.sort((a, b) => a.isComplete - b.isComplete)
@@ -78,6 +82,7 @@ storiesOf('Features/Sort', module)
                   Complete
                 </HeaderCellSort>
                 <HeaderCellSort
+                  resize
                   sortKey="TASKS"
                   sortFn={(array) =>
                     array.sort(

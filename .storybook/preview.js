@@ -7,7 +7,7 @@ export const parameters = {
       method: 'alphabetical',
       order: [
         'Getting Started',
-        ['Introduction', 'Roadmap'],
+        ['Introduction', 'Roadmap', 'DEMO'],
         'First Steps',
         ['Table', 'Create', 'Update', 'Delete'],
         'Library Themes',
