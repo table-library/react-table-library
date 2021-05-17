@@ -31,9 +31,9 @@ import { usePagination } from '@table-library/react-table-library/pagination';
 
 import { nodes } from '../data';
 
-storiesOf('Getting Started', module)
+storiesOf('First Steps', module)
   .addParameters({ component: Table })
-  .add('DEMO', () => {
+  .add('Demo', () => {
     const data = {
       nodes,
     };

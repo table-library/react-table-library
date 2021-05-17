@@ -1,6 +1,6 @@
 {
   "name": "@table-library/react-table-library",
-  "version": "0.5.124",
+  "version": "0.5.126",
   "description": "react-table-library",
   "main": "lib/main.js",
   "peerDependencies": {
@@ -112,7 +112,6 @@
   ],
   "author": "Robin Wieruch <hello@rwieruch.com> (https://www.robinwieruch.de)",
   "license": "MIT",
-  "readme": "README.md",
   "bugs": {
     "url": "https://github.com/table-library/react-table-library/issues"
   },

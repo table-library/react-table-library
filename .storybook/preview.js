@@ -7,9 +7,9 @@ export const parameters = {
       method: 'alphabetical',
       order: [
         'Getting Started',
-        ['Introduction', 'Roadmap', 'DEMO'],
+        ['Introduction', 'Roadmap'],
         'First Steps',
-        ['Table', 'Create', 'Update', 'Delete'],
+        ['Demo', 'Table', 'Create', 'Update', 'Delete'],
         'Library Themes',
         ['Material UI', 'Semantic UI', 'Bootstrap UI', 'Ant Design'],
         'Features',
