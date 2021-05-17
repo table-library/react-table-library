@@ -71,6 +71,7 @@ const Row = React.memo(
     onClick,
     onDoubleClick,
     children,
+    ...rest
   }) => {
     const theme = React.useContext(ThemeContext);
 
@@ -89,6 +90,7 @@ const Row = React.memo(
     return (
       <>
         <RowContainer
+          {...rest}
           role="row"
           className={cs(
             'tr',

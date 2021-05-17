@@ -16,6 +16,7 @@ const HeaderCell = ({
   shrink,
   resize,
   children,
+  ...rest
 }) => {
   const theme = React.useContext(ThemeContext);
 
@@ -23,6 +24,7 @@ const HeaderCell = ({
 
   return (
     <HeaderCellContainer
+      {...rest}
       role="columnheader"
       className={cs('th', className, { hide, shrink })}
       css={`

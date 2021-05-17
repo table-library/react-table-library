@@ -17,7 +17,7 @@ import { useTheme } from '@table-library/react-table-library/theme';
 
 import { nodes } from '../../data';
 
-storiesOf('Library Themes/Bootstrap UI', module)
+storiesOf('Library Themes/Ant Design', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };
@@ -31,24 +31,22 @@ storiesOf('Library Themes/Bootstrap UI', module)
           cursor: default;
         }
 
-        height: 40px;
-        font-size: 16px;
+        height: 56px;
+        font-size: 14px;
 
-        border-bottom: 1px solid #000000;
+        border-bottom: 1px solid #f0f0f0;
       `,
       HeaderRow: `
         font-weight: bold;
+        background-color: #fafafa;
       `,
       Row: `
-        border-bottom: 1px solid #dee2e6;
+        &:hover {
+          backgorund-color: #fafafa;
+        }
       `,
       BaseCell: `
         border-right: 1px solid transparent;
-      `,
-      Cell: `
-      	&:nth-child(1) {
-          font-weight: bold;
-        }
       `,
     });
 

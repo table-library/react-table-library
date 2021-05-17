@@ -17,38 +17,49 @@ import { useTheme } from '@table-library/react-table-library/theme';
 
 import { nodes } from '../../data';
 
-storiesOf('Library Themes/Bootstrap UI', module)
+storiesOf('Library Themes/Chakra UI', module)
   .addParameters({ component: Table })
   .add('default', () => {
     const data = { nodes };
 
     const theme = useTheme({
+      Table: `
+        padding: 12px;
+
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+      `,
       BaseRow: `
-        color: #212529;
+        color: #4a5568;
 
         &:hover {
-          color: #212529;
+          color: #4a5568;
           cursor: default;
         }
 
-        height: 40px;
-        font-size: 16px;
-
-        border-bottom: 1px solid #000000;
+        &:not(:last-child) {
+          border-bottom: 1px solid #e2e8f0;
+        }
       `,
       HeaderRow: `
+        text-transform: uppercase;
+        font-size: 12px;
+        height: 40px;
+
         font-weight: bold;
+
+        border-bottom: 1px solid #e2e8f0;
       `,
       Row: `
-        border-bottom: 1px solid #dee2e6;
+        font-size: 16px;
+        height: 53px;
+
+        &:hover {
+          backgorund-color: #fafafa;
+        }
       `,
       BaseCell: `
         border-right: 1px solid transparent;
-      `,
-      Cell: `
-      	&:nth-child(1) {
-          font-weight: bold;
-        }
       `,
     });
 

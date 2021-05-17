@@ -3,8 +3,95 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
-storiesOf('Library Themes/Semantic UI (WIP)', module)
-  // .addParameters({ component: Table })
+import {
+  Table,
+  Header,
+  HeaderRow,
+  Body,
+  Row,
+  HeaderCell,
+  Cell,
+} from '@table-library/react-table-library/table';
+
+import { useTheme } from '@table-library/react-table-library/theme';
+
+import { nodes } from '../../data';
+
+storiesOf('Library Themes/Semantic UI', module)
+  .addParameters({ component: Table })
   .add('default', () => {
-    return <div>WIP</div>;
+    const data = { nodes };
+
+    const theme = useTheme({
+      Table: `
+        border-radius: 4px;
+        border: 1px solid #e3e4e5;
+      `,
+      BaseRow: `
+        color: #212121;
+
+        &:hover {
+          color: #212121;
+          cursor: default;
+        }
+
+        height: 46px;
+        font-size: 14px;
+
+        border-bottom: 1px solid #e3e4e5;
+      `,
+      HeaderRow: `
+        font-weight: bold;
+        background-color: #f9fafb;
+      `,
+      Row: `
+        border-bottom: 1px solid #e3e4e5;
+      `,
+      BaseCell: `
+        border-right: 1px solid #e3e4e5;
+      `,
+    });
+
+    return (
+      <Table data={data} theme={theme}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row item={item} key={item.id}>
+                  {(tableItem) => (
+                    <>
+                      <Cell>{tableItem.name}</Cell>
+                      <Cell>
+                        {tableItem.deadline.toLocaleDateString(
+                          'en-US',
+                          {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                          }
+                        )}
+                      </Cell>
+                      <Cell>{tableItem.type}</Cell>
+                      <Cell>{tableItem.isComplete.toString()}</Cell>
+                      <Cell>{tableItem.nodes?.length}</Cell>
+                    </>
+                  )}
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
   });

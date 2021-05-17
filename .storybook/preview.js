@@ -10,6 +10,8 @@ export const parameters = {
         ['Introduction', 'Roadmap'],
         'First Steps',
         ['Table', 'Create', 'Update', 'Delete'],
+        'Library Themes',
+        ['Material UI', 'Semantic UI', 'Bootstrap UI', 'Ant Design'],
         'Features',
         [
           'Theme',
@@ -29,12 +31,6 @@ export const parameters = {
         ],
         'Composites',
         ['Sort & Select (WIP)', 'Tree & Select', 'Tree & Sort'],
-        'Library Themes',
-        [
-          'Material UI (WIP)',
-          'Semantic UI (WIP)',
-          'Bootstrap UI (WIP)',
-        ],
         'Misc',
         ['Cell', 'Row', 'Column', 'Configuration (WIP)'],
         'Product Themes',
