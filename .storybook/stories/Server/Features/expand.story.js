@@ -46,7 +46,7 @@ const insertTree = (targetId, nodes, pageInfo) => (state) => {
 
 storiesOf('Server/Expand', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('base', () => {
     const [data, setData] = React.useState({
       nodes: [],
     });

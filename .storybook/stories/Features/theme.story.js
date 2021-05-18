@@ -18,16 +18,24 @@ import { nodes } from '../data';
 
 storiesOf('Features/Theme', module)
   .addParameters({ component: Table })
+  .add('tutorial', () => (
+    <a
+      target="_blank"
+      rel="noopener noreferrer"
+      href="https://www.robinwieruch.de/react-table-theme"
+    >
+      Tutorial
+    </a>
+  ))
   .add('Ocean Blue', () => {
     const theme = useTheme({
-      HeaderRow: `
+      BaseRow: `
         font-size: 14px;
-
+      `,
+      HeaderRow: `
         background-color: #eaf5fd;
       `,
       Row: `
-        font-size: 14px;
-
         &:nth-child(odd) {
           background-color: #d2e9fb;
         }
@@ -85,14 +93,13 @@ storiesOf('Features/Theme', module)
   })
   .add('Grey Wolf', () => {
     const theme = useTheme({
-      HeaderRow: `
+      BaseRow: `
         font-size: 14px;
-
+      `,
+      HeaderRow: `
         background-color: #fafafa;
       `,
       Row: `
-        font-size: 14px;
-
         &:nth-child(odd) {
           background-color: #f5f5f5;
         }

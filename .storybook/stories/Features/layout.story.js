@@ -18,7 +18,7 @@ import { nodes } from '../data';
 
 storiesOf('Features/Layout', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('base', () => {
     const theme = useTheme({
       BaseCell: `
         &:nth-child(1) {

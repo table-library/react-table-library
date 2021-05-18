@@ -19,7 +19,7 @@ import { getData } from '../../server';
 
 storiesOf('Server/Pagination', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('base', () => {
     const LIMIT = 2;
 
     const [data, setData] = React.useState({

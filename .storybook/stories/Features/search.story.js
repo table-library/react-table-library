@@ -18,7 +18,16 @@ import { nodes } from '../data';
 
 storiesOf('Features/Search', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('tutorial', () => (
+    <a
+      target="_blank"
+      rel="noopener noreferrer"
+      href="https://www.robinwieruch.de/react-table-search"
+    >
+      Tutorial
+    </a>
+  ))
+  .add('base', () => {
     const [search, setSearch] = React.useState('');
 
     const handleSearch = (event) => {

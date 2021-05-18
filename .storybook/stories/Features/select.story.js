@@ -28,7 +28,16 @@ import { nodes } from '../data';
 
 storiesOf('Features/Select', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('tutorial', () => (
+    <a
+      target="_blank"
+      rel="noopener noreferrer"
+      href="https://www.robinwieruch.de/react-table-select"
+    >
+      Tutorial
+    </a>
+  ))
+  .add('base', () => {
     const data = { nodes };
 
     const select = useRowSelect(data, {

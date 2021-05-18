@@ -17,6 +17,6 @@ import { nodes } from '../data';
 
 storiesOf('Recipes/Large Table (WIP)', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('base', () => {
     return <>WIP</>;
   });

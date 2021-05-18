@@ -17,7 +17,7 @@ import { nodes } from '../data';
 
 storiesOf('Misc/Column', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('base', () => {
     const data = { nodes };
 
     const columns = [

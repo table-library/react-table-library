@@ -17,7 +17,7 @@ import { nodes } from '../data';
 
 storiesOf('First Steps/Delete', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('base', () => {
     const [data, setData] = React.useState({ nodes });
 
     const handleRemove = (id) => {

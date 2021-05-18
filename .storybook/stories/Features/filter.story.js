@@ -18,7 +18,16 @@ import { nodes } from '../data';
 
 storiesOf('Features/Filter', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('tutorial', () => (
+    <a
+      target="_blank"
+      rel="noopener noreferrer"
+      href="https://www.robinwieruch.de/react-table-filter"
+    >
+      Tutorial
+    </a>
+  ))
+  .add('base', () => {
     const [filters, setFilters] = React.useState(['SETUP', 'LEARN']);
 
     const handleFilter = (filter) => {

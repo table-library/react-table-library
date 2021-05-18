@@ -18,7 +18,7 @@ import { getData } from '../../server';
 
 storiesOf('Server/Search', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('base', () => {
     const [data, setData] = React.useState({
       nodes: [],
     });

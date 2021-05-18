@@ -28,7 +28,16 @@ import { nodes } from '../data';
 
 storiesOf('Features/Sort', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('tutorial', () => (
+    <a
+      target="_blank"
+      rel="noopener noreferrer"
+      href="https://www.robinwieruch.de/react-table-sort"
+    >
+      Tutorial
+    </a>
+  ))
+  .add('base', () => {
     const data = { nodes };
 
     const sort = useSort(data, {

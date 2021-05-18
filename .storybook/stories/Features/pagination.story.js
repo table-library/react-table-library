@@ -19,7 +19,16 @@ import { nodes } from '../data';
 
 storiesOf('Features/Pagination', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('tutorial', () => (
+    <a
+      target="_blank"
+      rel="noopener noreferrer"
+      href="https://www.robinwieruch.de/react-table-pagination"
+    >
+      Tutorial
+    </a>
+  ))
+  .add('base', () => {
     const data = { nodes };
 
     const pagination = usePagination(data, {

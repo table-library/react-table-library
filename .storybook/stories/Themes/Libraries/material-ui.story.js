@@ -34,7 +34,7 @@ import { nodes } from '../../data';
 
 storiesOf('Library Themes/Material UI', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('base', () => {
     const data = { nodes };
 
     const theme = useTheme({

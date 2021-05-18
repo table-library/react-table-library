@@ -27,7 +27,16 @@ import { nodes } from '../data';
 
 storiesOf('Features/Tree', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('tutorial', () => (
+    <a
+      target="_blank"
+      rel="noopener noreferrer"
+      href="https://www.robinwieruch.de/react-tree-table"
+    >
+      Tutorial
+    </a>
+  ))
+  .add('base', () => {
     const data = { nodes };
 
     const tree = useTree(data, {
@@ -81,7 +90,6 @@ storiesOf('Features/Tree', module)
       </Table>
     );
   })
-
   .add('tree icon', () => {
     const data = { nodes };
 
@@ -145,7 +153,6 @@ storiesOf('Features/Tree', module)
       state: {
         ids: ['2', '62', '4'],
       },
-
       onChange: onTreeChange,
     });
 

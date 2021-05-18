@@ -17,7 +17,16 @@ import { nodes } from '../data';
 
 storiesOf('First Steps/Table', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('tutorial', () => (
+    <a
+      target="_blank"
+      rel="noopener noreferrer"
+      href="https://www.robinwieruch.de/react-table-component"
+    >
+      Tutorial
+    </a>
+  ))
+  .add('base', () => {
     const data = { nodes };
 
     return (

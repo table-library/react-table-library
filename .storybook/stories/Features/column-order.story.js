@@ -19,7 +19,7 @@ import { nodes } from '../data';
 
 storiesOf('Features/Column Ordering', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('base', () => {
     const data = { nodes };
 
     const [columns, setColumns] = React.useState([

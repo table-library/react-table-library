@@ -17,7 +17,7 @@ import { nodes } from '../data';
 
 storiesOf('First Steps/Create', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('base', () => {
     const [data, setData] = React.useState({ nodes });
     const [value, setValue] = React.useState('');
 

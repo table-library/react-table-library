@@ -18,7 +18,7 @@ import { getData } from '../../server';
 
 storiesOf('Server/Filter', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('base', () => {
     const initialFilters = ['SETUP', 'LEARN'];
 
     const [data, setData] = React.useState({

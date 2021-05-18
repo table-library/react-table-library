@@ -23,7 +23,7 @@ import { nodes } from '../data';
 
 storiesOf('Composites/Tree & Sort', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('base', () => {
     const data = { nodes };
 
     const tree = useTree(data, {

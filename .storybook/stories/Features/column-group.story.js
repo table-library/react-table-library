@@ -31,6 +31,6 @@ const list = [
 
 storiesOf('Features/Column Grouping (WIP)', module)
   .addParameters({ component: Table })
-  .add('default', () => {
+  .add('base', () => {
     return <>WIP</>;
   });
