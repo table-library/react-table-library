@@ -5,7 +5,7 @@ import { version } from '../package.json';
 
 addons.setConfig({
   theme: create({
-    brandTitle: `React Table Library (v${version} Beta)`,
+    brandTitle: `React Table Library (v${version})`,
     brandUrl: 'https://github.com/table-library/react-table-library',
   }),
   showPanel: false,
