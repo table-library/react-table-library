@@ -1,6 +1,6 @@
 {
   "name": "@table-library/react-table-library",
-  "version": "0.5.127",
+  "version": "0.5.128",
   "description": "react-table-library",
   "main": "lib/main.js",
   "peerDependencies": {
@@ -115,5 +115,5 @@
   "bugs": {
     "url": "https://github.com/table-library/react-table-library/issues"
   },
-  "homepage": "https://github.com/table-library/react-table-library#readme"
+  "homepage": "https://react-table-library.com"
 }
