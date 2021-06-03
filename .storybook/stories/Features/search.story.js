@@ -44,7 +44,12 @@ storiesOf('Features/Search', module)
       <>
         <label htmlFor="search">
           Search by Task:
-          <input id="search" type="text" onChange={handleSearch} />
+          <input
+            id="search"
+            type="text"
+            value={search}
+            onChange={handleSearch}
+          />
         </label>
 
         <Table data={data}>
@@ -116,7 +121,12 @@ storiesOf('Features/Search', module)
       <>
         <label htmlFor="search">
           Search by Task:
-          <input id="search" type="text" onChange={handleSearch} />
+          <input
+            id="search"
+            type="text"
+            value={search}
+            onChange={handleSearch}
+          />
         </label>
 
         <Table data={data}>
