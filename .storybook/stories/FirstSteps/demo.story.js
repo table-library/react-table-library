@@ -384,7 +384,7 @@ storiesOf('First Steps/Demo', module)
       timeout.current = setTimeout(
         () =>
           fetchData({
-            search: search,
+            search: state.search,
             filter,
             page: pagination.state.page,
           }),
