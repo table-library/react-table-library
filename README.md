@@ -20,7 +20,7 @@ React Table Library -- yet another table library for React -- which prioritzes:
 
 ## Requirements
 
-React Table Library requires the following be installed:
+React Table Library requires the following libraries to be installed:
 
 - React 16.13.1+
 - styled-components 4.0.0+ || 5.0.0+
