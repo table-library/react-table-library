@@ -38,6 +38,8 @@ const RowContainer = React.forwardRef((props, ref) => {
 const headerRowContainerStyle = `
   ${baseStyle}
 
+  background-color: ${COLORS.BACKGROUND};
+  
   border-bottom: 1px solid ${COLORS.BORDER};
 
   font-size: 18px;
