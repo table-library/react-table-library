@@ -5,7 +5,8 @@
   "main": "lib/main.js",
   "peerDependencies": {
     "react": "^16.13.1 || ^17",
-    "react-dom": "^16.13.1 || ^17"
+    "react-dom": "^16.13.1 || ^17",
+    "styled-components": ">= 4"
   },
   "dependencies": {
     "classnames": "^2.2.6",
