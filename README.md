@@ -28,11 +28,11 @@ React Table Library requires the following libraries to be installed:
 ## Installation
 
 ```
-npm install @table-library/react-table-library
+npm install @table-library/react-table-library styled-components
 ```
 
 ```
-yarn add @table-library/react-table-library
+yarn add @table-library/react-table-library styled-components
 ```
 
 ## The Problem
