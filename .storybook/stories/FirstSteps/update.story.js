@@ -50,36 +50,26 @@ storiesOf('First Steps/Update', module)
             <Body>
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {(tableItem) => (
-                    <>
-                      <Cell>
-                        <input
-                          style={{ width: '100%' }}
-                          type="text"
-                          value={tableItem.name}
-                          onChange={(event) =>
-                            handleUpdate(
-                              event.target.value,
-                              tableItem.id
-                            )
-                          }
-                        />
-                      </Cell>
-                      <Cell>
-                        {tableItem.deadline.toLocaleDateString(
-                          'en-US',
-                          {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit',
-                          }
-                        )}
-                      </Cell>
-                      <Cell>{tableItem.type}</Cell>
-                      <Cell>{tableItem.isComplete.toString()}</Cell>
-                      <Cell>{tableItem.nodes?.length}</Cell>
-                    </>
-                  )}
+                  <Cell>
+                    <input
+                      style={{ width: '100%' }}
+                      type="text"
+                      value={item.name}
+                      onChange={(event) =>
+                        handleUpdate(event.target.value, item.id)
+                      }
+                    />
+                  </Cell>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
                 </Row>
               ))}
             </Body>

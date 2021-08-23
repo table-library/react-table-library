@@ -130,32 +130,25 @@ storiesOf('Features/Column Hiding', module)
               <Body>
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    {(tableItem) => (
-                      <>
-                        <Cell hide={!columns.includes('name')}>
-                          {tableItem.name}
-                        </Cell>
-                        <Cell hide={!columns.includes('deadline')}>
-                          {tableItem.deadline.toLocaleDateString(
-                            'en-US',
-                            {
-                              year: 'numeric',
-                              month: '2-digit',
-                              day: '2-digit',
-                            }
-                          )}
-                        </Cell>
-                        <Cell hide={!columns.includes('type')}>
-                          {tableItem.type}
-                        </Cell>
-                        <Cell hide={!columns.includes('complete')}>
-                          {tableItem.isComplete.toString()}
-                        </Cell>
-                        <Cell hide={!columns.includes('tasks')}>
-                          {tableItem.nodes?.length}
-                        </Cell>
-                      </>
-                    )}
+                    <Cell hide={!columns.includes('name')}>
+                      {item.name}
+                    </Cell>
+                    <Cell hide={!columns.includes('deadline')}>
+                      {item.deadline.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                      })}
+                    </Cell>
+                    <Cell hide={!columns.includes('type')}>
+                      {item.type}
+                    </Cell>
+                    <Cell hide={!columns.includes('complete')}>
+                      {item.isComplete.toString()}
+                    </Cell>
+                    <Cell hide={!columns.includes('tasks')}>
+                      {item.nodes?.length}
+                    </Cell>
                   </Row>
                 ))}
               </Body>
@@ -286,32 +279,25 @@ storiesOf('Features/Column Hiding', module)
               <Body>
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    {(tableItem) => (
-                      <>
-                        <Cell hide={!columns.includes('name')}>
-                          {tableItem.name}
-                        </Cell>
-                        <Cell hide={!columns.includes('deadline')}>
-                          {tableItem.deadline.toLocaleDateString(
-                            'en-US',
-                            {
-                              year: 'numeric',
-                              month: '2-digit',
-                              day: '2-digit',
-                            }
-                          )}
-                        </Cell>
-                        <Cell hide={!columns.includes('type')}>
-                          {tableItem.type}
-                        </Cell>
-                        <Cell hide={!columns.includes('complete')}>
-                          {tableItem.isComplete.toString()}
-                        </Cell>
-                        <Cell hide={!columns.includes('tasks')}>
-                          {tableItem.nodes?.length}
-                        </Cell>
-                      </>
-                    )}
+                    <Cell hide={!columns.includes('name')}>
+                      {item.name}
+                    </Cell>
+                    <Cell hide={!columns.includes('deadline')}>
+                      {item.deadline.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                      })}
+                    </Cell>
+                    <Cell hide={!columns.includes('type')}>
+                      {item.type}
+                    </Cell>
+                    <Cell hide={!columns.includes('complete')}>
+                      {item.isComplete.toString()}
+                    </Cell>
+                    <Cell hide={!columns.includes('tasks')}>
+                      {item.nodes?.length}
+                    </Cell>
                   </Row>
                 ))}
               </Body>

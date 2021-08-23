@@ -39,28 +39,21 @@ storiesOf('Misc/Row', module)
                 <Row
                   key={item.id}
                   item={item}
-                  onClick={(tableItem, event) =>
-                    console.log('Click Row', tableItem, event)
+                  onClick={(item, event) =>
+                    console.log('Click Row', item, event)
                   }
                 >
-                  {(tableItem) => (
-                    <>
-                      <Cell>{tableItem.name}</Cell>
-                      <Cell>
-                        {tableItem.deadline.toLocaleDateString(
-                          'en-US',
-                          {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit',
-                          }
-                        )}
-                      </Cell>
-                      <Cell>{tableItem.type}</Cell>
-                      <Cell>{tableItem.isComplete.toString()}</Cell>
-                      <Cell>{tableItem.nodes?.length}</Cell>
-                    </>
-                  )}
+                  <Cell>{item.name}</Cell>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
                 </Row>
               ))}
             </Body>
@@ -91,28 +84,21 @@ storiesOf('Misc/Row', module)
                 <Row
                   key={item.id}
                   item={item}
-                  onDoubleClick={(tableItem, event) =>
-                    console.log('Double Click Row', tableItem, event)
+                  onDoubleClick={(item, event) =>
+                    console.log('Double Click Row', item, event)
                   }
                 >
-                  {(tableItem) => (
-                    <>
-                      <Cell>{tableItem.name}</Cell>
-                      <Cell>
-                        {tableItem.deadline.toLocaleDateString(
-                          'en-US',
-                          {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit',
-                          }
-                        )}
-                      </Cell>
-                      <Cell>{tableItem.type}</Cell>
-                      <Cell>{tableItem.isComplete.toString()}</Cell>
-                      <Cell>{tableItem.nodes?.length}</Cell>
-                    </>
-                  )}
+                  <Cell>{item.name}</Cell>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
                 </Row>
               ))}
             </Body>
@@ -146,24 +132,17 @@ storiesOf('Misc/Row', module)
                   key={item.id}
                   item={item}
                 >
-                  {(tableItem) => (
-                    <>
-                      <Cell>{tableItem.name}</Cell>
-                      <Cell>
-                        {tableItem.deadline.toLocaleDateString(
-                          'en-US',
-                          {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit',
-                          }
-                        )}
-                      </Cell>
-                      <Cell>{tableItem.type}</Cell>
-                      <Cell>{tableItem.isComplete.toString()}</Cell>
-                      <Cell>{tableItem.nodes?.length}</Cell>
-                    </>
-                  )}
+                  <Cell>{item.name}</Cell>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
                 </Row>
               ))}
             </Body>

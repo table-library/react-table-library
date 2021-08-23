@@ -67,15 +67,9 @@ storiesOf('Features/Column Ordering', module)
               <Body>
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    {(tableItem) => (
-                      <>
-                        {columns.map((column, index) => (
-                          <Cell key={index}>
-                            {column.get(tableItem)}
-                          </Cell>
-                        ))}
-                      </>
-                    )}
+                    {columns.map((column, index) => (
+                      <Cell key={index}>{column.get(item)}</Cell>
+                    ))}
                   </Row>
                 ))}
               </Body>
@@ -142,15 +136,9 @@ storiesOf('Features/Column Ordering', module)
               <Body>
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    {(tableItem) => (
-                      <>
-                        {columns.map((column, index) => (
-                          <Cell key={index}>
-                            {column.get(tableItem)}
-                          </Cell>
-                        ))}
-                      </>
-                    )}
+                    {columns.map((column, index) => (
+                      <Cell key={index}>{column.get(item)}</Cell>
+                    ))}
                   </Row>
                 ))}
               </Body>

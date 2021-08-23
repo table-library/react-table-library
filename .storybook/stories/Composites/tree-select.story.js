@@ -65,24 +65,17 @@ storiesOf('Composites/Tree & Select', module)
             <Body>
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {(tableItem) => (
-                    <>
-                      <Cell>{tableItem.name}</Cell>
-                      <Cell>
-                        {tableItem.deadline.toLocaleDateString(
-                          'en-US',
-                          {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit',
-                          }
-                        )}
-                      </Cell>
-                      <Cell>{tableItem.type}</Cell>
-                      <Cell>{tableItem.isComplete.toString()}</Cell>
-                      <Cell>{tableItem.nodes?.length}</Cell>
-                    </>
-                  )}
+                  <Cell>{item.name}</Cell>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
                 </Row>
               ))}
             </Body>
@@ -141,27 +134,18 @@ storiesOf('Composites/Tree & Select', module)
             <Body>
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {(tableItem) => (
-                    <>
-                      <CellSelect item={tableItem} />
-                      <CellTree item={tableItem}>
-                        {tableItem.name}
-                      </CellTree>
-                      <Cell>
-                        {tableItem.deadline.toLocaleDateString(
-                          'en-US',
-                          {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit',
-                          }
-                        )}
-                      </Cell>
-                      <Cell>{tableItem.type}</Cell>
-                      <Cell>{tableItem.isComplete.toString()}</Cell>
-                      <Cell>{tableItem.nodes?.length}</Cell>
-                    </>
-                  )}
+                  <CellSelect item={item} />
+                  <CellTree item={item}>{item.name}</CellTree>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
                 </Row>
               ))}
             </Body>
@@ -220,27 +204,18 @@ storiesOf('Composites/Tree & Select', module)
             <Body>
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {(tableItem) => (
-                    <>
-                      <CellSelect item={tableItem} />
-                      <CellTree item={tableItem}>
-                        {tableItem.name}
-                      </CellTree>
-                      <Cell>
-                        {tableItem.deadline.toLocaleDateString(
-                          'en-US',
-                          {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit',
-                          }
-                        )}
-                      </Cell>
-                      <Cell>{tableItem.type}</Cell>
-                      <Cell>{tableItem.isComplete.toString()}</Cell>
-                      <Cell>{tableItem.nodes?.length}</Cell>
-                    </>
-                  )}
+                  <CellSelect item={item} />
+                  <CellTree item={item}>{item.name}</CellTree>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
                 </Row>
               ))}
             </Body>
@@ -299,27 +274,18 @@ storiesOf('Composites/Tree & Select', module)
             <Body>
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {(tableItem) => (
-                    <>
-                      <CellSelect item={tableItem} />
-                      <CellTree item={tableItem}>
-                        {tableItem.name}
-                      </CellTree>
-                      <Cell>
-                        {tableItem.deadline.toLocaleDateString(
-                          'en-US',
-                          {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit',
-                          }
-                        )}
-                      </Cell>
-                      <Cell>{tableItem.type}</Cell>
-                      <Cell>{tableItem.isComplete.toString()}</Cell>
-                      <Cell>{tableItem.nodes?.length}</Cell>
-                    </>
-                  )}
+                  <CellSelect item={item} />
+                  <CellTree item={item}>{item.name}</CellTree>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
                 </Row>
               ))}
             </Body>
@@ -372,26 +338,17 @@ storiesOf('Composites/Tree & Select', module)
               <Body>
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    {(tableItem) => (
-                      <>
-                        <CellTree item={tableItem}>
-                          {tableItem.name}
-                        </CellTree>
-                        <Cell>
-                          {tableItem.deadline.toLocaleDateString(
-                            'en-US',
-                            {
-                              year: 'numeric',
-                              month: '2-digit',
-                              day: '2-digit',
-                            }
-                          )}
-                        </Cell>
-                        <Cell>{tableItem.type}</Cell>
-                        <Cell>{tableItem.isComplete.toString()}</Cell>
-                        <Cell>{tableItem.nodes?.length}</Cell>
-                      </>
-                    )}
+                    <CellTree item={item}>{item.name}</CellTree>
+                    <Cell>
+                      {item.deadline.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                      })}
+                    </Cell>
+                    <Cell>{item.type}</Cell>
+                    <Cell>{item.isComplete.toString()}</Cell>
+                    <Cell>{item.nodes?.length}</Cell>
                   </Row>
                 ))}
               </Body>
@@ -452,25 +409,18 @@ storiesOf('Composites/Tree & Select', module)
               <Body>
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    {(tableItem) => (
-                      <>
-                        <CellSelect item={tableItem} />
-                        <Cell>{tableItem.name}</Cell>
-                        <Cell>
-                          {tableItem.deadline.toLocaleDateString(
-                            'en-US',
-                            {
-                              year: 'numeric',
-                              month: '2-digit',
-                              day: '2-digit',
-                            }
-                          )}
-                        </Cell>
-                        <Cell>{tableItem.type}</Cell>
-                        <Cell>{tableItem.isComplete.toString()}</Cell>
-                        <Cell>{tableItem.nodes?.length}</Cell>
-                      </>
-                    )}
+                    <CellSelect item={item} />
+                    <Cell>{item.name}</Cell>
+                    <Cell>
+                      {item.deadline.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                      })}
+                    </Cell>
+                    <Cell>{item.type}</Cell>
+                    <Cell>{item.isComplete.toString()}</Cell>
+                    <Cell>{item.nodes?.length}</Cell>
                   </Row>
                 ))}
               </Body>

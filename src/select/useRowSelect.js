@@ -36,16 +36,16 @@ const getRowProps = (props, features) => {
     'row-select-single-selected': isSingleSelect,
   });
 
-  const onClick = (tableItem, event) => {
+  const onClick = (node, event) => {
     if (!isRowClick(event)) return;
 
     if (select._options.clickType !== SELECT_CLICK_TYPES.RowClick)
       return;
 
     if (select._options.rowSelect === SELECT_TYPES.SingleSelect) {
-      select.fns.onToggleByIdExclusively(tableItem.id);
+      select.fns.onToggleByIdExclusively(node.id);
     } else {
-      select.fns.onToggleById(tableItem.id);
+      select.fns.onToggleById(node.id);
     }
   };
 

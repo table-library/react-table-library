@@ -47,24 +47,17 @@ storiesOf('Server/Table', module)
             <Body>
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {(tableItem) => (
-                    <>
-                      <Cell>{tableItem.name}</Cell>
-                      <Cell>
-                        {tableItem.deadline.toLocaleDateString(
-                          'en-US',
-                          {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit',
-                          }
-                        )}
-                      </Cell>
-                      <Cell>{tableItem.type}</Cell>
-                      <Cell>{tableItem.isComplete.toString()}</Cell>
-                      <Cell>{tableItem.nodes?.length}</Cell>
-                    </>
-                  )}
+                  <Cell>{item.name}</Cell>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
                 </Row>
               ))}
             </Body>
@@ -73,12 +66,12 @@ storiesOf('Server/Table', module)
       </Table>
     );
   })
-  .add('create WIP', () => {
+  .add('create (WIP)', () => {
     return <div>dat fetching</div>;
   })
-  .add('delete WIP', () => {
+  .add('delete (WIP)', () => {
     return <div>dat fetching</div>;
   })
-  .add('update WIP', () => {
+  .add('update (WIP)', () => {
     return <div>dat fetching</div>;
   });

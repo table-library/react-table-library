@@ -39,15 +39,15 @@ const getRowProps = (props, features) => {
     'row-tree-leaf': isLeaf(item),
   });
 
-  const onClick = (tableItem, event) => {
+  const onClick = (node, event) => {
     if (!isRowClick(event)) return;
 
-    if (isLeaf(tableItem)) return;
+    if (isLeaf(node)) return;
 
     if (
       tree._options.clickType === TREE_EXPAND_CLICK_TYPES.RowClick
     ) {
-      tree.fns.onToggleById(tableItem.id);
+      tree.fns.onToggleById(node.id);
     }
   };
 

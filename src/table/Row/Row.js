@@ -38,9 +38,9 @@ const evaluateProps = (rowPropsByFeature, onSingleClick) => {
 
       const mergedClassName = cs(acc.classNamesByFeature, className);
 
-      const mergedOnClick = (tableItem, event) => {
-        onClick(tableItem, event);
-        acc.onClickByFeature(tableItem, event);
+      const mergedOnClick = (node, event) => {
+        onClick(node, event);
+        acc.onClickByFeature(node, event);
       };
 
       return {
@@ -53,9 +53,9 @@ const evaluateProps = (rowPropsByFeature, onSingleClick) => {
     {
       themeByFeature: '',
       classNamesByFeature: '',
-      onClickByFeature: (tableItem, event) => {
+      onClickByFeature: (node, event) => {
         if (onSingleClick && isRowClick(event)) {
-          onSingleClick(tableItem, event);
+          onSingleClick(node, event);
         }
       },
     }
@@ -128,7 +128,7 @@ const Row = (props) => {
         `}
         ref={ref}
       >
-        {children(item)}
+        {children}
       </RowContainer>
 
       {panelsByRow.map((panel) =>

@@ -182,40 +182,29 @@ storiesOf('Library Themes/Material UI', module)
             <Body>
               {tableList.map((item) => (
                 <Row item={item} key={item.id}>
-                  {(tableItem) => (
-                    <>
-                      <Cell shrink tabIndex="-1">
-                        <MaterialCheckbox
-                          color="primary"
-                          size="small"
-                          checked={select.state.ids.includes(
-                            tableItem.id
-                          )}
-                          onChange={() =>
-                            select.fns.onToggleById(tableItem.id)
-                          }
-                        />
-                      </Cell>
-                      <Cell tabIndex="-1">{tableItem.name}</Cell>
-                      <Cell tabIndex="-1">
-                        {tableItem.deadline.toLocaleDateString(
-                          'en-US',
-                          {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit',
-                          }
-                        )}
-                      </Cell>
-                      <Cell tabIndex="-1">{tableItem.type}</Cell>
-                      <Cell tabIndex="-1">
-                        {tableItem.isComplete.toString()}
-                      </Cell>
-                      <Cell tabIndex="-1">
-                        {tableItem.nodes?.length}
-                      </Cell>
-                    </>
-                  )}
+                  <Cell shrink tabIndex="-1">
+                    <MaterialCheckbox
+                      color="primary"
+                      size="small"
+                      checked={select.state.ids.includes(item.id)}
+                      onChange={() =>
+                        select.fns.onToggleById(item.id)
+                      }
+                    />
+                  </Cell>
+                  <Cell tabIndex="-1">{item.name}</Cell>
+                  <Cell tabIndex="-1">
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell tabIndex="-1">{item.type}</Cell>
+                  <Cell tabIndex="-1">
+                    {item.isComplete.toString()}
+                  </Cell>
+                  <Cell tabIndex="-1">{item.nodes?.length}</Cell>
                 </Row>
               ))}
             </Body>

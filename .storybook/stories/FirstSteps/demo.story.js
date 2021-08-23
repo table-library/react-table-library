@@ -193,27 +193,18 @@ storiesOf('First Steps/Demo', module)
             <Body>
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  {(tableItem) => (
-                    <>
-                      <CellSelect item={tableItem} />
-                      <CellTree item={tableItem}>
-                        {tableItem.name}
-                      </CellTree>
-                      <Cell>
-                        {tableItem.deadline.toLocaleDateString(
-                          'en-US',
-                          {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit',
-                          }
-                        )}
-                      </Cell>
-                      <Cell>{tableItem.type}</Cell>
-                      <Cell>{tableItem.isComplete.toString()}</Cell>
-                      <Cell>{tableItem.nodes?.length}</Cell>
-                    </>
-                  )}
+                  <CellSelect item={item} />
+                  <CellTree item={item}>{item.name}</CellTree>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
                 </Row>
               ))}
             </Body>
@@ -445,26 +436,21 @@ storiesOf('First Steps/Demo', module)
               <Body>
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    {(tableItem) => (
-                      <>
-                        <Cell>
-                          <a href={tableItem.url}>
-                            {tableItem.title}
-                          </a>
-                        </Cell>
-                        <Cell>
-                          {new Date(
-                            tableItem.created_at
-                          ).toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit',
-                          })}
-                        </Cell>
-                        <Cell>{tableItem.points}</Cell>
-                        <Cell>{tableItem.num_comments}</Cell>
-                      </>
-                    )}
+                    <Cell>
+                      <a href={item.url}>{item.title}</a>
+                    </Cell>
+                    <Cell>
+                      {new Date(item.created_at).toLocaleDateString(
+                        'en-US',
+                        {
+                          year: 'numeric',
+                          month: '2-digit',
+                          day: '2-digit',
+                        }
+                      )}
+                    </Cell>
+                    <Cell>{item.points}</Cell>
+                    <Cell>{item.num_comments}</Cell>
                   </Row>
                 ))}
               </Body>
