@@ -53,7 +53,6 @@ const getRowProps = (props, features) => {
     theme,
     className,
     onClick,
-    panels: [],
   };
 };
 

@@ -27,10 +27,9 @@ const evaluateProps = (rowPropsByFeature, onSingleClick) => {
     themeByFeature,
     classNamesByFeature,
     onClickByFeature,
-    panelsByFeature,
   } = rowPropsByFeature.reduce(
     (acc, value) => {
-      const { theme, className, onClick, panels } = value;
+      const { theme, className, onClick } = value;
 
       const mergedTheme = `
         ${acc.themeByFeature}
@@ -44,14 +43,11 @@ const evaluateProps = (rowPropsByFeature, onSingleClick) => {
         acc.onClickByFeature(tableItem, event);
       };
 
-      const mergedPanels = acc.panelsByFeature.concat(panels || []);
-
       return {
         ...acc,
         themeByFeature: mergedTheme,
         classNamesByFeature: mergedClassName,
         onClickByFeature: mergedOnClick,
-        panelsByFeature: mergedPanels,
       };
     },
     {
@@ -62,7 +58,6 @@ const evaluateProps = (rowPropsByFeature, onSingleClick) => {
           onSingleClick(tableItem, event);
         }
       },
-      panelsByFeature: [],
     }
   );
 
@@ -70,7 +65,6 @@ const evaluateProps = (rowPropsByFeature, onSingleClick) => {
     themeByFeature,
     classNamesByFeature,
     onClickByFeature,
-    panelsByFeature,
   };
 };
 
@@ -105,7 +99,6 @@ const Row = (props) => {
     themeByFeature,
     classNamesByFeature,
     onClickByFeature,
-    panelsByFeature,
   } = evaluateProps(rowPropsByFeature, onClick);
 
   const ref = React.useRef();
@@ -137,10 +130,6 @@ const Row = (props) => {
       >
         {children(item)}
       </RowContainer>
-
-      {panelsByFeature.map((panel) =>
-        React.cloneElement(panel, { key: item.id })
-      )}
 
       {panelsByRow.map((panel) =>
         React.cloneElement(panel, { key: item.id })
