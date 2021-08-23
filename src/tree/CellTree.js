@@ -49,46 +49,49 @@ const getTreeIcon = (
     : null;
 };
 
-const CellTree = React.memo(
-  ({ item, treeIcon = {}, children, ...passThrough }) => {
-    const { state, fns, _options } = React.useContext(TreeContext);
+const CellTree = ({
+  item,
+  treeIcon = {},
+  children,
+  ...passThrough
+}) => {
+  const { state, fns, _options } = React.useContext(TreeContext);
 
-    const mergedTreeIconOptions = {
-      ..._options.treeIcon,
-      ...treeIcon,
-    };
+  const mergedTreeIconOptions = {
+    ..._options.treeIcon,
+    ...treeIcon,
+  };
 
-    const handleClick = () => {
-      if (isLeaf(item)) return;
+  const handleClick = () => {
+    if (isLeaf(item)) return;
 
-      fns.onToggleById(item.id);
-    };
+    fns.onToggleById(item.id);
+  };
 
-    const icon = getTreeIcon(
-      item,
-      state,
-      mergedTreeIconOptions.size,
-      mergedTreeIconOptions.iconDefault,
-      mergedTreeIconOptions.iconRight,
-      mergedTreeIconOptions.iconDown
-    );
+  const icon = getTreeIcon(
+    item,
+    state,
+    mergedTreeIconOptions.size,
+    mergedTreeIconOptions.iconDefault,
+    mergedTreeIconOptions.iconRight,
+    mergedTreeIconOptions.iconDown
+  );
 
-    return (
-      <Cell {...passThrough}>
-        <div css={style()}>
-          <Button
-            className="prefix narrow"
-            margin={mergedTreeIconOptions.margin}
-            onClick={handleClick}
-          >
-            {icon && <span>{icon}</span>}
-          </Button>
-          <div>{children}</div>
-        </div>
-      </Cell>
-    );
-  }
-);
+  return (
+    <Cell {...passThrough}>
+      <div css={style()}>
+        <Button
+          className="prefix narrow"
+          margin={mergedTreeIconOptions.margin}
+          onClick={handleClick}
+        >
+          {icon && <span>{icon}</span>}
+        </Button>
+        <div>{children}</div>
+      </div>
+    </Cell>
+  );
+};
 
 CellTree.propTypes = {
   item: PropTypes.objectOf(PropTypes.any),
