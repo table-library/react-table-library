@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { findNodeById } from './tree/findNodeById';
-import { fromNodesToList } from './tree/fromNodesToList';
+import { fromTreeToList } from './tree/fromTreeToList';
 import { includesAll } from './tree/includesAll';
 import { useSyncControlledState } from './useSyncControlledState';
 import { useReducerWithMiddleware } from './useReducerWithMiddleware';
@@ -199,7 +199,7 @@ const useIdReducer = (data, controlledState, onChange, context) => {
 
       const node = findNodeById(data.nodes, id);
 
-      const ids = [node, ...fromNodesToList(node.nodes)].map(
+      const ids = [node, ...fromTreeToList(node.nodes)].map(
         (item) => item.id
       );
 
@@ -256,7 +256,7 @@ const useIdReducer = (data, controlledState, onChange, context) => {
   }, [dispatchWithMiddleware]);
 
   const onToggleAll = React.useCallback(() => {
-    const ids = fromNodesToList(data.nodes).map((item) => item.id);
+    const ids = fromTreeToList(data.nodes).map((item) => item.id);
 
     if (includesAll(ids, state.ids)) {
       onRemoveAll();

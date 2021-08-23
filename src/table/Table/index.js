@@ -41,6 +41,16 @@ const Table = ({
       ] || [];
   }
 
+  if (tree && !tree._options.isServer) {
+    modifiedNodes = tree.state.fromTreeToListExtended(
+      modifiedNodes,
+      tree,
+      tree._options.treeXLevel,
+      tree._options.treeYLevel,
+      null
+    );
+  }
+
   return (
     <div
       className="table"

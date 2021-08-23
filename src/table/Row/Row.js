@@ -27,7 +27,7 @@ const evaluateProps = (rowPropsByFeature, onSingleClick) => {
     themeByFeature,
     classNamesByFeature,
     onClickByFeature,
-    ...specificsByFeature
+    panelsByFeature,
   } = rowPropsByFeature.reduce(
     (acc, value) => {
       const { theme, className, onClick, panels } = value;
@@ -70,7 +70,7 @@ const evaluateProps = (rowPropsByFeature, onSingleClick) => {
     themeByFeature,
     classNamesByFeature,
     onClickByFeature,
-    ...specificsByFeature,
+    panelsByFeature,
   };
 };
 

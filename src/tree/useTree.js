@@ -1,12 +1,9 @@
 import * as React from 'react';
 import cs from 'classnames';
-
-import { Body } from '@table-library/react-table-library/table/Body';
-import { Row } from '@table-library/react-table-library/table/Row';
 import { isRowClick } from '@table-library/react-table-library/common/util/isRowClick';
 import {
   isLeaf,
-  hasLeaves,
+  fromTreeToListExtended,
 } from '@table-library/react-table-library/common/util/tree';
 import { useIdReducer } from '@table-library/react-table-library/common/util/useIdReducer';
 import { useSyncRefState } from '@table-library/react-table-library/common/util/useSyncRefState';
@@ -16,14 +13,14 @@ import IconChevronSingleRight from '@table-library/react-table-library/common/ic
 import { TREE_EXPAND_CLICK_TYPES } from './config';
 
 const getRowProps = (props, features) => {
-  const { item, children, ...passThrough } = props;
+  const { item } = props;
 
   const { tree } = features;
 
   const isTreeExpanded = tree.state.ids.includes(item.id);
 
-  const treeYLevel = props.treeYLevel || tree._options.treeYLevel;
-  const treeXLevel = props.treeXLevel || tree._options.treeXLevel;
+  const treeYLevel = item.treeYLevel || tree._options.treeYLevel;
+  const treeXLevel = item.treeXLevel || tree._options.treeXLevel;
 
   const theme = `
     &.row-tree-clickable {
@@ -54,31 +51,11 @@ const getRowProps = (props, features) => {
     }
   };
 
-  let panels = [];
-
-  if (isTreeExpanded && hasLeaves(item)) {
-    panels = panels.concat(
-      <Body>
-        {item.nodes.map((node) => (
-          <Row
-            key={node.id}
-            item={node}
-            {...passThrough}
-            treeYLevel={treeYLevel}
-            treeXLevel={treeXLevel + 1}
-          >
-            {(recursiveNode) => children(recursiveNode)}
-          </Row>
-        ))}
-      </Body>
-    );
-  }
-
   return {
     theme,
     className,
     onClick,
-    panels,
+    panels: [],
   };
 };
 
@@ -95,6 +72,7 @@ const DEFAULT_TREE_ICON = {
 };
 
 const DEFAULT_OPTIONS = {
+  isServer: false,
   treeIcon: DEFAULT_TREE_ICON,
   clickType: TREE_EXPAND_CLICK_TYPES.RowClick,
   treeXLevel: 0,
@@ -128,7 +106,7 @@ const useTree = (data, primary = {}, options = {}, context) => {
   };
 
   return {
-    state,
+    state: { ...state, fromTreeToListExtended },
     fns,
     _options: mergedOptions,
     _getRowProps: getRowProps,

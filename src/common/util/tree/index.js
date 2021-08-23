@@ -3,6 +3,6 @@ export * from './hasLeaves';
 export * from './findNodeById';
 export * from './findParentItem';
 export * from './getParentItem';
-export * from './fromNodesToList';
+export * from './fromTreeToList';
 export * from './recursiveMergeInsert';
 export * from './recursiveReplaceInsert';
