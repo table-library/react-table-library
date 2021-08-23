@@ -3,11 +3,24 @@ import PropTypes from 'prop-types';
 import cs from 'classnames';
 
 import { RowContainer } from '@table-library/react-table-library/common/components/Row';
-import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
 import { isRowClick } from '@table-library/react-table-library/common/util/isRowClick';
+import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
+import { TableContext } from '@table-library/react-table-library/common/context/Table';
+import { PanelContext } from '@table-library/react-table-library/common/context/Panel';
+import { SelectContext } from '@table-library/react-table-library/common/context/Select';
+import { TreeContext } from '@table-library/react-table-library/common/context/Tree';
 
 import { useRowLayout } from './useRowLayout';
 import { useDoubleClick } from './useDoubleClick';
+
+const getPanels = (panels, props, data) =>
+  (panels || []).map((panel) => panel(props, data)).filter(Boolean);
+
+const getRowProps = (features, props) =>
+  Object.values(features)
+    .filter(Boolean)
+    .filter((feature) => feature._getRowProps)
+    .map((feature) => feature._getRowProps(props, features));
 
 const evaluateProps = (rowPropsByFeature, onSingleClick) => {
   const {
@@ -61,73 +74,83 @@ const evaluateProps = (rowPropsByFeature, onSingleClick) => {
   };
 };
 
-const Row = React.memo(
-  ({
+const Row = (props) => {
+  const {
     item,
     className,
     disabled,
-    rowPropsByFeature,
-    panels,
     onClick,
     onDoubleClick,
     children,
     ...rest
-  }) => {
-    const theme = React.useContext(ThemeContext);
+  } = props;
 
-    const {
-      themeByFeature,
-      classNamesByFeature,
-      onClickByFeature,
-      panelsByFeature,
-    } = evaluateProps(rowPropsByFeature, onClick);
+  const data = React.useContext(TableContext);
+  const select = React.useContext(SelectContext);
+  const tree = React.useContext(TreeContext);
+  const panels = React.useContext(PanelContext);
 
-    const ref = React.useRef();
+  const features = {
+    select,
+    tree,
+    // others
+  };
 
-    useDoubleClick(ref, onClickByFeature, onDoubleClick, item);
-    useRowLayout(ref, '.td');
+  const panelsByRow = getPanels(panels, props, data);
+  const rowPropsByFeature = getRowProps(features, props);
 
-    return (
-      <>
-        <RowContainer
-          {...rest}
-          role="row"
-          className={cs(
-            'tr',
-            'tr-body',
-            classNamesByFeature,
-            className,
-            {
-              disabled,
-              clickable: onClickByFeature || onDoubleClick,
-            }
-          )}
-          css={`
-            ${themeByFeature}
-            ${theme?.BaseRow}
+  const theme = React.useContext(ThemeContext);
+
+  const {
+    themeByFeature,
+    classNamesByFeature,
+    onClickByFeature,
+    panelsByFeature,
+  } = evaluateProps(rowPropsByFeature, onClick);
+
+  const ref = React.useRef();
+
+  useDoubleClick(ref, onClickByFeature, onDoubleClick, item);
+  useRowLayout(ref, '.td');
+
+  return (
+    <>
+      <RowContainer
+        {...rest}
+        role="row"
+        className={cs(
+          'tr',
+          'tr-body',
+          classNamesByFeature,
+          className,
+          {
+            disabled,
+            clickable: onClickByFeature || onDoubleClick,
+          }
+        )}
+        css={`
+          ${themeByFeature}
+          ${theme?.BaseRow}
             ${theme?.Row}
-          `}
-          ref={ref}
-        >
-          {children(item)}
-        </RowContainer>
+        `}
+        ref={ref}
+      >
+        {children(item)}
+      </RowContainer>
 
-        {panelsByFeature.map((panel) =>
-          React.cloneElement(panel, { key: item.id })
-        )}
+      {panelsByFeature.map((panel) =>
+        React.cloneElement(panel, { key: item.id })
+      )}
 
-        {panels.map((panel) =>
-          React.cloneElement(panel, { key: item.id })
-        )}
-      </>
-    );
-  }
-);
+      {panelsByRow.map((panel) =>
+        React.cloneElement(panel, { key: item.id })
+      )}
+    </>
+  );
+};
 
 Row.propTypes = {
   item: PropTypes.objectOf(PropTypes.any),
-  rowPropsByFeature: PropTypes.arrayOf(PropTypes.any),
-  panels: PropTypes.arrayOf(PropTypes.any),
   className: PropTypes.string,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
