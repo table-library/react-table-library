@@ -12,7 +12,6 @@ import {
   HeaderCell,
   Cell,
 } from '@table-library/react-table-library/table';
-import { createPanel } from '@table-library/react-table-library/panel';
 
 import { getData } from '../../server';
 
@@ -43,22 +42,8 @@ storiesOf('Server/Fetch', module)
       doGet({ offset: item.pageInfo.nextOffset, limit: 2 });
     };
 
-    const fetchPanel = createPanel({
-      panel: (item) => (
-        <div>
-          <button type="button" onClick={() => handleLoadMore(item)}>
-            Load More ...
-          </button>
-        </div>
-      ),
-      condition: (item) =>
-        data.pageInfo &&
-        data.pageInfo.nextOffset < data.pageInfo.total &&
-        data.nodes[data.nodes.length - 1].id === item.id,
-    });
-
     return (
-      <Table data={data} panels={[fetchPanel]}>
+      <Table data={data}>
         {(tableList) => (
           <>
             <Header>
@@ -72,21 +57,41 @@ storiesOf('Server/Fetch', module)
             </Header>
 
             <Body>
-              {tableList.map((item) => (
-                <Row key={item.id} item={item}>
-                  <Cell>{item.name}</Cell>
-                  <Cell>
-                    {item.deadline.toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: '2-digit',
-                      day: '2-digit',
-                    })}
-                  </Cell>
-                  <Cell>{item.type}</Cell>
-                  <Cell>{item.isComplete.toString()}</Cell>
-                  <Cell>{item.nodes?.length}</Cell>
-                </Row>
-              ))}
+              {tableList.map((item) => {
+                const showLoadMore =
+                  data.pageInfo &&
+                  data.pageInfo.nextOffset < data.pageInfo.total &&
+                  data.nodes[data.nodes.length - 1].id === item.id;
+
+                return (
+                  <React.Fragment key={item.id}>
+                    <Row item={item}>
+                      <Cell>{item.name}</Cell>
+                      <Cell>
+                        {item.deadline.toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: '2-digit',
+                          day: '2-digit',
+                        })}
+                      </Cell>
+                      <Cell>{item.type}</Cell>
+                      <Cell>{item.isComplete.toString()}</Cell>
+                      <Cell>{item.nodes?.length}</Cell>
+                    </Row>
+
+                    {showLoadMore && (
+                      <div>
+                        <button
+                          type="button"
+                          onClick={() => handleLoadMore(item)}
+                        >
+                          Load More ...
+                        </button>
+                      </div>
+                    )}
+                  </React.Fragment>
+                );
+              })}
             </Body>
           </>
         )}
@@ -124,27 +129,8 @@ storiesOf('Server/Fetch', module)
       setLoadingIds(loadingIds.filter((id) => id !== item.id));
     };
 
-    const fetchPanel = createPanel({
-      panel: (item) => (
-        <div>
-          <button type="button" onClick={() => handleLoadMore(item)}>
-            Load More ...
-          </button>
-        </div>
-      ),
-      condition: (item) =>
-        data.pageInfo.nextOffset < data.pageInfo.total &&
-        data.nodes[data.nodes.length - 1].id === item.id &&
-        !loadingIds.includes(item.id),
-    });
-
-    const loadingPanel = createPanel({
-      panel: () => <div>Loading ...</div>,
-      condition: (item) => loadingIds.includes(item.id),
-    });
-
     return (
-      <Table data={data} panels={[fetchPanel, loadingPanel]}>
+      <Table data={data}>
         {(tableList) => (
           <>
             <Header>
@@ -158,21 +144,46 @@ storiesOf('Server/Fetch', module)
             </Header>
 
             <Body>
-              {tableList.map((item) => (
-                <Row key={item.id} item={item}>
-                  <Cell>{item.name}</Cell>
-                  <Cell>
-                    {item.deadline.toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: '2-digit',
-                      day: '2-digit',
-                    })}
-                  </Cell>
-                  <Cell>{item.type}</Cell>
-                  <Cell>{item.isComplete.toString()}</Cell>
-                  <Cell>{item.nodes?.length}</Cell>
-                </Row>
-              ))}
+              {tableList.map((item) => {
+                const showLoading = loadingIds.includes(item.id);
+
+                const showLoadMore =
+                  !showLoading &&
+                  data.pageInfo &&
+                  data.pageInfo.nextOffset < data.pageInfo.total &&
+                  data.nodes[data.nodes.length - 1].id === item.id;
+
+                return (
+                  <React.Fragment key={item.id}>
+                    <Row item={item}>
+                      <Cell>{item.name}</Cell>
+                      <Cell>
+                        {item.deadline.toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: '2-digit',
+                          day: '2-digit',
+                        })}
+                      </Cell>
+                      <Cell>{item.type}</Cell>
+                      <Cell>{item.isComplete.toString()}</Cell>
+                      <Cell>{item.nodes?.length}</Cell>
+                    </Row>
+
+                    {showLoading && <div>Loading ...</div>}
+
+                    {showLoadMore && (
+                      <div>
+                        <button
+                          type="button"
+                          onClick={() => handleLoadMore(item)}
+                        >
+                          Load More ...
+                        </button>
+                      </div>
+                    )}
+                  </React.Fragment>
+                );
+              })}
             </Body>
           </>
         )}

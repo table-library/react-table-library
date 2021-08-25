@@ -13,7 +13,6 @@ export default {
   input: {
     main: './src/index.js', // ts
     common: './src/common/index.js', // ts
-    panel: './src/panel/index.js', // ts
     table: './src/table/index.js', // ts
     theme: './src/theme/index.js', // ts
     sort: './src/sort/index.js', // ts

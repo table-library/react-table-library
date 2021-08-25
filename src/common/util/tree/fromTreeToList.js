@@ -14,6 +14,7 @@ export const fromTreeToList = (nodes) =>
   }, []);
 
 export const fromTreeToListExtended = (
+  data,
   nodes,
   tree,
   treeXLevel = 0,
@@ -29,23 +30,33 @@ export const fromTreeToListExtended = (
       listNode = value;
     }
 
-    // eslint-disable-next-line no-param-reassign
-    acc = acc.concat({
-      ...listNode,
+    const extendedNode = {
       treeXLevel,
       treeYLevel,
-      parentNode,
-    });
+      parentNode: parentNode || data,
+      ancestors: parentNode
+        ? [parentNode, ...parentNode.ancestors]
+        : [parentNode || data],
+    };
+
+    listNode = {
+      ...listNode,
+      ...extendedNode,
+    };
+
+    // eslint-disable-next-line no-param-reassign
+    acc = acc.concat(listNode);
 
     if (hasLeaves(value) && tree.state.ids.includes(value.id)) {
       // eslint-disable-next-line no-param-reassign
       acc = acc.concat(
         fromTreeToListExtended(
+          data,
           value.nodes,
           tree,
           treeXLevel + 1,
           treeYLevel,
-          value
+          { ...value, ...extendedNode }
         )
       );
     }

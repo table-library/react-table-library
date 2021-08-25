@@ -13,7 +13,6 @@ import {
   HeaderCell,
   Cell,
 } from '@table-library/react-table-library/table';
-import { createPanel } from '@table-library/react-table-library/panel';
 
 import { nodes } from '../data';
 
@@ -26,18 +25,6 @@ storiesOf('Kitchen Sink/Expand', module)
 
     const [ids, setIds] = React.useState([]);
     const [heights, setHeights] = React.useState([]);
-
-    const expansionPanel = createPanel({
-      panel: (item) => (
-        <AnimateHeight
-          duration={DURATION}
-          height={heights[item.id] || 0}
-        >
-          <strong>{item.name.toUpperCase()}</strong>
-        </AnimateHeight>
-      ),
-      condition: (item) => ids.includes(item.id),
-    });
 
     const handleExpand = (item) => {
       if (ids.includes(item.id)) {
@@ -57,7 +44,7 @@ storiesOf('Kitchen Sink/Expand', module)
       ids.reduce((acc, id) => ({ ...acc, [id]: 'auto' }), {});
 
     return (
-      <Table data={data} panels={[expansionPanel]}>
+      <Table data={data}>
         {(tableList) => (
           <>
             <Header>
@@ -72,19 +59,30 @@ storiesOf('Kitchen Sink/Expand', module)
 
             <Body>
               {tableList.map((item) => (
-                <Row key={item.id} item={item} onClick={handleExpand}>
-                  <Cell>{item.name}</Cell>
-                  <Cell>
-                    {item.deadline.toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: '2-digit',
-                      day: '2-digit',
-                    })}
-                  </Cell>
-                  <Cell>{item.type}</Cell>
-                  <Cell>{item.isComplete.toString()}</Cell>
-                  <Cell>{item.nodes?.length}</Cell>
-                </Row>
+                <React.Fragment key={item.id}>
+                  <Row item={item} onClick={handleExpand}>
+                    <Cell>{item.name}</Cell>
+                    <Cell>
+                      {item.deadline.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                      })}
+                    </Cell>
+                    <Cell>{item.type}</Cell>
+                    <Cell>{item.isComplete.toString()}</Cell>
+                    <Cell>{item.nodes?.length}</Cell>
+                  </Row>
+
+                  {ids.includes(item.id) && (
+                    <AnimateHeight
+                      duration={DURATION}
+                      height={heights[item.id] || 0}
+                    >
+                      <strong>{item.name.toUpperCase()}</strong>
+                    </AnimateHeight>
+                  )}
+                </React.Fragment>
               ))}
             </Body>
           </>

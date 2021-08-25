@@ -17,7 +17,6 @@ import {
   useTree,
   CellTree,
 } from '@table-library/react-table-library/tree';
-import { createPanel } from '@table-library/react-table-library/panel';
 import {
   findNodeById,
   recursiveMergeInsert,
@@ -221,17 +220,8 @@ storiesOf('Server/Tree', module)
       );
     }
 
-    const loadingPanel = createPanel({
-      panel: (item, { treeXLevel }) => (
-        <div style={{ marginLeft: `${8 + treeXLevel * 20}px` }}>
-          Loading ...
-        </div>
-      ),
-      condition: (item) => loadingIds.includes(item.id),
-    });
-
     return (
-      <Table data={data} tree={tree} panels={[loadingPanel]}>
+      <Table data={data} tree={tree}>
         {(tableList) => (
           <>
             <Header>
@@ -245,21 +235,37 @@ storiesOf('Server/Tree', module)
             </Header>
 
             <Body>
-              {tableList.map((item) => (
-                <Row key={item.id} item={item}>
-                  <CellTree item={item}>{item.name}</CellTree>
-                  <Cell>
-                    {item.deadline.toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: '2-digit',
-                      day: '2-digit',
-                    })}
-                  </Cell>
-                  <Cell>{item.type}</Cell>
-                  <Cell>{item.isComplete.toString()}</Cell>
-                  <Cell>{item.nodes?.length}</Cell>
-                </Row>
-              ))}
+              {tableList.map((item) => {
+                const showLoading = loadingIds.includes(item.id);
+
+                return (
+                  <React.Fragment key={item.id}>
+                    <Row item={item}>
+                      <CellTree item={item}>{item.name}</CellTree>
+                      <Cell>
+                        {item.deadline.toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: '2-digit',
+                          day: '2-digit',
+                        })}
+                      </Cell>
+                      <Cell>{item.type}</Cell>
+                      <Cell>{item.isComplete.toString()}</Cell>
+                      <Cell>{item.nodes?.length}</Cell>
+                    </Row>
+
+                    {showLoading && (
+                      <div
+                        style={{
+                          marginLeft: `${8 + item.treeXLevel * 20}px`,
+                        }}
+                      >
+                        Loading ...
+                      </div>
+                    )}
+                  </React.Fragment>
+                );
+              })}
             </Body>
           </>
         )}
@@ -288,7 +294,8 @@ storiesOf('Server/Tree', module)
 
     // features
 
-    const [loadingIds, setLoadingIds] = React.useState([]);
+    const [idsNested, setIdsNested] = React.useState([]);
+    const [idsMore, setIdsMore] = React.useState([]);
 
     const tree = useTree(data, {
       onChange: onTreeChange,
@@ -305,58 +312,54 @@ storiesOf('Server/Tree', module)
         isShallow: true,
       };
 
-      setLoadingIds(loadingIds.concat(action.payload.id));
+      setIdsNested(idsNested.concat(action.payload.id));
       await doGet(params);
-      setLoadingIds(
-        loadingIds.filter((id) => id !== action.payload.id)
+      setIdsNested(
+        idsNested.filter((id) => id !== action.payload.id)
       );
     }
 
-    const handleLoadMore = async (item, props, parentItem) => {
-      setLoadingIds(loadingIds.concat(item.id));
+    const handleLoadMore = async (item) => {
+      setIdsMore(idsNested.concat(item.id));
       await doGet({
-        offset: parentItem.pageInfo.nextOffset,
+        offset: item.pageInfo.nextOffset,
         limit: 2,
-        id: parentItem.id,
+        id: item.id,
         isShallow: true,
       });
-      setLoadingIds(loadingIds.filter((id) => id !== item.id));
+      setIdsMore(idsNested.filter((id) => id !== item.id));
     };
 
-    const fetchPanel = createPanel({
-      panel: (item, props, parentItem) => (
-        <div>
-          <button
-            type="button"
-            onClick={() => handleLoadMore(item, props, parentItem)}
-          >
-            Load More ...
-          </button>
-        </div>
-      ),
-      condition: (item, props, parentItem) =>
-        !loadingIds.includes(item.id) &&
-        parentItem &&
-        parentItem.pageInfo &&
-        parentItem.pageInfo.nextOffset < parentItem.pageInfo.total &&
-        parentItem.nodes[parentItem.nodes.length - 1].id === item.id,
-    });
+    const getLastInDepth = (item) =>
+      (item?.nodes || []).reduce(
+        (_, value) => getLastInDepth(value),
+        item
+      );
 
-    const loadingPanel = createPanel({
-      panel: (item, { treeXLevel }) => (
-        <div style={{ marginLeft: `${8 + treeXLevel * 20}px` }}>
-          Loading ...
-        </div>
-      ),
-      condition: (item) => loadingIds.includes(item.id),
-    });
+    const LoadingRow = ({ item }) => (
+      <div
+        style={{
+          marginLeft: `${8 + item.treeXLevel * 20}px`,
+        }}
+      >
+        Loading ...
+      </div>
+    );
+
+    const FetchMoreRow = ({ item }) => (
+      <div
+        style={{
+          marginLeft: `${8 + item.treeXLevel * 20}px`,
+        }}
+      >
+        <button type="button" onClick={() => handleLoadMore(item)}>
+          Load More {item.name}
+        </button>
+      </div>
+    );
 
     return (
-      <Table
-        data={data}
-        tree={tree}
-        panels={[loadingPanel, fetchPanel]}
-      >
+      <Table data={data} tree={tree}>
         {(tableList) => (
           <>
             <Header>
@@ -371,19 +374,47 @@ storiesOf('Server/Tree', module)
 
             <Body>
               {tableList.map((item) => (
-                <Row key={item.id} item={item}>
-                  <CellTree item={item}>{item.name}</CellTree>
-                  <Cell>
-                    {item.deadline.toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: '2-digit',
-                      day: '2-digit',
-                    })}
-                  </Cell>
-                  <Cell>{item.type}</Cell>
-                  <Cell>{item.isComplete.toString()}</Cell>
-                  <Cell>{item.nodes?.length}</Cell>
-                </Row>
+                <React.Fragment key={item.id}>
+                  <Row item={item}>
+                    <CellTree item={item}>{item.name}</CellTree>
+                    <Cell>
+                      {item.deadline.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                      })}
+                    </Cell>
+                    <Cell>{item.type}</Cell>
+                    <Cell>{item.isComplete.toString()}</Cell>
+                    <Cell>{item.nodes?.length}</Cell>
+                  </Row>
+
+                  {idsNested.includes(item.id) && (
+                    <LoadingRow item={item} />
+                  )}
+
+                  {item.ancestors
+                    .filter(
+                      (ancestor) =>
+                        ancestor.pageInfo &&
+                        ancestor.pageInfo.nextOffset <
+                          ancestor.pageInfo.total &&
+                        item.id === getLastInDepth(ancestor).id
+                    )
+                    .map((ancestor) =>
+                      idsMore.includes(ancestor.id) ? (
+                        <LoadingRow
+                          key={item.id + ancestor.id}
+                          item={ancestor}
+                        />
+                      ) : (
+                        <FetchMoreRow
+                          key={item.id + ancestor.id}
+                          item={ancestor}
+                        />
+                      )
+                    )}
+                </React.Fragment>
               ))}
             </Body>
           </>

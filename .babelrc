@@ -12,7 +12,6 @@
           "@table-library/react-table-library/table": "./src/table",
           "@table-library/react-table-library/theme": "./src/theme",
           "@table-library/react-table-library/resize": "./src/resize",
-          "@table-library/react-table-library/panel": "./src/panel",
           "@table-library/react-table-library/sort": "./src/sort",
           "@table-library/react-table-library/select": "./src/select",
           "@table-library/react-table-library/tree": "./src/tree",

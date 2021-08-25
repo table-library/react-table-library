@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { TableContext } from '@table-library/react-table-library/common/context/Table';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
 import { ResizeProvider } from '@table-library/react-table-library/common/context/Resize';
-import { PanelContext } from '@table-library/react-table-library/common/context/Panel';
 import { SortContext } from '@table-library/react-table-library/common/context/Sort';
 import { SelectContext } from '@table-library/react-table-library/common/context/Select';
 import { TreeContext } from '@table-library/react-table-library/common/context/Tree';
@@ -20,7 +19,6 @@ const Table = ({
   pagination,
   select,
   tree,
-  panels,
   children,
 }) => {
   const tableRef = React.useRef();
@@ -43,6 +41,7 @@ const Table = ({
 
   if (tree && !tree._options.isServer) {
     modifiedNodes = tree.state.fromTreeToListExtended(
+      data,
       modifiedNodes,
       tree,
       tree._options.treeXLevel,
@@ -63,17 +62,15 @@ const Table = ({
     >
       <TableContext.Provider value={data}>
         <ThemeContext.Provider value={theme}>
-          <PanelContext.Provider value={panels}>
-            <SortContext.Provider value={sort}>
-              <SelectContext.Provider value={select}>
-                <TreeContext.Provider value={tree}>
-                  <ResizeProvider layout={layout} tableRef={tableRef}>
-                    {children(modifiedNodes)}
-                  </ResizeProvider>
-                </TreeContext.Provider>
-              </SelectContext.Provider>
-            </SortContext.Provider>
-          </PanelContext.Provider>
+          <SortContext.Provider value={sort}>
+            <SelectContext.Provider value={select}>
+              <TreeContext.Provider value={tree}>
+                <ResizeProvider layout={layout} tableRef={tableRef}>
+                  {children(modifiedNodes)}
+                </ResizeProvider>
+              </TreeContext.Provider>
+            </SelectContext.Provider>
+          </SortContext.Provider>
         </ThemeContext.Provider>
       </TableContext.Provider>
     </div>
