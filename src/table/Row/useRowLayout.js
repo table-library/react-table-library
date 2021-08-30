@@ -6,6 +6,8 @@ export const useRowLayout = (ref, selector) => {
   const { layout, resizedLayout } = React.useContext(ResizeContext);
 
   React.useLayoutEffect(() => {
+    if (layout?.custom) return;
+
     const allCells = Array.from(
       ref.current.querySelectorAll(selector)
     );
@@ -24,11 +26,16 @@ export const useRowLayout = (ref, selector) => {
     );
 
     allCells.forEach((cell, index) => {
+      // if it has been resized, take resize layout
       if (resizedLayout.current?.[index]) {
         cell.style.width = resizedLayout.current[index];
-      } else if (shrinkCells.includes(cell)) {
+      }
+      // if it is a shrink cell, shrink cell
+      else if (shrinkCells.includes(cell)) {
         cell.style.width = `${cell.getBoundingClientRect().width}px`;
-      } else if (!layout?.custom) {
+      }
+      // if it is no custom layout, divide equally
+      else {
         const percentage = 100 / normalCells.length;
         const diff = shrinkCellsWidth / normalCells.length;
 
