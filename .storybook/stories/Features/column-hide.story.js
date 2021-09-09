@@ -4,12 +4,6 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import {
-  useTree,
-  CellTree,
-  TREE_EXPAND_CLICK_TYPES,
-} from '@table-library/react-table-library/tree';
-
-import {
   useCustom,
   Table,
   Header,
@@ -27,16 +21,9 @@ storiesOf('Features/Column Hiding', module)
   .add('base', () => {
     const data = { nodes };
 
-    const tree = useTree(data, {
-      onChange: onTreeChange,
-    });
-
-    function onTreeChange(action, state) {
-      console.log(action, state);
-    }
-
     const [columns, setColumns] = React.useState([
       'name',
+      'deadline',
       'type',
       'complete',
       'tasks',
@@ -117,33 +104,24 @@ storiesOf('Features/Column Hiding', module)
           </label>
         </div>
 
-        <Table data={data} tree={tree}>
+        <Table data={data}>
           {(tableList) => (
             <>
               <Header>
                 <HeaderRow>
-                  <HeaderCell resize hide={!columns.includes('name')}>
+                  <HeaderCell hide={!columns.includes('name')}>
                     Task
                   </HeaderCell>
-                  <HeaderCell
-                    resize
-                    hide={!columns.includes('deadline')}
-                  >
+                  <HeaderCell hide={!columns.includes('deadline')}>
                     Deadline
                   </HeaderCell>
-                  <HeaderCell resize hide={!columns.includes('type')}>
+                  <HeaderCell hide={!columns.includes('type')}>
                     Type
                   </HeaderCell>
-                  <HeaderCell
-                    resize
-                    hide={!columns.includes('complete')}
-                  >
+                  <HeaderCell hide={!columns.includes('complete')}>
                     Complete
                   </HeaderCell>
-                  <HeaderCell
-                    resize
-                    hide={!columns.includes('tasks')}
-                  >
+                  <HeaderCell hide={!columns.includes('tasks')}>
                     Tasks
                   </HeaderCell>
                 </HeaderRow>
