@@ -4,6 +4,12 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import {
+  useTree,
+  CellTree,
+  TREE_EXPAND_CLICK_TYPES,
+} from '@table-library/react-table-library/tree';
+
+import {
   useCustom,
   Table,
   Header,
@@ -21,9 +27,16 @@ storiesOf('Features/Column Hiding', module)
   .add('base', () => {
     const data = { nodes };
 
+    const tree = useTree(data, {
+      onChange: onTreeChange,
+    });
+
+    function onTreeChange(action, state) {
+      console.log(action, state);
+    }
+
     const [columns, setColumns] = React.useState([
       'name',
-      'deadline',
       'type',
       'complete',
       'tasks',
@@ -104,24 +117,33 @@ storiesOf('Features/Column Hiding', module)
           </label>
         </div>
 
-        <Table data={data}>
+        <Table data={data} tree={tree}>
           {(tableList) => (
             <>
               <Header>
                 <HeaderRow>
-                  <HeaderCell hide={!columns.includes('name')}>
+                  <HeaderCell resize hide={!columns.includes('name')}>
                     Task
                   </HeaderCell>
-                  <HeaderCell hide={!columns.includes('deadline')}>
+                  <HeaderCell
+                    resize
+                    hide={!columns.includes('deadline')}
+                  >
                     Deadline
                   </HeaderCell>
-                  <HeaderCell hide={!columns.includes('type')}>
+                  <HeaderCell resize hide={!columns.includes('type')}>
                     Type
                   </HeaderCell>
-                  <HeaderCell hide={!columns.includes('complete')}>
+                  <HeaderCell
+                    resize
+                    hide={!columns.includes('complete')}
+                  >
                     Complete
                   </HeaderCell>
-                  <HeaderCell hide={!columns.includes('tasks')}>
+                  <HeaderCell
+                    resize
+                    hide={!columns.includes('tasks')}
+                  >
                     Tasks
                   </HeaderCell>
                 </HeaderRow>

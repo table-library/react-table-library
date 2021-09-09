@@ -7,6 +7,8 @@ import { ThemeContext } from '@table-library/react-table-library/common/context/
 import {
   resizerStyle,
   useResize,
+  useLayoutHide,
+  useStyleHide,
 } from '@table-library/react-table-library/resize';
 
 const HeaderCell = ({
@@ -21,7 +23,10 @@ const HeaderCell = ({
   const theme = React.useContext(ThemeContext);
 
   const cellRef = React.useRef();
-  const { resizeRef } = useResize(cellRef, index, resize, hide);
+  useLayoutHide(index, resize, hide);
+  useStyleHide(cellRef, hide);
+
+  const { resizeRef } = useResize(cellRef, index, resize);
 
   return (
     <HeaderCellContainer
