@@ -6,8 +6,6 @@ export const useRowLayout = (ref, selector) => {
   const { layout, resizedLayout } = React.useContext(ResizeContext);
 
   React.useLayoutEffect(() => {
-    if (layout?.custom) return;
-
     const allCells = Array.from(
       ref.current.querySelectorAll(selector)
     );
@@ -35,7 +33,7 @@ export const useRowLayout = (ref, selector) => {
         cell.style.width = `${cell.getBoundingClientRect().width}px`;
       }
       // if it is no custom layout, divide equally
-      else {
+      else if (!layout?.custom) {
         const percentage = 100 / normalCells.length;
         const diff = shrinkCellsWidth / normalCells.length;
 

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const ResizeContext = React.createContext({});
 
 const ResizeProvider = ({ tableRef, layout, children }) => {
-  const resizedLayout = React.useRef();
+  const resizedLayout = React.useRef([]);
 
   const value = React.useMemo(
     () => ({ layout, resizedLayout, tableRef }),

@@ -20,13 +20,18 @@ const HeaderCell = ({
 }) => {
   const theme = React.useContext(ThemeContext);
 
-  const { resizeRef, cellRef } = useResize(index, resize);
+  const cellRef = React.useRef();
+  const { resizeRef } = useResize(cellRef, index, resize, hide);
 
   return (
     <HeaderCellContainer
       {...rest}
       role="columnheader"
-      className={cs('th', className, { hide, shrink })}
+      data-resize-min-width={resize?.minWidth || 75}
+      className={cs('th', className, {
+        shrink,
+        resize,
+      })}
       css={`
         ${theme?.BaseCell}
         ${theme?.HeaderCell}

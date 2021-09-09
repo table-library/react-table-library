@@ -20,7 +20,6 @@ const Cell = ({
       {...rest}
       role="gridcell"
       className={cs('td', className, {
-        hide,
         shrink,
       })}
       css={`
