@@ -2,6 +2,8 @@
 /* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
+import { FixedSizeList } from 'react-window';
+import AutoSizer from 'react-virtualized-auto-sizer';
 
 import {
   Table,
@@ -15,8 +17,67 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('Recipes/Large Table (WIP)', module)
+const manyNodes = [...Array(1000)]
+  .map((_, i) => nodes.map((node) => ({ ...node, id: node.id + i })))
+  .flat();
+
+storiesOf('Recipes/Large Tables', module)
   .addParameters({ component: Table })
-  .add('base', () => {
-    return <>WIP</>;
+  .add('large list/tree', () => {
+    // import AutoSizer from 'react-virtualized-auto-sizer';
+    // import { FixedSizeList } from 'react-window';
+
+    const data = { nodes: manyNodes };
+
+    return (
+      <Table data={data}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <AutoSizer>
+              {({ width }) => (
+                <FixedSizeList
+                  height={300}
+                  itemCount={data.nodes.length}
+                  itemSize={29}
+                  width={width}
+                  itemData={{ items: tableList }}
+                >
+                  {({ index, style, data }) => (
+                    <div style={style}>
+                      <Row item={data.items[index]}>
+                        <Cell>{data.items[index].name}</Cell>
+                        <Cell>
+                          {data.items[
+                            index
+                          ].deadline.toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                          })}
+                        </Cell>
+                        <Cell>{data.items[index].type}</Cell>
+                        <Cell>
+                          {data.items[index].isComplete.toString()}
+                        </Cell>
+                        <Cell>{data.items[index].nodes?.length}</Cell>
+                      </Row>
+                    </div>
+                  )}
+                </FixedSizeList>
+              )}
+            </AutoSizer>
+          </>
+        )}
+      </Table>
+    );
   });

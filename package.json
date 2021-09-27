@@ -60,6 +60,8 @@
     "react": "16.13.1",
     "react-animate-height": "^2.0.23",
     "react-dom": "16.13.1",
+    "react-virtualized-auto-sizer": "^1.0.6",
+    "react-window": "^1.8.6",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.0",

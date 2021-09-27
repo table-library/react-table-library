@@ -36,7 +36,7 @@ export const parameters = {
         'Product Themes',
         ['Google Drive (WIP)', 'Stripe (WIP)'],
         'Recipes',
-        ['Controlled', 'Large Table (WIP)', 'Memoized Row (WIP)'],
+        ['Controlled', 'Large Tables', 'Memoized Row (WIP)'],
         'Server',
         [
           'Table',
