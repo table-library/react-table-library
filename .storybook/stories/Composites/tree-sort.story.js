@@ -30,9 +30,29 @@ storiesOf('Composites/Tree & Sort', module)
       onChange: onTreeChange,
     });
 
-    const sort = useSort(data, {
-      onChange: onSortChange,
-    });
+    const sort = useSort(
+      data,
+      {
+        onChange: onSortChange,
+      },
+      {
+        sortFns: {
+          TASK: (array) =>
+            array.sort((a, b) => a.name.localeCompare(b.name)),
+          DEADLINE: (array) =>
+            array.sort((a, b) => a.deadline - b.deadline),
+          TYPE: (array) =>
+            array.sort((a, b) => a.type.localeCompare(b.type)),
+          COMPLETE: (array) =>
+            array.sort((a, b) => a.isComplete - b.isComplete),
+          TASKS: (array) =>
+            array.sort(
+              (a, b) =>
+                (a.nodes || []).length - (b.nodes || []).length
+            ),
+        },
+      }
+    );
 
     function onSortChange(action, state) {
       console.log(action, state);
@@ -48,50 +68,15 @@ storiesOf('Composites/Tree & Sort', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCellSort
-                  sortKey="TASK"
-                  sortFn={(array) =>
-                    array.sort((a, b) => a.name.localeCompare(b.name))
-                  }
-                >
-                  Task
-                </HeaderCellSort>
-                <HeaderCellSort
-                  sortKey="DEADLINE"
-                  sortFn={(array) =>
-                    array.sort((a, b) => a.deadline - b.deadline)
-                  }
-                >
+                <HeaderCellSort sortKey="TASK">Task</HeaderCellSort>
+                <HeaderCellSort sortKey="DEADLINE">
                   Deadline
                 </HeaderCellSort>
-                <HeaderCellSort
-                  sortKey="TYPE"
-                  sortFn={(array) =>
-                    array.sort((a, b) => a.type.localeCompare(b.type))
-                  }
-                >
-                  Type
-                </HeaderCellSort>
-                <HeaderCellSort
-                  sortKey="COMPLETE"
-                  sortFn={(array) =>
-                    array.sort((a, b) => a.isComplete - b.isComplete)
-                  }
-                >
+                <HeaderCellSort sortKey="TYPE">Type</HeaderCellSort>
+                <HeaderCellSort sortKey="COMPLETE">
                   Complete
                 </HeaderCellSort>
-                <HeaderCellSort
-                  sortKey="TASKS"
-                  sortFn={(array) =>
-                    array.sort(
-                      (a, b) =>
-                        (a.nodes || []).length -
-                        (b.nodes || []).length
-                    )
-                  }
-                >
-                  Tasks
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="TASKS">Tasks</HeaderCellSort>
               </HeaderRow>
             </Header>
 

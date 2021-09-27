@@ -26,9 +26,11 @@ const Table = ({
   let modifiedNodes = [...data.nodes];
 
   if (sort && !sort._options.isServer) {
-    modifiedNodes = tree
-      ? sort.state.recursiveSortFn(modifiedNodes)
-      : sort.state.sortFn(modifiedNodes);
+    modifiedNodes = sort.state.sortFn(
+      modifiedNodes,
+      sort._options.sortFns,
+      !!tree
+    );
   }
 
   if (pagination && !pagination._options.isServer) {

@@ -55,6 +55,7 @@ export const parameters = {
           'Origin External',
           'Origin Mixed',
           'Debounce',
+          'Overlay',
           'Hybrid',
         ],
         'Kitchen Sink',

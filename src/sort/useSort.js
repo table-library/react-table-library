@@ -13,16 +13,13 @@ const TOGGLE_SORT = 'TOGGLE_SORT';
 const SET = 'SET';
 
 const toggleSort = (state, action) => {
-  const needsReverse =
+  const reverse =
     action.payload.sortKey === state.sortKey && !state.reverse;
 
-  return needsReverse
-    ? {
-        ...action.payload,
-        sortFn: (array) => action.payload.sortFn(array).reverse(),
-        reverse: true,
-      }
-    : { ...action.payload, reverse: false };
+  return {
+    ...action.payload,
+    reverse,
+  };
 };
 
 const set = (state, action) => ({ ...state, ...action.payload });
@@ -42,7 +39,6 @@ const reducer = (state, action) => {
 
 const DEFAULT_STATE = {
   sortKey: 'NONE',
-  sortFn: (array) => array,
   reverse: false,
 };
 
@@ -92,13 +88,21 @@ const useSort = (data, primary = {}, options = {}, context) => {
     })
   );
 
-  const recursiveSortFn = React.useCallback(
-    (nodes) => {
-      return state.sortFn(nodes).reduce((acc, value) => {
-        if (value.nodes) {
+  const sortFn = React.useCallback(
+    (nodes, sortFns, isRecursive) => {
+      const sortFnCurrent = sortFns[state.sortKey];
+
+      const sortFnWithFallback = sortFnCurrent || ((array) => array);
+
+      const sortFnReverse = state.reverse
+        ? (array) => sortFnWithFallback(array).reverse()
+        : sortFnWithFallback;
+
+      return sortFnReverse(nodes).reduce((acc, value) => {
+        if (isRecursive && value.nodes) {
           return acc.concat({
             ...value,
-            nodes: recursiveSortFn(value.nodes, state.sortFn),
+            nodes: sortFn(value.nodes, sortFns, isRecursive),
           });
         }
 
@@ -127,7 +131,7 @@ const useSort = (data, primary = {}, options = {}, context) => {
   };
 
   return {
-    state: { ...state, recursiveSortFn },
+    state: { ...state, sortFn },
     fns,
     _options: mergedOptions,
   };
