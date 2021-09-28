@@ -44,7 +44,7 @@ const HeaderCell = ({
       ref={cellRef}
     >
       <div>{children}</div>
-      {resize && <span ref={resizeRef} css={resizerStyle()} />}
+      {resize && <span ref={resizeRef} css={resizerStyle(resize)} />}
     </HeaderCellContainer>
   );
 };

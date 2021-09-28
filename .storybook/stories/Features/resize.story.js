@@ -107,6 +107,88 @@ storiesOf('Features/Resize', module)
       </Table>
     );
   })
+  .add('resizerWidth', () => {
+    const data = { nodes };
+
+    const resize = { resizerWidth: 30 };
+
+    return (
+      <Table data={data}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell resize={resize}>Task</HeaderCell>
+                <HeaderCell resize={resize}>Deadline</HeaderCell>
+                <HeaderCell resize={resize}>Type</HeaderCell>
+                <HeaderCell resize={resize}>Complete</HeaderCell>
+                <HeaderCell resize={resize}>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row key={item.id} item={item}>
+                  <Cell>{item.name}</Cell>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('resizerHighlight', () => {
+    const data = { nodes };
+
+    const resize = { resizerHighlight: '#ff0000' };
+
+    return (
+      <Table data={data}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell resize={resize}>Task</HeaderCell>
+                <HeaderCell resize={resize}>Deadline</HeaderCell>
+                <HeaderCell resize={resize}>Type</HeaderCell>
+                <HeaderCell resize={resize}>Complete</HeaderCell>
+                <HeaderCell resize={resize}>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row key={item.id} item={item}>
+                  <Cell>{item.name}</Cell>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
   .add('offset', () => {
     const theme = useTheme({
       BaseRow: `
