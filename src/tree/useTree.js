@@ -28,7 +28,7 @@ const getRowProps = (props, features) => {
     }
 
     .td:nth-child(${treeYLevel + 1}) > div {
-      margin-left: ${treeXLevel * 20}px;
+      margin-left: ${treeXLevel * tree._options.indentation}px;
     }
   `;
 
@@ -75,6 +75,7 @@ const DEFAULT_OPTIONS = {
   isServer: false,
   treeIcon: DEFAULT_TREE_ICON,
   clickType: TREE_EXPAND_CLICK_TYPES.RowClick,
+  indentation: 20,
   treeXLevel: 0,
   treeYLevel: 0,
 };

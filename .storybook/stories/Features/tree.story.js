@@ -135,61 +135,6 @@ storiesOf('Features/Tree', module)
       </Table>
     );
   })
-  .add('no icon indentation', () => {
-    const data = { nodes };
-
-    const tree = useTree(
-      data,
-      {
-        onChange: onTreeChange,
-      },
-      {
-        treeIcon: {
-          noIconMargin: '18px',
-        },
-      }
-    );
-
-    function onTreeChange(action, state) {
-      console.log(action, state);
-    }
-
-    return (
-      <Table data={data} tree={tree}>
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCell>Task</HeaderCell>
-                <HeaderCell>Deadline</HeaderCell>
-                <HeaderCell>Type</HeaderCell>
-                <HeaderCell>Complete</HeaderCell>
-                <HeaderCell>Tasks</HeaderCell>
-              </HeaderRow>
-            </Header>
-
-            <Body>
-              {tableList.map((item) => (
-                <Row key={item.id} item={item}>
-                  <CellTree item={item}>{item.name}</CellTree>
-                  <Cell>
-                    {item.deadline.toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: '2-digit',
-                      day: '2-digit',
-                    })}
-                  </Cell>
-                  <Cell>{item.type}</Cell>
-                  <Cell>{item.isComplete.toString()}</Cell>
-                  <Cell>{item.nodes?.length}</Cell>
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
-    );
-  })
   .add('default tree', () => {
     const data = { nodes };
 
@@ -365,6 +310,114 @@ storiesOf('Features/Tree', module)
           iconRight: <FolderIcon fontSize="small" />,
           iconDown: <FolderOpenIcon fontSize="small" />,
         },
+      }
+    );
+
+    function onTreeChange(action, state) {
+      console.log(action, state);
+    }
+
+    return (
+      <Table data={data} tree={tree}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row key={item.id} item={item}>
+                  <CellTree item={item}>{item.name}</CellTree>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('no icon margin', () => {
+    const data = { nodes };
+
+    const tree = useTree(
+      data,
+      {
+        onChange: onTreeChange,
+      },
+      {
+        treeIcon: {
+          noIconMargin: '18px',
+        },
+      }
+    );
+
+    function onTreeChange(action, state) {
+      console.log(action, state);
+    }
+
+    return (
+      <Table data={data} tree={tree}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row key={item.id} item={item}>
+                  <CellTree item={item}>{item.name}</CellTree>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('indentation', () => {
+    const data = { nodes };
+
+    const tree = useTree(
+      data,
+      {
+        onChange: onTreeChange,
+      },
+      {
+        indentation: 10,
       }
     );
 
