@@ -28,14 +28,19 @@ import { nodes } from '../data';
 
 storiesOf('Features/Sort', module)
   .addParameters({ component: Table })
-  .add('tutorial', () => (
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      href="https://www.robinwieruch.de/react-table-sort"
-    >
-      Tutorial
-    </a>
+  .add('documentation', () => (
+    <>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.robinwieruch.de/react-table-sort"
+      >
+        Tutorial
+      </a>
+      <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+        Story Code
+      </a>
+    </>
   ))
   .add('base', () => {
     const data = { nodes };

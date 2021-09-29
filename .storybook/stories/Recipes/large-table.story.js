@@ -23,10 +23,14 @@ const manyNodes = [...Array(1000)]
 
 storiesOf('Recipes/Large Tables', module)
   .addParameters({ component: Table })
+  .add('documentation', () => (
+    <>
+      <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+        Story Code
+      </a>
+    </>
+  ))
   .add('large list/tree', () => {
-    // import AutoSizer from 'react-virtualized-auto-sizer';
-    // import { FixedSizeList } from 'react-window';
-
     const data = { nodes: manyNodes };
 
     return (

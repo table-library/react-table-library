@@ -18,14 +18,19 @@ import { nodes } from '../data';
 
 storiesOf('Features/Theme', module)
   .addParameters({ component: Table })
-  .add('tutorial', () => (
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      href="https://www.robinwieruch.de/react-table-theme"
-    >
-      Tutorial
-    </a>
+  .add('documentation', () => (
+    <>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.robinwieruch.de/react-table-theme"
+      >
+        Tutorial
+      </a>
+      <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+        Story Code
+      </a>
+    </>
   ))
   .add('Ocean Blue', () => {
     const theme = useTheme({

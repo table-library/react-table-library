@@ -18,14 +18,19 @@ import { nodes } from '../data';
 
 storiesOf('Features/Search', module)
   .addParameters({ component: Table })
-  .add('tutorial', () => (
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      href="https://www.robinwieruch.de/react-table-search"
-    >
-      Tutorial
-    </a>
+  .add('documentation', () => (
+    <>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.robinwieruch.de/react-table-search"
+      >
+        Tutorial
+      </a>
+      <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+        Story Code
+      </a>
+    </>
   ))
   .add('base', () => {
     const [search, setSearch] = React.useState('');

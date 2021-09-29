@@ -35,6 +35,13 @@ import { nodes } from '../data';
 
 storiesOf('First Steps/Demo', module)
   .addParameters({ component: Table })
+  .add('documentation', () => (
+    <>
+      <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+        Story Code
+      </a>
+    </>
+  ))
   .add('Client-Side', () => {
     const data = {
       nodes,

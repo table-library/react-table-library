@@ -17,6 +17,13 @@ import { nodes } from '../data';
 
 storiesOf('Misc/Row', module)
   .addParameters({ component: Table })
+  .add('documentation', () => (
+    <>
+      <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+        Story Code
+      </a>
+    </>
+  ))
   .add('row click', () => {
     const data = { nodes };
 

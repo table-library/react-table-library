@@ -17,6 +17,13 @@ import { getData } from '../../server';
 
 storiesOf('Server/Table', module)
   .addParameters({ component: Table })
+  .add('documentation', () => (
+    <>
+      <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+        Story Code
+      </a>
+    </>
+  ))
   .add('read', () => {
     const [data, setData] = React.useState({
       nodes: [],
