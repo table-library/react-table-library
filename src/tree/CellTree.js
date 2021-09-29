@@ -82,10 +82,14 @@ const CellTree = ({
       <div css={style()}>
         <Button
           className="prefix narrow"
-          margin={mergedTreeIconOptions.margin}
+          margin={
+            icon
+              ? mergedTreeIconOptions.margin
+              : mergedTreeIconOptions.noIconMargin
+          }
           onClick={handleClick}
         >
-          {icon && <span>{icon}</span>}
+          {icon ? <span>{icon}</span> : <span />}
         </Button>
         <div>{children}</div>
       </div>

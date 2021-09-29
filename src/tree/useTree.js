@@ -65,6 +65,7 @@ const DEFAULT_STATE = {
 const DEFAULT_TREE_ICON = {
   margin: '4px',
   size: '14px',
+  noIconMargin: '0px',
   iconDefault: null,
   iconRight: <IconChevronSingleRight />,
   iconDown: <IconChevronSingleDown />,
