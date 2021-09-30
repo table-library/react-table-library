@@ -59,7 +59,7 @@ export const parameters = {
           'Hybrid',
         ],
         'Kitchen Sink',
-        ['Tree'],
+        ['CSV Download', 'PDF Download', 'Image Download'],
       ],
     },
   },

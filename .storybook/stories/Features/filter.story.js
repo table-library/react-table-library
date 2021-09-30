@@ -19,18 +19,22 @@ import { nodes } from '../data';
 storiesOf('Features/Filter', module)
   .addParameters({ component: Table })
   .add('documentation', () => (
-    <>
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.robinwieruch.de/react-table-filter"
-      >
-        Tutorial
-      </a>
-      <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-        Story Code
-      </a>
-    </>
+    <ul>
+      <li>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.robinwieruch.de/react-table-filter"
+        >
+          Tutorial
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
   ))
   .add('base', () => {
     const [filters, setFilters] = React.useState(['SETUP', 'LEARN']);

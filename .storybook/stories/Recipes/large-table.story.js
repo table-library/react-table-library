@@ -24,11 +24,13 @@ const manyNodes = [...Array(1000)]
 storiesOf('Recipes/Large Tables', module)
   .addParameters({ component: Table })
   .add('documentation', () => (
-    <>
-      <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-        Story Code
-      </a>
-    </>
+    <ul>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
   ))
   .add('large list/tree', () => {
     const data = { nodes: manyNodes };

@@ -20,11 +20,13 @@ import { nodes } from '../data';
 storiesOf('Features/Column Ordering', module)
   .addParameters({ component: Table })
   .add('documentation', () => (
-    <>
-      <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-        Story Code
-      </a>
-    </>
+    <ul>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
   ))
   .add('base', () => {
     const data = { nodes };

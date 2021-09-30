@@ -28,11 +28,13 @@ import { nodes } from '../data';
 storiesOf('Kitchen Sink/Tree', module)
   .addParameters({ component: Table })
   .add('documentation', () => (
-    <>
-      <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-        Story Code
-      </a>
-    </>
+    <ul>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
   ))
   .add('zoom on double click (WIP)', () => {
     const data = { nodes };

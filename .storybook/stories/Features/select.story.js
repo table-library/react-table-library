@@ -29,18 +29,22 @@ import { nodes } from '../data';
 storiesOf('Features/Select', module)
   .addParameters({ component: Table })
   .add('documentation', () => (
-    <>
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.robinwieruch.de/react-table-select"
-      >
-        Tutorial
-      </a>
-      <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-        Story Code
-      </a>
-    </>
+    <ul>
+      <li>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.robinwieruch.de/react-table-select"
+        >
+          Tutorial
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
   ))
   .add('base', () => {
     const data = { nodes };
