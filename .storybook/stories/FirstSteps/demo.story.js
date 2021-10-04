@@ -103,9 +103,29 @@ storiesOf('First Steps/Demo', module)
       onChange: onSelectChange,
     });
 
-    const sort = useSort(data, {
-      onChange: onSortChange,
-    });
+    const sort = useSort(
+      data,
+      {
+        onChange: onSortChange,
+      },
+      {
+        sortFns: {
+          TASK: (array) =>
+            array.sort((a, b) => a.name.localeCompare(b.name)),
+          DEADLINE: (array) =>
+            array.sort((a, b) => a.deadline - b.deadline),
+          TYPE: (array) =>
+            array.sort((a, b) => a.type.localeCompare(b.type)),
+          COMPLETE: (array) =>
+            array.sort((a, b) => a.isComplete - b.isComplete),
+          TASKS: (array) =>
+            array.sort(
+              (a, b) =>
+                (a.nodes || []).length - (b.nodes || []).length
+            ),
+        },
+      }
+    );
 
     const pagination = usePagination(data, {
       state: {
@@ -147,53 +167,19 @@ storiesOf('First Steps/Demo', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSelect />
-                <HeaderCellSort
-                  resize={resize}
-                  sortKey="TASK"
-                  sortFn={(array) =>
-                    array.sort((a, b) => a.name.localeCompare(b.name))
-                  }
-                >
+                <HeaderCellSort resize={resize} sortKey="TASK">
                   Task
                 </HeaderCellSort>
-                <HeaderCellSort
-                  resize={resize}
-                  sortKey="DEADLINE"
-                  sortFn={(array) =>
-                    array.sort((a, b) => a.deadline - b.deadline)
-                  }
-                >
+                <HeaderCellSort resize={resize} sortKey="DEADLINE">
                   Deadline
                 </HeaderCellSort>
-                <HeaderCellSort
-                  resize={resize}
-                  sortKey="TYPE"
-                  sortFn={(array) =>
-                    array.sort((a, b) => a.type.localeCompare(b.type))
-                  }
-                >
+                <HeaderCellSort resize={resize} sortKey="TYPE">
                   Type
                 </HeaderCellSort>
-                <HeaderCellSort
-                  resize={resize}
-                  sortKey="COMPLETE"
-                  sortFn={(array) =>
-                    array.sort((a, b) => a.isComplete - b.isComplete)
-                  }
-                >
+                <HeaderCellSort resize={resize} sortKey="COMPLETE">
                   Complete
                 </HeaderCellSort>
-                <HeaderCellSort
-                  resize={resize}
-                  sortKey="TASKS"
-                  sortFn={(array) =>
-                    array.sort(
-                      (a, b) =>
-                        (a.nodes || []).length -
-                        (b.nodes || []).length
-                    )
-                  }
-                >
+                <HeaderCellSort resize={resize} sortKey="TASKS">
                   Tasks
                 </HeaderCellSort>
               </HeaderRow>
@@ -334,6 +320,16 @@ storiesOf('First Steps/Demo', module)
       });
     }, [fetchData]);
 
+    // client-side select
+
+    const select = useRowSelect(data, {
+      onChange: onSelectChange,
+    });
+
+    function onSelectChange(action, state) {
+      console.log(action, state);
+    }
+
     // server-side search
 
     const [search, setSearch] = React.useState(INITIAL_PARAMS.search);
@@ -430,11 +426,17 @@ storiesOf('First Steps/Demo', module)
           Only "Ask HN"
         </label>
 
-        <Table data={data} theme={theme} pagination={pagination}>
+        <Table
+          data={data}
+          theme={theme}
+          select={select}
+          pagination={pagination}
+        >
           {(tableList) => (
             <>
               <Header>
                 <HeaderRow>
+                  <HeaderCellSelect />
                   <HeaderCell>Title</HeaderCell>
                   <HeaderCell>Created At</HeaderCell>
                   <HeaderCell>Points</HeaderCell>
@@ -445,6 +447,7 @@ storiesOf('First Steps/Demo', module)
               <Body>
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
+                    <CellSelect item={item} />
                     <Cell>
                       <a href={item.url}>{item.title}</a>
                     </Cell>
