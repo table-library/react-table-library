@@ -85,15 +85,15 @@ storiesOf('Features/Layout', module)
   .add('class specific', () => {
     const theme = useTheme({
       BaseCell: `
-        .task {
+        &.task {
           width: 35%;
         }
 
-        .deadline, .type, .complete {
+        &.deadline, .type, .complete {
           width: 15%;
         }
 
-        .tasks {
+        &.tasks {
           width: 10%;
         }
       `,
