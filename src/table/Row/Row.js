@@ -8,7 +8,7 @@ import { ThemeContext } from '@table-library/react-table-library/common/context/
 import { SelectContext } from '@table-library/react-table-library/common/context/Select';
 import { TreeContext } from '@table-library/react-table-library/common/context/Tree';
 
-import { useRowLayout } from './useRowLayout';
+import { useConsumeRowLayout } from './useConsumeRowLayout';
 import { useDoubleClick } from './useDoubleClick';
 
 const getRowProps = (features, props) =>
@@ -96,7 +96,7 @@ const Row = (props) => {
   const ref = React.useRef();
 
   useDoubleClick(ref, onClickByFeature, onDoubleClick, item);
-  useRowLayout(ref, '.td');
+  useConsumeRowLayout(ref, '.td');
 
   return (
     <RowContainer

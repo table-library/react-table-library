@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { ResizeContext } from '@table-library/react-table-library/common/context/Resize';
 
-export const useRowLayout = (ref, selector) => {
+export const useProduceRowLayout = (ref, selector) => {
   const { layout, resizedLayout } = React.useContext(ResizeContext);
 
   React.useLayoutEffect(() => {
@@ -24,20 +24,24 @@ export const useRowLayout = (ref, selector) => {
     );
 
     allCells.forEach((cell, index) => {
-      // if it has been resized, take resize layout
-      if (resizedLayout.current?.[index]) {
-        cell.style.width = resizedLayout.current[index];
-      }
       // if it is a shrink cell, shrink cell
-      else if (shrinkCells.includes(cell)) {
-        cell.style.width = `${cell.getBoundingClientRect().width}px`;
+      if (shrinkCells.includes(cell)) {
+        const value = `${cell.getBoundingClientRect().width}px`;
+        resizedLayout.current[index] = value;
       }
+
       // if it is no custom layout, divide equally
       else if (!layout?.custom) {
         const percentage = 100 / normalCells.length;
         const diff = shrinkCellsWidth / normalCells.length;
+        const value = `calc(${percentage}% - ${diff}px)`;
+        resizedLayout.current[index] = value;
+      }
 
-        cell.style.width = `calc(${percentage}% - ${diff}px)`;
+      // if it has custom layout
+      else {
+        const value = `${cell.getBoundingClientRect().width}px`;
+        resizedLayout.current[index] = value;
       }
     });
   }, [ref, layout, resizedLayout, selector]);
