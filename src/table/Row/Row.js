@@ -96,6 +96,7 @@ const Row = (props) => {
   const ref = React.useRef();
 
   useDoubleClick(ref, onClickByFeature, onDoubleClick, item);
+
   useConsumeRowLayout(ref, '.td');
 
   return (

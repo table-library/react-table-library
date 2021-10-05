@@ -2,6 +2,10 @@ import * as React from 'react';
 
 import { ResizeContext } from '@table-library/react-table-library/common/context/Resize';
 
+// take all columns of this row
+// and assign their width from the ref
+// which has been produced in the header
+
 export const useConsumeRowLayout = (ref, selector) => {
   const { layout, resizedLayout } = React.useContext(ResizeContext);
 
