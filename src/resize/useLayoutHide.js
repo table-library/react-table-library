@@ -131,8 +131,13 @@ const applyHide = (index, tableRef, resize, hides, hide) => {
 
   // imperative write of all cell widths
 
-  const applyWidth = (cell, i) => {
-    cell.style.width = columnWidthsPercentages[i];
+  const applyWidth = (cell, i, size) => {
+    if (i === size - 1) {
+      cell.style.maxWidth = `${newColumnWidths[i]}px`;
+    } else {
+      cell.style.minWidth = `${newColumnWidths[i]}px`;
+      cell.style.maxWidth = `${newColumnWidths[i]}px`;
+    }
   };
 
   applyToHeaderColumns(tableRef, applyWidth);

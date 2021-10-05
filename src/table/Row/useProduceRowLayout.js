@@ -14,32 +14,12 @@ export const useProduceRowLayout = (ref, selector) => {
       ref.current.querySelectorAll(`${selector}.shrink`)
     );
 
-    const shrinkCellsWidth = shrinkCells.reduce(
-      (acc, element) => acc + element.getBoundingClientRect().width,
-      0
-    );
-
-    const normalCells = Array.from(
-      ref.current.querySelectorAll(`${selector}:not(.shrink)`)
-    );
-
     allCells.forEach((cell, index) => {
       // if it is a shrink cell, shrink cell
       if (shrinkCells.includes(cell)) {
         const value = `${cell.getBoundingClientRect().width}px`;
         resizedLayout.current[index] = value;
-      }
-
-      // if it is no custom layout, divide equally
-      else if (!layout?.custom) {
-        const percentage = 100 / normalCells.length;
-        const diff = shrinkCellsWidth / normalCells.length;
-        const value = `calc(${percentage}% - ${diff}px)`;
-        resizedLayout.current[index] = value;
-      }
-
-      // if it has custom layout
-      else {
+      } else {
         const value = `${cell.getBoundingClientRect().width}px`;
         resizedLayout.current[index] = value;
       }
