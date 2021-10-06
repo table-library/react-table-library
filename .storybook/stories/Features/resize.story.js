@@ -208,19 +208,17 @@ storiesOf('Features/Resize', module)
 
     const data = { nodes };
 
-    const resize = { offset: 48 };
-
     return (
-      <Table data={data} theme={theme}>
+      <Table data={data} theme={theme} layout={{ boxOffset: 48 }}>
         {(tableList) => (
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell resize={resize}>Task</HeaderCell>
-                <HeaderCell resize={resize}>Deadline</HeaderCell>
-                <HeaderCell resize={resize}>Type</HeaderCell>
-                <HeaderCell resize={resize}>Complete</HeaderCell>
-                <HeaderCell resize={resize}>Tasks</HeaderCell>
+                <HeaderCell resize>Task</HeaderCell>
+                <HeaderCell resize>Deadline</HeaderCell>
+                <HeaderCell resize>Type</HeaderCell>
+                <HeaderCell resize>Complete</HeaderCell>
+                <HeaderCell resize>Tasks</HeaderCell>
               </HeaderRow>
             </Header>
 

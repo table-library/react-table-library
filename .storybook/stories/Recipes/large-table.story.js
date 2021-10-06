@@ -57,6 +57,7 @@ storiesOf('Recipes/Large Tables', module)
                   itemSize={29}
                   width={width}
                   itemData={{ items: tableList }}
+                  style={{ overflowX: 'hidden' }}
                 >
                   {({ index, style, data }) => (
                     <div style={style}>

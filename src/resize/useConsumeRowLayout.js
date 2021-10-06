@@ -15,12 +15,8 @@ export const useConsumeRowLayout = (ref, selector) => {
     );
 
     allCells.forEach((cell, index) => {
-      if (index === allCells.length - 1) {
-        cell.style.maxWidth = resizedLayout.current[index];
-      } else {
-        cell.style.minWidth = resizedLayout.current[index];
-        cell.style.maxWidth = resizedLayout.current[index];
-      }
+      cell.style.minWidth = `${resizedLayout.current[index]}px`;
+      cell.style.maxWidth = `${resizedLayout.current[index]}px`;
     });
   }, [ref, layout, resizedLayout, selector]);
 };
