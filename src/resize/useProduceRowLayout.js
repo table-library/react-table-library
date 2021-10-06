@@ -35,7 +35,7 @@ export const useProduceRowLayout = (ref, selector) => {
     resizedLayout.current = allCells.map((cell) => {
       // if it is a shrink cell or custom layout, use extracted pixel
       if (shrinkCells.includes(cell) || layout?.custom) {
-        return `${cell.getBoundingClientRect().width}px`;
+        return cell.getBoundingClientRect().width;
       }
 
       // else divide equally

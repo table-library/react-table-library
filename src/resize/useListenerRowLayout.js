@@ -34,7 +34,7 @@ export const useListenerRowLayout = () => {
     const offset = layout?.boxOffset || 0;
 
     const percentage =
-      (tableWidth - shrinkCellsWidth - offset) /
+      (tableWidth - offset - shrinkCellsWidth) /
       (allCellWidths - shrinkCellsWidth);
 
     const newColumnWidths = getHeaderColumns(tableRef).map((cell) => {

@@ -85,7 +85,7 @@ storiesOf('Kitchen Sink/Slide', module)
         </Table>
         <Slide
           direction="left"
-          in={select.state.id}
+          in={!!select.state.id}
           mountOnEnter
           unmountOnExit
         >

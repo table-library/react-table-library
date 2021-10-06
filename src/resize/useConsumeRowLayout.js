@@ -9,7 +9,12 @@ import { ResizeContext } from '@table-library/react-table-library/common/context
 export const useConsumeRowLayout = (ref, selector) => {
   const { layout, resizedLayout } = React.useContext(ResizeContext);
 
+  const calledOnce = React.useRef();
+
   React.useLayoutEffect(() => {
+    if (calledOnce.current) return;
+    calledOnce.current = true;
+
     const allCells = Array.from(
       ref.current.querySelectorAll(selector)
     );
