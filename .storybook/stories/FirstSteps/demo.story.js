@@ -151,8 +151,6 @@ storiesOf('First Steps/Demo', module)
       console.log(action, state);
     }
 
-    const resize = { offset: 2 };
-
     return (
       <Table
         data={data}
@@ -161,25 +159,26 @@ storiesOf('First Steps/Demo', module)
         select={select}
         sort={sort}
         pagination={pagination}
+        layout={{ boxOffset: 2 }}
       >
         {(tableList) => (
           <>
             <Header>
               <HeaderRow>
                 <HeaderCellSelect />
-                <HeaderCellSort resize={resize} sortKey="TASK">
+                <HeaderCellSort resize sortKey="TASK">
                   Task
                 </HeaderCellSort>
-                <HeaderCellSort resize={resize} sortKey="DEADLINE">
+                <HeaderCellSort resize sortKey="DEADLINE">
                   Deadline
                 </HeaderCellSort>
-                <HeaderCellSort resize={resize} sortKey="TYPE">
+                <HeaderCellSort resize sortKey="TYPE">
                   Type
                 </HeaderCellSort>
-                <HeaderCellSort resize={resize} sortKey="COMPLETE">
+                <HeaderCellSort resize sortKey="COMPLETE">
                   Complete
                 </HeaderCellSort>
-                <HeaderCellSort resize={resize} sortKey="TASKS">
+                <HeaderCellSort resize sortKey="TASKS">
                   Tasks
                 </HeaderCellSort>
               </HeaderRow>

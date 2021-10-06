@@ -1,15 +1,22 @@
 import * as React from 'react';
 
 import * as COLORS from '@table-library/react-table-library/common/colors';
+import { ResizeContext } from '@table-library/react-table-library/common/context/Resize';
 
-const GUTTER = 8;
+const GUTTER = 6;
 
-const baseStyle = `
+const baseStyle = (layout) => `
+  ${() => {
+    /* without custom layout, every cell uses equal size */
+  }}
+  ${!layout?.custom ? 'flex: 1' : ''};
+
   display: flex;
   align-items: center;
 
   padding-top: 4px;
   padding-bottom: 4px;
+
 
   &:not(.shrink) > div {
     width: 100%;
@@ -24,7 +31,7 @@ const baseStyle = `
   }
 
   & > div {
-    padding-right: 20px;
+    padding-right: ${GUTTER}px;
     padding-left: 20px;
   }
 
@@ -35,7 +42,7 @@ const baseStyle = `
   border-right: 1px solid ${COLORS.BORDER};
 
   &:last-child {
-    border-right: 1px solid transparent;
+    border-right: 0px solid transparent;
   }
 
   &.shrink > div {
@@ -48,8 +55,8 @@ const baseStyle = `
   }
 `;
 
-const cellContainerStyle = `
-  ${baseStyle}
+const cellContainerStyle = (layout) => `
+  ${baseStyle(layout)}
 
   ${() => {
     /* #1 otherwise tree + resize would have overflow icons */
@@ -58,11 +65,15 @@ const cellContainerStyle = `
 `;
 
 const CellContainer = React.forwardRef((props, ref) => {
-  return <div {...props} css={cellContainerStyle} ref={ref} />;
+  const { layout } = React.useContext(ResizeContext);
+
+  return (
+    <div {...props} css={cellContainerStyle(layout)} ref={ref} />
+  );
 });
 
-const headerCellContainerStyle = `
-  ${baseStyle}
+const headerCellContainerStyle = (layout) => `
+  ${baseStyle(layout)}
 
   position: relative;
 
@@ -73,7 +84,15 @@ const headerCellContainerStyle = `
 `;
 
 const HeaderCellContainer = React.forwardRef((props, ref) => {
-  return <div {...props} css={headerCellContainerStyle} ref={ref} />;
+  const { layout } = React.useContext(ResizeContext);
+
+  return (
+    <div
+      {...props}
+      css={headerCellContainerStyle(layout)}
+      ref={ref}
+    />
+  );
 });
 
 export { CellContainer, HeaderCellContainer };

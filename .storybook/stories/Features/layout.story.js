@@ -139,7 +139,7 @@ storiesOf('Features/Layout', module)
       </Table>
     );
   })
-  .add('fixed space', () => {
+  .add('fixed/remaining space', () => {
     const theme = useTheme({
       BaseCell: `
         &:nth-child(1), &:nth-child(2), &:nth-child(3) {
@@ -152,61 +152,6 @@ storiesOf('Features/Layout', module)
 
         &:nth-child(5) {
           flex: 100px;
-        }
-      `,
-    });
-
-    const data = { nodes };
-
-    return (
-      <Table data={data} theme={theme} layout={{ custom: true }}>
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCell>Task</HeaderCell>
-                <HeaderCell>Deadline</HeaderCell>
-                <HeaderCell>Type</HeaderCell>
-                <HeaderCell>Complete</HeaderCell>
-                <HeaderCell>Tasks</HeaderCell>
-              </HeaderRow>
-            </Header>
-
-            <Body>
-              {tableList.map((item) => (
-                <Row key={item.id} item={item}>
-                  <Cell>{item.name}</Cell>
-                  <Cell>
-                    {item.deadline.toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: '2-digit',
-                      day: '2-digit',
-                    })}
-                  </Cell>
-                  <Cell>{item.type}</Cell>
-                  <Cell>{item.isComplete.toString()}</Cell>
-                  <Cell>{item.nodes?.length}</Cell>
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
-    );
-  })
-  .add('remaining space', () => {
-    const theme = useTheme({
-      BaseCell: `
-        &:nth-child(1), &:nth-child(2), &:nth-child(3) {
-          width: 15%;
-        }
-
-        &:nth-child(4) {
-          width: 100px;
-        }
-
-        &:nth-child(5) {
-          flex: 1;
         }
       `,
     });

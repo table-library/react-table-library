@@ -52,7 +52,13 @@ storiesOf('Features/Fixed Header', module)
               </HeaderRow>
             </Header>
 
-            <div style={{ maxHeight: '150px', overflow: 'auto' }}>
+            <div
+              style={{
+                maxHeight: '150px',
+                overflowY: 'auto',
+                overflowX: 'hidden',
+              }}
+            >
               <Body>
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>

@@ -99,7 +99,7 @@ const fillSpace = (index, columns, resizeWidth) => {
   );
 };
 
-const applyHide = (index, tableRef, resize, hides, hide) => {
+const applyHide = (index, tableRef, layout, hides, hide) => {
   const headerColumns = getHeaderColumns(tableRef);
 
   const columns = headerColumns.map((headerCell, j) => ({
@@ -122,27 +122,21 @@ const applyHide = (index, tableRef, resize, hides, hide) => {
     delete hides.current[index];
   }
 
-  const tableOffset = resize?.offset || 0;
-  const tableWidth = tableRef.current.getBoundingClientRect().width;
-
-  const columnWidthsPercentages = newColumnWidths.map(
-    (width) => `${(width / (tableWidth - tableOffset)) * 100}%`
-  );
-
-  // imperative write of all cell widths
-
   const applyWidth = (cell, i) => {
-    cell.style.width = columnWidthsPercentages[i];
+    cell.style.minWidth = `${newColumnWidths[i]}px`;
+    cell.style.maxWidth = `${newColumnWidths[i]}px`;
   };
 
   applyToHeaderColumns(tableRef, applyWidth);
   applyToColumns(tableRef, applyWidth);
 
-  return columnWidthsPercentages;
+  return newColumnWidths;
 };
 
-export const useLayoutHide = (index, resize, hide) => {
-  const { resizedLayout, tableRef } = React.useContext(ResizeContext);
+export const useLayoutHide = (index, hide) => {
+  const { resizedLayout, tableRef, layout } = React.useContext(
+    ResizeContext
+  );
 
   const mounted = React.useRef(false);
   const previousHide = React.useRef();
@@ -155,7 +149,7 @@ export const useLayoutHide = (index, resize, hide) => {
       resizedLayout.current = applyHide(
         index,
         tableRef,
-        resize,
+        layout,
         hides,
         hide
       );
@@ -163,5 +157,5 @@ export const useLayoutHide = (index, resize, hide) => {
 
     mounted.current = true;
     previousHide.current = hide;
-  }, [index, hide, resizedLayout, tableRef, resize]);
+  }, [index, hide, resizedLayout, tableRef, layout]);
 };

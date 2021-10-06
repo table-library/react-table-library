@@ -5,8 +5,9 @@ import cs from 'classnames';
 import { HeaderRowContainer } from '@table-library/react-table-library/common/components/Row';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
 
-import { useProduceRowLayout } from './useProduceRowLayout';
-import { useConsumeRowLayout } from './useConsumeRowLayout';
+import { useProduceRowLayout } from '@table-library/react-table-library/resize/useProduceRowLayout';
+import { useConsumeRowLayout } from '@table-library/react-table-library/resize/useConsumeRowLayout';
+import { useListenerRowLayout } from '@table-library/react-table-library/resize/useListenerRowLayout';
 
 const HeaderRow = ({ className, disabled, children }) => {
   const theme = React.useContext(ThemeContext);
@@ -14,6 +15,7 @@ const HeaderRow = ({ className, disabled, children }) => {
   const ref = React.useRef();
   useProduceRowLayout(ref, '.th');
   useConsumeRowLayout(ref, '.th');
+  useListenerRowLayout(ref, '.th');
 
   return (
     <HeaderRowContainer

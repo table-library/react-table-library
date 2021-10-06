@@ -8,7 +8,7 @@ import {
   applyToColumns,
 } from './util';
 
-const applyResize = (index, tableRef, resize, resizeWidth) => {
+const applyResize = (index, tableRef, layout, resizeWidth) => {
   const headerColumns = getHeaderColumns(tableRef);
 
   const columns = headerColumns.map((headerCell, j) => ({
@@ -51,27 +51,28 @@ const applyResize = (index, tableRef, resize, resizeWidth) => {
     return column.width;
   });
 
-  const tableOffset = resize?.offset || 0;
-  const tableWidth = tableRef.current.getBoundingClientRect().width;
-
-  const columnWidthsPercentages = newColumnWidths.map(
-    (width) => `${(width / (tableWidth - tableOffset)) * 100}%`
-  );
-
   // imperative write of all cell widths
 
-  const applyWidth = (cell, i) => {
-    cell.style.width = columnWidthsPercentages[i];
+  const applyWidth = (cell, i, size) => {
+    if (i === size - 1) {
+      cell.style.minWidth = `${newColumnWidths[i]}px`;
+      cell.style.maxWidth = `${newColumnWidths[i]}px`;
+    } else {
+      cell.style.minWidth = `${newColumnWidths[i]}px`;
+      cell.style.maxWidth = `${newColumnWidths[i]}px`;
+    }
   };
 
   applyToHeaderColumns(tableRef, applyWidth);
   applyToColumns(tableRef, applyWidth);
 
-  return columnWidthsPercentages;
+  return newColumnWidths;
 };
 
-export const useResize = (cellRef, index, resize) => {
-  const { resizedLayout, tableRef } = React.useContext(ResizeContext);
+export const useResize = (cellRef, index) => {
+  const { resizedLayout, tableRef, layout } = React.useContext(
+    ResizeContext
+  );
 
   const resizeRef = React.useRef();
 
@@ -98,12 +99,12 @@ export const useResize = (cellRef, index, resize) => {
         resizedLayout.current = applyResize(
           index,
           tableRef,
-          resize,
+          layout,
           resizeWidth
         );
       }
     },
-    [index, resize, resizedLayout, tableRef]
+    [index, layout, resizedLayout, tableRef]
   );
 
   const onMouseUp = React.useCallback(() => {

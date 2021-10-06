@@ -23,10 +23,10 @@ const HeaderCell = ({
   const theme = React.useContext(ThemeContext);
 
   const cellRef = React.useRef();
-  useLayoutHide(index, resize, hide);
+  useLayoutHide(index, hide);
   useStyleHide(cellRef, hide);
 
-  const { resizeRef } = useResize(cellRef, index, resize);
+  const { resizeRef } = useResize(cellRef, index);
 
   return (
     <HeaderCellContainer
@@ -58,7 +58,6 @@ HeaderCell.propTypes = {
     PropTypes.bool,
     PropTypes.shape({
       minWidth: PropTypes.number,
-      offset: PropTypes.number,
     }),
   ]),
   children: PropTypes.oneOfType([
