@@ -14,6 +14,8 @@ export const useListenerRowLayout = () => {
   );
 
   const updateCells = React.useCallback(() => {
+    if (!tableRef.current) return;
+
     const tableWidth = tableRef.current.getBoundingClientRect().width;
     const allCellWidths = getHeaderColumns(tableRef).reduce(
       (s, v) => s + v.getBoundingClientRect().width,

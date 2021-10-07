@@ -1,6 +1,6 @@
 {
   "name": "@table-library/react-table-library",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "description": "react-table-library",
   "main": "lib/main.js",
   "peerDependencies": {
