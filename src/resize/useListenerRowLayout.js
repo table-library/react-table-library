@@ -58,13 +58,13 @@ export const useListenerRowLayout = () => {
     resizedLayout.current = newColumnWidths;
   }, [layout?.boxOffset, resizedLayout, tableRef]);
 
-  React.useEffect(() => {
-    if (!ResizeObserver) {
+  React.useLayoutEffect(() => {
+    if (!('ResizeObserver' in window)) {
       window.addEventListener('resize', updateCells);
     }
 
     return () => {
-      if (!ResizeObserver) {
+      if (!('ResizeObserver' in window)) {
         window.removeEventListener('resize', updateCells);
       }
     };
@@ -72,16 +72,15 @@ export const useListenerRowLayout = () => {
 
   const observer = React.useRef();
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     const { current } = tableRef;
-
-    if (ResizeObserver) {
+    if ('ResizeObserver' in window && current) {
       observer.current = new ResizeObserver(updateCells);
       observer.current.observe(current);
     }
 
     return () => {
-      if (ResizeObserver) {
+      if ('ResizeObserver' in window && current) {
         observer.current.unobserve(current);
       }
     };
