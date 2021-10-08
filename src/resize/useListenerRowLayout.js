@@ -59,30 +59,39 @@ export const useListenerRowLayout = () => {
   }, [layout?.boxOffset, resizedLayout, tableRef]);
 
   React.useLayoutEffect(() => {
-    if (!('ResizeObserver' in window)) {
-      window.addEventListener('resize', updateCells);
-    }
+    window.addEventListener('resize', updateCells);
 
     return () => {
-      if (!('ResizeObserver' in window)) {
-        window.removeEventListener('resize', updateCells);
-      }
+      window.removeEventListener('resize', updateCells);
     };
   }, [layout?.responsive, updateCells]);
 
   const observer = React.useRef();
 
+  const doObserve = React.useCallback(
+    async (current) => {
+      if ('ResizeObserver' in window === false) {
+        // Loads polyfill asynchronously, only if required.
+        const module = await import('@juggle/resize-observer');
+        window.ResizeObserver = module.ResizeObserver;
+      }
+
+      observer.current = new ResizeObserver(updateCells);
+
+      if (current) observer.current.observe(current);
+    },
+    [updateCells]
+  );
+
   React.useLayoutEffect(() => {
     const { current } = tableRef;
-    if ('ResizeObserver' in window && current) {
-      observer.current = new ResizeObserver(updateCells);
-      observer.current.observe(current);
-    }
+
+    doObserve(current);
 
     return () => {
-      if ('ResizeObserver' in window && current) {
+      if (observer.current && current) {
         observer.current.unobserve(current);
       }
     };
-  }, [layout?.responsive, tableRef, updateCells]);
+  }, [doObserve, layout, tableRef, updateCells]);
 };
