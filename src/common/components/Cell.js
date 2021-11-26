@@ -1,23 +1,10 @@
 import * as React from 'react';
 
 import * as COLORS from '@table-library/react-table-library/common/colors';
-import { ResizeContext } from '@table-library/react-table-library/common/context/Resize';
 
 const GUTTER = 6;
 
-const baseStyle = (layout) => `
-  ${() => {
-    /* without custom layout, every cell uses equal size */
-  }}
-  ${
-    !layout?.custom &&
-    `
-      &:not(.shrink) {
-        flex: 1;
-      }
-    `
-  };
-
+const BASE_STYLE = `
   display: flex;
   align-items: center;
 
@@ -62,25 +49,22 @@ const baseStyle = (layout) => `
   }
 `;
 
-const cellContainerStyle = (layout) => `
-  ${baseStyle(layout)}
+const CELL_CONTAINER_STYLE = () => `
+  ${BASE_STYLE}
 
   ${() => {
-    /* #1 otherwise tree + resize would have overflow icons */
+    /* #1 */
+    // otherwise tree + resize would have overflow icons */
   }}
   background-color: inherit;
 `;
 
 const CellContainer = React.forwardRef((props, ref) => {
-  const { layout } = React.useContext(ResizeContext);
-
-  return (
-    <div {...props} css={cellContainerStyle(layout)} ref={ref} />
-  );
+  return <div {...props} css={CELL_CONTAINER_STYLE} ref={ref} />;
 });
 
-const headerCellContainerStyle = (layout) => `
-  ${baseStyle(layout)}
+const HEADER_CELL_CONTAINER_STYLE = `
+  ${BASE_STYLE}
 
   position: relative;
 
@@ -91,14 +75,8 @@ const headerCellContainerStyle = (layout) => `
 `;
 
 const HeaderCellContainer = React.forwardRef((props, ref) => {
-  const { layout } = React.useContext(ResizeContext);
-
   return (
-    <div
-      {...props}
-      css={headerCellContainerStyle(layout)}
-      ref={ref}
-    />
+    <div {...props} css={HEADER_CELL_CONTAINER_STYLE} ref={ref} />
   );
 });
 

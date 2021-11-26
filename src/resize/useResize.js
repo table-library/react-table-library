@@ -55,11 +55,9 @@ const applyResize = (index, tableRef, layout, resizeWidth) => {
 
   const applyWidth = (cell, i, size) => {
     if (i === size - 1) {
-      cell.style.minWidth = `${newColumnWidths[i]}px`;
-      cell.style.maxWidth = `${newColumnWidths[i]}px`;
+      cell.style.width = `${newColumnWidths[i]}px`;
     } else {
-      cell.style.minWidth = `${newColumnWidths[i]}px`;
-      cell.style.maxWidth = `${newColumnWidths[i]}px`;
+      cell.style.width = `${newColumnWidths[i]}px`;
     }
   };
 

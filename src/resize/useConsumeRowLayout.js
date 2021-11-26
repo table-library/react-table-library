@@ -22,7 +22,7 @@ export const useConsumeRowLayout = (ref, selector) => {
     allCells.forEach((cell, index) => {
       if (resizedLayout.current[index] === null) return;
 
-      cell.style.width = `${resizedLayout.current[index]}px`;
+      cell.style.width = resizedLayout.current[index];
     });
   }, [ref, layout, resizedLayout, selector]);
 };

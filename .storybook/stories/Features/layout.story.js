@@ -39,7 +39,7 @@ storiesOf('Features/Layout', module)
         }
 
         &:nth-child(5) {
-          width: 10%;
+          width: 20%;
         }
       `,
     });
@@ -90,11 +90,11 @@ storiesOf('Features/Layout', module)
         }
 
         &.deadline, &.type, &.complete {
-          width: 15%;
+          width: 10%;
         }
 
         &.tasks {
-          width: 20%;
+          width: 35%;
         }
       `,
     });
