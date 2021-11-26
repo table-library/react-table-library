@@ -79,9 +79,30 @@ storiesOf('Recipes/Controlled', module)
 
     const data = { nodes };
 
-    const sort = useSort(data, {
-      onChange: onSortChange,
-    });
+    const sort = useSort(
+      data,
+      {
+        onChange: onSortChange,
+      },
+      {
+        sortFns: {
+          NONE: (array) => array,
+          TASK: (array) =>
+            array.sort((a, b) => a.name.localeCompare(b.name)),
+          DEADLINE: (array) =>
+            array.sort((a, b) => a.deadline - b.deadline),
+          TYPE: (array) =>
+            array.sort((a, b) => a.type.localeCompare(b.type)),
+          COMPLETE: (array) =>
+            array.sort((a, b) => a.isComplete - b.isComplete),
+          TASKS: (array) =>
+            array.sort(
+              (a, b) =>
+                (a.nodes || []).length - (b.nodes || []).length
+            ),
+        },
+      }
+    );
 
     function onSortChange(action, state) {
       console.log(action, state);
@@ -113,7 +134,6 @@ storiesOf('Recipes/Controlled', module)
                       <HeaderCellSort
                         key={key}
                         sortKey={SORTS[key].sortKey}
-                        sortFn={SORTS[key].sortFn}
                       >
                         {SORTS[key].label}
                       </HeaderCellSort>
