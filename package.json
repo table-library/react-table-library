@@ -1,6 +1,6 @@
 {
   "name": "@table-library/react-table-library",
-  "version": "1.11.0-beta.0",
+  "version": "1.11.0-beta.1",
   "description": "react-table-library",
   "main": "lib/main.js",
   "peerDependencies": {
@@ -87,6 +87,7 @@
     "check": "npm run test && npm run prettier:check && npm run lint:check",
     "copypackage": "cp -rf package.json lib",
     "dist": "npm run check && npm run library:build && cd lib && npm publish",
+    "dist:beta": "npm run check && npm run library:build && cd lib && npm publish --tag beta",
     "prepublishOnly": "echo \"Warning: Don't run 'npm publish' in root. Use 'npm run dist' instead.\" && exit 0"
   },
   "husky": {

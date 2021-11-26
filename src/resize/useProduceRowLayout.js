@@ -45,6 +45,8 @@ export const useProduceRowLayout = (ref, selector) => {
 
         return `calc(${percentage}% - ${diff}px)`;
       }
+
+      return null;
     });
   }, [layout, ref, resizedLayout, selector]);
 };
