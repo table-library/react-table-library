@@ -27,22 +27,24 @@ export const useProduceRowLayout = (ref, selector) => {
       ref.current.querySelectorAll(`${selector}:not(.shrink)`)
     );
 
-    const tableWidth = allCells.reduce(
-      (sum, cell) => sum + cell.getBoundingClientRect().width,
-      0
-    );
-
-    resizedLayout.current = allCells.map((cell) => {
-      // if it is a shrink cell or custom layout, use extracted pixel
-      if (shrinkCells.includes(cell) || layout?.custom) {
-        return cell.getBoundingClientRect().width;
+    resizedLayout.current = allCells.map((cell, index) => {
+      // if it has been resized, take resize layout
+      if (resizedLayout.current?.[index]) {
+        return resizedLayout.current[index];
       }
 
-      // else divide equally
-      const offset = layout?.boxOffset || 0;
-      const width = (tableWidth - offset) / normalCells.length;
-      const diff = shrinkCellsWidth / normalCells.length;
-      return width - diff;
+      // if it is a shrink cell, shrink cell
+      if (shrinkCells.includes(cell)) {
+        return `${cell.getBoundingClientRect().width}px`;
+      }
+
+      // if it is no custom layout, divide equally
+      if (!layout?.custom) {
+        const percentage = 100 / normalCells.length;
+        const diff = shrinkCellsWidth / normalCells.length;
+
+        return `calc(${percentage}% - ${diff}px)`;
+      }
     });
   }, [layout, ref, resizedLayout, selector]);
 };

@@ -89,12 +89,12 @@ storiesOf('Features/Layout', module)
           width: 35%;
         }
 
-        &.deadline, .type, .complete {
+        &.deadline, &.type, &.complete {
           width: 15%;
         }
 
         &.tasks {
-          width: 10%;
+          width: 20%;
         }
       `,
     });

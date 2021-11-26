@@ -9,7 +9,14 @@ const baseStyle = (layout) => `
   ${() => {
     /* without custom layout, every cell uses equal size */
   }}
-  ${!layout?.custom ? 'flex: 1' : ''};
+  ${
+    !layout?.custom &&
+    `
+      &:not(.shrink) {
+        flex: 1;
+      }
+    `
+  };
 
   display: flex;
   align-items: center;

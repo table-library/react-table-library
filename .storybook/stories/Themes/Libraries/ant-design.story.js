@@ -65,11 +65,11 @@ storiesOf('Library Themes/Ant Design', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell>Task</HeaderCell>
-                <HeaderCell>Deadline</HeaderCell>
-                <HeaderCell>Type</HeaderCell>
-                <HeaderCell>Complete</HeaderCell>
-                <HeaderCell>Tasks</HeaderCell>
+                <HeaderCell resize>Task</HeaderCell>
+                <HeaderCell resize>Deadline</HeaderCell>
+                <HeaderCell resize>Type</HeaderCell>
+                <HeaderCell resize>Complete</HeaderCell>
+                <HeaderCell resize>Tasks</HeaderCell>
               </HeaderRow>
             </Header>
 

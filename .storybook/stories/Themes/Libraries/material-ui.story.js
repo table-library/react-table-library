@@ -156,15 +156,21 @@ storiesOf('Library Themes/Material UI', module)
                     onChange={select.fns.onToggleAll}
                   />
                 </HeaderCell>
-                <HeaderCellSort sortKey="TASK">Task</HeaderCellSort>
-                <HeaderCellSort sortKey="DEADLINE">
+                <HeaderCellSort resize sortKey="TASK">
+                  Task
+                </HeaderCellSort>
+                <HeaderCellSort resize sortKey="DEADLINE">
                   Deadline
                 </HeaderCellSort>
-                <HeaderCellSort sortKey="TYPE">Type</HeaderCellSort>
-                <HeaderCellSort sortKey="COMPLETE">
+                <HeaderCellSort resize sortKey="TYPE">
+                  Type
+                </HeaderCellSort>
+                <HeaderCellSort resize sortKey="COMPLETE">
                   Complete
                 </HeaderCellSort>
-                <HeaderCellSort sortKey="TASKS">Tasks</HeaderCellSort>
+                <HeaderCellSort resize sortKey="TASKS">
+                  Tasks
+                </HeaderCellSort>
               </HeaderRow>
             </Header>
 

@@ -1,12 +1,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-const style = `
-  overflow-x: hidden;
-`;
-
 const Body = ({ children }) => {
-  return <div css={style}>{children}</div>;
+  return <div>{children}</div>;
 };
 
 Body.propTypes = {

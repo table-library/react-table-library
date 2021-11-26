@@ -12,6 +12,7 @@ import {
   HeaderCell,
   Cell,
 } from '@table-library/react-table-library/table';
+import { useTheme } from '@table-library/react-table-library/theme';
 
 import { nodes } from '../data';
 
@@ -38,27 +39,27 @@ storiesOf('Features/Fixed Header', module)
   .add('base', () => {
     const data = { nodes };
 
-    return (
-      <Table data={data}>
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCell>Task</HeaderCell>
-                <HeaderCell>Deadline</HeaderCell>
-                <HeaderCell>Type</HeaderCell>
-                <HeaderCell>Complete</HeaderCell>
-                <HeaderCell>Tasks</HeaderCell>
-              </HeaderRow>
-            </Header>
+    const theme = useTheme({
+      Table: `
+        height: 100%;
+      `,
+    });
 
-            <div
-              style={{
-                maxHeight: '150px',
-                overflowY: 'auto',
-                overflowX: 'hidden',
-              }}
-            >
+    return (
+      <div style={{ height: '150px' }}>
+        <Table data={data} theme={theme}>
+          {(tableList) => (
+            <>
+              <Header>
+                <HeaderRow>
+                  <HeaderCell>Task</HeaderCell>
+                  <HeaderCell>Deadline</HeaderCell>
+                  <HeaderCell>Type</HeaderCell>
+                  <HeaderCell>Complete</HeaderCell>
+                  <HeaderCell>Tasks</HeaderCell>
+                </HeaderRow>
+              </Header>
+
               <Body>
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
@@ -76,9 +77,9 @@ storiesOf('Features/Fixed Header', module)
                   </Row>
                 ))}
               </Body>
-            </div>
-          </>
-        )}
-      </Table>
+            </>
+          )}
+        </Table>
+      </div>
     );
   });
