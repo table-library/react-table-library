@@ -1,0 +1,1 @@
+{"version":3,"file":"isLeaf-8680e1ca.js","sources":["../src/common/util/tree/isLeaf.js"],"sourcesContent":["export const isLeaf = (node) => !node.nodes;\n"],"names":["isLeaf","node","nodes"],"mappings":"IAAaA,EAAS,SAACC,UAAUA,EAAKC"}

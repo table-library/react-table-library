@@ -1,0 +1,1 @@
+{"version":3,"file":"Tree-d9a33a63.js","sources":["../src/common/context/Tree.js"],"sourcesContent":["import * as React from 'react';\n\nconst TreeContext = React.createContext({});\n\nexport { TreeContext };\n"],"names":["TreeContext","React","createContext"],"mappings":"4BAEMA,EAAcC,EAAMC,cAAc"}
