@@ -130,7 +130,7 @@ storiesOf('Misc/Cell', module)
       </Table>
     );
   })
-  .add('cell tabbable', () => {
+  .add('cell tab navigation', () => {
     const data = { nodes };
 
     const theme = useTheme({
@@ -161,8 +161,8 @@ storiesOf('Misc/Cell', module)
               {tableList.map((item, index) => (
                 <Row key={item.id} item={item}>
                   <Cell
-                    ariaColindex={0 + index * 5}
-                    tabIndex={0 + index * 5}
+                    ariaColindex={1 + index * 5}
+                    tabIndex={1 + index * 5}
                     onClick={(event) =>
                       console.log('Click Cell', event)
                     }
@@ -170,8 +170,8 @@ storiesOf('Misc/Cell', module)
                     {item.name}
                   </Cell>
                   <Cell
-                    ariaColindex={1 + index * 5}
-                    tabIndex={1 + index * 5}
+                    ariaColindex={2 + index * 5}
+                    tabIndex={2 + index * 5}
                   >
                     {item.deadline.toLocaleDateString('en-US', {
                       year: 'numeric',
@@ -180,20 +180,20 @@ storiesOf('Misc/Cell', module)
                     })}
                   </Cell>
                   <Cell
-                    ariaColindex={2 + index * 5}
-                    tabIndex={2 + index * 5}
+                    ariaColindex={3 + index * 5}
+                    tabIndex={3 + index * 5}
                   >
                     {item.type}
                   </Cell>
                   <Cell
-                    ariaColindex={3 + index * 5}
-                    tabIndex={3 + index * 5}
+                    ariaColindex={4 + index * 5}
+                    tabIndex={4 + index * 5}
                   >
                     {item.isComplete.toString()}
                   </Cell>
                   <Cell
-                    ariaColindex={4 + index * 5}
-                    tabIndex={4 + index * 5}
+                    ariaColindex={5 + index * 5}
+                    tabIndex={5 + index * 5}
                   >
                     {item.nodes?.length}
                   </Cell>

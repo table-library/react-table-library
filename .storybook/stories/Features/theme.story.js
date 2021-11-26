@@ -93,21 +93,30 @@ storiesOf('Features/Theme', module)
       </Table>
     );
   })
-  .add('Grey Wolf', () => {
+  .add('Chess Board', () => {
     const theme = useTheme({
-      BaseRow: `
-        font-size: 14px;
-      `,
-      HeaderRow: `
-        background-color: #fafafa;
+      BaseCell: `
+        border-right: 1px solid transparent;
       `,
       Row: `
         &:nth-child(odd) {
-          background-color: #f5f5f5;
+          .td:nth-child(even) {
+            background-color: #dddddd;
+          }
+
+          .td:nth-child(odd) {
+            background-color: #fafafa;
+          }
         }
 
         &:nth-child(even) {
-          background-color: #fafafa;
+          .td:nth-child(odd) {
+            background-color: #dddddd;
+          }
+
+          .td:nth-child(even) {
+            background-color: #fafafa;
+          }
         }
       `,
     });

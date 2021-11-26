@@ -101,7 +101,6 @@ storiesOf('Server/Expand', module)
                 <HeaderCell>Deadline</HeaderCell>
                 <HeaderCell>Type</HeaderCell>
                 <HeaderCell>Complete</HeaderCell>
-                <HeaderCell>Tasks</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -119,11 +118,26 @@ storiesOf('Server/Expand', module)
                     </Cell>
                     <Cell>{item.type}</Cell>
                     <Cell>{item.isComplete.toString()}</Cell>
-                    <Cell>{item.nodes?.length}</Cell>
                   </Row>
 
                   {ids.includes(item.id) && (
-                    <strong>{JSON.stringify(item.nodes)}</strong>
+                    <div
+                      style={{
+                        backgroundColor: '#e0e0e0',
+                      }}
+                    >
+                      <strong>Tasks: {item.nodes.length}</strong>
+                      <ul
+                        style={{
+                          margin: '0',
+                          padding: '0',
+                        }}
+                      >
+                        {item.nodes.map((node) => (
+                          <li key={node.id}>{node.name}</li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
                 </React.Fragment>
               ))}
