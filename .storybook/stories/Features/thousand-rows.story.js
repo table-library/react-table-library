@@ -43,7 +43,7 @@ const WithStickyHeader = React.forwardRef(
         </HeaderRow>
       </Header>
 
-      {children}
+      <Body>{children}</Body>
     </div>
   )
 );
