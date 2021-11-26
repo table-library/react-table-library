@@ -33,6 +33,7 @@ storiesOf('Library Themes/Chakra UI', module)
 
     const theme = useTheme({
       Table: `
+        margin: 20px;
         padding: 12px;
 
         border-radius: 12px;

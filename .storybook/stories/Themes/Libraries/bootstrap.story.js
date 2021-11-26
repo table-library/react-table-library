@@ -32,6 +32,9 @@ storiesOf('Library Themes/Bootstrap UI', module)
     const data = { nodes };
 
     const theme = useTheme({
+      Table: `
+        margin: 20px;
+      `,
       BaseRow: `
         color: #212529;
 

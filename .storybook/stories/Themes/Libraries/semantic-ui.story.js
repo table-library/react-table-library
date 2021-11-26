@@ -33,6 +33,7 @@ storiesOf('Library Themes/Semantic UI', module)
 
     const theme = useTheme({
       Table: `
+        margin: 20px;
         border-radius: 4px;
         border: 1px solid #e3e4e5;
       `,

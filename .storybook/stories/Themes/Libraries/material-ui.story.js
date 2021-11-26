@@ -48,6 +48,7 @@ storiesOf('Library Themes/Material UI', module)
 
     const theme = useTheme({
       Table: `
+        margin: 20px;
         border-radius: 4px;
         border: 1px solid #e0e0e0;
       `,

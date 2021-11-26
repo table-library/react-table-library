@@ -2,6 +2,7 @@ import * as React from 'react';
 import 'loki/configure-react';
 
 export const parameters = {
+  layout: 'fullscreen',
   options: {
     storySort: {
       method: 'alphabetical',
@@ -25,6 +26,7 @@ export const parameters = {
           'Expand',
           'Pagination',
           'Fixed Header',
+          'Ten Thousand Rows',
           'Column Hiding',
           'Column Ordering',
           'Column Grouping (WIP)',
@@ -36,7 +38,7 @@ export const parameters = {
         'Product Themes',
         ['Google Drive (WIP)', 'Stripe (WIP)'],
         'Recipes',
-        ['Controlled', 'Large Tables'],
+        ['Controlled'],
         'Server',
         [
           'Table',
@@ -67,8 +69,14 @@ export const parameters = {
 
 export const decorators = [
   (Story) => (
-    <>
+    <div
+      style={{
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <Story />
-    </>
+    </div>
   ),
 ];

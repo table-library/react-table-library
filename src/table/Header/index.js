@@ -6,6 +6,7 @@ import { ThemeContext } from '@table-library/react-table-library/common/context/
 const headerRow = `
   position: sticky;
   top: 0;
+  z-index: 3;
 `;
 
 const Header = ({ children }) => {
