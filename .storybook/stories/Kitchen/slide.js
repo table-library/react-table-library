@@ -21,15 +21,6 @@ import { nodes } from '../data';
 
 storiesOf('Kitchen Sink/Slide', module)
   .addParameters({ component: Table })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ))
   .add('base', () => {
     const data = { nodes };
 
@@ -107,4 +98,13 @@ storiesOf('Kitchen Sink/Slide', module)
         </Slide>
       </div>
     );
-  });
+  })
+  .add('documentation', () => (
+    <ul>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
+  ));

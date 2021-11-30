@@ -35,15 +35,6 @@ import { nodes } from '../data';
 
 storiesOf('First Steps/Demo', module)
   .addParameters({ component: Table })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ))
   .add('Client-Side', () => {
     const data = {
       nodes,
@@ -500,4 +491,13 @@ storiesOf('First Steps/Demo', module)
         </div>
       </>
     );
-  });
+  })
+  .add('documentation', () => (
+    <ul>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
+  ));

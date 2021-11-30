@@ -17,15 +17,6 @@ import { getData } from '../../server';
 
 storiesOf('Server/Table', module)
   .addParameters({ component: Table })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ))
   .add('read', () => {
     const [data, setData] = React.useState({
       nodes: [],
@@ -83,4 +74,13 @@ storiesOf('Server/Table', module)
   })
   .add('update (WIP)', () => {
     return <div>dat fetching</div>;
-  });
+  })
+  .add('documentation', () => (
+    <ul>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
+  ));

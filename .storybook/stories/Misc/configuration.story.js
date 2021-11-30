@@ -17,6 +17,9 @@ import { nodes } from '../data';
 
 storiesOf('Misc/Configuration (WIP)', module)
   .addParameters({ component: Table })
+  .add('base', () => {
+    return <div>IP</div>;
+  })
   .add('documentation', () => (
     <ul>
       <li>
@@ -25,7 +28,4 @@ storiesOf('Misc/Configuration (WIP)', module)
         </a>
       </li>
     </ul>
-  ))
-  .add('base', () => {
-    return <div>IP</div>;
-  });
+  ));

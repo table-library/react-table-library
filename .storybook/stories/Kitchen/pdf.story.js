@@ -19,24 +19,6 @@ import { nodes } from '../data';
 
 storiesOf('Kitchen Sink/PDF Download', module)
   .addParameters({ component: Table })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.robinwieruch.de/react-component-to-pdf"
-        >
-          Tutorial
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ))
   .add('base', () => {
     const data = { nodes };
 
@@ -100,4 +82,22 @@ storiesOf('Kitchen Sink/PDF Download', module)
         </div>
       </>
     );
-  });
+  })
+  .add('documentation', () => (
+    <ul>
+      <li>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.robinwieruch.de/react-component-to-pdf"
+        >
+          Tutorial
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
+  ));

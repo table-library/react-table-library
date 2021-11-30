@@ -18,24 +18,6 @@ import { nodes } from '../data';
 
 storiesOf('Features/Fixed Header', module)
   .addParameters({ component: Table })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.robinwieruch.de/react-table-fixed-header"
-        >
-          Tutorial
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ))
   .add('height', () => {
     const data = { nodes };
 
@@ -203,4 +185,22 @@ storiesOf('Features/Fixed Header', module)
         </div>
       </>
     );
-  });
+  })
+  .add('documentation', () => (
+    <ul>
+      <li>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.robinwieruch.de/react-table-fixed-header"
+        >
+          Tutorial
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
+  ));

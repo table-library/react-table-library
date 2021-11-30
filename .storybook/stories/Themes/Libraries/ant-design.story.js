@@ -19,15 +19,6 @@ import { nodes } from '../../data';
 
 storiesOf('Library Themes/Ant Design', module)
   .addParameters({ component: Table })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ))
   .add('base', () => {
     const data = { nodes };
 
@@ -97,4 +88,13 @@ storiesOf('Library Themes/Ant Design', module)
         )}
       </Table>
     );
-  });
+  })
+  .add('documentation', () => (
+    <ul>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
+  ));

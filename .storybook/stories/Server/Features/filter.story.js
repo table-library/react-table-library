@@ -18,15 +18,6 @@ import { getData } from '../../server';
 
 storiesOf('Server/Filter', module)
   .addParameters({ component: Table })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ))
   .add('base', () => {
     const initialFilters = ['SETUP', 'LEARN'];
 
@@ -229,4 +220,13 @@ storiesOf('Server/Filter', module)
         </Table>
       </>
     );
-  });
+  })
+  .add('documentation', () => (
+    <ul>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
+  ));

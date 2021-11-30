@@ -19,15 +19,6 @@ import { getData } from '../../server';
 
 storiesOf('Server/Pagination', module)
   .addParameters({ component: Table })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ))
   .add('base', () => {
     const LIMIT = 2;
 
@@ -421,4 +412,13 @@ storiesOf('Server/Pagination', module)
         )}
       </>
     );
-  });
+  })
+  .add('documentation', () => (
+    <ul>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
+  ));

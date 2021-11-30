@@ -18,15 +18,6 @@ import { nodes } from '../data';
 
 storiesOf('Features/Layout', module)
   .addParameters({ component: Table })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ))
   .add('nth-child', () => {
     const theme = useTheme({
       BaseCell: `
@@ -193,4 +184,13 @@ storiesOf('Features/Layout', module)
         )}
       </Table>
     );
-  });
+  })
+  .add('documentation', () => (
+    <ul>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
+  ));

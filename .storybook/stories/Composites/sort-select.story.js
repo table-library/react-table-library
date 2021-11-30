@@ -27,15 +27,6 @@ import { nodes } from '../data';
 
 storiesOf('Composites/Sort & Select (WIP)', module)
   .addParameters({ component: Table })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ))
   .add('base', () => {
     const data = { nodes };
 
@@ -116,4 +107,13 @@ storiesOf('Composites/Sort & Select (WIP)', module)
         )}
       </Table>
     );
-  });
+  })
+  .add('documentation', () => (
+    <ul>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
+  ));

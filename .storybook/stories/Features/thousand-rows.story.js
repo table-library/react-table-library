@@ -50,15 +50,6 @@ const WithStickyHeader = React.forwardRef(
 
 storiesOf('Features/Ten Thousand Rows', module)
   .addParameters({ component: Table })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ))
   .add('large list', () => {
     const data = { nodes: manyNodes };
 
@@ -192,4 +183,13 @@ storiesOf('Features/Ten Thousand Rows', module)
         </Table>
       </div>
     );
-  });
+  })
+  .add('documentation', () => (
+    <ul>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
+  ));

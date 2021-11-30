@@ -17,15 +17,6 @@ import { getData } from '../../server';
 
 storiesOf('Server/Fetch', module)
   .addParameters({ component: Table })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ))
   .add('base', () => {
     const [data, setData] = React.useState({
       nodes: [],
@@ -198,4 +189,13 @@ storiesOf('Server/Fetch', module)
         )}
       </Table>
     );
-  });
+  })
+  .add('documentation', () => (
+    <ul>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
+  ));

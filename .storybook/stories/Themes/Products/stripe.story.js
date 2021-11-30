@@ -5,6 +5,9 @@ import { storiesOf } from '@storybook/react';
 
 storiesOf('Product Themes/Stripe (WIP)', module)
   // .addParameters({ component: Table })
+  .add('base', () => {
+    return <div>WIP</div>;
+  })
   .add('documentation', () => (
     <ul>
       <li>
@@ -13,7 +16,4 @@ storiesOf('Product Themes/Stripe (WIP)', module)
         </a>
       </li>
     </ul>
-  ))
-  .add('base', () => {
-    return <div>WIP</div>;
-  });
+  ));

@@ -5,6 +5,9 @@ import { storiesOf } from '@storybook/react';
 
 storiesOf('Server/Infinite Scroll (WIP)', module)
   // .addParameters({ component: Table })
+  .add('base', () => {
+    return <div>WIP</div>;
+  })
   .add('documentation', () => (
     <ul>
       <li>
@@ -13,7 +16,4 @@ storiesOf('Server/Infinite Scroll (WIP)', module)
         </a>
       </li>
     </ul>
-  ))
-  .add('base', () => {
-    return <div>WIP</div>;
-  });
+  ));

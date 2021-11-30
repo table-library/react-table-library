@@ -19,15 +19,6 @@ import { getData } from '../../server';
 
 storiesOf('Server Recipes/Hybrid', module)
   .addParameters({ component: Table })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ))
   .add('base', () => {
     const [data, setData] = React.useState({
       nodes: [],
@@ -135,4 +126,13 @@ storiesOf('Server Recipes/Hybrid', module)
         </Table>
       </>
     );
-  });
+  })
+  .add('documentation', () => (
+    <ul>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
+  ));
