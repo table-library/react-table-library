@@ -1,1 +1,0 @@
-{"version":3,"file":"Sort-e479fef8.js","sources":["../src/common/context/Sort.js"],"sourcesContent":["import * as React from 'react';\n\nconst SortContext = React.createContext({});\n\nexport { SortContext };\n"],"names":["SortContext","React","createContext"],"mappings":"4BAEMA,EAAcC,EAAMC,cAAc"}
