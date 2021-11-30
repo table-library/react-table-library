@@ -62,6 +62,7 @@ In 2020, [Robin Wieruch](https://www.robinwieruch.de) created React Table Librar
 [twitter]: https://twitter.com/intent/tweet?text=Check%20out%20react-table-library%20by%20%40rwieruch%20https%3A%2F%2Fgithub.com%2Ftable-library%2Freact-table-library%20%F0%9F%91%8D
 [twitter-badge]: https://img.shields.io/twitter/url/https/github.com/table-library/react-table-library.svg?style=social
 [size-badge]: https://badgen.net/bundlephobia/minzip/@table-library/react-table-library@latest
+[size]: https://bundlephobia.com/package/@table-library/react-table-library
 
 ## How is this different from other React Table Libraries?
 
