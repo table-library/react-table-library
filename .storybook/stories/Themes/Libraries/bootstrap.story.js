@@ -19,15 +19,6 @@ import { nodes } from '../../data';
 
 storiesOf('Library Themes/Bootstrap UI', module)
   .addParameters({ component: Table })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ))
   .add('base', () => {
     const data = { nodes };
 
@@ -56,6 +47,7 @@ storiesOf('Library Themes/Bootstrap UI', module)
       `,
       BaseCell: `
         border-right: 1px solid transparent;
+        border-bottom: 1px solid transparent;
       `,
       Cell: `
       	&:nth-child(1) {
@@ -99,4 +91,13 @@ storiesOf('Library Themes/Bootstrap UI', module)
         )}
       </Table>
     );
-  });
+  })
+  .add('documentation', () => (
+    <ul>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
+  ));

@@ -56,8 +56,8 @@ const Table = ({
     <div
       className="table"
       css={`
-        ${theme?.Table}
         ${styles()}
+        ${theme?.Table}
       `}
       role="grid"
       ref={tableRef}

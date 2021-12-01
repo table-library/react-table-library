@@ -26,6 +26,7 @@ export const parameters = {
           'Expand',
           'Pagination',
           'Fixed Header',
+          'Horizontal',
           'Ten Thousand Rows',
           'Column Hiding',
           'Column Ordering',

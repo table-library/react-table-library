@@ -71,6 +71,7 @@ storiesOf('Library Themes/Material UI', module)
       `,
       BaseCell: `
         border-right: 1px solid transparent;
+        border-bottom: 1px solid transparent;
 
         &:focus {
           outline: dotted;

@@ -5,7 +5,7 @@ export default () => `
     box-sizing: border-box;
   }
 
-  overflow-x: hidden;
+  overflow: hidden;
   overflow-y: auto;
   position: relative;
 `;

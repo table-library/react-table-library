@@ -50,6 +50,7 @@ storiesOf('Library Themes/Ant Design', module)
       `,
       BaseCell: `
         border-right: 1px solid transparent;
+        border-bottom: 1px solid transparent;
       `,
     });
 

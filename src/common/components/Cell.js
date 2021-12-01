@@ -11,7 +11,6 @@ const BASE_STYLE = `
   padding-top: 4px;
   padding-bottom: 4px;
 
-
   &:not(.shrink) > div {
     width: 100%;
 
@@ -67,6 +66,9 @@ const HEADER_CELL_CONTAINER_STYLE = `
   ${BASE_STYLE}
 
   position: relative;
+
+  background-color: ${COLORS.BACKGROUND};
+  border-bottom: 1px solid ${COLORS.BORDER};
 
   svg,
   path {
