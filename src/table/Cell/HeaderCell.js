@@ -15,6 +15,7 @@ const HeaderCell = ({
   index,
   className,
   hide,
+  pin,
   shrink,
   resize,
   children,
@@ -36,6 +37,7 @@ const HeaderCell = ({
       className={cs('th', className, {
         shrink,
         resize,
+        pin,
       })}
       css={`
         ${theme?.BaseCell}
@@ -53,6 +55,7 @@ HeaderCell.propTypes = {
   index: PropTypes.number,
   className: PropTypes.string,
   hide: PropTypes.bool,
+  pin: PropTypes.bool,
   shrink: PropTypes.bool,
   resize: PropTypes.oneOfType([
     PropTypes.bool,

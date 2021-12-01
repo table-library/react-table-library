@@ -139,6 +139,7 @@ storiesOf('Features/Layout', module)
 
         &:nth-child(4) {
           width: 100px;
+          min-width: 100px;
         }
 
         &:nth-child(5) {

@@ -27,6 +27,7 @@ export const parameters = {
           'Pagination',
           'Fixed Header',
           'Horizontal',
+          'Pin',
           'Ten Thousand Rows',
           'Column Hiding',
           'Column Ordering',

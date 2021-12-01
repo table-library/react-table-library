@@ -10,6 +10,7 @@ import { useStyleHide } from '@table-library/react-table-library/resize';
 const Cell = ({
   className,
   hide,
+  pin,
   shrink,
   onClick,
   children,
@@ -26,6 +27,7 @@ const Cell = ({
       role="gridcell"
       className={cs('td', className, {
         shrink,
+        pin,
       })}
       css={`
         ${theme?.BaseCell}
@@ -42,6 +44,7 @@ const Cell = ({
 Cell.propTypes = {
   className: PropTypes.string,
   hide: PropTypes.bool,
+  pin: PropTypes.bool,
   shrink: PropTypes.bool,
   onClick: PropTypes.func,
   children: PropTypes.oneOfType([

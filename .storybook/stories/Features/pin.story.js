@@ -16,7 +16,7 @@ import { useTheme } from '@table-library/react-table-library/theme';
 
 import { nodes } from '../data';
 
-storiesOf('Features/Horizontal', module)
+storiesOf('Features/Pin', module)
   .addParameters({ component: Table })
   .add('base', () => {
     const data = { nodes };
@@ -29,13 +29,17 @@ storiesOf('Features/Horizontal', module)
       `,
       BaseCell: `
         &:nth-child(1) {
-          width: 250px;
-          min-width: 250px;
+          left: 0px;
+
+          width: 150px;
+          min-width: 150px;
         }
 
         &:nth-child(2) {
-          width: 200px;
-          min-width: 200px;
+          left: 150px;
+
+          width: 100px;
+          min-width: 100px;
         }
 
         &:nth-child(3), &:nth-child(4) {
@@ -75,19 +79,23 @@ storiesOf('Features/Horizontal', module)
               <>
                 <Header>
                   <HeaderRow>
-                    <HeaderCell>Task</HeaderCell>
-                    <HeaderCell>Deadline</HeaderCell>
-                    <HeaderCell>Type</HeaderCell>
-                    <HeaderCell>Complete</HeaderCell>
-                    <HeaderCell>Tasks</HeaderCell>
+                    <HeaderCell resize pin>
+                      Task
+                    </HeaderCell>
+                    <HeaderCell resize pin>
+                      Deadline
+                    </HeaderCell>
+                    <HeaderCell resize>Type</HeaderCell>
+                    <HeaderCell resize>Complete</HeaderCell>
+                    <HeaderCell resize>Tasks</HeaderCell>
                   </HeaderRow>
                 </Header>
 
                 <Body>
                   {tableList.map((item) => (
                     <Row key={item.id} item={item}>
-                      <Cell>{item.name}</Cell>
-                      <Cell>
+                      <Cell pin>{item.name}</Cell>
+                      <Cell pin>
                         {item.deadline.toLocaleDateString('en-US', {
                           year: 'numeric',
                           month: '2-digit',

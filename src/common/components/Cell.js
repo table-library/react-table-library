@@ -46,6 +46,12 @@ const BASE_STYLE = `
   &.hide {
     display: none;
   }
+
+  &.pin {
+    position: sticky;
+    left: 0;
+    z-index: 3;
+  }
 `;
 
 const CELL_CONTAINER_STYLE = () => `

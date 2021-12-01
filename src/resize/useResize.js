@@ -32,8 +32,6 @@ const applyResize = (index, tableRef, layout, resizeWidth) => {
   const diffWidth = actualResizeWidth - columns[index].width;
 
   const newColumnWidths = columns.map((column, i) => {
-    // resize
-
     if (afterColumn && index === i) {
       const nextWidth = afterColumn.width - diffWidth;
       const willNextAdjust = nextWidth > minResizeWidth;
@@ -53,16 +51,29 @@ const applyResize = (index, tableRef, layout, resizeWidth) => {
 
   // imperative write of all cell widths
 
-  const applyWidth = (cell, i, size) => {
-    if (i === size - 1) {
-      cell.style.width = `${newColumnWidths[i]}px`;
+  const applyWidth = (cell, i) => {
+    cell.style.width = `${newColumnWidths[i]}px`;
+    cell.style.minWidth = `${newColumnWidths[i]}px`;
+  };
+
+  const applyLeft = (cell, i) => {
+    if ([...cell.classList].includes('pin')) {
+      const left = newColumnWidths.reduce((sum, v, j) => {
+        if (j >= i) return sum;
+        return sum + v;
+      }, 0);
+
+      cell.style.left = `${left}px`;
     } else {
-      cell.style.width = `${newColumnWidths[i]}px`;
+      cell.style.left = 0;
     }
   };
 
   applyToHeaderColumns(tableRef, applyWidth);
   applyToColumns(tableRef, applyWidth);
+
+  applyToHeaderColumns(tableRef, applyLeft);
+  applyToColumns(tableRef, applyLeft);
 
   return newColumnWidths;
 };

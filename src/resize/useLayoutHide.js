@@ -124,6 +124,7 @@ const applyHide = (index, tableRef, layout, hides, hide) => {
 
   const applyWidth = (cell, i) => {
     cell.style.width = `${newColumnWidths[i]}px`;
+    cell.style.minWidth = `${newColumnWidths[i]}px`;
   };
 
   applyToHeaderColumns(tableRef, applyWidth);
