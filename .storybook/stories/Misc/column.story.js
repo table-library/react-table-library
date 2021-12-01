@@ -45,6 +45,7 @@ storiesOf('Misc/Column', module)
           <>
             <Header>
               <HeaderRow>
+                {/* important: when using resize, the key needs to be index */}
                 {columns.map((column, index) => (
                   <HeaderCell key={index}>{column.label}</HeaderCell>
                 ))}
