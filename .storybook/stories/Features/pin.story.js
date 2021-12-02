@@ -69,7 +69,11 @@ storiesOf('Features/Pin', module)
             width: '100%',
           }}
         >
-          <Table data={data} theme={theme} layout={{ custom: true }}>
+          <Table
+            data={data}
+            theme={theme}
+            layout={{ custom: true, horizontal: true }}
+          >
             {(tableList) => (
               <>
                 <Header>
