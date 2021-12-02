@@ -23,7 +23,7 @@ export const useConsumeRowLayout = (ref, selector) => {
       if (resizedLayout.current[index] === null) return;
 
       cell.style.width = resizedLayout.current[index];
-      cell.style.minWidth = resizedLayout.current[index];
+      // cell.style.minWidth = resizedLayout.current[index];
     });
   }, [ref, layout, resizedLayout, selector]);
 };
