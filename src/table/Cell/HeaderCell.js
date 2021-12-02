@@ -38,6 +38,7 @@ const HeaderCell = ({
         shrink,
         resize,
         pin,
+        hide,
       })}
       css={`
         ${theme?.BaseCell}
