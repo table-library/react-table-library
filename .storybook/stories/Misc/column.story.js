@@ -69,6 +69,12 @@ storiesOf('Misc/Column', module)
   .add('documentation', () => (
     <ul>
       <li>
+        <strong>
+          Caveat: Works only with index as key for features like
+          resizing to work
+        </strong>
+      </li>
+      <li>
         <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
           Story Code
         </a>

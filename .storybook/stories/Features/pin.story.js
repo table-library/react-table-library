@@ -124,13 +124,9 @@ storiesOf('Features/Pin', module)
   .add('documentation', () => (
     <ul>
       <li>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.robinwieruch.de/react-table-fixed-header"
-        >
-          Tutorial
-        </a>
+        <strong>
+          Caveat: Works only with fixed px columns, not %
+        </strong>
       </li>
       <li>
         <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
