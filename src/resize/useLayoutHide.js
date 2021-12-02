@@ -89,7 +89,11 @@ const fillSpace = (index, columns, resizeWidth) => {
 
           neededSpace -= spaceToAllocate;
 
-          return { ...value, width: value.width - spaceToAllocate };
+          return {
+            ...value,
+            width: value.width - spaceToAllocate,
+            minWidth: value.width - spaceToAllocate,
+          };
         }
 
         return value;
