@@ -28,7 +28,7 @@ const Cell = ({
       className={cs('td', className, {
         shrink,
         pin,
-        // hide,
+        hide,
       })}
       css={`
         ${theme?.BaseCell}
