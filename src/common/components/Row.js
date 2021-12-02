@@ -3,7 +3,7 @@ import * as React from 'react';
 import * as COLORS from '@table-library/react-table-library/common/colors';
 import { ResizeContext } from '@table-library/react-table-library/common/context/Resize';
 
-const getBaseStyle = () => `
+const getBaseStyle = (layout) => `
   display: flex;
   align-items: stretch;
 
@@ -11,7 +11,7 @@ const getBaseStyle = () => `
     /* otherwise pin feature pushes pined columns eventually outside if sum of all column widths is greater than container size */
     /* https://stackoverflow.com/a/57437315/1189762 */
   }}
-  min-width: max-content;
+  ${layout?.noMaxContent ? '' : 'min-width: max-content;'}
 `;
 
 const getRowContainerStyle = (layout) => `
