@@ -31,25 +31,20 @@ storiesOf('Features/Pin', module)
         &:nth-child(1) {
           left: 0px;
 
-          width: 150px;
-          min-width: 150px;
+          width: 250px;
+          min-width: 250px;
         }
 
         &:nth-child(2) {
-          left: 150px;
+          left: 250px;
 
-          width: 100px;
-          min-width: 100px;
+          width: 200px;
+          min-width: 200px;
         }
 
-        &:nth-child(3), &:nth-child(4) {
-          width: 30%;
-          min-width: 30%;
-        }
-
-        &:nth-child(5) {
-          width: 40%;
-          min-width: 40%;
+        &:nth-child(3), &:nth-child(4), &:nth-child(5) {
+          width: 500px;
+          min-width: 500px;
         }
       `,
     });
@@ -74,28 +69,28 @@ storiesOf('Features/Pin', module)
             width: '100%',
           }}
         >
-          <Table data={data} theme={theme} layout={{ custom: true }}>
+          <Table
+            data={data}
+            theme={theme}
+            layout={{ custom: true, pin: true }}
+          >
             {(tableList) => (
               <>
                 <Header>
                   <HeaderRow>
-                    <HeaderCell resize pin>
-                      Task
-                    </HeaderCell>
-                    <HeaderCell resize pin>
-                      Deadline
-                    </HeaderCell>
-                    <HeaderCell resize>Type</HeaderCell>
-                    <HeaderCell resize>Complete</HeaderCell>
-                    <HeaderCell resize>Tasks</HeaderCell>
+                    <HeaderCell className="pin">Task</HeaderCell>
+                    <HeaderCell className="pin">Deadline</HeaderCell>
+                    <HeaderCell>Type</HeaderCell>
+                    <HeaderCell>Complete</HeaderCell>
+                    <HeaderCell>Tasks</HeaderCell>
                   </HeaderRow>
                 </Header>
 
                 <Body>
                   {tableList.map((item) => (
                     <Row key={item.id} item={item}>
-                      <Cell pin>{item.name}</Cell>
-                      <Cell pin>
+                      <Cell className="pin">{item.name}</Cell>
+                      <Cell className="pin">
                         {item.deadline.toLocaleDateString('en-US', {
                           year: 'numeric',
                           month: '2-digit',
