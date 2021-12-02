@@ -38,13 +38,13 @@ storiesOf('Features/Pin', module)
         &:nth-child(2) {
           left: 250px;
 
-          width: 200px;
-          min-width: 200px;
+          width: 150px;
+          min-width: 150px;
         }
 
         &:nth-child(3), &:nth-child(4), &:nth-child(5) {
-          width: 500px;
-          min-width: 500px;
+          width: 700px;
+          min-width: 700px;
         }
       `,
     });
@@ -69,11 +69,7 @@ storiesOf('Features/Pin', module)
             width: '100%',
           }}
         >
-          <Table
-            data={data}
-            theme={theme}
-            layout={{ custom: true, pin: true }}
-          >
+          <Table data={data} theme={theme} layout={{ custom: true }}>
             {(tableList) => (
               <>
                 <Header>

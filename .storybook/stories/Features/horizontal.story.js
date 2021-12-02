@@ -29,8 +29,8 @@ storiesOf('Features/Horizontal', module)
       `,
       BaseCell: `
         &:nth-child(1) {
-          width: 250px;
-          min-width: 250px;
+          width: 50%;
+          min-width: 50%;
         }
 
         &:nth-child(2) {
