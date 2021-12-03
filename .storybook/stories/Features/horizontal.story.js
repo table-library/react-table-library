@@ -29,23 +29,23 @@ storiesOf('Features/Horizontal', module)
       `,
       BaseCell: `
         &:nth-child(1) {
-          width: 50%;
           min-width: 50%;
+          width: 50%;
         }
 
         &:nth-child(2) {
-          width: 200px;
           min-width: 200px;
+          width: 200px;
         }
 
         &:nth-child(3), &:nth-child(4) {
-          width: 30%;
           min-width: 30%;
+          width: 30%;
         }
 
         &:nth-child(5) {
-          width: 40%;
           min-width: 40%;
+          width: 40%;
         }
       `,
     });

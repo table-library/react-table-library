@@ -31,20 +31,20 @@ storiesOf('Features/Pin', module)
         &:nth-child(1) {
           left: 0px;
 
-          width: 250px;
           min-width: 250px;
+          width: 250px;
         }
 
         &:nth-child(2) {
           left: 250px;
 
-          width: 150px;
           min-width: 150px;
+          width: 150px;
         }
 
         &:nth-child(3), &:nth-child(4), &:nth-child(5) {
-          width: 700px;
           min-width: 700px;
+          width: 700px;
         }
       `,
     });

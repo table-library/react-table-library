@@ -22,14 +22,17 @@ storiesOf('Features/Layout', module)
     const theme = useTheme({
       BaseCell: `
         &:nth-child(1) {
+          min-width: 35%;
           width: 35%;
         }
 
         &:nth-child(2), &:nth-child(3), &:nth-child(4) {
+          min-width: 15%;
           width: 15%;
         }
 
         &:nth-child(5) {
+          min-width: 20%;
           width: 20%;
         }
       `,
@@ -77,14 +80,17 @@ storiesOf('Features/Layout', module)
     const theme = useTheme({
       BaseCell: `
         &.task {
+          min-width: 35%;
           width: 35%;
         }
 
         &.deadline, &.type, &.complete {
+          min-width: 10%;
           width: 10%;
         }
 
         &.tasks {
+          min-width: 35%;
           width: 35%;
         }
       `,
@@ -134,12 +140,13 @@ storiesOf('Features/Layout', module)
     const theme = useTheme({
       BaseCell: `
         &:nth-child(1), &:nth-child(2), &:nth-child(3) {
+          min-width: 15%;
           width: 15%;
         }
 
         &:nth-child(4) {
-          width: 100px;
           min-width: 100px;
+          width: 100px;
         }
 
         &:nth-child(5) {
@@ -186,6 +193,11 @@ storiesOf('Features/Layout', module)
       </Table>
     );
   })
+  .add('horizontal', () => (
+    <>
+      See <strong>Features/Horizontal</strong>
+    </>
+  ))
   .add('documentation', () => (
     <ul>
       <li>
