@@ -43,6 +43,10 @@ export const useProduceRowLayout = (ref, selector) => {
         const percentage = 100 / normalCells.length;
         const diff = shrinkCellsWidth / normalCells.length;
 
+        if (diff === 0) {
+          return `${percentage}%`;
+        }
+
         return `calc(${percentage}% - ${diff}px)`;
       }
 
