@@ -8,7 +8,7 @@ import {
   applyToColumns,
 } from './util';
 
-const applyResize = (index, tableRef, resizeWidth) => {
+const applyResize = (index, tableRef, layout, resizeWidth) => {
   const headerColumns = getHeaderColumns(tableRef);
 
   const columns = headerColumns.map((headerCell, j) => ({
@@ -58,7 +58,10 @@ const applyResize = (index, tableRef, resizeWidth) => {
     const px = newColumnWidthsAsPx[i];
     const percentage = (px / tableWidth) * 100;
 
-    return column.isFixed ? `${px}px` : `${percentage}%`;
+    // if horizontalScroll, then we cannot work with "absolute" percentages
+    return column.isFixed || layout?.horizontalScroll
+      ? `${px}px`
+      : `${percentage}%`;
   });
 
   // imperative write of all cell widths
@@ -78,8 +81,6 @@ const applyResize = (index, tableRef, resizeWidth) => {
       }, 0);
 
       cell.style.left = `${left}px`;
-    } else {
-      cell.style.left = 0;
     }
   };
 
@@ -93,7 +94,9 @@ const applyResize = (index, tableRef, resizeWidth) => {
 };
 
 export const useResize = (cellRef, index) => {
-  const { resizedLayout, tableRef } = React.useContext(ResizeContext);
+  const { resizedLayout, layout, tableRef } = React.useContext(
+    ResizeContext
+  );
 
   const resizeRef = React.useRef();
 
@@ -120,6 +123,7 @@ export const useResize = (cellRef, index) => {
         resizedLayout.current = applyResize(
           index,
           tableRef,
+          layout,
           resizeWidth
         );
       }

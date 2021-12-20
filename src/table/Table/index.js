@@ -52,7 +52,7 @@ const Table = React.forwardRef(
       <div
         className="table"
         css={`
-          ${styles()}
+          ${styles(layout)}
           ${theme?.Table}
         `}
         role="grid"

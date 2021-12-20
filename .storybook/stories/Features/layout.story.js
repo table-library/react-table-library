@@ -18,7 +18,7 @@ import { nodes } from '../data';
 
 storiesOf('Features/Layout', module)
   .addParameters({ component: Table })
-  .add('evenly distributed (default)', () => {
+  .add('evenly distributed (%)', () => {
     const data = { nodes };
 
     return (
@@ -57,7 +57,7 @@ storiesOf('Features/Layout', module)
       </Table>
     );
   })
-  .add('nth-child', () => {
+  .add('nth-child (%)', () => {
     const theme = useTheme({
       BaseCell: `
         &:nth-child(1) {
@@ -115,7 +115,7 @@ storiesOf('Features/Layout', module)
       </Table>
     );
   })
-  .add('class specific', () => {
+  .add('class specific (%)', () => {
     const theme = useTheme({
       BaseCell: `
         &.task {
@@ -175,7 +175,7 @@ storiesOf('Features/Layout', module)
       </Table>
     );
   })
-  .add('fixed/remaining space', () => {
+  .add('px + remaining space', () => {
     const theme = useTheme({
       BaseCell: `
         &:nth-child(1), &:nth-child(2), &:nth-child(3) {
@@ -183,13 +183,23 @@ storiesOf('Features/Layout', module)
           width: 15%;
         }
 
-        &:nth-child(4) {
+        &:nth-child(2) {
           min-width: 100px;
           width: 100px;
         }
 
+        &:nth-child(3) {
+          min-width: 15%;
+          width: 15%;
+        }
+
+        &:nth-child(4) {
+          flex: 1;
+        }
+
         &:nth-child(5) {
-          flex: 100px;
+          min-width: 15%;
+          width: 15%;
         }
       `,
     });
@@ -203,7 +213,7 @@ storiesOf('Features/Layout', module)
             <Header>
               <HeaderRow>
                 <HeaderCell>Task</HeaderCell>
-                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell className="stiff">Deadline</HeaderCell>
                 <HeaderCell>Type</HeaderCell>
                 <HeaderCell>Complete</HeaderCell>
                 <HeaderCell>Tasks</HeaderCell>
@@ -232,9 +242,9 @@ storiesOf('Features/Layout', module)
       </Table>
     );
   })
-  .add('horizontal', () => (
+  .add('horizontal scroll', () => (
     <>
-      See <strong>Features/Horizontal</strong>
+      See <strong>Features/Horizontal Scroll</strong>
     </>
   ))
   .add('documentation', () => (

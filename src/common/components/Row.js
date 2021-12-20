@@ -11,7 +11,7 @@ const getBaseStyle = (layout) => `
     /* otherwise pin feature pushes pined columns eventually outside if sum of all column widths is greater than container size */
     /* https://stackoverflow.com/a/57437315/1189762 */
   }}
-  ${layout?.horizontal && 'min-width: max-content;'}
+  ${layout?.horizontalScroll && 'min-width: max-content;'}
 `;
 
 const getRowContainerStyle = (layout) => `
