@@ -23,6 +23,11 @@ export const useProduceRowLayout = (ref, selector) => {
       0
     );
 
+    // if there are hidden cells from the beginning
+    const hideCells = allCells.filter(
+      (element) => element.getBoundingClientRect().width === 0
+    );
+
     const normalCells = Array.from(
       ref.current.querySelectorAll(`${selector}:not(.stiff)`)
     );
@@ -40,8 +45,11 @@ export const useProduceRowLayout = (ref, selector) => {
 
       // if it is no custom layout, divide equally
       if (!layout?.custom) {
-        const percentage = 100 / normalCells.length;
-        const diff = stiffCellsWidth / normalCells.length;
+        const percentage =
+          100 / (normalCells.length - hideCells.length);
+
+        const diff =
+          stiffCellsWidth / (normalCells.length - hideCells.length);
 
         if (diff === 0) {
           return `${percentage}%`;

@@ -25,7 +25,8 @@ storiesOf('Features/Column Hiding', module)
       'name',
       'deadline',
       'type',
-      'complete',
+      // 'complete',
+      'tasks',
     ]);
 
     const handleColumns = (column) => {

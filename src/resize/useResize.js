@@ -15,7 +15,7 @@ const applyResize = (index, tableRef, layout, resizeWidth) => {
     index: j,
     minResizeWidth: +headerCell.getAttribute('data-resize-min-width'),
     width: headerCell.getBoundingClientRect().width,
-    isFixed: headerCell.classList.contains('stiff'),
+    isStiff: headerCell.classList.contains('stiff'),
   }));
 
   const afterColumn = columns.reduce((acc, value, j) => {
@@ -59,7 +59,8 @@ const applyResize = (index, tableRef, layout, resizeWidth) => {
     const percentage = (px / tableWidth) * 100;
 
     // if horizontalScroll, then we cannot work with "absolute" percentages
-    return column.isFixed || layout?.horizontalScroll
+    // TODO maybe there is a way to keep % for horizontalScroll, however, use with resize feature I didn't find one yet
+    return column.isStiff || layout?.horizontalScroll
       ? `${px}px`
       : `${percentage}%`;
   });
@@ -128,7 +129,7 @@ export const useResize = (cellRef, index) => {
         );
       }
     },
-    [index, resizedLayout, tableRef]
+    [index, layout, resizedLayout, tableRef]
   );
 
   const onMouseUp = React.useCallback(() => {

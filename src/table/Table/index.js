@@ -13,7 +13,17 @@ import styles from './styles';
 
 const Table = React.forwardRef(
   (
-    { data, theme, layout, sort, pagination, select, tree, children },
+    {
+      data,
+      theme,
+      layout,
+      sort,
+      pagination,
+      select,
+      tree,
+      onInit = () => {},
+      children,
+    },
     ref
   ) => {
     let tableRef = React.useRef();
@@ -48,6 +58,12 @@ const Table = React.forwardRef(
       );
     }
 
+    const callbackRef = (node) => {
+      if (!node) return;
+      tableRef.current = node;
+      onInit(node);
+    };
+
     return (
       <div
         className="table"
@@ -56,7 +72,7 @@ const Table = React.forwardRef(
           ${theme?.Table}
         `}
         role="grid"
-        ref={tableRef}
+        ref={callbackRef}
       >
         <TableContext.Provider value={data}>
           <ThemeContext.Provider value={theme}>
