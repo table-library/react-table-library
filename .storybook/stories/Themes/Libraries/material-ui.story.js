@@ -138,7 +138,7 @@ storiesOf('Library Themes/Material UI', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell shrink>
+                <HeaderCell fixed>
                   <MaterialCheckbox
                     color="primary"
                     size="small"
@@ -170,7 +170,7 @@ storiesOf('Library Themes/Material UI', module)
             <Body>
               {tableList.map((item) => (
                 <Row item={item} key={item.id}>
-                  <Cell shrink tabIndex="-1">
+                  <Cell fixed tabIndex="-1">
                     <MaterialCheckbox
                       color="primary"
                       size="small"

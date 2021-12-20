@@ -11,7 +11,7 @@ const BASE_STYLE = `
   padding-top: 4px;
   padding-bottom: 4px;
 
-  &:not(.shrink) > div {
+  &:not(.fixed) > div {
     width: 100%;
 
     white-space: nowrap;
@@ -38,7 +38,7 @@ const BASE_STYLE = `
     border-right: 0px solid transparent;
   }
 
-  &.shrink > div {
+  &.fixed > div {
     padding-right: ${GUTTER}px;
     padding-left: ${GUTTER}px;
   }

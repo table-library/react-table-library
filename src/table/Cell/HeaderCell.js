@@ -16,7 +16,7 @@ const HeaderCell = ({
   className,
   hide,
   pin,
-  shrink,
+  fixed,
   resize,
   children,
   ...rest
@@ -35,7 +35,7 @@ const HeaderCell = ({
       role="columnheader"
       data-resize-min-width={resize?.minWidth || 75}
       className={cs('th', className, {
-        shrink,
+        fixed,
         resize,
         pin,
       })}
@@ -56,7 +56,7 @@ HeaderCell.propTypes = {
   className: PropTypes.string,
   hide: PropTypes.bool,
   pin: PropTypes.bool,
-  shrink: PropTypes.bool,
+  fixed: PropTypes.bool,
   resize: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.shape({

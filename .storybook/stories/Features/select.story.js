@@ -464,7 +464,7 @@ storiesOf('Features/Select', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell shrink>
+                <HeaderCell fixed>
                   <MaterialCheckbox
                     size="small"
                     checked={select.state.all}
@@ -485,7 +485,7 @@ storiesOf('Features/Select', module)
             <Body>
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  <Cell shrink>
+                  <Cell fixed>
                     <MaterialCheckbox
                       size="small"
                       checked={select.state.ids.includes(item.id)}

@@ -15,7 +15,7 @@ const applyResize = (index, tableRef, resizeWidth) => {
     index: j,
     minResizeWidth: +headerCell.getAttribute('data-resize-min-width'),
     width: headerCell.getBoundingClientRect().width,
-    isShrink: headerCell.classList.contains('shrink'),
+    isFixed: headerCell.classList.contains('fixed'),
   }));
 
   const afterColumn = columns.reduce((acc, value, j) => {
@@ -58,7 +58,7 @@ const applyResize = (index, tableRef, resizeWidth) => {
     const px = newColumnWidthsAsPx[i];
     const percentage = (px / tableWidth) * 100;
 
-    return column.isShrink ? `${px}px` : `${percentage}%`;
+    return column.isFixed ? `${px}px` : `${percentage}%`;
   });
 
   // imperative write of all cell widths
