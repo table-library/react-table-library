@@ -8,7 +8,7 @@ import {
   applyToColumns,
 } from './util';
 
-const applyResize = (index, tableRef, layout, resizeWidth) => {
+const applyResize = (index, tableRef, resizeWidth) => {
   const headerColumns = getHeaderColumns(tableRef);
 
   const columns = headerColumns.map((headerCell, j) => ({
@@ -33,6 +33,8 @@ const applyResize = (index, tableRef, layout, resizeWidth) => {
     resizeWidth > minResizeWidth ? resizeWidth : minResizeWidth;
 
   const diffWidth = actualResizeWidth - columns[index].width;
+
+  // calculate new widths of cell under consideration of its neighbors
 
   const newColumnWidthsAsPx = columns.map((column, i) => {
     if (afterColumn && index === i) {
@@ -91,9 +93,7 @@ const applyResize = (index, tableRef, layout, resizeWidth) => {
 };
 
 export const useResize = (cellRef, index) => {
-  const { resizedLayout, tableRef, layout } = React.useContext(
-    ResizeContext
-  );
+  const { resizedLayout, tableRef } = React.useContext(ResizeContext);
 
   const resizeRef = React.useRef();
 
@@ -120,12 +120,11 @@ export const useResize = (cellRef, index) => {
         resizedLayout.current = applyResize(
           index,
           tableRef,
-          layout,
           resizeWidth
         );
       }
     },
-    [index, layout, resizedLayout, tableRef]
+    [index, resizedLayout, tableRef]
   );
 
   const onMouseUp = React.useCallback(() => {
