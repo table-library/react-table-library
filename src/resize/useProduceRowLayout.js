@@ -14,17 +14,17 @@ export const useProduceRowLayout = (ref, selector) => {
       ref.current.querySelectorAll(selector)
     );
 
-    const fixedCells = Array.from(
-      ref.current.querySelectorAll(`${selector}.fixed`)
+    const stiffCells = Array.from(
+      ref.current.querySelectorAll(`${selector}.stiff`)
     );
 
-    const fixedCellsWidth = fixedCells.reduce(
+    const stiffCellsWidth = stiffCells.reduce(
       (acc, element) => acc + element.getBoundingClientRect().width,
       0
     );
 
     const normalCells = Array.from(
-      ref.current.querySelectorAll(`${selector}:not(.fixed)`)
+      ref.current.querySelectorAll(`${selector}:not(.stiff)`)
     );
 
     resizedLayout.current = allCells.map((cell, index) => {
@@ -33,15 +33,15 @@ export const useProduceRowLayout = (ref, selector) => {
         return resizedLayout.current[index];
       }
 
-      // if it is a fixed cell, fixed cell
-      if (fixedCells.includes(cell)) {
+      // if it is a stiff cell, stiff cell
+      if (stiffCells.includes(cell)) {
         return `${cell.getBoundingClientRect().width}px`;
       }
 
       // if it is no custom layout, divide equally
       if (!layout?.custom) {
         const percentage = 100 / normalCells.length;
-        const diff = fixedCellsWidth / normalCells.length;
+        const diff = stiffCellsWidth / normalCells.length;
 
         if (diff === 0) {
           return `${percentage}%`;

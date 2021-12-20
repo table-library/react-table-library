@@ -11,7 +11,7 @@ const Cell = ({
   className,
   hide,
   pin,
-  fixed,
+  stiff,
   onClick,
   children,
   ...rest
@@ -26,7 +26,7 @@ const Cell = ({
       {...rest}
       role="gridcell"
       className={cs('td', className, {
-        fixed,
+        stiff,
         pin,
       })}
       css={`
@@ -45,7 +45,7 @@ Cell.propTypes = {
   className: PropTypes.string,
   hide: PropTypes.bool,
   pin: PropTypes.bool,
-  fixed: PropTypes.bool,
+  stiff: PropTypes.bool,
   onClick: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

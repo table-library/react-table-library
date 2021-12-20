@@ -15,7 +15,7 @@ const applyResize = (index, tableRef, resizeWidth) => {
     index: j,
     minResizeWidth: +headerCell.getAttribute('data-resize-min-width'),
     width: headerCell.getBoundingClientRect().width,
-    isFixed: headerCell.classList.contains('fixed'),
+    isFixed: headerCell.classList.contains('stiff'),
   }));
 
   const afterColumn = columns.reduce((acc, value, j) => {

@@ -11,7 +11,7 @@ const BASE_STYLE = `
   padding-top: 4px;
   padding-bottom: 4px;
 
-  &:not(.fixed) > div {
+  &:not(.stiff) > div {
     width: 100%;
 
     white-space: nowrap;
@@ -38,7 +38,7 @@ const BASE_STYLE = `
     border-right: 0px solid transparent;
   }
 
-  &.fixed > div {
+  &.stiff > div {
     padding-right: ${GUTTER}px;
     padding-left: ${GUTTER}px;
   }
