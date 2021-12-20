@@ -1,12 +1,11 @@
 import * as React from 'react';
 
 import { ResizeContext } from '@table-library/react-table-library/common/context/Resize';
-
 import {
   getHeaderColumns,
   applyToHeaderColumns,
   applyToColumns,
-} from './util';
+} from '@table-library/react-table-library/common/util/columns';
 
 const applyResize = (index, tableRef, layout, resizeWidth) => {
   const headerColumns = getHeaderColumns(tableRef);

@@ -6,7 +6,7 @@ import {
   getHeaderColumns,
   applyToHeaderColumns,
   applyToColumns,
-} from './util';
+} from '@table-library/react-table-library/common/util/columns';
 
 const hideSpace = (index, columns) => {
   let resizeWidth = 0;
