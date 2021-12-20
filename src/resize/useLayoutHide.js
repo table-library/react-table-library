@@ -107,7 +107,9 @@ const fillSpace = (index, columns, resizeWidth) => {
 };
 
 const applyHide = (index, tableRef, layout, hides, hide) => {
-  const tableWidth = tableRef.current.getBoundingClientRect().width;
+  const tableWidth = tableRef.current
+    .querySelector('.thead')
+    .getBoundingClientRect().width;
 
   const headerColumns = getHeaderColumns(tableRef);
 

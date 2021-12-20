@@ -25,7 +25,9 @@ const applyResize = (index, tableRef, layout, resizeWidth) => {
     return acc;
   }, null);
 
-  const tableWidth = tableRef.current.getBoundingClientRect().width;
+  const tableWidth = tableRef.current
+    .querySelector('.thead')
+    .getBoundingClientRect().width;
 
   const { minResizeWidth } = columns[index];
 

@@ -58,8 +58,13 @@ const Table = React.forwardRef(
       );
     }
 
+    const calledOnce = React.useRef();
     const callbackRef = (node) => {
       if (!node) return;
+
+      if (calledOnce.current) return;
+      calledOnce.current = true;
+
       tableRef.current = node;
       onInit(node);
     };
