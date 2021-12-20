@@ -36,7 +36,7 @@ export const parameters = {
         'Composites',
         ['Sort & Select (WIP)', 'Tree & Select', 'Tree & Sort'],
         'Misc',
-        ['Cell', 'Row', 'Column', 'Configuration (WIP)'],
+        ['Cell', 'Row', 'Column'],
         'Product Themes',
         ['Google Drive (WIP)', 'Stripe (WIP)'],
         'Recipes',
