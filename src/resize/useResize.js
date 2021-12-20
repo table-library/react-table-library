@@ -15,6 +15,7 @@ const applyResize = (index, tableRef, layout, resizeWidth) => {
     index: j,
     minResizeWidth: +headerCell.getAttribute('data-resize-min-width'),
     width: headerCell.getBoundingClientRect().width,
+    isShrink: headerCell.classList.contains('shrink'),
   }));
 
   const afterColumn = columns.reduce((acc, value, j) => {
@@ -24,6 +25,8 @@ const applyResize = (index, tableRef, layout, resizeWidth) => {
     return acc;
   }, null);
 
+  const tableWidth = tableRef.current.getBoundingClientRect().width;
+
   const { minResizeWidth } = columns[index];
 
   const actualResizeWidth =
@@ -31,7 +34,7 @@ const applyResize = (index, tableRef, layout, resizeWidth) => {
 
   const diffWidth = actualResizeWidth - columns[index].width;
 
-  const newColumnWidths = columns.map((column, i) => {
+  const newColumnWidthsAsPx = columns.map((column, i) => {
     if (afterColumn && index === i) {
       const nextWidth = afterColumn.width - diffWidth;
       const willNextAdjust = nextWidth > minResizeWidth;
@@ -49,16 +52,25 @@ const applyResize = (index, tableRef, layout, resizeWidth) => {
     return column.width;
   });
 
+  const newColumnWidths = columns.map((column, i) => {
+    const px = newColumnWidthsAsPx[i];
+    const percentage = (px / tableWidth) * 100;
+
+    return column.isShrink ? `${px}px` : `${percentage}%`;
+  });
+
   // imperative write of all cell widths
 
   const applyWidth = (cell, i) => {
-    cell.style.width = `${newColumnWidths[i]}px`;
-    cell.style.minWidth = `${newColumnWidths[i]}px`;
+    cell.style.width = newColumnWidths[i];
+    cell.style.minWidth = newColumnWidths[i];
   };
+
+  // pin feature as edge case
 
   const applyLeft = (cell, i) => {
     if ([...cell.classList].includes('pin')) {
-      const left = newColumnWidths.reduce((sum, v, j) => {
+      const left = newColumnWidthsAsPx.reduce((sum, v, j) => {
         if (j >= i) return sum;
         return sum + v;
       }, 0);
