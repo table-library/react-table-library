@@ -78,11 +78,21 @@ storiesOf('Features/Pin', module)
               <>
                 <Header>
                   <HeaderRow>
-                    <HeaderCell className="pin">Task</HeaderCell>
-                    <HeaderCell className="pin">Deadline</HeaderCell>
-                    <HeaderCell>Type</HeaderCell>
-                    <HeaderCell>Complete</HeaderCell>
-                    <HeaderCell>Tasks</HeaderCell>
+                    <HeaderCell resize className="stiff pin">
+                      Task
+                    </HeaderCell>
+                    <HeaderCell resize className="stiff pin">
+                      Deadline
+                    </HeaderCell>
+                    <HeaderCell resize className="stiff">
+                      Type
+                    </HeaderCell>
+                    <HeaderCell resize className="stiff">
+                      Complete
+                    </HeaderCell>
+                    <HeaderCell resize className="stiff">
+                      Tasks
+                    </HeaderCell>
                   </HeaderRow>
                 </Header>
 
