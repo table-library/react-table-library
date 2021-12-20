@@ -57,7 +57,7 @@ storiesOf('Features/Layout', module)
       </Table>
     );
   })
-  .add('nth-child (%)', () => {
+  .add('percentage', () => {
     const theme = useTheme({
       BaseCell: `
         &:nth-child(1) {
@@ -115,7 +115,65 @@ storiesOf('Features/Layout', module)
       </Table>
     );
   })
-  .add('class specific (%)', () => {
+  .add('px', () => {
+    const theme = useTheme({
+      BaseCell: `
+        &:nth-child(1) {
+          min-width: 100px;
+          width: 100px;
+        }
+
+        &:nth-child(2), &:nth-child(3), &:nth-child(4) {
+          min-width: 75px;
+          width: 75px;
+        }
+
+        &:nth-child(5) {
+          min-width: 100px;
+          width: 100px;
+        }
+      `,
+    });
+
+    const data = { nodes };
+
+    return (
+      <Table data={data} theme={theme} layout={{ custom: true }}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row key={item.id} item={item}>
+                  <Cell>{item.name}</Cell>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('class', () => {
     const theme = useTheme({
       BaseCell: `
         &.task {
@@ -124,8 +182,8 @@ storiesOf('Features/Layout', module)
         }
 
         &.deadline, &.type, &.complete {
-          min-width: 10%;
-          width: 10%;
+          min-width: 100px;
+          width: 100px;
         }
 
         &.tasks {
@@ -175,20 +233,10 @@ storiesOf('Features/Layout', module)
       </Table>
     );
   })
-  .add('px + remaining space', () => {
+  .add('fill space', () => {
     const theme = useTheme({
       BaseCell: `
         &:nth-child(1), &:nth-child(2), &:nth-child(3) {
-          min-width: 15%;
-          width: 15%;
-        }
-
-        &:nth-child(2) {
-          min-width: 100px;
-          width: 100px;
-        }
-
-        &:nth-child(3) {
           min-width: 15%;
           width: 15%;
         }
@@ -200,6 +248,68 @@ storiesOf('Features/Layout', module)
         &:nth-child(5) {
           min-width: 15%;
           width: 15%;
+        }
+      `,
+    });
+
+    const data = { nodes };
+
+    return (
+      <Table data={data} theme={theme} layout={{ custom: true }}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell className="stiff">Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row key={item.id} item={item}>
+                  <Cell>{item.name}</Cell>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('squeeze space', () => {
+    const theme = useTheme({
+      BaseCell: `
+        &:nth-child(1), &:nth-child(2) {
+          min-width: 25%;
+          width: 25%;
+        }
+
+        &:nth-child(3) {
+          width: 25%;
+        }
+
+        &:nth-child(4) {
+          min-width: 100px;
+          width: 100px;
+        }
+
+        &:nth-child(5) {
+          min-width: 25%;
+          width: 25%;
         }
       `,
     });
