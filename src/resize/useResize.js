@@ -1,14 +1,14 @@
 import * as React from 'react';
 
-import { ResizeContext } from '@table-library/react-table-library/common/context/Resize';
+import { LayoutContext } from '@table-library/react-table-library/common/context/Layout';
 import {
   getHeaderColumns,
   applyToHeaderColumns,
   applyToColumns,
 } from '@table-library/react-table-library/common/util/columns';
 
-const applyResize = (index, tableRef, layout, resizeWidth) => {
-  const headerColumns = getHeaderColumns(tableRef);
+const applyResize = (index, tableElementRef, layout, resizeWidth) => {
+  const headerColumns = getHeaderColumns(tableElementRef);
 
   const columns = headerColumns.map((headerCell, j) => ({
     index: j,
@@ -24,7 +24,7 @@ const applyResize = (index, tableRef, layout, resizeWidth) => {
     return acc;
   }, null);
 
-  const tableWidth = tableRef.current
+  const tableWidth = tableElementRef.current
     .querySelector('.thead')
     .getBoundingClientRect().width;
 
@@ -86,19 +86,21 @@ const applyResize = (index, tableRef, layout, resizeWidth) => {
     }
   };
 
-  applyToHeaderColumns(tableRef, applyWidth);
-  applyToColumns(tableRef, applyWidth);
+  applyToHeaderColumns(tableElementRef, applyWidth);
+  applyToColumns(tableElementRef, applyWidth);
 
-  applyToHeaderColumns(tableRef, applyLeft);
-  applyToColumns(tableRef, applyLeft);
+  applyToHeaderColumns(tableElementRef, applyLeft);
+  applyToColumns(tableElementRef, applyLeft);
 
   return newColumnWidths;
 };
 
 export const useResize = (cellRef, index) => {
-  const { resizedLayout, layout, tableRef } = React.useContext(
-    ResizeContext
-  );
+  const {
+    tableMemoryRef,
+    layout,
+    tableElementRef,
+  } = React.useContext(LayoutContext);
 
   const resizeRef = React.useRef();
 
@@ -122,15 +124,15 @@ export const useResize = (cellRef, index) => {
 
         const resizeWidth = startOffset.current + event.pageX;
 
-        resizedLayout.current = applyResize(
+        tableMemoryRef.current.resizedLayout = applyResize(
           index,
-          tableRef,
+          tableElementRef,
           layout,
           resizeWidth
         );
       }
     },
-    [index, layout, resizedLayout, tableRef]
+    [index, layout, tableElementRef, tableMemoryRef]
   );
 
   const onMouseUp = React.useCallback(() => {

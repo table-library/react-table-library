@@ -21,19 +21,16 @@ storiesOf('Features/Column Hiding', module)
   .add('base', () => {
     const data = { nodes };
 
-    const [columns, setColumns] = React.useState([
-      'name',
+    const [hiddenColumns, setHiddenColumns] = React.useState([
       'deadline',
-      'type',
-      // 'complete',
-      'tasks',
+      'complete',
     ]);
 
-    const handleColumns = (column) => {
-      if (columns.includes(column)) {
-        setColumns(columns.filter((value) => value !== column));
+    const toggleColumn = (column) => {
+      if (hiddenColumns.includes(column)) {
+        setHiddenColumns(hiddenColumns.filter((v) => v !== column));
       } else {
-        setColumns(columns.concat(column));
+        setHiddenColumns(hiddenColumns.concat(column));
       }
     };
 
@@ -45,8 +42,8 @@ storiesOf('Features/Column Hiding', module)
               id="name"
               type="checkbox"
               value="name"
-              checked={columns.includes('name')}
-              onChange={() => handleColumns('name')}
+              checked={!hiddenColumns.includes('name')}
+              onChange={() => toggleColumn('name')}
             />
             Name
           </label>
@@ -58,8 +55,8 @@ storiesOf('Features/Column Hiding', module)
               id="deadline"
               type="checkbox"
               value="deadline"
-              checked={columns.includes('deadline')}
-              onChange={() => handleColumns('deadline')}
+              checked={!hiddenColumns.includes('deadline')}
+              onChange={() => toggleColumn('deadline')}
             />
             Deadline
           </label>
@@ -71,8 +68,8 @@ storiesOf('Features/Column Hiding', module)
               id="type"
               type="checkbox"
               value="type"
-              checked={columns.includes('type')}
-              onChange={() => handleColumns('type')}
+              checked={!hiddenColumns.includes('type')}
+              onChange={() => toggleColumn('type')}
             />
             Type
           </label>
@@ -84,8 +81,8 @@ storiesOf('Features/Column Hiding', module)
               id="complete"
               type="checkbox"
               value="complete"
-              checked={columns.includes('complete')}
-              onChange={() => handleColumns('complete')}
+              checked={!hiddenColumns.includes('complete')}
+              onChange={() => toggleColumn('complete')}
             />
             Complete
           </label>
@@ -97,58 +94,40 @@ storiesOf('Features/Column Hiding', module)
               id="tasks"
               type="checkbox"
               value="tasks"
-              checked={columns.includes('tasks')}
-              onChange={() => handleColumns('tasks')}
+              checked={!hiddenColumns.includes('tasks')}
+              onChange={() => toggleColumn('tasks')}
             />
             Tasks
           </label>
         </div>
 
-        <Table data={data}>
+        <Table data={data} layout={{ hiddenColumns }}>
           {(tableList) => (
             <>
               <Header>
                 <HeaderRow>
-                  <HeaderCell hide={!columns.includes('name')}>
-                    Task
-                  </HeaderCell>
-                  <HeaderCell hide={!columns.includes('deadline')}>
-                    Deadline
-                  </HeaderCell>
-                  <HeaderCell hide={!columns.includes('type')}>
-                    Type
-                  </HeaderCell>
-                  <HeaderCell hide={!columns.includes('complete')}>
-                    Complete
-                  </HeaderCell>
-                  <HeaderCell hide={!columns.includes('tasks')}>
-                    Tasks
-                  </HeaderCell>
+                  <HeaderCell cellKey="name">Task</HeaderCell>
+                  <HeaderCell cellKey="deadline">Deadline</HeaderCell>
+                  <HeaderCell cellKey="type">Type</HeaderCell>
+                  <HeaderCell cellKey="complete">Complete</HeaderCell>
+                  <HeaderCell cellKey="tasks">Tasks</HeaderCell>
                 </HeaderRow>
               </Header>
 
               <Body>
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    <Cell hide={!columns.includes('name')}>
-                      {item.name}
-                    </Cell>
-                    <Cell hide={!columns.includes('deadline')}>
+                    <Cell>{item.name}</Cell>
+                    <Cell>
                       {item.deadline.toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: '2-digit',
                         day: '2-digit',
                       })}
                     </Cell>
-                    <Cell hide={!columns.includes('type')}>
-                      {item.type}
-                    </Cell>
-                    <Cell hide={!columns.includes('complete')}>
-                      {item.isComplete.toString()}
-                    </Cell>
-                    <Cell hide={!columns.includes('tasks')}>
-                      {item.nodes?.length}
-                    </Cell>
+                    <Cell>{item.type}</Cell>
+                    <Cell>{item.isComplete.toString()}</Cell>
+                    <Cell>{item.nodes?.length}</Cell>
                   </Row>
                 ))}
               </Body>
@@ -161,24 +140,21 @@ storiesOf('Features/Column Hiding', module)
   .add('with callback', () => {
     const data = { nodes };
 
-    const [columns, setColumns] = React.useState([
-      'name',
+    const [hiddenColumns, setHiddenColumns] = React.useState([
       'deadline',
-      'type',
       'complete',
-      'tasks',
     ]);
 
-    const handleColumns = (column) => {
-      if (columns.includes(column)) {
-        setColumns(columns.filter((value) => value !== column));
+    const toggleColumn = (column) => {
+      if (hiddenColumns.includes(column)) {
+        setHiddenColumns(hiddenColumns.filter((v) => v !== column));
       } else {
-        setColumns(columns.concat(column));
+        setHiddenColumns(hiddenColumns.concat(column));
       }
     };
 
     useCustom('columnHide', data, {
-      state: { columns },
+      state: { hiddenColumns },
       onChange: onColumnHideChange,
     });
 
@@ -194,8 +170,8 @@ storiesOf('Features/Column Hiding', module)
               id="name"
               type="checkbox"
               value="name"
-              checked={columns.includes('name')}
-              onChange={() => handleColumns('name')}
+              checked={!hiddenColumns.includes('name')}
+              onChange={() => toggleColumn('name')}
             />
             Name
           </label>
@@ -207,8 +183,8 @@ storiesOf('Features/Column Hiding', module)
               id="deadline"
               type="checkbox"
               value="deadline"
-              checked={columns.includes('deadline')}
-              onChange={() => handleColumns('deadline')}
+              checked={!hiddenColumns.includes('deadline')}
+              onChange={() => toggleColumn('deadline')}
             />
             Deadline
           </label>
@@ -220,8 +196,8 @@ storiesOf('Features/Column Hiding', module)
               id="type"
               type="checkbox"
               value="type"
-              checked={columns.includes('type')}
-              onChange={() => handleColumns('type')}
+              checked={!hiddenColumns.includes('type')}
+              onChange={() => toggleColumn('type')}
             />
             Type
           </label>
@@ -233,8 +209,8 @@ storiesOf('Features/Column Hiding', module)
               id="complete"
               type="checkbox"
               value="complete"
-              checked={columns.includes('complete')}
-              onChange={() => handleColumns('complete')}
+              checked={!hiddenColumns.includes('complete')}
+              onChange={() => toggleColumn('complete')}
             />
             Complete
           </label>
@@ -246,58 +222,40 @@ storiesOf('Features/Column Hiding', module)
               id="tasks"
               type="checkbox"
               value="tasks"
-              checked={columns.includes('tasks')}
-              onChange={() => handleColumns('tasks')}
+              checked={!hiddenColumns.includes('tasks')}
+              onChange={() => toggleColumn('tasks')}
             />
             Tasks
           </label>
         </div>
 
-        <Table data={data}>
+        <Table data={data} layout={{ hiddenColumns }}>
           {(tableList) => (
             <>
               <Header>
                 <HeaderRow>
-                  <HeaderCell hide={!columns.includes('name')}>
-                    Task
-                  </HeaderCell>
-                  <HeaderCell hide={!columns.includes('deadline')}>
-                    Deadline
-                  </HeaderCell>
-                  <HeaderCell hide={!columns.includes('type')}>
-                    Type
-                  </HeaderCell>
-                  <HeaderCell hide={!columns.includes('complete')}>
-                    Complete
-                  </HeaderCell>
-                  <HeaderCell hide={!columns.includes('tasks')}>
-                    Tasks
-                  </HeaderCell>
+                  <HeaderCell cellKey="name">Task</HeaderCell>
+                  <HeaderCell cellKey="deadline">Deadline</HeaderCell>
+                  <HeaderCell cellKey="type">Type</HeaderCell>
+                  <HeaderCell cellKey="complete">Complete</HeaderCell>
+                  <HeaderCell cellKey="tasks">Tasks</HeaderCell>
                 </HeaderRow>
               </Header>
 
               <Body>
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    <Cell hide={!columns.includes('name')}>
-                      {item.name}
-                    </Cell>
-                    <Cell hide={!columns.includes('deadline')}>
+                    <Cell>{item.name}</Cell>
+                    <Cell>
                       {item.deadline.toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: '2-digit',
                         day: '2-digit',
                       })}
                     </Cell>
-                    <Cell hide={!columns.includes('type')}>
-                      {item.type}
-                    </Cell>
-                    <Cell hide={!columns.includes('complete')}>
-                      {item.isComplete.toString()}
-                    </Cell>
-                    <Cell hide={!columns.includes('tasks')}>
-                      {item.nodes?.length}
-                    </Cell>
+                    <Cell>{item.type}</Cell>
+                    <Cell>{item.isComplete.toString()}</Cell>
+                    <Cell>{item.nodes?.length}</Cell>
                   </Row>
                 ))}
               </Body>

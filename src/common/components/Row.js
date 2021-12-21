@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import * as COLORS from '@table-library/react-table-library/common/colors';
-import { ResizeContext } from '@table-library/react-table-library/common/context/Resize';
+import { LayoutContext } from '@table-library/react-table-library/common/context/Layout';
 
 const getBaseStyle = (layout) => `
   display: flex;
@@ -39,7 +39,7 @@ const getRowContainerStyle = (layout) => `
 `;
 
 const RowContainer = React.forwardRef((props, ref) => {
-  const { layout } = React.useContext(ResizeContext);
+  const { layout } = React.useContext(LayoutContext);
 
   return (
     <div {...props} css={getRowContainerStyle(layout)} ref={ref} />
@@ -54,7 +54,7 @@ const getHeaderRowContainerStyle = (layout) => `
 `;
 
 const HeaderRowContainer = React.forwardRef((props, ref) => {
-  const { layout } = React.useContext(ResizeContext);
+  const { layout } = React.useContext(LayoutContext);
 
   return (
     <div

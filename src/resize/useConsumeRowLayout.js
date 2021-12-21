@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-import { ResizeContext } from '@table-library/react-table-library/common/context/Resize';
+import { LayoutContext } from '@table-library/react-table-library/common/context/Layout';
 
 // take all columns of this row
 // and assign their width from the ref
 // which has been produced in the header
 
 export const useConsumeRowLayout = (ref, selector) => {
-  const { layout, resizedLayout } = React.useContext(ResizeContext);
+  const { layout, tableMemoryRef } = React.useContext(LayoutContext);
 
   const calledOnce = React.useRef();
 
@@ -20,10 +20,12 @@ export const useConsumeRowLayout = (ref, selector) => {
     );
 
     allCells.forEach((cell, index) => {
-      if (resizedLayout.current[index] === null) return;
+      if (tableMemoryRef.current.resizedLayout[index] === null)
+        return;
 
-      cell.style.width = resizedLayout.current[index];
-      cell.style.minWidth = resizedLayout.current[index];
+      cell.style.width = tableMemoryRef.current.resizedLayout[index];
+      cell.style.minWidth =
+        tableMemoryRef.current.resizedLayout[index];
     });
-  }, [ref, layout, resizedLayout, selector]);
+  }, [ref, layout, selector, tableMemoryRef]);
 };

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ResizeContext } from '@table-library/react-table-library/common/context/Resize';
+import { LayoutContext } from '@table-library/react-table-library/common/context/Layout';
 
 import {
   getHeaderColumns,
@@ -8,16 +8,18 @@ import {
   applyToColumns,
 } from '@table-library/react-table-library/common/util/columns';
 
-const hideSpace = (index, columns) => {
+const hideSpace = (column, columns) => {
   let resizeWidth = 0;
 
   const prioritizedColumns = [
-    ...columns.slice(0, index).reverse(),
-    ...columns.slice(index, columns.length),
+    ...columns.slice(0, column.index).reverse(),
+    ...columns.slice(column.index, columns.length),
   ];
 
   const withHiddenColumns = prioritizedColumns.map((value) => {
-    if (value.index === index) {
+    const itself = value.index === column.index;
+
+    if (itself) {
       resizeWidth = value.width;
       return { ...value, width: 0 };
     }
@@ -26,10 +28,11 @@ const hideSpace = (index, columns) => {
   });
 
   const withFilledColumns = withHiddenColumns.map((value) => {
-    const notHidden = value.width !== 0;
+    const notItself = value.index !== column.index;
+    const notHidden = value.width !== 0 && !value.isHide;
     const notStiff = !value.isStiff;
 
-    if (notHidden && notStiff && resizeWidth > 0) {
+    if (notItself && notHidden && notStiff && resizeWidth > 0) {
       const newValue = { ...value, width: value.width + resizeWidth };
       resizeWidth = 0;
       return newValue;
@@ -38,14 +41,22 @@ const hideSpace = (index, columns) => {
     return value;
   });
 
-  return withFilledColumns
-    .sort((a, b) => a.index - b.index)
-    .map((value) => value.width);
+  return withFilledColumns.sort((a, b) => a.index - b.index);
 };
 
-const fillSpace = (index, columns, resizeWidth) => {
+const fillSpace = (column, columns, widthInMemory) => {
+  const prioritizedColumns = [
+    ...columns.slice(0, column.index).reverse(),
+    ...columns.slice(column.index, columns.length),
+  ].sort((a, b) => b.width - a.width);
+
   const totalSpaceAvailable = columns.reduce((acc, value) => {
-    if (value.width === 0 || value.isStiff) {
+    const cannotGiveSpaceAway =
+      value.width === 0 ||
+      value.isStiff ||
+      value.width < value.minResizeWidth;
+
+    if (cannotGiveSpaceAway) {
       return acc;
     }
 
@@ -53,7 +64,9 @@ const fillSpace = (index, columns, resizeWidth) => {
   }, 0);
 
   const resizeWidthWithFallback =
-    resizeWidth || columns[index].minResizeWidth;
+    widthInMemory > columns[column.index].minResizeWidth
+      ? widthInMemory
+      : columns[column.index].minResizeWidth;
 
   const enoughSpaceAvailable =
     totalSpaceAvailable > resizeWidthWithFallback;
@@ -62,13 +75,8 @@ const fillSpace = (index, columns, resizeWidth) => {
     ? resizeWidthWithFallback
     : totalSpaceAvailable;
 
-  const prioritizedColumns = [
-    ...columns.slice(0, index).reverse(),
-    ...columns.slice(index, columns.length),
-  ];
-
   const withFilledColumns = prioritizedColumns.map((value) => {
-    if (value.index === index) {
+    if (value.index === column.index) {
       return { ...value, width: neededSpace };
     }
 
@@ -78,14 +86,15 @@ const fillSpace = (index, columns, resizeWidth) => {
   const withRemovedSpaceColumns = withFilledColumns.map((value) => {
     const spaceAvailable = value.width - value.minResizeWidth;
     const notStiff = !value.isStiff;
-    const notRevealingColumn = value.index !== index;
+    const notRevealingColumn = value.index !== column.index;
 
-    if (
+    const shouldGrow =
       neededSpace !== 0 &&
       spaceAvailable > 0 &&
       notStiff &&
-      notRevealingColumn
-    ) {
+      notRevealingColumn;
+
+    if (shouldGrow) {
       const spaceToAllocate =
         neededSpace > spaceAvailable ? spaceAvailable : neededSpace;
 
@@ -101,38 +110,54 @@ const fillSpace = (index, columns, resizeWidth) => {
     return value;
   });
 
-  return withRemovedSpaceColumns
-    .sort((a, b) => a.index - b.index)
-    .map((value) => value.width);
+  return withRemovedSpaceColumns.sort((a, b) => a.index - b.index);
 };
 
-const applyHide = (index, tableRef, layout, hides, hide) => {
-  const tableWidth = tableRef.current
+const distributeSpaceOfHiddenColumns = (
+  dataColumns,
+  tableMemoryRef
+) => {
+  return dataColumns.reduce((acc, column) => {
+    const { index, width, isHide } = column;
+
+    // prevent things on re-render, because we cannot memorize the previous hide state
+
+    if (!isHide && width > 0) {
+      return acc;
+    }
+
+    if (isHide && width === 0) {
+      return acc;
+    }
+
+    const space = tableMemoryRef.current.hiddenSpacesInMemory[index];
+
+    const adjustedColumns = isHide
+      ? hideSpace(column, acc)
+      : fillSpace(column, acc, space);
+
+    // put space in memory before setting it to 0
+    // this way it can be used when column is revealed again
+    // remove space from memory when it has been filled up
+
+    if (isHide) {
+      tableMemoryRef.current.hiddenSpacesInMemory[index] =
+        acc[index].width;
+    } else {
+      delete tableMemoryRef.current.hiddenSpacesInMemory[index];
+    }
+
+    return adjustedColumns;
+  }, dataColumns);
+};
+
+const performHide = (dataColumns, tableElementRef, layout) => {
+  const tableWidth = tableElementRef.current
     .querySelector('.thead')
     .getBoundingClientRect().width;
 
-  const headerColumns = getHeaderColumns(tableRef);
-
-  const columns = headerColumns.map((headerCell, j) => ({
-    index: j,
-    isStiff: headerCell.classList.contains('stiff'),
-    minResizeWidth: +headerCell.getAttribute('data-resize-min-width'),
-    width: headerCell.getBoundingClientRect().width,
-  }));
-
-  const newColumnWidthsAsPx = hide
-    ? hideSpace(index, columns)
-    : fillSpace(index, columns, hides.current[index]);
-
-  // remember width before hiding the column
-  if (hide) {
-    hides.current[index] = columns[index].width;
-  } else {
-    delete hides.current[index];
-  }
-
-  const newColumnWidths = columns.map((column, i) => {
-    const px = newColumnWidthsAsPx[i];
+  const columnWidths = dataColumns.map((column) => {
+    const px = column.width;
     const percentage = (px / tableWidth) * 100;
 
     return column.isStiff || layout?.horizontalScroll
@@ -141,41 +166,58 @@ const applyHide = (index, tableRef, layout, hides, hide) => {
   });
 
   const applyWidth = (cell, i) => {
-    cell.style.width = newColumnWidths[i];
-    cell.style.minWidth = newColumnWidths[i];
+    cell.style.width = columnWidths[i];
+    cell.style.minWidth = columnWidths[i];
   };
 
-  applyToHeaderColumns(tableRef, applyWidth);
-  applyToColumns(tableRef, applyWidth);
+  applyToHeaderColumns(tableElementRef, applyWidth);
+  applyToColumns(tableElementRef, applyWidth);
 
-  return newColumnWidths;
+  const applyHide = (cell, i) => {
+    if (dataColumns[i].isHide && dataColumns[i].width === 0) {
+      cell.classList.add('hide');
+    } else {
+      cell.classList.remove('hide');
+    }
+  };
+
+  applyToHeaderColumns(tableElementRef, applyHide);
+  applyToColumns(tableElementRef, applyHide);
+
+  return columnWidths;
 };
 
-export const useLayoutHide = (index, hide) => {
-  const { resizedLayout, tableRef, layout } = React.useContext(
-    ResizeContext
-  );
-
-  const mounted = React.useRef(false);
-  const previousHide = React.useRef();
-  const hides = React.useRef({});
+export const useLayoutHide = () => {
+  const {
+    tableElementRef,
+    tableMemoryRef,
+    layout,
+  } = React.useContext(LayoutContext);
 
   React.useLayoutEffect(() => {
-    if (previousHide.current === hide) return;
+    const dataColumns = getHeaderColumns(tableElementRef).map(
+      (headerCell, j) => ({
+        index: j,
+        minResizeWidth: +headerCell.getAttribute(
+          'data-resize-min-width'
+        ),
+        width: headerCell.getBoundingClientRect().width,
+        isStiff: headerCell.classList.contains('stiff'),
+        isHide: (layout?.hiddenColumns || []).includes(
+          headerCell.getAttribute('data-cell-key')
+        ),
+      })
+    );
 
-    // we do not want to hide on initial render
-    // initialing hiding is done in useProduceRowLayout.js
-    if (mounted.current) {
-      resizedLayout.current = applyHide(
-        index,
-        tableRef,
-        layout,
-        hides,
-        hide
-      );
-    }
+    const adjustedDataColumns = distributeSpaceOfHiddenColumns(
+      dataColumns,
+      tableMemoryRef
+    );
 
-    mounted.current = true;
-    previousHide.current = hide;
-  }, [index, hide, resizedLayout, tableRef, layout]);
+    tableMemoryRef.current.resizedLayout = performHide(
+      adjustedDataColumns,
+      tableElementRef,
+      layout
+    );
+  }, [tableElementRef, tableMemoryRef, layout]);
 };

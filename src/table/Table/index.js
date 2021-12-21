@@ -4,12 +4,32 @@ import PropTypes from 'prop-types';
 
 import { TableContext } from '@table-library/react-table-library/common/context/Table';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
-import { ResizeProvider } from '@table-library/react-table-library/common/context/Resize';
+import { LayoutProvider } from '@table-library/react-table-library/common/context/Layout';
 import { SortContext } from '@table-library/react-table-library/common/context/Sort';
 import { SelectContext } from '@table-library/react-table-library/common/context/Select';
 import { TreeContext } from '@table-library/react-table-library/common/context/Tree';
 
 import styles from './styles';
+
+const useTableElementRef = (ref) => {
+  let tableElementRef = React.useRef();
+  if (ref) tableElementRef = ref;
+
+  return tableElementRef;
+};
+
+const useTableMemoryRef = () => {
+  const tableMemoryRef = React.useRef();
+
+  if (!tableMemoryRef.current) {
+    tableMemoryRef.current = {
+      resizedLayout: {},
+      hiddenSpacesInMemory: {},
+    };
+  }
+
+  return tableMemoryRef;
+};
 
 const Table = React.forwardRef(
   (
@@ -26,8 +46,8 @@ const Table = React.forwardRef(
     },
     ref
   ) => {
-    let tableRef = React.useRef();
-    if (ref) tableRef = ref;
+    const tableElementRef = useTableElementRef(ref);
+    const tableMemoryRef = useTableMemoryRef();
 
     let modifiedNodes = [...data.nodes];
 
@@ -58,14 +78,14 @@ const Table = React.forwardRef(
       );
     }
 
-    const calledOnce = React.useRef();
+    const [calledOnce, setCalledOnce] = React.useState(false);
     const callbackRef = (node) => {
       if (!node) return;
 
-      if (calledOnce.current) return;
-      calledOnce.current = true;
+      if (calledOnce) return;
+      setCalledOnce(true);
 
-      tableRef.current = node;
+      tableElementRef.current = node;
       onInit(node);
     };
 
@@ -79,19 +99,25 @@ const Table = React.forwardRef(
         role="grid"
         ref={callbackRef}
       >
-        <TableContext.Provider value={data}>
-          <ThemeContext.Provider value={theme}>
-            <SortContext.Provider value={sort}>
-              <SelectContext.Provider value={select}>
-                <TreeContext.Provider value={tree}>
-                  <ResizeProvider layout={layout} tableRef={tableRef}>
-                    {children(modifiedNodes)}
-                  </ResizeProvider>
-                </TreeContext.Provider>
-              </SelectContext.Provider>
-            </SortContext.Provider>
-          </ThemeContext.Provider>
-        </TableContext.Provider>
+        {calledOnce && (
+          <TableContext.Provider value={data}>
+            <ThemeContext.Provider value={theme}>
+              <SortContext.Provider value={sort}>
+                <SelectContext.Provider value={select}>
+                  <TreeContext.Provider value={tree}>
+                    <LayoutProvider
+                      layout={layout}
+                      tableElementRef={tableElementRef}
+                      tableMemoryRef={tableMemoryRef}
+                    >
+                      {children(modifiedNodes)}
+                    </LayoutProvider>
+                  </TreeContext.Provider>
+                </SelectContext.Provider>
+              </SortContext.Provider>
+            </ThemeContext.Provider>
+          </TableContext.Provider>
+        )}
       </div>
     );
   }
