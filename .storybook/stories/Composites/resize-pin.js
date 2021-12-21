@@ -16,7 +16,7 @@ import { useTheme } from '@table-library/react-table-library/theme';
 
 import { nodes } from '../data';
 
-storiesOf('Features/Pin', module)
+storiesOf('Composites/Resize & Pin', module)
   .addParameters({ component: Table })
   .add('base', () => {
     const data = { nodes };
@@ -67,13 +67,19 @@ storiesOf('Features/Pin', module)
             <>
               <Header>
                 <HeaderRow>
-                  <HeaderCell className="stiff pin">Task</HeaderCell>
-                  <HeaderCell className="stiff pin">
+                  <HeaderCell resize className="stiff pin">
+                    Task
+                  </HeaderCell>
+                  <HeaderCell resize className="stiff pin">
                     Deadline
                   </HeaderCell>
-                  <HeaderCell>Type</HeaderCell>
-                  <HeaderCell className="stiff">Complete</HeaderCell>
-                  <HeaderCell className="stiff">Tasks</HeaderCell>
+                  <HeaderCell resize>Type</HeaderCell>
+                  <HeaderCell resize className="stiff">
+                    Complete
+                  </HeaderCell>
+                  <HeaderCell resize className="stiff">
+                    Tasks
+                  </HeaderCell>
                 </HeaderRow>
               </Header>
 
@@ -99,23 +105,4 @@ storiesOf('Features/Pin', module)
         </Table>
       </div>
     );
-  })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-      <li>
-        <strong>Caveats: </strong>
-        <ul>
-          <li>% can be used, even a sum of % that's above 100%</li>
-          <li>
-            When resize feature is active, a resize transforms all %
-            to px columns
-          </li>
-        </ul>
-      </li>
-    </ul>
-  ));
+  });
