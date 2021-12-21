@@ -20,7 +20,7 @@ const HeaderCellSelect = React.memo(
     const handleChange = () => select.fns.onToggleAll();
 
     return (
-      <HeaderCell shrink {...passThrough}>
+      <HeaderCell stiff {...passThrough}>
         <Checkbox
           checked={isSelected}
           isIndeterminate={isIndeterminate}

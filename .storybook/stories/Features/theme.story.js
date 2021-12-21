@@ -18,24 +18,6 @@ import { nodes } from '../data';
 
 storiesOf('Features/Theme', module)
   .addParameters({ component: Table })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.robinwieruch.de/react-table-theme"
-        >
-          Tutorial
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ))
   .add('Ocean Blue', () => {
     const theme = useTheme({
       BaseRow: `
@@ -192,6 +174,8 @@ storiesOf('Features/Theme', module)
 
         padding-top: 11px;
         padding-bottom: 11px;
+
+        border-bottom: 1px solid transparent;
       `,
       Cell: `
         margin-top: 8px;
@@ -236,4 +220,22 @@ storiesOf('Features/Theme', module)
         )}
       </Table>
     );
-  });
+  })
+  .add('documentation', () => (
+    <ul>
+      <li>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.robinwieruch.de/react-table-theme"
+        >
+          Tutorial
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
+  ));

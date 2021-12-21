@@ -12,50 +12,48 @@ import {
   HeaderCell,
   Cell,
 } from '@table-library/react-table-library/table';
-
 import { useTheme } from '@table-library/react-table-library/theme';
 
-import { nodes } from '../../data';
+import { nodes } from '../data';
 
-storiesOf('Library Themes/Ant Design', module)
+storiesOf('Composites/Resize & Horizontal', module)
   .addParameters({ component: Table })
   .add('base', () => {
     const data = { nodes };
 
     const theme = useTheme({
       Table: `
-        margin: 20px;
-      `,
-      BaseRow: `
-        color: #212529;
-
-        &:hover {
-          color: #212529;
-          cursor: default;
-        }
-
-        height: 56px;
-        font-size: 14px;
-
-        border-bottom: 1px solid #f0f0f0;
-      `,
-      HeaderRow: `
-        font-weight: bold;
-        background-color: #fafafa;
-      `,
-      Row: `
-        &:hover {
-          backgorund-color: #fafafa;
-        }
+        height: 100%;
       `,
       BaseCell: `
-        border-right: 1px solid transparent;
-        border-bottom: 1px solid transparent;
+        &:nth-child(1) {
+          min-width: 50%;
+          width: 50%;
+        }
+
+        &:nth-child(2) {
+          min-width: 200px;
+          width: 200px;
+        }
+
+        &:nth-child(3), &:nth-child(4) {
+          min-width: 30%;
+          width: 30%;
+        }
+
+        &:nth-child(5) {
+          min-width: 40%;
+          width: 40%;
+        }
       `,
     });
 
     return (
-      <Table data={data} theme={theme}>
+      <Table
+        data={data}
+        theme={theme}
+        layout={{ custom: true, horizontalScroll: true }}
+      >
         {(tableList) => (
           <>
             <Header>
@@ -70,7 +68,7 @@ storiesOf('Library Themes/Ant Design', module)
 
             <Body>
               {tableList.map((item) => (
-                <Row item={item} key={item.id}>
+                <Row key={item.id} item={item}>
                   <Cell>{item.name}</Cell>
                   <Cell>
                     {item.deadline.toLocaleDateString('en-US', {
@@ -89,13 +87,4 @@ storiesOf('Library Themes/Ant Design', module)
         )}
       </Table>
     );
-  })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ));
+  });

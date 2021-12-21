@@ -19,15 +19,6 @@ import { nodes } from '../../data';
 
 storiesOf('Library Themes/Semantic UI', module)
   .addParameters({ component: Table })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ))
   .add('base', () => {
     const data = { nodes };
 
@@ -52,13 +43,14 @@ storiesOf('Library Themes/Semantic UI', module)
       `,
       HeaderRow: `
         font-weight: bold;
-        background-color: #f9fafb;
+        background-color: #f9fafb;;
       `,
       Row: `
         border-bottom: 1px solid #e3e4e5;
       `,
       BaseCell: `
         border-right: 1px solid #e3e4e5;
+        border-bottom: 1px solid transparent;
       `,
     });
 
@@ -97,4 +89,13 @@ storiesOf('Library Themes/Semantic UI', module)
         )}
       </Table>
     );
-  });
+  })
+  .add('documentation', () => (
+    <ul>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
+  ));

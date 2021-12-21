@@ -1,20 +1,20 @@
 import * as React from 'react';
 
-import { ResizeContext } from '@table-library/react-table-library/common/context/Resize';
-
+import { LayoutContext } from '@table-library/react-table-library/common/context/Layout';
 import {
   getHeaderColumns,
   applyToHeaderColumns,
   applyToColumns,
-} from './util';
+} from '@table-library/react-table-library/common/util/columns';
 
-const applyResize = (index, tableRef, layout, resizeWidth) => {
-  const headerColumns = getHeaderColumns(tableRef);
+const applyResize = (index, tableElementRef, layout, resizeWidth) => {
+  const headerColumns = getHeaderColumns(tableElementRef);
 
   const columns = headerColumns.map((headerCell, j) => ({
     index: j,
     minResizeWidth: +headerCell.getAttribute('data-resize-min-width'),
     width: headerCell.getBoundingClientRect().width,
+    isStiff: headerCell.classList.contains('stiff'),
   }));
 
   const afterColumn = columns.reduce((acc, value, j) => {
@@ -24,6 +24,10 @@ const applyResize = (index, tableRef, layout, resizeWidth) => {
     return acc;
   }, null);
 
+  const tableWidth = tableElementRef.current
+    .querySelector('.thead')
+    .getBoundingClientRect().width;
+
   const { minResizeWidth } = columns[index];
 
   const actualResizeWidth =
@@ -31,9 +35,9 @@ const applyResize = (index, tableRef, layout, resizeWidth) => {
 
   const diffWidth = actualResizeWidth - columns[index].width;
 
-  const newColumnWidths = columns.map((column, i) => {
-    // resize
+  // calculate new widths of cell under consideration of its neighbors
 
+  const newColumnWidthsAsPx = columns.map((column, i) => {
     if (afterColumn && index === i) {
       const nextWidth = afterColumn.width - diffWidth;
       const willNextAdjust = nextWidth > minResizeWidth;
@@ -51,26 +55,52 @@ const applyResize = (index, tableRef, layout, resizeWidth) => {
     return column.width;
   });
 
+  const newColumnWidths = columns.map((column, i) => {
+    const px = newColumnWidthsAsPx[i];
+    const percentage = (px / tableWidth) * 100;
+
+    // if horizontalScroll, then we cannot work with "absolute" percentages
+    // TODO maybe there is a way to keep % for horizontalScroll, however, use with resize feature I didn't find one yet
+    return column.isStiff || layout?.horizontalScroll
+      ? `${px}px`
+      : `${percentage}%`;
+  });
+
   // imperative write of all cell widths
 
-  const applyWidth = (cell, i, size) => {
-    if (i === size - 1) {
-      cell.style.width = `${newColumnWidths[i]}px`;
-    } else {
-      cell.style.width = `${newColumnWidths[i]}px`;
+  const applyWidth = (cell, i) => {
+    cell.style.width = newColumnWidths[i];
+    cell.style.minWidth = newColumnWidths[i];
+  };
+
+  // pin feature as edge case
+
+  const applyLeft = (cell, i) => {
+    if ([...cell.classList].includes('pin')) {
+      const left = newColumnWidthsAsPx.reduce((sum, v, j) => {
+        if (j >= i) return sum;
+        return sum + v;
+      }, 0);
+
+      cell.style.left = `${left}px`;
     }
   };
 
-  applyToHeaderColumns(tableRef, applyWidth);
-  applyToColumns(tableRef, applyWidth);
+  applyToHeaderColumns(tableElementRef, applyWidth);
+  applyToColumns(tableElementRef, applyWidth);
+
+  applyToHeaderColumns(tableElementRef, applyLeft);
+  applyToColumns(tableElementRef, applyLeft);
 
   return newColumnWidths;
 };
 
 export const useResize = (cellRef, index) => {
-  const { resizedLayout, tableRef, layout } = React.useContext(
-    ResizeContext
-  );
+  const {
+    tableMemoryRef,
+    layout,
+    tableElementRef,
+  } = React.useContext(LayoutContext);
 
   const resizeRef = React.useRef();
 
@@ -94,15 +124,15 @@ export const useResize = (cellRef, index) => {
 
         const resizeWidth = startOffset.current + event.pageX;
 
-        resizedLayout.current = applyResize(
+        tableMemoryRef.current.resizedLayout = applyResize(
           index,
-          tableRef,
+          tableElementRef,
           layout,
           resizeWidth
         );
       }
     },
-    [index, layout, resizedLayout, tableRef]
+    [index, layout, tableElementRef, tableMemoryRef]
   );
 
   const onMouseUp = React.useCallback(() => {

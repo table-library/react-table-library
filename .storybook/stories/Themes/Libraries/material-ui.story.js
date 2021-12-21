@@ -71,6 +71,7 @@ storiesOf('Library Themes/Material UI', module)
       `,
       BaseCell: `
         border-right: 1px solid transparent;
+        border-bottom: 1px solid transparent;
 
         &:focus {
           outline: dotted;
@@ -137,7 +138,7 @@ storiesOf('Library Themes/Material UI', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell shrink>
+                <HeaderCell stiff>
                   <MaterialCheckbox
                     color="primary"
                     size="small"
@@ -169,7 +170,7 @@ storiesOf('Library Themes/Material UI', module)
             <Body>
               {tableList.map((item) => (
                 <Row item={item} key={item.id}>
-                  <Cell shrink tabIndex="-1">
+                  <Cell stiff tabIndex="-1">
                     <MaterialCheckbox
                       color="primary"
                       size="small"

@@ -34,7 +34,7 @@ const WithStickyHeader = React.forwardRef(
     <div ref={ref} {...rest}>
       <Header>
         <HeaderRow>
-          <HeaderCell shrink>Index</HeaderCell>
+          <HeaderCell stiff>Index</HeaderCell>
           <HeaderCell>Task</HeaderCell>
           <HeaderCell>Deadline</HeaderCell>
           <HeaderCell>Type</HeaderCell>
@@ -82,7 +82,7 @@ storiesOf('Features/Ten Thousand Rows', module)
                       }}
                     >
                       <Row item={data.items[index]}>
-                        <Cell shrink>{index}</Cell>
+                        <Cell stiff>{index}</Cell>
                         <Cell>{data.items[index].name}</Cell>
                         <Cell>
                           {data.items[
@@ -155,7 +155,7 @@ storiesOf('Features/Ten Thousand Rows', module)
                       }}
                     >
                       <Row item={data.items[index]}>
-                        <Cell shrink>{index}</Cell>
+                        <Cell stiff>{index}</Cell>
                         <CellTree item={data.items[index]}>
                           {data.items[index].name}
                         </CellTree>

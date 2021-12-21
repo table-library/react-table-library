@@ -11,8 +11,7 @@ const BASE_STYLE = `
   padding-top: 4px;
   padding-bottom: 4px;
 
-
-  &:not(.shrink) > div {
+  &:not(.stiff) > div {
     width: 100%;
 
     white-space: nowrap;
@@ -39,13 +38,19 @@ const BASE_STYLE = `
     border-right: 0px solid transparent;
   }
 
-  &.shrink > div {
+  &.stiff > div {
     padding-right: ${GUTTER}px;
     padding-left: ${GUTTER}px;
   }
 
   &.hide {
     display: none;
+  }
+
+  &.pin {
+    position: sticky;
+    left: 0;
+    z-index: 3;
   }
 `;
 
@@ -67,6 +72,9 @@ const HEADER_CELL_CONTAINER_STYLE = `
   ${BASE_STYLE}
 
   position: relative;
+
+  background-color: ${COLORS.BACKGROUND};
+  border-bottom: 1px solid ${COLORS.BORDER};
 
   svg,
   path {

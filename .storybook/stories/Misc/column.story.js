@@ -45,6 +45,7 @@ storiesOf('Misc/Column', module)
           <>
             <Header>
               <HeaderRow>
+                {/* important: when using resize, the key needs to be index */}
                 {columns.map((column, index) => (
                   <HeaderCell key={index}>{column.label}</HeaderCell>
                 ))}
@@ -71,6 +72,12 @@ storiesOf('Misc/Column', module)
         <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
           Story Code
         </a>
+      </li>
+      <li>
+        <strong>Caveats: </strong>
+        <ul>
+          <li>When resize feature is active, use index as key</li>
+        </ul>
       </li>
     </ul>
   ));

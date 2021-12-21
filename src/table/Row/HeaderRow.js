@@ -6,12 +6,15 @@ import { HeaderRowContainer } from '@table-library/react-table-library/common/co
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
 import { useProduceRowLayout } from '@table-library/react-table-library/resize/useProduceRowLayout';
 import { useConsumeRowLayout } from '@table-library/react-table-library/resize/useConsumeRowLayout';
+import { useLayoutHide } from '@table-library/react-table-library/resize';
 
 const HeaderRow = ({ className, disabled, children }) => {
   const theme = React.useContext(ThemeContext);
 
   const ref = React.useRef();
   useProduceRowLayout(ref, '.th');
+  useConsumeRowLayout(ref, '.th');
+  useLayoutHide();
   useConsumeRowLayout(ref, '.th');
 
   return (

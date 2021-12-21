@@ -31,7 +31,7 @@ const CellSelect = React.memo(
     };
 
     return (
-      <Cell shrink {...passThrough}>
+      <Cell stiff {...passThrough}>
         <Checkbox
           select={select}
           checked={isSelected}

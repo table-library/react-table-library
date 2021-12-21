@@ -7,15 +7,15 @@ import { ThemeContext } from '@table-library/react-table-library/common/context/
 import {
   resizerStyle,
   useResize,
-  useLayoutHide,
-  useStyleHide,
 } from '@table-library/react-table-library/resize';
 
 const HeaderCell = ({
   index,
+  cellKey,
   className,
   hide,
-  shrink,
+  pin,
+  stiff,
   resize,
   children,
   ...rest
@@ -23,19 +23,18 @@ const HeaderCell = ({
   const theme = React.useContext(ThemeContext);
 
   const cellRef = React.useRef();
-  useLayoutHide(index, hide);
-  useStyleHide(cellRef, hide);
-
   const { resizeRef } = useResize(cellRef, index);
 
   return (
     <HeaderCellContainer
       {...rest}
       role="columnheader"
+      data-cell-key={cellKey || index}
       data-resize-min-width={resize?.minWidth || 75}
       className={cs('th', className, {
-        shrink,
+        stiff,
         resize,
+        pin,
       })}
       css={`
         ${theme?.BaseCell}
@@ -51,9 +50,11 @@ const HeaderCell = ({
 
 HeaderCell.propTypes = {
   index: PropTypes.number,
+  cellKey: PropTypes.string,
   className: PropTypes.string,
   hide: PropTypes.bool,
-  shrink: PropTypes.bool,
+  pin: PropTypes.bool,
+  stiff: PropTypes.bool,
   resize: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.shape({

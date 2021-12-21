@@ -5,34 +5,30 @@ import cs from 'classnames';
 import { CellContainer } from '@table-library/react-table-library/common/components/Cell';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
 
-import { useStyleHide } from '@table-library/react-table-library/resize';
-
 const Cell = ({
   className,
   hide,
-  shrink,
+  pin,
+  stiff,
   onClick,
   children,
   ...rest
 }) => {
   const theme = React.useContext(ThemeContext);
 
-  const cellRef = React.useRef();
-  useStyleHide(cellRef, hide);
-
   return (
     <CellContainer
       {...rest}
       role="gridcell"
       className={cs('td', className, {
-        shrink,
+        stiff,
+        pin,
       })}
       css={`
         ${theme?.BaseCell}
         ${theme?.Cell}
       `}
       onClick={onClick}
-      ref={cellRef}
     >
       <div>{children}</div>
     </CellContainer>
@@ -42,7 +38,8 @@ const Cell = ({
 Cell.propTypes = {
   className: PropTypes.string,
   hide: PropTypes.bool,
-  shrink: PropTypes.bool,
+  pin: PropTypes.bool,
+  stiff: PropTypes.bool,
   onClick: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
