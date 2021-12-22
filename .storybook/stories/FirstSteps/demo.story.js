@@ -42,6 +42,7 @@ storiesOf('First Steps/Demo', module)
 
     const theme = useTheme({
       Table: `
+        margin: 20px;
         border-radius: 4px;
         border: 1px solid #e0e0e0;
       `,
@@ -67,15 +68,9 @@ storiesOf('First Steps/Demo', module)
           }
         }
       `,
-      HeaderCell: `
+      BaseCell: `
         border-right: 1px solid transparent;
-
-        &:not(:first-child) {
-          border-right: 1px dotted #e0e0e0;
-        }
-      `,
-      Cell: `
-        border-right: 1px solid transparent;
+        border-bottom: 1px solid transparent;
       `,
     });
 
@@ -150,7 +145,6 @@ storiesOf('First Steps/Demo', module)
         select={select}
         sort={sort}
         pagination={pagination}
-        layout={{ boxOffset: 2 }}
       >
         {(tableList) => (
           <>
@@ -237,6 +231,7 @@ storiesOf('First Steps/Demo', module)
   .add('Server-Side', () => {
     const theme = useTheme({
       Table: `
+        margin: 20px;
         border-radius: 4px;
         border: 1px solid #e0e0e0;
       `,
@@ -262,15 +257,9 @@ storiesOf('First Steps/Demo', module)
           }
         }
       `,
-      HeaderCell: `
+      BaseCell: `
         border-right: 1px solid transparent;
-
-        &:not(:first-child) {
-          border-right: 1px dotted #e0e0e0;
-        }
-      `,
-      Cell: `
-        border-right: 1px solid transparent;
+        border-bottom: 1px solid transparent;
       `,
     });
 

@@ -180,52 +180,6 @@ storiesOf('Features/Resize', module)
       </Table>
     );
   })
-  .add('offset', () => {
-    const theme = useTheme({
-      BaseRow: `
-        padding-left: 32px;
-        padding-right: 16px;
-      `,
-    });
-
-    const data = { nodes };
-
-    return (
-      <Table data={data} theme={theme} layout={{ boxOffset: 48 }}>
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCell resize>Task</HeaderCell>
-                <HeaderCell resize>Deadline</HeaderCell>
-                <HeaderCell resize>Type</HeaderCell>
-                <HeaderCell resize>Complete</HeaderCell>
-                <HeaderCell resize>Tasks</HeaderCell>
-              </HeaderRow>
-            </Header>
-
-            <Body>
-              {tableList.map((item) => (
-                <Row key={item.id} item={item}>
-                  <Cell>{item.name}</Cell>
-                  <Cell>
-                    {item.deadline.toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: '2-digit',
-                      day: '2-digit',
-                    })}
-                  </Cell>
-                  <Cell>{item.type}</Cell>
-                  <Cell>{item.isComplete.toString()}</Cell>
-                  <Cell>{item.nodes?.length}</Cell>
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
-    );
-  })
   .add('documentation', () => (
     <ul>
       <li>
