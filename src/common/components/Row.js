@@ -8,6 +8,12 @@ const getBaseStyle = (layout) => `
   align-items: stretch;
 
   ${() => {
+    /* #1 */
+    // otherwise tree + resize would have overflow icons */
+  }}
+  background-color: ${COLORS.BACKGROUND};
+
+  ${() => {
     /* otherwise pin feature pushes pined columns eventually outside if sum of all column widths is greater than container size */
     /* https://stackoverflow.com/a/57437315/1189762 */
   }}
@@ -16,11 +22,6 @@ const getBaseStyle = (layout) => `
 
 const getRowContainerStyle = (layout) => `
   ${getBaseStyle(layout)}
-
-  ${() => {
-    /* #1 */
-  }}
-  background-color: ${COLORS.BACKGROUND};
 
   font-size: 18px;
   color: ${COLORS.FONT_SECONDARY};

@@ -52,16 +52,16 @@ const BASE_STYLE = `
     left: 0;
     z-index: 3;
   }
-`;
-
-const CELL_CONTAINER_STYLE = () => `
-  ${BASE_STYLE}
 
   ${() => {
     /* #1 */
     // otherwise tree + resize would have overflow icons */
   }}
   background-color: inherit;
+`;
+
+const CELL_CONTAINER_STYLE = () => `
+  ${BASE_STYLE}
 `;
 
 const CellContainer = React.forwardRef((props, ref) => {
@@ -73,7 +73,6 @@ const HEADER_CELL_CONTAINER_STYLE = `
 
   position: relative;
 
-  background-color: ${COLORS.BACKGROUND};
   border-bottom: 1px solid ${COLORS.BORDER};
 
   svg,
