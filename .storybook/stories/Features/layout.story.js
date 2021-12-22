@@ -246,8 +246,8 @@ storiesOf('Features/Layout', module)
         }
 
         &:nth-child(5) {
-          min-width: 15%;
-          width: 15%;
+          min-width: 100px;
+          width: 100px;
         }
       `,
     });
@@ -261,7 +261,7 @@ storiesOf('Features/Layout', module)
             <Header>
               <HeaderRow>
                 <HeaderCell>Task</HeaderCell>
-                <HeaderCell className="stiff">Deadline</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
                 <HeaderCell>Type</HeaderCell>
                 <HeaderCell>Complete</HeaderCell>
                 <HeaderCell>Tasks</HeaderCell>
@@ -323,7 +323,7 @@ storiesOf('Features/Layout', module)
             <Header>
               <HeaderRow>
                 <HeaderCell>Task</HeaderCell>
-                <HeaderCell className="stiff">Deadline</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
                 <HeaderCell>Type</HeaderCell>
                 <HeaderCell>Complete</HeaderCell>
                 <HeaderCell>Tasks</HeaderCell>

@@ -59,21 +59,19 @@ storiesOf('Features/Pin', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell className="stiff pin">Task</HeaderCell>
-                <HeaderCell className="stiff pin">
-                  Deadline
-                </HeaderCell>
+                <HeaderCell pin>Task</HeaderCell>
+                <HeaderCell pin>Deadline</HeaderCell>
                 <HeaderCell>Type</HeaderCell>
-                <HeaderCell className="stiff">Complete</HeaderCell>
-                <HeaderCell className="stiff">Tasks</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
               </HeaderRow>
             </Header>
 
             <Body>
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  <Cell className="pin">{item.name}</Cell>
-                  <Cell className="pin">
+                  <Cell pin>{item.name}</Cell>
+                  <Cell pin>
                     {item.deadline.toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: '2-digit',
@@ -140,21 +138,19 @@ storiesOf('Features/Pin', module)
             <>
               <Header>
                 <HeaderRow>
-                  <HeaderCell className="stiff pin">Task</HeaderCell>
-                  <HeaderCell className="stiff pin">
-                    Deadline
-                  </HeaderCell>
+                  <HeaderCell pin>Task</HeaderCell>
+                  <HeaderCell pin>Deadline</HeaderCell>
                   <HeaderCell>Type</HeaderCell>
-                  <HeaderCell className="stiff">Complete</HeaderCell>
-                  <HeaderCell className="stiff">Tasks</HeaderCell>
+                  <HeaderCell>Complete</HeaderCell>
+                  <HeaderCell>Tasks</HeaderCell>
                 </HeaderRow>
               </Header>
 
               <Body>
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    <Cell className="pin">{item.name}</Cell>
-                    <Cell className="pin">
+                    <Cell pin>{item.name}</Cell>
+                    <Cell pin>
                       {item.deadline.toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: '2-digit',

@@ -34,13 +34,13 @@ storiesOf('Features/Horizontal Scroll', module)
         }
 
         &:nth-child(3), &:nth-child(4) {
-          min-width: 30%;
-          width: 30%;
+          min-width: 25%;
+          width: 25%;
         }
 
         &:nth-child(5) {
-          min-width: 40%;
-          width: 40%;
+          min-width: 50%;
+          width: 50%;
         }
       `,
     });
@@ -104,13 +104,13 @@ storiesOf('Features/Horizontal Scroll', module)
         }
 
         &:nth-child(3), &:nth-child(4) {
-          min-width: 30%;
-          width: 30%;
+          min-width: 25%;
+          width: 25%;
         }
 
         &:nth-child(5) {
-          min-width: 40%;
-          width: 40%;
+          min-width: 50%;
+          width: 50%;
         }
       `,
     });

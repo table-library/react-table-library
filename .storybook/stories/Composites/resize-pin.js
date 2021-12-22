@@ -67,27 +67,23 @@ storiesOf('Composites/Resize & Pin', module)
             <>
               <Header>
                 <HeaderRow>
-                  <HeaderCell resize className="stiff pin">
+                  <HeaderCell resize pin>
                     Task
                   </HeaderCell>
-                  <HeaderCell resize className="stiff pin">
+                  <HeaderCell resize pin>
                     Deadline
                   </HeaderCell>
                   <HeaderCell resize>Type</HeaderCell>
-                  <HeaderCell resize className="stiff">
-                    Complete
-                  </HeaderCell>
-                  <HeaderCell resize className="stiff">
-                    Tasks
-                  </HeaderCell>
+                  <HeaderCell resize>Complete</HeaderCell>
+                  <HeaderCell resize>Tasks</HeaderCell>
                 </HeaderRow>
               </Header>
 
               <Body>
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    <Cell className="pin">{item.name}</Cell>
-                    <Cell className="pin">
+                    <Cell pin>{item.name}</Cell>
+                    <Cell pin>
                       {item.deadline.toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: '2-digit',
