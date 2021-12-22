@@ -22,6 +22,79 @@ storiesOf('Features/Pin', module)
     const data = { nodes };
 
     const theme = useTheme({
+      BaseCell: `
+        &:nth-child(1) {
+          left: 0px;
+
+          min-width: 250px;
+          width: 250px;
+        }
+
+        &:nth-child(2) {
+          left: 250px;
+
+          min-width: 150px;
+          width: 150px;
+        }
+
+        &:nth-child(3) {
+          min-width: 20%;
+          width: 20%;
+        }
+
+        &:nth-child(4), &:nth-child(5) {
+          min-width: 700px;
+          width: 700px;
+        }
+      `,
+    });
+
+    return (
+      <Table
+        data={data}
+        theme={theme}
+        layout={{ custom: true, horizontalScroll: true }}
+      >
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell className="stiff pin">Task</HeaderCell>
+                <HeaderCell className="stiff pin">
+                  Deadline
+                </HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell className="stiff">Complete</HeaderCell>
+                <HeaderCell className="stiff">Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row key={item.id} item={item}>
+                  <Cell className="pin">{item.name}</Cell>
+                  <Cell className="pin">
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('+ vertical scroll', () => {
+    const data = { nodes };
+
+    const theme = useTheme({
       Table: `
         height: 100%;
       `,

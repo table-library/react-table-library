@@ -22,9 +22,6 @@ storiesOf('Features/Horizontal Scroll', module)
     const data = { nodes };
 
     const theme = useTheme({
-      Table: `
-        height: 100%;
-      `,
       BaseCell: `
         &:nth-child(1) {
           min-width: 50%;
