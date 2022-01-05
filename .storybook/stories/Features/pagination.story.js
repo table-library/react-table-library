@@ -25,7 +25,7 @@ storiesOf('Features/Pagination', module)
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://www.robinwieruch.de/react-table-pagination"
+          href="https://www.robinwieruch.de/react-table-pagination/"
         >
           Tutorial
         </a>

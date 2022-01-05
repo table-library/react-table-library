@@ -227,7 +227,7 @@ storiesOf('Features/Theme', module)
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://www.robinwieruch.de/react-table-theme"
+          href="https://www.robinwieruch.de/react-table-theme/"
         >
           Tutorial
         </a>

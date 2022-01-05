@@ -243,7 +243,7 @@ storiesOf('Features/Fixed Header', module)
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://www.robinwieruch.de/react-table-fixed-header"
+          href="https://www.robinwieruch.de/react-table-fixed-header/"
         >
           Tutorial
         </a>

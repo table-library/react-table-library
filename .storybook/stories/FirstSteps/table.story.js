@@ -62,7 +62,7 @@ storiesOf('First Steps/Table', module)
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://www.robinwieruch.de/react-table-component"
+          href="https://www.robinwieruch.de/react-table-component/"
         >
           Tutorial
         </a>

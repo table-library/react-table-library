@@ -89,7 +89,7 @@ storiesOf('Kitchen Sink/PDF Download', module)
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://www.robinwieruch.de/react-component-to-pdf"
+          href="https://www.robinwieruch.de/react-component-to-pdf/"
         >
           Tutorial
         </a>

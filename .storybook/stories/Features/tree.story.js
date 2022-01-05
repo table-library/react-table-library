@@ -33,7 +33,7 @@ storiesOf('Features/Tree', module)
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://www.robinwieruch.de/react-tree-table"
+          href="https://www.robinwieruch.de/react-tree-table/"
         >
           Tutorial
         </a>

@@ -519,7 +519,7 @@ storiesOf('Features/Select', module)
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://www.robinwieruch.de/react-table-select"
+          href="https://www.robinwieruch.de/react-table-select/"
         >
           Tutorial
         </a>

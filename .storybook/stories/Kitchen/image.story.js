@@ -92,7 +92,7 @@ storiesOf('Kitchen Sink/Image Download', module)
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://www.robinwieruch.de/react-component-to-image"
+          href="https://www.robinwieruch.de/react-component-to-image/"
         >
           Tutorial
         </a>

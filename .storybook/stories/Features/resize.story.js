@@ -186,7 +186,7 @@ storiesOf('Features/Resize', module)
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://www.robinwieruch.de/react-table-resize"
+          href="https://www.robinwieruch.de/react-table-resize/"
         >
           Tutorial
         </a>

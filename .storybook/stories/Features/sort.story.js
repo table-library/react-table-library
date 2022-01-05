@@ -627,7 +627,7 @@ storiesOf('Features/Sort', module)
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://www.robinwieruch.de/react-table-sort"
+          href="https://www.robinwieruch.de/react-table-sort/"
         >
           Tutorial
         </a>

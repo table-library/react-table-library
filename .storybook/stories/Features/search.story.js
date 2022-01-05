@@ -155,7 +155,7 @@ storiesOf('Features/Search', module)
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://www.robinwieruch.de/react-table-search"
+          href="https://www.robinwieruch.de/react-table-search/"
         >
           Tutorial
         </a>

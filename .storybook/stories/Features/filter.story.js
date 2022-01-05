@@ -191,7 +191,7 @@ storiesOf('Features/Filter', module)
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://www.robinwieruch.de/react-table-filter"
+          href="https://www.robinwieruch.de/react-table-filter/"
         >
           Tutorial
         </a>
