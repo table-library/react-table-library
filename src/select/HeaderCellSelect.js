@@ -18,7 +18,9 @@ const HeaderCellSelect = React.memo(
         select.state.id != null);
 
     const handleChange = () =>
-      select.fns.onToggleAll(select._options);
+      select.fns.onToggleAll({
+        isPartialToAll: select._options.isPartialToAll,
+      });
 
     return (
       <HeaderCell stiff {...passThrough}>

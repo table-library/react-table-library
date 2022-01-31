@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { findNodeById } from './tree/findNodeById';
 import { fromTreeToList } from './tree/fromTreeToList';
-import { includesAll } from './tree/includesAll';
+import { includesAll, includesNone } from './tree/includesAll';
 import { useSyncControlledState } from './useSyncControlledState';
 import { useReducerWithMiddleware } from './useReducerWithMiddleware';
 
@@ -199,6 +199,7 @@ const useIdReducer = (data, controlledState, onChange, context) => {
     (id, options) => {
       const DEFAULT_OPTIONS = {
         isCarryForward: false,
+        isPartialToAll: false,
       };
 
       const mergedOptions = {
@@ -212,13 +213,28 @@ const useIdReducer = (data, controlledState, onChange, context) => {
         (item) => item.id
       );
 
-      if (includesAll(ids, state.ids)) {
-        onRemoveByIdRecursively(ids);
-      } else {
-        onAddByIdRecursively(ids, mergedOptions);
+      if (!mergedOptions.isPartialToAll) {
+        if (includesNone(ids, state.ids)) {
+          onAddByIdRecursively(ids, mergedOptions);
+        } else {
+          onRemoveByIdRecursively(ids);
+        }
+      }
+
+      if (mergedOptions.isPartialToAll) {
+        if (includesAll(ids, state.ids)) {
+          onRemoveByIdRecursively(ids);
+        } else {
+          onAddByIdRecursively(ids, mergedOptions);
+        }
       }
     },
-    [data, state, onAddByIdRecursively, onRemoveByIdRecursively]
+    [
+      data.nodes,
+      state.ids,
+      onAddByIdRecursively,
+      onRemoveByIdRecursively,
+    ]
   );
 
   const onAddByIdExclusively = React.useCallback(
@@ -265,10 +281,19 @@ const useIdReducer = (data, controlledState, onChange, context) => {
   }, [dispatchWithMiddleware]);
 
   const onToggleAll = React.useCallback(
-    ({ isPartialToAll }) => {
+    (options) => {
+      const DEFAULT_OPTIONS = {
+        isPartialToAll: false,
+      };
+
+      const mergedOptions = {
+        ...DEFAULT_OPTIONS,
+        ...options,
+      };
+
       const ids = fromTreeToList(data.nodes).map((item) => item.id);
 
-      if (!isPartialToAll) {
+      if (!mergedOptions.isPartialToAll) {
         if (none) {
           onAddAll(ids);
         } else {
@@ -276,7 +301,7 @@ const useIdReducer = (data, controlledState, onChange, context) => {
         }
       }
 
-      if (isPartialToAll) {
+      if (mergedOptions.isPartialToAll) {
         if (all) {
           onRemoveAll();
         } else {

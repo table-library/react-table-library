@@ -26,6 +26,7 @@ const CellSelect = React.memo(
       } else {
         select.fns.onToggleByIdRecursively(item.id, {
           isCarryForward: select._options.isCarryForward,
+          isPartialToAll: select._options.isPartialToAll,
         });
       }
     };
