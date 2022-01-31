@@ -17,7 +17,8 @@ const HeaderCellSelect = React.memo(
       (select._options.buttonSelect === SELECT_TYPES.SingleSelect &&
         select.state.id != null);
 
-    const handleChange = () => select.fns.onToggleAll();
+    const handleChange = () =>
+      select.fns.onToggleAll(select._options);
 
     return (
       <HeaderCell stiff {...passThrough}>

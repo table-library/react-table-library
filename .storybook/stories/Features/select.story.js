@@ -392,7 +392,7 @@ storiesOf('Features/Select', module)
       </Table>
     );
   })
-  .add('carry-forward', () => {
+  .add('isCarryForward', () => {
     const data = { nodes };
 
     const select = useRowSelect(
@@ -402,6 +402,61 @@ storiesOf('Features/Select', module)
       },
       {
         isCarryForward: true,
+      }
+    );
+
+    function onSelectChange(action, state) {
+      console.log(action, state);
+    }
+
+    return (
+      <Table data={data} select={select}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCellSelect />
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row key={item.id} item={item}>
+                  <CellSelect item={item} />
+                  <Cell>{item.name}</Cell>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('isPartialToAll', () => {
+    const data = { nodes };
+
+    const select = useRowSelect(
+      data,
+      {
+        onChange: onSelectChange,
+      },
+      {
+        isPartialToAll: true,
       }
     );
 

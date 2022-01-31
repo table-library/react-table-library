@@ -130,6 +130,15 @@ const useIdReducer = (data, controlledState, onChange, context) => {
     context
   );
 
+  const none = !state.ids.length;
+
+  const all =
+    !!data.nodes.length &&
+    includesAll(
+      data.nodes.map((item) => item.id),
+      state.ids
+    );
+
   const onAddById = React.useCallback(
     (id) =>
       dispatchWithMiddleware({
@@ -255,15 +264,28 @@ const useIdReducer = (data, controlledState, onChange, context) => {
     });
   }, [dispatchWithMiddleware]);
 
-  const onToggleAll = React.useCallback(() => {
-    const ids = fromTreeToList(data.nodes).map((item) => item.id);
+  const onToggleAll = React.useCallback(
+    ({ isPartialToAll }) => {
+      const ids = fromTreeToList(data.nodes).map((item) => item.id);
 
-    if (includesAll(ids, state.ids)) {
-      onRemoveAll();
-    } else {
-      onAddAll(ids);
-    }
-  }, [data, state, onAddAll, onRemoveAll]);
+      if (!isPartialToAll) {
+        if (none) {
+          onAddAll(ids);
+        } else {
+          onRemoveAll();
+        }
+      }
+
+      if (isPartialToAll) {
+        if (all) {
+          onRemoveAll();
+        } else {
+          onAddAll(ids);
+        }
+      }
+    },
+    [data.nodes, none, onAddAll, onRemoveAll, all]
+  );
 
   useSyncControlledState(controlledState, state, () =>
     dispatchWithMiddleware({
@@ -271,15 +293,6 @@ const useIdReducer = (data, controlledState, onChange, context) => {
       payload: controlledState,
     })
   );
-
-  const none = !state.ids.length;
-
-  const all =
-    !!data.nodes.length &&
-    includesAll(
-      data.nodes.map((item) => item.id),
-      state.ids
-    );
 
   const fns = React.useMemo(
     () => ({

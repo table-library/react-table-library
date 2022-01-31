@@ -66,6 +66,7 @@ const DEFAULT_OPTIONS = {
   rowSelect: SELECT_TYPES.SingleSelect,
   buttonSelect: SELECT_TYPES.MultiSelect,
   isCarryForward: false,
+  isPartialToAll: false,
 };
 
 const useRowSelect = (data, primary = {}, options = {}, context) => {
