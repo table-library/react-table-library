@@ -29,11 +29,9 @@ const HeaderRow = ({ className, disabled, children }) => {
     >
       {React.Children.toArray(children)
         .filter(Boolean)
-        .map((child) =>
+        .map((child, index) =>
           React.cloneElement(child, {
-            index: Number(
-              child.key.replace('.', '').replace('$', '')
-            ),
+            index,
           })
         )}
     </HeaderRowContainer>
