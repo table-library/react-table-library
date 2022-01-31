@@ -121,6 +121,16 @@ const reducer = (state, action) => {
   }
 };
 
+const DEFAULT_OPTIONS = {
+  isCarryForward: true,
+  isPartialToAll: false,
+};
+
+const getMergedOptions = (options) => ({
+  ...DEFAULT_OPTIONS,
+  ...options,
+});
+
 const useIdReducer = (data, controlledState, onChange, context) => {
   const [state, dispatchWithMiddleware] = useReducerWithMiddleware(
     reducer,
@@ -129,6 +139,12 @@ const useIdReducer = (data, controlledState, onChange, context) => {
     [onChange],
     context
   );
+
+  // exclusive for select feature
+  const shiftToggle = React.useRef({
+    toggleId: null,
+    shiftIds: [],
+  });
 
   const none = !state.ids.length;
 
@@ -158,21 +174,22 @@ const useIdReducer = (data, controlledState, onChange, context) => {
   );
 
   const onToggleById = React.useCallback(
-    (id) =>
-      state.ids.includes(id) ? onRemoveById(id) : onAddById(id),
+    (id) => {
+      if (state.ids.includes(id)) {
+        onRemoveById(id);
+      } else {
+        onAddById(id);
+      }
+
+      shiftToggle.current.toggledId = id;
+      shiftToggle.current.shiftIds = [];
+    },
     [state, onAddById, onRemoveById]
   );
 
   const onAddByIdRecursively = React.useCallback(
     (ids, options) => {
-      const DEFAULT_OPTIONS = {
-        isCarryForward: false,
-      };
-
-      const mergedOptions = {
-        ...DEFAULT_OPTIONS,
-        ...options,
-      };
+      const mergedOptions = getMergedOptions(options);
 
       dispatchWithMiddleware({
         type: ADD_BY_ID_RECURSIVELY,
@@ -197,15 +214,7 @@ const useIdReducer = (data, controlledState, onChange, context) => {
 
   const onToggleByIdRecursively = React.useCallback(
     (id, options) => {
-      const DEFAULT_OPTIONS = {
-        isCarryForward: false,
-        isPartialToAll: false,
-      };
-
-      const mergedOptions = {
-        ...DEFAULT_OPTIONS,
-        ...options,
-      };
+      const mergedOptions = getMergedOptions(options);
 
       const node = findNodeById(data.nodes, id);
 
@@ -228,6 +237,9 @@ const useIdReducer = (data, controlledState, onChange, context) => {
           onAddByIdRecursively(ids, mergedOptions);
         }
       }
+
+      shiftToggle.current.toggledId = id;
+      shiftToggle.current.shiftIds = [];
     },
     [
       data.nodes,
@@ -260,6 +272,9 @@ const useIdReducer = (data, controlledState, onChange, context) => {
       } else {
         onAddByIdExclusively(id);
       }
+
+      shiftToggle.current.toggledId = id;
+      shiftToggle.current.shiftIds = [];
     },
     [state, onRemoveByIdExclusively, onAddByIdExclusively]
   );
@@ -282,20 +297,13 @@ const useIdReducer = (data, controlledState, onChange, context) => {
 
   const onToggleAll = React.useCallback(
     (options) => {
-      const DEFAULT_OPTIONS = {
-        isPartialToAll: false,
-      };
-
-      const mergedOptions = {
-        ...DEFAULT_OPTIONS,
-        ...options,
-      };
+      const mergedOptions = getMergedOptions(options);
 
       const ids = fromTreeToList(data.nodes).map((item) => item.id);
 
       if (!mergedOptions.isPartialToAll) {
         if (none) {
-          onAddAll(ids);
+          onAddAll(ids, mergedOptions);
         } else {
           onRemoveAll();
         }
@@ -305,11 +313,40 @@ const useIdReducer = (data, controlledState, onChange, context) => {
         if (all) {
           onRemoveAll();
         } else {
-          onAddAll(ids);
+          onAddAll(ids, mergedOptions);
         }
       }
     },
     [data.nodes, none, onAddAll, onRemoveAll, all]
+  );
+
+  const onToggleByIdShift = React.useCallback(
+    (id, options) => {
+      const mergedOptions = getMergedOptions(options);
+
+      if (shiftToggle.current.shiftIds.length) {
+        onRemoveByIdRecursively(shiftToggle.current.shiftIds);
+        shiftToggle.current.shiftIds = [];
+      }
+
+      const ids = fromTreeToList(data.nodes).map((item) => item.id);
+
+      const originId = shiftToggle.current.toggledId;
+      const targetId = id;
+
+      let originIndex = ids.findIndex((v) => v === originId);
+      let targetIndex = ids.findIndex((v) => v === targetId);
+
+      if (originIndex > targetIndex) {
+        [originIndex, targetIndex] = [targetIndex, originIndex];
+      }
+
+      const newShiftIds = ids.slice(originIndex, targetIndex + 1);
+
+      onAddByIdRecursively(newShiftIds, mergedOptions);
+      shiftToggle.current.shiftIds = newShiftIds;
+    },
+    [data.nodes, onAddByIdRecursively, onRemoveByIdRecursively]
   );
 
   useSyncControlledState(controlledState, state, () =>
@@ -333,6 +370,8 @@ const useIdReducer = (data, controlledState, onChange, context) => {
       onRemoveByIdExclusively,
       onToggleByIdExclusively,
 
+      onToggleByIdShift,
+
       onAddAll,
       onRemoveAll,
       onToggleAll,
@@ -350,6 +389,7 @@ const useIdReducer = (data, controlledState, onChange, context) => {
       onToggleAll,
       onToggleById,
       onToggleByIdRecursively,
+      onToggleByIdShift,
     ]
   );
 

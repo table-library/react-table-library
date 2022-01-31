@@ -9,6 +9,8 @@ import { SortContext } from '@table-library/react-table-library/common/context/S
 import { SelectContext } from '@table-library/react-table-library/common/context/Select';
 import { TreeContext } from '@table-library/react-table-library/common/context/Tree';
 
+import { useShiftDown } from './useShiftDown';
+
 import styles from './styles';
 
 const useTableElementRef = (ref) => {
@@ -89,11 +91,14 @@ const Table = React.forwardRef(
       onInit(node);
     };
 
+    // no selection of content (e.g. text) in table if shift is active (e.g. select shift feature)
+    const isShiftDown = useShiftDown();
+
     return (
       <div
         className="table"
         css={`
-          ${styles(layout)}
+          ${styles(layout, { isShiftDown })}
           ${theme?.Table}
         `}
         role="grid"

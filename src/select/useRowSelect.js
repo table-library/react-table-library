@@ -42,10 +42,21 @@ const getRowProps = (props, features) => {
     if (select._options.clickType !== SELECT_CLICK_TYPES.RowClick)
       return;
 
-    if (select._options.rowSelect === SELECT_TYPES.SingleSelect) {
-      select.fns.onToggleByIdExclusively(node.id);
-    } else {
+    const isMultiSelectType =
+      select._options.rowSelect === SELECT_TYPES.MultiSelect;
+
+    // optional ways to activate multi-select with keyboard
+    const isCommandSelectType = !!event.metaKey;
+    const isShiftSelectType = !!event.shiftKey;
+
+    if (isCommandSelectType) {
       select.fns.onToggleById(node.id);
+    } else if (isShiftSelectType) {
+      select.fns.onToggleByIdShift(node.id, select._options);
+    } else if (isMultiSelectType) {
+      select.fns.onToggleById(node.id);
+    } /* isSingleSelectType */ else {
+      select.fns.onToggleByIdExclusively(node.id);
     }
   };
 
@@ -65,7 +76,7 @@ const DEFAULT_OPTIONS = {
   clickType: SELECT_CLICK_TYPES.RowClick,
   rowSelect: SELECT_TYPES.SingleSelect,
   buttonSelect: SELECT_TYPES.MultiSelect,
-  isCarryForward: false,
+  isCarryForward: true,
   isPartialToAll: false,
 };
 

@@ -401,7 +401,7 @@ storiesOf('Features/Select', module)
         onChange: onSelectChange,
       },
       {
-        isCarryForward: true,
+        isCarryForward: false,
       }
     );
 
