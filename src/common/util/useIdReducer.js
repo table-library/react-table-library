@@ -142,8 +142,8 @@ const useIdReducer = (data, controlledState, onChange, context) => {
 
   // exclusive for select feature
   const shiftToggle = React.useRef({
-    toggleId: null,
-    shiftIds: [],
+    lastToggledId: null,
+    currentShiftIds: [],
   });
 
   const none = !state.ids.length;
@@ -181,8 +181,8 @@ const useIdReducer = (data, controlledState, onChange, context) => {
         onAddById(id);
       }
 
-      shiftToggle.current.toggledId = id;
-      shiftToggle.current.shiftIds = [];
+      shiftToggle.current.lastToggledId = id;
+      shiftToggle.current.currentShiftIds = [];
     },
     [state, onAddById, onRemoveById]
   );
@@ -238,8 +238,8 @@ const useIdReducer = (data, controlledState, onChange, context) => {
         }
       }
 
-      shiftToggle.current.toggledId = id;
-      shiftToggle.current.shiftIds = [];
+      shiftToggle.current.lastToggledId = id;
+      shiftToggle.current.currentShiftIds = [];
     },
     [
       data.nodes,
@@ -273,8 +273,8 @@ const useIdReducer = (data, controlledState, onChange, context) => {
         onAddByIdExclusively(id);
       }
 
-      shiftToggle.current.toggledId = id;
-      shiftToggle.current.shiftIds = [];
+      shiftToggle.current.lastToggledId = id;
+      shiftToggle.current.currentShiftIds = [];
     },
     [state, onRemoveByIdExclusively, onAddByIdExclusively]
   );
@@ -324,14 +324,14 @@ const useIdReducer = (data, controlledState, onChange, context) => {
     (id, options) => {
       const mergedOptions = getMergedOptions(options);
 
-      if (shiftToggle.current.shiftIds.length) {
-        onRemoveByIdRecursively(shiftToggle.current.shiftIds);
-        shiftToggle.current.shiftIds = [];
+      if (shiftToggle.current.currentShiftIds.length) {
+        onRemoveByIdRecursively(shiftToggle.current.currentShiftIds);
+        shiftToggle.current.currentShiftIds = [];
       }
 
       const ids = fromTreeToList(data.nodes).map((item) => item.id);
 
-      const originId = shiftToggle.current.toggledId;
+      const originId = shiftToggle.current.lastToggledId;
       const targetId = id;
 
       let originIndex = ids.findIndex((v) => v === originId);
@@ -344,7 +344,7 @@ const useIdReducer = (data, controlledState, onChange, context) => {
       const newShiftIds = ids.slice(originIndex, targetIndex + 1);
 
       onAddByIdRecursively(newShiftIds, mergedOptions);
-      shiftToggle.current.shiftIds = newShiftIds;
+      shiftToggle.current.currentShiftIds = newShiftIds;
     },
     [data.nodes, onAddByIdRecursively, onRemoveByIdRecursively]
   );

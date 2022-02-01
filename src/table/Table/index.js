@@ -9,7 +9,10 @@ import { SortContext } from '@table-library/react-table-library/common/context/S
 import { SelectContext } from '@table-library/react-table-library/common/context/Select';
 import { TreeContext } from '@table-library/react-table-library/common/context/Tree';
 
+import { applyModifiers } from '@table-library/react-table-library/common/util/modifiers';
+
 import { useShiftDown } from './useShiftDown';
+import { useOnInit } from './useOnInit';
 
 import styles from './styles';
 
@@ -51,45 +54,18 @@ const Table = React.forwardRef(
     const tableElementRef = useTableElementRef(ref);
     const tableMemoryRef = useTableMemoryRef();
 
-    let modifiedNodes = [...data.nodes];
+    const modifiedNodes = applyModifiers({
+      nodes: data.nodes,
+      sort,
+      pagination,
+      tree,
+    });
 
-    if (sort && !sort._options.isServer) {
-      modifiedNodes = sort.state.sortFn(
-        modifiedNodes,
-        sort._options.sortFns,
-        !!tree
-      );
-    }
-
-    if (pagination && !pagination._options.isServer) {
-      // TODO tree?
-      modifiedNodes =
-        pagination.state.getPages(modifiedNodes)[
-          pagination.state.page
-        ] || [];
-    }
-
-    if (tree && !tree._options.isServer) {
-      modifiedNodes = tree.state.fromTreeToListExtended(
-        data,
-        modifiedNodes,
-        tree,
-        tree._options.treeXLevel,
-        tree._options.treeYLevel,
-        null
-      );
-    }
-
-    const [calledOnce, setCalledOnce] = React.useState(false);
-    const callbackRef = (node) => {
-      if (!node) return;
-
-      if (calledOnce) return;
-      setCalledOnce(true);
-
-      tableElementRef.current = node;
-      onInit(node);
-    };
+    // callback handler to notifty internal but also optionally outside world that table got rendered
+    const [calledOnce, callbackRef] = useOnInit(
+      onInit,
+      tableElementRef
+    );
 
     // no selection of content (e.g. text) in table if shift is active (e.g. select shift feature)
     const isShiftDown = useShiftDown();

@@ -106,11 +106,27 @@ const useTree = (data, primary = {}, options = {}, context) => {
     },
   };
 
+  const _modifier = (nodes) => {
+    if (mergedOptions.isServer) {
+      return nodes;
+    }
+
+    return fromTreeToListExtended(
+      data,
+      nodes,
+      state.ids,
+      mergedOptions.treeXLevel,
+      mergedOptions.treeYLevel,
+      null
+    );
+  };
+
   return {
-    state: { ...state, fromTreeToListExtended },
+    state,
     fns,
     _options: mergedOptions,
     _getRowProps: getRowProps,
+    _modifier,
   };
 };
 

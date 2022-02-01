@@ -54,6 +54,7 @@ const DEFAULT_SORT_ICON = {
 const DEFAULT_OPTIONS = {
   isServer: false,
   sortIcon: DEFAULT_SORT_ICON,
+  isRecursive: true,
 };
 
 const useSort = (data, primary = {}, options = {}, context) => {
@@ -130,10 +131,25 @@ const useSort = (data, primary = {}, options = {}, context) => {
     },
   };
 
+  const stateAndGetters = { ...state, sortFn };
+
+  const _modifier = (nodes) => {
+    if (mergedOptions.isServer) {
+      return nodes;
+    }
+
+    return stateAndGetters.sortFn(
+      nodes,
+      mergedOptions.sortFns,
+      mergedOptions.isRecursive
+    );
+  };
+
   return {
-    state: { ...state, sortFn },
+    state: stateAndGetters,
     fns,
     _options: mergedOptions,
+    _modifier,
   };
 };
 

@@ -16,7 +16,7 @@ export const fromTreeToList = (nodes) =>
 export const fromTreeToListExtended = (
   data,
   nodes,
-  tree,
+  treeIds,
   treeXLevel = 0,
   treeYLevel = 0,
   parentNode = null
@@ -47,13 +47,13 @@ export const fromTreeToListExtended = (
     // eslint-disable-next-line no-param-reassign
     acc = acc.concat(listNode);
 
-    if (hasLeaves(value) && tree.state.ids.includes(value.id)) {
+    if (hasLeaves(value) && treeIds.includes(value.id)) {
       // eslint-disable-next-line no-param-reassign
       acc = acc.concat(
         fromTreeToListExtended(
           data,
           value.nodes,
-          tree,
+          treeIds,
           treeXLevel + 1,
           treeYLevel,
           { ...value, ...extendedNode }

@@ -117,10 +117,27 @@ const usePagination = (data, primary = {}, options = {}, context) => {
     ...options,
   };
 
+  const stateAndGetters = {
+    ...state,
+    getTotalPages,
+    getPages,
+    getPageBoundaries,
+  };
+
+  const _modifier = (nodes) => {
+    if (mergedOptions.isServer) {
+      return nodes;
+    }
+
+    // TODO tree?
+    return stateAndGetters.getPages(nodes)[state.page] || [];
+  };
+
   return {
-    state: { ...state, getTotalPages, getPages, getPageBoundaries },
+    state: stateAndGetters,
     fns,
     _options: mergedOptions,
+    _modifier,
   };
 };
 
