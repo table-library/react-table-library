@@ -4,6 +4,7 @@ import * as COLORS from '@table-library/react-table-library/common/colors';
 import { isRowClick } from '@table-library/react-table-library/common/util/isRowClick';
 import { useIdReducer } from '@table-library/react-table-library/common/util/useIdReducer';
 import { useSyncRefState } from '@table-library/react-table-library/common/util/useSyncRefState';
+import { applyModifiers } from '@table-library/react-table-library/common/util/modifiers';
 
 import { SELECT_TYPES, SELECT_CLICK_TYPES } from './config';
 
@@ -49,10 +50,16 @@ const getRowProps = (props, features) => {
     const isCommandSelectType = !!event.metaKey;
     const isShiftSelectType = !!event.shiftKey;
 
+    const modifier = applyModifiers(features);
+
     if (isCommandSelectType) {
       select.fns.onToggleById(node.id);
     } else if (isShiftSelectType) {
-      select.fns.onToggleByIdShift(node.id, select._options);
+      select.fns.onToggleByIdShift(
+        node.id,
+        select._options,
+        modifier
+      );
     } else if (isMultiSelectType) {
       select.fns.onToggleById(node.id);
     } /* isSingleSelectType */ else {

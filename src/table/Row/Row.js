@@ -7,6 +7,8 @@ import { isRowClick } from '@table-library/react-table-library/common/util/isRow
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
 import { SelectContext } from '@table-library/react-table-library/common/context/Select';
 import { TreeContext } from '@table-library/react-table-library/common/context/Tree';
+import { SortContext } from '@table-library/react-table-library/common/context/Sort';
+import { PaginationContext } from '@table-library/react-table-library/common/context/Pagination';
 
 import { useConsumeRowLayout } from '@table-library/react-table-library/resize/useConsumeRowLayout';
 
@@ -77,10 +79,14 @@ const Row = (props) => {
 
   const select = React.useContext(SelectContext);
   const tree = React.useContext(TreeContext);
+  const sort = React.useContext(SortContext);
+  const pagination = React.useContext(PaginationContext);
 
   const features = {
     select,
     tree,
+    sort,
+    pagination,
     // others
   };
 

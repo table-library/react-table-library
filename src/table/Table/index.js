@@ -8,6 +8,7 @@ import { LayoutProvider } from '@table-library/react-table-library/common/contex
 import { SortContext } from '@table-library/react-table-library/common/context/Sort';
 import { SelectContext } from '@table-library/react-table-library/common/context/Select';
 import { TreeContext } from '@table-library/react-table-library/common/context/Tree';
+import { PaginationContext } from '@table-library/react-table-library/common/context/Pagination';
 
 import { applyModifiers } from '@table-library/react-table-library/common/util/modifiers';
 
@@ -55,11 +56,10 @@ const Table = React.forwardRef(
     const tableMemoryRef = useTableMemoryRef();
 
     const modifiedNodes = applyModifiers({
-      nodes: data.nodes,
       sort,
       pagination,
       tree,
-    });
+    })(data.nodes);
 
     // callback handler to notifty internal but also optionally outside world that table got rendered
     const [calledOnce, callbackRef] = useOnInit(
@@ -86,13 +86,15 @@ const Table = React.forwardRef(
               <SortContext.Provider value={sort}>
                 <SelectContext.Provider value={select}>
                   <TreeContext.Provider value={tree}>
-                    <LayoutProvider
-                      layout={layout}
-                      tableElementRef={tableElementRef}
-                      tableMemoryRef={tableMemoryRef}
-                    >
-                      {children(modifiedNodes)}
-                    </LayoutProvider>
+                    <PaginationContext.Provider value={pagination}>
+                      <LayoutProvider
+                        layout={layout}
+                        tableElementRef={tableElementRef}
+                        tableMemoryRef={tableMemoryRef}
+                      >
+                        {children(modifiedNodes)}
+                      </LayoutProvider>
+                    </PaginationContext.Provider>
                   </TreeContext.Provider>
                 </SelectContext.Provider>
               </SortContext.Provider>

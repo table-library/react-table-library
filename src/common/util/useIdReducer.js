@@ -321,7 +321,7 @@ const useIdReducer = (data, controlledState, onChange, context) => {
   );
 
   const onToggleByIdShift = React.useCallback(
-    (id, options) => {
+    (id, options, modifier) => {
       const mergedOptions = getMergedOptions(options);
 
       if (shiftToggle.current.currentShiftIds.length) {
@@ -329,10 +329,10 @@ const useIdReducer = (data, controlledState, onChange, context) => {
         shiftToggle.current.currentShiftIds = [];
       }
 
-      const ids = fromTreeToList(data.nodes).map((item) => item.id);
-
       const originId = shiftToggle.current.lastToggledId;
       const targetId = id;
+
+      const ids = modifier(data.nodes).map((item) => item.id);
 
       let originIndex = ids.findIndex((v) => v === originId);
       let targetIndex = ids.findIndex((v) => v === targetId);

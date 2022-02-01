@@ -1,4 +1,6 @@
-export const applyModifiers = ({ nodes, sort, pagination, tree }) => {
+export const applyModifiers = ({ sort, pagination, tree }) => (
+  nodes
+) => {
   let modifiedNodes = [...nodes];
 
   modifiedNodes = sort
