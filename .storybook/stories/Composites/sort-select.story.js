@@ -25,7 +25,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('Composites/Sort & Select (WIP)', module)
+storiesOf('Composites/Sort & Select', module)
   .addParameters({ component: Table })
   .add('base', () => {
     const data = { nodes };

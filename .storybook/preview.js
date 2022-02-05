@@ -34,7 +34,7 @@ export const parameters = {
           'Column Grouping (WIP)',
         ],
         'Composites',
-        ['Sort & Select (WIP)', 'Tree & Select', 'Tree & Sort'],
+        ['Sort & Select', 'Tree & Select', 'Tree & Sort'],
         'Misc',
         ['Cell', 'Row', 'Column'],
         'Product Themes',

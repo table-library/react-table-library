@@ -16,13 +16,13 @@ import {
 import {
   CellTree,
   useTree,
-  TREE_EXPAND_CLICK_TYPES,
+  TreeExpandClickTypes,
 } from '@table-library/react-table-library/tree';
 import {
   CellSelect,
   HeaderCellSelect,
   useRowSelect,
-  SELECT_CLICK_TYPES,
+  SelectClickTypes,
 } from '@table-library/react-table-library/select';
 
 import { nodes } from '../data';
@@ -94,9 +94,9 @@ storiesOf('Composites/Tree & Select', module)
         onChange: onTreeChange,
       },
       {
-        clickType: TREE_EXPAND_CLICK_TYPES.ButtonClick,
+        clickType: TreeExpandClickTypes.ButtonClick,
         treeYLevel: 1,
-      }
+      },
     );
 
     const select = useRowSelect(
@@ -105,8 +105,8 @@ storiesOf('Composites/Tree & Select', module)
         onChange: onSelectChange,
       },
       {
-        clickType: SELECT_CLICK_TYPES.ButtonClick,
-      }
+        clickType: SelectClickTypes.ButtonClick,
+      },
     );
 
     function onTreeChange(action, state) {
@@ -164,9 +164,9 @@ storiesOf('Composites/Tree & Select', module)
         onChange: onTreeChange,
       },
       {
-        clickType: TREE_EXPAND_CLICK_TYPES.ButtonClick,
+        clickType: TreeExpandClickTypes.ButtonClick,
         treeYLevel: 1,
-      }
+      },
     );
 
     const select = useRowSelect(
@@ -175,8 +175,8 @@ storiesOf('Composites/Tree & Select', module)
         onChange: onSelectChange,
       },
       {
-        clickType: SELECT_CLICK_TYPES.RowClick,
-      }
+        clickType: SelectClickTypes.RowClick,
+      },
     );
 
     function onTreeChange(action, state) {
@@ -234,9 +234,9 @@ storiesOf('Composites/Tree & Select', module)
         onChange: onTreeChange,
       },
       {
-        clickType: TREE_EXPAND_CLICK_TYPES.RowClick,
+        clickType: TreeExpandClickTypes.RowClick,
         treeYLevel: 1,
-      }
+      },
     );
 
     const select = useRowSelect(
@@ -245,8 +245,8 @@ storiesOf('Composites/Tree & Select', module)
         onChange: onSelectChange,
       },
       {
-        clickType: SELECT_CLICK_TYPES.ButtonClick,
-      }
+        clickType: SelectClickTypes.ButtonClick,
+      },
     );
 
     function onTreeChange(action, state) {
@@ -306,8 +306,8 @@ storiesOf('Composites/Tree & Select', module)
           onChange: onTreeChange,
         },
         {
-          clickType: TREE_EXPAND_CLICK_TYPES.ButtonClick,
-        }
+          clickType: TreeExpandClickTypes.ButtonClick,
+        },
       );
 
       const select = useRowSelect(data, {
@@ -357,7 +357,7 @@ storiesOf('Composites/Tree & Select', module)
           )}
         </Table>
       );
-    }
+    },
   )
   .add(
     'only checkbox: select on checkbox, expand tree on row click',
@@ -371,7 +371,7 @@ storiesOf('Composites/Tree & Select', module)
         },
         {
           treeYLevel: 1,
-        }
+        },
       );
 
       const select = useRowSelect(
@@ -380,8 +380,8 @@ storiesOf('Composites/Tree & Select', module)
           onChange: onSelectChange,
         },
         {
-          clickType: SELECT_CLICK_TYPES.ButtonClick,
-        }
+          clickType: SelectClickTypes.ButtonClick,
+        },
       );
 
       function onTreeChange(action, state) {
@@ -429,7 +429,7 @@ storiesOf('Composites/Tree & Select', module)
           )}
         </Table>
       );
-    }
+    },
   )
   .add('documentation', () => (
     <ul>

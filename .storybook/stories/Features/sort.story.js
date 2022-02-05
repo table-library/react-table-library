@@ -21,7 +21,7 @@ import {
 import {
   useSort,
   HeaderCellSort,
-  SORT_ICON_POSITIONS,
+  SortIconPositions,
 } from '@table-library/react-table-library/sort';
 
 import { nodes } from '../data';
@@ -49,10 +49,10 @@ storiesOf('Features/Sort', module)
           TASKS: (array) =>
             array.sort(
               (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length
+                (a.nodes || []).length - (b.nodes || []).length,
             ),
         },
-      }
+      },
     );
 
     function onSortChange(action, state) {
@@ -124,10 +124,10 @@ storiesOf('Features/Sort', module)
           TASKS: (array) =>
             array.sort(
               (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length
+                (a.nodes || []).length - (b.nodes || []).length,
             ),
         },
-      }
+      },
     );
 
     function onSortChange(action, state) {
@@ -198,10 +198,10 @@ storiesOf('Features/Sort', module)
           TASKS: (array) =>
             array.sort(
               (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length
+                (a.nodes || []).length - (b.nodes || []).length,
             ),
         },
-      }
+      },
     );
 
     function onSortChange(action, state) {
@@ -258,7 +258,7 @@ storiesOf('Features/Sort', module)
       },
       {
         sortIcon: {
-          position: SORT_ICON_POSITIONS.Prefix,
+          position: SortIconPositions.Prefix,
         },
         sortFns: {
           TASK: (array) =>
@@ -272,10 +272,10 @@ storiesOf('Features/Sort', module)
           TASKS: (array) =>
             array.sort(
               (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length
+                (a.nodes || []).length - (b.nodes || []).length,
             ),
         },
-      }
+      },
     );
 
     function onSortChange(action, state) {
@@ -348,10 +348,10 @@ storiesOf('Features/Sort', module)
           TASKS: (array) =>
             array.sort(
               (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length
+                (a.nodes || []).length - (b.nodes || []).length,
             ),
         },
-      }
+      },
     );
 
     function onSortChange(action, state) {
@@ -427,10 +427,10 @@ storiesOf('Features/Sort', module)
           TASKS: (array) =>
             array.sort(
               (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length
+                (a.nodes || []).length - (b.nodes || []).length,
             ),
         },
-      }
+      },
     );
 
     function onSortChange(action, state) {
@@ -498,10 +498,10 @@ storiesOf('Features/Sort', module)
           TASKS: (array) =>
             array.sort(
               (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length
+                (a.nodes || []).length - (b.nodes || []).length,
             ),
         },
-      }
+      },
     );
 
     function onSortChange(action, state) {

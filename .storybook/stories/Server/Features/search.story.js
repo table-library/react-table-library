@@ -18,15 +18,6 @@ import { getData } from '../../server';
 
 storiesOf('Server/Search', module)
   .addParameters({ component: Table })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ))
   .add('base', () => {
     const [data, setData] = React.useState({
       nodes: [],
@@ -194,4 +185,13 @@ storiesOf('Server/Search', module)
     <>
       See <strong>Server Recipes/Debounce</strong>
     </>
+  ))
+  .add('documentation', () => (
+    <ul>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
   ));

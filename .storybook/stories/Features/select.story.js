@@ -18,8 +18,8 @@ import {
 import {
   HeaderCellSelect,
   CellSelect,
-  SELECT_CLICK_TYPES,
-  SELECT_TYPES,
+  SelectClickTypes,
+  SelectTypes,
   useRowSelect,
   Checkbox,
 } from '@table-library/react-table-library/select';
@@ -133,8 +133,8 @@ storiesOf('Features/Select', module)
         onChange: onSelectChange,
       },
       {
-        clickType: SELECT_CLICK_TYPES.ButtonClick,
-      }
+        clickType: SelectClickTypes.ButtonClick,
+      },
     );
 
     function onSelectChange(action, state) {
@@ -189,9 +189,9 @@ storiesOf('Features/Select', module)
         onChange: onSelectChange,
       },
       {
-        rowSelect: SELECT_TYPES.SingleSelect,
-        buttonSelect: SELECT_TYPES.SingleSelect,
-      }
+        rowSelect: SelectTypes.SingleSelect,
+        buttonSelect: SelectTypes.SingleSelect,
+      },
     );
 
     function onSelectChange(action, state) {
@@ -245,9 +245,9 @@ storiesOf('Features/Select', module)
         onChange: onSelectChange,
       },
       {
-        rowSelect: SELECT_TYPES.MultiSelect,
-        buttonSelect: SELECT_TYPES.MultiSelect,
-      }
+        rowSelect: SelectTypes.MultiSelect,
+        buttonSelect: SelectTypes.MultiSelect,
+      },
     );
 
     function onSelectChange(action, state) {
@@ -402,7 +402,7 @@ storiesOf('Features/Select', module)
       },
       {
         isCarryForward: false,
-      }
+      },
     );
 
     function onSelectChange(action, state) {
@@ -457,7 +457,7 @@ storiesOf('Features/Select', module)
       },
       {
         isPartialToAll: true,
-      }
+      },
     );
 
     function onSelectChange(action, state) {

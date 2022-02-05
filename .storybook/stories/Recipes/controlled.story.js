@@ -20,7 +20,7 @@ import {
 
 import {
   useRowSelect,
-  SELECT_TYPES,
+  SelectTypes,
 } from '@table-library/react-table-library/select';
 
 import { nodes } from '../data';
@@ -63,7 +63,7 @@ storiesOf('Recipes/Controlled', module)
         sortKey: 'TASKS',
         sortFn: (array) =>
           array.sort(
-            (a, b) => (a.nodes || []).length - (b.nodes || []).length
+            (a, b) => (a.nodes || []).length - (b.nodes || []).length,
           ),
       },
     };
@@ -89,10 +89,10 @@ storiesOf('Recipes/Controlled', module)
           TASKS: (array) =>
             array.sort(
               (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length
+                (a.nodes || []).length - (b.nodes || []).length,
             ),
         },
-      }
+      },
     );
 
     function onSortChange(action, state) {
@@ -170,8 +170,8 @@ storiesOf('Recipes/Controlled', module)
         onChange: onSelectChange,
       },
       {
-        rowSelect: SELECT_TYPES.MultiSelect,
-      }
+        rowSelect: SelectTypes.MultiSelect,
+      },
     );
 
     function onSelectChange(action, state) {

@@ -20,7 +20,7 @@ import {
 import {
   useTree,
   CellTree,
-  TREE_EXPAND_CLICK_TYPES,
+  TreeExpandClickTypes,
 } from '@table-library/react-table-library/tree';
 
 import { nodes } from '../data';
@@ -198,8 +198,8 @@ storiesOf('Features/Tree', module)
         onChange: onTreeChange,
       },
       {
-        clickType: TREE_EXPAND_CLICK_TYPES.ButtonClick,
-      }
+        clickType: TreeExpandClickTypes.ButtonClick,
+      },
     );
 
     function onTreeChange(action, state) {
@@ -252,7 +252,7 @@ storiesOf('Features/Tree', module)
       },
       {
         treeYLevel: 1,
-      }
+      },
     );
 
     function onTreeChange(action, state) {
@@ -307,7 +307,7 @@ storiesOf('Features/Tree', module)
         treeIcon: {
           size: '10px',
         },
-      }
+      },
     );
 
     function onTreeChange(action, state) {
@@ -367,7 +367,7 @@ storiesOf('Features/Tree', module)
           iconRight: <FolderIcon fontSize="small" />,
           iconDown: <FolderOpenIcon fontSize="small" />,
         },
-      }
+      },
     );
 
     function onTreeChange(action, state) {
@@ -422,7 +422,7 @@ storiesOf('Features/Tree', module)
         treeIcon: {
           noIconMargin: '18px',
         },
-      }
+      },
     );
 
     function onTreeChange(action, state) {
@@ -475,7 +475,7 @@ storiesOf('Features/Tree', module)
       },
       {
         indentation: 10,
-      }
+      },
     );
 
     function onTreeChange(action, state) {

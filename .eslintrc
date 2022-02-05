@@ -1,5 +1,13 @@
 {
-  "parser": "@babel/eslint-parser",
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
   "env": {
     "browser": true,
     "commonjs": true,
@@ -8,28 +16,41 @@
     "jest": true
   },
   "extends": [
-    "airbnb",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "airbnb-typescript",
     "prettier",
     "plugin:import/errors",
-    "plugin:import/warnings"
+    "plugin:import/warnings",
+    "plugin:import/typescript"
   ],
   "plugins": ["prettier", "react-hooks"],
   "settings": {
     "import/resolver": {
-      "babel-module": {}
+      "babel-module": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    },
+    "react": {
+      "version": "detect"
     }
   },
   "rules": {
     "prettier/prettier": ["error"],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "@typescript-eslint/default-param-last": 0,
+    "@typescript-eslint/ban-ts-comment": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/no-non-null-assertion": 0,
+    "react/display-name": 0,
     "react/jsx-props-no-spreading": 0,
     "react/require-default-props": 0,
     "react/jsx-wrap-multilines": 0,
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [".js", ".jsx"]
+        "extensions": [".ts", ".tsx"]
       }
     ],
     "jsx-a11y/heading-has-content": 0,

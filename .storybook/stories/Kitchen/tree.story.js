@@ -20,7 +20,7 @@ import {
 import {
   useTree,
   CellTree,
-  TREE_EXPAND_CLICK_TYPES,
+  TreeExpandClickTypes,
 } from '@table-library/react-table-library/tree';
 
 import { nodes } from '../data';

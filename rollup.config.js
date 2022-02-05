@@ -1,26 +1,26 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import babel from '@rollup/plugin-babel';
+// import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import del from 'rollup-plugin-delete';
 // import typescript from '@rollup/plugin-typescript';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-// import ts from '@wessberg/rollup-plugin-ts';
+import ts from '@wessberg/rollup-plugin-ts';
 import postcss from 'rollup-plugin-postcss';
 import pkg from './package.json';
 
 export default {
   input: {
-    main: './src/index.js', // ts
-    common: './src/common/index.js', // ts
-    table: './src/table/index.js', // ts
-    theme: './src/theme/index.js', // ts
-    sort: './src/sort/index.js', // ts
-    select: './src/select/index.js', // ts
-    tree: './src/tree/index.js', // ts
-    pagination: './src/pagination/index.js', // ts
+    main: './src/index.ts',
+    types: './src/types/index.ts',
+    common: './src/common/index.ts',
+    table: './src/table/index.ts',
+    theme: './src/theme/index.ts',
+    sort: './src/sort/index.ts',
+    select: './src/select/index.ts',
+    tree: './src/tree/index.ts',
+    pagination: './src/pagination/index.ts',
   },
-
   output: [
     // ES module version, for modern browsers
     {
@@ -55,13 +55,8 @@ export default {
       sourceMap: true,
       exclude: 'src/**',
     }),
-    // ts({
-    //   transpiler: 'babel'
-    // }),
-
-    babel({
-      babelHelpers: 'runtime',
-      exclude: 'node_modules/**',
+    ts({
+      transpiler: 'babel',
     }),
     // typescript({ sourceMap: true }),
     terser({

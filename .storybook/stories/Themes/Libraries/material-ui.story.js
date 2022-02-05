@@ -25,7 +25,7 @@ import {
 
 import {
   useRowSelect,
-  SELECT_TYPES,
+  SelectTypes,
 } from '@table-library/react-table-library/select';
 
 import { useTheme } from '@table-library/react-table-library/theme';
@@ -107,10 +107,10 @@ storiesOf('Library Themes/Material UI', module)
           TASKS: (array) =>
             array.sort(
               (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length
+                (a.nodes || []).length - (b.nodes || []).length,
             ),
         },
-      }
+      },
     );
 
     const select = useRowSelect(
@@ -119,9 +119,9 @@ storiesOf('Library Themes/Material UI', module)
         onChange: onSelectChange,
       },
       {
-        rowSelect: SELECT_TYPES.MultiSelect,
-        buttonSelect: SELECT_TYPES.MultiSelect,
-      }
+        rowSelect: SelectTypes.MultiSelect,
+        buttonSelect: SelectTypes.MultiSelect,
+      },
     );
 
     function onSortChange(action, state) {

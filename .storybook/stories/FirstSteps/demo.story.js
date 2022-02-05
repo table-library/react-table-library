@@ -18,7 +18,7 @@ import { useTheme } from '@table-library/react-table-library/theme';
 import {
   CellTree,
   useTree,
-  TREE_EXPAND_CLICK_TYPES,
+  TreeExpandClickTypes,
 } from '@table-library/react-table-library/tree';
 import {
   CellSelect,
@@ -80,9 +80,9 @@ storiesOf('First Steps/Demo', module)
         onChange: onTreeChange,
       },
       {
-        clickType: TREE_EXPAND_CLICK_TYPES.ButtonClick,
+        clickType: TreeExpandClickTypes.ButtonClick,
         treeYLevel: 1,
-      }
+      },
     );
 
     const select = useRowSelect(data, {
@@ -107,10 +107,10 @@ storiesOf('First Steps/Demo', module)
           TASKS: (array) =>
             array.sort(
               (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length
+                (a.nodes || []).length - (b.nodes || []).length,
             ),
         },
-      }
+      },
     );
 
     const pagination = usePagination(data, {
@@ -347,7 +347,7 @@ storiesOf('First Steps/Demo', module)
       },
       {
         isServer: true,
-      }
+      },
     );
 
     // listeners
@@ -363,7 +363,7 @@ storiesOf('First Steps/Demo', module)
             filter,
             page: pagination.state.page,
           }),
-        500
+        500,
       );
     }
 
@@ -437,7 +437,7 @@ storiesOf('First Steps/Demo', module)
                           year: 'numeric',
                           month: '2-digit',
                           day: '2-digit',
-                        }
+                        },
                       )}
                     </Cell>
                     <Cell>{item.points}</Cell>

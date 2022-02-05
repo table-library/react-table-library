@@ -66,6 +66,8 @@ storiesOf('Server/Expand', module)
     const [ids, setIds] = React.useState([]);
 
     const handleExpand = async (item) => {
+      if (!item.nodes) return;
+
       if (ids.includes(item.id)) {
         setIds(ids.filter((id) => id !== item.id));
       } else {

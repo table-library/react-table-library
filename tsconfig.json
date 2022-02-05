@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "paths": {
+      "@table-library/react-table-library/types/*": ["./src/types/*"],
+      "@table-library/react-table-library/common/*": ["./src/common/*"],
+      "@table-library/react-table-library/table/*": ["./src/table/*"],
+      "@table-library/react-table-library/theme/*": ["./src/theme/*"],
+      "@table-library/react-table-library/resize/*": ["./src/resize/*"],
+      "@table-library/react-table-library/sort/*": ["./src/sort/*"],
+      "@table-library/react-table-library/select/*": ["./src/select/*"],
+      "@table-library/react-table-library/tree/*": ["./src/tree/*"],
+      "@table-library/react-table-library/pagination/*": ["./src/pagination"]
+    },
+    // "plugins": [
+    //   {
+    //     "transform": "typescript-plugin-styled-components",
+    //     "type": "config"
+    //   }
+    // ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "importHelpers": true,
+    "removeComments": true,
+    "typeRoots": ["node_modules/@types"]
+  },
+  "include": ["src"]
+}
