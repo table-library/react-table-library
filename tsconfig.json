@@ -11,14 +11,14 @@
       "@table-library/react-table-library/sort/*": ["./src/sort/*"],
       "@table-library/react-table-library/select/*": ["./src/select/*"],
       "@table-library/react-table-library/tree/*": ["./src/tree/*"],
-      "@table-library/react-table-library/pagination/*": ["./src/pagination"]
+      "@table-library/react-table-library/pagination/*": ["./src/pagination/*"]
     },
-    // "plugins": [
-    //   {
-    //     "transform": "typescript-plugin-styled-components",
-    //     "type": "config"
-    //   }
-    // ],
+    "plugins": [
+      {
+        "transform": "typescript-plugin-styled-components",
+        "type": "config"
+      }
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -31,6 +31,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "declaration": true,
     "jsx": "react-jsx",
     "importHelpers": true,
     "removeComments": true,

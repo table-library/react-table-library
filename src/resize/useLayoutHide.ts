@@ -8,6 +8,7 @@ import {
   applyToColumns,
 } from '@table-library/react-table-library/common/util/columns';
 
+import { Nullish } from '@table-library/react-table-library/types/common';
 import {
   Layout,
   TableMemoryRef,
@@ -155,7 +156,7 @@ const distributeSpaceOfHiddenColumns = (
 const performHide = (
   dataColumns: DataColumn[],
   tableElementRef: TableElementRef,
-  layout: Layout,
+  layout: Layout | Nullish,
 ) => {
   const thead = tableElementRef.current!.querySelector('.thead');
   const tableWidth = thead?.getBoundingClientRect().width || 0;

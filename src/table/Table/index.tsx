@@ -51,13 +51,13 @@ const useTableMemoryRef = (): TableMemoryRef => {
 
 export interface TableProps {
   data: Data;
-  theme: Theme;
-  layout: Layout;
-  sort: Sort;
-  pagination: Pagination;
-  select: Select;
-  tree: Tree;
-  onInit: OnInitFunction;
+  theme?: Theme;
+  layout?: Layout;
+  sort?: Sort;
+  pagination?: Pagination;
+  select?: Select;
+  tree?: Tree;
+  onInit?: OnInitFunction;
   children: (nodes: TableNode[]) => React.ReactNode;
 }
 

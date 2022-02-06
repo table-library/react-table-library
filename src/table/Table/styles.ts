@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/indent */
 
+import { Nullish } from '@table-library/react-table-library/types/common';
 import { Layout } from '@table-library/react-table-library/types/layout';
 
 type Configuration = {
   isShiftDown: boolean;
 };
 
-export default (layout: Layout, configuration: Configuration) => `
+export default (layout: Layout | Nullish, configuration: Configuration) => `
   *,
   *:before,
   *:after {

@@ -15,7 +15,7 @@ export type TableNode = {
 export type OnClick = (node: TableNode, event: React.SyntheticEvent | React.KeyboardEvent) => void;
 
 export type Data = {
-  pageInfo: any;
+  pageInfo?: any;
   nodes: TableNode[];
 };
 
@@ -30,8 +30,8 @@ export interface RowProps {
   item: TableNode;
   className?: string;
   disabled?: boolean;
-  onClick: OnClick;
-  onDoubleClick: OnClick;
+  onClick?: OnClick;
+  onDoubleClick?: OnClick;
   children: React.ReactNode;
 }
 

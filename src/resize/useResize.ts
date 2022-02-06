@@ -20,7 +20,7 @@ type DataColumn = {
 const applyResize = (
   index: number,
   tableElementRef: TableElementRef,
-  layout: Layout,
+  layout: Layout | Nullish,
   resizeWidth: number,
 ) => {
   const headerColumns = getHeaderColumns(tableElementRef);

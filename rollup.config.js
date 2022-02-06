@@ -3,11 +3,14 @@ import commonjs from '@rollup/plugin-commonjs';
 // import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import del from 'rollup-plugin-delete';
-// import typescript from '@rollup/plugin-typescript';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import ts from '@wessberg/rollup-plugin-ts';
+import ts from 'rollup-plugin-typescript2';
 import postcss from 'rollup-plugin-postcss';
+import createStyledComponentsTransformer from 'typescript-plugin-styled-components';
+
 import pkg from './package.json';
+
+const styledComponentsTransformer = createStyledComponentsTransformer();
 
 export default {
   input: {
@@ -38,10 +41,7 @@ export default {
     //   sourcemap: true,
     // },
   ],
-  external: [
-    ...Object.keys(pkg.dependencies || {}),
-    ...Object.keys(pkg.peerDependencies || {}),
-  ],
+  external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
   plugins: [
     del({ targets: 'lib/*' }),
     peerDepsExternal(),
@@ -57,8 +57,13 @@ export default {
     }),
     ts({
       transpiler: 'babel',
+      transformers: [
+        () => ({
+          before: [styledComponentsTransformer],
+        }),
+      ],
+      // sourceMap: true,
     }),
-    // typescript({ sourceMap: true }),
     terser({
       module: true,
     }),

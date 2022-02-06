@@ -8,7 +8,7 @@ import { SortOptionsIcon } from '@table-library/react-table-library/types/sort';
 import { SortButton } from './SortButton';
 
 interface HeaderCellSortProps {
-  index: number;
+  index?: number;
   sortKey: string;
   sortIcon: SortOptionsIcon;
   children: React.ReactNode;

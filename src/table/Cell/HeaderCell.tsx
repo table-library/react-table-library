@@ -9,7 +9,7 @@ import { useResize } from '@table-library/react-table-library/resize/useResize';
 import { ResizeProp } from '@table-library/react-table-library/types/resize';
 
 interface CellProps {
-  index: number;
+  index?: number;
   cellKey?: string;
   className?: string;
   hide?: boolean;
@@ -33,7 +33,7 @@ const HeaderCell = ({
   const theme = React.useContext(ThemeContext);
 
   const cellRef = React.useRef<HTMLDivElement>(null);
-  const { resizeRef } = useResize(cellRef, index);
+  const { resizeRef } = useResize(cellRef, index!);
 
   return (
     <HeaderCellContainer

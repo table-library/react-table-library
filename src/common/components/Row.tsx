@@ -6,7 +6,7 @@ import { LayoutContext } from '@table-library/react-table-library/common/context
 import { Nullish } from '@table-library/react-table-library/types/common';
 import { Layout } from '@table-library/react-table-library/types/layout';
 
-const getBaseStyle = (layout: Layout) => `
+const getBaseStyle = (layout: Layout | Nullish) => `
   display: flex;
   align-items: stretch;
 
@@ -23,7 +23,7 @@ const getBaseStyle = (layout: Layout) => `
   ${layout?.horizontalScroll && 'min-width: max-content;'}
 `;
 
-const getRowContainerStyle = (layout: Layout) => `
+const getRowContainerStyle = (layout: Layout | Nullish) => `
   ${getBaseStyle(layout)}
 
   font-size: 18px;
@@ -56,7 +56,7 @@ const RowContainer = React.forwardRef(
   },
 );
 
-const getHeaderRowContainerStyle = (layout: Layout) => `
+const getHeaderRowContainerStyle = (layout: Layout | Nullish) => `
   ${getBaseStyle(layout)}
 
   font-size: 18px;

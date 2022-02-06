@@ -11,6 +11,7 @@ import { PaginationContext } from '@table-library/react-table-library/common/con
 
 import { useConsumeRowLayout } from '@table-library/react-table-library/resize/useConsumeRowLayout';
 
+import { Nullish } from '@table-library/react-table-library/types/common';
 import {
   OnClick,
   Features,
@@ -27,7 +28,7 @@ const getRowProps = (features: Features, props: RowProps) =>
     .filter((feature) => feature?.hasOwnProperty('_getRowProps'))
     .map((feature) => (feature as any)._getRowProps(props, features));
 
-const evaluateProps = (rowPropsByFeature: FeatureProps[], onSingleClick: OnClick) => {
+const evaluateProps = (rowPropsByFeature: FeatureProps[], onSingleClick: OnClick | Nullish) => {
   const { themeByFeature, classNamesByFeature, onClickByFeature } = rowPropsByFeature.reduce(
     (acc, value) => {
       const { theme, className, onClick } = value;

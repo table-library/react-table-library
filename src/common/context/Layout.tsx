@@ -10,7 +10,7 @@ import {
 interface Value {
   tableElementRef: TableElementRef;
   tableMemoryRef: TableMemoryRef;
-  layout: Layout;
+  layout: Layout | Nullish;
 }
 
 const LayoutContext = React.createContext<Value | Nullish>(null);
@@ -18,7 +18,7 @@ const LayoutContext = React.createContext<Value | Nullish>(null);
 interface LayoutProviderProps {
   tableElementRef: TableElementRef;
   tableMemoryRef: TableMemoryRef;
-  layout: Layout;
+  layout: Layout | Nullish;
   children: React.ReactNode;
 }
 
