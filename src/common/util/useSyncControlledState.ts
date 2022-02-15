@@ -1,7 +1,10 @@
 import * as React from 'react';
-import isEqual from 'lodash.isequal';
 
 import { State } from '@table-library/react-table-library/types/common';
+
+// order of keys must be the same
+// no functions in object allowed
+const isEqual = (a: any, b: any) => JSON.stringify(a) === JSON.stringify(b);
 
 const useSyncControlledState = (controlledState: State, state: State, callback: () => void) => {
   const previousControlledState = React.useRef(controlledState);

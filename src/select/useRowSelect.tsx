@@ -1,4 +1,4 @@
-import cs from 'classnames';
+import cs from 'clsx';
 
 import * as COLORS from '@table-library/react-table-library/common/colors';
 import { isRowClick } from '@table-library/react-table-library/common/util/isRowClick';

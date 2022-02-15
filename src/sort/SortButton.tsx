@@ -1,5 +1,5 @@
 import * as React from 'react';
-import cs from 'classnames';
+import cs from 'clsx';
 
 import { Button } from '@table-library/react-table-library/common/components/Button';
 

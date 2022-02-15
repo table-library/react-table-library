@@ -1,6 +1,6 @@
 {
   "name": "@table-library/react-table-library",
-  "version": "1.16.1-beta.14",
+  "version": "1.16.1-beta.16",
   "description": "react-table-library",
   "main": "main.js",
   "types": "index.d.ts",
@@ -10,8 +10,7 @@
     "styled-components": ">= 4"
   },
   "dependencies": {
-    "classnames": "^2.2.6",
-    "lodash.isequal": "^4.5.0",
+    "clsx": "^1.1.1",
     "use-double-click": "^1.0.5"
   },
   "devDependencies": {

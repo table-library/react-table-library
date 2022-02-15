@@ -1,5 +1,5 @@
 import * as React from 'react';
-import cs from 'classnames';
+import cs from 'clsx';
 
 import { HeaderRowContainer } from '@table-library/react-table-library/common/components/Row';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
