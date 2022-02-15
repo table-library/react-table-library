@@ -13,12 +13,6 @@
       "@table-library/react-table-library/tree/*": ["./src/tree/*"],
       "@table-library/react-table-library/pagination/*": ["./src/pagination/*"]
     },
-    "plugins": [
-      {
-        "transform": "typescript-plugin-styled-components",
-        "type": "config"
-      }
-    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
