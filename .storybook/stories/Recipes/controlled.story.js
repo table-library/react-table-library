@@ -13,15 +13,9 @@ import {
   Cell,
 } from '@table-library/react-table-library/table';
 
-import {
-  useSort,
-  HeaderCellSort,
-} from '@table-library/react-table-library/sort';
+import { useSort, HeaderCellSort } from '@table-library/react-table-library/sort';
 
-import {
-  useRowSelect,
-  SelectTypes,
-} from '@table-library/react-table-library/select';
+import { useRowSelect, SelectTypes } from '@table-library/react-table-library/select';
 
 import { nodes } from '../data';
 
@@ -37,34 +31,27 @@ storiesOf('Recipes/Controlled', module)
       TASK: {
         label: 'Task',
         sortKey: 'TASK',
-        sortFn: (array) =>
-          array.sort((a, b) => a.name.localeCompare(b.name)),
+        sortFn: (array) => array.sort((a, b) => a.name.localeCompare(b.name)),
       },
       DEADLINE: {
         label: 'Deadline',
         sortKey: 'DEADLINE',
-        sortFn: (array) =>
-          array.sort((a, b) => a.deadline - b.deadline),
+        sortFn: (array) => array.sort((a, b) => a.deadline - b.deadline),
       },
       TYPE: {
         label: 'Type',
         sortKey: 'TYPE',
-        sortFn: (array) =>
-          array.sort((a, b) => a.type.localeCompare(b.type)),
+        sortFn: (array) => array.sort((a, b) => a.type.localeCompare(b.type)),
       },
       COMPLETE: {
         label: 'Complete',
         sortKey: 'COMPLETE',
-        sortFn: (array) =>
-          array.sort((a, b) => a.isComplete - b.isComplete),
+        sortFn: (array) => array.sort((a, b) => a.isComplete - b.isComplete),
       },
       TASKS: {
         label: 'Tasks',
         sortKey: 'TASKS',
-        sortFn: (array) =>
-          array.sort(
-            (a, b) => (a.nodes || []).length - (b.nodes || []).length,
-          ),
+        sortFn: (array) => array.sort((a, b) => (a.nodes || []).length - (b.nodes || []).length),
       },
     };
 
@@ -78,19 +65,11 @@ storiesOf('Recipes/Controlled', module)
       {
         sortFns: {
           NONE: (array) => array,
-          TASK: (array) =>
-            array.sort((a, b) => a.name.localeCompare(b.name)),
-          DEADLINE: (array) =>
-            array.sort((a, b) => a.deadline - b.deadline),
-          TYPE: (array) =>
-            array.sort((a, b) => a.type.localeCompare(b.type)),
-          COMPLETE: (array) =>
-            array.sort((a, b) => a.isComplete - b.isComplete),
-          TASKS: (array) =>
-            array.sort(
-              (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length,
-            ),
+          TASK: (array) => array.sort((a, b) => a.name.localeCompare(b.name)),
+          DEADLINE: (array) => array.sort((a, b) => a.deadline - b.deadline),
+          TYPE: (array) => array.sort((a, b) => a.type.localeCompare(b.type)),
+          COMPLETE: (array) => array.sort((a, b) => a.isComplete - b.isComplete),
+          TASKS: (array) => array.sort((a, b) => (a.nodes || []).length - (b.nodes || []).length),
         },
       },
     );
@@ -103,9 +82,7 @@ storiesOf('Recipes/Controlled', module)
       <>
         <select
           value={sort.state.sortKey}
-          onChange={(event) =>
-            sort.fns.onToggleSort(SORTS[event.target.value])
-          }
+          onChange={(event) => sort.fns.onToggleSort(SORTS[event.target.value])}
         >
           {Object.keys(SORTS).map((key) => (
             <option key={key} value={SORTS[key].sortKey}>
@@ -122,10 +99,7 @@ storiesOf('Recipes/Controlled', module)
                   {Object.keys(SORTS)
                     .filter((key) => key !== 'NONE')
                     .map((key) => (
-                      <HeaderCellSort
-                        key={key}
-                        sortKey={SORTS[key].sortKey}
-                      >
+                      <HeaderCellSort key={key} sortKey={SORTS[key].sortKey}>
                         {SORTS[key].label}
                       </HeaderCellSort>
                     ))}
@@ -158,10 +132,7 @@ storiesOf('Recipes/Controlled', module)
   .add('select', () => {
     const data = { nodes };
 
-    const [
-      controlledSelectState,
-      setControlledSelectState,
-    ] = React.useState({ ids: [] });
+    const [controlledSelectState, setControlledSelectState] = React.useState({ ids: [] });
 
     const select = useRowSelect(
       data,
@@ -175,6 +146,8 @@ storiesOf('Recipes/Controlled', module)
     );
 
     function onSelectChange(action, state) {
+      console.log(action, state);
+
       setControlledSelectState(state);
     }
 
