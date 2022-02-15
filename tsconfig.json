@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "paths": {
       "@table-library/react-table-library/types/*": ["./src/types/*"],
@@ -32,7 +32,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "declaration": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "importHelpers": true,
     "removeComments": true,
     "typeRoots": ["node_modules/@types"]

@@ -1,16 +1,17 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-// import babel from '@rollup/plugin-babel';
+import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import del from 'rollup-plugin-delete';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import ts from 'rollup-plugin-typescript2';
+import typescript from 'rollup-plugin-typescript2';
 import postcss from 'rollup-plugin-postcss';
-import createStyledComponentsTransformer from 'typescript-plugin-styled-components';
 
 import pkg from './package.json';
 
-const styledComponentsTransformer = createStyledComponentsTransformer();
+const babelConfig = require('./babel.config.js');
+
+const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
 export default {
   input: {
@@ -48,21 +49,20 @@ export default {
     postcss({
       modules: true,
     }),
-    resolve({
-      browser: true,
+    resolve({ extensions, preferBuiltins: false }),
+    typescript({
+      typescript: require('typescript'),
+      clean: true,
+    }),
+    babel({
+      babelHelpers: 'runtime',
+      exclude: 'node_modules/**',
+      extensions,
+      ...babelConfig,
     }),
     commonjs({
       sourceMap: true,
       exclude: 'src/**',
-    }),
-    ts({
-      transpiler: 'babel',
-      transformers: [
-        () => ({
-          before: [styledComponentsTransformer],
-        }),
-      ],
-      // sourceMap: true,
     }),
     terser({
       module: true,
