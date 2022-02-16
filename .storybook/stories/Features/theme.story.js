@@ -18,7 +18,7 @@ import { nodes } from '../data';
 
 storiesOf('Features/Theme', module)
   .addParameters({ component: Table })
-  .add('Ocean Blue', () => {
+  .add('stripped', () => {
     const theme = useTheme({
       BaseRow: `
         font-size: 14px;
@@ -75,7 +75,7 @@ storiesOf('Features/Theme', module)
       </Table>
     );
   })
-  .add('Chess Board', () => {
+  .add('chess', () => {
     const theme = useTheme({
       BaseCell: `
         border-right: 1px solid transparent;
@@ -141,15 +141,215 @@ storiesOf('Features/Theme', module)
       </Table>
     );
   })
-  .add('Machine', () => {
+  .add('alignment', () => {
     const theme = useTheme({
-      HeaderRow: `
-        color: #000000;
+      BaseCell: `
+        text-align: center;
+
+        &:first-child {
+          text-align: left;
+        }
+
+        &:last-child {
+          text-align: right;
+        }
+      `,
+    });
+
+    const data = { nodes };
+
+    return (
+      <Table data={data} theme={theme}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row key={item.id} item={item}>
+                  <Cell>{item.name}</Cell>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('dense', () => {
+    const theme = useTheme({
+      BaseCell: `
+        border-right: 1px solid #a0a8ae;
+        border-bottom: 1px solid #a0a8ae;
+
+        padding-top: 0px;
+        padding-bottom: 0px;
+
+        & > div {
+          padding-right: 0px;
+          padding-left: 0px;
+        }
+      `,
+    });
+
+    const data = { nodes };
+
+    return (
+      <Table data={data} theme={theme}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row key={item.id} item={item}>
+                  <Cell>{item.name}</Cell>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('gutter', () => {
+    const theme = useTheme({
+      BaseRow: `
+        border-bottom: 1px solid #a0a8ae;
+      `,
+      BaseCell: `
+        margin-top: 9px;
+        margin-bottom: 9px;
+
+        padding-top: 11px;
+        padding-bottom: 11px;
+
         border-bottom: 1px solid transparent;
       `,
-      Row: `
-        color: #363636;
+    });
 
+    const data = { nodes };
+
+    return (
+      <Table data={data} theme={theme}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row key={item.id} item={item}>
+                  <Cell>{item.name}</Cell>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('indentation', () => {
+    const theme = useTheme({
+      BaseCell: `
+        padding-left: 30px;
+      `,
+    });
+
+    const data = { nodes };
+
+    return (
+      <Table data={data} theme={theme}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row key={item.id} item={item}>
+                  <Cell>{item.name}</Cell>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('border hover', () => {
+    const theme = useTheme({
+      Row: `
         border-top: 1px solid #a0a8ae;
         border-bottom: 1px solid #a0a8ae;
 
@@ -164,11 +364,75 @@ storiesOf('Features/Theme', module)
           z-index: 2;
           border-top: 1px solid #177ac9;
           border-bottom: 1px solid #177ac9;
-
-          color: #177ac9;
         }
       `,
-      HeaderCell: `
+      BaseCell: `
+        border-bottom: 1px solid transparent;
+      `,
+    });
+
+    const data = { nodes };
+
+    return (
+      <Table data={data} theme={theme}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row key={item.id} item={item}>
+                  <Cell>{item.name}</Cell>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('stitch themes', () => {
+    const strippedTheme = {
+      BaseRow: `
+        font-size: 14px;
+      `,
+      HeaderRow: `
+        background-color: #eaf5fd;
+      `,
+      Row: `
+        &:nth-child(odd) {
+          background-color: #d2e9fb;
+        }
+
+        &:nth-child(even) {
+          background-color: #eaf5fd;
+        }
+      `,
+    };
+
+    const gutterTheme = {
+      BaseRow: `
+        border-bottom: 1px solid #a0a8ae;
+      `,
+      BaseCell: `
         margin-top: 9px;
         margin-bottom: 9px;
 
@@ -177,11 +441,9 @@ storiesOf('Features/Theme', module)
 
         border-bottom: 1px solid transparent;
       `,
-      Cell: `
-        margin-top: 8px;
-        margin-bottom: 9px;
-      `,
-    });
+    };
+
+    const theme = useTheme([strippedTheme, gutterTheme]);
 
     const data = { nodes };
 

@@ -18,15 +18,9 @@ import {
   Cell,
 } from '@table-library/react-table-library/table';
 
-import {
-  useSort,
-  HeaderCellSort,
-} from '@table-library/react-table-library/sort';
+import { useSort, HeaderCellSort } from '@table-library/react-table-library/sort';
 
-import {
-  useRowSelect,
-  SelectTypes,
-} from '@table-library/react-table-library/select';
+import { useRowSelect, SelectTypes } from '@table-library/react-table-library/select';
 
 import { useTheme } from '@table-library/react-table-library/theme';
 
@@ -91,24 +85,14 @@ storiesOf('Library Themes/Material UI', module)
           margin: '0px',
           iconDefault: <UnfoldMoreOutlinedIcon fontSize="small" />,
           iconUp: <KeyboardArrowUpOutlinedIcon fontSize="small" />,
-          iconDown: (
-            <KeyboardArrowDownOutlinedIcon fontSize="small" />
-          ),
+          iconDown: <KeyboardArrowDownOutlinedIcon fontSize="small" />,
         },
         sortFns: {
-          TASK: (array) =>
-            array.sort((a, b) => a.name.localeCompare(b.name)),
-          DEADLINE: (array) =>
-            array.sort((a, b) => a.deadline - b.deadline),
-          TYPE: (array) =>
-            array.sort((a, b) => a.type.localeCompare(b.type)),
-          COMPLETE: (array) =>
-            array.sort((a, b) => a.isComplete - b.isComplete),
-          TASKS: (array) =>
-            array.sort(
-              (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length,
-            ),
+          TASK: (array) => array.sort((a, b) => a.name.localeCompare(b.name)),
+          DEADLINE: (array) => array.sort((a, b) => a.deadline - b.deadline),
+          TYPE: (array) => array.sort((a, b) => a.type.localeCompare(b.type)),
+          COMPLETE: (array) => array.sort((a, b) => a.isComplete - b.isComplete),
+          TASKS: (array) => array.sort((a, b) => (a.nodes || []).length - (b.nodes || []).length),
         },
       },
     );
@@ -143,9 +127,7 @@ storiesOf('Library Themes/Material UI', module)
                     color="primary"
                     size="small"
                     checked={select.state.all}
-                    indeterminate={
-                      !select.state.all && !select.state.none
-                    }
+                    indeterminate={!select.state.all && !select.state.none}
                     onChange={select.fns.onToggleAll}
                   />
                 </HeaderCell>
@@ -175,9 +157,7 @@ storiesOf('Library Themes/Material UI', module)
                       color="primary"
                       size="small"
                       checked={select.state.ids.includes(item.id)}
-                      onChange={() =>
-                        select.fns.onToggleById(item.id)
-                      }
+                      onChange={() => select.fns.onToggleById(item.id)}
                     />
                   </Cell>
                   <Cell tabIndex="-1">{item.name}</Cell>
@@ -189,9 +169,7 @@ storiesOf('Library Themes/Material UI', module)
                     })}
                   </Cell>
                   <Cell tabIndex="-1">{item.type}</Cell>
-                  <Cell tabIndex="-1">
-                    {item.isComplete.toString()}
-                  </Cell>
+                  <Cell tabIndex="-1">{item.isComplete.toString()}</Cell>
                   <Cell tabIndex="-1">{item.nodes?.length}</Cell>
                 </Row>
               ))}

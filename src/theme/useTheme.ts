@@ -1,17 +1,29 @@
-// @ts-nocheck
-/* eslint-disable @typescript-eslint/ban-types */
-
 import { Theme } from '@table-library/react-table-library/types/theme';
 
-const useTheme = (theme: Theme) =>
-  Object.keys(theme).reduce((acc: Theme | {}, key: string) => {
-    acc[key] = `
-      ${theme[key]}
-    `;
+const zipThemes = (themes: Theme[]): Theme =>
+  themes.reduce((acc: Record<string, any>, value: any) => {
+    const keys = Object.keys(value);
+
+    keys.forEach((key) => {
+      if (!acc[key]) {
+        acc[key] = '';
+      }
+
+      acc[key] = `
+        ${acc[key]}
+        ${value[key]}
+      `;
+    });
 
     return acc;
   }, {});
 
-export { useTheme };
+const useTheme = (theme: Theme | Theme[]): Theme => {
+  if (Array.isArray(theme)) {
+    return zipThemes(theme);
+  }
 
-/* eslint-enable @typescript-eslint/ban-types */
+  return theme;
+};
+
+export { useTheme };
