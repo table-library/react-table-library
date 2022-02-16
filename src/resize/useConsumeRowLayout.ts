@@ -30,7 +30,7 @@ export const useConsumeRowLayout = (ref: TableElementRef, selector: string) => {
 
       cell.setAttribute(
         'style',
-        `width: ${tableMemoryRef.current!.resizedLayout[index]}; minWidth: ${
+        `width: ${tableMemoryRef.current!.resizedLayout[index]}; min-width: ${
           tableMemoryRef.current!.resizedLayout[index]
         };`,
       );
