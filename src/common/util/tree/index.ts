@@ -1,5 +1,6 @@
 export * from './isLeaf';
 export * from './hasLeaves';
+export * from './insertNode';
 export * from './findNodeById';
 export * from './fromTreeToList';
 export * from './recursiveMergeInsert';
