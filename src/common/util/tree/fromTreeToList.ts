@@ -33,7 +33,7 @@ export const fromTreeToListExtended = (
     let listNode;
 
     if (value.nodes) {
-      listNode = { ...value, nodes: [] };
+      listNode = { ...value, nodes: value.nodes.map((node: TableNode) => node.id) };
     } else {
       listNode = value;
     }
