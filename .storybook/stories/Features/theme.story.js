@@ -20,9 +20,6 @@ storiesOf('Features/Theme', module)
   .addParameters({ component: Table })
   .add('stripped', () => {
     const theme = useTheme({
-      BaseRow: `
-        font-size: 14px;
-      `,
       HeaderRow: `
         background-color: #eaf5fd;
       `,
@@ -322,6 +319,70 @@ storiesOf('Features/Theme', module)
                 <HeaderCell>Type</HeaderCell>
                 <HeaderCell>Complete</HeaderCell>
                 <HeaderCell>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+
+            <Body>
+              {tableList.map((item) => (
+                <Row key={item.id} item={item}>
+                  <Cell>{item.name}</Cell>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
+                </Row>
+              ))}
+            </Body>
+          </>
+        )}
+      </Table>
+    );
+  })
+  .add('flex', () => {
+    const theme = useTheme({
+      HeaderCell: `
+        & > div {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+      `,
+    });
+
+    const data = { nodes };
+
+    return (
+      <Table data={data} theme={theme}>
+        {(tableList) => (
+          <>
+            <Header>
+              <HeaderRow>
+                <HeaderCell>
+                  <span>Task</span>
+                  <span>1</span>
+                </HeaderCell>
+                <HeaderCell>
+                  <span>Deadline</span>
+                  <span>2</span>
+                </HeaderCell>
+                <HeaderCell>
+                  <span>Type</span>
+                  <span>3</span>
+                </HeaderCell>
+                <HeaderCell>
+                  <span>Complete</span>
+                  <span>4</span>
+                </HeaderCell>
+                <HeaderCell>
+                  <span>Tasks</span>
+                  <span>5</span>
+                </HeaderCell>
               </HeaderRow>
             </Header>
 
