@@ -18,7 +18,7 @@ import { nodes } from '../data';
 
 storiesOf('Features/Theme', module)
   .addParameters({ component: Table })
-  .add('stripped', () => {
+  .add('striped', () => {
     const theme = useTheme({
       HeaderRow: `
         background-color: #eaf5fd;
@@ -471,7 +471,7 @@ storiesOf('Features/Theme', module)
     );
   })
   .add('stitch themes', () => {
-    const strippedTheme = {
+    const stripedTheme = {
       BaseRow: `
         font-size: 14px;
       `,
@@ -504,7 +504,7 @@ storiesOf('Features/Theme', module)
       `,
     };
 
-    const theme = useTheme([strippedTheme, gutterTheme]);
+    const theme = useTheme([stripedTheme, gutterTheme]);
 
     const data = { nodes };
 

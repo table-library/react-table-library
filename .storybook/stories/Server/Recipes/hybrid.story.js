@@ -65,18 +65,15 @@ storiesOf('Server Recipes/Hybrid', module)
 
     const theme = useTheme({
       Cell: `
-       & .match {
-          font-weight: bold;
-          color: #212121;
-        }
-    `,
+        & .match {
+            font-weight: bold;
+            color: #212121;
+          }
+      `,
     });
 
     const highlight = (needle, haystack) =>
-      haystack.replace(
-        new RegExp(needle, 'gi'),
-        (str) => `<span class="match">${str}</span>`
-      );
+      haystack.replace(new RegExp(needle, 'gi'), (str) => `<span class="match">${str}</span>`);
 
     return (
       <>

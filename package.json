@@ -1,6 +1,6 @@
 {
   "name": "@table-library/react-table-library",
-  "version": "1.16.1-beta.21",
+  "version": "1.16.1-beta.22",
   "description": "react-table-library",
   "main": "main.js",
   "types": "index.d.ts",
@@ -23,6 +23,7 @@
     "@babel/preset-env": "7.12.17",
     "@babel/preset-react": "7.12.13",
     "@babel/runtime": "7.12.18",
+    "@mantine/core": "^3.6.9",
     "@material-ui/core": "^4.11.1",
     "@material-ui/icons": "^4.9.1",
     "@rollup/plugin-babel": "^5.3.0",
@@ -69,6 +70,7 @@
     "react": "16.13.1",
     "react-animate-height": "^2.0.23",
     "react-dom": "16.13.1",
+    "react-icons": "^4.3.1",
     "react-virtualized-auto-sizer": "^1.0.6",
     "react-window": "^1.8.6",
     "rollup-plugin-delete": "^2.0.0",

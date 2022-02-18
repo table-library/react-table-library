@@ -38,19 +38,11 @@ storiesOf('Features/Sort', module)
       },
       {
         sortFns: {
-          TASK: (array) =>
-            array.sort((a, b) => a.name.localeCompare(b.name)),
-          DEADLINE: (array) =>
-            array.sort((a, b) => a.deadline - b.deadline),
-          TYPE: (array) =>
-            array.sort((a, b) => a.type.localeCompare(b.type)),
-          COMPLETE: (array) =>
-            array.sort((a, b) => a.isComplete - b.isComplete),
-          TASKS: (array) =>
-            array.sort(
-              (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length,
-            ),
+          TASK: (array) => array.sort((a, b) => a.name.localeCompare(b.name)),
+          DEADLINE: (array) => array.sort((a, b) => a.deadline - b.deadline),
+          TYPE: (array) => array.sort((a, b) => a.type.localeCompare(b.type)),
+          COMPLETE: (array) => array.sort((a, b) => a.isComplete - b.isComplete),
+          TASKS: (array) => array.sort((a, b) => (a.nodes || []).length - (b.nodes || []).length),
         },
       },
     );
@@ -66,13 +58,9 @@ storiesOf('Features/Sort', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSort sortKey="TASK">Task</HeaderCellSort>
-                <HeaderCellSort sortKey="DEADLINE">
-                  Deadline
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="DEADLINE">Deadline</HeaderCellSort>
                 <HeaderCellSort sortKey="TYPE">Type</HeaderCellSort>
-                <HeaderCellSort sortKey="COMPLETE">
-                  Complete
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="COMPLETE">Complete</HeaderCellSort>
                 <HeaderCellSort sortKey="TASKS">Tasks</HeaderCellSort>
               </HeaderRow>
             </Header>
@@ -113,19 +101,11 @@ storiesOf('Features/Sort', module)
       },
       {
         sortFns: {
-          TASK: (array) =>
-            array.sort((a, b) => a.name.localeCompare(b.name)),
-          DEADLINE: (array) =>
-            array.sort((a, b) => a.deadline - b.deadline),
-          TYPE: (array) =>
-            array.sort((a, b) => a.type.localeCompare(b.type)),
-          COMPLETE: (array) =>
-            array.sort((a, b) => a.isComplete - b.isComplete),
-          TASKS: (array) =>
-            array.sort(
-              (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length,
-            ),
+          TASK: (array) => array.sort((a, b) => a.name.localeCompare(b.name)),
+          DEADLINE: (array) => array.sort((a, b) => a.deadline - b.deadline),
+          TYPE: (array) => array.sort((a, b) => a.type.localeCompare(b.type)),
+          COMPLETE: (array) => array.sort((a, b) => a.isComplete - b.isComplete),
+          TASKS: (array) => array.sort((a, b) => (a.nodes || []).length - (b.nodes || []).length),
         },
       },
     );
@@ -141,13 +121,9 @@ storiesOf('Features/Sort', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSort sortKey="TASK">Task</HeaderCellSort>
-                <HeaderCellSort sortKey="DEADLINE">
-                  Deadline
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="DEADLINE">Deadline</HeaderCellSort>
                 <HeaderCellSort sortKey="TYPE">Type</HeaderCellSort>
-                <HeaderCellSort sortKey="COMPLETE">
-                  Complete
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="COMPLETE">Complete</HeaderCellSort>
                 <HeaderCellSort sortKey="TASKS">Tasks</HeaderCellSort>
               </HeaderRow>
             </Header>
@@ -187,19 +163,11 @@ storiesOf('Features/Sort', module)
           size: '10px',
         },
         sortFns: {
-          TASK: (array) =>
-            array.sort((a, b) => a.name.localeCompare(b.name)),
-          DEADLINE: (array) =>
-            array.sort((a, b) => a.deadline - b.deadline),
-          TYPE: (array) =>
-            array.sort((a, b) => a.type.localeCompare(b.type)),
-          COMPLETE: (array) =>
-            array.sort((a, b) => a.isComplete - b.isComplete),
-          TASKS: (array) =>
-            array.sort(
-              (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length,
-            ),
+          TASK: (array) => array.sort((a, b) => a.name.localeCompare(b.name)),
+          DEADLINE: (array) => array.sort((a, b) => a.deadline - b.deadline),
+          TYPE: (array) => array.sort((a, b) => a.type.localeCompare(b.type)),
+          COMPLETE: (array) => array.sort((a, b) => a.isComplete - b.isComplete),
+          TASKS: (array) => array.sort((a, b) => (a.nodes || []).length - (b.nodes || []).length),
         },
       },
     );
@@ -215,13 +183,9 @@ storiesOf('Features/Sort', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSort sortKey="TASK">Task</HeaderCellSort>
-                <HeaderCellSort sortKey="DEADLINE">
-                  Deadline
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="DEADLINE">Deadline</HeaderCellSort>
                 <HeaderCellSort sortKey="TYPE">Type</HeaderCellSort>
-                <HeaderCellSort sortKey="COMPLETE">
-                  Complete
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="COMPLETE">Complete</HeaderCellSort>
                 <HeaderCellSort sortKey="TASKS">Tasks</HeaderCellSort>
               </HeaderRow>
             </Header>
@@ -261,19 +225,11 @@ storiesOf('Features/Sort', module)
           position: SortIconPositions.Prefix,
         },
         sortFns: {
-          TASK: (array) =>
-            array.sort((a, b) => a.name.localeCompare(b.name)),
-          DEADLINE: (array) =>
-            array.sort((a, b) => a.deadline - b.deadline),
-          TYPE: (array) =>
-            array.sort((a, b) => a.type.localeCompare(b.type)),
-          COMPLETE: (array) =>
-            array.sort((a, b) => a.isComplete - b.isComplete),
-          TASKS: (array) =>
-            array.sort(
-              (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length,
-            ),
+          TASK: (array) => array.sort((a, b) => a.name.localeCompare(b.name)),
+          DEADLINE: (array) => array.sort((a, b) => a.deadline - b.deadline),
+          TYPE: (array) => array.sort((a, b) => a.type.localeCompare(b.type)),
+          COMPLETE: (array) => array.sort((a, b) => a.isComplete - b.isComplete),
+          TASKS: (array) => array.sort((a, b) => (a.nodes || []).length - (b.nodes || []).length),
         },
       },
     );
@@ -289,13 +245,9 @@ storiesOf('Features/Sort', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSort sortKey="TASK">Task</HeaderCellSort>
-                <HeaderCellSort sortKey="DEADLINE">
-                  Deadline
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="DEADLINE">Deadline</HeaderCellSort>
                 <HeaderCellSort sortKey="TYPE">Type</HeaderCellSort>
-                <HeaderCellSort sortKey="COMPLETE">
-                  Complete
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="COMPLETE">Complete</HeaderCellSort>
                 <HeaderCellSort sortKey="TASKS">Tasks</HeaderCellSort>
               </HeaderRow>
             </Header>
@@ -337,19 +289,11 @@ storiesOf('Features/Sort', module)
           iconDown: null,
         },
         sortFns: {
-          TASK: (array) =>
-            array.sort((a, b) => a.name.localeCompare(b.name)),
-          DEADLINE: (array) =>
-            array.sort((a, b) => a.deadline - b.deadline),
-          TYPE: (array) =>
-            array.sort((a, b) => a.type.localeCompare(b.type)),
-          COMPLETE: (array) =>
-            array.sort((a, b) => a.isComplete - b.isComplete),
-          TASKS: (array) =>
-            array.sort(
-              (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length,
-            ),
+          TASK: (array) => array.sort((a, b) => a.name.localeCompare(b.name)),
+          DEADLINE: (array) => array.sort((a, b) => a.deadline - b.deadline),
+          TYPE: (array) => array.sort((a, b) => a.type.localeCompare(b.type)),
+          COMPLETE: (array) => array.sort((a, b) => a.isComplete - b.isComplete),
+          TASKS: (array) => array.sort((a, b) => (a.nodes || []).length - (b.nodes || []).length),
         },
       },
     );
@@ -365,13 +309,9 @@ storiesOf('Features/Sort', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSort sortKey="TASK">Task</HeaderCellSort>
-                <HeaderCellSort sortKey="DEADLINE">
-                  Deadline
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="DEADLINE">Deadline</HeaderCellSort>
                 <HeaderCellSort sortKey="TYPE">Type</HeaderCellSort>
-                <HeaderCellSort sortKey="COMPLETE">
-                  Complete
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="COMPLETE">Complete</HeaderCellSort>
                 <HeaderCellSort sortKey="TASKS">Tasks</HeaderCellSort>
               </HeaderRow>
             </Header>
@@ -411,24 +351,14 @@ storiesOf('Features/Sort', module)
           margin: '0px',
           iconDefault: <UnfoldMoreOutlinedIcon fontSize="small" />,
           iconUp: <KeyboardArrowUpOutlinedIcon fontSize="small" />,
-          iconDown: (
-            <KeyboardArrowDownOutlinedIcon fontSize="small" />
-          ),
+          iconDown: <KeyboardArrowDownOutlinedIcon fontSize="small" />,
         },
         sortFns: {
-          TASK: (array) =>
-            array.sort((a, b) => a.name.localeCompare(b.name)),
-          DEADLINE: (array) =>
-            array.sort((a, b) => a.deadline - b.deadline),
-          TYPE: (array) =>
-            array.sort((a, b) => a.type.localeCompare(b.type)),
-          COMPLETE: (array) =>
-            array.sort((a, b) => a.isComplete - b.isComplete),
-          TASKS: (array) =>
-            array.sort(
-              (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length,
-            ),
+          TASK: (array) => array.sort((a, b) => a.name.localeCompare(b.name)),
+          DEADLINE: (array) => array.sort((a, b) => a.deadline - b.deadline),
+          TYPE: (array) => array.sort((a, b) => a.type.localeCompare(b.type)),
+          COMPLETE: (array) => array.sort((a, b) => a.isComplete - b.isComplete),
+          TASKS: (array) => array.sort((a, b) => (a.nodes || []).length - (b.nodes || []).length),
         },
       },
     );
@@ -444,13 +374,9 @@ storiesOf('Features/Sort', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSort sortKey="TASK">Task</HeaderCellSort>
-                <HeaderCellSort sortKey="DEADLINE">
-                  Deadline
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="DEADLINE">Deadline</HeaderCellSort>
                 <HeaderCellSort sortKey="TYPE">Type</HeaderCellSort>
-                <HeaderCellSort sortKey="COMPLETE">
-                  Complete
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="COMPLETE">Complete</HeaderCellSort>
                 <HeaderCellSort sortKey="TASKS">Tasks</HeaderCellSort>
               </HeaderRow>
             </Header>
@@ -487,19 +413,11 @@ storiesOf('Features/Sort', module)
       },
       {
         sortFns: {
-          TASK: (array) =>
-            array.sort((a, b) => a.name.localeCompare(b.name)),
-          DEADLINE: (array) =>
-            array.sort((a, b) => a.deadline - b.deadline),
-          TYPE: (array) =>
-            array.sort((a, b) => a.type.localeCompare(b.type)),
-          COMPLETE: (array) =>
-            array.sort((a, b) => a.isComplete - b.isComplete),
-          TASKS: (array) =>
-            array.sort(
-              (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length,
-            ),
+          TASK: (array) => array.sort((a, b) => a.name.localeCompare(b.name)),
+          DEADLINE: (array) => array.sort((a, b) => a.deadline - b.deadline),
+          TYPE: (array) => array.sort((a, b) => a.type.localeCompare(b.type)),
+          COMPLETE: (array) => array.sort((a, b) => a.isComplete - b.isComplete),
+          TASKS: (array) => array.sort((a, b) => (a.nodes || []).length - (b.nodes || []).length),
         },
       },
     );
