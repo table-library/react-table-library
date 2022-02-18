@@ -17,6 +17,8 @@ module.exports = {
           '@table-library/react-table-library/select': './src/select',
           '@table-library/react-table-library/tree': './src/tree',
           '@table-library/react-table-library/pagination': './src/pagination',
+          // themes
+          '@table-library/react-table-library/themes/mantine': './src/themes/mantine',
         },
       },
     ],

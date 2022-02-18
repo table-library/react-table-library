@@ -26,4 +26,4 @@ const useTheme = (theme: Theme | Theme[]): Theme => {
   return theme;
 };
 
-export { useTheme };
+export { useTheme, zipThemes };

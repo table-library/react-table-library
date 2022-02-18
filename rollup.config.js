@@ -24,6 +24,8 @@ export default {
     select: './src/select/index.ts',
     tree: './src/tree/index.ts',
     pagination: './src/pagination/index.ts',
+    // themes
+    mantine: './src/themes/mantine/index.ts',
   },
   output: [
     // ES module version, for modern browsers

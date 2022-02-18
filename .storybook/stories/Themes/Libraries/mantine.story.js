@@ -14,6 +14,10 @@ import {
   useCustom,
 } from '@table-library/react-table-library/table';
 import { useTheme } from '@table-library/react-table-library/theme';
+import {
+  DEFAULT_OPTIONS,
+  getMantineTheme,
+} from '@table-library/react-table-library/themes/mantine';
 import { useRowSelect } from '@table-library/react-table-library/select';
 import { CellTree, useTree, TreeExpandClickTypes } from '@table-library/react-table-library/tree';
 import { useSort, HeaderCellSort } from '@table-library/react-table-library/sort';
@@ -40,86 +44,34 @@ import {
   FaChevronDown,
   FaChevronUp,
 } from 'react-icons/fa';
+import { FixedSizeList } from 'react-window';
+import AutoSizer from 'react-virtualized-auto-sizer';
+import useInterval from 'use-interval';
 
-import { nodes } from '../../data';
+import { nodes, lotsOfNodes, randomFromInterval } from '../../data';
 
-const DEFAULT_OPTIONS = {
-  horizontalSpacing: 10,
-  verticalSpacing: 10,
-  striped: false,
-  highlightOnHover: false,
-};
+const ROW_HEIGHT = 38;
 
-const getTheme = ({ horizontalSpacing, verticalSpacing, striped, highlightOnHover }) => ({
-  Table: `
-    padding: 16px;
-    font-size: 14px;
+const WithStickyHeader = React.forwardRef(({ children, ...rest }, ref) => (
+  <div ref={ref} {...rest}>
+    <Header>
+      <HeaderRow>
+        <HeaderCell pin>A</HeaderCell>
+        <HeaderCell pin>B</HeaderCell>
+        <HeaderCell>C</HeaderCell>
+        <HeaderCell>D</HeaderCell>
+        <HeaderCell>E</HeaderCell>
+        <HeaderCell>F</HeaderCell>
+        <HeaderCell>G</HeaderCell>
+        <HeaderCell>H</HeaderCell>
+        <HeaderCell>I</HeaderCell>
+        <HeaderCell>J</HeaderCell>
+      </HeaderRow>
+    </Header>
 
-    .caption-container {
-      margin-top: 10px;
-      display: flex;
-      justify-content: center;
-      width: 100%;
-    }
-
-    caption {
-      color: #868e96;
-    }
-  `,
-  HeaderRow: `
-    &.tr-footer {
-      border-bottom: 1px solid transparent;
-    }
-  `,
-  BaseRow: `
-    border-bottom: 1px solid #dee2e6;
-  `,
-  Row: `
-    &:nth-child(odd) {
-      background-color: ${striped ? '#f8f9fa' : '#ffffff'};
-    }
-
-    &:nth-child(even) {
-      background-color: #ffffff;
-    }
-
-    ${
-      highlightOnHover
-        ? `
-            &:hover {
-              background-color: #f1f3f5;
-            }
-          `
-        : ``
-    }
-  `,
-  BaseCell: `
-    border-right: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-
-    padding: ${verticalSpacing}px ${horizontalSpacing}px;
-
-    & > div {
-      padding: 0;
-    }
-  `,
-  HeaderCell: `
-    font-weight: bold;
-    color: #495057;
-  `,
-  Cell: `
-    color: #000000;
-  `,
-});
-
-const getMantineTheme = (options) => {
-  const mergedOptions = {
-    ...DEFAULT_OPTIONS,
-    ...(options ? options : {}),
-  };
-
-  return getTheme(mergedOptions);
-};
+    <Body>{children}</Body>
+  </div>
+));
 
 storiesOf('Library Themes/Mantine', module)
   .addParameters({ component: Table })
@@ -307,9 +259,9 @@ storiesOf('Library Themes/Mantine', module)
       `,
       Cell: `
         & .match {
-            font-weight: bold;
-            color: #212121;
-          }
+          font-weight: bold;
+          color: #212121;
+        }
       `,
     };
     const theme = useTheme([mantineTheme, customTheme]);
@@ -632,6 +584,97 @@ storiesOf('Library Themes/Mantine', module)
             <Button onClick={handleSave}>Save</Button>
           </Group>
         </Drawer>
+      </div>
+    );
+  })
+  .add('virtualized', () => {
+    const [nodes, setNodes] = React.useState(lotsOfNodes);
+
+    const mantineTheme = getMantineTheme(
+      {
+        ...DEFAULT_OPTIONS,
+        striped: true,
+        highlightOnHover: true,
+      },
+      { isVirtualized: true },
+    );
+    const customTheme = {
+      Table: `
+        height: 100%;
+      `,
+      BaseCell: `
+        min-width: 15%;
+        width: 15%;
+
+        &:nth-child(1) {
+          left: 0px;
+        }
+
+        &:nth-child(2) {
+          left: 15%;
+          border-right: 1px solid #000000;
+        }
+      `,
+    };
+    const theme = useTheme([mantineTheme, customTheme]);
+
+    //* Update Interval *//
+
+    const updateRandomCell = React.useCallback((node) => {
+      const keys = Object.keys(node);
+      const randomKey = keys[randomFromInterval(0, keys.length - 1)];
+
+      const prefix = node[randomKey].substring(0, node[randomKey].indexOf(':') + 1);
+
+      return { [randomKey]: `${prefix} ${randomFromInterval(-100, 100)}` };
+    }, []);
+
+    useInterval(() => {
+      setNodes((v) => v.map((node) => ({ ...node, ...updateRandomCell(node) })));
+    }, 100);
+
+    const data = { nodes };
+
+    return (
+      <div style={{ height: '300px' }}>
+        <Table data={data} theme={theme} layout={{ custom: true, horizontalScroll: true }}>
+          {(tableList) => (
+            <AutoSizer>
+              {({ width, height }) => (
+                <FixedSizeList
+                  height={height}
+                  width={width}
+                  itemCount={data.nodes.length}
+                  itemSize={ROW_HEIGHT}
+                  innerElementType={WithStickyHeader}
+                  itemData={{ items: tableList }}
+                >
+                  {({ index, style, data }) => (
+                    <div
+                      style={{
+                        ...style,
+                        top: style.top + ROW_HEIGHT,
+                      }}
+                    >
+                      <Row item={data.items[index]}>
+                        <Cell pin>{data.items[index].cellA}</Cell>
+                        <Cell pin>{data.items[index].cellB}</Cell>
+                        <Cell>{data.items[index].cellC}</Cell>
+                        <Cell>{data.items[index].cellD}</Cell>
+                        <Cell>{data.items[index].cellE}</Cell>
+                        <Cell>{data.items[index].cellF}</Cell>
+                        <Cell>{data.items[index].cellG}</Cell>
+                        <Cell>{data.items[index].cellH}</Cell>
+                        <Cell>{data.items[index].cellI}</Cell>
+                        <Cell>{data.items[index].cellJ}</Cell>
+                      </Row>
+                    </div>
+                  )}
+                </FixedSizeList>
+              )}
+            </AutoSizer>
+          )}
+        </Table>
       </div>
     );
   })
