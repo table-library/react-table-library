@@ -117,7 +117,7 @@ storiesOf('Library Themes/Mantine', module)
       </Table>
     );
   })
-  .add('configure', () => {
+  .add('native configuration', () => {
     const data = { nodes };
 
     const [horizontalSpacing, setHorizontalSpacing] = React.useState(
