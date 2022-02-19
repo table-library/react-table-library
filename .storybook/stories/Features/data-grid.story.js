@@ -3,6 +3,8 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
+import { DisableAnimationsContext } from '../../stories/loki.js';
+
 import {
   Table,
   Header,
@@ -95,6 +97,7 @@ storiesOf('Features/Data Grid', module)
 
     //* Ambiguous Update Interval *//
 
+    const disableAnimations = React.useContext(DisableAnimationsContext);
     const updateRandomCell = React.useCallback((node) => {
       const keys = Object.keys(node);
       const randomKey = keys[randomFromInterval(0, keys.length - 1)];
@@ -105,6 +108,8 @@ storiesOf('Features/Data Grid', module)
     }, []);
 
     useInterval(() => {
+      if (disableAnimations) return;
+
       setNodes((v) => v.map((node) => ({ ...node, ...updateRandomCell(node) })));
     }, 250);
 

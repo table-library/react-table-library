@@ -1,5 +1,8 @@
 import * as React from 'react';
 import 'loki/configure-react';
+import isLokiRunning from '@loki/is-loki-running';
+
+import { DisableAnimationsContext } from './stories/loki.js';
 
 export const parameters = {
   layout: 'fullscreen',
@@ -65,14 +68,16 @@ export const parameters = {
 
 export const decorators = [
   (Story) => (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
-      <Story />
-    </div>
+    <DisableAnimationsContext.Provider value={isLokiRunning()}>
+      <div
+        style={{
+          height: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <Story />
+      </div>
+    </DisableAnimationsContext.Provider>
   ),
 ];

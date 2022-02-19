@@ -40,9 +40,7 @@ storiesOf('Misc/Row', module)
                 <Row
                   key={item.id}
                   item={item}
-                  onClick={(item, event) =>
-                    console.log('Click Row', item, event)
-                  }
+                  onClick={(item, event) => console.log('Click Row', item, event)}
                 >
                   <Cell>{item.name}</Cell>
                   <Cell>
@@ -85,9 +83,7 @@ storiesOf('Misc/Row', module)
                 <Row
                   key={item.id}
                   item={item}
-                  onDoubleClick={(item, event) =>
-                    console.log('Double Click Row', item, event)
-                  }
+                  onDoubleClick={(item, event) => console.log('Double Click Row', item, event)}
                 >
                   <Cell>{item.name}</Cell>
                   <Cell>
@@ -182,13 +178,7 @@ storiesOf('Misc/Row', module)
             <Body>
               {tableList.map((item) => (
                 <Row key={item.id} item={item} tabIndex="-1">
-                  <Cell
-                    onClick={(event) =>
-                      console.log('Click Cell', event)
-                    }
-                  >
-                    {item.name}
-                  </Cell>
+                  <Cell onClick={(event) => console.log('Click Cell', event)}>{item.name}</Cell>
                   <Cell>
                     {item.deadline.toLocaleDateString('en-US', {
                       year: 'numeric',
@@ -236,19 +226,8 @@ storiesOf('Misc/Row', module)
 
             <Body>
               {tableList.map((item, index) => (
-                <Row
-                  key={item.id}
-                  item={item}
-                  ariaColindex={index + 1}
-                  tabIndex={index + 1}
-                >
-                  <Cell
-                    onClick={(event) =>
-                      console.log('Click Cell', event)
-                    }
-                  >
-                    {item.name}
-                  </Cell>
+                <Row key={item.id} item={item} ariaColindex={index + 1} tabIndex={index + 1}>
+                  <Cell onClick={(event) => console.log('Click Cell', event)}>{item.name}</Cell>
                   <Cell>
                     {item.deadline.toLocaleDateString('en-US', {
                       year: 'numeric',
@@ -270,8 +249,7 @@ storiesOf('Misc/Row', module)
   .add('variable row height', () => {
     const data = { nodes };
 
-    const getRandomNumber = (min, max) =>
-      Math.floor(Math.random() * (max - min + 1) + min);
+    const getHeight = (index) => ((index % 3) + 1) * 25;
 
     const theme = useTheme({
       BaseRow: `
@@ -301,18 +279,8 @@ storiesOf('Misc/Row', module)
 
             <Body>
               {tableList.map((item, index) => (
-                <Row
-                  key={item.id}
-                  item={item}
-                  style={{ height: `${getRandomNumber(25, 100)}px` }}
-                >
-                  <Cell
-                    onClick={(event) =>
-                      console.log('Click Cell', event)
-                    }
-                  >
-                    {item.name}
-                  </Cell>
+                <Row key={item.id} item={item} style={{ height: `${getHeight(index)}px` }}>
+                  <Cell onClick={(event) => console.log('Click Cell', event)}>{item.name}</Cell>
                   <Cell>
                     {item.deadline.toLocaleDateString('en-US', {
                       year: 'numeric',

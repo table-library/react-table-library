@@ -3,6 +3,8 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
+import { DisableAnimationsContext } from '../../../stories/loki.js';
+
 import {
   Table,
   Header,
@@ -629,7 +631,10 @@ storiesOf('Library Themes/Mantine', module)
       return { [randomKey]: `${prefix} ${randomFromInterval(-100, 100)}` };
     }, []);
 
+    const disableAnimations = React.useContext(DisableAnimationsContext);
     useInterval(() => {
+      if (disableAnimations) return;
+
       setNodes((v) => v.map((node) => ({ ...node, ...updateRandomCell(node) })));
     }, 100);
 

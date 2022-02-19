@@ -285,14 +285,14 @@ export const randomFromInterval = (min, max) => {
 };
 
 export const lotsOfNodes = [...Array(100000).keys()].map((key) => ({
-  cellA: `Cell A${key}: ${randomFromInterval(-100, 100)}`,
-  cellB: `Cell B${key}: ${randomFromInterval(-100, 100)}`,
-  cellC: `Cell C${key}: ${randomFromInterval(-100, 100)}`,
-  cellD: `Cell D${key}: ${randomFromInterval(-100, 100)}`,
-  cellE: `Cell E${key}: ${randomFromInterval(-100, 100)}`,
-  cellF: `Cell F${key}: ${randomFromInterval(-100, 100)}`,
-  cellG: `Cell G${key}: ${randomFromInterval(-100, 100)}`,
-  cellH: `Cell H${key}: ${randomFromInterval(-100, 100)}`,
-  cellI: `Cell I${key}: ${randomFromInterval(-100, 100)}`,
-  cellJ: `Cell J${key}: ${randomFromInterval(-100, 100)}`,
+  cellA: `Cell A${key}: 100`,
+  cellB: `Cell B${key}: 100`,
+  cellC: `Cell C${key}: 100`,
+  cellD: `Cell D${key}: 100`,
+  cellE: `Cell E${key}: 100`,
+  cellF: `Cell F${key}: 100`,
+  cellG: `Cell G${key}: 100`,
+  cellH: `Cell H${key}: 100`,
+  cellI: `Cell I${key}: 100`,
+  cellJ: `Cell J${key}: 100`,
 }));
