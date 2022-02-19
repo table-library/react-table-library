@@ -2,6 +2,7 @@
 
 [![Version][version-badge]][package]
 [![Size][size-badge]][size]
+[![type-badge]][package]
 [![License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 [![Changelog][changelog-badge]][changelog]
@@ -53,11 +54,12 @@ In 2020, [Robin Wieruch](https://www.robinwieruch.de) created React Table Librar
 
 [version-badge]: https://img.shields.io/npm/v/@table-library/react-table-library
 [package]: https://www.npmjs.com/package/@table-library/react-table-library
-[license-badge]: https://img.shields.io/npm/l/@table-library/react-table-library.svg?style=flat-square
+[type-badge]: https://img.shields.io/npm/types/@table-library/react-table-library
+[license-badge]: https://img.shields.io/npm/l/@table-library/react-table-library.svg
 [license]: https://github.com/table-library/react-table-library/blob/master/LICENSE
 [github-star-badge]: https://img.shields.io/github/stars/table-library/react-table-library?style=social
 [github-star]: https://github.com/table-library/react-table-library/
-[coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
+[coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg
 [coc]: https://github.com/table-library/react-table-library/blob/master/CODE_OF_CONDUCT.md
 [changelog-badge]: https://img.shields.io/badge/Change-Log-blue
 [changelog]: https://github.com/table-library/react-table-library/blob/master/CHANGELOG.md
