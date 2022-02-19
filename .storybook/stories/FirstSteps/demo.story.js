@@ -15,20 +15,13 @@ import {
   useCustom,
 } from '@table-library/react-table-library/table';
 import { useTheme } from '@table-library/react-table-library/theme';
-import {
-  CellTree,
-  useTree,
-  TreeExpandClickTypes,
-} from '@table-library/react-table-library/tree';
+import { CellTree, useTree, TreeExpandClickTypes } from '@table-library/react-table-library/tree';
 import {
   CellSelect,
   HeaderCellSelect,
   useRowSelect,
 } from '@table-library/react-table-library/select';
-import {
-  useSort,
-  HeaderCellSort,
-} from '@table-library/react-table-library/sort';
+import { useSort, HeaderCellSort } from '@table-library/react-table-library/sort';
 import { usePagination } from '@table-library/react-table-library/pagination';
 
 import { nodes } from '../data';
@@ -96,19 +89,11 @@ storiesOf('First Steps/Demo', module)
       },
       {
         sortFns: {
-          TASK: (array) =>
-            array.sort((a, b) => a.name.localeCompare(b.name)),
-          DEADLINE: (array) =>
-            array.sort((a, b) => a.deadline - b.deadline),
-          TYPE: (array) =>
-            array.sort((a, b) => a.type.localeCompare(b.type)),
-          COMPLETE: (array) =>
-            array.sort((a, b) => a.isComplete - b.isComplete),
-          TASKS: (array) =>
-            array.sort(
-              (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length,
-            ),
+          TASK: (array) => array.sort((a, b) => a.name.localeCompare(b.name)),
+          DEADLINE: (array) => array.sort((a, b) => a.deadline - b.deadline),
+          TYPE: (array) => array.sort((a, b) => a.type.localeCompare(b.type)),
+          COMPLETE: (array) => array.sort((a, b) => a.isComplete - b.isComplete),
+          TASKS: (array) => array.sort((a, b) => (a.nodes || []).length - (b.nodes || []).length),
         },
       },
     );
@@ -197,30 +182,22 @@ storiesOf('First Steps/Demo', module)
                 alignItems: 'center',
               }}
             >
-              <span>
-                Total Pages:{' '}
-                {pagination.state.getTotalPages(data.nodes)}
-              </span>
+              <span>Total Pages: {pagination.state.getTotalPages(data.nodes)}</span>
 
               <span>
                 Page:{' '}
-                {pagination.state
-                  .getPages(data.nodes)
-                  .map((_, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      style={{
-                        fontWeight:
-                          pagination.state.page === index
-                            ? 'bold'
-                            : 'normal',
-                      }}
-                      onClick={() => pagination.fns.onSetPage(index)}
-                    >
-                      {index + 1}
-                    </button>
-                  ))}
+                {pagination.state.getPages(data.nodes).map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    style={{
+                      fontWeight: pagination.state.page === index ? 'bold' : 'normal',
+                    }}
+                    onClick={() => pagination.fns.onSetPage(index)}
+                  >
+                    {index + 1}
+                  </button>
+                ))}
               </span>
             </div>
           </>
@@ -263,7 +240,7 @@ storiesOf('First Steps/Demo', module)
       `,
     });
 
-    const BASE_URL = 'http://hn.algolia.com/api/v1/search';
+    const BASE_URL = 'https://hn.algolia.com/api/v1/search';
 
     const INITIAL_PARAMS = {
       search: 'react',
@@ -387,30 +364,15 @@ storiesOf('First Steps/Demo', module)
       <>
         <label htmlFor="search">
           Search by Task:
-          <input
-            id="search"
-            type="text"
-            value={search}
-            onChange={handleSearch}
-          />
+          <input id="search" type="text" value={search} onChange={handleSearch} />
         </label>
 
         <label htmlFor="filter">
-          <input
-            id="filter"
-            type="checkbox"
-            checked={filter}
-            onChange={handleFilter}
-          />
+          <input id="filter" type="checkbox" checked={filter} onChange={handleFilter} />
           Only "Ask HN"
         </label>
 
-        <Table
-          data={data}
-          theme={theme}
-          select={select}
-          pagination={pagination}
-        >
+        <Table data={data} theme={theme} select={select} pagination={pagination}>
           {(tableList) => (
             <>
               <Header>
@@ -431,14 +393,11 @@ storiesOf('First Steps/Demo', module)
                       <a href={item.url}>{item.title}</a>
                     </Cell>
                     <Cell>
-                      {new Date(item.created_at).toLocaleDateString(
-                        'en-US',
-                        {
-                          year: 'numeric',
-                          month: '2-digit',
-                          day: '2-digit',
-                        },
-                      )}
+                      {new Date(item.created_at).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                      })}
                     </Cell>
                     <Cell>{item.points}</Cell>
                     <Cell>{item.num_comments}</Cell>
@@ -466,10 +425,7 @@ storiesOf('First Steps/Demo', module)
                   key={index}
                   type="button"
                   style={{
-                    fontWeight:
-                      pagination.state.page === index
-                        ? 'bold'
-                        : 'normal',
+                    fontWeight: pagination.state.page === index ? 'bold' : 'normal',
                   }}
                   onClick={() => pagination.fns.onSetPage(index)}
                 >
