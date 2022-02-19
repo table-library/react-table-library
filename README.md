@@ -7,8 +7,8 @@
 [![Code of Conduct][coc-badge]][coc]
 [![Changelog][changelog-badge]][changelog]
 
-[![Follow][twitter-follow-badge]][twitter-follow]
 [![Tweet][twitter-badge]][twitter]
+[![Follow][twitter-follow-badge]][twitter-follow]
 [![Star][github-star-badge]][github-star]
 
 React Table Library -- yet another table library for React -- which prioritzes:
