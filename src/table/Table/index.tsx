@@ -58,7 +58,7 @@ export interface TableProps {
   select?: Select;
   tree?: Tree;
   onInit?: OnInitFunction;
-  children: (nodes: TableNode[]) => React.ReactNode;
+  children?: (nodes: TableNode[]) => React.ReactNode;
 }
 
 const Table = React.forwardRef(
@@ -114,7 +114,7 @@ const Table = React.forwardRef(
                         tableElementRef={tableElementRef}
                         tableMemoryRef={tableMemoryRef}
                       >
-                        {children(modifiedNodes)}
+                        {children && children(modifiedNodes)}
                       </LayoutProvider>
                     </PaginationContext.Provider>
                   </TreeContext.Provider>

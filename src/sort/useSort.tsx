@@ -20,6 +20,8 @@ import {
   SortIconPositions,
 } from '@table-library/react-table-library/types/sort';
 
+import { HeaderCellSort } from './HeaderCellSort';
+
 const TOGGLE_SORT = 'TOGGLE_SORT';
 const SET = 'SET';
 
@@ -163,6 +165,9 @@ const useSort = (
     fns,
     options: mergedOptions,
     modifier,
+    components: {
+      HeaderCellSort,
+    },
   };
 };
 

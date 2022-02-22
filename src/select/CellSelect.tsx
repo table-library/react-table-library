@@ -3,17 +3,11 @@ import * as React from 'react';
 import { Cell } from '@table-library/react-table-library/table/Cell';
 import { SelectContext } from '@table-library/react-table-library/common/context/Select';
 
-import { TableNode } from '@table-library/react-table-library/types/table';
-import { SelectTypes } from '@table-library/react-table-library/types/select';
+import { SelectTypes, CellSelectProps } from '@table-library/react-table-library/types/select';
 
 import { Checkbox } from './Checkbox';
 
-interface CellSelectProps {
-  item: TableNode;
-  children: React.ReactNode;
-}
-
-const CellSelect = React.memo(({ item, children, ...passThrough }: CellSelectProps) => {
+const CellSelect = React.memo(({ item, ...passThrough }: CellSelectProps) => {
   const select = React.useContext(SelectContext);
 
   if (!select) {

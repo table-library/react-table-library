@@ -7,12 +7,7 @@ import { SelectTypes } from '@table-library/react-table-library/types/select';
 
 import { Checkbox } from './Checkbox';
 
-interface HeaderCellSelectProps {
-  index: number;
-  children: React.ReactNode;
-}
-
-const HeaderCellSelect = React.memo(({ children, ...passThrough }: HeaderCellSelectProps) => {
+const HeaderCellSelect = React.memo((passThrough: Record<string, any>) => {
   const select = React.useContext(SelectContext);
 
   if (!select) {

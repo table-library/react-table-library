@@ -253,18 +253,6 @@ storiesOf('Library Themes/Mantine', module)
       Table: `
         padding: 16px 0px;
       `,
-      Row: `
-        &.row-select-single-selected, &.row-select-selected {
-          background-color: #b3dcff;
-          border-bottom: 1px solid #b3dcff;
-        }
-      `,
-      Cell: `
-        & .match {
-          font-weight: bold;
-          color: #212121;
-        }
-      `,
     };
     const theme = useTheme([mantineTheme, customTheme]);
 

@@ -3,24 +3,12 @@ import * as React from 'react';
 import { SortContext } from '@table-library/react-table-library/common/context/Sort';
 import { HeaderCell } from '@table-library/react-table-library/table/Cell';
 
-import { SortOptionsIcon } from '@table-library/react-table-library/types/sort';
+import { HeaderCellSortProps } from '@table-library/react-table-library/types/sort';
 
 import { SortButton } from './SortButton';
 
-interface HeaderCellSortProps {
-  index?: number;
-  sortKey: string;
-  sortIcon: SortOptionsIcon;
-  children: React.ReactNode;
-}
-
 const HeaderCellSort = React.memo(
-  ({
-    sortKey,
-    sortIcon = {},
-    children,
-    ...passThrough
-  }: HeaderCellSortProps & Record<string, any>) => {
+  ({ sortKey, sortIcon = {}, children, ...passThrough }: HeaderCellSortProps) => {
     const sort = React.useContext(SortContext);
 
     if (!sort) {

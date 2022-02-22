@@ -4,6 +4,27 @@ import isLokiRunning from '@loki/is-loki-running';
 
 import { DisableAnimationsContext } from './stories/loki.js';
 
+const Features = [
+  'Theme',
+  'Layout',
+  'Resize',
+  'Sort',
+  'Search',
+  'Filter',
+  'Select',
+  'Tree',
+  'Expand',
+  'Pagination',
+  'Fixed Header',
+  'Horizontal Scroll',
+  'Pin',
+  'Ten Thousand Rows',
+  'Data Grid',
+  'Column Hiding',
+  'Column Ordering',
+  'Column Grouping (WIP)',
+];
+
 export const parameters = {
   layout: 'fullscreen',
   options: {
@@ -17,26 +38,9 @@ export const parameters = {
         'Library Themes',
         ['Material UI', 'Semantic UI', 'Bootstrap UI', 'Ant Design'],
         'Features',
-        [
-          'Theme',
-          'Layout',
-          'Resize',
-          'Sort',
-          'Search',
-          'Filter',
-          'Select',
-          'Tree',
-          'Expand',
-          'Pagination',
-          'Fixed Header',
-          'Horizontal Scroll',
-          'Pin',
-          'Ten Thousand Rows',
-          'Data Grid',
-          'Column Hiding',
-          'Column Ordering',
-          'Column Grouping (WIP)',
-        ],
+        Features,
+        'Compact',
+        ['Base', ...Features],
         'Composites',
         ['Sort & Select', 'Tree & Select', 'Tree & Sort'],
         'Misc',

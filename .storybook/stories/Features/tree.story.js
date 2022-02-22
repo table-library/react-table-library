@@ -17,34 +17,12 @@ import {
   Cell,
 } from '@table-library/react-table-library/table';
 
-import {
-  useTree,
-  CellTree,
-  TreeExpandClickTypes,
-} from '@table-library/react-table-library/tree';
+import { useTree, CellTree, TreeExpandClickTypes } from '@table-library/react-table-library/tree';
 
 import { nodes } from '../data';
 
 storiesOf('Features/Tree', module)
   .addParameters({ component: Table })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.robinwieruch.de/react-tree-table/"
-        >
-          Tutorial
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ))
   .add('base', () => {
     const data = { nodes };
 
@@ -361,9 +339,7 @@ storiesOf('Features/Tree', module)
       {
         treeIcon: {
           margin: '4px',
-          iconDefault: (
-            <InsertDriveFileOutlinedIcon fontSize="small" />
-          ),
+          iconDefault: <InsertDriveFileOutlinedIcon fontSize="small" />,
           iconRight: <FolderIcon fontSize="small" />,
           iconDown: <FolderOpenIcon fontSize="small" />,
         },
@@ -517,4 +493,22 @@ storiesOf('Features/Tree', module)
         )}
       </Table>
     );
-  });
+  })
+  .add('documentation', () => (
+    <ul>
+      <li>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.robinwieruch.de/react-tree-table/"
+        >
+          Tutorial
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
+  ));

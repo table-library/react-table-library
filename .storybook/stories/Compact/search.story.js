@@ -3,24 +3,24 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import {
-  Table,
-  Header,
-  HeaderRow,
-  Body,
-  Row,
-  HeaderCell,
-  Cell,
-} from '@table-library/react-table-library/table';
+import { CompactTable } from '@table-library/react-table-library/compact';
 
 import { nodes } from '../data';
 
-storiesOf('Misc/Column', module)
-  .addParameters({ component: Table })
-  .add('base', () => {
-    const data = { nodes };
+storiesOf('Compact/Search', module)
+  .addParameters({ component: CompactTable })
+  .add('search', () => {
+    const [search, setSearch] = React.useState('');
 
-    const columns = [
+    const handleSearch = (event) => {
+      setSearch(event.target.value);
+    };
+
+    const data = {
+      nodes: nodes.filter((item) => item.name.toLowerCase().includes(search.toLowerCase())),
+    };
+
+    const COLUMNS = [
       { label: 'Task', renderCell: (item) => item.name },
       {
         label: 'Deadline',
@@ -40,29 +40,19 @@ storiesOf('Misc/Column', module)
     ];
 
     return (
-      <Table data={data}>
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                {columns.map((column, index) => (
-                  <HeaderCell key={index}>{column.label}</HeaderCell>
-                ))}
-              </HeaderRow>
-            </Header>
+      <>
+        <label htmlFor="search">
+          Search by Task:
+          <input id="search" type="text" value={search} onChange={handleSearch} />
+        </label>
 
-            <Body>
-              {tableList.map((item) => (
-                <Row key={item.id} item={item}>
-                  {columns.map((column, index) => (
-                    <Cell key={index}>{column.renderCell(item)}</Cell>
-                  ))}
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
+        <CompactTable columns={COLUMNS} data={data} />
+
+        <br />
+        <small style={{ width: '100%' }}>
+          For more configuration, see <strong>Features/Search</strong> ...
+        </small>
+      </>
     );
   })
   .add('documentation', () => (

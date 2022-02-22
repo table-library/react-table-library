@@ -3,24 +3,16 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import {
-  Table,
-  Header,
-  HeaderRow,
-  Body,
-  Row,
-  HeaderCell,
-  Cell,
-} from '@table-library/react-table-library/table';
+import { CompactTable } from '@table-library/react-table-library/compact';
 
 import { nodes } from '../data';
 
-storiesOf('Misc/Column', module)
-  .addParameters({ component: Table })
-  .add('base', () => {
+storiesOf('Compact/Fixed Header', module)
+  .addParameters({ component: CompactTable })
+  .add('fixed header', () => {
     const data = { nodes };
 
-    const columns = [
+    const COLUMNS = [
       { label: 'Task', renderCell: (item) => item.name },
       {
         label: 'Deadline',
@@ -40,29 +32,20 @@ storiesOf('Misc/Column', module)
     ];
 
     return (
-      <Table data={data}>
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                {columns.map((column, index) => (
-                  <HeaderCell key={index}>{column.label}</HeaderCell>
-                ))}
-              </HeaderRow>
-            </Header>
+      <>
+        <div
+          style={{
+            height: '150px',
+          }}
+        >
+          <CompactTable fullHeight columns={COLUMNS} data={data} layout={{ fullHeight: true }} />
+        </div>
 
-            <Body>
-              {tableList.map((item) => (
-                <Row key={item.id} item={item}>
-                  {columns.map((column, index) => (
-                    <Cell key={index}>{column.renderCell(item)}</Cell>
-                  ))}
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
+        <br />
+        <small style={{ width: '100%' }}>
+          For more configuration, see <strong>Features/Fixed Header</strong> ...
+        </small>
+      </>
     );
   })
   .add('documentation', () => (

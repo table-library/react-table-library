@@ -11,6 +11,8 @@ module.exports = {
           '@table-library/react-table-library/types': './src/types',
           '@table-library/react-table-library/common': './src/common',
           '@table-library/react-table-library/table': './src/table',
+          '@table-library/react-table-library/compact': './src/compact',
+          // features
           '@table-library/react-table-library/theme': './src/theme',
           '@table-library/react-table-library/resize': './src/resize',
           '@table-library/react-table-library/sort': './src/sort',

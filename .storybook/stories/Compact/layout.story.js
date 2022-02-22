@@ -3,24 +3,36 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import {
-  Table,
-  Header,
-  HeaderRow,
-  Body,
-  Row,
-  HeaderCell,
-  Cell,
-} from '@table-library/react-table-library/table';
+import { CompactTable } from '@table-library/react-table-library/compact';
+import { useTheme } from '@table-library/react-table-library/theme';
 
 import { nodes } from '../data';
 
-storiesOf('Misc/Column', module)
-  .addParameters({ component: Table })
-  .add('base', () => {
+storiesOf('Compact/Layout', module)
+  .addParameters({ component: CompactTable })
+  .add('layout', () => {
     const data = { nodes };
 
-    const columns = [
+    const theme = useTheme({
+      BaseCell: `
+        &:nth-child(1) {
+          min-width: 35%;
+          width: 35%;
+        }
+
+        &:nth-child(2), &:nth-child(3), &:nth-child(4) {
+          min-width: 15%;
+          width: 15%;
+        }
+
+        &:nth-child(5) {
+          min-width: 20%;
+          width: 20%;
+        }
+      `,
+    });
+
+    const COLUMNS = [
       { label: 'Task', renderCell: (item) => item.name },
       {
         label: 'Deadline',
@@ -40,29 +52,14 @@ storiesOf('Misc/Column', module)
     ];
 
     return (
-      <Table data={data}>
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                {columns.map((column, index) => (
-                  <HeaderCell key={index}>{column.label}</HeaderCell>
-                ))}
-              </HeaderRow>
-            </Header>
+      <>
+        <CompactTable columns={COLUMNS} data={data} theme={theme} layout={{ custom: true }} />
 
-            <Body>
-              {tableList.map((item) => (
-                <Row key={item.id} item={item}>
-                  {columns.map((column, index) => (
-                    <Cell key={index}>{column.renderCell(item)}</Cell>
-                  ))}
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
+        <br />
+        <small style={{ width: '100%' }}>
+          For more configuration, see <strong>Features/Layout</strong> ...
+        </small>
+      </>
     );
   })
   .add('documentation', () => (

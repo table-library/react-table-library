@@ -3,24 +3,16 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import {
-  Table,
-  Header,
-  HeaderRow,
-  Body,
-  Row,
-  HeaderCell,
-  Cell,
-} from '@table-library/react-table-library/table';
+import { CompactTable } from '@table-library/react-table-library/compact';
 
 import { nodes } from '../data';
 
-storiesOf('Misc/Column', module)
-  .addParameters({ component: Table })
+storiesOf('Compact/Base', module)
+  .addParameters({ component: CompactTable })
   .add('base', () => {
     const data = { nodes };
 
-    const columns = [
+    const COLUMNS = [
       { label: 'Task', renderCell: (item) => item.name },
       {
         label: 'Deadline',
@@ -39,31 +31,7 @@ storiesOf('Misc/Column', module)
       { label: 'Tasks', renderCell: (item) => item.nodes?.length },
     ];
 
-    return (
-      <Table data={data}>
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                {columns.map((column, index) => (
-                  <HeaderCell key={index}>{column.label}</HeaderCell>
-                ))}
-              </HeaderRow>
-            </Header>
-
-            <Body>
-              {tableList.map((item) => (
-                <Row key={item.id} item={item}>
-                  {columns.map((column, index) => (
-                    <Cell key={index}>{column.renderCell(item)}</Cell>
-                  ))}
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
-    );
+    return <CompactTable columns={COLUMNS} data={data} />;
   })
   .add('documentation', () => (
     <ul>

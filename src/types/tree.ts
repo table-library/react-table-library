@@ -5,7 +5,7 @@ import {
   IdReducerFunctions,
   Modifier,
 } from '@table-library/react-table-library/types/common';
-import { GetRowProps } from '@table-library/react-table-library/types/table';
+import { TableNode, GetRowProps } from '@table-library/react-table-library/types/table';
 
 export enum TreeExpandClickTypes {
   RowClick,
@@ -48,10 +48,25 @@ export type TreeOptionsSound = {
   treeYLevel: number;
 };
 
+export interface ColumnTreePropsObject {
+  treeIcon?: TreeOptionsIcon;
+}
+
+export type ColumnTreeProps = ColumnTreePropsObject | boolean;
+
+export interface CellTreeProps {
+  item: TableNode;
+  treeIcon?: TreeOptionsIcon;
+  children: React.ReactNode;
+}
+
 export type Tree = {
   state: State;
   fns: IdReducerFunctions;
   options: TreeOptionsSound;
   _getRowProps: GetRowProps;
   modifier: Modifier;
+  components: {
+    CellTree: React.FunctionComponent<CellTreeProps>;
+  };
 };

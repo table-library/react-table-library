@@ -21,6 +21,9 @@ import {
   SelectClickTypes,
 } from '@table-library/react-table-library/types/select';
 
+import { HeaderCellSelect } from './HeaderCellSelect';
+import { CellSelect } from './CellSelect';
+
 const getRowProps = (props: RowProps, features: Features): FeatureProps => {
   const { item } = props;
 
@@ -123,6 +126,10 @@ const useRowSelect = (
     fns,
     options: mergedOptions,
     _getRowProps: getRowProps,
+    components: {
+      HeaderCellSelect,
+      CellSelect,
+    },
   };
 };
 

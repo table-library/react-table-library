@@ -71,19 +71,16 @@ storiesOf('Features/Expand', module)
                       }}
                     >
                       <li>
-                        <strong>Name:</strong>{' '}
-                        {item.name.toUpperCase()}
+                        <strong>Name:</strong> {item.name.toUpperCase()}
                       </li>
                       <li>
-                        <strong>Deadline:</strong>{' '}
-                        {item.deadline.toLocaleDateString('en-US')}
+                        <strong>Deadline:</strong> {item.deadline.toLocaleDateString('en-US')}
                       </li>
                       <li>
                         <strong>Type:</strong> {item.type}
                       </li>
                       <li>
-                        <strong>Complete:</strong>{' '}
-                        {item.isComplete.toString()}
+                        <strong>Complete:</strong> {item.isComplete.toString()}
                       </li>
                     </ul>
                   )}
@@ -148,9 +145,7 @@ storiesOf('Features/Expand', module)
                     <Cell>{item.nodes?.length}</Cell>
                   </Row>
 
-                  {ids.includes(item.id) && (
-                    <strong>{item.name.toUpperCase()}</strong>
-                  )}
+                  {ids.includes(item.id) && <strong>{item.name.toUpperCase()}</strong>}
                 </React.Fragment>
               ))}
             </Body>

@@ -50,9 +50,23 @@ export type SortFunctions = {
   onToggleSort: (sortFunctionInput: SortFunctionInput) => void;
 };
 
+export interface ColumnSortProps {
+  sortKey: string;
+  sortIcon?: SortOptionsIcon;
+}
+export type HeaderCellSortProps = {
+  index?: number;
+  sortKey: string;
+  sortIcon?: SortOptionsIcon;
+  children: React.ReactNode;
+} & Record<string, any>;
+
 export type Sort = {
   state: State;
   fns: SortFunctions;
   options: SortOptionsSound;
   modifier: Modifier;
+  components: {
+    HeaderCellSort: React.FunctionComponent<HeaderCellSortProps>;
+  };
 };

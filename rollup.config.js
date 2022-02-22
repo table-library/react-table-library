@@ -19,6 +19,8 @@ export default {
     types: './src/types/index.ts',
     common: './src/common/index.ts',
     table: './src/table/index.ts',
+    compact: './src/compact/index.ts',
+    // features
     theme: './src/theme/index.ts',
     sort: './src/sort/index.ts',
     select: './src/select/index.ts',

@@ -3,24 +3,32 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import {
-  Table,
-  Header,
-  HeaderRow,
-  Body,
-  Row,
-  HeaderCell,
-  Cell,
-} from '@table-library/react-table-library/table';
+import { CompactTable } from '@table-library/react-table-library/compact';
+import { useTheme } from '@table-library/react-table-library/theme';
 
 import { nodes } from '../data';
 
-storiesOf('Misc/Column', module)
-  .addParameters({ component: Table })
-  .add('base', () => {
+storiesOf('Compact/Theme', module)
+  .addParameters({ component: CompactTable })
+  .add('theme', () => {
     const data = { nodes };
 
-    const columns = [
+    const theme = useTheme({
+      HeaderRow: `
+        background-color: #eaf5fd;
+      `,
+      Row: `
+        &:nth-child(odd) {
+          background-color: #d2e9fb;
+        }
+
+        &:nth-child(even) {
+          background-color: #eaf5fd;
+        }
+      `,
+    });
+
+    const COLUMNS = [
       { label: 'Task', renderCell: (item) => item.name },
       {
         label: 'Deadline',
@@ -40,29 +48,14 @@ storiesOf('Misc/Column', module)
     ];
 
     return (
-      <Table data={data}>
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                {columns.map((column, index) => (
-                  <HeaderCell key={index}>{column.label}</HeaderCell>
-                ))}
-              </HeaderRow>
-            </Header>
+      <>
+        <CompactTable columns={COLUMNS} data={data} theme={theme} />
 
-            <Body>
-              {tableList.map((item) => (
-                <Row key={item.id} item={item}>
-                  {columns.map((column, index) => (
-                    <Cell key={index}>{column.renderCell(item)}</Cell>
-                  ))}
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
+        <br />
+        <small style={{ width: '100%' }}>
+          For more configuration, see <strong>Features/Theme</strong> ...
+        </small>
+      </>
     );
   })
   .add('documentation', () => (

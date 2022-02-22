@@ -19,6 +19,8 @@ import { nodes } from '../data';
 storiesOf('Features/Theme', module)
   .addParameters({ component: Table })
   .add('striped', () => {
+    const data = { nodes };
+
     const theme = useTheme({
       HeaderRow: `
         background-color: #eaf5fd;
@@ -33,8 +35,6 @@ storiesOf('Features/Theme', module)
         }
       `,
     });
-
-    const data = { nodes };
 
     return (
       <Table data={data} theme={theme}>
@@ -73,6 +73,8 @@ storiesOf('Features/Theme', module)
     );
   })
   .add('chess', () => {
+    const data = { nodes };
+
     const theme = useTheme({
       BaseCell: `
         border-right: 1px solid transparent;
@@ -99,8 +101,6 @@ storiesOf('Features/Theme', module)
         }
       `,
     });
-
-    const data = { nodes };
 
     return (
       <Table data={data} theme={theme}>
@@ -139,6 +139,8 @@ storiesOf('Features/Theme', module)
     );
   })
   .add('alignment', () => {
+    const data = { nodes };
+
     const theme = useTheme({
       BaseCell: `
         text-align: center;
@@ -152,8 +154,6 @@ storiesOf('Features/Theme', module)
         }
       `,
     });
-
-    const data = { nodes };
 
     return (
       <Table data={data} theme={theme}>
@@ -192,6 +192,8 @@ storiesOf('Features/Theme', module)
     );
   })
   .add('dense', () => {
+    const data = { nodes };
+
     const theme = useTheme({
       BaseCell: `
         border-right: 1px solid #a0a8ae;
@@ -206,8 +208,6 @@ storiesOf('Features/Theme', module)
         }
       `,
     });
-
-    const data = { nodes };
 
     return (
       <Table data={data} theme={theme}>
@@ -246,6 +246,8 @@ storiesOf('Features/Theme', module)
     );
   })
   .add('gutter', () => {
+    const data = { nodes };
+
     const theme = useTheme({
       BaseRow: `
         border-bottom: 1px solid #a0a8ae;
@@ -260,8 +262,6 @@ storiesOf('Features/Theme', module)
         border-bottom: 1px solid transparent;
       `,
     });
-
-    const data = { nodes };
 
     return (
       <Table data={data} theme={theme}>
@@ -300,13 +300,13 @@ storiesOf('Features/Theme', module)
     );
   })
   .add('indentation', () => {
+    const data = { nodes };
+
     const theme = useTheme({
       BaseCell: `
         padding-left: 30px;
       `,
     });
-
-    const data = { nodes };
 
     return (
       <Table data={data} theme={theme}>
@@ -345,6 +345,8 @@ storiesOf('Features/Theme', module)
     );
   })
   .add('flex', () => {
+    const data = { nodes };
+
     const theme = useTheme({
       HeaderCell: `
         & > div {
@@ -354,8 +356,6 @@ storiesOf('Features/Theme', module)
         }
       `,
     });
-
-    const data = { nodes };
 
     return (
       <Table data={data} theme={theme}>
@@ -409,6 +409,8 @@ storiesOf('Features/Theme', module)
     );
   })
   .add('border hover', () => {
+    const data = { nodes };
+
     const theme = useTheme({
       Row: `
         border-top: 1px solid #a0a8ae;
@@ -431,8 +433,6 @@ storiesOf('Features/Theme', module)
         border-bottom: 1px solid transparent;
       `,
     });
-
-    const data = { nodes };
 
     return (
       <Table data={data} theme={theme}>
@@ -471,6 +471,8 @@ storiesOf('Features/Theme', module)
     );
   })
   .add('stitch themes', () => {
+    const data = { nodes };
+
     const stripedTheme = {
       BaseRow: `
         font-size: 14px;
@@ -505,8 +507,6 @@ storiesOf('Features/Theme', module)
     };
 
     const theme = useTheme([stripedTheme, gutterTheme]);
-
-    const data = { nodes };
 
     return (
       <Table data={data} theme={theme}>

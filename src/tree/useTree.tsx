@@ -24,6 +24,8 @@ import {
   TreeExpandClickTypes,
 } from '@table-library/react-table-library/types/tree';
 
+import { CellTree } from './CellTree';
+
 const getRowProps = (props: RowProps, features: Features): FeatureProps => {
   const { item } = props;
 
@@ -139,6 +141,9 @@ const useTree = (
     options: mergedOptions,
     _getRowProps: getRowProps,
     modifier,
+    components: {
+      CellTree,
+    },
   };
 };
 

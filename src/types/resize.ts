@@ -1,9 +1,7 @@
-type ResizePropBoolean = boolean;
-
-type ResizePropObject = {
+type ColumnResizePropsObject = {
   minWidth?: number;
   resizerWidth?: number;
   resizerHighlight?: string;
 };
 
-export type ResizeProp = ResizePropObject | ResizePropBoolean;
+export type ColumnResizeProps = ColumnResizePropsObject | boolean;

@@ -44,6 +44,12 @@ const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
       border-bottom: 1px solid transparent;
     }
   `,
+  Row: `
+    &.row-select.row-select-single-selected, &.row-select.row-select-selected {
+      background-color: #b3dcff;
+      border-bottom: 1px solid #b3dcff;
+    }
+  `,
   BaseRow: `
     border-bottom: 1px solid #dee2e6;
   `,
@@ -63,6 +69,11 @@ const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
   `,
   Cell: `
     color: #000000;
+
+    & .match {
+      font-weight: bold;
+      color: #212121;
+    }
   `,
 });
 
@@ -135,7 +146,7 @@ export const DEFAULT_CONFIGURATION = {
   isVirtualized: false,
 };
 
-export const getMantineTheme = (options: Options, configuration: Configuration) => {
+export const getMantineTheme = (options?: Options, configuration?: Configuration) => {
   const mergedOptions = {
     ...DEFAULT_OPTIONS,
     ...(options ? options : {}),

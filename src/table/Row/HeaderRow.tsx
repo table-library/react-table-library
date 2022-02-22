@@ -13,6 +13,13 @@ interface HeaderRowProps {
   children: React.ReactNode;
 }
 
+function isReactFragment(variableToInspect: any) {
+  if (variableToInspect.type) {
+    return variableToInspect.type === React.Fragment;
+  }
+  return variableToInspect === React.Fragment;
+}
+
 const HeaderRow = ({ className, disabled, children }: HeaderRowProps) => {
   const theme = React.useContext(ThemeContext);
 
@@ -36,9 +43,19 @@ const HeaderRow = ({ className, disabled, children }: HeaderRowProps) => {
         .filter(Boolean)
         .map((child, index) => {
           if (React.isValidElement(child)) {
-            return React.cloneElement(child, {
-              index,
-            });
+            let extraProps = {};
+
+            // edge case: CompactTable renders checkbox (select feature) + cell in one fragment
+            // this would break the resize feature
+            // hence we need to pass the index from the outside then (see CompactTable)
+            if (!isReactFragment(child)) {
+              extraProps = {
+                ...extraProps,
+                index,
+              };
+            }
+
+            return React.cloneElement(child, extraProps);
           }
         })}
     </HeaderRowContainer>

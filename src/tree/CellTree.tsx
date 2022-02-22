@@ -7,7 +7,7 @@ import { isLeaf } from '@table-library/react-table-library/common/util/tree';
 
 import { Nullish, State } from '@table-library/react-table-library/types/common';
 import { TableNode } from '@table-library/react-table-library/types/table';
-import { TreeOptionsIcon } from '@table-library/react-table-library/types/tree';
+import { CellTreeProps } from '@table-library/react-table-library/types/tree';
 
 const style = () => `
   display: flex;
@@ -45,12 +45,6 @@ const getTreeIcon = (
 
   return TreeIconDefault ? React.cloneElement(TreeIconDefault, { ...size }) : null;
 };
-
-interface CellTreeProps {
-  item: TableNode;
-  treeIcon: TreeOptionsIcon;
-  children: React.ReactNode;
-}
 
 const CellTree = ({ item, treeIcon = {}, children, ...passThrough }: CellTreeProps) => {
   const context = React.useContext(TreeContext);

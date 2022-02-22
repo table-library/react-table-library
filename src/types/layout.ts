@@ -2,6 +2,7 @@ export type Layout = {
   custom: boolean;
   horizontalScroll: boolean;
   hiddenColumns: string[];
+  fullHeight?: boolean;
 };
 
 export type TableMemory = {

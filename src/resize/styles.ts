@@ -1,6 +1,6 @@
-import { ResizeProp } from '@table-library/react-table-library/types/resize';
+import { ColumnResizeProps } from '@table-library/react-table-library/types/resize';
 
-const resizerStyle = (resize: ResizeProp) => {
+const resizerStyle = (resize: ColumnResizeProps) => {
   const width =
     typeof resize === 'boolean' || resize?.resizerWidth == null ? 3 : resize.resizerWidth;
 
