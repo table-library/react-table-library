@@ -11,21 +11,15 @@ import { PaginationContext } from '@table-library/react-table-library/common/con
 import { applyModifiers } from '@table-library/react-table-library/common/util/modifiers';
 
 import { Nullish } from '@table-library/react-table-library/types/common';
-import { TableNode, Data } from '@table-library/react-table-library/types/table';
-import { Theme } from '@table-library/react-table-library/types/theme';
+import { TableProps } from '@table-library/react-table-library/types/table';
 import {
-  Layout,
   TableMemory,
   TableMemoryRef,
   TableElementRef,
 } from '@table-library/react-table-library/types/layout';
-import { Sort } from '@table-library/react-table-library/types/sort';
-import { Pagination } from '@table-library/react-table-library/types/pagination';
-import { Select } from '@table-library/react-table-library/types/select';
-import { Tree } from '@table-library/react-table-library/types/tree';
 
 import { useShiftDown } from './useShiftDown';
-import { useOnInit, OnInitFunction } from './useOnInit';
+import { useOnInit } from './useOnInit';
 
 import styles from './styles';
 
@@ -48,18 +42,6 @@ const useTableMemoryRef = (): TableMemoryRef => {
 
   return tableMemoryRef;
 };
-
-export interface TableProps {
-  data: Data;
-  theme?: Theme;
-  layout?: Layout;
-  sort?: Sort;
-  pagination?: Pagination;
-  select?: Select;
-  tree?: Tree;
-  onInit?: OnInitFunction;
-  children?: (nodes: TableNode[]) => React.ReactNode;
-}
 
 const Table = React.forwardRef(
   (

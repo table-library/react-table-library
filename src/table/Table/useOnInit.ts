@@ -1,8 +1,7 @@
 import * as React from 'react';
 
+import { OnInitFunction } from '@table-library/react-table-library/types/table';
 import { TableElementRef } from '@table-library/react-table-library/types/layout';
-
-export type OnInitFunction = (node: HTMLDivElement) => void;
 
 export const useOnInit = (
   onInit: OnInitFunction,
