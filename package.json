@@ -10,8 +10,8 @@
     "styled-components": ">= 4"
   },
   "dependencies": {
-    "clsx": "^1.1.1",
-    "use-double-click": "^1.0.5"
+    "clsx": "1.1.1",
+    "use-double-click": "1.0.5"
   },
   "devDependencies": {
     "@babel/core": "7.12.17",
