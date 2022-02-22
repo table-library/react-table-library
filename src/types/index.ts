@@ -7,3 +7,4 @@ export * from './sort';
 export * from './table';
 export * from './theme';
 export * from './tree';
+export * from './hide';

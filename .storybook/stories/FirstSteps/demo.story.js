@@ -263,7 +263,7 @@ storiesOf('First Steps/Demo', module)
       const result = await axios.get(url);
 
       setData({
-        nodes: result.data.hits,
+        nodes: result.data.hits.map((hit) => ({ ...hit, id: hit.objectID })),
         totalPages: result.data.nbPages,
       });
     }, []);

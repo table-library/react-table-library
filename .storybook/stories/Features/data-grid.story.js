@@ -2,8 +2,9 @@
 /* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-
-import { DisableAnimationsContext } from '../../stories/loki.js';
+import { FixedSizeList } from 'react-window';
+import AutoSizer from 'react-virtualized-auto-sizer';
+import useInterval from 'use-interval';
 
 import {
   Table,
@@ -15,39 +16,12 @@ import {
   Cell,
 } from '@table-library/react-table-library/table';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { FixedSizeList } from 'react-window';
-import AutoSizer from 'react-virtualized-auto-sizer';
-import useInterval from 'use-interval';
 
+import { DisableAnimationsContext } from '../../stories/loki.js';
 import { lotsOfNodes, randomFromInterval } from '../data';
+import { valueToColor } from '../util';
 
 const ROW_HEIGHT = 30;
-
-const valueToColor = (value) => {
-  let perc = value.substring(value.indexOf(':') + 1);
-
-  const min = -100;
-  const max = 100;
-  const base = max - min;
-
-  if (base == 0) {
-    perc = 100;
-  } else {
-    perc = ((perc - min) / base) * 100;
-  }
-  let r,
-    g,
-    b = 0;
-  if (perc < 50) {
-    r = 255;
-    g = Math.round(5.1 * perc);
-  } else {
-    g = 255;
-    r = Math.round(510 - 5.1 * perc);
-  }
-  const h = r * 0x10000 + g * 0x100 + b * 0x1;
-  return '#' + ('000000' + h.toString(16)).slice(-6);
-};
 
 const WithStickyHeader = React.forwardRef(({ children, ...rest }, ref) => (
   <div ref={ref} {...rest}>

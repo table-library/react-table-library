@@ -54,6 +54,7 @@ export interface ColumnSortProps {
   sortKey: string;
   sortIcon?: SortOptionsIcon;
 }
+
 export type HeaderCellSortProps = {
   index?: number;
   sortKey: string;

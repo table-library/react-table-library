@@ -10,7 +10,7 @@ import { ColumnResizeProps } from '@table-library/react-table-library/types/resi
 
 type CellProps = {
   index?: number;
-  cellKey?: string;
+  hideKey?: string;
   className?: string;
   hide?: boolean;
   pin?: boolean;
@@ -21,7 +21,7 @@ type CellProps = {
 
 const HeaderCell = ({
   index,
-  cellKey,
+  hideKey,
   className,
   hide,
   pin,
@@ -39,7 +39,7 @@ const HeaderCell = ({
     <HeaderCellContainer
       {...rest}
       role="columnheader"
-      data-cell-key={cellKey || index}
+      data-cell-key={hideKey || index}
       data-resize-min-width={
         typeof resize === 'boolean' || resize?.minWidth == null ? 75 : resize.minWidth
       }

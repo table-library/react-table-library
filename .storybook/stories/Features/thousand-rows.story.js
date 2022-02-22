@@ -16,37 +16,28 @@ import {
 } from '@table-library/react-table-library/table';
 import { useTheme } from '@table-library/react-table-library/theme';
 
-import {
-  useTree,
-  CellTree,
-} from '@table-library/react-table-library/tree';
+import { useTree, CellTree } from '@table-library/react-table-library/tree';
 
-import { nodes } from '../data';
+import { manyNodes } from '../data';
 
 const ROW_HEIGHT = 28;
 
-const manyNodes = [...Array(1430)]
-  .map((_, i) => nodes.map((node) => ({ ...node, id: node.id + i })))
-  .flat();
+const WithStickyHeader = React.forwardRef(({ children, ...rest }, ref) => (
+  <div ref={ref} {...rest}>
+    <Header>
+      <HeaderRow>
+        <HeaderCell stiff>Index</HeaderCell>
+        <HeaderCell>Task</HeaderCell>
+        <HeaderCell>Deadline</HeaderCell>
+        <HeaderCell>Type</HeaderCell>
+        <HeaderCell>Complete</HeaderCell>
+        <HeaderCell>Tasks</HeaderCell>
+      </HeaderRow>
+    </Header>
 
-const WithStickyHeader = React.forwardRef(
-  ({ children, ...rest }, ref) => (
-    <div ref={ref} {...rest}>
-      <Header>
-        <HeaderRow>
-          <HeaderCell stiff>Index</HeaderCell>
-          <HeaderCell>Task</HeaderCell>
-          <HeaderCell>Deadline</HeaderCell>
-          <HeaderCell>Type</HeaderCell>
-          <HeaderCell>Complete</HeaderCell>
-          <HeaderCell>Tasks</HeaderCell>
-        </HeaderRow>
-      </Header>
-
-      <Body>{children}</Body>
-    </div>
-  )
-);
+    <Body>{children}</Body>
+  </div>
+));
 
 storiesOf('Features/Ten Thousand Rows', module)
   .addParameters({ component: Table })
@@ -85,18 +76,14 @@ storiesOf('Features/Ten Thousand Rows', module)
                         <Cell stiff>{index}</Cell>
                         <Cell>{data.items[index].name}</Cell>
                         <Cell>
-                          {data.items[
-                            index
-                          ].deadline.toLocaleDateString('en-US', {
+                          {data.items[index].deadline.toLocaleDateString('en-US', {
                             year: 'numeric',
                             month: '2-digit',
                             day: '2-digit',
                           })}
                         </Cell>
                         <Cell>{data.items[index].type}</Cell>
-                        <Cell>
-                          {data.items[index].isComplete.toString()}
-                        </Cell>
+                        <Cell>{data.items[index].isComplete.toString()}</Cell>
                         <Cell>{data.items[index].nodes?.length}</Cell>
                       </Row>
                     </div>
@@ -125,7 +112,7 @@ storiesOf('Features/Ten Thousand Rows', module)
       },
       {
         treeYLevel: 1,
-      }
+      },
     );
 
     function onTreeChange(action, state) {
@@ -156,22 +143,16 @@ storiesOf('Features/Ten Thousand Rows', module)
                     >
                       <Row item={data.items[index]}>
                         <Cell stiff>{index}</Cell>
-                        <CellTree item={data.items[index]}>
-                          {data.items[index].name}
-                        </CellTree>
+                        <CellTree item={data.items[index]}>{data.items[index].name}</CellTree>
                         <Cell>
-                          {data.items[
-                            index
-                          ].deadline.toLocaleDateString('en-US', {
+                          {data.items[index].deadline.toLocaleDateString('en-US', {
                             year: 'numeric',
                             month: '2-digit',
                             day: '2-digit',
                           })}
                         </Cell>
                         <Cell>{data.items[index].type}</Cell>
-                        <Cell>
-                          {data.items[index].isComplete.toString()}
-                        </Cell>
+                        <Cell>{data.items[index].isComplete.toString()}</Cell>
                         <Cell>{data.items[index].nodes?.length}</Cell>
                       </Row>
                     </div>

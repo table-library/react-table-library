@@ -21,10 +21,7 @@ storiesOf('Features/Column Hiding', module)
   .add('base', () => {
     const data = { nodes };
 
-    const [hiddenColumns, setHiddenColumns] = React.useState([
-      'deadline',
-      'complete',
-    ]);
+    const [hiddenColumns, setHiddenColumns] = React.useState(['DEADLINE', 'COMPLETE']);
 
     const toggleColumn = (column) => {
       if (hiddenColumns.includes(column)) {
@@ -41,9 +38,9 @@ storiesOf('Features/Column Hiding', module)
             <input
               id="name"
               type="checkbox"
-              value="name"
-              checked={!hiddenColumns.includes('name')}
-              onChange={() => toggleColumn('name')}
+              value="NAME"
+              checked={!hiddenColumns.includes('NAME')}
+              onChange={() => toggleColumn('NAME')}
             />
             Name
           </label>
@@ -54,9 +51,9 @@ storiesOf('Features/Column Hiding', module)
             <input
               id="deadline"
               type="checkbox"
-              value="deadline"
-              checked={!hiddenColumns.includes('deadline')}
-              onChange={() => toggleColumn('deadline')}
+              value="DEADLINE"
+              checked={!hiddenColumns.includes('DEADLINE')}
+              onChange={() => toggleColumn('DEADLINE')}
             />
             Deadline
           </label>
@@ -67,9 +64,9 @@ storiesOf('Features/Column Hiding', module)
             <input
               id="type"
               type="checkbox"
-              value="type"
-              checked={!hiddenColumns.includes('type')}
-              onChange={() => toggleColumn('type')}
+              value="TYPE"
+              checked={!hiddenColumns.includes('TYPE')}
+              onChange={() => toggleColumn('TYPE')}
             />
             Type
           </label>
@@ -80,9 +77,9 @@ storiesOf('Features/Column Hiding', module)
             <input
               id="complete"
               type="checkbox"
-              value="complete"
-              checked={!hiddenColumns.includes('complete')}
-              onChange={() => toggleColumn('complete')}
+              value="COMPLETE"
+              checked={!hiddenColumns.includes('COMPLETE')}
+              onChange={() => toggleColumn('COMPLETE')}
             />
             Complete
           </label>
@@ -93,9 +90,9 @@ storiesOf('Features/Column Hiding', module)
             <input
               id="tasks"
               type="checkbox"
-              value="tasks"
-              checked={!hiddenColumns.includes('tasks')}
-              onChange={() => toggleColumn('tasks')}
+              value="TASKS"
+              checked={!hiddenColumns.includes('TASKS')}
+              onChange={() => toggleColumn('TASKS')}
             />
             Tasks
           </label>
@@ -106,11 +103,11 @@ storiesOf('Features/Column Hiding', module)
             <>
               <Header>
                 <HeaderRow>
-                  <HeaderCell cellKey="name">Task</HeaderCell>
-                  <HeaderCell cellKey="deadline">Deadline</HeaderCell>
-                  <HeaderCell cellKey="type">Type</HeaderCell>
-                  <HeaderCell cellKey="complete">Complete</HeaderCell>
-                  <HeaderCell cellKey="tasks">Tasks</HeaderCell>
+                  <HeaderCell hideKey="NAME">Task</HeaderCell>
+                  <HeaderCell hideKey="DEADLINE">Deadline</HeaderCell>
+                  <HeaderCell hideKey="TYPE">Type</HeaderCell>
+                  <HeaderCell hideKey="COMPLETE">Complete</HeaderCell>
+                  <HeaderCell hideKey="TASKS">Tasks</HeaderCell>
                 </HeaderRow>
               </Header>
 
@@ -140,10 +137,7 @@ storiesOf('Features/Column Hiding', module)
   .add('with callback', () => {
     const data = { nodes };
 
-    const [hiddenColumns, setHiddenColumns] = React.useState([
-      'deadline',
-      'complete',
-    ]);
+    const [hiddenColumns, setHiddenColumns] = React.useState(['deadline', 'complete']);
 
     const toggleColumn = (column) => {
       if (hiddenColumns.includes(column)) {
@@ -234,11 +228,11 @@ storiesOf('Features/Column Hiding', module)
             <>
               <Header>
                 <HeaderRow>
-                  <HeaderCell cellKey="name">Task</HeaderCell>
-                  <HeaderCell cellKey="deadline">Deadline</HeaderCell>
-                  <HeaderCell cellKey="type">Type</HeaderCell>
-                  <HeaderCell cellKey="complete">Complete</HeaderCell>
-                  <HeaderCell cellKey="tasks">Tasks</HeaderCell>
+                  <HeaderCell hideKey="name">Task</HeaderCell>
+                  <HeaderCell hideKey="deadline">Deadline</HeaderCell>
+                  <HeaderCell hideKey="type">Type</HeaderCell>
+                  <HeaderCell hideKey="complete">Complete</HeaderCell>
+                  <HeaderCell hideKey="tasks">Tasks</HeaderCell>
                 </HeaderRow>
               </Header>
 

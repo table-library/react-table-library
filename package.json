@@ -1,6 +1,6 @@
 {
   "name": "@table-library/react-table-library",
-  "version": "1.17.5",
+  "version": "1.17.5-beta.1",
   "description": "react-table-library",
   "main": "main.js",
   "types": "index.d.ts",
@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "clsx": "1.1.1",
+    "react-virtualized-auto-sizer": "1.0.6",
+    "react-window": "1.8.6",
     "use-double-click": "1.0.5"
   },
   "devDependencies": {
@@ -43,6 +45,8 @@
     "@types/node": "^17.0.14",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
+    "@types/react-virtualized-auto-sizer": "^1.0.1",
+    "@types/react-window": "^1.8.5",
     "@types/use-double-click": "^1.0.1",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
@@ -72,8 +76,6 @@
     "react-animate-height": "^2.0.23",
     "react-dom": "16.13.1",
     "react-icons": "^4.3.1",
-    "react-virtualized-auto-sizer": "^1.0.6",
-    "react-window": "^1.8.6",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",

@@ -3,22 +3,13 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import {
-  useCustom,
-  Table,
-  Header,
-  HeaderRow,
-  Body,
-  Row,
-  HeaderCell,
-  Cell,
-} from '@table-library/react-table-library/table';
+import { CompactTable } from '@table-library/react-table-library/compact';
 
 import { nodes } from '../data';
 
-storiesOf('Composites/Column Hide & Resize', module)
-  .addParameters({ component: Table })
-  .add('base', () => {
+storiesOf('Compact/Column Hiding', module)
+  .addParameters({ component: CompactTable })
+  .add('column hiding', () => {
     const data = { nodes };
 
     const [hiddenColumns, setHiddenColumns] = React.useState(['DEADLINE', 'COMPLETE']);
@@ -30,6 +21,27 @@ storiesOf('Composites/Column Hide & Resize', module)
         setHiddenColumns(hiddenColumns.concat(column));
       }
     };
+
+    const COLUMNS = [
+      { label: 'Task', renderCell: (item) => item.name, hide: { hideKey: 'TASK' } },
+      {
+        label: 'Deadline',
+        renderCell: (item) =>
+          item.deadline.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+          }),
+        hide: { hideKey: 'DEADLINE' },
+      },
+      { label: 'Type', renderCell: (item) => item.type, hide: { hideKey: 'TYPE' } },
+      {
+        label: 'Complete',
+        renderCell: (item) => item.isComplete.toString(),
+        hide: { hideKey: 'COMPLETE' },
+      },
+      { label: 'Tasks', renderCell: (item) => item.nodes?.length, hide: { hideKey: 'TASKS' } },
+    ];
 
     return (
       <>
@@ -98,54 +110,21 @@ storiesOf('Composites/Column Hide & Resize', module)
           </label>
         </div>
 
-        <Table
-          data={data}
-          layout={{
-            hiddenColumns,
-          }}
-        >
-          {(tableList) => (
-            <>
-              <Header>
-                <HeaderRow>
-                  <HeaderCell resize hideKey="NAME">
-                    Task
-                  </HeaderCell>
-                  <HeaderCell resize hideKey="DEADLINE">
-                    Deadline
-                  </HeaderCell>
-                  <HeaderCell resize hideKey="TYPE">
-                    Type
-                  </HeaderCell>
-                  <HeaderCell resize hideKey="COMPLETE">
-                    Complete
-                  </HeaderCell>
-                  <HeaderCell resize hideKey="TASKS">
-                    Tasks
-                  </HeaderCell>
-                </HeaderRow>
-              </Header>
+        <CompactTable columns={COLUMNS} data={data} layout={{ hiddenColumns }} />
 
-              <Body>
-                {tableList.map((item) => (
-                  <Row key={item.id} item={item}>
-                    <Cell>{item.name}</Cell>
-                    <Cell>
-                      {item.deadline.toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: '2-digit',
-                        day: '2-digit',
-                      })}
-                    </Cell>
-                    <Cell>{item.type}</Cell>
-                    <Cell>{item.isComplete.toString()}</Cell>
-                    <Cell>{item.nodes?.length}</Cell>
-                  </Row>
-                ))}
-              </Body>
-            </>
-          )}
-        </Table>
+        <br />
+        <small style={{ width: '100%' }}>
+          For more configuration, see <strong>Features/Column Hiding</strong> ...
+        </small>
       </>
     );
-  });
+  })
+  .add('documentation', () => (
+    <ul>
+      <li>
+        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
+          Story Code
+        </a>
+      </li>
+    </ul>
+  ));

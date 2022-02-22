@@ -26,12 +26,7 @@ export type Features = {
   pagination: Pagination | Nullish;
 };
 
-export interface RowPropsAsObject {
-  className?: string;
-  disabled?: boolean;
-  onClick?: OnClick;
-  onDoubleClick?: OnClick;
-}
+export type RowPropsAsObject = Omit<RowProps, 'item' | 'children'>;
 
 export interface RowProps {
   item: TableNode;

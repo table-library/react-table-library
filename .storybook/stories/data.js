@@ -296,3 +296,7 @@ export const lotsOfNodes = [...Array(100000).keys()].map((key) => ({
   cellI: `Cell I${key}: 100`,
   cellJ: `Cell J${key}: 100`,
 }));
+
+export const manyNodes = [...Array(1430)]
+  .map((_, i) => nodes.map((node) => ({ ...node, id: node.id + i })))
+  .flat();
