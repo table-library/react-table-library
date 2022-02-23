@@ -27,9 +27,14 @@ const Features = [
 
 export const parameters = {
   layout: 'fullscreen',
+  previewTabs: {
+    canvas: {
+      hidden: true,
+    },
+  },
+  viewMode: 'docs',
   options: {
     storySort: {
-      method: 'alphabetical',
       order: [
         'Getting Started',
         ['Introduction', 'Roadmap'],
@@ -75,7 +80,6 @@ export const decorators = [
     <DisableAnimationsContext.Provider value={isLokiRunning()}>
       <div
         style={{
-          height: '100vh',
           display: 'flex',
           flexDirection: 'column',
         }}
