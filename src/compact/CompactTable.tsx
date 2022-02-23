@@ -19,7 +19,14 @@ const FULL_HEIGHT_THEME = {
 
 const CompactTable = React.forwardRef(
   (
-    { columns, rowProps = {}, rowOptions, virtualizedOptions, ...tableProps }: CompactTableProps,
+    {
+      columns,
+      rowProps = {},
+      tableOptions,
+      rowOptions,
+      virtualizedOptions,
+      ...tableProps
+    }: CompactTableProps,
     ref: any,
   ) => {
     const {
@@ -55,26 +62,30 @@ const CompactTable = React.forwardRef(
         tree={tree}
         onInit={onInit}
       >
-        {(tableList: TableNode[]) =>
-          virtualizedOptions ? (
-            <VirtualizedTable
-              tableList={tableList}
-              columns={columns}
-              rowProps={rowProps}
-              rowOptions={rowOptions}
-              virtualizedOptions={virtualizedOptions}
-              {...tableProps}
-            />
-          ) : (
-            <NormalTable
-              tableList={tableList}
-              columns={columns}
-              rowProps={rowProps}
-              rowOptions={rowOptions}
-              {...tableProps}
-            />
-          )
-        }
+        {(tableList: TableNode[]) => (
+          <>
+            {tableOptions?.renderBeforeTable && tableOptions.renderBeforeTable()}
+            {virtualizedOptions ? (
+              <VirtualizedTable
+                tableList={tableList}
+                columns={columns}
+                rowProps={rowProps}
+                rowOptions={rowOptions}
+                virtualizedOptions={virtualizedOptions}
+                {...tableProps}
+              />
+            ) : (
+              <NormalTable
+                tableList={tableList}
+                columns={columns}
+                rowProps={rowProps}
+                rowOptions={rowOptions}
+                {...tableProps}
+              />
+            )}
+            {tableOptions?.renderAfterTable && tableOptions.renderAfterTable()}
+          </>
+        )}
       </Table>
     );
   },

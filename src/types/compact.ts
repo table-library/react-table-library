@@ -26,6 +26,11 @@ export type VirtualizedOptions = {
   itemCount?: number;
 };
 
+export type TableOptions = {
+  renderBeforeTable?: () => React.ReactNode;
+  renderAfterTable?: () => React.ReactNode;
+};
+
 export type RowOptions = {
   renderBeforeRow?: (node: TableNode) => React.ReactNode;
   renderAfterRow?: (node: TableNode) => React.ReactNode;
@@ -33,6 +38,7 @@ export type RowOptions = {
 
 export type CompactTableProps = TableProps & {
   columns: Column[];
+  tableOptions?: TableOptions;
   rowProps?: RowPropsAsObject;
   rowOptions?: RowOptions;
   virtualizedOptions?: VirtualizedOptions;

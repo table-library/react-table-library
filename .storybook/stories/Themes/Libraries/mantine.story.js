@@ -15,6 +15,7 @@ import {
   Cell,
   useCustom,
 } from '@table-library/react-table-library/table';
+import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
 import {
   DEFAULT_OPTIONS,
@@ -46,34 +47,12 @@ import {
   FaChevronDown,
   FaChevronUp,
 } from 'react-icons/fa';
-import { FixedSizeList } from 'react-window';
-import AutoSizer from 'react-virtualized-auto-sizer';
 import useInterval from 'use-interval';
 
 import { nodes, lotsOfNodes, randomFromInterval } from '../../data';
+import { valueToColor } from '../../util';
 
 const ROW_HEIGHT = 38;
-
-const WithStickyHeader = React.forwardRef(({ children, ...rest }, ref) => (
-  <div ref={ref} {...rest}>
-    <Header>
-      <HeaderRow>
-        <HeaderCell pin>A</HeaderCell>
-        <HeaderCell pin>B</HeaderCell>
-        <HeaderCell>C</HeaderCell>
-        <HeaderCell>D</HeaderCell>
-        <HeaderCell>E</HeaderCell>
-        <HeaderCell>F</HeaderCell>
-        <HeaderCell>G</HeaderCell>
-        <HeaderCell>H</HeaderCell>
-        <HeaderCell>I</HeaderCell>
-        <HeaderCell>J</HeaderCell>
-      </HeaderRow>
-    </Header>
-
-    <Body>{children}</Body>
-  </div>
-));
 
 storiesOf('Library Themes/Mantine', module)
   .addParameters({ component: Table })
@@ -83,41 +62,26 @@ storiesOf('Library Themes/Mantine', module)
     const mantineTheme = getMantineTheme(DEFAULT_OPTIONS);
     const theme = useTheme(mantineTheme);
 
-    return (
-      <Table data={data} theme={theme}>
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCell>Task</HeaderCell>
-                <HeaderCell>Deadline</HeaderCell>
-                <HeaderCell>Type</HeaderCell>
-                <HeaderCell>Complete</HeaderCell>
-                <HeaderCell>Tasks</HeaderCell>
-              </HeaderRow>
-            </Header>
+    const COLUMNS = [
+      { label: 'Task', renderCell: (item) => item.name },
+      {
+        label: 'Deadline',
+        renderCell: (item) =>
+          item.deadline.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+          }),
+      },
+      { label: 'Type', renderCell: (item) => item.type },
+      {
+        label: 'Complete',
+        renderCell: (item) => item.isComplete.toString(),
+      },
+      { label: 'Tasks', renderCell: (item) => item.nodes?.length },
+    ];
 
-            <Body>
-              {tableList.map((item) => (
-                <Row item={item} key={item.id}>
-                  <Cell>{item.name}</Cell>
-                  <Cell>
-                    {item.deadline.toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: '2-digit',
-                      day: '2-digit',
-                    })}
-                  </Cell>
-                  <Cell>{item.type}</Cell>
-                  <Cell>{item.isComplete.toString()}</Cell>
-                  <Cell>{item.nodes?.length}</Cell>
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
-    );
+    return <CompactTable columns={COLUMNS} data={data} theme={theme} />;
   })
   .add('native configuration', () => {
     const data = { nodes };
@@ -140,6 +104,49 @@ storiesOf('Library Themes/Mantine', module)
       highlightOnHover,
     });
     const theme = useTheme(mantineTheme);
+
+    const COLUMNS = [
+      { label: 'Task', renderCell: (item) => item.name },
+      {
+        label: 'Deadline',
+        renderCell: (item) =>
+          item.deadline.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+          }),
+      },
+      { label: 'Type', renderCell: (item) => item.type },
+      {
+        label: 'Complete',
+        renderCell: (item) => item.isComplete.toString(),
+      },
+      { label: 'Tasks', renderCell: (item) => item.nodes?.length },
+    ];
+
+    const TABLE_OPTIONS = {
+      renderAfterTable: () => (
+        <>
+          {hasFooter && (
+            <Header>
+              <HeaderRow className="tr-footer">
+                <HeaderCell>Task</HeaderCell>
+                <HeaderCell>Deadline</HeaderCell>
+                <HeaderCell>Type</HeaderCell>
+                <HeaderCell>Complete</HeaderCell>
+                <HeaderCell>Tasks</HeaderCell>
+              </HeaderRow>
+            </Header>
+          )}
+
+          {caption && (
+            <div className="caption-container">
+              <caption>{caption}</caption>
+            </div>
+          )}
+        </>
+      ),
+    };
 
     return (
       <>
@@ -185,57 +192,7 @@ storiesOf('Library Themes/Mantine', module)
         </label>
 
         <hr />
-        <Table data={data} theme={theme}>
-          {(tableList) => (
-            <>
-              <Header>
-                <HeaderRow>
-                  <HeaderCell>Task</HeaderCell>
-                  <HeaderCell>Deadline</HeaderCell>
-                  <HeaderCell>Type</HeaderCell>
-                  <HeaderCell>Complete</HeaderCell>
-                  <HeaderCell>Tasks</HeaderCell>
-                </HeaderRow>
-              </Header>
-
-              <Body>
-                {tableList.map((item) => (
-                  <Row item={item} key={item.id}>
-                    <Cell>{item.name}</Cell>
-                    <Cell>
-                      {item.deadline.toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: '2-digit',
-                        day: '2-digit',
-                      })}
-                    </Cell>
-                    <Cell>{item.type}</Cell>
-                    <Cell>{item.isComplete.toString()}</Cell>
-                    <Cell>{item.nodes?.length}</Cell>
-                  </Row>
-                ))}
-              </Body>
-
-              {hasFooter && (
-                <Header>
-                  <HeaderRow className="tr-footer">
-                    <HeaderCell>Task</HeaderCell>
-                    <HeaderCell>Deadline</HeaderCell>
-                    <HeaderCell>Type</HeaderCell>
-                    <HeaderCell>Complete</HeaderCell>
-                    <HeaderCell>Tasks</HeaderCell>
-                  </HeaderRow>
-                </Header>
-              )}
-
-              {caption && (
-                <div className="caption-container">
-                  <caption>{caption}</caption>
-                </div>
-              )}
-            </>
-          )}
-        </Table>
+        <CompactTable columns={COLUMNS} tableOptions={TABLE_OPTIONS} data={data} theme={theme} />
       </>
     );
   })
@@ -628,46 +585,94 @@ storiesOf('Library Themes/Mantine', module)
 
     const data = { nodes };
 
+    const COLUMNS = [
+      {
+        label: 'A',
+        renderCell: (item) => item.cellA,
+        cellProps: {
+          style: (item) => ({ backgroundColor: valueToColor(item.cellA) }),
+        },
+        pin: true,
+      },
+      {
+        label: 'B',
+        renderCell: (item) => item.cellB,
+        cellProps: {
+          style: (item) => ({ backgroundColor: valueToColor(item.cellB) }),
+        },
+        pin: true,
+      },
+      {
+        label: 'C',
+        renderCell: (item) => item.cellC,
+        cellProps: {
+          style: (item) => ({ backgroundColor: valueToColor(item.cellC) }),
+        },
+      },
+      {
+        label: 'D',
+        renderCell: (item) => item.cellD,
+        cellProps: {
+          style: (item) => ({ backgroundColor: valueToColor(item.cellD) }),
+        },
+      },
+      {
+        label: 'E',
+        renderCell: (item) => item.cellE,
+        cellProps: {
+          style: (item) => ({ backgroundColor: valueToColor(item.cellE) }),
+        },
+      },
+      {
+        label: 'F',
+        renderCell: (item) => item.cellF,
+        cellProps: {
+          style: (item) => ({ backgroundColor: valueToColor(item.cellF) }),
+        },
+      },
+      {
+        label: 'G',
+        renderCell: (item) => item.cellG,
+        cellProps: {
+          style: (item) => ({ backgroundColor: valueToColor(item.cellG) }),
+        },
+      },
+      {
+        label: 'H',
+        renderCell: (item) => item.cellH,
+        cellProps: {
+          style: (item) => ({ backgroundColor: valueToColor(item.cellH) }),
+        },
+      },
+      {
+        label: 'I',
+        renderCell: (item) => item.cellI,
+        cellProps: {
+          style: (item) => ({ backgroundColor: valueToColor(item.cellI) }),
+        },
+      },
+      {
+        label: 'J',
+        renderCell: (item) => item.cellJ,
+        cellProps: {
+          style: (item) => ({ backgroundColor: valueToColor(item.cellJ) }),
+        },
+      },
+    ];
+
+    const VIRTUALIZED_OPTIONS = {
+      rowHeight: (_item, _index) => ROW_HEIGHT,
+    };
+
     return (
       <div style={{ height: '300px' }}>
-        <Table data={data} theme={theme} layout={{ custom: true, horizontalScroll: true }}>
-          {(tableList) => (
-            <AutoSizer>
-              {({ width, height }) => (
-                <FixedSizeList
-                  height={height}
-                  width={width}
-                  itemCount={data.nodes.length}
-                  itemSize={ROW_HEIGHT}
-                  innerElementType={WithStickyHeader}
-                  itemData={{ items: tableList }}
-                >
-                  {({ index, style, data }) => (
-                    <div
-                      style={{
-                        ...style,
-                        top: style.top + ROW_HEIGHT,
-                      }}
-                    >
-                      <Row item={data.items[index]}>
-                        <Cell pin>{data.items[index].cellA}</Cell>
-                        <Cell pin>{data.items[index].cellB}</Cell>
-                        <Cell>{data.items[index].cellC}</Cell>
-                        <Cell>{data.items[index].cellD}</Cell>
-                        <Cell>{data.items[index].cellE}</Cell>
-                        <Cell>{data.items[index].cellF}</Cell>
-                        <Cell>{data.items[index].cellG}</Cell>
-                        <Cell>{data.items[index].cellH}</Cell>
-                        <Cell>{data.items[index].cellI}</Cell>
-                        <Cell>{data.items[index].cellJ}</Cell>
-                      </Row>
-                    </div>
-                  )}
-                </FixedSizeList>
-              )}
-            </AutoSizer>
-          )}
-        </Table>
+        <CompactTable
+          columns={COLUMNS}
+          virtualizedOptions={VIRTUALIZED_OPTIONS}
+          data={data}
+          theme={theme}
+          layout={{ custom: true, horizontalScroll: true }}
+        />
       </div>
     );
   })
