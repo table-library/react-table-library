@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import * as React from 'react';
 
 import { Header, HeaderRow, HeaderCell } from '@table-library/react-table-library/table/index';
