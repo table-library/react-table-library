@@ -7,9 +7,9 @@ import { CompactTable } from '@table-library/react-table-library/compact';
 
 import { nodes } from '../data';
 
-storiesOf('Compact/Expand', module)
+storiesOf('Compact', module)
   .addParameters({ component: CompactTable })
-  .add('expand', () => {
+  .add('Expand', () => {
     const data = { nodes };
 
     const [ids, setIds] = React.useState([]);
@@ -84,13 +84,4 @@ storiesOf('Compact/Expand', module)
         </small>
       </>
     );
-  })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ));
+  });

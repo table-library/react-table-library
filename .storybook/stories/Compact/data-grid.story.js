@@ -11,9 +11,9 @@ import { DisableAnimationsContext } from '../../stories/loki.js';
 import { lotsOfNodes, randomFromInterval } from '../data';
 import { valueToColor } from '../util';
 
-storiesOf('Compact/Data Grid', module)
+storiesOf('Compact', module)
   .addParameters({ component: CompactTable })
-  .add('one million cells', () => {
+  .add('Data Grid', () => {
     const [nodes, setNodes] = React.useState(lotsOfNodes);
 
     const theme = useTheme({
@@ -153,13 +153,4 @@ storiesOf('Compact/Data Grid', module)
         </small>
       </>
     );
-  })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ));
+  });

@@ -7,9 +7,9 @@ import { CompactTable } from '@table-library/react-table-library/compact';
 
 import { nodes } from '../data';
 
-storiesOf('Compact/Column Hiding', module)
+storiesOf('Compact', module)
   .addParameters({ component: CompactTable })
-  .add('column hiding', () => {
+  .add('Column Hiding', () => {
     const data = { nodes };
 
     const [hiddenColumns, setHiddenColumns] = React.useState(['DEADLINE', 'COMPLETE']);
@@ -118,13 +118,4 @@ storiesOf('Compact/Column Hiding', module)
         </small>
       </>
     );
-  })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ));
+  });

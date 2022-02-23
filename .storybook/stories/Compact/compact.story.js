@@ -7,9 +7,9 @@ import { CompactTable } from '@table-library/react-table-library/compact';
 
 import { nodes } from '../data';
 
-storiesOf('Compact/Base', module)
-  .addParameters({ component: CompactTable })
-  .add('base', () => {
+storiesOf('Compact', module)
+  .addParameters({ component: CompactTable, sortPriority: 0 })
+  .add('Base', () => {
     const data = { nodes };
 
     const COLUMNS = [
@@ -32,13 +32,4 @@ storiesOf('Compact/Base', module)
     ];
 
     return <CompactTable columns={COLUMNS} data={data} />;
-  })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ));
+  });

@@ -8,9 +8,9 @@ import { useTheme } from '@table-library/react-table-library/theme';
 
 import { nodes } from '../data';
 
-storiesOf('Compact/Theme', module)
+storiesOf('Compact', module)
   .addParameters({ component: CompactTable })
-  .add('theme', () => {
+  .add('Theme', () => {
     const data = { nodes };
 
     const theme = useTheme({
@@ -57,13 +57,4 @@ storiesOf('Compact/Theme', module)
         </small>
       </>
     );
-  })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ));
+  });

@@ -7,9 +7,9 @@ import { CompactTable } from '@table-library/react-table-library/compact';
 
 import { nodes } from '../data';
 
-storiesOf('Compact/Filter', module)
+storiesOf('Compact', module)
   .addParameters({ component: CompactTable })
-  .add('filter', () => {
+  .add('Filter', () => {
     const [filters, setFilters] = React.useState(['SETUP', 'LEARN']);
 
     const handleFilter = (filter) => {
@@ -79,13 +79,4 @@ storiesOf('Compact/Filter', module)
         </small>
       </>
     );
-  })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ));
+  });

@@ -7,9 +7,9 @@ import { CompactTable } from '@table-library/react-table-library/compact';
 
 import { nodes } from '../data';
 
-storiesOf('Compact/Fixed Header', module)
+storiesOf('Compact', module)
   .addParameters({ component: CompactTable })
-  .add('fixed header', () => {
+  .add('Fixed Header', () => {
     const data = { nodes };
 
     const COLUMNS = [
@@ -47,13 +47,4 @@ storiesOf('Compact/Fixed Header', module)
         </small>
       </>
     );
-  })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ));
+  });

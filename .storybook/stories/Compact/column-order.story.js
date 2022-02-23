@@ -7,9 +7,9 @@ import { CompactTable } from '@table-library/react-table-library/compact';
 
 import { nodes } from '../data';
 
-storiesOf('Compact/Column Ordering', module)
+storiesOf('Compact', module)
   .addParameters({ component: CompactTable })
-  .add('column order', () => {
+  .add('Column Ordering', () => {
     const data = { nodes };
 
     const [columns, setColumns] = React.useState([
@@ -49,13 +49,4 @@ storiesOf('Compact/Column Ordering', module)
         </small>
       </>
     );
-  })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ));
+  });

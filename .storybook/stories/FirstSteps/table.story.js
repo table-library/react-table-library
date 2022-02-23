@@ -15,8 +15,12 @@ import {
 
 import { nodes } from '../data';
 
+Header.displayName = 'header';
+
 storiesOf('First Steps/Table', module)
-  .addParameters({ component: Table })
+  .addParameters({
+    component: Table,
+  })
   .add('base', () => {
     const data = { nodes };
 
