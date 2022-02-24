@@ -1,6 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
+
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
@@ -57,9 +56,7 @@ storiesOf('Features/Column Ordering', module)
               <Header>
                 <HeaderRow>
                   {columns.map((column, index) => (
-                    <HeaderCell key={index}>
-                      {column.label}
-                    </HeaderCell>
+                    <HeaderCell key={index}>{column.label}</HeaderCell>
                   ))}
                 </HeaderRow>
               </Header>
@@ -126,9 +123,7 @@ storiesOf('Features/Column Ordering', module)
               <Header>
                 <HeaderRow>
                   {columns.map((column, index) => (
-                    <HeaderCell key={index}>
-                      {column.label}
-                    </HeaderCell>
+                    <HeaderCell key={index}>{column.label}</HeaderCell>
                   ))}
                 </HeaderRow>
               </Header>

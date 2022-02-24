@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
@@ -28,12 +26,7 @@ storiesOf('Kitchen Sink/CSV Download', module)
       if (sc === '' || sc === '""') {
         return sc;
       }
-      if (
-        sc.includes('"') ||
-        sc.includes(',') ||
-        sc.includes('\n') ||
-        sc.includes('\r')
-      ) {
+      if (sc.includes('"') || sc.includes(',') || sc.includes('\n') || sc.includes('\r')) {
         return '"' + sc.replace(/"/g, '""') + '"';
       }
       return sc;
@@ -43,9 +36,7 @@ storiesOf('Kitchen Sink/CSV Download', module)
       return data.reduce((csvString, rowItem) => {
         return (
           csvString +
-          columns
-            .map(({ accessor }) => escapeCsvCell(accessor(rowItem)))
-            .join(',') +
+          columns.map(({ accessor }) => escapeCsvCell(accessor(rowItem))).join(',') +
           '\r\n'
         );
       }, columns.map(({ name }) => escapeCsvCell(name)).join(',') + '\r\n');

@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
@@ -81,10 +79,7 @@ storiesOf('Server/Fetch', module)
 
                     {showLoadMore && (
                       <div>
-                        <button
-                          type="button"
-                          onClick={() => handleLoadMore(item)}
-                        >
+                        <button type="button" onClick={() => handleLoadMore(item)}>
                           Load More ...
                         </button>
                       </div>
@@ -173,10 +168,7 @@ storiesOf('Server/Fetch', module)
 
                     {showLoadMore && (
                       <div>
-                        <button
-                          type="button"
-                          onClick={() => handleLoadMore(item)}
-                        >
+                        <button type="button" onClick={() => handleLoadMore(item)}>
                           Load More ...
                         </button>
                       </div>

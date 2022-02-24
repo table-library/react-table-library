@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
@@ -50,7 +48,7 @@ storiesOf('Server/Pagination', module)
       },
       {
         isServer: true,
-      }
+      },
     );
 
     function onPaginationChange(action, state) {
@@ -114,10 +112,7 @@ storiesOf('Server/Pagination', module)
                     key={index}
                     type="button"
                     style={{
-                      fontWeight:
-                        pagination.state.page === index
-                          ? 'bold'
-                          : 'normal',
+                      fontWeight: pagination.state.page === index ? 'bold' : 'normal',
                     }}
                     onClick={() => pagination.fns.onSetPage(index)}
                   >
@@ -161,7 +156,7 @@ storiesOf('Server/Pagination', module)
       },
       {
         isServer: true,
-      }
+      },
     );
 
     function onPaginationChange(action, state) {
@@ -223,10 +218,7 @@ storiesOf('Server/Pagination', module)
                   key={size}
                   type="button"
                   style={{
-                    fontWeight:
-                      pagination.state.size === size
-                        ? 'bold'
-                        : 'normal',
+                    fontWeight: pagination.state.size === size ? 'bold' : 'normal',
                   }}
                   onClick={() => pagination.fns.onSetSize(size)}
                 >
@@ -236,14 +228,9 @@ storiesOf('Server/Pagination', module)
               <button
                 type="button"
                 style={{
-                  fontWeight:
-                    pagination.state.size === data.pageInfo.total
-                      ? 'bold'
-                      : 'normal',
+                  fontWeight: pagination.state.size === data.pageInfo.total ? 'bold' : 'normal',
                 }}
-                onClick={() =>
-                  pagination.fns.onSetSize(data.pageInfo.total)
-                }
+                onClick={() => pagination.fns.onSetSize(data.pageInfo.total)}
               >
                 All
               </button>
@@ -258,10 +245,7 @@ storiesOf('Server/Pagination', module)
                     key={index}
                     type="button"
                     style={{
-                      fontWeight:
-                        pagination.state.page === index
-                          ? 'bold'
-                          : 'normal',
+                      fontWeight: pagination.state.page === index ? 'bold' : 'normal',
                     }}
                     onClick={() => pagination.fns.onSetPage(index)}
                   >
@@ -305,7 +289,7 @@ storiesOf('Server/Pagination', module)
       },
       {
         isServer: true,
-      }
+      },
     );
 
     function onPaginationChange(action, state) {
@@ -375,35 +359,21 @@ storiesOf('Server/Pagination', module)
               <button
                 type="button"
                 disabled={pagination.state.page === 0}
-                onClick={() =>
-                  pagination.fns.onSetPage(pagination.state.page - 1)
-                }
+                onClick={() => pagination.fns.onSetPage(pagination.state.page - 1)}
               >
                 {'<'}
               </button>
               <button
                 type="button"
-                disabled={
-                  pagination.state.page + 1 ===
-                  data.pageInfo.totalPages
-                }
-                onClick={() =>
-                  pagination.fns.onSetPage(pagination.state.page + 1)
-                }
+                disabled={pagination.state.page + 1 === data.pageInfo.totalPages}
+                onClick={() => pagination.fns.onSetPage(pagination.state.page + 1)}
               >
                 {'>'}
               </button>
               <button
                 type="button"
-                disabled={
-                  pagination.state.page + 1 ===
-                  data.pageInfo.totalPages
-                }
-                onClick={() =>
-                  pagination.fns.onSetPage(
-                    data.pageInfo.totalPages - 1
-                  )
-                }
+                disabled={pagination.state.page + 1 === data.pageInfo.totalPages}
+                onClick={() => pagination.fns.onSetPage(data.pageInfo.totalPages - 1)}
               >
                 {'>|'}
               </button>

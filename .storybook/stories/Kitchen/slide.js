@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
@@ -74,12 +72,7 @@ storiesOf('Kitchen Sink/Slide', module)
             </>
           )}
         </Table>
-        <Slide
-          direction="left"
-          in={!!select.state.id}
-          mountOnEnter
-          unmountOnExit
-        >
+        <Slide direction="left" in={!!select.state.id} mountOnEnter unmountOnExit>
           <div
             style={{
               backgroundColor: '#e0e0e0',
@@ -90,10 +83,7 @@ storiesOf('Kitchen Sink/Slide', module)
               textAlign: 'center',
             }}
           >
-            {
-              data.nodes.find((node) => node.id === select.state.id)
-                ?.name
-            }
+            {data.nodes.find((node) => node.id === select.state.id)?.name}
           </div>
         </Slide>
       </div>

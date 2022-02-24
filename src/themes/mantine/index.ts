@@ -1,31 +1,30 @@
 import { zipThemes } from '@table-library/react-table-library/theme/index';
 
-interface Configuration {
+type Configuration = {
   isVirtualized?: boolean;
-}
+};
 
-interface ConfigurationSound {
+type ConfigurationSound = {
   isVirtualized: boolean;
-}
+};
 
-interface Options {
+type Options = {
   horizontalSpacing?: number;
   verticalSpacing?: number;
   striped?: boolean;
   highlightOnHover?: boolean;
-}
+};
 
-interface OptionsSound {
+type OptionsSound = {
   horizontalSpacing: number;
   verticalSpacing: number;
   striped: boolean;
   highlightOnHover: boolean;
-}
+};
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
   Table: `
-    padding: 16px;
     font-size: 14px;
 
     .caption-container {
@@ -51,6 +50,8 @@ const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
     }
   `,
   BaseRow: `
+    font-size: 14px;
+
     border-bottom: 1px solid #dee2e6;
   `,
   BaseCell: `

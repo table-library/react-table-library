@@ -48,17 +48,17 @@ export type TreeOptionsSound = {
   treeYLevel: number;
 };
 
-export interface ColumnTreePropsObject {
+export type ColumnTreePropsObject = {
   treeIcon?: TreeOptionsIcon;
-}
+};
 
 export type ColumnTreeProps = ColumnTreePropsObject | boolean;
 
-export interface CellTreeProps {
+export type CellTreeProps = {
   item: TableNode;
   treeIcon?: TreeOptionsIcon;
   children: React.ReactNode;
-}
+};
 
 export type Tree = {
   state: State;

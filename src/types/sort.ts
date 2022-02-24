@@ -50,10 +50,10 @@ export type SortFunctions = {
   onToggleSort: (sortFunctionInput: SortFunctionInput) => void;
 };
 
-export interface ColumnSortProps {
+export type ColumnSortProps = {
   sortKey: string;
   sortIcon?: SortOptionsIcon;
-}
+};
 
 export type HeaderCellSortProps = {
   index?: number;

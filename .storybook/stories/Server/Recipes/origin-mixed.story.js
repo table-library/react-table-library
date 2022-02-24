@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
@@ -14,10 +12,7 @@ import {
   Cell,
 } from '@table-library/react-table-library/table';
 
-import {
-  useSort,
-  HeaderCellSort,
-} from '@table-library/react-table-library/sort';
+import { useSort, HeaderCellSort } from '@table-library/react-table-library/sort';
 
 import { getData } from '../../server';
 
@@ -54,7 +49,7 @@ storiesOf('Server Recipes/Origin Mixed', module)
       },
       {
         isServer: true,
-      }
+      },
     );
 
     function onSearchChange(action, state) {
@@ -88,9 +83,10 @@ storiesOf('Server Recipes/Origin Mixed', module)
     return (
       <>
         <label htmlFor="search">
-          Search by Task:
+          Search by Task:&nbsp;
           <input id="search" type="text" onChange={handleSearch} />
         </label>
+        <br />
 
         <Table data={data} sort={sort}>
           {(tableList) => (
@@ -98,16 +94,10 @@ storiesOf('Server Recipes/Origin Mixed', module)
               <Header>
                 <HeaderRow>
                   <HeaderCellSort sortKey="TASK">Task</HeaderCellSort>
-                  <HeaderCellSort sortKey="DEADLINE">
-                    Deadline
-                  </HeaderCellSort>
+                  <HeaderCellSort sortKey="DEADLINE">Deadline</HeaderCellSort>
                   <HeaderCellSort sortKey="TYPE">Type</HeaderCellSort>
-                  <HeaderCellSort sortKey="COMPLETE">
-                    Complete
-                  </HeaderCellSort>
-                  <HeaderCellSort sortKey="TASKS">
-                    Tasks
-                  </HeaderCellSort>
+                  <HeaderCellSort sortKey="COMPLETE">Complete</HeaderCellSort>
+                  <HeaderCellSort sortKey="TASKS">Tasks</HeaderCellSort>
                 </HeaderRow>
               </Header>
 

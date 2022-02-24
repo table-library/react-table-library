@@ -7,20 +7,16 @@ import { useProduceRowLayout } from '@table-library/react-table-library/resize/u
 import { useConsumeRowLayout } from '@table-library/react-table-library/resize/useConsumeRowLayout';
 import { useLayoutHide } from '@table-library/react-table-library/resize/useLayoutHide';
 
-interface HeaderRowProps {
-  className?: string;
-  disabled?: boolean;
-  children: React.ReactNode;
-}
+import { HeaderRowProps } from '@table-library/react-table-library/types/table';
 
-function isReactFragment(variableToInspect: any) {
+const isReactFragment = (variableToInspect: any) => {
   if (variableToInspect.type) {
     return variableToInspect.type === React.Fragment;
   }
   return variableToInspect === React.Fragment;
-}
+};
 
-const HeaderRow = ({ className, disabled, children }: HeaderRowProps) => {
+const HeaderRow = ({ className, children, ...rest }: HeaderRowProps) => {
   const theme = React.useContext(ThemeContext);
 
   const ref = React.useRef<HTMLDivElement>(null);
@@ -32,12 +28,13 @@ const HeaderRow = ({ className, disabled, children }: HeaderRowProps) => {
   return (
     <HeaderRowContainer
       role="rowheader"
-      className={cs('tr', 'tr-header', className, { disabled })}
+      className={cs('tr', 'tr-header', className)}
       css={`
         ${theme?.BaseRow}
         ${theme?.HeaderRow}
       `}
       ref={ref}
+      {...rest}
     >
       {React.Children.toArray(children)
         .filter(Boolean)

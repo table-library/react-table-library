@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
@@ -17,11 +15,7 @@ import {
   Cell,
 } from '@table-library/react-table-library/table';
 
-import {
-  useTree,
-  CellTree,
-  TreeExpandClickTypes,
-} from '@table-library/react-table-library/tree';
+import { useTree, CellTree, TreeExpandClickTypes } from '@table-library/react-table-library/tree';
 
 import { nodes } from '../data';
 
@@ -54,11 +48,7 @@ storiesOf('Kitchen Sink/Tree', module)
 
             <Body>
               {tableList.map((item) => (
-                <Row
-                  key={item.id}
-                  item={item}
-                  onDoubleClick={(item) => console.log(item)}
-                >
+                <Row key={item.id} item={item} onDoubleClick={(item) => console.log(item)}>
                   <CellTree item={item}>{item.name}</CellTree>
                   <Cell>
                     {item.deadline.toLocaleDateString('en-US', {

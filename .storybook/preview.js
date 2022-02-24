@@ -37,23 +37,32 @@ export const parameters = {
     storySort: {
       order: [
         'Getting Started',
-        ['Introduction', 'Roadmap'],
+        ['Introduction', 'Feature Requests', 'Roadmap', 'Support'],
         'First Steps',
-        ['Demo', 'Table', 'Create', 'Update', 'Delete'],
+        ['Compact Table', 'Composed Table'],
+        'Compact Table',
+        ['FAQ', 'Base', ...Features],
         'Library Themes',
-        ['Material UI', 'Semantic UI', 'Bootstrap UI', 'Ant Design'],
-        'Features',
-        Features,
-        'Compact',
-        ['Base', ...Features],
-        'Composites',
-        ['Sort & Select', 'Tree & Select', 'Tree & Sort'],
-        'Misc',
-        ['Cell', 'Row', 'Column'],
+        [
+          'Mantine',
+          'Material UI (WIP)',
+          'Semantic UI (WIP)',
+          'Bootstrap UI (WIP)',
+          'Ant Design (WIP)',
+        ],
         'Product Themes',
         ['Google Drive (WIP)', 'Stripe (WIP)'],
+        'Features',
+        Features,
+        'Composites',
+        ['Sort & Select', 'Tree & Select', 'Tree & Sort'],
+        'CRUD',
+        ['Create', 'Update', 'Delete'],
+        'Misc',
+        ['Cell', 'Row', 'Column'],
         'Recipes',
         ['Controlled'],
+        'Client vs Server',
         'Server',
         [
           'Table',
@@ -82,6 +91,7 @@ export const decorators = [
         style={{
           display: 'flex',
           flexDirection: 'column',
+          margin: '20px',
         }}
       >
         <Story />

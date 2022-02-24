@@ -1,0 +1,22 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="First Steps/Data Structures" />
+
+## Data Structures
+
+Either table component needs to receive the followiung `Data` type as `data` prop:
+
+```javascript
+export type TableNode = {
+  id: string,
+  nodes?: TableNode[],
+  [prop: string]: any,
+};
+
+export type Data = {
+  pageInfo?: any,
+  nodes: TableNode[],
+};
+```
+
+The `pageInfo` property is optional and can be used for **server-side** features such as pagination or infinite scrolling. The implementation details (e.g. [paginated tree table](https://www.robinwieruch.de/react-tree-list/)) of it are up to you, but check out the server-side features (e.g. pagination) of this table library to get an example of it.

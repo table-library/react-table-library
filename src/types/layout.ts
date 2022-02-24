@@ -1,9 +1,13 @@
+// external
+
 export type Layout = {
   custom: boolean;
   horizontalScroll: boolean;
   hiddenColumns: string[];
   fullHeight?: boolean;
 };
+
+// internal
 
 export type TableMemory = {
   resizedLayout: (string | null)[];

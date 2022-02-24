@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
@@ -52,14 +50,10 @@ storiesOf('Server/Search', module)
     return (
       <>
         <label htmlFor="search">
-          Search by Task:
-          <input
-            id="search"
-            type="text"
-            value={search}
-            onChange={handleSearch}
-          />
+          Search by Task:&nbsp;
+          <input id="search" type="text" value={search} onChange={handleSearch} />
         </label>
+        <br />
 
         <Table data={data}>
           {(tableList) => (
@@ -136,14 +130,10 @@ storiesOf('Server/Search', module)
     return (
       <>
         <label htmlFor="search">
-          Search by Task:
-          <input
-            id="search"
-            type="text"
-            value={search}
-            onChange={handleSearch}
-          />
+          Search by Task:&nbsp;
+          <input id="search" type="text" value={search} onChange={handleSearch} />
         </label>
+        <br />
 
         <Table data={data}>
           {(tableList) => (

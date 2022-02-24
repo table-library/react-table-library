@@ -66,7 +66,12 @@ const CompactRow = ({
 
           let checkbox = null;
           if (select && column.select) {
-            checkbox = <select.components.CellSelect item={item} />;
+            checkbox =
+              typeof column.select !== 'boolean' && column.select.renderCellSelect ? (
+                <Cell stiff>{column.select.renderCellSelect(item)}</Cell>
+              ) : (
+                <select.components.CellSelect item={item} />
+              );
           }
 
           return (

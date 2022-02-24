@@ -1,20 +1,18 @@
-import {
-  TableNode,
-  TableProps,
-  RowPropsAsObject,
-} from '@table-library/react-table-library/types/table';
+import { TableNode, TableProps, RowProps } from '@table-library/react-table-library/types/table';
 import { ColumnSortProps } from '@table-library/react-table-library/types/sort';
+import { ColumnSelectProps } from '@table-library/react-table-library/types/select';
 import { ColumnTreeProps } from '@table-library/react-table-library/types/tree';
 import { ColumnResizeProps } from '@table-library/react-table-library/types/resize';
 import { ColumnHideProps } from '@table-library/react-table-library/types/hide';
 
+// external
+
 export type Column = {
   label: string;
   renderCell: (node: TableNode) => React.ReactNode;
-  // features
   resize?: ColumnResizeProps;
   sort?: ColumnSortProps;
-  select?: boolean;
+  select?: ColumnSelectProps;
   tree?: ColumnTreeProps;
   pin?: boolean;
   hide?: ColumnHideProps;
@@ -36,6 +34,8 @@ export type RowOptions = {
   renderAfterRow?: (node: TableNode) => React.ReactNode;
 };
 
+export type RowPropsAsObject = Omit<RowProps, 'item' | 'children'>;
+
 export type CompactTableProps = TableProps & {
   columns: Column[];
   tableOptions?: TableOptions;
@@ -43,6 +43,8 @@ export type CompactTableProps = TableProps & {
   rowOptions?: RowOptions;
   virtualizedOptions?: VirtualizedOptions;
 };
+
+// internal
 
 export type NormalTableProps = CompactTableProps & {
   tableList: TableNode[];

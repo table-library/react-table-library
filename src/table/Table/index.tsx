@@ -55,6 +55,7 @@ const Table = React.forwardRef(
       tree,
       onInit = () => {},
       children,
+      ...rest
     }: TableProps,
     ref: any,
   ) => {
@@ -83,6 +84,7 @@ const Table = React.forwardRef(
         `}
         role="grid"
         ref={callbackRef}
+        {...rest}
       >
         {calledOnce && (
           <TableContext.Provider value={data}>

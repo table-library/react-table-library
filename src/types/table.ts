@@ -1,47 +1,63 @@
 import * as React from 'react';
 
+import { Nullish } from '@table-library/react-table-library/types/common';
 import { Theme } from '@table-library/react-table-library/types/theme';
 import { Layout } from '@table-library/react-table-library/types/layout';
+import { ColumnResizeProps } from '@table-library/react-table-library/types/resize';
 import { Select } from '@table-library/react-table-library/types/select';
 import { Tree } from '@table-library/react-table-library/types/tree';
 import { Sort } from '@table-library/react-table-library/types/sort';
 import { Pagination } from '@table-library/react-table-library/types/pagination';
-import { Nullish } from '@table-library/react-table-library/types/common';
 
-export type OnInitFunction = (node: HTMLDivElement) => void;
+// external
 
-export type TableNode = {
-  id: string;
-  nodes?: TableNode[];
-  [prop: string]: any;
-};
+export type RestProps = Record<string, any>;
 
 export type OnClick = (node: TableNode, event: React.SyntheticEvent | React.KeyboardEvent) => void;
 
-export type Data = {
-  pageInfo?: any;
-  nodes: TableNode[];
-};
+export type CellProps = {
+  className?: string;
+  hide?: boolean;
+  pin?: boolean;
+  stiff?: boolean;
+  onClick?: (event: React.SyntheticEvent) => void;
+  children: React.ReactNode;
+} & RestProps;
 
-export type Features = {
-  select: Select | Nullish;
-  tree: Tree | Nullish;
-  sort: Sort | Nullish;
-  pagination: Pagination | Nullish;
-};
+export type HeaderCellProps = {
+  index?: number;
+  hideKey?: string;
+  className?: string;
+  hide?: boolean;
+  pin?: boolean;
+  stiff?: boolean;
+  resize?: ColumnResizeProps;
+  children: React.ReactNode;
+} & RestProps;
 
-export type RowPropsAsObject = Omit<RowProps, 'item' | 'children'>;
-
-export interface RowProps {
+export type RowProps = {
   item: TableNode;
   className?: string;
   disabled?: boolean;
   onClick?: OnClick;
   onDoubleClick?: OnClick;
   children: React.ReactNode;
-}
+} & RestProps;
 
-export interface TableProps {
+export type BodyProps = {
+  children: React.ReactNode;
+} & RestProps;
+
+export type HeaderRowProps = {
+  className?: string;
+  children: React.ReactNode;
+} & RestProps;
+
+export type HeaderProps = {
+  children: React.ReactNode;
+} & RestProps;
+
+export type TableProps = {
   data: Data;
   theme?: Theme;
   layout?: Layout;
@@ -51,7 +67,29 @@ export interface TableProps {
   tree?: Tree;
   onInit?: OnInitFunction;
   children?: (nodes: TableNode[]) => React.ReactNode;
-}
+} & RestProps;
+
+export type TableNode = {
+  id: string;
+  nodes?: TableNode[];
+  [prop: string]: any;
+};
+
+export type Data = {
+  pageInfo?: any;
+  nodes: TableNode[];
+};
+
+// internal
+
+export type OnInitFunction = (node: HTMLDivElement) => void;
+
+export type Features = {
+  select: Select | Nullish;
+  tree: Tree | Nullish;
+  sort: Sort | Nullish;
+  pagination: Pagination | Nullish;
+};
 
 export type FeatureProps = {
   theme?: string;

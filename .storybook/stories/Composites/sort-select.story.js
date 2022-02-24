@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
@@ -12,10 +10,7 @@ import {
   Cell,
 } from '@table-library/react-table-library/table';
 
-import {
-  useSort,
-  HeaderCellSort,
-} from '@table-library/react-table-library/sort';
+import { useSort, HeaderCellSort } from '@table-library/react-table-library/sort';
 
 import {
   HeaderCellSelect,
@@ -37,21 +32,13 @@ storiesOf('Composites/Sort & Select', module)
       },
       {
         sortFns: {
-          TASK: (array) =>
-            array.sort((a, b) => a.name.localeCompare(b.name)),
-          DEADLINE: (array) =>
-            array.sort((a, b) => a.deadline - b.deadline),
-          TYPE: (array) =>
-            array.sort((a, b) => a.type.localeCompare(b.type)),
-          COMPLETE: (array) =>
-            array.sort((a, b) => a.isComplete - b.isComplete),
-          TASKS: (array) =>
-            array.sort(
-              (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length
-            ),
+          TASK: (array) => array.sort((a, b) => a.name.localeCompare(b.name)),
+          DEADLINE: (array) => array.sort((a, b) => a.deadline - b.deadline),
+          TYPE: (array) => array.sort((a, b) => a.type.localeCompare(b.type)),
+          COMPLETE: (array) => array.sort((a, b) => a.isComplete - b.isComplete),
+          TASKS: (array) => array.sort((a, b) => (a.nodes || []).length - (b.nodes || []).length),
         },
-      }
+      },
     );
 
     const select = useRowSelect(data, {
@@ -74,13 +61,9 @@ storiesOf('Composites/Sort & Select', module)
               <HeaderRow>
                 <HeaderCellSelect />
                 <HeaderCellSort sortKey="TASK">Task</HeaderCellSort>
-                <HeaderCellSort sortKey="DEADLINE">
-                  Deadline
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="DEADLINE">Deadline</HeaderCellSort>
                 <HeaderCellSort sortKey="TYPE">Type</HeaderCellSort>
-                <HeaderCellSort sortKey="COMPLETE">
-                  Complete
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="COMPLETE">Complete</HeaderCellSort>
                 <HeaderCellSort sortKey="TASKS">Tasks</HeaderCellSort>
               </HeaderRow>
             </Header>

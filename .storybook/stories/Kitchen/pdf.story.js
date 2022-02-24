@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import html2canvas from 'html2canvas';
@@ -32,8 +30,7 @@ storiesOf('Kitchen Sink/PDF Download', module)
       const pdf = new jsPDF();
       const imgProperties = pdf.getImageProperties(data);
       const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight =
-        (imgProperties.height * pdfWidth) / imgProperties.width;
+      const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
 
       pdf.addImage(data, 'PNG', 0, 0, pdfWidth, pdfHeight);
       pdf.save('print.pdf');

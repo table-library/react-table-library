@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
@@ -221,9 +219,7 @@ storiesOf('Features/Layout', module)
                     })}
                   </Cell>
                   <Cell className="type">{item.type}</Cell>
-                  <Cell className="complete">
-                    {item.isComplete.toString()}
-                  </Cell>
+                  <Cell className="complete">{item.isComplete.toString()}</Cell>
                   <Cell className="tasks">{item.nodes?.length}</Cell>
                 </Row>
               ))}

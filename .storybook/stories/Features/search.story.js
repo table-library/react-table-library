@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
@@ -26,22 +24,16 @@ storiesOf('Features/Search', module)
     };
 
     const data = {
-      nodes: nodes.filter((item) =>
-        item.name.toLowerCase().includes(search.toLowerCase())
-      ),
+      nodes: nodes.filter((item) => item.name.toLowerCase().includes(search.toLowerCase())),
     };
 
     return (
       <>
         <label htmlFor="search">
-          Search by Task:
-          <input
-            id="search"
-            type="text"
-            value={search}
-            onChange={handleSearch}
-          />
+          Search by Task:&nbsp;
+          <input id="search" type="text" value={search} onChange={handleSearch} />
         </label>
+        <br />
 
         <Table data={data}>
           {(tableList) => (
@@ -87,9 +79,7 @@ storiesOf('Features/Search', module)
     };
 
     const data = {
-      nodes: nodes.filter((item) =>
-        item.name.toLowerCase().includes(search.toLowerCase())
-      ),
+      nodes: nodes.filter((item) => item.name.toLowerCase().includes(search.toLowerCase())),
     };
 
     useCustom('search', data, {
@@ -104,14 +94,10 @@ storiesOf('Features/Search', module)
     return (
       <>
         <label htmlFor="search">
-          Search by Task:
-          <input
-            id="search"
-            type="text"
-            value={search}
-            onChange={handleSearch}
-          />
+          Search by Task:&nbsp;
+          <input id="search" type="text" value={search} onChange={handleSearch} />
         </label>
+        <br />
 
         <Table data={data}>
           {(tableList) => (

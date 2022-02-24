@@ -2,11 +2,11 @@ import * as React from 'react';
 
 import { Checkbox as CheckboxBase } from '@table-library/react-table-library/common/components/Checkbox';
 
-interface CheckboxProps {
+type CheckboxProps = {
   checked: boolean;
   isIndeterminate?: boolean;
   onChange: (event: React.SyntheticEvent) => void;
-}
+};
 
 const Checkbox = ({ checked, isIndeterminate, onChange }: CheckboxProps) => {
   const ref = (node: HTMLInputElement) => {

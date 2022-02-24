@@ -7,20 +7,20 @@ import {
   TableElementRef,
 } from '@table-library/react-table-library/types/layout';
 
-interface Value {
+type Value = {
   tableElementRef: TableElementRef;
   tableMemoryRef: TableMemoryRef;
   layout: Layout | Nullish;
-}
+};
 
 const LayoutContext = React.createContext<Value | Nullish>(null);
 
-interface LayoutProviderProps {
+type LayoutProviderProps = {
   tableElementRef: TableElementRef;
   tableMemoryRef: TableMemoryRef;
   layout: Layout | Nullish;
   children: React.ReactNode;
-}
+};
 
 const LayoutProvider = ({
   tableElementRef,

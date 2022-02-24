@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import AnimateHeight from 'react-animate-height';
@@ -40,8 +38,7 @@ storiesOf('Kitchen Sink/Expand', module)
       setHeights(computeHeights(ids));
     }, [ids]);
 
-    const computeHeights = (ids) =>
-      ids.reduce((acc, id) => ({ ...acc, [id]: 'auto' }), {});
+    const computeHeights = (ids) => ids.reduce((acc, id) => ({ ...acc, [id]: 'auto' }), {});
 
     return (
       <Table data={data}>
@@ -75,10 +72,7 @@ storiesOf('Kitchen Sink/Expand', module)
                   </Row>
 
                   {ids.includes(item.id) && (
-                    <AnimateHeight
-                      duration={DURATION}
-                      height={heights[item.id] || 0}
-                    >
+                    <AnimateHeight duration={DURATION} height={heights[item.id] || 0}>
                       <ul
                         style={{
                           margin: '0',
@@ -87,19 +81,16 @@ storiesOf('Kitchen Sink/Expand', module)
                         }}
                       >
                         <li>
-                          <strong>Name:</strong>{' '}
-                          {item.name.toUpperCase()}
+                          <strong>Name:</strong> {item.name.toUpperCase()}
                         </li>
                         <li>
-                          <strong>Deadline:</strong>{' '}
-                          {item.deadline.toLocaleDateString('en-US')}
+                          <strong>Deadline:</strong> {item.deadline.toLocaleDateString('en-US')}
                         </li>
                         <li>
                           <strong>Type:</strong> {item.type}
                         </li>
                         <li>
-                          <strong>Complete:</strong>{' '}
-                          {item.isComplete.toString()}
+                          <strong>Complete:</strong> {item.isComplete.toString()}
                         </li>
                       </ul>
                     </AnimateHeight>
@@ -165,19 +156,16 @@ storiesOf('Kitchen Sink/Expand', module)
                       }}
                     >
                       <li>
-                        <strong>Name:</strong>{' '}
-                        {item.name.toUpperCase()}
+                        <strong>Name:</strong> {item.name.toUpperCase()}
                       </li>
                       <li>
-                        <strong>Deadline:</strong>{' '}
-                        {item.deadline.toLocaleDateString('en-US')}
+                        <strong>Deadline:</strong> {item.deadline.toLocaleDateString('en-US')}
                       </li>
                       <li>
                         <strong>Type:</strong> {item.type}
                       </li>
                       <li>
-                        <strong>Complete:</strong>{' '}
-                        {item.isComplete.toString()}
+                        <strong>Complete:</strong> {item.isComplete.toString()}
                       </li>
                     </ul>
                   )}

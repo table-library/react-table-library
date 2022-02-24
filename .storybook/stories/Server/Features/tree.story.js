@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
@@ -13,14 +11,8 @@ import {
   Cell,
 } from '@table-library/react-table-library/table';
 
-import {
-  useTree,
-  CellTree,
-} from '@table-library/react-table-library/tree';
-import {
-  findNodeById,
-  recursiveMergeInsert,
-} from '@table-library/react-table-library/common/util';
+import { useTree, CellTree } from '@table-library/react-table-library/tree';
+import { findNodeById, recursiveMergeInsert } from '@table-library/react-table-library/common/util';
 
 import { getData } from '../../server';
 
@@ -41,9 +33,7 @@ const insertTree = (targetId, nodes, pageInfo) => (state) => {
 
   return {
     pageInfo: state.pageInfo,
-    nodes: state.nodes.map(
-      recursiveMergeInsert(targetId, nodes, { pageInfo })
-    ),
+    nodes: state.nodes.map(recursiveMergeInsert(targetId, nodes, { pageInfo })),
   };
 };
 
@@ -215,9 +205,7 @@ storiesOf('Server/Tree', module)
 
       setLoadingIds(loadingIds.concat(action.payload.id));
       await doGet(params);
-      setLoadingIds(
-        loadingIds.filter((id) => id !== action.payload.id)
-      );
+      setLoadingIds(loadingIds.filter((id) => id !== action.payload.id));
     }
 
     return (
@@ -314,9 +302,7 @@ storiesOf('Server/Tree', module)
 
       setIdsNested(idsNested.concat(action.payload.id));
       await doGet(params);
-      setIdsNested(
-        idsNested.filter((id) => id !== action.payload.id)
-      );
+      setIdsNested(idsNested.filter((id) => id !== action.payload.id));
     }
 
     const handleLoadMore = async (item) => {
@@ -331,10 +317,7 @@ storiesOf('Server/Tree', module)
     };
 
     const getLastInDepth = (item) =>
-      (item?.nodes || []).reduce(
-        (_, value) => getLastInDepth(value),
-        item
-      );
+      (item?.nodes || []).reduce((_, value) => getLastInDepth(value), item);
 
     const LoadingRow = ({ item }) => (
       <div
@@ -389,30 +372,21 @@ storiesOf('Server/Tree', module)
                     <Cell>{item.nodes?.length}</Cell>
                   </Row>
 
-                  {idsNested.includes(item.id) && (
-                    <LoadingRow item={item} />
-                  )}
+                  {idsNested.includes(item.id) && <LoadingRow item={item} />}
 
                   {item.ancestors
                     .filter(
                       (ancestor) =>
                         ancestor.pageInfo &&
-                        ancestor.pageInfo.nextOffset <
-                          ancestor.pageInfo.total &&
-                        item.id === getLastInDepth(ancestor).id
+                        ancestor.pageInfo.nextOffset < ancestor.pageInfo.total &&
+                        item.id === getLastInDepth(ancestor).id,
                     )
                     .map((ancestor) =>
                       idsMore.includes(ancestor.id) ? (
-                        <LoadingRow
-                          key={item.id + ancestor.id}
-                          item={ancestor}
-                        />
+                        <LoadingRow key={item.id + ancestor.id} item={ancestor} />
                       ) : (
-                        <FetchMoreRow
-                          key={item.id + ancestor.id}
-                          item={ancestor}
-                        />
-                      )
+                        <FetchMoreRow key={item.id + ancestor.id} item={ancestor} />
+                      ),
                     )}
                 </React.Fragment>
               ))}

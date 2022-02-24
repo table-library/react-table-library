@@ -6,18 +6,7 @@ import { ThemeContext } from '@table-library/react-table-library/common/context/
 import { resizerStyle } from '@table-library/react-table-library/resize/styles';
 import { useResize } from '@table-library/react-table-library/resize/useResize';
 
-import { ColumnResizeProps } from '@table-library/react-table-library/types/resize';
-
-type CellProps = {
-  index?: number;
-  hideKey?: string;
-  className?: string;
-  hide?: boolean;
-  pin?: boolean;
-  stiff?: boolean;
-  resize?: ColumnResizeProps;
-  children: React.ReactNode;
-} & Record<string, any>;
+import { HeaderCellProps } from '@table-library/react-table-library/types/table';
 
 const HeaderCell = ({
   index,
@@ -29,7 +18,7 @@ const HeaderCell = ({
   resize,
   children,
   ...rest
-}: CellProps) => {
+}: HeaderCellProps) => {
   const theme = React.useContext(ThemeContext);
 
   const cellRef = React.useRef<HTMLDivElement>(null);

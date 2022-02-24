@@ -1,5 +1,6 @@
 import { State, IdReducerFunctions } from '@table-library/react-table-library/types/common';
 import { TableNode, GetRowProps } from '@table-library/react-table-library/types/table';
+import React from 'react';
 
 export enum SelectClickTypes {
   RowClick,
@@ -27,9 +28,16 @@ export type SelectOptionsSound = {
   isPartialToAll: boolean;
 };
 
-export interface CellSelectProps {
+export type CellSelectProps = {
   item: TableNode;
-}
+};
+
+type ColumnSelectPropsObject = {
+  renderHeaderCellSelect?: () => React.ReactNode;
+  renderCellSelect?: (node: TableNode) => React.ReactNode;
+};
+
+export type ColumnSelectProps = ColumnSelectPropsObject | boolean;
 
 export type Select = {
   state: State;

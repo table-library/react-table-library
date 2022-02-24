@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
@@ -19,47 +17,28 @@ import { nodes } from '../data';
 storiesOf('Features/Filter', module)
   .addParameters({ component: Table })
   .add('base', () => {
-    const [filters, setFilters] = React.useState(['SETUP', 'LEARN']);
+    let data = { nodes };
 
-    const handleFilter = (filter) => {
-      filters.includes(filter)
-        ? setFilters(filters.filter((value) => value !== filter))
-        : setFilters(filters.concat(filter));
-    };
+    const [isHide, setHide] = React.useState(false);
 
-    const data = {
-      nodes: nodes.filter(
-        (item) =>
-          (filters.includes('SETUP') && item.type === 'SETUP') ||
-          (filters.includes('LEARN') && item.type === 'LEARN')
-      ),
+    data = {
+      nodes: isHide ? data.nodes.filter((node) => !node.isComplete) : data.nodes,
     };
 
     return (
       <>
         <div>
-          <label htmlFor="setup">
-            Include SETUP:
+          <label htmlFor="complete">
+            Hide Complete:
             <input
-              id="setup"
+              id="complete"
               type="checkbox"
-              checked={filters.includes('SETUP')}
-              onChange={() => handleFilter('SETUP')}
+              checked={isHide}
+              onChange={() => setHide(!isHide)}
             />
           </label>
         </div>
-
-        <div>
-          <label htmlFor="learn">
-            Include LEARN:
-            <input
-              id="learn"
-              type="checkbox"
-              checked={filters.includes('LEARN')}
-              onChange={() => handleFilter('LEARN')}
-            />
-          </label>
-        </div>
+        <br />
 
         <Table data={data}>
           {(tableList) => (
@@ -98,24 +77,12 @@ storiesOf('Features/Filter', module)
     );
   })
   .add('with callback', () => {
-    const [filters, setFilters] = React.useState(['SETUP', 'LEARN']);
+    let data = { nodes };
 
-    const handleFilter = (filter) => {
-      filters.includes(filter)
-        ? setFilters(filters.filter((value) => value !== filter))
-        : setFilters(filters.concat(filter));
-    };
-
-    const data = {
-      nodes: nodes.filter(
-        (item) =>
-          (filters.includes('SETUP') && item.type === 'SETUP') ||
-          (filters.includes('LEARN') && item.type === 'LEARN')
-      ),
-    };
+    const [isHide, setHide] = React.useState(false);
 
     useCustom('filters', data, {
-      state: { filters },
+      state: { isHide },
       onChange: onFiltersChange,
     });
 
@@ -123,31 +90,24 @@ storiesOf('Features/Filter', module)
       console.log(action, state);
     }
 
+    data = {
+      nodes: isHide ? data.nodes.filter((node) => !node.isComplete) : data.nodes,
+    };
+
     return (
       <>
         <div>
-          <label htmlFor="setup">
-            Include SETUP:
+          <label htmlFor="complete">
+            Hide Complete:
             <input
-              id="setup"
+              id="complete"
               type="checkbox"
-              checked={filters.includes('SETUP')}
-              onChange={() => handleFilter('SETUP')}
+              checked={isHide}
+              onChange={() => setHide(!isHide)}
             />
           </label>
         </div>
-
-        <div>
-          <label htmlFor="learn">
-            Include LEARN:
-            <input
-              id="learn"
-              type="checkbox"
-              checked={filters.includes('LEARN')}
-              onChange={() => handleFilter('LEARN')}
-            />
-          </label>
-        </div>
+        <br />
 
         <Table data={data}>
           {(tableList) => (

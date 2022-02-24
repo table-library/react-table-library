@@ -34,12 +34,12 @@ const getSortIcon = (
   return SortIconDefault ? React.cloneElement(SortIconDefault, { ...size }) : null;
 };
 
-interface SortButtonProps {
+type SortButtonProps = {
   sort: Sort;
   sortKey: string;
   sortIcon: SortOptionsIcon;
   children: React.ReactNode;
-}
+};
 
 const SortButton = ({ sort, sortKey, sortIcon = {}, children }: SortButtonProps) => {
   const { state, fns, options } = sort;

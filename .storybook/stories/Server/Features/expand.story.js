@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
@@ -12,10 +10,7 @@ import {
   HeaderCell,
   Cell,
 } from '@table-library/react-table-library/table';
-import {
-  findNodeById,
-  recursiveMergeInsert,
-} from '@table-library/react-table-library/common/util';
+import { findNodeById, recursiveMergeInsert } from '@table-library/react-table-library/common/util';
 
 import { getData } from '../../server';
 
@@ -36,9 +31,7 @@ const insertTree = (targetId, nodes, pageInfo) => (state) => {
 
   return {
     pageInfo: state.pageInfo,
-    nodes: state.nodes.map(
-      recursiveMergeInsert(targetId, nodes, { pageInfo })
-    ),
+    nodes: state.nodes.map(recursiveMergeInsert(targetId, nodes, { pageInfo })),
   };
 };
 

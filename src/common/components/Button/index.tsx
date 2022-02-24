@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import styles from './styles';
 
-interface ButtonProps {
+type ButtonProps = {
   margin: string;
-}
+};
 
 const Button = React.forwardRef(
   (

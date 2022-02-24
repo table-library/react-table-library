@@ -58,6 +58,8 @@
     "jsx-a11y/anchor-has-content": 0,
     "jsx-a11y/anchor-is-valid": 0,
     "no-underscore-dangle": "off",
+    "no-console": 0,
+    "no-unused-vars": 0,
     "arrow-body-style": 0,
     "import/prefer-default-export": 0,
     "import/no-extraneous-dependencies": [

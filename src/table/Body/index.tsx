@@ -1,12 +1,9 @@
 import * as React from 'react';
 
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
+import { BodyProps } from '@table-library/react-table-library/types/table';
 
-interface BodyProps {
-  children: React.ReactNode;
-}
-
-const Body = ({ children }: BodyProps) => {
+const Body = ({ children, ...rest }: BodyProps) => {
   const theme = React.useContext(ThemeContext);
 
   return (
@@ -15,6 +12,7 @@ const Body = ({ children }: BodyProps) => {
       css={`
         ${theme?.Body}
       `}
+      {...rest}
     >
       {children}
     </div>

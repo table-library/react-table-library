@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
@@ -38,13 +36,7 @@ storiesOf('Misc/Cell', module)
             <Body>
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  <Cell
-                    onClick={(event) =>
-                      console.log('Click Cell', event)
-                    }
-                  >
-                    {item.name}
-                  </Cell>
+                  <Cell onClick={(event) => console.log('Click Cell', event)}>{item.name}</Cell>
                   <Cell>
                     {item.deadline.toLocaleDateString('en-US', {
                       year: 'numeric',
@@ -93,12 +85,7 @@ storiesOf('Misc/Cell', module)
             <Body>
               {tableList.map((item, index) => (
                 <Row key={item.id} item={item}>
-                  <Cell
-                    tabIndex="-1"
-                    onClick={(event) =>
-                      console.log('Click Cell', event)
-                    }
-                  >
+                  <Cell tabIndex="-1" onClick={(event) => console.log('Click Cell', event)}>
                     {item.name}
                   </Cell>
                   <Cell tabIndex="-1">
@@ -109,9 +96,7 @@ storiesOf('Misc/Cell', module)
                     })}
                   </Cell>
                   <Cell tabIndex="-1">{item.type}</Cell>
-                  <Cell tabIndex="-1">
-                    {item.isComplete.toString()}
-                  </Cell>
+                  <Cell tabIndex="-1">{item.isComplete.toString()}</Cell>
                   <Cell tabIndex="-1">{item.nodes?.length}</Cell>
                 </Row>
               ))}
@@ -154,38 +139,24 @@ storiesOf('Misc/Cell', module)
                   <Cell
                     ariaColindex={1 + index * 5}
                     tabIndex={1 + index * 5}
-                    onClick={(event) =>
-                      console.log('Click Cell', event)
-                    }
+                    onClick={(event) => console.log('Click Cell', event)}
                   >
                     {item.name}
                   </Cell>
-                  <Cell
-                    ariaColindex={2 + index * 5}
-                    tabIndex={2 + index * 5}
-                  >
+                  <Cell ariaColindex={2 + index * 5} tabIndex={2 + index * 5}>
                     {item.deadline.toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: '2-digit',
                       day: '2-digit',
                     })}
                   </Cell>
-                  <Cell
-                    ariaColindex={3 + index * 5}
-                    tabIndex={3 + index * 5}
-                  >
+                  <Cell ariaColindex={3 + index * 5} tabIndex={3 + index * 5}>
                     {item.type}
                   </Cell>
-                  <Cell
-                    ariaColindex={4 + index * 5}
-                    tabIndex={4 + index * 5}
-                  >
+                  <Cell ariaColindex={4 + index * 5} tabIndex={4 + index * 5}>
                     {item.isComplete.toString()}
                   </Cell>
-                  <Cell
-                    ariaColindex={5 + index * 5}
-                    tabIndex={5 + index * 5}
-                  >
+                  <Cell ariaColindex={5 + index * 5} tabIndex={5 + index * 5}>
                     {item.nodes?.length}
                   </Cell>
                 </Row>

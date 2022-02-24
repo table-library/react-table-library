@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
@@ -13,10 +11,7 @@ import {
   Cell,
 } from '@table-library/react-table-library/table';
 
-import {
-  useSort,
-  HeaderCellSort,
-} from '@table-library/react-table-library/sort';
+import { useSort, HeaderCellSort } from '@table-library/react-table-library/sort';
 
 import { getData } from '../../server';
 
@@ -46,7 +41,7 @@ storiesOf('Server/Sort', module)
       },
       {
         isServer: true,
-      }
+      },
     );
 
     function onSortChange(action, state) {
@@ -67,13 +62,9 @@ storiesOf('Server/Sort', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSort sortKey="TASK">Task</HeaderCellSort>
-                <HeaderCellSort sortKey="DEADLINE">
-                  Deadline
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="DEADLINE">Deadline</HeaderCellSort>
                 <HeaderCellSort sortKey="TYPE">Type</HeaderCellSort>
-                <HeaderCellSort sortKey="COMPLETE">
-                  Complete
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="COMPLETE">Complete</HeaderCellSort>
                 <HeaderCellSort sortKey="TASKS">Tasks</HeaderCellSort>
               </HeaderRow>
             </Header>

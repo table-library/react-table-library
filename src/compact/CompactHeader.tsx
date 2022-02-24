@@ -22,7 +22,12 @@ const CompactHeader = ({ columns, ...tableProps }: CompactTableProps) => {
 
           let checkbox = null;
           if (select && column.select) {
-            checkbox = <select.components.HeaderCellSelect />;
+            checkbox =
+              typeof column.select !== 'boolean' && column.select.renderHeaderCellSelect ? (
+                <HeaderCell stiff>{column.select.renderHeaderCellSelect()}</HeaderCell>
+              ) : (
+                <select.components.HeaderCellSelect />
+              );
           }
 
           const sharedProps = {

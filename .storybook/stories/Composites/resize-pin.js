@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
@@ -58,11 +56,7 @@ storiesOf('Composites/Resize & Pin', module)
           height: '150px',
         }}
       >
-        <Table
-          data={data}
-          theme={theme}
-          layout={{ custom: true, horizontalScroll: true }}
-        >
+        <Table data={data} theme={theme} layout={{ custom: true, horizontalScroll: true }}>
           {(tableList) => (
             <>
               <Header>

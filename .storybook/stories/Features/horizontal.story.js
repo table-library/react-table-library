@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
@@ -46,11 +44,7 @@ storiesOf('Features/Horizontal Scroll', module)
     });
 
     return (
-      <Table
-        data={data}
-        theme={theme}
-        layout={{ custom: true, horizontalScroll: true }}
-      >
+      <Table data={data} theme={theme} layout={{ custom: true, horizontalScroll: true }}>
         {(tableList) => (
           <>
             <Header>
@@ -121,11 +115,7 @@ storiesOf('Features/Horizontal Scroll', module)
           height: '150px',
         }}
       >
-        <Table
-          data={data}
-          theme={theme}
-          layout={{ custom: true, horizontalScroll: true }}
-        >
+        <Table data={data} theme={theme} layout={{ custom: true, horizontalScroll: true }}>
           {(tableList) => (
             <>
               <Header>
@@ -181,10 +171,7 @@ storiesOf('Features/Horizontal Scroll', module)
         <strong>Caveats: </strong>
         <ul>
           <li>% can be used, even a sum of % that's above 100%</li>
-          <li>
-            When resize feature is active, a resize transforms all %
-            to px columns though
-          </li>
+          <li>When resize feature is active, a resize transforms all % to px columns though</li>
         </ul>
       </li>
     </ul>

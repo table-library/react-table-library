@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
@@ -14,10 +12,7 @@ import {
 
 import { useTree } from '@table-library/react-table-library/tree';
 
-import {
-  useSort,
-  HeaderCellSort,
-} from '@table-library/react-table-library/sort';
+import { useSort, HeaderCellSort } from '@table-library/react-table-library/sort';
 
 import { nodes } from '../data';
 
@@ -37,21 +32,13 @@ storiesOf('Composites/Tree & Sort', module)
       },
       {
         sortFns: {
-          TASK: (array) =>
-            array.sort((a, b) => a.name.localeCompare(b.name)),
-          DEADLINE: (array) =>
-            array.sort((a, b) => a.deadline - b.deadline),
-          TYPE: (array) =>
-            array.sort((a, b) => a.type.localeCompare(b.type)),
-          COMPLETE: (array) =>
-            array.sort((a, b) => a.isComplete - b.isComplete),
-          TASKS: (array) =>
-            array.sort(
-              (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length
-            ),
+          TASK: (array) => array.sort((a, b) => a.name.localeCompare(b.name)),
+          DEADLINE: (array) => array.sort((a, b) => a.deadline - b.deadline),
+          TYPE: (array) => array.sort((a, b) => a.type.localeCompare(b.type)),
+          COMPLETE: (array) => array.sort((a, b) => a.isComplete - b.isComplete),
+          TASKS: (array) => array.sort((a, b) => (a.nodes || []).length - (b.nodes || []).length),
         },
-      }
+      },
     );
 
     function onSortChange(action, state) {
@@ -69,13 +56,9 @@ storiesOf('Composites/Tree & Sort', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSort sortKey="TASK">Task</HeaderCellSort>
-                <HeaderCellSort sortKey="DEADLINE">
-                  Deadline
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="DEADLINE">Deadline</HeaderCellSort>
                 <HeaderCellSort sortKey="TYPE">Type</HeaderCellSort>
-                <HeaderCellSort sortKey="COMPLETE">
-                  Complete
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="COMPLETE">Complete</HeaderCellSort>
                 <HeaderCellSort sortKey="TASKS">Tasks</HeaderCellSort>
               </HeaderRow>
             </Header>
@@ -116,22 +99,14 @@ storiesOf('Composites/Tree & Sort', module)
       },
       {
         sortFns: {
-          TASK: (array) =>
-            array.sort((a, b) => a.name.localeCompare(b.name)),
-          DEADLINE: (array) =>
-            array.sort((a, b) => a.deadline - b.deadline),
-          TYPE: (array) =>
-            array.sort((a, b) => a.type.localeCompare(b.type)),
-          COMPLETE: (array) =>
-            array.sort((a, b) => a.isComplete - b.isComplete),
-          TASKS: (array) =>
-            array.sort(
-              (a, b) =>
-                (a.nodes || []).length - (b.nodes || []).length
-            ),
+          TASK: (array) => array.sort((a, b) => a.name.localeCompare(b.name)),
+          DEADLINE: (array) => array.sort((a, b) => a.deadline - b.deadline),
+          TYPE: (array) => array.sort((a, b) => a.type.localeCompare(b.type)),
+          COMPLETE: (array) => array.sort((a, b) => a.isComplete - b.isComplete),
+          TASKS: (array) => array.sort((a, b) => (a.nodes || []).length - (b.nodes || []).length),
         },
         isRecursive: false,
-      }
+      },
     );
 
     function onSortChange(action, state) {
@@ -149,13 +124,9 @@ storiesOf('Composites/Tree & Sort', module)
             <Header>
               <HeaderRow>
                 <HeaderCellSort sortKey="TASK">Task</HeaderCellSort>
-                <HeaderCellSort sortKey="DEADLINE">
-                  Deadline
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="DEADLINE">Deadline</HeaderCellSort>
                 <HeaderCellSort sortKey="TYPE">Type</HeaderCellSort>
-                <HeaderCellSort sortKey="COMPLETE">
-                  Complete
-                </HeaderCellSort>
+                <HeaderCellSort sortKey="COMPLETE">Complete</HeaderCellSort>
                 <HeaderCellSort sortKey="TASKS">Tasks</HeaderCellSort>
               </HeaderRow>
             </Header>
