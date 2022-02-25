@@ -28,6 +28,7 @@ export default {
     pagination: './src/pagination/index.ts',
     // themes
     mantine: './src/themes/mantine/index.ts',
+    chakra: './src/themes/chakra-ui/index.ts',
   },
   output: [
     // ES module version, for modern browsers

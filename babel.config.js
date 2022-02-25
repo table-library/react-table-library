@@ -21,6 +21,7 @@ module.exports = {
           '@table-library/react-table-library/pagination': './src/pagination',
           // themes
           '@table-library/react-table-library/themes/mantine': './src/themes/mantine',
+          '@table-library/react-table-library/themes/chakra-ui': './src/themes/chakra-ui',
         },
       },
     ],

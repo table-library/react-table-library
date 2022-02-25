@@ -2,30 +2,45 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/mantine';
-import { Group, TextInput } from '@mantine/core';
-import { FaSearch } from 'react-icons/fa';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
+import { Box } from '@chakra-ui/react';
 
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';
 
-const key = 'Search';
+const key = 'Theme';
 
 const Component = () => {
-  let data = { nodes };
+  const data = { nodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(mantineTheme);
+  const chakraTheme = getTheme(DEFAULT_OPTIONS);
+  const customTheme = {
+    BaseCell: `
+      border-right: 1px solid transparent;
+    `,
+    Row: `
+      &:nth-child(odd) {
+        .td:nth-child(even) {
+          background-color: #dddddd;
+        }
 
-  const [search, setSearch] = React.useState('');
+        .td:nth-child(odd) {
+          background-color: #fafafa;
+        }
+      }
 
-  const handleSearch = (event) => {
-    setSearch(event.target.value);
+      &:nth-child(even) {
+        .td:nth-child(odd) {
+          background-color: #dddddd;
+        }
+
+        .td:nth-child(even) {
+          background-color: #fafafa;
+        }
+      }
+  `,
   };
-
-  data = {
-    nodes: data.nodes.filter((item) => item.name.toLowerCase().includes(search.toLowerCase())),
-  };
+  const theme = useTheme([chakraTheme, customTheme]);
 
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name },
@@ -48,16 +63,9 @@ const Component = () => {
 
   return (
     <>
-      <Group mx={10}>
-        <TextInput
-          placeholder="Search Task"
-          value={search}
-          icon={<FaSearch />}
-          onChange={handleSearch}
-        />
-      </Group>
-
-      <CompactTable columns={COLUMNS} data={data} theme={theme} />
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable columns={COLUMNS} data={data} theme={theme} />
+      </Box>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />
@@ -70,33 +78,45 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import {
-  DEFAULT_OPTIONS,
-  getTheme,
-} from '@table-library/react-table-library/themes/mantine';
-import { Group, TextInput } from '@mantine/core';
-import { FaSearch } from 'react-icons/fa';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
+import { Box } from '@chakra-ui/react';
 
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';
 
-const key = 'Search';
+const key = 'Theme';
 
 const Component = () => {
-  let data = { nodes };
+  const data = { nodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(mantineTheme);
+  const chakraTheme = getTheme(DEFAULT_OPTIONS);
+  const customTheme = {
+    BaseCell: \`
+      border-right: 1px solid transparent;
+    \`,
+    Row: \`
+      &:nth-child(odd) {
+        .td:nth-child(even) {
+          background-color: #dddddd;
+        }
 
-  const [search, setSearch] = React.useState('');
+        .td:nth-child(odd) {
+          background-color: #fafafa;
+        }
+      }
 
-  const handleSearch = (event) => {
-    setSearch(event.target.value);
+      &:nth-child(even) {
+        .td:nth-child(odd) {
+          background-color: #dddddd;
+        }
+
+        .td:nth-child(even) {
+          background-color: #fafafa;
+        }
+      }
+  \`,
   };
-
-  data = {
-    nodes: data.nodes.filter((item) => item.name.toLowerCase().includes(search.toLowerCase())),
-  };
+  const theme = useTheme([chakraTheme, customTheme]);
 
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name },
@@ -119,16 +139,9 @@ const Component = () => {
 
   return (
     <>
-      <Group mx={10}>
-        <TextInput
-          placeholder="Search Task"
-          value={search}
-          icon={<FaSearch />}
-          onChange={handleSearch}
-        />
-      </Group>
-
-      <CompactTable columns={COLUMNS} data={data} theme={theme} />
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable columns={COLUMNS} data={data} theme={theme} />
+      </Box>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />

@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/mantine';
-import { Collapse } from '@mantine/core';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
+import { Box, Collapse } from '@chakra-ui/react';
 
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';
@@ -13,8 +13,8 @@ const key = 'Expand';
 const Component = () => {
   const data = { nodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(mantineTheme);
+  const chakraTheme = getTheme(DEFAULT_OPTIONS);
+  const theme = useTheme(chakraTheme);
 
   const [ids, setIds] = React.useState([]);
 
@@ -77,13 +77,15 @@ const Component = () => {
 
   return (
     <>
-      <CompactTable
-        columns={COLUMNS}
-        rowProps={ROW_PROPS}
-        rowOptions={ROW_OPTIONS}
-        data={data}
-        theme={theme}
-      />
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable
+          columns={COLUMNS}
+          rowProps={ROW_PROPS}
+          rowOptions={ROW_OPTIONS}
+          data={data}
+          theme={theme}
+        />
+      </Box>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />
@@ -96,11 +98,8 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import {
-  DEFAULT_OPTIONS,
-  getTheme,
-} from '@table-library/react-table-library/themes/mantine';
-import { Collapse } from '@mantine/core';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
+import { Box, Collapse } from '@chakra-ui/react';
 
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';
@@ -110,8 +109,8 @@ const key = 'Expand';
 const Component = () => {
   const data = { nodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(mantineTheme);
+  const chakraTheme = getTheme(DEFAULT_OPTIONS);
+  const theme = useTheme(chakraTheme);
 
   const [ids, setIds] = React.useState([]);
 
@@ -174,13 +173,15 @@ const Component = () => {
 
   return (
     <>
-      <CompactTable
-        columns={COLUMNS}
-        rowProps={ROW_PROPS}
-        rowOptions={ROW_OPTIONS}
-        data={data}
-        theme={theme}
-      />
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable
+          columns={COLUMNS}
+          rowProps={ROW_PROPS}
+          rowOptions={ROW_OPTIONS}
+          data={data}
+          theme={theme}
+        />
+      </Box>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />

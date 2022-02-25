@@ -1,6 +1,8 @@
+import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
+import { ChakraProvider } from '@chakra-ui/react';
 
 import * as BaseStory from './base';
 import * as NativeStory from './native';
@@ -48,12 +50,20 @@ const stories = [
   ColumnGroupStory,
 ];
 
-const storyContainer = storiesOf('Library Themes/Mantine', module).addParameters({
+const storyContainer = storiesOf('Library Themes/Chakra UI', module).addParameters({
   component: CompactTable,
 });
 
-stories.forEach((story) => {
-  storyContainer.add(story.key, story.Component, {
-    docs: { source: { code: story.code || '' } },
-  });
+stories.forEach((story, i) => {
+  storyContainer.add(
+    story.key,
+    () => (
+      <ChakraProvider>
+        <story.Component />
+      </ChakraProvider>
+    ),
+    {
+      docs: { source: { code: story.code || '' } },
+    },
+  );
 });

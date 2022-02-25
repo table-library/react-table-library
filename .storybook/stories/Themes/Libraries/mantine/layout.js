@@ -2,10 +2,7 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import {
-  DEFAULT_OPTIONS,
-  getMantineTheme,
-} from '@table-library/react-table-library/themes/mantine';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/mantine';
 
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';
@@ -15,7 +12,7 @@ const key = 'Layout';
 const Component = () => {
   const data = { nodes };
 
-  const mantineTheme = getMantineTheme(DEFAULT_OPTIONS);
+  const mantineTheme = getTheme(DEFAULT_OPTIONS);
   const customTheme = useTheme({
     BaseCell: `
       &:nth-child(1) {
@@ -72,7 +69,7 @@ import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
 import {
   DEFAULT_OPTIONS,
-  getMantineTheme,
+  getTheme,
 } from '@table-library/react-table-library/themes/mantine';
 
 import { DocumentationSee } from '../../../documentation';
@@ -83,7 +80,7 @@ const key = 'Layout';
 const Component = () => {
   const data = { nodes };
 
-  const mantineTheme = getMantineTheme(DEFAULT_OPTIONS);
+  const mantineTheme = getTheme(DEFAULT_OPTIONS);
   const customTheme = useTheme({
     BaseCell: \`
       &:nth-child(1) {

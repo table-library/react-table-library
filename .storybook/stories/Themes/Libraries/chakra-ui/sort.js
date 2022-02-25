@@ -2,8 +2,9 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/mantine';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
 import { useSort } from '@table-library/react-table-library/sort';
+import { Box } from '@chakra-ui/react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 import { DocumentationSee } from '../../../documentation';
@@ -14,8 +15,8 @@ const key = 'Sort';
 const Component = () => {
   const data = { nodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(mantineTheme);
+  const chakraTheme = getTheme(DEFAULT_OPTIONS);
+  const theme = useTheme(chakraTheme);
 
   const sort = useSort(
     data,
@@ -65,7 +66,9 @@ const Component = () => {
 
   return (
     <>
-      <CompactTable columns={COLUMNS} data={data} sort={sort} theme={theme} />
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable columns={COLUMNS} data={data} sort={sort} theme={theme} />
+      </Box>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />
@@ -78,11 +81,9 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import {
-  DEFAULT_OPTIONS,
-  getTheme,
-} from '@table-library/react-table-library/themes/mantine';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
 import { useSort } from '@table-library/react-table-library/sort';
+import { Box } from '@chakra-ui/react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 import { DocumentationSee } from '../../../documentation';
@@ -93,8 +94,8 @@ const key = 'Sort';
 const Component = () => {
   const data = { nodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(mantineTheme);
+  const chakraTheme = getTheme(DEFAULT_OPTIONS);
+  const theme = useTheme(chakraTheme);
 
   const sort = useSort(
     data,
@@ -144,7 +145,9 @@ const Component = () => {
 
   return (
     <>
-      <CompactTable columns={COLUMNS} data={data} sort={sort} theme={theme} />
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable columns={COLUMNS} data={data} sort={sort} theme={theme} />
+      </Box>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />

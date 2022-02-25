@@ -3,10 +3,7 @@ import * as React from 'react';
 import { useCustom } from '@table-library/react-table-library/table';
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import {
-  DEFAULT_OPTIONS,
-  getMantineTheme,
-} from '@table-library/react-table-library/themes/mantine';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
 import { useRowSelect } from '@table-library/react-table-library/select';
 import { useTree, TreeExpandClickTypes } from '@table-library/react-table-library/tree';
 import { useSort } from '@table-library/react-table-library/sort';
@@ -17,23 +14,36 @@ import {
   insertNode,
 } from '@table-library/react-table-library/common';
 import {
-  Group,
-  TextInput,
+  Text,
+  Box,
+  HStack,
+  InputGroup,
+  InputLeftElement,
+  Input,
   Checkbox,
-  Modal,
-  ActionIcon,
+  IconButton,
   Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
   Drawer,
-  Space,
-  Pagination,
-} from '@mantine/core';
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+} from '@chakra-ui/react';
 import {
   FaPen,
   FaSearch,
-  FaRegCheckSquare,
   FaChevronRight,
   FaChevronDown,
   FaChevronUp,
+  FaChevronLeft,
 } from 'react-icons/fa';
 
 import { nodes } from '../../../data';
@@ -45,17 +55,16 @@ const Component = () => {
 
   //* Theme *//
 
-  const mantineTheme = getMantineTheme({
+  const chakraTheme = getTheme({
     ...DEFAULT_OPTIONS,
     striped: true,
-    highlightOnHover: true,
   });
   const customTheme = {
     Table: `
-      padding: 16px 0px;
+      margin: 16px 0px;
     `,
   };
-  const theme = useTheme([mantineTheme, customTheme]);
+  const theme = useTheme([chakraTheme, customTheme]);
 
   //* Resize *//
 
@@ -217,14 +226,17 @@ const Component = () => {
       select: {
         renderHeaderCellSelect: () => (
           <Checkbox
-            checked={select.state.all}
-            indeterminate={!select.state.all && !select.state.none}
+            colorScheme="teal"
+            isChecked={select.state.all}
+            isIndeterminate={!select.state.all && !select.state.none}
             onChange={select.fns.onToggleAll}
           />
         ),
         renderCellSelect: (item) => (
           <Checkbox
-            checked={select.state.ids.includes(item.id)}
+            colorScheme="teal"
+            style={{ backgroundColor: '#ffffff' }}
+            isChecked={select.state.ids.includes(item.id)}
             onChange={() => select.fns.onToggleById(item.id)}
           />
         ),
@@ -253,15 +265,15 @@ const Component = () => {
       label: 'Tasks',
       renderCell: (item) => (
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span>{item.nodes?.length}</span>{' '}
-          <ActionIcon
-            variant="filled"
-            color="blue"
-            component="button"
+          <span>{item.nodes?.length}</span>
+          <IconButton
+            aria-label="edit"
+            icon={<FaPen />}
+            variant="outline"
+            colorScheme="teal"
+            style={{ backgroundColor: '#ffffff' }}
             onClick={() => setDrawerId(item.id)}
-          >
-            <FaPen />
-          </ActionIcon>
+          />
         </div>
       ),
       resize,
@@ -270,101 +282,160 @@ const Component = () => {
   ];
 
   return (
-    <div style={{ padding: '16px 16px 0' }}>
-      <Modal
-        opened={modalOpened}
-        onClose={() => setModalOpened(false)}
-        title="Not all features included here, but we got ..."
-      >
-        <div>
-          <FaRegCheckSquare /> Resize
-        </div>
-        <div>
-          <FaRegCheckSquare /> Sort
-        </div>
-        <div>
-          <FaRegCheckSquare /> Search
-        </div>
-        <div>
-          <FaRegCheckSquare /> Filter
-        </div>
-        <div>
-          <FaRegCheckSquare /> Select
-        </div>
-        <div>
-          <FaRegCheckSquare /> Tree
-        </div>
-        <div>
-          <FaRegCheckSquare /> Drawer on Double Click
-        </div>
-        <div>
-          <FaRegCheckSquare /> Pagination
-        </div>
+    <>
+      <Modal isOpen={modalOpened} onClose={() => setModalOpened(false)}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Not all features included here, but we got ...</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <div>
+              <Checkbox colorScheme="teal" isChecked>
+                Resize
+              </Checkbox>
+            </div>
+            <div>
+              <Checkbox colorScheme="teal" isChecked>
+                Sort
+              </Checkbox>
+            </div>
+            <div>
+              <Checkbox colorScheme="teal" isChecked>
+                Search
+              </Checkbox>
+            </div>
+            <div>
+              <Checkbox colorScheme="teal" isChecked>
+                Filter
+              </Checkbox>
+            </div>
+            <div>
+              <Checkbox colorScheme="teal" isChecked>
+                Select
+              </Checkbox>
+            </div>
+            <div>
+              <Checkbox colorScheme="teal" isChecked>
+                Tree
+              </Checkbox>
+            </div>
+            <div>
+              <Checkbox colorScheme="teal" isChecked>
+                Drawer on Edit
+              </Checkbox>
+            </div>
+            <div>
+              <Checkbox colorScheme="teal" isChecked>
+                Pagination
+              </Checkbox>
+            </div>
+          </ModalBody>
+        </ModalContent>
       </Modal>
 
       {/* Form */}
 
-      <Group mx={10}>
-        <Button onClick={() => setModalOpened(true)}>Features?</Button>
+      <HStack m={3}>
+        <Button colorScheme="teal" onClick={() => setModalOpened(true)}>
+          Features?
+        </Button>
 
-        <TextInput
-          placeholder="Search Task"
-          value={search}
-          icon={<FaSearch />}
-          onChange={(event) => setSearch(event.target.value)}
-        />
+        <InputGroup>
+          <InputLeftElement
+            pointerEvents="none"
+            children={<FaSearch style={{ color: '#4a5568' }} />}
+          />
+          <Input
+            placeholder="Search Task"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
+        </InputGroup>
+
         <Checkbox
-          label="Hide Complete"
-          checked={isHide}
+          style={{ whiteSpace: 'nowrap' }}
+          colorScheme="teal"
+          isChecked={isHide}
           onChange={(event) => setHide(event.target.checked)}
-        />
-      </Group>
+        >
+          Hide Complete
+        </Checkbox>
+      </HStack>
 
       {/* Table */}
 
-      <CompactTable
-        columns={COLUMNS}
-        data={{ ...data, nodes: modifiedNodes }}
-        theme={theme}
-        select={select}
-        tree={tree}
-        sort={sort}
-        pagination={pagination}
-      />
-
-      <Group position="right" mx={10}>
-        <Pagination
-          total={pagination.state.getTotalPages(modifiedNodes)}
-          page={pagination.state.page + 1}
-          onChange={(page) => pagination.fns.onSetPage(page - 1)}
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable
+          columns={COLUMNS}
+          data={{ ...data, nodes: modifiedNodes }}
+          theme={theme}
+          select={select}
+          tree={tree}
+          sort={sort}
+          pagination={pagination}
         />
-      </Group>
+      </Box>
 
-      <Drawer
-        opened={drawerId}
-        onClose={handleCancel}
-        title="Edit"
-        padding="xl"
-        size="xl"
-        position="right"
-      >
-        <Group grow>
-          <TextInput
-            label="Name"
-            value={edited || fromTreeToList(data.nodes).find((node) => node.id === drawerId)?.name}
-            onChange={handleEdit}
-            data-autofocus
-          />
-        </Group>
-        <Space h="md" />
-        <Group grow>
-          <Button variant="outline" onClick={handleCancel}>
-            Cancel
+      <br />
+      <HStack justify="flex-end">
+        <IconButton
+          aria-label="previous page"
+          icon={<FaChevronLeft />}
+          colorScheme="teal"
+          variant="ghost"
+          disabled={pagination.state.page === 0}
+          onClick={() => pagination.fns.onSetPage(pagination.state.page - 1)}
+        />
+
+        {pagination.state.getPages(data.nodes).map((_, index) => (
+          <Button
+            key={index}
+            colorScheme="teal"
+            variant={pagination.state.page === index ? 'solid' : 'ghost'}
+            onClick={() => pagination.fns.onSetPage(index)}
+          >
+            {index + 1}
           </Button>
-          <Button onClick={handleSave}>Save</Button>
-        </Group>
+        ))}
+        <IconButton
+          aria-label="next page"
+          icon={<FaChevronRight />}
+          colorScheme="teal"
+          variant="ghost"
+          disabled={pagination.state.page + 1 === pagination.state.getTotalPages(data.nodes)}
+          onClick={() => pagination.fns.onSetPage(pagination.state.page + 1)}
+        />
+      </HStack>
+
+      <Drawer isOpen={drawerId} onClose={handleCancel} placement="right">
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>Create your account</DrawerHeader>
+
+          <DrawerBody>
+            <Text>Name: </Text>
+            <Input
+              autoFocus
+              value={
+                edited || fromTreeToList(data.nodes).find((node) => node.id === drawerId)?.name
+              }
+              onChange={handleEdit}
+              data-autofocus
+            />
+          </DrawerBody>
+
+          <DrawerFooter>
+            <Button variant="outline" mr={3} onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button onClick={handleSave} colorScheme="teal">
+              Save
+            </Button>
+          </DrawerFooter>
+        </DrawerContent>
       </Drawer>
-    </div>
+    </>
   );
 };
 
@@ -374,10 +445,7 @@ import * as React from 'react';
 import { useCustom } from '@table-library/react-table-library/table';
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import {
-  DEFAULT_OPTIONS,
-  getMantineTheme,
-} from '@table-library/react-table-library/themes/mantine';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
 import { useRowSelect } from '@table-library/react-table-library/select';
 import { useTree, TreeExpandClickTypes } from '@table-library/react-table-library/tree';
 import { useSort } from '@table-library/react-table-library/sort';
@@ -388,23 +456,36 @@ import {
   insertNode,
 } from '@table-library/react-table-library/common';
 import {
-  Group,
-  TextInput,
+  Text,
+  Box,
+  HStack,
+  InputGroup,
+  InputLeftElement,
+  Input,
   Checkbox,
-  Modal,
-  ActionIcon,
+  IconButton,
   Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
   Drawer,
-  Space,
-  Pagination,
-} from '@mantine/core';
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+} from '@chakra-ui/react';
 import {
   FaPen,
   FaSearch,
-  FaRegCheckSquare,
   FaChevronRight,
   FaChevronDown,
   FaChevronUp,
+  FaChevronLeft,
 } from 'react-icons/fa';
 
 import { nodes } from '../../../data';
@@ -416,17 +497,16 @@ const Component = () => {
 
   //* Theme *//
 
-  const mantineTheme = getMantineTheme({
+  const chakraTheme = getTheme({
     ...DEFAULT_OPTIONS,
     striped: true,
-    highlightOnHover: true,
   });
   const customTheme = {
     Table: \`
-      padding: 16px 0px;
+      margin: 16px 0px;
     \`,
   };
-  const theme = useTheme([mantineTheme, customTheme]);
+  const theme = useTheme([chakraTheme, customTheme]);
 
   //* Resize *//
 
@@ -588,14 +668,17 @@ const Component = () => {
       select: {
         renderHeaderCellSelect: () => (
           <Checkbox
-            checked={select.state.all}
-            indeterminate={!select.state.all && !select.state.none}
+            colorScheme="teal"
+            isChecked={select.state.all}
+            isIndeterminate={!select.state.all && !select.state.none}
             onChange={select.fns.onToggleAll}
           />
         ),
         renderCellSelect: (item) => (
           <Checkbox
-            checked={select.state.ids.includes(item.id)}
+            colorScheme="teal"
+            style={{ backgroundColor: '#ffffff' }}
+            isChecked={select.state.ids.includes(item.id)}
             onChange={() => select.fns.onToggleById(item.id)}
           />
         ),
@@ -624,15 +707,15 @@ const Component = () => {
       label: 'Tasks',
       renderCell: (item) => (
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span>{item.nodes?.length}</span>{' '}
-          <ActionIcon
-            variant="filled"
-            color="blue"
-            component="button"
+          <span>{item.nodes?.length}</span>
+          <IconButton
+            aria-label="edit"
+            icon={<FaPen />}
+            variant="outline"
+            colorScheme="teal"
+            style={{ backgroundColor: '#ffffff' }}
             onClick={() => setDrawerId(item.id)}
-          >
-            <FaPen />
-          </ActionIcon>
+          />
         </div>
       ),
       resize,
@@ -641,101 +724,160 @@ const Component = () => {
   ];
 
   return (
-    <div style={{ padding: '16px 16px 0' }}>
-      <Modal
-        opened={modalOpened}
-        onClose={() => setModalOpened(false)}
-        title="Not all features included here, but we got ..."
-      >
-        <div>
-          <FaRegCheckSquare /> Resize
-        </div>
-        <div>
-          <FaRegCheckSquare /> Sort
-        </div>
-        <div>
-          <FaRegCheckSquare /> Search
-        </div>
-        <div>
-          <FaRegCheckSquare /> Filter
-        </div>
-        <div>
-          <FaRegCheckSquare /> Select
-        </div>
-        <div>
-          <FaRegCheckSquare /> Tree
-        </div>
-        <div>
-          <FaRegCheckSquare /> Drawer on Double Click
-        </div>
-        <div>
-          <FaRegCheckSquare /> Pagination
-        </div>
+    <>
+      <Modal isOpen={modalOpened} onClose={() => setModalOpened(false)}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Not all features included here, but we got ...</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <div>
+              <Checkbox colorScheme="teal" isChecked>
+                Resize
+              </Checkbox>
+            </div>
+            <div>
+              <Checkbox colorScheme="teal" isChecked>
+                Sort
+              </Checkbox>
+            </div>
+            <div>
+              <Checkbox colorScheme="teal" isChecked>
+                Search
+              </Checkbox>
+            </div>
+            <div>
+              <Checkbox colorScheme="teal" isChecked>
+                Filter
+              </Checkbox>
+            </div>
+            <div>
+              <Checkbox colorScheme="teal" isChecked>
+                Select
+              </Checkbox>
+            </div>
+            <div>
+              <Checkbox colorScheme="teal" isChecked>
+                Tree
+              </Checkbox>
+            </div>
+            <div>
+              <Checkbox colorScheme="teal" isChecked>
+                Drawer on Edit
+              </Checkbox>
+            </div>
+            <div>
+              <Checkbox colorScheme="teal" isChecked>
+                Pagination
+              </Checkbox>
+            </div>
+          </ModalBody>
+        </ModalContent>
       </Modal>
 
       {/* Form */}
 
-      <Group mx={10}>
-        <Button onClick={() => setModalOpened(true)}>Features?</Button>
+      <HStack m={3}>
+        <Button colorScheme="teal" onClick={() => setModalOpened(true)}>
+          Features?
+        </Button>
 
-        <TextInput
-          placeholder="Search Task"
-          value={search}
-          icon={<FaSearch />}
-          onChange={(event) => setSearch(event.target.value)}
-        />
+        <InputGroup>
+          <InputLeftElement
+            pointerEvents="none"
+            children={<FaSearch style={{ color: '#4a5568' }} />}
+          />
+          <Input
+            placeholder="Search Task"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
+        </InputGroup>
+
         <Checkbox
-          label="Hide Complete"
-          checked={isHide}
+          style={{ whiteSpace: 'nowrap' }}
+          colorScheme="teal"
+          isChecked={isHide}
           onChange={(event) => setHide(event.target.checked)}
-        />
-      </Group>
+        >
+          Hide Complete
+        </Checkbox>
+      </HStack>
 
       {/* Table */}
 
-      <CompactTable
-        columns={COLUMNS}
-        data={{ ...data, nodes: modifiedNodes }}
-        theme={theme}
-        select={select}
-        tree={tree}
-        sort={sort}
-        pagination={pagination}
-      />
-
-      <Group position="right" mx={10}>
-        <Pagination
-          total={pagination.state.getTotalPages(modifiedNodes)}
-          page={pagination.state.page + 1}
-          onChange={(page) => pagination.fns.onSetPage(page - 1)}
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable
+          columns={COLUMNS}
+          data={{ ...data, nodes: modifiedNodes }}
+          theme={theme}
+          select={select}
+          tree={tree}
+          sort={sort}
+          pagination={pagination}
         />
-      </Group>
+      </Box>
 
-      <Drawer
-        opened={drawerId}
-        onClose={handleCancel}
-        title="Edit"
-        padding="xl"
-        size="xl"
-        position="right"
-      >
-        <Group grow>
-          <TextInput
-            label="Name"
-            value={edited || fromTreeToList(data.nodes).find((node) => node.id === drawerId)?.name}
-            onChange={handleEdit}
-            data-autofocus
-          />
-        </Group>
-        <Space h="md" />
-        <Group grow>
-          <Button variant="outline" onClick={handleCancel}>
-            Cancel
+      <br />
+      <HStack justify="flex-end">
+        <IconButton
+          aria-label="previous page"
+          icon={<FaChevronLeft />}
+          colorScheme="teal"
+          variant="ghost"
+          disabled={pagination.state.page === 0}
+          onClick={() => pagination.fns.onSetPage(pagination.state.page - 1)}
+        />
+
+        {pagination.state.getPages(data.nodes).map((_, index) => (
+          <Button
+            key={index}
+            colorScheme="teal"
+            variant={pagination.state.page === index ? 'solid' : 'ghost'}
+            onClick={() => pagination.fns.onSetPage(index)}
+          >
+            {index + 1}
           </Button>
-          <Button onClick={handleSave}>Save</Button>
-        </Group>
+        ))}
+        <IconButton
+          aria-label="next page"
+          icon={<FaChevronRight />}
+          colorScheme="teal"
+          variant="ghost"
+          disabled={pagination.state.page + 1 === pagination.state.getTotalPages(data.nodes)}
+          onClick={() => pagination.fns.onSetPage(pagination.state.page + 1)}
+        />
+      </HStack>
+
+      <Drawer isOpen={drawerId} onClose={handleCancel} placement="right">
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>Create your account</DrawerHeader>
+
+          <DrawerBody>
+            <Text>Name: </Text>
+            <Input
+              autoFocus
+              value={
+                edited || fromTreeToList(data.nodes).find((node) => node.id === drawerId)?.name
+              }
+              onChange={handleEdit}
+              data-autofocus
+            />
+          </DrawerBody>
+
+          <DrawerFooter>
+            <Button variant="outline" mr={3} onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button onClick={handleSave} colorScheme="teal">
+              Save
+            </Button>
+          </DrawerFooter>
+        </DrawerContent>
       </Drawer>
-    </div>
+    </>
   );
 };
 `;

@@ -12,21 +12,18 @@ type Options = {
   horizontalSpacing?: number;
   verticalSpacing?: number;
   striped?: boolean;
-  highlightOnHover?: boolean;
 };
 
 type OptionsSound = {
   horizontalSpacing: number;
   verticalSpacing: number;
   striped: boolean;
-  highlightOnHover: boolean;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
   Table: `
     .caption-container {
-      margin-top: 10px;
       display: flex;
       justify-content: center;
       width: 100%;
@@ -35,87 +32,87 @@ const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
     caption {
       color: #868e96;
     }
-  `,
-  HeaderRow: `
-    &.tr-footer {
+
+    .tr-footer {
+      border-top: 1px solid #e2e8f0;
       border-bottom: 1px solid transparent;
     }
   `,
-  Row: `
-    &.row-select.row-select-single-selected, &.row-select.row-select-selected {
-      background-color: #b3dcff;
-      border-bottom: 1px solid #b3dcff;
-    }
-  `,
   BaseRow: `
-    font-size: 14px;
+    color: #4a5568;
+  `,
+  HeaderRow: `
+    text-transform: uppercase;
+    font-size: 12px;
 
-    border-bottom: 1px solid #dee2e6;
+    font-weight: bold;
+
+    border-bottom: 1px solid #e2e8f0;
+  `,
+  Row: `
+    font-size: 16px;
+
+    &.row-select.row-select-single-selected, &.row-select.row-select-selected {
+      background-color: #81E6D9;
+      border-bottom: 1px solid #81E6D9;
+    }
   `,
   BaseCell: `
+    padding: ${options.verticalSpacing}px 0;
+    &:first-child {
+      padding-left: ${options.horizontalSpacing}px;
+    }
+    &:last-child {
+      padding-right: ${options.horizontalSpacing}px;
+    }
+
     border-right: 1px solid transparent;
     border-bottom: 1px solid transparent;
-
-    padding: ${options.verticalSpacing}px ${options.horizontalSpacing}px;
-
-    & > div {
-      padding: 0;
-    }
   `,
   HeaderCell: `
-    font-weight: bold;
-    color: #495057;
+    & > div {
+      padding-top: 3px;
+      padding-bottom: 3px;
+    }
   `,
   Cell: `
-    color: #000000;
+    &.stiff > div {
+      display: flex;
+    }
   `,
 });
-
-const getVirtualizedHighlight = (highlightOnHover: boolean) =>
-  highlightOnHover
-    ? `
-      & > div:hover > .tr {
-        background-color: #f1f3f5;
-      }
-    `
-    : '';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getVirtualizedTheme = (options: OptionsSound, configuration: ConfigurationSound) => ({
   Body: `
+    & > div:not(:last-child) > .tr {
+      border-bottom: 1px solid #e2e8f0;
+    }
+
     & > div:nth-child(odd) > .tr {
-      background-color: ${options.striped ? '#f8f9fa' : '#ffffff'};
+      background-color: ${options.striped ? '#E6FFFA' : '#ffffff'};
     }
 
     & > div:nth-child(even) > .tr {
       background-color: #ffffff;
     }
-
-    ${getVirtualizedHighlight(options.highlightOnHover)}
   `,
 });
-
-const getNoneVirtualizedHighlight = (highlightOnHover: boolean) =>
-  highlightOnHover
-    ? `
-      &:hover {
-        background-color: #f1f3f5;
-      }
-    `
-    : '';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getNoneVirtualizedTheme = (options: OptionsSound, configuration: ConfigurationSound) => ({
   Row: `
+    &.tr:not(:last-child) {
+      border-bottom: 1px solid #e2e8f0;
+    }
+
     &:nth-child(odd) {
-      background-color: ${options.striped ? '#f8f9fa' : '#ffffff'};
+      background-color: ${options.striped ? '#E6FFFA' : '#ffffff'};
     }
 
     &:nth-child(even) {
       background-color: #ffffff;
     }
-
-    ${getNoneVirtualizedHighlight(options.highlightOnHover)}
   `,
 });
 
@@ -130,10 +127,9 @@ const getZipTheme = (options: OptionsSound, configuration: ConfigurationSound) =
 };
 
 export const DEFAULT_OPTIONS = {
-  horizontalSpacing: 10,
-  verticalSpacing: 10,
+  horizontalSpacing: 24,
+  verticalSpacing: 12,
   striped: false,
-  highlightOnHover: false,
 };
 
 export const DEFAULT_CONFIGURATION = {
