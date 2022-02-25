@@ -20,8 +20,6 @@ React Table Library -- yet another table library for React -- which prioritzes:
 - server-side
 - developer experience
 
-**[Documentation](https://react-table-library.com/)**
-
 ## Requirements
 
 React Table Library requires the following libraries to be installed:
@@ -41,6 +39,8 @@ yarn add @table-library/react-table-library styled-components
 ```
 
 ## Usage
+
+**[Documentation](https://react-table-library.com/)**
 
 ```javascript
 import { CompactTable } from '@table-library/react-table-library/compact';
