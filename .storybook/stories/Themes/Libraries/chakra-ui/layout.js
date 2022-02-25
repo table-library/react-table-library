@@ -2,30 +2,37 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/mantine';
-import { Group, TextInput } from '@mantine/core';
-import { FaSearch } from 'react-icons/fa';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
+import { Box } from '@chakra-ui/react';
 
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';
 
-const key = 'Search';
+const key = 'Layout';
 
 const Component = () => {
-  let data = { nodes };
+  const data = { nodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(mantineTheme);
+  const chakraTheme = getTheme(DEFAULT_OPTIONS);
+  const customTheme = useTheme({
+    BaseCell: `
+      &:nth-child(1) {
+        min-width: 35%;
+        width: 35%;
+      }
 
-  const [search, setSearch] = React.useState('');
+      &:nth-child(2), &:nth-child(3), &:nth-child(4) {
+        min-width: 15%;
+        width: 15%;
+      }
 
-  const handleSearch = (event) => {
-    setSearch(event.target.value);
-  };
-
-  data = {
-    nodes: data.nodes.filter((item) => item.name.toLowerCase().includes(search.toLowerCase())),
-  };
+      &:nth-child(5) {
+        min-width: 20%;
+        width: 20%;
+      }
+    `,
+  });
+  const theme = useTheme([chakraTheme, customTheme]);
 
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name },
@@ -48,16 +55,9 @@ const Component = () => {
 
   return (
     <>
-      <Group mx={10}>
-        <TextInput
-          placeholder="Search Task"
-          value={search}
-          icon={<FaSearch />}
-          onChange={handleSearch}
-        />
-      </Group>
-
-      <CompactTable columns={COLUMNS} data={data} theme={theme} />
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable columns={COLUMNS} data={data} theme={theme} layout={{ custom: true }} />
+      </Box>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />
@@ -70,33 +70,37 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import {
-  DEFAULT_OPTIONS,
-  getTheme,
-} from '@table-library/react-table-library/themes/mantine';
-import { Group, TextInput } from '@mantine/core';
-import { FaSearch } from 'react-icons/fa';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
+import { Box } from '@chakra-ui/react';
 
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';
 
-const key = 'Search';
+const key = 'Layout';
 
 const Component = () => {
-  let data = { nodes };
+  const data = { nodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(mantineTheme);
+  const chakraTheme = getTheme(DEFAULT_OPTIONS);
+  const customTheme = useTheme({
+    BaseCell: \`
+      &:nth-child(1) {
+        min-width: 35%;
+        width: 35%;
+      }
 
-  const [search, setSearch] = React.useState('');
+      &:nth-child(2), &:nth-child(3), &:nth-child(4) {
+        min-width: 15%;
+        width: 15%;
+      }
 
-  const handleSearch = (event) => {
-    setSearch(event.target.value);
-  };
-
-  data = {
-    nodes: data.nodes.filter((item) => item.name.toLowerCase().includes(search.toLowerCase())),
-  };
+      &:nth-child(5) {
+        min-width: 20%;
+        width: 20%;
+      }
+    \`,
+  });
+  const theme = useTheme([chakraTheme, customTheme]);
 
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name },
@@ -119,16 +123,9 @@ const Component = () => {
 
   return (
     <>
-      <Group mx={10}>
-        <TextInput
-          placeholder="Search Task"
-          value={search}
-          icon={<FaSearch />}
-          onChange={handleSearch}
-        />
-      </Group>
-
-      <CompactTable columns={COLUMNS} data={data} theme={theme} />
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable columns={COLUMNS} data={data} theme={theme} layout={{ custom: true }} />
+      </Box>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />

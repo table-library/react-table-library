@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/mantine';
-import { Group, Checkbox } from '@mantine/core';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
+import { Box, HStack, Checkbox } from '@chakra-ui/react';
 
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';
@@ -13,8 +13,8 @@ const key = 'Column Hiding';
 const Component = () => {
   const data = { nodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(mantineTheme);
+  const chakraTheme = getTheme(DEFAULT_OPTIONS);
+  const theme = useTheme(chakraTheme);
 
   const [hiddenColumns, setHiddenColumns] = React.useState(['DEADLINE', 'COMPLETE']);
 
@@ -49,35 +49,48 @@ const Component = () => {
 
   return (
     <>
-      <Group m={10}>
+      <HStack spacing={10}>
         <Checkbox
-          label="Name"
-          checked={!hiddenColumns.includes('NAME')}
+          colorScheme="teal"
+          isChecked={!hiddenColumns.includes('NAME')}
           onChange={() => toggleColumn('NAME')}
-        />
+        >
+          Name
+        </Checkbox>
         <Checkbox
-          label="Deadline"
-          checked={!hiddenColumns.includes('DEADLINE')}
+          colorScheme="teal"
+          isChecked={!hiddenColumns.includes('DEADLINE')}
           onChange={() => toggleColumn('DEADLINE')}
-        />
+        >
+          Deadline
+        </Checkbox>
         <Checkbox
-          label="Type"
-          checked={!hiddenColumns.includes('TYPE')}
+          colorScheme="teal"
+          isChecked={!hiddenColumns.includes('TYPE')}
           onChange={() => toggleColumn('TYPE')}
-        />
+        >
+          Type
+        </Checkbox>
         <Checkbox
-          label="Complete"
-          checked={!hiddenColumns.includes('COMPLETE')}
+          colorScheme="teal"
+          isChecked={!hiddenColumns.includes('COMPLETE')}
           onChange={() => toggleColumn('COMPLETE')}
-        />
+        >
+          Complete
+        </Checkbox>
         <Checkbox
-          label="Tasks"
-          checked={!hiddenColumns.includes('TASKS')}
+          colorScheme="teal"
+          isChecked={!hiddenColumns.includes('TASKS')}
           onChange={() => toggleColumn('TASKS')}
-        />
-      </Group>
+        >
+          Tasks
+        </Checkbox>
+      </HStack>
+      <br />
 
-      <CompactTable columns={COLUMNS} data={data} theme={theme} layout={{ hiddenColumns }} />
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable columns={COLUMNS} data={data} theme={theme} layout={{ hiddenColumns }} />
+      </Box>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />
@@ -90,11 +103,8 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import {
-  DEFAULT_OPTIONS,
-  getTheme,
-} from '@table-library/react-table-library/themes/mantine';
-import { Group, Checkbox } from '@mantine/core';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
+import { Box, HStack, Checkbox } from '@chakra-ui/react';
 
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';
@@ -104,8 +114,8 @@ const key = 'Column Hiding';
 const Component = () => {
   const data = { nodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(mantineTheme);
+  const chakraTheme = getTheme(DEFAULT_OPTIONS);
+  const theme = useTheme(chakraTheme);
 
   const [hiddenColumns, setHiddenColumns] = React.useState(['DEADLINE', 'COMPLETE']);
 
@@ -140,35 +150,48 @@ const Component = () => {
 
   return (
     <>
-      <Group m={10}>
+      <HStack spacing={10}>
         <Checkbox
-          label="Name"
-          checked={!hiddenColumns.includes('NAME')}
+          colorScheme="teal"
+          isChecked={!hiddenColumns.includes('NAME')}
           onChange={() => toggleColumn('NAME')}
-        />
+        >
+          Name
+        </Checkbox>
         <Checkbox
-          label="Deadline"
-          checked={!hiddenColumns.includes('DEADLINE')}
+          colorScheme="teal"
+          isChecked={!hiddenColumns.includes('DEADLINE')}
           onChange={() => toggleColumn('DEADLINE')}
-        />
+        >
+          Deadline
+        </Checkbox>
         <Checkbox
-          label="Type"
-          checked={!hiddenColumns.includes('TYPE')}
+          colorScheme="teal"
+          isChecked={!hiddenColumns.includes('TYPE')}
           onChange={() => toggleColumn('TYPE')}
-        />
+        >
+          Type
+        </Checkbox>
         <Checkbox
-          label="Complete"
-          checked={!hiddenColumns.includes('COMPLETE')}
+          colorScheme="teal"
+          isChecked={!hiddenColumns.includes('COMPLETE')}
           onChange={() => toggleColumn('COMPLETE')}
-        />
+        >
+          Complete
+        </Checkbox>
         <Checkbox
-          label="Tasks"
-          checked={!hiddenColumns.includes('TASKS')}
+          colorScheme="teal"
+          isChecked={!hiddenColumns.includes('TASKS')}
           onChange={() => toggleColumn('TASKS')}
-        />
-      </Group>
+        >
+          Tasks
+        </Checkbox>
+      </HStack>
+      <br />
 
-      <CompactTable columns={COLUMNS} data={data} theme={theme} layout={{ hiddenColumns }} />
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable columns={COLUMNS} data={data} theme={theme} layout={{ hiddenColumns }} />
+      </Box>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />

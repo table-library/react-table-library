@@ -2,10 +2,7 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import {
-  DEFAULT_OPTIONS,
-  getMantineTheme,
-} from '@table-library/react-table-library/themes/mantine';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/mantine';
 
 import { DocumentationSee } from '../../../documentation';
 import { manyNodes } from '../../../data';
@@ -15,7 +12,7 @@ const key = 'Ten Thousand Rows';
 const Component = () => {
   const data = { nodes: manyNodes };
 
-  const mantineTheme = getMantineTheme(DEFAULT_OPTIONS);
+  const mantineTheme = getTheme(DEFAULT_OPTIONS, { isVirtualized: true });
   const theme = useTheme(mantineTheme);
 
   const COLUMNS = [
@@ -38,7 +35,7 @@ const Component = () => {
   ];
 
   const VIRTUALIZED_OPTIONS = {
-    rowHeight: (_item, _index) => 37.5,
+    rowHeight: (_item, _index) => 38.5,
   };
 
   return (
@@ -65,7 +62,7 @@ import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
 import {
   DEFAULT_OPTIONS,
-  getMantineTheme,
+  getTheme,
 } from '@table-library/react-table-library/themes/mantine';
 
 import { DocumentationSee } from '../../../documentation';
@@ -76,7 +73,7 @@ const key = 'Ten Thousand Rows';
 const Component = () => {
   const data = { nodes: manyNodes };
 
-  const mantineTheme = getMantineTheme(DEFAULT_OPTIONS);
+  const mantineTheme = getTheme(DEFAULT_OPTIONS);
   const theme = useTheme(mantineTheme);
 
   const COLUMNS = [

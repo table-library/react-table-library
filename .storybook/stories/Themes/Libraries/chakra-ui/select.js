@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/mantine';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
 import { useRowSelect } from '@table-library/react-table-library/select';
-import { Checkbox } from '@mantine/core';
+import { Box, Checkbox } from '@chakra-ui/react';
 
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';
@@ -14,8 +14,8 @@ const key = 'Select';
 const Component = () => {
   const data = { nodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(mantineTheme);
+  const chakraTheme = getTheme(DEFAULT_OPTIONS);
+  const theme = useTheme(chakraTheme);
 
   const select = useRowSelect(data, {
     onChange: onSelectChange,
@@ -32,14 +32,16 @@ const Component = () => {
       select: {
         renderHeaderCellSelect: () => (
           <Checkbox
-            checked={select.state.all}
-            indeterminate={!select.state.all && !select.state.none}
+            colorScheme="teal"
+            isChecked={select.state.all}
+            isIndeterminate={!select.state.all && !select.state.none}
             onChange={select.fns.onToggleAll}
           />
         ),
         renderCellSelect: (item) => (
           <Checkbox
-            checked={select.state.ids.includes(item.id)}
+            colorScheme="teal"
+            isChecked={select.state.ids.includes(item.id)}
             onChange={() => select.fns.onToggleById(item.id)}
           />
         ),
@@ -64,7 +66,9 @@ const Component = () => {
 
   return (
     <>
-      <CompactTable columns={COLUMNS} data={data} theme={theme} select={select} />
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable columns={COLUMNS} data={data} theme={theme} select={select} />
+      </Box>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />
@@ -77,12 +81,9 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import {
-  DEFAULT_OPTIONS,
-  getTheme,
-} from '@table-library/react-table-library/themes/mantine';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
 import { useRowSelect } from '@table-library/react-table-library/select';
-import { Checkbox } from '@mantine/core';
+import { Box, Checkbox } from '@chakra-ui/react';
 
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';
@@ -92,8 +93,8 @@ const key = 'Select';
 const Component = () => {
   const data = { nodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(mantineTheme);
+  const chakraTheme = getTheme(DEFAULT_OPTIONS);
+  const theme = useTheme(chakraTheme);
 
   const select = useRowSelect(data, {
     onChange: onSelectChange,
@@ -110,14 +111,16 @@ const Component = () => {
       select: {
         renderHeaderCellSelect: () => (
           <Checkbox
-            checked={select.state.all}
-            indeterminate={!select.state.all && !select.state.none}
+            colorScheme="teal"
+            isChecked={select.state.all}
+            isIndeterminate={!select.state.all && !select.state.none}
             onChange={select.fns.onToggleAll}
           />
         ),
         renderCellSelect: (item) => (
           <Checkbox
-            checked={select.state.ids.includes(item.id)}
+            colorScheme="teal"
+            isChecked={select.state.ids.includes(item.id)}
             onChange={() => select.fns.onToggleById(item.id)}
           />
         ),
@@ -142,7 +145,9 @@ const Component = () => {
 
   return (
     <>
-      <CompactTable columns={COLUMNS} data={data} theme={theme} select={select} />
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable columns={COLUMNS} data={data} theme={theme} select={select} />
+      </Box>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />

@@ -2,8 +2,9 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/mantine';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
 import { useTree } from '@table-library/react-table-library/tree';
+import { Box } from '@chakra-ui/react';
 import { FaChevronRight, FaChevronDown } from 'react-icons/fa';
 
 import { DocumentationSee } from '../../../documentation';
@@ -14,8 +15,8 @@ const key = 'Tree';
 const Component = () => {
   const data = { nodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(mantineTheme);
+  const chakraTheme = getTheme(DEFAULT_OPTIONS);
+  const theme = useTheme(chakraTheme);
 
   const tree = useTree(
     data,
@@ -57,7 +58,9 @@ const Component = () => {
 
   return (
     <>
-      <CompactTable columns={COLUMNS} data={data} theme={theme} tree={tree} />
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable columns={COLUMNS} data={data} theme={theme} tree={tree} />
+      </Box>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />
@@ -69,19 +72,37 @@ const code = `
 import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
+import { useTheme } from '@table-library/react-table-library/theme';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
 import { useTree } from '@table-library/react-table-library/tree';
+import { Box } from '@chakra-ui/react';
+import { FaChevronRight, FaChevronDown } from 'react-icons/fa';
 
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';
 
-const key = 'Select';
+const key = 'Tree';
 
 const Component = () => {
   const data = { nodes };
 
-  const tree = useTree(data, {
-    onChange: onTreeChange,
-  });
+  const chakraTheme = getTheme(DEFAULT_OPTIONS);
+  const theme = useTheme(chakraTheme);
+
+  const tree = useTree(
+    data,
+    {
+      onChange: onTreeChange,
+    },
+    {
+      treeIcon: {
+        margin: '4px',
+        iconDefault: null,
+        iconRight: <FaChevronRight />,
+        iconDown: <FaChevronDown />,
+      },
+    },
+  );
 
   function onTreeChange(action, state) {
     console.log(action, state);
@@ -108,7 +129,9 @@ const Component = () => {
 
   return (
     <>
-      <CompactTable columns={COLUMNS} data={data} tree={tree} />
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable columns={COLUMNS} data={data} theme={theme} tree={tree} />
+      </Box>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />

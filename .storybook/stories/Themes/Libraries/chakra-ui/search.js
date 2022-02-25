@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/mantine';
-import { Group, TextInput } from '@mantine/core';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
+import { Box, Stack, Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
 import { FaSearch } from 'react-icons/fa';
 
 import { DocumentationSee } from '../../../documentation';
@@ -14,8 +14,8 @@ const key = 'Search';
 const Component = () => {
   let data = { nodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(mantineTheme);
+  const chakraTheme = getTheme(DEFAULT_OPTIONS);
+  const theme = useTheme(chakraTheme);
 
   const [search, setSearch] = React.useState('');
 
@@ -47,21 +47,25 @@ const Component = () => {
   ];
 
   return (
-    <>
-      <Group mx={10}>
-        <TextInput
-          placeholder="Search Task"
-          value={search}
-          icon={<FaSearch />}
-          onChange={handleSearch}
-        />
-      </Group>
+    <div>
+      <Stack spacing={10}>
+        <InputGroup>
+          <InputLeftElement
+            pointerEvents="none"
+            children={<FaSearch style={{ color: '#4a5568' }} />}
+          />
+          <Input placeholder="Search Task" value={search} onChange={handleSearch} />
+        </InputGroup>
+      </Stack>
+      <br />
 
-      <CompactTable columns={COLUMNS} data={data} theme={theme} />
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable columns={COLUMNS} data={data} theme={theme} />
+      </Box>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />
-    </>
+    </div>
   );
 };
 
@@ -70,11 +74,8 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import {
-  DEFAULT_OPTIONS,
-  getTheme,
-} from '@table-library/react-table-library/themes/mantine';
-import { Group, TextInput } from '@mantine/core';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
+import { Box, Stack, Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
 import { FaSearch } from 'react-icons/fa';
 
 import { DocumentationSee } from '../../../documentation';
@@ -85,8 +86,8 @@ const key = 'Search';
 const Component = () => {
   let data = { nodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(mantineTheme);
+  const chakraTheme = getTheme(DEFAULT_OPTIONS);
+  const theme = useTheme(chakraTheme);
 
   const [search, setSearch] = React.useState('');
 
@@ -118,21 +119,25 @@ const Component = () => {
   ];
 
   return (
-    <>
-      <Group mx={10}>
-        <TextInput
-          placeholder="Search Task"
-          value={search}
-          icon={<FaSearch />}
-          onChange={handleSearch}
-        />
-      </Group>
+    <div>
+      <Stack spacing={10}>
+        <InputGroup>
+          <InputLeftElement
+            pointerEvents="none"
+            children={<FaSearch style={{ color: '#4a5568' }} />}
+          />
+          <Input placeholder="Search Task" value={search} onChange={handleSearch} />
+        </InputGroup>
+      </Stack>
+      <br />
 
-      <CompactTable columns={COLUMNS} data={data} theme={theme} />
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable columns={COLUMNS} data={data} theme={theme} />
+      </Box>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />
-    </>
+    </div>
   );
 };
 `;

@@ -47,6 +47,7 @@ export const parameters = {
         'Library Themes',
         [
           'Mantine',
+          'Chakra UI',
           'Material UI (WIP)',
           'Semantic UI (WIP)',
           'Bootstrap UI (WIP)',

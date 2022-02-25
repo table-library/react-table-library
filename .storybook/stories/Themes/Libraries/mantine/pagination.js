@@ -2,10 +2,7 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import {
-  DEFAULT_OPTIONS,
-  getMantineTheme,
-} from '@table-library/react-table-library/themes/mantine';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/mantine';
 import { usePagination } from '@table-library/react-table-library/pagination';
 import { Group, Pagination } from '@mantine/core';
 
@@ -17,7 +14,7 @@ const key = 'Pagination';
 const Component = () => {
   const data = { nodes };
 
-  const mantineTheme = getMantineTheme(DEFAULT_OPTIONS);
+  const mantineTheme = getTheme(DEFAULT_OPTIONS);
   const theme = useTheme(mantineTheme);
 
   const pagination = usePagination(data, {
@@ -77,7 +74,7 @@ import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
 import {
   DEFAULT_OPTIONS,
-  getMantineTheme,
+  getTheme,
 } from '@table-library/react-table-library/themes/mantine';
 import { usePagination } from '@table-library/react-table-library/pagination';
 import { Group, Pagination } from '@mantine/core';
@@ -90,7 +87,7 @@ const key = 'Pagination';
 const Component = () => {
   const data = { nodes };
 
-  const mantineTheme = getMantineTheme(DEFAULT_OPTIONS);
+  const mantineTheme = getTheme(DEFAULT_OPTIONS);
   const theme = useTheme(mantineTheme);
 
   const pagination = usePagination(data, {

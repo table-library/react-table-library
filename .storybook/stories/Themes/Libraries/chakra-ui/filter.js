@@ -2,29 +2,24 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/mantine';
-import { Group, TextInput } from '@mantine/core';
-import { FaSearch } from 'react-icons/fa';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
+import { Box, Stack, Checkbox } from '@chakra-ui/react';
 
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';
 
-const key = 'Search';
+const key = 'Filter';
 
 const Component = () => {
   let data = { nodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(mantineTheme);
+  const chakraTheme = getTheme(DEFAULT_OPTIONS);
+  const theme = useTheme(chakraTheme);
 
-  const [search, setSearch] = React.useState('');
-
-  const handleSearch = (event) => {
-    setSearch(event.target.value);
-  };
+  const [isHide, setHide] = React.useState(false);
 
   data = {
-    nodes: data.nodes.filter((item) => item.name.toLowerCase().includes(search.toLowerCase())),
+    nodes: isHide ? data.nodes.filter((node) => !node.isComplete) : data.nodes,
   };
 
   const COLUMNS = [
@@ -48,16 +43,20 @@ const Component = () => {
 
   return (
     <>
-      <Group mx={10}>
-        <TextInput
-          placeholder="Search Task"
-          value={search}
-          icon={<FaSearch />}
-          onChange={handleSearch}
-        />
-      </Group>
+      <Stack spacing={10}>
+        <Checkbox
+          colorScheme="teal"
+          isChecked={isHide}
+          onChange={(event) => setHide(event.target.checked)}
+        >
+          Hide Complete
+        </Checkbox>
+      </Stack>
+      <br />
 
-      <CompactTable columns={COLUMNS} data={data} theme={theme} />
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable columns={COLUMNS} data={data} theme={theme} />
+      </Box>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />
@@ -70,32 +69,24 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import {
-  DEFAULT_OPTIONS,
-  getTheme,
-} from '@table-library/react-table-library/themes/mantine';
-import { Group, TextInput } from '@mantine/core';
-import { FaSearch } from 'react-icons/fa';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
+import { Box, Stack, Checkbox } from '@chakra-ui/react';
 
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';
 
-const key = 'Search';
+const key = 'Filter';
 
 const Component = () => {
   let data = { nodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(mantineTheme);
+  const chakraTheme = getTheme(DEFAULT_OPTIONS);
+  const theme = useTheme(chakraTheme);
 
-  const [search, setSearch] = React.useState('');
-
-  const handleSearch = (event) => {
-    setSearch(event.target.value);
-  };
+  const [isHide, setHide] = React.useState(false);
 
   data = {
-    nodes: data.nodes.filter((item) => item.name.toLowerCase().includes(search.toLowerCase())),
+    nodes: isHide ? data.nodes.filter((node) => !node.isComplete) : data.nodes,
   };
 
   const COLUMNS = [
@@ -119,16 +110,20 @@ const Component = () => {
 
   return (
     <>
-      <Group mx={10}>
-        <TextInput
-          placeholder="Search Task"
-          value={search}
-          icon={<FaSearch />}
-          onChange={handleSearch}
-        />
-      </Group>
+      <Stack spacing={10}>
+        <Checkbox
+          colorScheme="teal"
+          isChecked={isHide}
+          onChange={(event) => setHide(event.target.checked)}
+        >
+          Hide Complete
+        </Checkbox>
+      </Stack>
+      <br />
 
-      <CompactTable columns={COLUMNS} data={data} theme={theme} />
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable columns={COLUMNS} data={data} theme={theme} />
+      </Box>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />

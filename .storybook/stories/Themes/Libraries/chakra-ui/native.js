@@ -3,7 +3,8 @@ import * as React from 'react';
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { Header, HeaderRow, HeaderCell } from '@table-library/react-table-library/table';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/mantine';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
+import { Box } from '@chakra-ui/react';
 
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';
@@ -18,7 +19,6 @@ const Component = () => {
   );
   const [verticalSpacing, setVerticalSpacing] = React.useState(DEFAULT_OPTIONS.verticalSpacing);
   const [striped, setStriped] = React.useState(DEFAULT_OPTIONS.striped);
-  const [highlightOnHover, setHighlightOnHover] = React.useState(DEFAULT_OPTIONS.highlightOnHover);
   const [hasFooter, setFooter] = React.useState(false);
   const [caption, setCaption] = React.useState('');
 
@@ -26,7 +26,6 @@ const Component = () => {
     horizontalSpacing,
     verticalSpacing,
     striped,
-    highlightOnHover,
   });
   const theme = useTheme(mantineTheme);
 
@@ -79,8 +78,8 @@ const Component = () => {
         horizontalSpacing:
         <input
           type="range"
-          min="10"
-          max="24"
+          min="18"
+          max="30"
           value={horizontalSpacing}
           onChange={(event) => setHorizontalSpacing(event.target.value)}
         />
@@ -89,8 +88,8 @@ const Component = () => {
         verticalSpacing:
         <input
           type="range"
-          min="10"
-          max="24"
+          min="6"
+          max="18"
           value={verticalSpacing}
           onChange={(event) => setVerticalSpacing(event.target.value)}
         />
@@ -98,14 +97,6 @@ const Component = () => {
       <label>
         striped:
         <input type="checkbox" checked={striped} onChange={() => setStriped(!striped)} />
-      </label>
-      <label>
-        highlightOnHover:
-        <input
-          type="checkbox"
-          checked={highlightOnHover}
-          onChange={() => setHighlightOnHover(!highlightOnHover)}
-        />
       </label>
       <label>
         has footer:
@@ -117,10 +108,12 @@ const Component = () => {
       </label>
       <br />
 
-      <CompactTable columns={COLUMNS} tableOptions={TABLE_OPTIONS} data={data} theme={theme} />
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable columns={COLUMNS} tableOptions={TABLE_OPTIONS} data={data} theme={theme} />
+      </Box>
 
       <br />
-      <DocumentationSee noLink anchor={"Mantine's official documentation"} />
+      <DocumentationSee noLink anchor={"Chakra UI's official documentation"} />
     </>
   );
 };
@@ -129,12 +122,10 @@ const code = `
 import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
-import { useTheme } from '@table-library/react-table-library/theme';
-import {
-  DEFAULT_OPTIONS,
-  getTheme,
-} from '@table-library/react-table-library/themes/mantine';
 import { Header, HeaderRow, HeaderCell } from '@table-library/react-table-library/table';
+import { useTheme } from '@table-library/react-table-library/theme';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
+import { Box } from '@chakra-ui/react';
 
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';
@@ -149,7 +140,6 @@ const Component = () => {
   );
   const [verticalSpacing, setVerticalSpacing] = React.useState(DEFAULT_OPTIONS.verticalSpacing);
   const [striped, setStriped] = React.useState(DEFAULT_OPTIONS.striped);
-  const [highlightOnHover, setHighlightOnHover] = React.useState(DEFAULT_OPTIONS.highlightOnHover);
   const [hasFooter, setFooter] = React.useState(false);
   const [caption, setCaption] = React.useState('');
 
@@ -157,7 +147,6 @@ const Component = () => {
     horizontalSpacing,
     verticalSpacing,
     striped,
-    highlightOnHover,
   });
   const theme = useTheme(mantineTheme);
 
@@ -210,8 +199,8 @@ const Component = () => {
         horizontalSpacing:
         <input
           type="range"
-          min="10"
-          max="24"
+          min="18"
+          max="30"
           value={horizontalSpacing}
           onChange={(event) => setHorizontalSpacing(event.target.value)}
         />
@@ -220,8 +209,8 @@ const Component = () => {
         verticalSpacing:
         <input
           type="range"
-          min="10"
-          max="24"
+          min="6"
+          max="18"
           value={verticalSpacing}
           onChange={(event) => setVerticalSpacing(event.target.value)}
         />
@@ -229,14 +218,6 @@ const Component = () => {
       <label>
         striped:
         <input type="checkbox" checked={striped} onChange={() => setStriped(!striped)} />
-      </label>
-      <label>
-        highlightOnHover:
-        <input
-          type="checkbox"
-          checked={highlightOnHover}
-          onChange={() => setHighlightOnHover(!highlightOnHover)}
-        />
       </label>
       <label>
         has footer:
@@ -248,10 +229,12 @@ const Component = () => {
       </label>
       <br />
 
-      <CompactTable columns={COLUMNS} tableOptions={TABLE_OPTIONS} data={data} theme={theme} />
+      <Box p={3} borderWidth="1px" borderRadius="lg">
+        <CompactTable columns={COLUMNS} tableOptions={TABLE_OPTIONS} data={data} theme={theme} />
+      </Box>
 
       <br />
-      <DocumentationSee noLink anchor={"Mantine's official documentation"} />
+      <DocumentationSee noLink anchor={"Chakra UI's official documentation"} />
     </>
   );
 };
