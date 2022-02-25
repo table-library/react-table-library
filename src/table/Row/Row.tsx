@@ -70,7 +70,7 @@ const evaluateProps = (rowPropsByFeature: FeatureProps[], onSingleClick: OnClick
   };
 };
 
-const Row = (props: RowProps) => {
+export const Row: React.FC<RowProps> = (props: RowProps) => {
   const { item, className, disabled, onClick, onDoubleClick, children, ...rest } = props;
 
   const select = React.useContext(SelectContext);
@@ -120,5 +120,3 @@ const Row = (props: RowProps) => {
     </RowContainer>
   );
 };
-
-export { Row };

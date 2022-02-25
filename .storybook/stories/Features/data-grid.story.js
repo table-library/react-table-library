@@ -43,7 +43,17 @@ const WithStickyHeader = React.forwardRef(({ children, ...rest }, ref) => (
 ));
 
 storiesOf('Features/Data Grid', module)
-  .addParameters({ component: Table })
+  .addParameters({
+    component: Table,
+    subcomponents: {
+      Header,
+      HeaderRow,
+      Body,
+      Row,
+      HeaderCell,
+      Cell,
+    },
+  })
   .add('one million cells', () => {
     const [nodes, setNodes] = React.useState(lotsOfNodes);
 

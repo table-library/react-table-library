@@ -19,13 +19,24 @@ import {
   SelectClickTypes,
   SelectTypes,
   useRowSelect,
-  Checkbox,
 } from '@table-library/react-table-library/select';
 
 import { nodes } from '../data';
 
 storiesOf('Features/Select', module)
-  .addParameters({ component: Table })
+  .addParameters({
+    component: Table,
+    subcomponents: {
+      Header,
+      HeaderRow,
+      Body,
+      Row,
+      HeaderCell,
+      Cell,
+      HeaderCellSelect,
+      CellSelect,
+    },
+  })
   .add('base', () => {
     const data = { nodes };
 

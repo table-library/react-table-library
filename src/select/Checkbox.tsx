@@ -8,7 +8,11 @@ type CheckboxProps = {
   onChange: (event: React.SyntheticEvent) => void;
 };
 
-const Checkbox = ({ checked, isIndeterminate, onChange }: CheckboxProps) => {
+export const Checkbox: React.FC<CheckboxProps> = ({
+  checked,
+  isIndeterminate,
+  onChange,
+}: CheckboxProps) => {
   const ref = (node: HTMLInputElement) => {
     if (!node) return;
 
@@ -26,5 +30,3 @@ const Checkbox = ({ checked, isIndeterminate, onChange }: CheckboxProps) => {
 
   return <CheckboxBase ref={ref} type="checkbox" onChange={onChange} />;
 };
-
-export { Checkbox };

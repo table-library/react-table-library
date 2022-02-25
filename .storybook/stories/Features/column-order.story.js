@@ -17,7 +17,17 @@ import {
 import { nodes } from '../data';
 
 storiesOf('Features/Column Ordering', module)
-  .addParameters({ component: Table })
+  .addParameters({
+    component: Table,
+    subcomponents: {
+      Header,
+      HeaderRow,
+      Body,
+      Row,
+      HeaderCell,
+      Cell,
+    },
+  })
   .add('base', () => {
     const data = { nodes };
 

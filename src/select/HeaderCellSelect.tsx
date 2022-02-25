@@ -7,30 +7,36 @@ import { SelectTypes } from '@table-library/react-table-library/types/select';
 
 import { Checkbox } from './Checkbox';
 
-const HeaderCellSelect = React.memo((passThrough: Record<string, any>) => {
-  const select = React.useContext(SelectContext);
+type HeaderCellSelectProps = Record<string, any>;
 
-  if (!select) {
-    throw new Error(
-      'No Select Context. No return value from useRowSelect provided to Table component.',
+export const HeaderCellSelect: React.FC<HeaderCellSelectProps> = React.memo(
+  (passThrough: HeaderCellSelectProps) => {
+    const select = React.useContext(SelectContext);
+
+    if (!select) {
+      throw new Error(
+        'No Select Context. No return value from useRowSelect provided to Table component.',
+      );
+    }
+
+    const isSelected = select.state.all;
+    const isIndeterminate =
+      (!select.state.all && !select.state.none) ||
+      (select.options.buttonSelect === SelectTypes.SingleSelect && select.state.id != null);
+
+    const handleChange = () =>
+      select.fns.onToggleAll({
+        isPartialToAll: select.options.isPartialToAll,
+      });
+
+    return (
+      <HeaderCell stiff {...passThrough}>
+        <Checkbox
+          checked={!!isSelected}
+          isIndeterminate={isIndeterminate}
+          onChange={handleChange}
+        />
+      </HeaderCell>
     );
-  }
-
-  const isSelected = select.state.all;
-  const isIndeterminate =
-    (!select.state.all && !select.state.none) ||
-    (select.options.buttonSelect === SelectTypes.SingleSelect && select.state.id != null);
-
-  const handleChange = () =>
-    select.fns.onToggleAll({
-      isPartialToAll: select.options.isPartialToAll,
-    });
-
-  return (
-    <HeaderCell stiff {...passThrough}>
-      <Checkbox checked={!!isSelected} isIndeterminate={isIndeterminate} onChange={handleChange} />
-    </HeaderCell>
-  );
-});
-
-export { HeaderCellSelect };
+  },
+);

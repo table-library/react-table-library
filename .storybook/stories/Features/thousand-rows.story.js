@@ -38,7 +38,17 @@ const WithStickyHeader = React.forwardRef(({ children, ...rest }, ref) => (
 ));
 
 storiesOf('Features/Ten Thousand Rows', module)
-  .addParameters({ component: Table })
+  .addParameters({
+    component: Table,
+    subcomponents: {
+      Header,
+      HeaderRow,
+      Body,
+      Row,
+      HeaderCell,
+      Cell,
+    },
+  })
   .add('large list', () => {
     const data = { nodes: manyNodes };
 

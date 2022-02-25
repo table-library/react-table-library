@@ -25,7 +25,18 @@ import {
 import { nodes } from '../data';
 
 storiesOf('Features/Sort', module)
-  .addParameters({ component: Table })
+  .addParameters({
+    component: Table,
+    subcomponents: {
+      Header,
+      HeaderRow,
+      Body,
+      Row,
+      HeaderCell,
+      Cell,
+      HeaderCellSort,
+    },
+  })
   .add('base', () => {
     const data = { nodes };
 

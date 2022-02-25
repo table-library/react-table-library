@@ -15,7 +15,17 @@ import { useTheme } from '@table-library/react-table-library/theme';
 import { nodes } from '../data';
 
 storiesOf('Features/Pin', module)
-  .addParameters({ component: Table })
+  .addParameters({
+    component: Table,
+    subcomponents: {
+      Header,
+      HeaderRow,
+      Body,
+      Row,
+      HeaderCell,
+      Cell,
+    },
+  })
   .add('base', () => {
     const data = { nodes };
 

@@ -16,13 +16,15 @@ const evaluateProps = (props: Record<string, any>, item: TableNode) =>
     return acc;
   }, {});
 
-const CompactRow = ({
+type CompactRowProps = { item: TableNode } & CompactTableProps;
+
+export const CompactRow: React.FC<CompactRowProps> = ({
   item,
   columns,
   rowProps,
   rowOptions,
   ...tableProps
-}: { item: TableNode } & CompactTableProps) => {
+}: CompactRowProps) => {
   const { tree, select } = tableProps;
 
   return (
@@ -87,5 +89,3 @@ const CompactRow = ({
     </>
   );
 };
-
-export { CompactRow };

@@ -4,15 +4,10 @@ import styles from './styles';
 
 type ButtonProps = {
   margin: string;
-};
+} & Record<string, any>;
 
-const Button = React.forwardRef(
-  (
-    { margin, ...props }: ButtonProps & Record<string, any>,
-    ref: React.ForwardedRef<HTMLButtonElement>,
-  ) => {
+export const Button: React.FC<ButtonProps> = React.forwardRef(
+  ({ margin, ...props }: ButtonProps, ref: React.ForwardedRef<HTMLButtonElement>) => {
     return <button type="button" ref={ref} {...props} css={styles({ margin })} />;
   },
 );
-
-export { Button };

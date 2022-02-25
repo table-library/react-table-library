@@ -15,7 +15,17 @@ import {
 import { nodes } from '../data';
 
 storiesOf('Features/Filter', module)
-  .addParameters({ component: Table })
+  .addParameters({
+    component: Table,
+    subcomponents: {
+      Header,
+      HeaderRow,
+      Body,
+      Row,
+      HeaderCell,
+      Cell,
+    },
+  })
   .add('base', () => {
     let data = { nodes };
 

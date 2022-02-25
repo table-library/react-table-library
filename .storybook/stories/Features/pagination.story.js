@@ -16,7 +16,17 @@ import { usePagination } from '@table-library/react-table-library/pagination';
 import { nodes } from '../data';
 
 storiesOf('Features/Pagination', module)
-  .addParameters({ component: Table })
+  .addParameters({
+    component: Table,
+    subcomponents: {
+      Header,
+      HeaderRow,
+      Body,
+      Row,
+      HeaderCell,
+      Cell,
+    },
+  })
   .add('base', () => {
     const data = { nodes };
 

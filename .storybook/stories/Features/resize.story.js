@@ -10,12 +10,21 @@ import {
   HeaderCell,
   Cell,
 } from '@table-library/react-table-library/table';
-import { useTheme } from '@table-library/react-table-library/theme';
 
 import { nodes } from '../data';
 
 storiesOf('Features/Resize', module)
-  .addParameters({ component: Table })
+  .addParameters({
+    component: Table,
+    subcomponents: {
+      Header,
+      HeaderRow,
+      Body,
+      Row,
+      HeaderCell,
+      Cell,
+    },
+  })
   .add('base', () => {
     const data = { nodes };
 

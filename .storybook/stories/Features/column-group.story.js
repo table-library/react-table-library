@@ -12,7 +12,17 @@ import {
 } from '@table-library/react-table-library/table';
 
 storiesOf('Features/Column Grouping (WIP)', module)
-  .addParameters({ component: Table })
+  .addParameters({
+    component: Table,
+    subcomponents: {
+      Header,
+      HeaderRow,
+      Body,
+      Row,
+      HeaderCell,
+      Cell,
+    },
+  })
   .add('base', () => {
     return <>WIP</>;
   })

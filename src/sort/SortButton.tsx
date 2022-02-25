@@ -41,7 +41,12 @@ type SortButtonProps = {
   children: React.ReactNode;
 };
 
-const SortButton = ({ sort, sortKey, sortIcon = {}, children }: SortButtonProps) => {
+export const SortButton: React.FC<SortButtonProps> = ({
+  sort,
+  sortKey,
+  sortIcon = {},
+  children,
+}: SortButtonProps) => {
   const { state, fns, options } = sort;
 
   const mergedSortIconOptions = {
@@ -79,5 +84,3 @@ const SortButton = ({ sort, sortKey, sortIcon = {}, children }: SortButtonProps)
     </Button>
   );
 };
-
-export { SortButton };

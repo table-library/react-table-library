@@ -16,7 +16,11 @@ const isReactFragment = (variableToInspect: any) => {
   return variableToInspect === React.Fragment;
 };
 
-const HeaderRow = ({ className, children, ...rest }: HeaderRowProps) => {
+export const HeaderRow: React.FC<HeaderRowProps> = ({
+  className,
+  children,
+  ...rest
+}: HeaderRowProps) => {
   const theme = React.useContext(ThemeContext);
 
   const ref = React.useRef<HTMLDivElement>(null);
@@ -58,5 +62,3 @@ const HeaderRow = ({ className, children, ...rest }: HeaderRowProps) => {
     </HeaderRowContainer>
   );
 };
-
-export { HeaderRow };

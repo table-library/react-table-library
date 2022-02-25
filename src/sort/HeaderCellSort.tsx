@@ -7,7 +7,7 @@ import { HeaderCellSortProps } from '@table-library/react-table-library/types/so
 
 import { SortButton } from './SortButton';
 
-const HeaderCellSort = React.memo(
+export const HeaderCellSort: React.FC<HeaderCellSortProps> = React.memo(
   ({ sortKey, sortIcon = {}, children, ...passThrough }: HeaderCellSortProps) => {
     const sort = React.useContext(SortContext);
 
@@ -24,5 +24,3 @@ const HeaderCellSort = React.memo(
     );
   },
 );
-
-export { HeaderCellSort };

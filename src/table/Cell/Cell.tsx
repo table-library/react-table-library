@@ -6,7 +6,15 @@ import { ThemeContext } from '@table-library/react-table-library/common/context/
 
 import { CellProps } from '@table-library/react-table-library/types/table';
 
-const Cell = ({ className, hide, pin, stiff, onClick, children, ...rest }: CellProps) => {
+export const Cell: React.FC<CellProps> = ({
+  className,
+  hide,
+  pin,
+  stiff,
+  onClick,
+  children,
+  ...rest
+}: CellProps) => {
   const theme = React.useContext(ThemeContext);
 
   return (
@@ -27,5 +35,3 @@ const Cell = ({ className, hide, pin, stiff, onClick, children, ...rest }: CellP
     </CellContainer>
   );
 };
-
-export { Cell };

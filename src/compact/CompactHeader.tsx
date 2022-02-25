@@ -11,7 +11,10 @@ const countPriorCheckboxes = (columns: Column[], column: Column) => {
   return priorCheckboxes.length;
 };
 
-const CompactHeader = ({ columns, ...tableProps }: CompactTableProps) => {
+export const CompactHeader: React.FC<CompactTableProps> = ({
+  columns,
+  ...tableProps
+}: CompactTableProps) => {
   const { sort, select } = tableProps;
 
   return (
@@ -65,5 +68,3 @@ const CompactHeader = ({ columns, ...tableProps }: CompactTableProps) => {
     </Header>
   );
 };
-
-export { CompactHeader };

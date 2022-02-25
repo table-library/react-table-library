@@ -8,7 +8,7 @@ import { useResize } from '@table-library/react-table-library/resize/useResize';
 
 import { HeaderCellProps } from '@table-library/react-table-library/types/table';
 
-const HeaderCell = ({
+export const HeaderCell: React.FC<HeaderCellProps> = ({
   index,
   hideKey,
   className,
@@ -48,5 +48,3 @@ const HeaderCell = ({
     </HeaderCellContainer>
   );
 };
-
-export { HeaderCell };

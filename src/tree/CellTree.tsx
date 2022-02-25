@@ -46,7 +46,12 @@ const getTreeIcon = (
   return TreeIconDefault ? React.cloneElement(TreeIconDefault, { ...size }) : null;
 };
 
-const CellTree = ({ item, treeIcon = {}, children, ...passThrough }: CellTreeProps) => {
+export const CellTree: React.FC<CellTreeProps> = ({
+  item,
+  treeIcon = {},
+  children,
+  ...passThrough
+}: CellTreeProps) => {
   const context = React.useContext(TreeContext);
 
   if (!context) {
@@ -90,5 +95,3 @@ const CellTree = ({ item, treeIcon = {}, children, ...passThrough }: CellTreePro
     </Cell>
   );
 };
-
-export { CellTree };

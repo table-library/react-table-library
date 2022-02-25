@@ -43,7 +43,7 @@ const useTableMemoryRef = (): TableMemoryRef => {
   return tableMemoryRef;
 };
 
-const Table = React.forwardRef(
+const Table: React.FC<TableProps> = React.forwardRef(
   (
     {
       data,

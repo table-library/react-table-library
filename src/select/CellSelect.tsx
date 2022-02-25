@@ -7,38 +7,38 @@ import { SelectTypes, CellSelectProps } from '@table-library/react-table-library
 
 import { Checkbox } from './Checkbox';
 
-const CellSelect = React.memo(({ item, ...passThrough }: CellSelectProps) => {
-  const select = React.useContext(SelectContext);
+export const CellSelect: React.FC<CellSelectProps> = React.memo(
+  ({ item, ...passThrough }: CellSelectProps) => {
+    const select = React.useContext(SelectContext);
 
-  if (!select) {
-    throw new Error(
-      'No Select Context. No return value from useRowSelect provided to Table component.',
-    );
-  }
-
-  const isSelected =
-    select.options.buttonSelect === SelectTypes.SingleSelect
-      ? select.state.id === item.id || select.state.ids.includes(item.id)
-      : select.state.ids.includes(item.id);
-
-  const handleChange = () => {
-    const isSingleSelect = select.options.buttonSelect === SelectTypes.SingleSelect;
-
-    if (isSingleSelect) {
-      select.fns.onToggleByIdExclusively(item.id);
-    } else {
-      select.fns.onToggleByIdRecursively(item.id, {
-        isCarryForward: select.options.isCarryForward,
-        isPartialToAll: select.options.isPartialToAll,
-      });
+    if (!select) {
+      throw new Error(
+        'No Select Context. No return value from useRowSelect provided to Table component.',
+      );
     }
-  };
 
-  return (
-    <Cell stiff {...passThrough}>
-      <Checkbox checked={!!isSelected} onChange={handleChange} />
-    </Cell>
-  );
-});
+    const isSelected =
+      select.options.buttonSelect === SelectTypes.SingleSelect
+        ? select.state.id === item.id || select.state.ids.includes(item.id)
+        : select.state.ids.includes(item.id);
 
-export { CellSelect };
+    const handleChange = () => {
+      const isSingleSelect = select.options.buttonSelect === SelectTypes.SingleSelect;
+
+      if (isSingleSelect) {
+        select.fns.onToggleByIdExclusively(item.id);
+      } else {
+        select.fns.onToggleByIdRecursively(item.id, {
+          isCarryForward: select.options.isCarryForward,
+          isPartialToAll: select.options.isPartialToAll,
+        });
+      }
+    };
+
+    return (
+      <Cell stiff {...passThrough}>
+        <Checkbox checked={!!isSelected} onChange={handleChange} />
+      </Cell>
+    );
+  },
+);

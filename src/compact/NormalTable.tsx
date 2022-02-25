@@ -8,7 +8,7 @@ import { NormalTableProps } from '@table-library/react-table-library/types/compa
 import { CompactHeader } from './CompactHeader';
 import { CompactRow } from './CompactRow';
 
-const NormalTable = ({
+export const NormalTable: React.FC<NormalTableProps> = ({
   tableList,
   columns,
   rowProps = {},
@@ -34,5 +34,3 @@ const NormalTable = ({
     </>
   );
 };
-
-export { NormalTable };

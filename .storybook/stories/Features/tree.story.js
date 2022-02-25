@@ -20,7 +20,18 @@ import { useTree, CellTree, TreeExpandClickTypes } from '@table-library/react-ta
 import { nodes } from '../data';
 
 storiesOf('Features/Tree', module)
-  .addParameters({ component: Table })
+  .addParameters({
+    component: Table,
+    subcomponents: {
+      Header,
+      HeaderRow,
+      Body,
+      Row,
+      HeaderCell,
+      Cell,
+      CellTree,
+    },
+  })
   .add('base', () => {
     const data = { nodes };
 

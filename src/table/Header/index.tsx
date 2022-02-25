@@ -10,7 +10,7 @@ const headerRow = `
   z-index: 4;
 `;
 
-const Header = ({ children, ...rest }: HeaderProps) => {
+export const Header: React.FC<HeaderProps> = ({ children, ...rest }: HeaderProps) => {
   const theme = React.useContext(ThemeContext);
 
   return (
@@ -31,5 +31,3 @@ const Header = ({ children, ...rest }: HeaderProps) => {
     </div>
   );
 };
-
-export { Header };

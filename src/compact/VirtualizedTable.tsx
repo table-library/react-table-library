@@ -47,14 +47,16 @@ const withStickyHeader = ({ columns, ...tableProps }: CompactTableProps) => {
   ));
 };
 
-const VirtualizedRow = ({
+type VirtualizedRowProps = InternalsObject & CompactTableProps;
+
+const VirtualizedRow: React.FC<VirtualizedRowProps> = ({
   internals,
   columns,
   rowProps,
   rowOptions,
   virtualizedOptions,
   ...tableProps
-}: InternalsObject & CompactTableProps) => {
+}: VirtualizedRowProps) => {
   const { index, style, data } = internals;
   const item = data.items[index];
 
@@ -78,7 +80,7 @@ const VirtualizedRow = ({
   );
 };
 
-const VirtualizedTable = ({
+export const VirtualizedTable: React.FC<VirtualizedTableProps> = ({
   tableList,
   columns,
   rowProps = {},
@@ -112,5 +114,3 @@ const VirtualizedTable = ({
     </AutoSizer>
   );
 };
-
-export { VirtualizedTable };
