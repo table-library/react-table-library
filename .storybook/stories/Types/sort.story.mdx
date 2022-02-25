@@ -1,0 +1,76 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Types/Sort" />
+
+# Sort
+
+```javascript
+export enum SortIconPositions {
+  Prefix,
+  Suffix,
+}
+
+export type SortOptionsIcon = {
+  position?: SortIconPositions;
+  margin?: string;
+  size?: string;
+  iconDefault?: React.ReactElement | Nullish;
+  iconUp?: React.ReactElement | Nullish;
+  iconDown?: React.ReactElement | Nullish;
+};
+
+export type SortFn = (node: TableNode[]) => TableNode[];
+
+export type SortOptions = {
+  sortFns: Record<string, SortFn>;
+  isServer?: boolean;
+  sortIcon?: SortOptionsIcon;
+  isRecursive?: boolean;
+};
+
+export type SortOptionsIconSound = {
+  position: SortIconPositions;
+  margin: string;
+  size: string;
+  iconDefault: React.ReactElement | Nullish;
+  iconUp: React.ReactElement | Nullish;
+  iconDown: React.ReactElement | Nullish;
+};
+
+export type SortOptionsSound = {
+  sortFns: Record<string, SortFn>;
+  isServer: boolean;
+  sortIcon: SortOptionsIconSound;
+  isRecursive: boolean;
+};
+
+export type SortFunctionInput = {
+  sortKey: string;
+};
+
+export type SortFunctions = {
+  onToggleSort: (sortFunctionInput: SortFunctionInput) => void;
+};
+
+export type ColumnSortProps = {
+  sortKey: string;
+  sortIcon?: SortOptionsIcon;
+};
+
+export type HeaderCellSortProps = {
+  index?: number;
+  sortKey: string;
+  sortIcon?: SortOptionsIcon;
+  children: React.ReactNode;
+} & Record<string, any>;
+
+export type Sort = {
+  state: State;
+  fns: SortFunctions;
+  options: SortOptionsSound;
+  modifier: Modifier;
+  components: {
+    HeaderCellSort: React.FunctionComponent<HeaderCellSortProps>;
+  };
+};
+```

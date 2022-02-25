@@ -40,6 +40,8 @@ export const parameters = {
         ['Introduction', 'Feature Requests', 'Roadmap', 'Support'],
         'First Steps',
         ['Compact Table', 'Composed Table'],
+        'Types',
+        ['Data', 'Compact Table', 'Composed Table', ...Features],
         'Compact Table',
         ['FAQ', 'Base', ...Features],
         'Library Themes',

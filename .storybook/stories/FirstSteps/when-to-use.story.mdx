@@ -2,12 +2,12 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta title="First Steps/When To Use ..." />
 
-While navigating through the documentation, you will see both, `CompactTable`s and Composable Tables. Therefore you will need to know when to use which:
+While navigating through the documentation, you will see both, `CompactTable`s and Composed Tables. Therefore you will need to know when to use which:
 
 ## Compact Table
 
-The `CompactTable` is the straightforward yet basic usage of the table library: It's one table component to rule them all. All configuration of the table can be provided via props to this component. Under the hood, the `CompactTable` is an assembled composed table. Usually you will want to use `CompactTable` for any case. However, once it gets more complex, you may want to use the Composable Table ...
+The `CompactTable` is the straightforward yet basic usage of the table library: It's one table component to rule them all. All configuration of the table can be provided via props to this component. Under the hood, the `CompactTable` is an assembled composed table. Usually you will want to use `CompactTable` for any case. However, once it gets more complex, you may want to use the Composed Table ...
 
-## Composable Table
+## Composed Table
 
 The composable table is not one component but a set of composable components (e.g. `Table`, `Row`, `Cell`) which use the philosophy of [composition over configuration](https://www.robinwieruch.de/react-component-composition/). If you create complex tables, you want to access to all the components that make up a table. By using all the composable components, you get more fine-grained access to them.

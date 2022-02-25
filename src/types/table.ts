@@ -69,6 +69,8 @@ export type TableProps = {
   children?: (nodes: TableNode[]) => React.ReactNode;
 } & RestProps;
 
+// external data
+
 export type TableNode = {
   id: string;
   nodes?: TableNode[];

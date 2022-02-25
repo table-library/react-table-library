@@ -16,7 +16,7 @@ const FULL_HEIGHT_THEME = {
   `,
 };
 
-const CompactTable = React.forwardRef(
+export const CompactTable: React.FC<CompactTableProps> = React.forwardRef(
   (
     {
       columns,
@@ -89,5 +89,3 @@ const CompactTable = React.forwardRef(
     );
   },
 );
-
-export { CompactTable };
