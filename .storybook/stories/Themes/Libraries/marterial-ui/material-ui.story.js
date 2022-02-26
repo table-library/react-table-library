@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import MaterialCheckbox from '@material-ui/core/Checkbox';
-import UnfoldMoreOutlinedIcon from '@material-ui/icons/UnfoldMoreOutlined';
-import KeyboardArrowUpOutlinedIcon from '@material-ui/icons/KeyboardArrowUpOutlined';
-import KeyboardArrowDownOutlinedIcon from '@material-ui/icons/KeyboardArrowDownOutlined';
+import { createTheme as createMaterialTheme } from '@mui/material/styles';
+import { ThemeProvider as MaterialThemeProvider } from '@mui/material/styles';
+import MaterialCheckbox from '@mui/material/Checkbox';
+import UnfoldMoreOutlinedIcon from '@mui/icons-material/UnfoldMoreOutlined';
+import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
+import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 
 import {
   Table,
@@ -115,66 +117,68 @@ storiesOf('Library Themes/Material UI (WIP)', module)
     }
 
     return (
-      <Table data={data} theme={theme} sort={sort} select={select}>
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCell stiff>
-                  <MaterialCheckbox
-                    color="primary"
-                    size="small"
-                    checked={select.state.all}
-                    indeterminate={!select.state.all && !select.state.none}
-                    onChange={select.fns.onToggleAll}
-                  />
-                </HeaderCell>
-                <HeaderCellSort resize sortKey="TASK">
-                  Task
-                </HeaderCellSort>
-                <HeaderCellSort resize sortKey="DEADLINE">
-                  Deadline
-                </HeaderCellSort>
-                <HeaderCellSort resize sortKey="TYPE">
-                  Type
-                </HeaderCellSort>
-                <HeaderCellSort resize sortKey="COMPLETE">
-                  Complete
-                </HeaderCellSort>
-                <HeaderCellSort resize sortKey="TASKS">
-                  Tasks
-                </HeaderCellSort>
-              </HeaderRow>
-            </Header>
-
-            <Body>
-              {tableList.map((item) => (
-                <Row item={item} key={item.id}>
-                  <Cell stiff tabIndex="-1">
+      <MaterialThemeProvider theme={createMaterialTheme({})}>
+        <Table data={data} theme={theme} sort={sort} select={select}>
+          {(tableList) => (
+            <>
+              <Header>
+                <HeaderRow>
+                  <HeaderCell stiff>
                     <MaterialCheckbox
                       color="primary"
                       size="small"
-                      checked={select.state.ids.includes(item.id)}
-                      onChange={() => select.fns.onToggleById(item.id)}
+                      checked={select.state.all}
+                      indeterminate={!select.state.all && !select.state.none}
+                      onChange={select.fns.onToggleAll}
                     />
-                  </Cell>
-                  <Cell tabIndex="-1">{item.name}</Cell>
-                  <Cell tabIndex="-1">
-                    {item.deadline.toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: '2-digit',
-                      day: '2-digit',
-                    })}
-                  </Cell>
-                  <Cell tabIndex="-1">{item.type}</Cell>
-                  <Cell tabIndex="-1">{item.isComplete.toString()}</Cell>
-                  <Cell tabIndex="-1">{item.nodes?.length}</Cell>
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
+                  </HeaderCell>
+                  <HeaderCellSort resize sortKey="TASK">
+                    Task
+                  </HeaderCellSort>
+                  <HeaderCellSort resize sortKey="DEADLINE">
+                    Deadline
+                  </HeaderCellSort>
+                  <HeaderCellSort resize sortKey="TYPE">
+                    Type
+                  </HeaderCellSort>
+                  <HeaderCellSort resize sortKey="COMPLETE">
+                    Complete
+                  </HeaderCellSort>
+                  <HeaderCellSort resize sortKey="TASKS">
+                    Tasks
+                  </HeaderCellSort>
+                </HeaderRow>
+              </Header>
+
+              <Body>
+                {tableList.map((item) => (
+                  <Row item={item} key={item.id}>
+                    <Cell stiff tabIndex="-1">
+                      <MaterialCheckbox
+                        color="primary"
+                        size="small"
+                        checked={select.state.ids.includes(item.id)}
+                        onChange={() => select.fns.onToggleById(item.id)}
+                      />
+                    </Cell>
+                    <Cell tabIndex="-1">{item.name}</Cell>
+                    <Cell tabIndex="-1">
+                      {item.deadline.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                      })}
+                    </Cell>
+                    <Cell tabIndex="-1">{item.type}</Cell>
+                    <Cell tabIndex="-1">{item.isComplete.toString()}</Cell>
+                    <Cell tabIndex="-1">{item.nodes?.length}</Cell>
+                  </Row>
+                ))}
+              </Body>
+            </>
+          )}
+        </Table>
+      </MaterialThemeProvider>
     );
   })
   .add('documentation', () => (

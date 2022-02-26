@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import FolderIcon from '@material-ui/icons/Folder';
-import FolderOpenIcon from '@material-ui/icons/FolderOpen';
-import InsertDriveFileOutlinedIcon from '@material-ui/icons/InsertDriveFileOutlined';
+import FolderIcon from '@mui/icons-material/Folder';
+import FolderOpenIcon from '@mui/icons-material/FolderOpen';
+import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
 
 import {
   Table,
