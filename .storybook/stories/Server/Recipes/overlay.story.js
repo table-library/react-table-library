@@ -1,7 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { storiesOf } from '@storybook/react';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { createTheme as createMaterialTheme } from '@mui/material/styles';
+import { ThemeProvider as MaterialThemeProvider } from '@mui/material/styles';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import {
   useCustom,
@@ -92,7 +94,7 @@ storiesOf('Server Recipes/Overlay', module)
     };
 
     return (
-      <>
+      <MaterialThemeProvider theme={createMaterialTheme({})}>
         <label htmlFor="search">
           Search by Task:&nbsp;
           <input id="search" type="text" value={search} onChange={handleSearch} />
@@ -136,7 +138,7 @@ storiesOf('Server Recipes/Overlay', module)
             )}
           </Table>
         </div>
-      </>
+      </MaterialThemeProvider>
     );
   })
   .add('documentation', () => (
