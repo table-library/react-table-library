@@ -22,6 +22,7 @@ module.exports = {
           // themes
           '@table-library/react-table-library/themes/mantine': './src/themes/mantine',
           '@table-library/react-table-library/themes/chakra-ui': './src/themes/chakra-ui',
+          '@table-library/react-table-library/themes/material-ui': './src/themes/material-ui',
         },
       },
     ],

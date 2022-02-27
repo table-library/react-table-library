@@ -48,7 +48,7 @@ export const parameters = {
         [
           'Mantine',
           'Chakra UI',
-          'Material UI (WIP)',
+          'Material UI',
           'Semantic UI (WIP)',
           'Bootstrap UI (WIP)',
           'Ant Design (WIP)',

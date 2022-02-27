@@ -26,52 +26,49 @@ type OptionsSound = {
 const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
   Table: `
     .caption-container {
-      margin-top: 10px;
+      padding: 10px 22px;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       width: 100%;
+
+      border-top: 1px solid #e0e0e0;
     }
 
     caption {
+      font-size: 14px;
       color: #868e96;
     }
-  `,
-  HeaderRow: `
-    height: 42px;
 
-    &.tr-footer {
+    .tr-footer {
+      border-top: 1px solid #e0e0e0;
       border-bottom: 1px solid transparent;
     }
   `,
-  Row: `
-    height: 49px;
+  BaseRow: `
+    height: 54px;
 
+    font-size: 14px;
+  `,
+  HeaderRow: `
+    font-weight: bold;
+    border-bottom: 1px solid #e0e0e0;
+  `,
+  Row: `
     &.row-select.row-select-single-selected, &.row-select.row-select-selected {
-      background-color: #b3dcff;
-      border-bottom: 1px solid #b3dcff;
+      background-color: #bddffd;
     }
   `,
-  BaseRow: `
-    font-size: 14px;
-
-    border-bottom: 1px solid #dee2e6;
-  `,
   BaseCell: `
+    padding: ${options.verticalSpacing}px ${options.horizontalSpacing}px;
+
     border-right: 1px solid transparent;
     border-bottom: 1px solid transparent;
 
-    padding: ${options.verticalSpacing}px ${options.horizontalSpacing}px;
-
-    & > div {
-      padding: 0;
+    &:focus {
+      outline: dotted;
+      outline-width: 1px;
+      outline-offset: -1px;
     }
-  `,
-  HeaderCell: `
-    font-weight: bold;
-    color: #495057;
-  `,
-  Cell: `
-    color: #000000;
   `,
 });
 
@@ -87,8 +84,12 @@ const getVirtualizedHighlight = (highlightOnHover: boolean) =>
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getVirtualizedTheme = (options: OptionsSound, configuration: ConfigurationSound) => ({
   Body: `
+    & > div:not(:last-child) > .tr {
+      border-bottom: 1px solid #e2e8f0;
+    }
+
     & > div:nth-child(odd) > .tr {
-      background-color: ${options.striped ? '#f8f9fa' : '#ffffff'};
+      background-color: ${options.striped ? '#f5f5f5' : '#ffffff'};
     }
 
     & > div:nth-child(even) > .tr {
@@ -111,8 +112,12 @@ const getNoneVirtualizedHighlight = (highlightOnHover: boolean) =>
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getNoneVirtualizedTheme = (options: OptionsSound, configuration: ConfigurationSound) => ({
   Row: `
+    &.tr:not(:last-child) {
+      border-bottom: 1px solid #e2e8f0;
+    }
+
     &:nth-child(odd) {
-      background-color: ${options.striped ? '#f8f9fa' : '#ffffff'};
+      background-color: ${options.striped ? '#f5f5f5' : '#ffffff'};
     }
 
     &:nth-child(even) {
@@ -134,8 +139,8 @@ const getZipTheme = (options: OptionsSound, configuration: ConfigurationSound) =
 };
 
 export const DEFAULT_OPTIONS = {
-  horizontalSpacing: 10,
-  verticalSpacing: 10,
+  horizontalSpacing: 16,
+  verticalSpacing: 16,
   striped: false,
   highlightOnHover: false,
 };

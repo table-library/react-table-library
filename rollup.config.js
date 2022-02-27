@@ -29,6 +29,7 @@ export default {
     // themes
     mantine: './src/themes/mantine/index.ts',
     chakra: './src/themes/chakra-ui/index.ts',
+    material: './src/themes/material-ui/index.ts',
   },
   output: [
     // ES module version, for modern browsers

@@ -269,9 +269,9 @@ const Component = () => {
           <IconButton
             aria-label="edit"
             icon={<FaPen />}
-            variant="outline"
+            size="xs"
+            variant="ghost"
             colorScheme="teal"
-            style={{ backgroundColor: '#ffffff' }}
             onClick={() => setDrawerId(item.id)}
           />
         </div>
@@ -387,7 +387,7 @@ const Component = () => {
           onClick={() => pagination.fns.onSetPage(pagination.state.page - 1)}
         />
 
-        {pagination.state.getPages(data.nodes).map((_, index) => (
+        {pagination.state.getPages(modifiedNodes).map((_, index) => (
           <Button
             key={index}
             colorScheme="teal"
@@ -711,9 +711,9 @@ const Component = () => {
           <IconButton
             aria-label="edit"
             icon={<FaPen />}
-            variant="outline"
+            size="xs"
+            variant="ghost"
             colorScheme="teal"
-            style={{ backgroundColor: '#ffffff' }}
             onClick={() => setDrawerId(item.id)}
           />
         </div>
@@ -829,7 +829,7 @@ const Component = () => {
           onClick={() => pagination.fns.onSetPage(pagination.state.page - 1)}
         />
 
-        {pagination.state.getPages(data.nodes).map((_, index) => (
+        {pagination.state.getPages(modifiedNodes).map((_, index) => (
           <Button
             key={index}
             colorScheme="teal"

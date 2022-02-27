@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useCustom } from '@table-library/react-table-library/table';
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/mantine';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/material-ui';
 import { useRowSelect } from '@table-library/react-table-library/select';
 import { useTree, TreeExpandClickTypes } from '@table-library/react-table-library/tree';
 import { useSort } from '@table-library/react-table-library/sort';
@@ -14,17 +14,20 @@ import {
   insertNode,
 } from '@table-library/react-table-library/common';
 import {
-  Group,
-  TextInput,
+  Stack,
+  TextField,
   Checkbox,
   Modal,
-  ActionIcon,
+  IconButton,
   Button,
+  Box,
+  Typography,
   Drawer,
-  Space,
-  Pagination,
-} from '@mantine/core';
-import { FaPen, FaSearch, FaChevronRight, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+  FormGroup,
+  FormControlLabel,
+  TablePagination,
+} from '@mui/material';
+import { FaPen, FaChevronRight, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 import { nodes } from '../../../data';
 
@@ -35,7 +38,7 @@ const Component = () => {
 
   //* Theme *//
 
-  const mantineTheme = getTheme({
+  const materialTheme = getTheme({
     ...DEFAULT_OPTIONS,
     striped: true,
     highlightOnHover: true,
@@ -45,7 +48,7 @@ const Component = () => {
       margin: 16px 0px;
     `,
   };
-  const theme = useTheme([mantineTheme, customTheme]);
+  const theme = useTheme([materialTheme, customTheme]);
 
   //* Resize *//
 
@@ -56,7 +59,7 @@ const Component = () => {
   const pagination = usePagination(data, {
     state: {
       page: 0,
-      size: 4,
+      size: 2,
     },
     onChange: onPaginationChange,
   });
@@ -207,6 +210,7 @@ const Component = () => {
       select: {
         renderHeaderCellSelect: () => (
           <Checkbox
+            size="small"
             checked={select.state.all}
             indeterminate={!select.state.all && !select.state.none}
             onChange={select.fns.onToggleAll}
@@ -214,6 +218,7 @@ const Component = () => {
         ),
         renderCellSelect: (item) => (
           <Checkbox
+            size="small"
             checked={select.state.ids.includes(item.id)}
             onChange={() => select.fns.onToggleById(item.id)}
           />
@@ -244,14 +249,9 @@ const Component = () => {
       renderCell: (item) => (
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span>{item.nodes?.length}</span>
-          <ActionIcon
-            variant="hover"
-            color="blue"
-            component="button"
-            onClick={() => setDrawerId(item.id)}
-          >
-            <FaPen />
-          </ActionIcon>
+          <IconButton onClick={() => setDrawerId(item.id)}>
+            <FaPen size={14} />
+          </IconButton>
         </div>
       ),
       resize,
@@ -261,54 +261,55 @@ const Component = () => {
 
   return (
     <>
-      <Modal
-        opened={modalOpened}
-        onClose={() => setModalOpened(false)}
-        title="Not all features included here, but we got ..."
-      >
-        <div>
-          <Checkbox label="Resize" checked />
-        </div>
-        <div>
-          <Checkbox label="Sort" checked />
-        </div>
-        <div>
-          <Checkbox label="Search" checked />
-        </div>
-        <div>
-          <Checkbox label="Filter" checked />
-        </div>
-        <div>
-          <Checkbox label="Select" checked />
-        </div>
-        <div>
-          <Checkbox label="Tree" checked />
-        </div>
-        <div>
-          <Checkbox label="Drawer on Edit" checked />
-        </div>
-        <div>
-          <Checkbox label="Pagination" checked />
-        </div>
+      <Modal open={modalOpened} onClose={() => setModalOpened(false)}>
+        <Box
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 500,
+            backgroundColor: '#ffffff',
+            border: '1px solid #e0e0e0',
+            borderRadius: '4px',
+            padding: '10px',
+          }}
+        >
+          <Typography variant="h6" component="h2">
+            "Not all features included here, but we got ..."
+          </Typography>
+          <FormGroup>
+            <FormControlLabel control={<Checkbox checked />} label="Resize" />
+            <FormControlLabel control={<Checkbox checked />} label="Sort" />
+            <FormControlLabel control={<Checkbox checked />} label="Search" />
+            <FormControlLabel control={<Checkbox checked />} label="Filter" />
+            <FormControlLabel control={<Checkbox checked />} label="Select" />
+            <FormControlLabel control={<Checkbox checked />} label="Tree" />
+            <FormControlLabel control={<Checkbox checked />} label="Drawer on Edit" />
+            <FormControlLabel control={<Checkbox checked />} label="Pagination" />
+          </FormGroup>
+        </Box>
       </Modal>
 
       {/* Form */}
 
-      <Group mx={10}>
-        <Button onClick={() => setModalOpened(true)}>Features?</Button>
+      <Stack spacing={1} direction="row">
+        <Button variant="contained" onClick={() => setModalOpened(true)}>
+          Features?
+        </Button>
 
-        <TextInput
-          placeholder="Search Task"
+        <TextField
+          label="Search Task"
           value={search}
-          icon={<FaSearch />}
           onChange={(event) => setSearch(event.target.value)}
         />
-        <Checkbox
+        <FormControlLabel
+          control={
+            <Checkbox checked={isHide} onChange={(event) => setHide(event.target.checked)} />
+          }
           label="Hide Complete"
-          checked={isHide}
-          onChange={(event) => setHide(event.target.checked)}
         />
-      </Group>
+      </Stack>
 
       {/* Table */}
 
@@ -322,37 +323,43 @@ const Component = () => {
         pagination={pagination}
       />
 
-      <Group position="right" mx={10}>
-        <Pagination
-          total={pagination.state.getTotalPages(modifiedNodes)}
-          page={pagination.state.page + 1}
-          onChange={(page) => pagination.fns.onSetPage(page - 1)}
+      <br />
+      <Stack spacing={10}>
+        <TablePagination
+          count={modifiedNodes.length}
+          page={pagination.state.page}
+          rowsPerPage={pagination.state.size}
+          rowsPerPageOptions={[1, 2, 5]}
+          onRowsPerPageChange={(event) =>
+            pagination.fns.onSetSize(parseInt(event.target.value, 10))
+          }
+          onPageChange={(event, page) => pagination.fns.onSetPage(page)}
         />
-      </Group>
+      </Stack>
 
       <Drawer
-        opened={drawerId}
+        open={drawerId}
         onClose={handleCancel}
         title="Edit"
-        padding="xl"
-        size="xl"
-        position="right"
+        anchor="right"
+        PaperProps={{
+          sx: { width: '50%', padding: '20px' },
+        }}
       >
-        <Group grow>
-          <TextInput
+        <Stack spacing={1}>
+          <TextField
             label="Name"
             value={edited || fromTreeToList(data.nodes).find((node) => node.id === drawerId)?.name}
             onChange={handleEdit}
-            data-autofocus
+            autoFocus
           />
-        </Group>
-        <Space h="md" />
-        <Group grow>
-          <Button variant="outline" onClick={handleCancel}>
+          <Button variant="outlined" onClick={handleCancel}>
             Cancel
           </Button>
-          <Button onClick={handleSave}>Save</Button>
-        </Group>
+          <Button variant="contained" onClick={handleSave}>
+            Save
+          </Button>
+        </Stack>
       </Drawer>
     </>
   );
@@ -364,7 +371,7 @@ import * as React from 'react';
 import { useCustom } from '@table-library/react-table-library/table';
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/mantine';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/material-ui';
 import { useRowSelect } from '@table-library/react-table-library/select';
 import { useTree, TreeExpandClickTypes } from '@table-library/react-table-library/tree';
 import { useSort } from '@table-library/react-table-library/sort';
@@ -375,17 +382,20 @@ import {
   insertNode,
 } from '@table-library/react-table-library/common';
 import {
-  Group,
-  TextInput,
+  Stack,
+  TextField,
   Checkbox,
   Modal,
-  ActionIcon,
+  IconButton,
   Button,
+  Box,
+  Typography,
   Drawer,
-  Space,
-  Pagination,
-} from '@mantine/core';
-import { FaPen, FaSearch, FaChevronRight, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+  FormGroup,
+  FormControlLabel,
+  TablePagination,
+} from '@mui/material';
+import { FaPen, FaChevronRight, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 import { nodes } from '../../../data';
 
@@ -396,7 +406,7 @@ const Component = () => {
 
   //* Theme *//
 
-  const mantineTheme = getTheme({
+  const materialTheme = getTheme({
     ...DEFAULT_OPTIONS,
     striped: true,
     highlightOnHover: true,
@@ -406,7 +416,7 @@ const Component = () => {
       margin: 16px 0px;
     \`,
   };
-  const theme = useTheme([mantineTheme, customTheme]);
+  const theme = useTheme([materialTheme, customTheme]);
 
   //* Resize *//
 
@@ -417,7 +427,7 @@ const Component = () => {
   const pagination = usePagination(data, {
     state: {
       page: 0,
-      size: 4,
+      size: 2,
     },
     onChange: onPaginationChange,
   });
@@ -568,6 +578,7 @@ const Component = () => {
       select: {
         renderHeaderCellSelect: () => (
           <Checkbox
+            size="small"
             checked={select.state.all}
             indeterminate={!select.state.all && !select.state.none}
             onChange={select.fns.onToggleAll}
@@ -575,6 +586,7 @@ const Component = () => {
         ),
         renderCellSelect: (item) => (
           <Checkbox
+            size="small"
             checked={select.state.ids.includes(item.id)}
             onChange={() => select.fns.onToggleById(item.id)}
           />
@@ -605,14 +617,9 @@ const Component = () => {
       renderCell: (item) => (
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span>{item.nodes?.length}</span>
-          <ActionIcon
-            variant="hover"
-            color="blue"
-            component="button"
-            onClick={() => setDrawerId(item.id)}
-          >
-            <FaPen />
-          </ActionIcon>
+          <IconButton onClick={() => setDrawerId(item.id)}>
+            <FaPen size={14} />
+          </IconButton>
         </div>
       ),
       resize,
@@ -622,54 +629,55 @@ const Component = () => {
 
   return (
     <>
-      <Modal
-        opened={modalOpened}
-        onClose={() => setModalOpened(false)}
-        title="Not all features included here, but we got ..."
-      >
-        <div>
-          <Checkbox label="Resize" checked />
-        </div>
-        <div>
-          <Checkbox label="Sort" checked />
-        </div>
-        <div>
-          <Checkbox label="Search" checked />
-        </div>
-        <div>
-          <Checkbox label="Filter" checked />
-        </div>
-        <div>
-          <Checkbox label="Select" checked />
-        </div>
-        <div>
-          <Checkbox label="Tree" checked />
-        </div>
-        <div>
-          <Checkbox label="Drawer on Edit" checked />
-        </div>
-        <div>
-          <Checkbox label="Pagination" checked />
-        </div>
+      <Modal open={modalOpened} onClose={() => setModalOpened(false)}>
+        <Box
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 500,
+            backgroundColor: '#ffffff',
+            border: '1px solid #e0e0e0',
+            borderRadius: '4px',
+            padding: '10px',
+          }}
+        >
+          <Typography variant="h6" component="h2">
+            "Not all features included here, but we got ..."
+          </Typography>
+          <FormGroup>
+            <FormControlLabel control={<Checkbox checked />} label="Resize" />
+            <FormControlLabel control={<Checkbox checked />} label="Sort" />
+            <FormControlLabel control={<Checkbox checked />} label="Search" />
+            <FormControlLabel control={<Checkbox checked />} label="Filter" />
+            <FormControlLabel control={<Checkbox checked />} label="Select" />
+            <FormControlLabel control={<Checkbox checked />} label="Tree" />
+            <FormControlLabel control={<Checkbox checked />} label="Drawer on Edit" />
+            <FormControlLabel control={<Checkbox checked />} label="Pagination" />
+          </FormGroup>
+        </Box>
       </Modal>
 
       {/* Form */}
 
-      <Group mx={10}>
-        <Button onClick={() => setModalOpened(true)}>Features?</Button>
+      <Stack spacing={1} direction="row">
+        <Button variant="contained" onClick={() => setModalOpened(true)}>
+          Features?
+        </Button>
 
-        <TextInput
-          placeholder="Search Task"
+        <TextField
+          label="Search Task"
           value={search}
-          icon={<FaSearch />}
           onChange={(event) => setSearch(event.target.value)}
         />
-        <Checkbox
+        <FormControlLabel
+          control={
+            <Checkbox checked={isHide} onChange={(event) => setHide(event.target.checked)} />
+          }
           label="Hide Complete"
-          checked={isHide}
-          onChange={(event) => setHide(event.target.checked)}
         />
-      </Group>
+      </Stack>
 
       {/* Table */}
 
@@ -683,37 +691,43 @@ const Component = () => {
         pagination={pagination}
       />
 
-      <Group position="right" mx={10}>
-        <Pagination
-          total={pagination.state.getTotalPages(modifiedNodes)}
-          page={pagination.state.page + 1}
-          onChange={(page) => pagination.fns.onSetPage(page - 1)}
+      <br />
+      <Stack spacing={10}>
+        <TablePagination
+          count={modifiedNodes.length}
+          page={pagination.state.page}
+          rowsPerPage={pagination.state.size}
+          rowsPerPageOptions={[1, 2, 5]}
+          onRowsPerPageChange={(event) =>
+            pagination.fns.onSetSize(parseInt(event.target.value, 10))
+          }
+          onPageChange={(event, page) => pagination.fns.onSetPage(page)}
         />
-      </Group>
+      </Stack>
 
       <Drawer
-        opened={drawerId}
+        open={drawerId}
         onClose={handleCancel}
         title="Edit"
-        padding="xl"
-        size="xl"
-        position="right"
+        anchor="right"
+        PaperProps={{
+          sx: { width: '50%', padding: '20px' },
+        }}
       >
-        <Group grow>
-          <TextInput
+        <Stack spacing={1}>
+          <TextField
             label="Name"
             value={edited || fromTreeToList(data.nodes).find((node) => node.id === drawerId)?.name}
             onChange={handleEdit}
-            data-autofocus
+            autoFocus
           />
-        </Group>
-        <Space h="md" />
-        <Group grow>
-          <Button variant="outline" onClick={handleCancel}>
+          <Button variant="outlined" onClick={handleCancel}>
             Cancel
           </Button>
-          <Button onClick={handleSave}>Save</Button>
-        </Group>
+          <Button variant="contained" onClick={handleSave}>
+            Save
+          </Button>
+        </Stack>
       </Drawer>
     </>
   );
