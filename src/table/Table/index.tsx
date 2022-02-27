@@ -18,10 +18,10 @@ import {
   TableElementRef,
 } from '@table-library/react-table-library/types/layout';
 
-import { useShiftDown } from './useShiftDown';
+// import { useShiftDown } from './useShiftDown';
 import { useOnInit } from './useOnInit';
 
-import styles from './styles';
+// import styles from './styles';
 
 const useTableElementRef = (ref: TableElementRef | Nullish): TableElementRef => {
   let tableElementRef = React.useRef(null) as TableElementRef;
@@ -73,15 +73,15 @@ const Table: React.FC<TableProps> = React.forwardRef(
     const [calledOnce, callbackRef] = useOnInit(onInit, tableElementRef);
 
     // no selection of content (e.g. text) in table if shift is active (e.g. select shift feature)
-    const isShiftDown = useShiftDown();
+    // const isShiftDown = useShiftDown();
 
     return (
       <div
         className="table"
-        css={`
-          ${styles(layout, { isShiftDown })}
-          ${theme?.Table}
-        `}
+        // css={css`
+        //   ${styles(layout, { isShiftDown })}
+        //   ${theme?.Table}
+        // `}
         role="grid"
         ref={callbackRef}
         {...rest}

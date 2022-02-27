@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { styled } from '@stitches/react';
 
 import { Button } from '@table-library/react-table-library/common/components/Button';
 import { Cell } from '@table-library/react-table-library/table/Cell';
@@ -9,16 +10,16 @@ import { Nullish, State } from '@table-library/react-table-library/types/common'
 import { TableNode } from '@table-library/react-table-library/types/table';
 import { CellTreeProps } from '@table-library/react-table-library/types/tree';
 
-const style = () => `
-  display: flex;
-  align-items: center;
+const BaseCellTree = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
 
-  & > div {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-`;
+  '& > div': {
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
+});
 
 const getTreeIcon = (
   item: TableNode,
@@ -82,7 +83,7 @@ export const CellTree: React.FC<CellTreeProps> = ({
 
   return (
     <Cell {...passThrough}>
-      <div css={style()}>
+      <BaseCellTree>
         <Button
           className="prefix narrow"
           margin={icon ? mergedTreeIconOptions.margin : mergedTreeIconOptions.noIconMargin}
@@ -91,7 +92,7 @@ export const CellTree: React.FC<CellTreeProps> = ({
           {icon ? <span>{icon}</span> : <span />}
         </Button>
         <div>{children}</div>
-      </div>
+      </BaseCellTree>
     </Cell>
   );
 };

@@ -1,21 +1,21 @@
 import * as React from 'react';
 import { linkTo } from '@storybook/addon-links';
-import styled from 'styled-components';
+import { styled } from '@stitches/react';
 
-const ButtonAsLink = styled.button`
-  background: none !important;
-  border: none;
-  padding: 0 !important;
-  color: #069;
-  text-decoration: underline;
-  cursor: pointer;
-`;
+const Button = styled('button', {
+  background: 'none !important',
+  border: 'none',
+  padding: '0 !important',
+  color: '#069',
+  textDecoration: 'underline',
+  cursor: 'pointer',
+});
 
 export const DocumentationSee = ({ anchor, noLink = false }) => {
   return (
     <small style={{ width: '100%' }}>
       For more documentation, see{' '}
-      {noLink ? anchor : <ButtonAsLink onClick={linkTo(anchor)}>{anchor}</ButtonAsLink>}
+      {noLink ? anchor : <Button onClick={linkTo(anchor)}>{anchor}</Button>}
     </small>
   );
 };

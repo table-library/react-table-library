@@ -1,91 +1,85 @@
 import * as React from 'react';
+import { styled } from '@stitches/react';
 
 import * as COLORS from '@table-library/react-table-library/common/colors';
 
 const GUTTER = 6;
 
-const BASE_STYLE = `
-  display: flex;
-  align-items: center;
+const BASE_STYLE = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
 
-  padding-top: 4px;
-  padding-bottom: 4px;
+  paddingTop: '4px',
+  paddingBottom: '4px',
 
-  &:not(.stiff) > div {
-    width: 100%;
+  '&:not(.stiff) > div': {
+    width: '100%',
 
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
 
-  &:first-child > div {
-    padding-left: ${GUTTER}px;
-  }
+  '&:first-child > div': {
+    paddingLeft: `${GUTTER}px`,
+  },
 
-  & > div {
-    padding-right: ${GUTTER}px;
-    padding-left: 20px;
-  }
+  '& > div': {
+    paddingRight: `${GUTTER}px`,
+    paddingLeft: '20px',
+  },
 
-  &:last-child > div {
-    padding-right: ${GUTTER}px;
-  }
+  '&:last-child > div': {
+    paddingRight: `${GUTTER}px`,
+  },
 
-  border-right: 1px solid ${COLORS.BORDER};
+  borderRight: `1px solid ${COLORS.BORDER}`,
 
-  &:last-child {
-    border-right: 0px solid transparent;
-  }
+  '&:last-child': {
+    borderRight: '0px solid transparent',
+  },
 
-  &.stiff > div {
-    padding-right: ${GUTTER}px;
-    padding-left: ${GUTTER}px;
-  }
+  '&.stiff > div': {
+    paddingRight: `${GUTTER}px`,
+    paddingLeft: `${GUTTER}px`,
+  },
 
-  &.hide {
-    display: none;
-  }
+  '&.hide:': {
+    display: 'none',
+  },
 
-  &.pin {
-    position: sticky;
-    left: 0;
-    z-index: 3;
-  }
+  '&.pin': {
+    position: 'sticky',
+    left: 0,
+    zIndex: 3,
+  },
 
-  ${() => {
-    /* #1 */
-    // otherwise tree + resize would have overflow icons */
-  }}
-  background-color: inherit;
-`;
+  /* #1 */
+  /* otherwise tree + resize would have overflow icons */
+  backgroundColor: 'inherit',
+});
 
-const CELL_CONTAINER_STYLE = () => `
-  ${BASE_STYLE}
-`;
+const BaseCellContainer = styled(BASE_STYLE, {});
 
 const CellContainer = React.forwardRef(
   (props: Record<string, any>, ref: React.ForwardedRef<HTMLDivElement>) => {
-    return <div {...props} css={CELL_CONTAINER_STYLE} ref={ref} />;
+    return <BaseCellContainer {...props} ref={ref} />;
   },
 );
 
-const HEADER_CELL_CONTAINER_STYLE = `
-  ${BASE_STYLE}
+const BaseHeaderCellContainer = styled(BASE_STYLE, {
+  position: 'relative',
 
-  position: relative;
+  borderBottom: `1px solid ${COLORS.BORDER}`,
 
-  border-bottom: 1px solid ${COLORS.BORDER};
-
-  svg,
-  path {
-    fill: currentColor;
-  }
-`;
+  'svg, path': {
+    fill: 'currentColor',
+  },
+});
 
 const HeaderCellContainer = React.forwardRef(
   (props: Record<string, any>, ref: React.ForwardedRef<HTMLDivElement>) => {
-    return <div {...props} css={HEADER_CELL_CONTAINER_STYLE} ref={ref} />;
+    return <BaseHeaderCellContainer {...props} ref={ref} />;
   },
 );
 

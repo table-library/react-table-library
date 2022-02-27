@@ -1,53 +1,56 @@
-export default ({ margin }: { margin: string }) => `
-  display: flex;
-  align-items: center;
+import { styled } from '@stitches/react';
 
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
+export default ({ margin }: { margin: string }) =>
+  styled('button', {
+    display: 'flex',
+    'align-items': 'center',
 
-  width: 100%;
-  height: 100%;
+    background: 'none',
+    color: 'inherit',
+    border: 'none',
+    padding: '0',
+    font: 'inherit',
+    cursor: 'pointer',
+    outline: 'inherit',
 
-  &.narrow {
-    width: auto;
-  }
+    width: '100%',
+    height: '100%',
 
-  &.active {
-    font-weight: bold;
-  }
+    '&.narrow': {
+      width: 'auto',
+    },
 
-  span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    '&.active': {
+      fontWeight: 'bold',
+    },
 
-  &.prefix span {
-    margin-right: ${margin};
-  }
+    span: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
 
-  &.suffix span {
-    margin-left: ${margin};
-  }
+    '&.prefix span': {
+      marginRight: `${margin}`,
+    },
 
-  div {
-    text-align: left;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
+    '&.suffix span': {
+      marginLeft: `${margin}`,
+    },
 
-  div:after {
-    display: block;
-    content: attr(title);
-    font-weight: bold;
-    height: 0;
-    overflow: hidden;
-    visibility: hidden;
-  }
-`;
+    div: {
+      textAlign: 'left',
+      overflow: 'hidden',
+      whiteSpace: 'nowrap',
+      textOverflow: 'ellipsis',
+    },
+
+    'div:after': {
+      display: 'block',
+      content: 'attr(title)',
+      fontWeight: 'bold',
+      height: 0,
+      overflow: 'hidden',
+      visibility: 'hidden',
+    },
+  });

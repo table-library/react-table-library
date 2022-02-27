@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import { styled } from '@stitches/react';
 import { storiesOf } from '@storybook/react';
 import { createTheme as createMaterialTheme } from '@mui/material/styles';
 import { ThemeProvider as MaterialThemeProvider } from '@mui/material/styles';
@@ -18,36 +18,36 @@ import {
 
 import { getData } from '../../server';
 
-export const Absolute = styled.div`
-  position: absolute;
+const Absolute = styled('div', {
+  position: 'absolute',
 
-  z-index: 5;
+  zIndex: 5,
 
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+});
 
-export const BlurryOverlay = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
+const BlurryOverlay = styled('div', {
+  position: 'absolute',
+  width: '100%',
+  height: '100%',
 
-  top: 0;
-  left: 0;
+  top: 0,
+  left: 0,
 
-  background: #ffffff;
-  filter: opacity(0.8);
+  background: '#ffffff',
+  filter: 'opacity(0.8)',
 
-  z-index: 10;
-`;
+  zIndex: 10,
+});
 
 const OverlayLoading = () => (
   <>
-    <BlurryOverlay />
-    <Absolute>
+    <Absolute />
+    <BlurryOverlay>
       <CircularProgress />
-    </Absolute>
+    </BlurryOverlay>
   </>
 );
 

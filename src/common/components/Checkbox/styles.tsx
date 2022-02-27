@@ -1,3 +1,5 @@
-export default () => `
-  cursor: pointer;
-`;
+import { styled } from '@stitches/react';
+
+export default styled('input', {
+  cursor: 'pointer',
+});

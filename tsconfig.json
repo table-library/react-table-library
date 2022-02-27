@@ -32,7 +32,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "declaration": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "importHelpers": true,
     "removeComments": true,
     "typeRoots": ["node_modules/@types"]

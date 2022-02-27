@@ -2,7 +2,7 @@ import * as React from 'react';
 import cs from 'clsx';
 
 import { HeaderRowContainer } from '@table-library/react-table-library/common/components/Row';
-import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
+// import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
 import { useProduceRowLayout } from '@table-library/react-table-library/resize/useProduceRowLayout';
 import { useConsumeRowLayout } from '@table-library/react-table-library/resize/useConsumeRowLayout';
 import { useLayoutHide } from '@table-library/react-table-library/resize/useLayoutHide';
@@ -21,7 +21,7 @@ export const HeaderRow: React.FC<HeaderRowProps> = ({
   children,
   ...rest
 }: HeaderRowProps) => {
-  const theme = React.useContext(ThemeContext);
+  // const theme = React.useContext(ThemeContext);
 
   const ref = React.useRef<HTMLDivElement>(null);
   useProduceRowLayout(ref, '.th');
@@ -33,10 +33,10 @@ export const HeaderRow: React.FC<HeaderRowProps> = ({
     <HeaderRowContainer
       role="rowheader"
       className={cs('tr', 'tr-header', className)}
-      css={`
-        ${theme?.BaseRow}
-        ${theme?.HeaderRow}
-      `}
+      // css={css`
+      //   ${theme?.BaseRow}
+      //   ${theme?.HeaderRow}
+      // `}
       ref={ref}
       {...rest}
     >

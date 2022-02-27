@@ -1,6 +1,7 @@
+import { styled } from '@stitches/react';
 import { ColumnResizeProps } from '@table-library/react-table-library/types/resize';
 
-const resizerStyle = (resize: ColumnResizeProps) => {
+const ResizerBlueprint = (resize: ColumnResizeProps) => {
   const width =
     typeof resize === 'boolean' || resize?.resizerWidth == null ? 3 : resize.resizerWidth;
 
@@ -9,22 +10,22 @@ const resizerStyle = (resize: ColumnResizeProps) => {
       ? 'transparent'
       : resize.resizerHighlight;
 
-  return `
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    cursor: col-resize;
-    width: ${width}px;
+  return styled('span', {
+    zIndex: 1,
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    cursor: 'col-resize',
+    width: `${width}px`,
 
-    background-color: transparent;
-    transition: background-color 0.1s linear;
+    backgroundColor: 'transparent',
+    transition: 'background-color 0.1s linear',
 
-    &:hover {
-      background-color: ${highlight};
-    }
-  `;
+    '&:hover': {
+      backgroundColor: `${highlight}`,
+    },
+  });
 };
 
-export { resizerStyle };
+export { ResizerBlueprint };

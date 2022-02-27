@@ -3,7 +3,7 @@ import cs from 'clsx';
 
 import { RowContainer } from '@table-library/react-table-library/common/components/Row';
 import { isRowClick } from '@table-library/react-table-library/common/util/isRowClick';
-import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
+// import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
 import { SelectContext } from '@table-library/react-table-library/common/context/Select';
 import { TreeContext } from '@table-library/react-table-library/common/context/Tree';
 import { SortContext } from '@table-library/react-table-library/common/context/Sort';
@@ -88,8 +88,9 @@ export const Row: React.FC<RowProps> = (props: RowProps) => {
 
   const rowPropsByFeature = getRowProps(features, props);
 
-  const theme = React.useContext(ThemeContext);
+  // const theme = React.useContext(ThemeContext);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { themeByFeature, classNamesByFeature, onClickByFeature } = evaluateProps(
     rowPropsByFeature,
     onClick,
@@ -109,11 +110,11 @@ export const Row: React.FC<RowProps> = (props: RowProps) => {
         disabled,
         clickable: onClickByFeature || onDoubleClick,
       })}
-      css={`
-        ${themeByFeature}
-        ${theme?.BaseRow}
-        ${theme?.Row}
-      `}
+      // css={css`
+      //   ${themeByFeature}
+      //   ${theme?.BaseRow}
+      //   ${theme?.Row}
+      // `}
       ref={ref}
     >
       {children}
