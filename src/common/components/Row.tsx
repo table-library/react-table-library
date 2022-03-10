@@ -1,4 +1,7 @@
 import * as React from 'react';
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { css, jsx } from '@emotion/react';
 
 import * as COLORS from '@table-library/react-table-library/common/colors';
 import { LayoutContext } from '@table-library/react-table-library/common/context/Layout';
@@ -23,7 +26,7 @@ const getBaseStyle = (layout: Layout | Nullish) => `
   ${layout?.horizontalScroll ? 'min-width: max-content;' : ''}
 `;
 
-const getRowContainerStyle = (layout: Layout | Nullish) => `
+const getRowContainerStyle = (layout: Layout | Nullish) => css`
   ${getBaseStyle(layout)}
 
   font-size: 18px;
@@ -56,7 +59,7 @@ const RowContainer = React.forwardRef(
   },
 );
 
-const getHeaderRowContainerStyle = (layout: Layout | Nullish) => `
+const getHeaderRowContainerStyle = (layout: Layout | Nullish) => css`
   ${getBaseStyle(layout)}
 
   font-size: 18px;

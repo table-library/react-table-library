@@ -1,4 +1,7 @@
 import * as React from 'react';
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { css, jsx } from '@emotion/react';
 
 import { Button } from '@table-library/react-table-library/common/components/Button';
 import { Cell } from '@table-library/react-table-library/table/Cell';
@@ -9,7 +12,7 @@ import { Nullish, State } from '@table-library/react-table-library/types/common'
 import { TableNode } from '@table-library/react-table-library/types/table';
 import { CellTreeProps } from '@table-library/react-table-library/types/tree';
 
-const style = () => `
+const style = () => css`
   display: flex;
   align-items: center;
 

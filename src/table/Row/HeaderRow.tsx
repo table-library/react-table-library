@@ -1,5 +1,8 @@
 import * as React from 'react';
 import cs from 'clsx';
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { css, jsx } from '@emotion/react';
 
 import { HeaderRowContainer } from '@table-library/react-table-library/common/components/Row';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
@@ -33,7 +36,7 @@ export const HeaderRow: React.FC<HeaderRowProps> = ({
     <HeaderRowContainer
       role="rowheader"
       className={cs('tr', 'tr-header', className)}
-      css={`
+      css={css`
         ${theme?.BaseRow}
         ${theme?.HeaderRow}
       `}

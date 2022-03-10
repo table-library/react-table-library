@@ -4,12 +4,7 @@ import { useReducerWithMiddleware } from '@table-library/react-table-library/com
 import { useSyncControlledState } from '@table-library/react-table-library/common/util//useSyncControlledState';
 import { useSyncRefState } from '@table-library/react-table-library/common/util/useSyncRefState';
 
-import {
-  Nullish,
-  Action,
-  State,
-  StateAndChange,
-} from '@table-library/react-table-library/types/common';
+import { Action, State, StateAndChange } from '@table-library/react-table-library/types/common';
 import { Data, TableNode } from '@table-library/react-table-library/types/table';
 import {
   Pages,
@@ -45,9 +40,9 @@ const DEFAULT_OPTIONS = {
 
 const usePagination = (
   data: Data,
-  primary: StateAndChange | Nullish,
-  options: PaginationOptions,
-  context: any,
+  primary?: StateAndChange,
+  options?: PaginationOptions,
+  context?: any,
 ): Pagination => {
   const controlledState: State = primary?.state
     ? { ...DEFAULT_STATE, ...primary.state }
@@ -133,7 +128,7 @@ const usePagination = (
 
   const mergedOptions = {
     ...DEFAULT_OPTIONS,
-    ...options,
+    ...(options ? options : {}),
   };
 
   const stateAndGetters = {

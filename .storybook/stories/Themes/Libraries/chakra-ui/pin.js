@@ -16,26 +16,26 @@ const Component = () => {
   const chakraTheme = getTheme(DEFAULT_OPTIONS);
   const customTheme = {
     BaseCell: `
-      &:nth-child(1) {
+      &:nth-of-type(1) {
         left: 0px;
 
         min-width: 250px;
         width: 250px;
       }
 
-      &:nth-child(2) {
+      &:nth-of-type(2) {
         left: 250px;
 
         min-width: 150px;
         width: 150px;
       }
 
-      &:nth-child(3) {
+      &:nth-of-type(3) {
         min-width: 20%;
         width: 20%;
       }
 
-      &:nth-child(4), &:nth-child(5) {
+      &:nth-of-type(4), &:nth-of-type(5) {
         min-width: 700px;
         width: 700px;
       }
@@ -99,26 +99,26 @@ const Component = () => {
   const chakraTheme = getTheme(DEFAULT_OPTIONS);
   const customTheme = {
     BaseCell: \`
-      &:nth-child(1) {
+      &:nth-of-type(1) {
         left: 0px;
 
         min-width: 250px;
         width: 250px;
       }
 
-      &:nth-child(2) {
+      &:nth-of-type(2) {
         left: 250px;
 
         min-width: 150px;
         width: 150px;
       }
 
-      &:nth-child(3) {
+      &:nth-of-type(3) {
         min-width: 20%;
         width: 20%;
       }
 
-      &:nth-child(4), &:nth-child(5) {
+      &:nth-of-type(4), &:nth-of-type(5) {
         min-width: 700px;
         width: 700px;
       }

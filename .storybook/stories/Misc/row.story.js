@@ -251,11 +251,11 @@ storiesOf('Misc/Row', module)
 
     const theme = useTheme({
       BaseRow: `
-        &:nth-child(odd) {
+        &:nth-of-type(odd) {
           background-color: #f5f5f5;
         }
 
-        &:nth-child(even) {
+        &:nth-of-type(even) {
           background-color: #fafafa;
         }
       `,

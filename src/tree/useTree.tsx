@@ -10,7 +10,7 @@ import { useSyncRefState } from '@table-library/react-table-library/common/util/
 import IconChevronSingleDown from '@table-library/react-table-library/common/icons/IconChevronSingleDown';
 import IconChevronSingleRight from '@table-library/react-table-library/common/icons/IconChevronSingleRight';
 
-import { Nullish, State, StateAndChange } from '@table-library/react-table-library/types/common';
+import { State, StateAndChange } from '@table-library/react-table-library/types/common';
 import {
   Data,
   TableNode,
@@ -45,7 +45,7 @@ const getRowProps = (props: RowProps, features: Features): FeatureProps => {
       cursor: pointer;
     }
 
-    .td:nth-child(${treeYLevel + 1}) > div {
+    .td:nth-of-type(${treeYLevel + 1}) > div {
       margin-left: ${treeXLevel * tree.options.indentation}px;
     }
   `;
@@ -97,9 +97,9 @@ const DEFAULT_OPTIONS = {
 
 const useTree = (
   data: Data,
-  primary: StateAndChange | Nullish,
-  options: TreeOptions,
-  context: any,
+  primary?: StateAndChange,
+  options?: TreeOptions,
+  context?: any,
 ): Tree => {
   const controlledState: State = primary?.state
     ? { ...DEFAULT_STATE, ...primary.state }

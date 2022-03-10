@@ -68,17 +68,17 @@ storiesOf('Features/Layout', module)
   .add('percentage', () => {
     const theme = useTheme({
       BaseCell: `
-        &:nth-child(1) {
+        &:nth-of-type(1) {
           min-width: 35%;
           width: 35%;
         }
 
-        &:nth-child(2), &:nth-child(3), &:nth-child(4) {
+        &:nth-of-type(2), &:nth-of-type(3), &:nth-of-type(4) {
           min-width: 15%;
           width: 15%;
         }
 
-        &:nth-child(5) {
+        &:nth-of-type(5) {
           min-width: 20%;
           width: 20%;
         }
@@ -126,17 +126,17 @@ storiesOf('Features/Layout', module)
   .add('px', () => {
     const theme = useTheme({
       BaseCell: `
-        &:nth-child(1) {
+        &:nth-of-type(1) {
           min-width: 100px;
           width: 100px;
         }
 
-        &:nth-child(2), &:nth-child(3), &:nth-child(4) {
+        &:nth-of-type(2), &:nth-of-type(3), &:nth-of-type(4) {
           min-width: 75px;
           width: 75px;
         }
 
-        &:nth-child(5) {
+        &:nth-of-type(5) {
           min-width: 100px;
           width: 100px;
         }
@@ -242,16 +242,16 @@ storiesOf('Features/Layout', module)
   .add('fill space', () => {
     const theme = useTheme({
       BaseCell: `
-        &:nth-child(1), &:nth-child(2), &:nth-child(3) {
+        &:nth-of-type(1), &:nth-of-type(2), &:nth-of-type(3) {
           min-width: 15%;
           width: 15%;
         }
 
-        &:nth-child(4) {
+        &:nth-of-type(4) {
           flex: 1;
         }
 
-        &:nth-child(5) {
+        &:nth-of-type(5) {
           min-width: 100px;
           width: 100px;
         }
@@ -299,21 +299,21 @@ storiesOf('Features/Layout', module)
   .add('squeeze space', () => {
     const theme = useTheme({
       BaseCell: `
-        &:nth-child(1), &:nth-child(2) {
+        &:nth-of-type(1), &:nth-of-type(2) {
           min-width: 25%;
           width: 25%;
         }
 
-        &:nth-child(3) {
+        &:nth-of-type(3) {
           width: 25%;
         }
 
-        &:nth-child(4) {
+        &:nth-of-type(4) {
           min-width: 100px;
           width: 100px;
         }
 
-        &:nth-child(5) {
+        &:nth-of-type(5) {
           min-width: 25%;
           width: 25%;
         }

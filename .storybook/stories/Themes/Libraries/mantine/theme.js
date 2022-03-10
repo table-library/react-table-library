@@ -18,22 +18,22 @@ const Component = () => {
       border-right: 1px solid transparent;
     `,
     Row: `
-      &:nth-child(odd) {
-        .td:nth-child(even) {
+      &:nth-of-type(odd) {
+        .td:nth-of-type(even) {
           background-color: #dddddd;
         }
 
-        .td:nth-child(odd) {
+        .td:nth-of-type(odd) {
           background-color: #fafafa;
         }
       }
 
-      &:nth-child(even) {
-        .td:nth-child(odd) {
+      &:nth-of-type(even) {
+        .td:nth-of-type(odd) {
           background-color: #dddddd;
         }
 
-        .td:nth-child(even) {
+        .td:nth-of-type(even) {
           background-color: #fafafa;
         }
       }
@@ -94,22 +94,22 @@ const Component = () => {
       border-right: 1px solid transparent;
     \`,
     Row: \`
-      &:nth-child(odd) {
-        .td:nth-child(even) {
+      &:nth-of-type(odd) {
+        .td:nth-of-type(even) {
           background-color: #dddddd;
         }
 
-        .td:nth-child(odd) {
+        .td:nth-of-type(odd) {
           background-color: #fafafa;
         }
       }
 
-      &:nth-child(even) {
-        .td:nth-child(odd) {
+      &:nth-of-type(even) {
+        .td:nth-of-type(odd) {
           background-color: #dddddd;
         }
 
-        .td:nth-child(even) {
+        .td:nth-of-type(even) {
           background-color: #fafafa;
         }
       }

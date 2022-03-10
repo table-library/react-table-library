@@ -1,4 +1,7 @@
 import * as React from 'react';
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { css, jsx } from '@emotion/react';
 
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
 
@@ -17,7 +20,7 @@ export const Header: React.FC<HeaderProps> = ({ children, ...rest }: HeaderProps
     <div
       role="rowgroup"
       className="thead"
-      css={`
+      css={css`
         ${headerRow}
         ${theme?.Header}
       `}

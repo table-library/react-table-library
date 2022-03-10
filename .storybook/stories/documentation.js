@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { linkTo } from '@storybook/addon-links';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 const ButtonAsLink = styled.button`
   background: none !important;

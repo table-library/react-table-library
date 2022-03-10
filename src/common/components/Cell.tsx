@@ -1,4 +1,7 @@
 import * as React from 'react';
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { css, jsx } from '@emotion/react';
 
 import * as COLORS from '@table-library/react-table-library/common/colors';
 
@@ -19,7 +22,7 @@ const BASE_STYLE = `
     text-overflow: ellipsis;
   }
 
-  &:first-child > div {
+  &:first-of-type > div {
     padding-left: ${GUTTER}px;
   }
 
@@ -28,13 +31,13 @@ const BASE_STYLE = `
     padding-left: 20px;
   }
 
-  &:last-child > div {
+  &:last-of-type > div {
     padding-right: ${GUTTER}px;
   }
 
   border-right: 1px solid ${COLORS.BORDER};
 
-  &:last-child {
+  &:last-of-type {
     border-right: 0px solid transparent;
   }
 
@@ -60,7 +63,7 @@ const BASE_STYLE = `
   background-color: inherit;
 `;
 
-const CELL_CONTAINER_STYLE = () => `
+const CELL_CONTAINER_STYLE = css`
   ${BASE_STYLE}
 `;
 
@@ -70,7 +73,7 @@ const CellContainer = React.forwardRef(
   },
 );
 
-const HEADER_CELL_CONTAINER_STYLE = `
+const HEADER_CELL_CONTAINER_STYLE = css`
   ${BASE_STYLE}
 
   position: relative;
