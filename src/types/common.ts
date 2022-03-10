@@ -17,8 +17,8 @@ export type IdState = {
 export type MiddlewareFunction = (action: Action | Nullish, state: State, context: any) => void;
 
 export type StateAndChange = {
-  state: State;
-  onChange: MiddlewareFunction;
+  state?: State;
+  onChange?: MiddlewareFunction;
 };
 
 export type Modifier = (nodes: any[]) => any[];

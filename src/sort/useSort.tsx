@@ -7,12 +7,7 @@ import IconChevronSingleDown from '@table-library/react-table-library/common/ico
 import IconChevronSingleUp from '@table-library/react-table-library/common/icons/IconChevronSingleUp';
 import IconChevronSingleUpDown from '@table-library/react-table-library/common/icons/IconChevronSingleUpDown';
 
-import {
-  Nullish,
-  Action,
-  State,
-  StateAndChange,
-} from '@table-library/react-table-library/types/common';
+import { Action, State, StateAndChange } from '@table-library/react-table-library/types/common';
 import { Data, TableNode } from '@table-library/react-table-library/types/table';
 import {
   Sort,
@@ -74,9 +69,9 @@ const DEFAULT_OPTIONS = {
 
 const useSort = (
   data: Data,
-  primary: StateAndChange | Nullish,
+  primary: StateAndChange,
   options: SortOptions,
-  context: any,
+  context?: any,
 ): Sort => {
   const controlledState: State = primary?.state
     ? { ...DEFAULT_STATE, ...primary.state }
@@ -146,7 +141,7 @@ const useSort = (
     ...options,
     sortIcon: {
       ...DEFAULT_SORT_ICON,
-      ...options.sortIcon,
+      ...(options ? options.sortIcon : {}),
     },
   };
 

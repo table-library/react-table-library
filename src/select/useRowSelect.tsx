@@ -6,7 +6,7 @@ import { useIdReducer } from '@table-library/react-table-library/common/util/use
 import { useSyncRefState } from '@table-library/react-table-library/common/util/useSyncRefState';
 import { applyModifiers } from '@table-library/react-table-library/common/util/modifiers';
 
-import { Nullish, State, StateAndChange } from '@table-library/react-table-library/types/common';
+import { State, StateAndChange } from '@table-library/react-table-library/types/common';
 import {
   Data,
   TableNode,
@@ -102,9 +102,9 @@ const DEFAULT_OPTIONS = {
 
 const useRowSelect = (
   data: Data,
-  primary: StateAndChange | Nullish,
-  options: SelectOptions,
-  context: any,
+  primary?: StateAndChange,
+  options?: SelectOptions,
+  context?: any,
 ): Select => {
   const controlledState: State = primary?.state
     ? { ...DEFAULT_STATE, ...primary.state }
