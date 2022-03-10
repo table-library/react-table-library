@@ -1,4 +1,8 @@
-export default ({ margin }: { margin: string }) => `
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { css, jsx } from '@emotion/react';
+
+export default ({ margin }: { margin: string }) => css`
   display: flex;
   align-items: center;
 

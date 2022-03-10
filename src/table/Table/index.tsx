@@ -1,4 +1,7 @@
 import * as React from 'react';
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { css, jsx } from '@emotion/react';
 
 import { TableContext } from '@table-library/react-table-library/common/context/Table';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
@@ -78,7 +81,7 @@ const Table: React.FC<TableProps> = React.forwardRef(
     return (
       <div
         className="table"
-        css={`
+        css={css`
           ${styles(layout, { isShiftDown })}
           ${theme?.Table}
         `}

@@ -1,4 +1,7 @@
 import * as React from 'react';
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { css, jsx } from '@emotion/react';
 
 import * as COLORS from '@table-library/react-table-library/common/colors';
 
@@ -60,7 +63,7 @@ const BASE_STYLE = `
   background-color: inherit;
 `;
 
-const CELL_CONTAINER_STYLE = () => `
+const CELL_CONTAINER_STYLE = css`
   ${BASE_STYLE}
 `;
 
@@ -70,7 +73,7 @@ const CellContainer = React.forwardRef(
   },
 );
 
-const HEADER_CELL_CONTAINER_STYLE = `
+const HEADER_CELL_CONTAINER_STYLE = css`
   ${BASE_STYLE}
 
   position: relative;

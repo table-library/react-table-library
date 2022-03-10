@@ -26,16 +26,16 @@ React Table Library requires the following libraries to be installed:
 
 - "react": "^16.8.0 || ^17"
 - "react-dom": "^16.8.0 || ^17"
-- "styled-components": ">= 4"
+- "@emotion/react": ">= 11",
 
 ## Installation
 
 ```sh
-npm install @table-library/react-table-library styled-components
+npm install @table-library/react-table-library @emotion/react
 ```
 
 ```sh
-yarn add @table-library/react-table-library styled-components
+yarn add @table-library/react-table-library @emotion/react
 ```
 
 ## Usage

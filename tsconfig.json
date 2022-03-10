@@ -33,6 +33,7 @@
     "noEmit": true,
     "declaration": true,
     "jsx": "preserve",
+    "jsxImportSource": "@emotion/react",
     "importHelpers": true,
     "removeComments": true,
     "typeRoots": ["node_modules/@types"]

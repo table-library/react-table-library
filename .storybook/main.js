@@ -30,6 +30,7 @@ module.exports = {
         alias: {
           ...config.resolve.alias,
           '@emotion/core': '@emotion/react',
+          '@emotion/styled': '@emotion/styled',
           'emotion-theming': '@emotion/react',
         },
       },

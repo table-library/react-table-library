@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { storiesOf } from '@storybook/react';
 import { createTheme as createMaterialTheme } from '@mui/material/styles';
 import { ThemeProvider as MaterialThemeProvider } from '@mui/material/styles';
