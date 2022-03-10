@@ -1,13 +1,13 @@
 {
   "name": "@table-library/react-table-library",
-  "version": "1.17.12-beta.4",
+  "version": "1.18.0",
   "description": "react-table-library",
   "main": "main.js",
   "types": "index.d.ts",
   "peerDependencies": {
-    "@emotion/react": ">= 11",
     "react": "^16.8.0 || ^17",
-    "react-dom": "^16.8.0 || ^17"
+    "react-dom": "^16.8.0 || ^17",
+    "@emotion/react": ">= 11"
   },
   "dependencies": {
     "clsx": "1.1.1",
