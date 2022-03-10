@@ -12,7 +12,7 @@
 [![Star][github-star-badge]][github-star]
 [![Sponsor][github-sponsor-badge]][github-sponsor]
 
-React Table Library -- yet another table library for React -- which prioritzes:
+React Table Library -- an almost headless table library -- which prioritzes:
 
 - composition over configuration
 - customization
