@@ -48,7 +48,7 @@ storiesOf('Library Themes/Bootstrap UI (WIP)', module)
         border-bottom: 1px solid transparent;
       `,
       Cell: `
-      	&:nth-child(1) {
+      	&:nth-of-type(1) {
           font-weight: bold;
         }
       `,

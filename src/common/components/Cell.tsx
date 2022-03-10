@@ -22,7 +22,7 @@ const BASE_STYLE = `
     text-overflow: ellipsis;
   }
 
-  &:first-child > div {
+  &:first-of-type > div {
     padding-left: ${GUTTER}px;
   }
 
@@ -31,13 +31,13 @@ const BASE_STYLE = `
     padding-left: 20px;
   }
 
-  &:last-child > div {
+  &:last-of-type > div {
     padding-right: ${GUTTER}px;
   }
 
   border-right: 1px solid ${COLORS.BORDER};
 
-  &:last-child {
+  &:last-of-type {
     border-right: 0px solid transparent;
   }
 

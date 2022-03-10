@@ -34,11 +34,11 @@ storiesOf('Features/Theme', module)
         background-color: #eaf5fd;
       `,
       Row: `
-        &:nth-child(odd) {
+        &:nth-of-type(odd) {
           background-color: #d2e9fb;
         }
 
-        &:nth-child(even) {
+        &:nth-of-type(even) {
           background-color: #eaf5fd;
         }
       `,
@@ -88,22 +88,22 @@ storiesOf('Features/Theme', module)
         border-right: 1px solid transparent;
       `,
       Row: `
-        &:nth-child(odd) {
-          .td:nth-child(even) {
+        &:nth-of-type(odd) {
+          .td:nth-of-type(even) {
             background-color: #dddddd;
           }
 
-          .td:nth-child(odd) {
+          .td:nth-of-type(odd) {
             background-color: #fafafa;
           }
         }
 
-        &:nth-child(even) {
-          .td:nth-child(odd) {
+        &:nth-of-type(even) {
+          .td:nth-of-type(odd) {
             background-color: #dddddd;
           }
 
-          .td:nth-child(even) {
+          .td:nth-of-type(even) {
             background-color: #fafafa;
           }
         }
@@ -153,11 +153,11 @@ storiesOf('Features/Theme', module)
       BaseCell: `
         text-align: center;
 
-        &:first-child {
+        &:first-of-type {
           text-align: left;
         }
 
-        &:last-child {
+        &:last-of-type {
           text-align: right;
         }
       `,
@@ -427,7 +427,7 @@ storiesOf('Features/Theme', module)
         position: relative;
         z-index: 1;
 
-        &:not(:last-child) {
+        &:not(:last-of-type) {
           margin-bottom: -1px;
         }
 
@@ -489,11 +489,11 @@ storiesOf('Features/Theme', module)
         background-color: #eaf5fd;
       `,
       Row: `
-        &:nth-child(odd) {
+        &:nth-of-type(odd) {
           background-color: #d2e9fb;
         }
 
-        &:nth-child(even) {
+        &:nth-of-type(even) {
           background-color: #eaf5fd;
         }
       `,

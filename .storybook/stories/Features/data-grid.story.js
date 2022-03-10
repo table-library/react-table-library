@@ -67,11 +67,11 @@ storiesOf('Features/Data Grid', module)
         min-width: 15%;
         width: 15%;
 
-        &:nth-child(1) {
+        &:nth-of-type(1) {
           left: 0px;
         }
 
-        &:nth-child(2) {
+        &:nth-of-type(2) {
           left: 15%;
         }
       `,

@@ -84,15 +84,15 @@ const getVirtualizedHighlight = (highlightOnHover: boolean) =>
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getVirtualizedTheme = (options: OptionsSound, configuration: ConfigurationSound) => ({
   Body: `
-    & > div:not(:last-child) > .tr {
+    & > div:not(:last-of-type) > .tr {
       border-bottom: 1px solid #e2e8f0;
     }
 
-    & > div:nth-child(odd) > .tr {
+    & > div:nth-of-type(odd) > .tr {
       background-color: ${options.striped ? '#f5f5f5' : '#ffffff'};
     }
 
-    & > div:nth-child(even) > .tr {
+    & > div:nth-of-type(even) > .tr {
       background-color: #ffffff;
     }
 
@@ -112,15 +112,15 @@ const getNoneVirtualizedHighlight = (highlightOnHover: boolean) =>
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getNoneVirtualizedTheme = (options: OptionsSound, configuration: ConfigurationSound) => ({
   Row: `
-    &.tr:not(:last-child) {
+    &.tr:not(:last-of-type) {
       border-bottom: 1px solid #e2e8f0;
     }
 
-    &:nth-child(odd) {
+    &:nth-of-type(odd) {
       background-color: ${options.striped ? '#f5f5f5' : '#ffffff'};
     }
 
-    &:nth-child(even) {
+    &:nth-of-type(even) {
       background-color: #ffffff;
     }
 

@@ -15,17 +15,17 @@ const Component = () => {
   const mantineTheme = getTheme(DEFAULT_OPTIONS);
   const customTheme = useTheme({
     BaseCell: `
-      &:nth-child(1) {
+      &:nth-of-type(1) {
         min-width: 35%;
         width: 35%;
       }
 
-      &:nth-child(2), &:nth-child(3), &:nth-child(4) {
+      &:nth-of-type(2), &:nth-of-type(3), &:nth-of-type(4) {
         min-width: 15%;
         width: 15%;
       }
 
-      &:nth-child(5) {
+      &:nth-of-type(5) {
         min-width: 20%;
         width: 20%;
       }
@@ -83,17 +83,17 @@ const Component = () => {
   const mantineTheme = getTheme(DEFAULT_OPTIONS);
   const customTheme = useTheme({
     BaseCell: \`
-      &:nth-child(1) {
+      &:nth-of-type(1) {
         min-width: 35%;
         width: 35%;
       }
 
-      &:nth-child(2), &:nth-child(3), &:nth-child(4) {
+      &:nth-of-type(2), &:nth-of-type(3), &:nth-of-type(4) {
         min-width: 15%;
         width: 15%;
       }
 
-      &:nth-child(5) {
+      &:nth-of-type(5) {
         min-width: 20%;
         width: 20%;
       }

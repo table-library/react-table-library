@@ -45,7 +45,7 @@ const getRowProps = (props: RowProps, features: Features): FeatureProps => {
       cursor: pointer;
     }
 
-    .td:nth-child(${treeYLevel + 1}) > div {
+    .td:nth-of-type(${treeYLevel + 1}) > div {
       margin-left: ${treeXLevel * tree.options.indentation}px;
     }
   `;

@@ -16,11 +16,11 @@ const Component = () => {
       background-color: #eaf5fd;
     `,
     Row: `
-      &:nth-child(odd) {
+      &:nth-of-type(odd) {
         background-color: #d2e9fb;
       }
 
-      &:nth-child(even) {
+      &:nth-of-type(even) {
         background-color: #eaf5fd;
       }
     `,
@@ -74,11 +74,11 @@ const Component = () => {
       background-color: #eaf5fd;
     \`,
     Row: \`
-      &:nth-child(odd) {
+      &:nth-of-type(odd) {
         background-color: #d2e9fb;
       }
 
-      &:nth-child(even) {
+      &:nth-of-type(even) {
         background-color: #eaf5fd;
       }
     \`,

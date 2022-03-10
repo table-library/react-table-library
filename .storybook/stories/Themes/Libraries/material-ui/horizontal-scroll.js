@@ -15,22 +15,22 @@ const Component = () => {
   const materialTheme = getTheme(DEFAULT_OPTIONS);
   const customTheme = {
     BaseCell: `
-      &:nth-child(1) {
+      &:nth-of-type(1) {
         min-width: 50%;
         width: 50%;
       }
 
-      &:nth-child(2) {
+      &:nth-of-type(2) {
         min-width: 200px;
         width: 200px;
       }
 
-      &:nth-child(3), &:nth-child(4) {
+      &:nth-of-type(3), &:nth-of-type(4) {
         min-width: 25%;
         width: 25%;
       }
 
-      &:nth-child(5) {
+      &:nth-of-type(5) {
         min-width: 50%;
         width: 50%;
       }
@@ -90,22 +90,22 @@ const Component = () => {
   const materialTheme = getTheme(DEFAULT_OPTIONS);
   const customTheme = {
     BaseCell: \`
-      &:nth-child(1) {
+      &:nth-of-type(1) {
         min-width: 50%;
         width: 50%;
       }
 
-      &:nth-child(2) {
+      &:nth-of-type(2) {
         min-width: 200px;
         width: 200px;
       }
 
-      &:nth-child(3), &:nth-child(4) {
+      &:nth-of-type(3), &:nth-of-type(4) {
         min-width: 25%;
         width: 25%;
       }
 
-      &:nth-child(5) {
+      &:nth-of-type(5) {
         min-width: 50%;
         width: 50%;
       }
