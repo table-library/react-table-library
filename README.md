@@ -1,4 +1,6 @@
-# React Table Library
+<h1 align="center">Build better Tables with React&nbsp;&nbsp;&nbsp;🍱</h1>
+
+<br>
 
 [![Version][version-badge]][package]
 [![Size][size-badge]][size]
@@ -11,6 +13,8 @@
 [![Follow][twitter-follow-badge]][twitter-follow]
 [![Star][github-star-badge]][github-star]
 [![Sponsor][github-sponsor-badge]][github-sponsor]
+
+## React Table Library
 
 React Table Library -- an almost headless table library -- which prioritzes:
 
