@@ -13,6 +13,8 @@ import pkg from './package.json';
 // see package.json "type": "module"
 // https://stackoverflow.com/a/63216984/1189762
 // see babel.config.cjs instead of .js
+// https://github.com/storybookjs/storybook/issues/11587#issuecomment-898604266
+// see .storybook/package.json
 const babelConfig = require('./babel.config.cjs');
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
