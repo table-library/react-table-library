@@ -9,7 +9,11 @@ import postcss from 'rollup-plugin-postcss';
 
 import pkg from './package.json';
 
-const babelConfig = require('./babel.config.js');
+// https://stackoverflow.com/a/65978156/1189762
+// see package.json "type": "module"
+// https://stackoverflow.com/a/63216984/1189762
+// see babel.config.cjs instead of .js
+const babelConfig = require('./babel.config.cjs');
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
