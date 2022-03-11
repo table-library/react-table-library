@@ -1,7 +1,8 @@
 {
   "name": "@table-library/react-table-library",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "react-table-library",
+  "type": "module",
   "main": "main.js",
   "types": "index.d.ts",
   "peerDependencies": {
