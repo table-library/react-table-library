@@ -73,7 +73,7 @@ export type TableProps = {
 
 export type TableNode = {
   id: string;
-  nodes?: TableNode[];
+  nodes?: TableNode[] | Nullish;
   [prop: string]: any;
 };
 

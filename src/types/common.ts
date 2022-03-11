@@ -14,7 +14,7 @@ export type IdState = {
   none?: boolean;
 } & State;
 
-export type MiddlewareFunction = (action: Action | Nullish, state: State, context: any) => void;
+export type MiddlewareFunction = (action: Action, state: State, context: any) => void;
 
 export type StateAndChange = {
   state?: State;

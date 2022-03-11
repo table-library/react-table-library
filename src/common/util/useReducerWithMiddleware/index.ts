@@ -27,7 +27,7 @@ const useReducerWithMiddleware = (
     if (!aRef.current) return;
 
     afterwareFns.forEach((afterwareFn) =>
-      afterwareFn(aRef.current, state, context ? context.current : undefined),
+      afterwareFn(aRef.current!, state, context ? context.current : undefined),
     );
 
     aRef.current = null;
