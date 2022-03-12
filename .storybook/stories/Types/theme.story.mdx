@@ -6,14 +6,27 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 ```javascript
 export type Theme = {
-  Table?: string,
-  Header?: string,
-  Body?: string,
-  BaseRow?: string,
-  HeaderRow?: string,
-  Row?: string,
-  BaseCell?: string,
-  HeaderCell?: string,
-  Cell?: string,
+  Table?: string;
+  Header?: string;
+  Body?: string;
+  BaseRow?: string;
+  HeaderRow?: string;
+  Row?: string;
+  BaseCell?: string;
+  HeaderCell?: string;
+  Cell?: string;
 };
 ```
+
+Access all feature related types:
+
+```javascript
+import * as TYPES from '@table-library/react-table-library/types/theme';
+```
+
+Access **all** types:
+
+```javascript
+import * as TYPES from '@table-library/react-table-library/types';
+```
+
