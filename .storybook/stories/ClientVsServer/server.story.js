@@ -20,9 +20,9 @@ import {
 } from '@table-library/react-table-library/select';
 import { usePagination } from '@table-library/react-table-library/pagination';
 
-storiesOf('Client vs Server/Server-Side', module)
+storiesOf('Client vs Server', module)
   .addParameters({ component: Table })
-  .add('base', () => {
+  .add('Server-Side', () => {
     const theme = useTheme({
       Table: `
         margin: 20px;

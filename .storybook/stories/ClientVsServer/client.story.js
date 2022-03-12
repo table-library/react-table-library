@@ -22,9 +22,9 @@ import { usePagination } from '@table-library/react-table-library/pagination';
 
 import { nodes } from '../data';
 
-storiesOf('Client vs Server/Client-Side', module)
+storiesOf('Client vs Server', module)
   .addParameters({ component: Table })
-  .add('base', () => {
+  .add('Client-Side', () => {
     const data = {
       nodes,
     };

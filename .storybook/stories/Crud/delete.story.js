@@ -13,9 +13,9 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('CRUD/Delete', module)
+storiesOf('CRUD', module)
   .addParameters({ component: Table })
-  .add('base', () => {
+  .add('Delete', () => {
     const [data, setData] = React.useState({ nodes });
 
     const handleRemove = (id) => {
@@ -66,13 +66,4 @@ storiesOf('CRUD/Delete', module)
         )}
       </Table>
     );
-  })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ));
+  });

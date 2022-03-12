@@ -13,9 +13,9 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('CRUD/Update', module)
+storiesOf('CRUD', module)
   .addParameters({ component: Table })
-  .add('base', () => {
+  .add('Update', () => {
     const [data, setData] = React.useState({ nodes });
 
     const handleUpdate = (value, id) => {
@@ -73,13 +73,4 @@ storiesOf('CRUD/Update', module)
         )}
       </Table>
     );
-  })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ));
+  });

@@ -199,13 +199,4 @@ storiesOf('Recipes/Controlled', module)
         </Table>
       </>
     );
-  })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ));
+  });
