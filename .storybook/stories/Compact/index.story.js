@@ -17,7 +17,8 @@ import * as PaginationStory from './pagination';
 import * as FixedHeaderStory from './fixed-header';
 import * as HorizontalScrollStory from './horizontal-scroll';
 import * as PinStory from './pin';
-import * as TenThousandRowsStory from './virtualized';
+import * as VirtualizedStory from './virtualized';
+import * as EditableStory from './editable';
 // import * as DataGridStory from './data-grid';
 import * as ColumnHideStory from './column-hide';
 import * as ColumnOrderStory from './column-order';
@@ -38,7 +39,8 @@ const stories = [
   FixedHeaderStory,
   HorizontalScrollStory,
   PinStory,
-  TenThousandRowsStory,
+  VirtualizedStory,
+  EditableStory,
   // DataGridStory,
   ColumnHideStory,
   ColumnOrderStory,

@@ -19,6 +19,7 @@ const Features = [
   'Horizontal Scroll',
   'Pin',
   'Virtualized',
+  'Editable',
   'Data Grid',
   'Column Hiding',
   'Column Ordering',
