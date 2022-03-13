@@ -17,7 +17,7 @@ import * as PaginationStory from './pagination';
 import * as FixedHeaderStory from './fixed-header';
 import * as HorizontalScrollStory from './horizontal-scroll';
 import * as PinStory from './pin';
-import * as TenThousandRowsStory from './thousand-rows';
+import * as TenThousandRowsStory from './virtualized';
 // import * as DataGridStory from './data-grid';
 import * as ColumnHideStory from './column-hide';
 import * as ColumnOrderStory from './column-order';

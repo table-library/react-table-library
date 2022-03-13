@@ -18,7 +18,7 @@ const Features = [
   'Fixed Header',
   'Horizontal Scroll',
   'Pin',
-  'Ten Thousand Rows',
+  'Virtualized',
   'Data Grid',
   'Column Hiding',
   'Column Ordering',
@@ -37,7 +37,7 @@ export const parameters = {
     storySort: {
       order: [
         'Getting Started',
-        ['Introduction', 'Feature Requests', 'Roadmap', 'Support'],
+        ['Installation', 'FAQ'],
         'First Steps',
         ['Compact Table', 'Composed Table'],
         'Types',

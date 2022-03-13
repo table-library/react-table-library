@@ -2,19 +2,19 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
-import { Box } from '@chakra-ui/react';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/material-ui';
+import { Paper } from '@mui/material';
 
 import { DocumentationSee } from '../../../documentation';
 import { manyNodes } from '../../../data';
 
-const key = 'Ten Thousand Rows';
+const key = 'Virtualized';
 
 const Component = () => {
   const data = { nodes: manyNodes };
 
-  const chakraTheme = getTheme(DEFAULT_OPTIONS, { isVirtualized: true });
-  const theme = useTheme(chakraTheme);
+  const materialTheme = getTheme(DEFAULT_OPTIONS, { isVirtualized: true });
+  const theme = useTheme(materialTheme);
 
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name },
@@ -36,19 +36,19 @@ const Component = () => {
   ];
 
   const VIRTUALIZED_OPTIONS = {
-    rowHeight: (_item, _index) => 50,
+    rowHeight: (_item, _index) => 49.5,
   };
 
   return (
     <>
-      <Box p={3} borderWidth="1px" borderRadius="lg" style={{ height: '300px' }}>
+      <Paper variant="outlined" square style={{ height: '300px' }}>
         <CompactTable
           columns={COLUMNS}
           virtualizedOptions={VIRTUALIZED_OPTIONS}
           data={data}
           theme={theme}
         />
-      </Box>
+      </Paper>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />
@@ -61,19 +61,19 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
-import { Box } from '@chakra-ui/react';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/material-ui';
+import { Paper } from '@mui/material';
 
 import { DocumentationSee } from '../../../documentation';
 import { manyNodes } from '../../../data';
 
-const key = 'Ten Thousand Rows';
+const key = 'Virtualized';
 
 const Component = () => {
   const data = { nodes: manyNodes };
 
-  const chakraTheme = getTheme(DEFAULT_OPTIONS, { isVirtualized: true });
-  const theme = useTheme(chakraTheme);
+  const materialTheme = getTheme(DEFAULT_OPTIONS, { isVirtualized: true });
+  const theme = useTheme(materialTheme);
 
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name },
@@ -95,19 +95,19 @@ const Component = () => {
   ];
 
   const VIRTUALIZED_OPTIONS = {
-    rowHeight: (_item, _index) => 50,
+    rowHeight: (_item, _index) => 49.5,
   };
 
   return (
     <>
-      <Box p={3} borderWidth="1px" borderRadius="lg" style={{ height: '300px' }}>
+      <Paper variant="outlined" square style={{ height: '300px' }}>
         <CompactTable
           columns={COLUMNS}
           virtualizedOptions={VIRTUALIZED_OPTIONS}
           data={data}
           theme={theme}
         />
-      </Box>
+      </Paper>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />

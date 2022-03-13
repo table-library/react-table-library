@@ -2,19 +2,18 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/material-ui';
-import { Paper } from '@mui/material';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/mantine';
 
 import { DocumentationSee } from '../../../documentation';
 import { manyNodes } from '../../../data';
 
-const key = 'Ten Thousand Rows';
+const key = 'Virtualized';
 
 const Component = () => {
   const data = { nodes: manyNodes };
 
-  const materialTheme = getTheme(DEFAULT_OPTIONS, { isVirtualized: true });
-  const theme = useTheme(materialTheme);
+  const mantineTheme = getTheme(DEFAULT_OPTIONS, { isVirtualized: true });
+  const theme = useTheme(mantineTheme);
 
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name },
@@ -36,19 +35,19 @@ const Component = () => {
   ];
 
   const VIRTUALIZED_OPTIONS = {
-    rowHeight: (_item, _index) => 49.5,
+    rowHeight: (_item, _index) => 38.5,
   };
 
   return (
     <>
-      <Paper variant="outlined" square style={{ height: '300px' }}>
+      <div style={{ height: '300px' }}>
         <CompactTable
           columns={COLUMNS}
           virtualizedOptions={VIRTUALIZED_OPTIONS}
           data={data}
           theme={theme}
         />
-      </Paper>
+      </div>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />
@@ -61,19 +60,21 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/material-ui';
-import { Paper } from '@mui/material';
+import {
+  DEFAULT_OPTIONS,
+  getTheme,
+} from '@table-library/react-table-library/themes/mantine';
 
 import { DocumentationSee } from '../../../documentation';
 import { manyNodes } from '../../../data';
 
-const key = 'Ten Thousand Rows';
+const key = 'Virtualized';
 
 const Component = () => {
   const data = { nodes: manyNodes };
 
-  const materialTheme = getTheme(DEFAULT_OPTIONS, { isVirtualized: true });
-  const theme = useTheme(materialTheme);
+  const mantineTheme = getTheme(DEFAULT_OPTIONS);
+  const theme = useTheme(mantineTheme);
 
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name },
@@ -95,19 +96,19 @@ const Component = () => {
   ];
 
   const VIRTUALIZED_OPTIONS = {
-    rowHeight: (_item, _index) => 49.5,
+    rowHeight: (_item, _index) => 37.5,
   };
 
   return (
     <>
-      <Paper variant="outlined" square style={{ height: '300px' }}>
+      <div style={{ height: '300px' }}>
         <CompactTable
           columns={COLUMNS}
           virtualizedOptions={VIRTUALIZED_OPTIONS}
           data={data}
           theme={theme}
         />
-      </Paper>
+      </div>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />

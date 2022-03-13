@@ -2,18 +2,19 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/mantine';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
+import { Box } from '@chakra-ui/react';
 
 import { DocumentationSee } from '../../../documentation';
 import { manyNodes } from '../../../data';
 
-const key = 'Ten Thousand Rows';
+const key = 'Virtualized';
 
 const Component = () => {
   const data = { nodes: manyNodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS, { isVirtualized: true });
-  const theme = useTheme(mantineTheme);
+  const chakraTheme = getTheme(DEFAULT_OPTIONS, { isVirtualized: true });
+  const theme = useTheme(chakraTheme);
 
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name },
@@ -35,19 +36,19 @@ const Component = () => {
   ];
 
   const VIRTUALIZED_OPTIONS = {
-    rowHeight: (_item, _index) => 38.5,
+    rowHeight: (_item, _index) => 50,
   };
 
   return (
     <>
-      <div style={{ height: '300px' }}>
+      <Box p={3} borderWidth="1px" borderRadius="lg" style={{ height: '300px' }}>
         <CompactTable
           columns={COLUMNS}
           virtualizedOptions={VIRTUALIZED_OPTIONS}
           data={data}
           theme={theme}
         />
-      </div>
+      </Box>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />
@@ -60,21 +61,19 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import {
-  DEFAULT_OPTIONS,
-  getTheme,
-} from '@table-library/react-table-library/themes/mantine';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra-ui';
+import { Box } from '@chakra-ui/react';
 
 import { DocumentationSee } from '../../../documentation';
 import { manyNodes } from '../../../data';
 
-const key = 'Ten Thousand Rows';
+const key = 'Virtualized';
 
 const Component = () => {
   const data = { nodes: manyNodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(mantineTheme);
+  const chakraTheme = getTheme(DEFAULT_OPTIONS, { isVirtualized: true });
+  const theme = useTheme(chakraTheme);
 
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name },
@@ -96,19 +95,19 @@ const Component = () => {
   ];
 
   const VIRTUALIZED_OPTIONS = {
-    rowHeight: (_item, _index) => 37.5,
+    rowHeight: (_item, _index) => 50,
   };
 
   return (
     <>
-      <div style={{ height: '300px' }}>
+      <Box p={3} borderWidth="1px" borderRadius="lg" style={{ height: '300px' }}>
         <CompactTable
           columns={COLUMNS}
           virtualizedOptions={VIRTUALIZED_OPTIONS}
           data={data}
           theme={theme}
         />
-      </div>
+      </Box>
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />

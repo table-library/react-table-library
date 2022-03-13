@@ -5,7 +5,7 @@ import { CompactTable } from '@table-library/react-table-library/compact';
 import { DocumentationSee } from '../documentation';
 import { manyNodes } from '../data';
 
-const key = 'Ten Thousand Rows';
+const key = 'Virtualized';
 
 const Component = () => {
   const data = { nodes: manyNodes };
@@ -53,7 +53,7 @@ import { CompactTable } from '@table-library/react-table-library/compact';
 import { DocumentationSee } from '../documentation';
 import { manyNodes } from '../data';
 
-const key = 'Ten Thousand Rows';
+const key = 'Virtualized';
 
 const Component = () => {
   const data = { nodes: manyNodes };

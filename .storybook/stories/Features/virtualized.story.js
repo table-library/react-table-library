@@ -37,7 +37,7 @@ const WithStickyHeader = React.forwardRef(({ children, ...rest }, ref) => (
   </div>
 ));
 
-storiesOf('Features/Ten Thousand Rows', module)
+storiesOf('Features/Virtualized', module)
   .addParameters({
     component: Table,
     subcomponents: {
