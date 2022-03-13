@@ -73,12 +73,14 @@ const CellContainer = React.forwardRef(
   },
 );
 
-const HEADER_CELL_CONTAINER_STYLE = css`
+const HEADER_CELL_CONTAINER_STYLE = ({ _inverseBorder }: { _inverseBorder?: boolean }) => css`
   ${BASE_STYLE}
 
   position: relative;
 
-  border-bottom: 1px solid ${COLORS.BORDER};
+  ${_inverseBorder
+    ? `border-top: 1px solid ${COLORS.BORDER};`
+    : `border-bottom: 1px solid ${COLORS.BORDER};`}
 
   svg,
   path {
@@ -88,7 +90,7 @@ const HEADER_CELL_CONTAINER_STYLE = css`
 
 const HeaderCellContainer = React.forwardRef(
   (props: Record<string, any>, ref: React.ForwardedRef<HTMLDivElement>) => {
-    return <div {...props} css={HEADER_CELL_CONTAINER_STYLE} ref={ref} />;
+    return <div {...props} css={HEADER_CELL_CONTAINER_STYLE(props)} ref={ref} />;
   },
 );
 

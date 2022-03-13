@@ -37,7 +37,7 @@ const Component = () => {
           background-color: #fafafa;
         }
       }
-  `,
+    `,
   };
   const theme = useTheme([mantineTheme, customTheme]);
 

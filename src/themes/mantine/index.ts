@@ -39,24 +39,28 @@ const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
   HeaderRow: `
     height: 42px;
 
+    border-bottom: 1px solid #dee2e6;
+
     &.tr-footer {
+      border-top: 1px solid transparent;
       border-bottom: 1px solid transparent;
     }
   `,
   Row: `
     height: 49px;
 
-    &.row-select.row-select-single-selected, &.row-select.row-select-selected {
+    border-bottom: 1px solid #dee2e6;
+
+    &.tr.tr-body.row-select.row-select-single-selected, &.tr.tr-body.row-select.row-select-selected {
       background-color: #b3dcff;
       border-bottom: 1px solid #b3dcff;
     }
   `,
   BaseRow: `
     font-size: 14px;
-
-    border-bottom: 1px solid #dee2e6;
   `,
   BaseCell: `
+    border-top: 1px solid transparent;
     border-right: 1px solid transparent;
     border-bottom: 1px solid transparent;
 

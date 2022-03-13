@@ -38,11 +38,6 @@ const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
       font-size: 14px;
       color: #868e96;
     }
-
-    .tr-footer {
-      border-top: 1px solid #e0e0e0;
-      border-bottom: 1px solid transparent;
-    }
   `,
   BaseRow: `
     height: 54px;
@@ -51,16 +46,26 @@ const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
   `,
   HeaderRow: `
     font-weight: bold;
+
     border-bottom: 1px solid #e0e0e0;
+
+    &.tr-footer {
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+    }
   `,
   Row: `
-    &.row-select.row-select-single-selected, &.row-select.row-select-selected {
+    border-bottom: 1px solid #e0e0e0;
+
+    &.tr.tr-body.row-select.row-select-single-selected, &.tr.tr-body.row-select.row-select-selected {
       background-color: #bddffd;
+      border-bottom: 1px solid #bddffd;
     }
   `,
   BaseCell: `
     padding: ${options.verticalSpacing}px ${options.horizontalSpacing}px;
 
+    border-top: 1px solid transparent;
     border-right: 1px solid transparent;
     border-bottom: 1px solid transparent;
 
