@@ -44,7 +44,7 @@ export const parameters = {
         'Types',
         ['Data', 'Compact Table', 'Composed Table', ...Features],
         'Compact Table',
-        ['FAQ', 'Base', ...Features],
+        ['Base', ...Features],
         'Library Themes',
         [
           'Mantine',
@@ -56,6 +56,8 @@ export const parameters = {
         ],
         'Product Themes',
         ['Google Drive (WIP)', 'Stripe (WIP)'],
+        'Tutorials',
+        ['Table', ...Features],
         'Features',
         Features,
         'Composites',
