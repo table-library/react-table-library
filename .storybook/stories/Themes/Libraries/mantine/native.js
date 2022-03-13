@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
-import { Header, HeaderRow, HeaderCell } from '@table-library/react-table-library/table';
 import { useTheme } from '@table-library/react-table-library/theme';
 import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/mantine';
 
@@ -31,7 +30,7 @@ const Component = () => {
   const theme = useTheme(mantineTheme);
 
   const COLUMNS = [
-    { label: 'Task', renderCell: (item) => item.name },
+    { label: 'Task', renderCell: (item) => item.name, footer: hasFooter ? 'Task' : null },
     {
       label: 'Deadline',
       renderCell: (item) =>
@@ -40,30 +39,24 @@ const Component = () => {
           month: '2-digit',
           day: '2-digit',
         }),
+      footer: hasFooter ? 'Deadline' : null,
     },
-    { label: 'Type', renderCell: (item) => item.type },
+    { label: 'Type', renderCell: (item) => item.type, footer: hasFooter ? 'Type' : null },
     {
       label: 'Complete',
       renderCell: (item) => item.isComplete.toString(),
+      footer: hasFooter ? 'Complete' : null,
     },
-    { label: 'Tasks', renderCell: (item) => item.nodes?.length },
+    {
+      label: 'Tasks',
+      renderCell: (item) => item.nodes?.length,
+      footer: hasFooter ? 'Tasks' : null,
+    },
   ];
 
   const TABLE_OPTIONS = {
     renderAfterTable: () => (
       <>
-        {hasFooter && (
-          <Header>
-            <HeaderRow className="tr-footer">
-              <HeaderCell>Task</HeaderCell>
-              <HeaderCell>Deadline</HeaderCell>
-              <HeaderCell>Type</HeaderCell>
-              <HeaderCell>Complete</HeaderCell>
-              <HeaderCell>Tasks</HeaderCell>
-            </HeaderRow>
-          </Header>
-        )}
-
         {caption && (
           <div className="caption-container">
             <caption>{caption}</caption>
@@ -130,11 +123,7 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import {
-  DEFAULT_OPTIONS,
-  getTheme,
-} from '@table-library/react-table-library/themes/mantine';
-import { Header, HeaderRow, HeaderCell } from '@table-library/react-table-library/table';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/mantine';
 
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';
@@ -162,7 +151,7 @@ const Component = () => {
   const theme = useTheme(mantineTheme);
 
   const COLUMNS = [
-    { label: 'Task', renderCell: (item) => item.name },
+    { label: 'Task', renderCell: (item) => item.name, footer: hasFooter ? 'Task' : null },
     {
       label: 'Deadline',
       renderCell: (item) =>
@@ -171,30 +160,24 @@ const Component = () => {
           month: '2-digit',
           day: '2-digit',
         }),
+      footer: hasFooter ? 'Deadline' : null,
     },
-    { label: 'Type', renderCell: (item) => item.type },
+    { label: 'Type', renderCell: (item) => item.type, footer: hasFooter ? 'Type' : null },
     {
       label: 'Complete',
       renderCell: (item) => item.isComplete.toString(),
+      footer: hasFooter ? 'Complete' : null,
     },
-    { label: 'Tasks', renderCell: (item) => item.nodes?.length },
+    {
+      label: 'Tasks',
+      renderCell: (item) => item.nodes?.length,
+      footer: hasFooter ? 'Tasks' : null,
+    },
   ];
 
   const TABLE_OPTIONS = {
     renderAfterTable: () => (
       <>
-        {hasFooter && (
-          <Header>
-            <HeaderRow className="tr-footer">
-              <HeaderCell>Task</HeaderCell>
-              <HeaderCell>Deadline</HeaderCell>
-              <HeaderCell>Type</HeaderCell>
-              <HeaderCell>Complete</HeaderCell>
-              <HeaderCell>Tasks</HeaderCell>
-            </HeaderRow>
-          </Header>
-        )}
-
         {caption && (
           <div className="caption-container">
             <caption>{caption}</caption>

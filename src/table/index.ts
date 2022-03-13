@@ -5,5 +5,6 @@ export * from './Body';
 export * from './Header';
 export * from './Row';
 export * from './Cell';
+export * from './Footer';
 export * from './useTableContext';
 export * from './useCustom';

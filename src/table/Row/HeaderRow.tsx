@@ -21,6 +21,8 @@ const isReactFragment = (variableToInspect: any) => {
 
 export const HeaderRow: React.FC<HeaderRowProps> = ({
   className,
+  role = 'rowheader',
+  _className = 'tr-header',
   children,
   ...rest
 }: HeaderRowProps) => {
@@ -34,8 +36,8 @@ export const HeaderRow: React.FC<HeaderRowProps> = ({
 
   return (
     <HeaderRowContainer
-      role="rowheader"
-      className={cs('tr', 'tr-header', className)}
+      role={role}
+      className={cs('tr', _className, className)}
       css={css`
         ${theme?.BaseRow}
         ${theme?.HeaderRow}

@@ -5,10 +5,11 @@ import { useTheme } from '@table-library/react-table-library/theme/index';
 
 import { TableNode } from '@table-library/react-table-library/types/table';
 import { Theme } from '@table-library/react-table-library/types/theme';
-import { CompactTableProps } from '@table-library/react-table-library/types/compact';
+import { CompactTableProps, Column } from '@table-library/react-table-library/types/compact';
 
 import { VirtualizedTable } from './VirtualizedTable';
 import { NormalTable } from './NormalTable';
+import { CompactFooter } from './CompactFooter';
 
 const FULL_HEIGHT_THEME = {
   Table: `
@@ -81,6 +82,9 @@ export const CompactTable: React.FC<CompactTableProps> = React.forwardRef(
                 rowOptions={rowOptions}
                 {...tableProps}
               />
+            )}
+            {columns.some((column: Column) => !!column.footer) && (
+              <CompactFooter columns={columns} />
             )}
             {tableOptions?.renderAfterTable && tableOptions.renderAfterTable()}
           </>

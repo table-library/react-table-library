@@ -19,6 +19,7 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
   pin,
   stiff,
   resize,
+  role = 'columnheader',
   children,
   ...rest
 }: HeaderCellProps) => {
@@ -30,7 +31,7 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
   return (
     <HeaderCellContainer
       {...rest}
-      role="columnheader"
+      role={role}
       data-cell-key={hideKey || index}
       data-resize-min-width={
         typeof resize === 'boolean' || resize?.minWidth == null ? 75 : resize.minWidth

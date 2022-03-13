@@ -13,13 +13,17 @@ const headerRow = `
   z-index: 4;
 `;
 
-export const Header: React.FC<HeaderProps> = ({ children, ...rest }: HeaderProps) => {
+export const Header: React.FC<HeaderProps> = ({
+  _className = 'thead',
+  children,
+  ...rest
+}: HeaderProps) => {
   const theme = React.useContext(ThemeContext);
 
   return (
     <div
       role="rowgroup"
-      className="thead"
+      className={_className}
       css={css`
         ${headerRow}
         ${theme?.Header}

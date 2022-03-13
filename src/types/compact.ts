@@ -10,6 +10,7 @@ import { ColumnHideProps } from '@table-library/react-table-library/types/hide';
 export type Column = {
   label: string;
   renderCell: (node: TableNode) => React.ReactNode;
+  footer?: string;
   resize?: ColumnResizeProps;
   sort?: ColumnSortProps;
   select?: ColumnSelectProps;
