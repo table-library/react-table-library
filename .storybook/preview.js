@@ -56,8 +56,6 @@ export const parameters = {
         ],
         'Product Themes',
         ['Google Drive (WIP)', 'Stripe (WIP)'],
-        'Tutorials',
-        ['Table', ...Features],
         'Features',
         Features,
         'Composites',
