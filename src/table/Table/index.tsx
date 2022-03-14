@@ -12,6 +12,7 @@ import { TreeContext } from '@table-library/react-table-library/common/context/T
 import { PaginationContext } from '@table-library/react-table-library/common/context/Pagination';
 
 import { applyModifiers } from '@table-library/react-table-library/common/util/modifiers';
+import { useShiftDown } from '@table-library/react-table-library/common/hooks/useShiftDown';
 
 import { Nullish } from '@table-library/react-table-library/types/common';
 import { TableProps } from '@table-library/react-table-library/types/table';
@@ -21,7 +22,6 @@ import {
   TableElementRef,
 } from '@table-library/react-table-library/types/layout';
 
-import { useShiftDown } from './useShiftDown';
 import { useOnInit } from './useOnInit';
 
 import styles from './styles';
@@ -65,6 +65,7 @@ const Table: React.FC<TableProps> = React.forwardRef(
     const tableElementRef = useTableElementRef(ref);
     const tableMemoryRef = useTableMemoryRef();
 
+    // if changed, adjust useFeatures hook
     const modifiedNodes = applyModifiers({
       sort,
       pagination,

@@ -58,7 +58,6 @@ const getRowProps = (props: RowProps, features: Features): FeatureProps => {
 
   const onClick = (node: TableNode, event: React.SyntheticEvent | React.KeyboardEvent) => {
     if (!isRowClick(event)) return;
-
     if (select.options.clickType !== SelectClickTypes.RowClick) return;
 
     const isMultiSelectType = select.options.rowSelect === SelectTypes.MultiSelect;
@@ -67,12 +66,10 @@ const getRowProps = (props: RowProps, features: Features): FeatureProps => {
     const isCommandSelectType = !!(event as any).metaKey;
     const isShiftSelectType = !!(event as any).shiftKey;
 
-    const modifier = applyModifiers(features);
-
     if (isCommandSelectType) {
       select.fns.onToggleById(node.id);
     } else if (isShiftSelectType) {
-      select.fns.onToggleByIdShift(node.id, select.options, modifier);
+      select.fns.onToggleByIdShift(node.id, select.options, applyModifiers(features));
     } else if (isMultiSelectType) {
       select.fns.onToggleById(node.id);
     } /* isSingleSelectType */ else {

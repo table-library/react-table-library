@@ -11,6 +11,7 @@ export const useFeatures = () => {
   const sort = React.useContext(SortContext);
   const pagination = React.useContext(PaginationContext);
 
+  // if changed, adjust applyModifiers usages
   return {
     select,
     tree,

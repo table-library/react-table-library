@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+// not all events offer the shiftKey property (e.g. checkbox click)
+
 export const useShiftDown = () => {
   const [isShiftDown, setShiftDown] = React.useState(false);
 
