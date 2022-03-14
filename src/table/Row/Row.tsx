@@ -5,13 +5,10 @@ import cs from 'clsx';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 
-import { RowContainer } from '@table-library/react-table-library/common/components/Row';
 import { isRowClick } from '@table-library/react-table-library/common/util/isRowClick';
+import { RowContainer } from '@table-library/react-table-library/common/components/Row';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
-import { SelectContext } from '@table-library/react-table-library/common/context/Select';
-import { TreeContext } from '@table-library/react-table-library/common/context/Tree';
-import { SortContext } from '@table-library/react-table-library/common/context/Sort';
-import { PaginationContext } from '@table-library/react-table-library/common/context/Pagination';
+import { useFeatures } from '@table-library/react-table-library/common/context/Feature';
 
 import { useConsumeRowLayout } from '@table-library/react-table-library/resize/useConsumeRowLayout';
 
@@ -77,19 +74,7 @@ const evaluateProps = (rowPropsByFeature: FeatureProps[], onSingleClick: OnClick
 export const Row: React.FC<RowProps> = (props: RowProps) => {
   const { item, className, disabled, onClick, onDoubleClick, children, ...rest } = props;
 
-  const select = React.useContext(SelectContext);
-  const tree = React.useContext(TreeContext);
-  const sort = React.useContext(SortContext);
-  const pagination = React.useContext(PaginationContext);
-
-  const features = {
-    select,
-    tree,
-    sort,
-    pagination,
-    // others
-  };
-
+  const features = useFeatures();
   const rowPropsByFeature = getRowProps(features, props);
 
   const theme = React.useContext(ThemeContext);

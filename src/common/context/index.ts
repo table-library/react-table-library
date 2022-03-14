@@ -1,3 +1,4 @@
+export * from './Feature';
 export * from './Table';
 export * from './Theme';
 export * from './Layout';

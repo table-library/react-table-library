@@ -1,4 +1,4 @@
-<h1 align="center">Build better Tables with React&nbsp;&nbsp;&nbsp;🍱</h1>
+<h1 align="center">Build better Tables with React&nbsp;🍱</h1>
 
 <br>
 
