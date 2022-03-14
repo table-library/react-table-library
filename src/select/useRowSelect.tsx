@@ -66,9 +66,9 @@ const getRowProps = (props: RowProps, features: Features): FeatureProps => {
     const isCommandSelectType = !!(event as any).metaKey;
     const isShiftSelectType = !!(event as any).shiftKey;
 
-    if (isCommandSelectType) {
+    if (isCommandSelectType && isMultiSelectType) {
       select.fns.onToggleById(node.id);
-    } else if (isShiftSelectType) {
+    } else if (isShiftSelectType && isMultiSelectType) {
       select.fns.onToggleByIdShift(node.id, select.options, applyModifiers(features));
     } else if (isMultiSelectType) {
       select.fns.onToggleById(node.id);

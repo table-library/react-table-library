@@ -29,17 +29,17 @@ export const CellSelect: React.FC<CellSelectProps> = React.memo(
         : select.state.ids.includes(item.id);
 
     const handleChange = React.useCallback(() => {
-      const isSingleSelectType = select.options.buttonSelect === SelectTypes.SingleSelect;
+      const isMuiltiSelectType = select.options.buttonSelect === SelectTypes.MultiSelect;
 
-      if (isShiftDown) {
+      if (isShiftDown && isMuiltiSelectType) {
         select.fns.onToggleByIdShift(item.id, select.options, applyModifiers(features));
-      } else if (isSingleSelectType) {
-        select.fns.onToggleByIdExclusively(item.id);
-      } /* isMtuliSelectType */ else {
+      } else if (isMuiltiSelectType) {
         select.fns.onToggleByIdRecursively(item.id, {
           isCarryForward: select.options.isCarryForward,
           isPartialToAll: select.options.isPartialToAll,
         });
+      } /* isSingleSelectType */ else {
+        select.fns.onToggleByIdExclusively(item.id);
       }
     }, [isShiftDown, features, item.id, select]);
 
