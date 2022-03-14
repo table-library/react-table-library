@@ -60,15 +60,19 @@ const getRowProps = (props: RowProps, features: Features): FeatureProps => {
     if (!isRowClick(event)) return;
     if (select.options.clickType !== SelectClickTypes.RowClick) return;
 
+    const hasMultiSelectType =
+      select.options.rowSelect === SelectTypes.MultiSelect ||
+      select.options.buttonSelect === SelectTypes.MultiSelect;
+
     const isMultiSelectType = select.options.rowSelect === SelectTypes.MultiSelect;
 
     // optional ways to activate multi-select with keyboard
     const isCommandSelectType = !!(event as any).metaKey;
     const isShiftSelectType = !!(event as any).shiftKey;
 
-    if (isCommandSelectType && isMultiSelectType) {
+    if (isCommandSelectType && hasMultiSelectType) {
       select.fns.onToggleById(node.id);
-    } else if (isShiftSelectType && isMultiSelectType) {
+    } else if (isShiftSelectType && hasMultiSelectType) {
       select.fns.onToggleByIdShift(node.id, select.options, applyModifiers(features));
     } else if (isMultiSelectType) {
       select.fns.onToggleById(node.id);
