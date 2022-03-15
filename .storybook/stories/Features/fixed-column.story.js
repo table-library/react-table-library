@@ -14,7 +14,7 @@ import { useTheme } from '@table-library/react-table-library/theme';
 
 import { nodes } from '../data';
 
-storiesOf('Features/Pin', module)
+storiesOf('Features/Fixed Column', module)
   .addParameters({
     component: Table,
     subcomponents: {

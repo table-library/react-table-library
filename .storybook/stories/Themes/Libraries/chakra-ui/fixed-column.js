@@ -8,7 +8,7 @@ import { Box } from '@chakra-ui/react';
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';
 
-const key = 'Pin';
+const key = 'Fixed Column';
 
 const Component = () => {
   const data = { nodes };
@@ -91,7 +91,7 @@ import { Box } from '@chakra-ui/react';
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';
 
-const key = 'Pin';
+const key = 'Fixed Column';
 
 const Component = () => {
   const data = { nodes };

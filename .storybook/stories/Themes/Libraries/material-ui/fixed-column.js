@@ -7,7 +7,7 @@ import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/th
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';
 
-const key = 'Pin';
+const key = 'Fixed Column';
 
 const Component = () => {
   const data = { nodes };
@@ -87,7 +87,7 @@ import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/th
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';
 
-const key = 'Pin';
+const key = 'Fixed Column';
 
 const Component = () => {
   const data = { nodes };

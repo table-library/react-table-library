@@ -2,45 +2,42 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/mantine';
 
-import { DocumentationSee } from '../../../documentation';
-import { nodes } from '../../../data';
+import { DocumentationSee } from '../documentation';
+import { nodes } from '../data';
 
-const key = 'Pin';
+const key = 'Fixed Column';
 
 const Component = () => {
   const data = { nodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const customTheme = {
+  const theme = useTheme({
     BaseCell: `
-      &:nth-of-type(1) {
-        left: 0px;
+        &:nth-of-type(1) {
+          left: 0px;
 
-        min-width: 250px;
-        width: 250px;
-      }
+          min-width: 250px;
+          width: 250px;
+        }
 
-      &:nth-of-type(2) {
-        left: 250px;
+        &:nth-of-type(2) {
+          left: 250px;
 
-        min-width: 150px;
-        width: 150px;
-      }
+          min-width: 150px;
+          width: 150px;
+        }
 
-      &:nth-of-type(3) {
-        min-width: 20%;
-        width: 20%;
-      }
+        &:nth-of-type(3) {
+          min-width: 20%;
+          width: 20%;
+        }
 
-      &:nth-of-type(4), &:nth-of-type(5) {
-        min-width: 700px;
-        width: 700px;
-      }
-    `,
-  };
-  const theme = useTheme([mantineTheme, customTheme]);
+        &:nth-of-type(4), &:nth-of-type(5) {
+          min-width: 700px;
+          width: 700px;
+        }
+      `,
+  });
 
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name, pin: true },
@@ -82,21 +79,16 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import {
-  DEFAULT_OPTIONS,
-  getTheme,
-} from '@table-library/react-table-library/themes/mantine';
 
-import { DocumentationSee } from '../../../documentation';
-import { nodes } from '../../../data';
+import { DocumentationSee } from '../documentation';
+import { nodes } from '../data';
 
-const key = 'Pin';
+const key = 'Fixed Column';
 
 const Component = () => {
   const data = { nodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const customTheme = {
+  const theme = useTheme({
     BaseCell: \`
       &:nth-of-type(1) {
         left: 0px;
@@ -122,8 +114,7 @@ const Component = () => {
         width: 700px;
       }
     \`,
-  };
-  const theme = useTheme([mantineTheme, customTheme]);
+  });
 
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name, pin: true },

@@ -17,7 +17,7 @@ import * as ExpandStory from './expand';
 import * as PaginationStory from './pagination';
 import * as FixedHeaderStory from './fixed-header';
 import * as HorizontalScrollStory from './horizontal-scroll';
-import * as PinStory from './pin';
+import * as FixedColumnStory from './fixed-column';
 import * as VirtualizedStory from './virtualized';
 import * as EditableStory from './editable';
 // import * as DataGridStory from './data-grid';
@@ -41,7 +41,7 @@ const stories = [
   PaginationStory,
   FixedHeaderStory,
   HorizontalScrollStory,
-  PinStory,
+  FixedColumnStory,
   VirtualizedStory,
   EditableStory,
   // DataGridStory,

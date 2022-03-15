@@ -17,7 +17,7 @@ const Features = [
   'Pagination',
   'Fixed Header',
   'Horizontal Scroll',
-  'Pin',
+  'Fixed Column',
   'Virtualized',
   'Editable',
   'Data Grid',
