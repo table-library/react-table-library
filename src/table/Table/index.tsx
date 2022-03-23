@@ -97,13 +97,17 @@ const Table: React.FC<TableProps> = React.forwardRef(
                 <SelectContext.Provider value={select}>
                   <TreeContext.Provider value={tree}>
                     <PaginationContext.Provider value={pagination}>
-                      <LayoutProvider
-                        layout={layout}
-                        tableElementRef={tableElementRef}
-                        tableMemoryRef={tableMemoryRef}
-                      >
-                        {children && children(modifiedNodes)}
-                      </LayoutProvider>
+                      {layout?.inheritLayout ? (
+                        <>{children && children(modifiedNodes)}</>
+                      ) : (
+                        <LayoutProvider
+                          layout={layout}
+                          tableElementRef={tableElementRef}
+                          tableMemoryRef={tableMemoryRef}
+                        >
+                          {children && children(modifiedNodes)}
+                        </LayoutProvider>
+                      )}
                     </PaginationContext.Provider>
                   </TreeContext.Provider>
                 </SelectContext.Provider>

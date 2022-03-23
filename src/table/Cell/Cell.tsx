@@ -12,7 +12,8 @@ import { CellProps } from '@table-library/react-table-library/types/table';
 export const Cell: React.FC<CellProps> = ({
   className,
   hide,
-  pin,
+  pinLeft,
+  pinRight,
   stiff,
   onClick,
   children,
@@ -26,7 +27,8 @@ export const Cell: React.FC<CellProps> = ({
       role="gridcell"
       className={cs('td', className, {
         stiff,
-        pin,
+        'pin-left': pinLeft,
+        'pin-right': pinRight,
       })}
       css={css`
         ${theme?.BaseCell}

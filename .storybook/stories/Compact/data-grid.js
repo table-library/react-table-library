@@ -41,7 +41,7 @@ const Component = () => {
       cellProps: {
         style: (item) => ({ backgroundColor: valueToColor(item.cellA) }),
       },
-      pin: true,
+      pinLeft: true,
     },
     {
       label: 'B',
@@ -49,7 +49,7 @@ const Component = () => {
       cellProps: {
         style: (item) => ({ backgroundColor: valueToColor(item.cellB) }),
       },
-      pin: true,
+      pinLeft: true,
     },
     {
       label: 'C',
@@ -195,7 +195,7 @@ const Component = () => {
       cellProps: {
         style: (item) => ({ backgroundColor: valueToColor(item.cellA) }),
       },
-      pin: true,
+      pinLeft: true,
     },
     {
       label: 'B',
@@ -203,7 +203,7 @@ const Component = () => {
       cellProps: {
         style: (item) => ({ backgroundColor: valueToColor(item.cellB) }),
       },
-      pin: true,
+      pinLeft: true,
     },
     {
       label: 'C',

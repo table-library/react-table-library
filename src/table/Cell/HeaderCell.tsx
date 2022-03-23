@@ -16,7 +16,8 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
   hideKey,
   className,
   hide,
-  pin,
+  pinLeft,
+  pinRight,
   stiff,
   resize,
   role = 'columnheader',
@@ -39,7 +40,8 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
       className={cs('th', className, {
         stiff,
         resize,
-        pin,
+        'pin-left': pinLeft,
+        'pin-right': pinRight,
       })}
       css={css`
         ${theme?.BaseCell}

@@ -15,7 +15,8 @@ export type Column = {
   sort?: ColumnSortProps;
   select?: ColumnSelectProps;
   tree?: ColumnTreeProps;
-  pin?: boolean;
+  pinLeft?: boolean;
+  pinRight?: boolean;
   hide?: ColumnHideProps;
   cellProps?: Record<string, any>;
 };

@@ -87,7 +87,6 @@ export const Row: React.FC<RowProps> = (props: RowProps) => {
   const ref = React.useRef<HTMLInputElement>(null);
 
   useDoubleClick(ref, onClickByFeature, onDoubleClick, item);
-
   useConsumeRowLayout(ref, '.td');
 
   return (

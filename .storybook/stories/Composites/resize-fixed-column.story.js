@@ -61,10 +61,10 @@ storiesOf('Composites/Resize & Fixed Column', module)
             <>
               <Header>
                 <HeaderRow>
-                  <HeaderCell resize pin>
+                  <HeaderCell resize pinLeft>
                     Task
                   </HeaderCell>
-                  <HeaderCell resize pin>
+                  <HeaderCell resize pinLeft>
                     Deadline
                   </HeaderCell>
                   <HeaderCell resize>Type</HeaderCell>
@@ -76,8 +76,8 @@ storiesOf('Composites/Resize & Fixed Column', module)
               <Body>
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    <Cell pin>{item.name}</Cell>
-                    <Cell pin>
+                    <Cell pinLeft>{item.name}</Cell>
+                    <Cell pinLeft>
                       {item.deadline.toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: '2-digit',

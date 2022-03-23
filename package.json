@@ -1,14 +1,14 @@
 {
   "name": "@table-library/react-table-library",
-  "version": "2.0.13",
+  "version": "2.0.14",
   "description": "react-table-library",
   "type": "module",
   "main": "main.js",
   "types": "index.d.ts",
   "peerDependencies": {
+    "@emotion/react": ">= 11",
     "react": ">=16.8.0",
-    "react-dom": ">=16.8.0",
-    "@emotion/react": ">= 11"
+    "react-dom": ">=16.8.0"
   },
   "dependencies": {
     "clsx": "1.1.1",
@@ -27,8 +27,8 @@
     "@babel/preset-react": "7.12.13",
     "@babel/runtime": "7.12.18",
     "@chakra-ui/react": "1.8.5",
-    "@emotion/babel-plugin": "^11.7.2",
-    "@emotion/babel-preset-css-prop": "^11.2.0",
+    "@emotion/babel-plugin": "11.7.2",
+    "@emotion/babel-preset-css-prop": "11.2.0",
     "@emotion/react": "11.8.1",
     "@emotion/styled": "11.8.1",
     "@loki/is-loki-running": "0.28.0",
@@ -84,6 +84,8 @@
     "react-animate-height": "2.0.23",
     "react-dom": "17.0.2",
     "react-icons": "4.3.1",
+    "react-query": "3.34.16",
+    "react-sparklines": "1.7.0",
     "rollup": "2.68.0",
     "rollup-plugin-delete": "2.0.0",
     "rollup-plugin-peer-deps-external": "2.2.4",
@@ -92,7 +94,8 @@
     "rollup-plugin-typescript2": "0.31.2",
     "tslib": "2.3.1",
     "typescript": "4.5.5",
-    "use-interval": "1.4.0"
+    "use-interval": "1.4.0",
+    "use-local-storage-state": "16.0.1"
   },
   "scripts": {
     "prettier": "prettier 'src/**/*.{js,ts,tsx}'",

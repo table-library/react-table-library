@@ -25,8 +25,8 @@ const WithStickyHeader = React.forwardRef(({ children, ...rest }, ref) => (
   <div ref={ref} {...rest}>
     <Header>
       <HeaderRow>
-        <HeaderCell pin>A</HeaderCell>
-        <HeaderCell pin>B</HeaderCell>
+        <HeaderCell pinLeft>A</HeaderCell>
+        <HeaderCell pinLeft>B</HeaderCell>
         <HeaderCell>C</HeaderCell>
         <HeaderCell>D</HeaderCell>
         <HeaderCell>E</HeaderCell>
@@ -121,13 +121,13 @@ storiesOf('Features/Data Grid', module)
                       <Row item={data.items[index]}>
                         <Cell
                           style={{ backgroundColor: valueToColor(data.items[index].cellA) }}
-                          pin
+                          pinLeft
                         >
                           {data.items[index].cellA}
                         </Cell>
                         <Cell
                           style={{ backgroundColor: valueToColor(data.items[index].cellB) }}
-                          pin
+                          pinLeft
                         >
                           {data.items[index].cellB}
                         </Cell>

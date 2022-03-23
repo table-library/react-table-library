@@ -87,13 +87,22 @@ const applyResize = (
   // pin feature as edge case
 
   const applyLeft = (cell: HTMLElement, i: number) => {
-    if ([...Array.from(cell.classList)].includes('pin')) {
+    if ([...Array.from(cell.classList)].includes('pin-left')) {
       const left = newColumnWidthsAsPx.reduce((sum, v, j) => {
         if (j >= i) return sum;
         return sum + v;
       }, 0);
 
       cell.style.left = `${left}px`;
+    }
+
+    if ([...Array.from(cell.classList)].includes('pin-right')) {
+      const right = newColumnWidthsAsPx.reduceRight((sum, v, j) => {
+        if (j <= i) return sum;
+        return sum + v;
+      }, 0);
+
+      cell.style.right = `${right}px`;
     }
   };
 

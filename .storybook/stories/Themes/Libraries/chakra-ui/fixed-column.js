@@ -44,7 +44,7 @@ const Component = () => {
   const theme = useTheme([chakraTheme, customTheme]);
 
   const COLUMNS = [
-    { label: 'Task', renderCell: (item) => item.name, pin: true },
+    { label: 'Task', renderCell: (item) => item.name, pinLeft: true },
     {
       label: 'Deadline',
       renderCell: (item) =>
@@ -53,7 +53,7 @@ const Component = () => {
           month: '2-digit',
           day: '2-digit',
         }),
-      pin: true,
+      pinLeft: true,
     },
     { label: 'Type', renderCell: (item) => item.type },
     {
@@ -127,7 +127,7 @@ const Component = () => {
   const theme = useTheme([chakraTheme, customTheme]);
 
   const COLUMNS = [
-    { label: 'Task', renderCell: (item) => item.name, pin: true },
+    { label: 'Task', renderCell: (item) => item.name, pinLeft: true },
     {
       label: 'Deadline',
       renderCell: (item) =>
@@ -136,7 +136,7 @@ const Component = () => {
           month: '2-digit',
           day: '2-digit',
         }),
-      pin: true,
+      pinLeft: true,
     },
     { label: 'Type', renderCell: (item) => item.type },
     {

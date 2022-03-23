@@ -18,7 +18,8 @@ export type OnClick = (node: TableNode, event: React.SyntheticEvent | React.Keyb
 export type CellProps = {
   className?: string;
   hide?: boolean;
-  pin?: boolean;
+  pinLeft?: boolean;
+  pinRight?: boolean;
   stiff?: boolean;
   onClick?: (event: React.SyntheticEvent) => void;
   children: React.ReactNode;
@@ -29,7 +30,8 @@ export type HeaderCellProps = {
   hideKey?: string;
   className?: string;
   hide?: boolean;
-  pin?: boolean;
+  pinLeft?: boolean;
+  pinRight?: boolean;
   stiff?: boolean;
   resize?: ColumnResizeProps;
   children: React.ReactNode;

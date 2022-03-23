@@ -36,7 +36,8 @@ export const CompactHeader: React.FC<CompactTableProps> = ({
           const sharedProps = {
             index: index + countPriorCheckboxes(columns, column),
             resize: column.resize,
-            pin: column.pin,
+            pinLeft: column.pinLeft,
+            pinRight: column.pinRight,
             hideKey: column.hide?.hideKey,
           };
 

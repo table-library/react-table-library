@@ -50,9 +50,8 @@ const BASE_STYLE = `
     display: none;
   }
 
-  &.pin {
+  &.pin-left, &.pin-right {
     position: sticky;
-    left: 0;
     z-index: 3;
   }
 

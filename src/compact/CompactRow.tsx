@@ -34,7 +34,8 @@ export const CompactRow: React.FC<CompactRowProps> = ({
       <Row item={item} {...rowProps}>
         {columns.map((column: Column, index: number) => {
           const sharedProps = {
-            pin: column.pin,
+            pinLeft: column.pinLeft,
+            pinRight: column.pinRight,
           };
 
           const evaluatedCellProps = evaluateProps(column?.cellProps || {}, item);

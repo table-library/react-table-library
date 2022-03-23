@@ -63,8 +63,8 @@ storiesOf('Features/Fixed Column', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell pin>Task</HeaderCell>
-                <HeaderCell pin>Deadline</HeaderCell>
+                <HeaderCell pinLeft>Task</HeaderCell>
+                <HeaderCell pinLeft>Deadline</HeaderCell>
                 <HeaderCell>Type</HeaderCell>
                 <HeaderCell>Complete</HeaderCell>
                 <HeaderCell>Tasks</HeaderCell>
@@ -74,8 +74,8 @@ storiesOf('Features/Fixed Column', module)
             <Body>
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  <Cell pin>{item.name}</Cell>
-                  <Cell pin>
+                  <Cell pinLeft>{item.name}</Cell>
+                  <Cell pinLeft>
                     {item.deadline.toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: '2-digit',
@@ -139,18 +139,18 @@ storiesOf('Features/Fixed Column', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell pin>Task</HeaderCell>
+                <HeaderCell pinLeft>Task</HeaderCell>
                 <HeaderCell>Deadline</HeaderCell>
                 <HeaderCell>Type</HeaderCell>
                 <HeaderCell>Complete</HeaderCell>
-                <HeaderCell pin>Tasks</HeaderCell>
+                <HeaderCell pinRight>Tasks</HeaderCell>
               </HeaderRow>
             </Header>
 
             <Body>
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  <Cell pin>{item.name}</Cell>
+                  <Cell pinLeft>{item.name}</Cell>
                   <Cell>
                     {item.deadline.toLocaleDateString('en-US', {
                       year: 'numeric',
@@ -160,7 +160,7 @@ storiesOf('Features/Fixed Column', module)
                   </Cell>
                   <Cell>{item.type}</Cell>
                   <Cell>{item.isComplete.toString()}</Cell>
-                  <Cell pin>{item.nodes?.length}</Cell>
+                  <Cell pinRight>{item.nodes?.length}</Cell>
                 </Row>
               ))}
             </Body>
@@ -214,8 +214,8 @@ storiesOf('Features/Fixed Column', module)
             <>
               <Header>
                 <HeaderRow>
-                  <HeaderCell pin>Task</HeaderCell>
-                  <HeaderCell pin>Deadline</HeaderCell>
+                  <HeaderCell pinLeft>Task</HeaderCell>
+                  <HeaderCell pinLeft>Deadline</HeaderCell>
                   <HeaderCell>Type</HeaderCell>
                   <HeaderCell>Complete</HeaderCell>
                   <HeaderCell>Tasks</HeaderCell>
@@ -225,8 +225,8 @@ storiesOf('Features/Fixed Column', module)
               <Body>
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    <Cell pin>{item.name}</Cell>
-                    <Cell pin>
+                    <Cell pinLeft>{item.name}</Cell>
+                    <Cell pinLeft>
                       {item.deadline.toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: '2-digit',

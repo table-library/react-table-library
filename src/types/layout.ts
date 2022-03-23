@@ -5,6 +5,7 @@ export type Layout = {
   horizontalScroll: boolean;
   hiddenColumns: string[];
   fullHeight?: boolean;
+  inheritLayout?: boolean;
 };
 
 // internal
