@@ -28,13 +28,13 @@ export const useConsumeRowLayout = (ref: TableElementRef, selector: string) => {
     allCells.forEach((cell, index) => {
       if (tableMemoryRef.current!.resizedLayout[index] === null) return;
 
-      cell.setAttribute(
-        'style',
-        `${cell.getAttribute('style')}` +
-          `width: ${tableMemoryRef.current!.resizedLayout[index]}; min-width: ${
-            tableMemoryRef.current!.resizedLayout[index]
-          };`,
-      );
+      const previousStyle = cell.getAttribute('style') ?? '';
+      const widthStyle = `
+        width: ${tableMemoryRef.current!.resizedLayout[index]};
+        min-width: ${tableMemoryRef.current!.resizedLayout[index]};
+      `;
+
+      cell.setAttribute('style', previousStyle + ' ' + widthStyle);
     });
   }, [ref, layout, selector, tableMemoryRef]);
 };
