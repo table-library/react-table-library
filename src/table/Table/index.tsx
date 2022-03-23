@@ -17,6 +17,7 @@ import { useShiftDown } from '@table-library/react-table-library/common/hooks/us
 import { Nullish } from '@table-library/react-table-library/types/common';
 import { TableProps } from '@table-library/react-table-library/types/table';
 import {
+  Layout,
   TableMemory,
   TableMemoryRef,
   TableElementRef,
@@ -33,12 +34,12 @@ const useTableElementRef = (ref: TableElementRef | Nullish): TableElementRef => 
   return tableElementRef;
 };
 
-const useTableMemoryRef = (): TableMemoryRef => {
+const useTableMemoryRef = (layout: Layout | Nullish): TableMemoryRef => {
   const tableMemoryRef = React.useRef<TableMemory | null>(null);
 
   if (!tableMemoryRef.current) {
     tableMemoryRef.current = {
-      resizedLayout: [],
+      resizedLayout: layout?.resizedLayout ?? [],
       hiddenSpacesInMemory: [],
     };
   }
@@ -63,7 +64,7 @@ const Table: React.FC<TableProps> = React.forwardRef(
     ref: any,
   ) => {
     const tableElementRef = useTableElementRef(ref);
-    const tableMemoryRef = useTableMemoryRef();
+    const tableMemoryRef = useTableMemoryRef(layout);
 
     // if changed, adjust useFeatures hook
     const modifiedNodes = applyModifiers({
