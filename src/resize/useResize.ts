@@ -9,6 +9,7 @@ import {
 
 import { Nullish } from '@table-library/react-table-library/types/common';
 import { TableElementRef, Layout } from '@table-library/react-table-library/types/layout';
+import { ColumnResizeProps } from '@table-library/react-table-library/types/resize';
 
 type DataColumn = {
   index: number;
@@ -115,7 +116,11 @@ const applyResize = (
   return newColumnWidths;
 };
 
-export const useResize = (cellRef: React.RefObject<HTMLDivElement>, index: number) => {
+export const useResize = (
+  cellRef: React.RefObject<HTMLDivElement>,
+  index: number,
+  resize: ColumnResizeProps | Nullish,
+) => {
   const context = React.useContext(LayoutContext);
 
   if (!context) {
@@ -152,14 +157,22 @@ export const useResize = (cellRef: React.RefObject<HTMLDivElement>, index: numbe
           layout,
           resizeWidth,
         );
+
+        if (typeof resize !== 'boolean' && resize?.onDragMove) {
+          resize?.onDragMove(tableMemoryRef.current!.resizedLayout as string[]);
+        }
       }
     },
-    [index, layout, tableElementRef, tableMemoryRef],
+    [index, layout, resize, tableElementRef, tableMemoryRef],
   );
 
   const onMouseUp = React.useCallback(() => {
     isMouseDown.current = false;
-  }, []);
+
+    if (typeof resize !== 'boolean' && resize?.onDragEnd) {
+      resize?.onDragEnd(tableMemoryRef.current!.resizedLayout as string[]);
+    }
+  }, [resize, tableMemoryRef]);
 
   React.useEffect(() => {
     const { current } = resizeRef;

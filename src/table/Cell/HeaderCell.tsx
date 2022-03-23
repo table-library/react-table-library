@@ -27,7 +27,7 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
   const theme = React.useContext(ThemeContext);
 
   const cellRef = React.useRef<HTMLDivElement>(null);
-  const { resizeRef } = useResize(cellRef, index!);
+  const { resizeRef } = useResize(cellRef, index!, resize);
 
   return (
     <HeaderCellContainer
