@@ -217,5 +217,9 @@ export const useLayoutHide = () => {
       tableElementRef,
       layout,
     );
-  }, [tableElementRef, tableMemoryRef, layout]);
+
+    if (layout?.onLayoutChange) {
+      layout?.onLayoutChange(tableMemoryRef.current!.resizedLayout as string[]);
+    }
+  }, [layout, tableElementRef, tableMemoryRef]);
 };

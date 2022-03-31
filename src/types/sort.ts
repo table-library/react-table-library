@@ -59,7 +59,7 @@ export type HeaderCellSortProps = {
   index?: number;
   sortKey: string;
   sortIcon?: SortOptionsIcon;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 } & Record<string, any>;
 
 export type Sort = {

@@ -19,9 +19,9 @@ module.exports = {
           '@table-library/react-table-library/tree': './src/tree',
           '@table-library/react-table-library/pagination': './src/pagination',
           // themes
-          '@table-library/react-table-library/themes/mantine': './src/themes/mantine',
-          '@table-library/react-table-library/themes/chakra-ui': './src/themes/chakra-ui',
-          '@table-library/react-table-library/themes/material-ui': './src/themes/material-ui',
+          '@table-library/react-table-library/mantine': './src/themes/mantine',
+          '@table-library/react-table-library/chakra-ui': './src/themes/chakra-ui',
+          '@table-library/react-table-library/material-ui': './src/themes/material-ui',
         },
       },
     ],

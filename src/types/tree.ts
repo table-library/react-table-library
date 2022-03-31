@@ -57,7 +57,7 @@ export type ColumnTreeProps = ColumnTreePropsObject | boolean;
 export type CellTreeProps = {
   item: TableNode;
   treeIcon?: TreeOptionsIcon;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 export type Tree = {

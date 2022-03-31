@@ -22,7 +22,7 @@ export type CellProps = {
   pinRight?: boolean;
   stiff?: boolean;
   onClick?: (event: React.SyntheticEvent) => void;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 } & RestProps;
 
 export type HeaderCellProps = {
@@ -34,7 +34,7 @@ export type HeaderCellProps = {
   pinRight?: boolean;
   stiff?: boolean;
   resize?: ColumnResizeProps;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 } & RestProps;
 
 export type RowProps = {

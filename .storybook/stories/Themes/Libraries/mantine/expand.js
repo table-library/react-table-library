@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/mantine';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/mantine';
 import { Collapse } from '@mantine/core';
 
 import { DocumentationSee } from '../../../documentation';
@@ -99,7 +99,7 @@ import { useTheme } from '@table-library/react-table-library/theme';
 import {
   DEFAULT_OPTIONS,
   getTheme,
-} from '@table-library/react-table-library/themes/mantine';
+} from '@table-library/react-table-library/mantine';
 import { Collapse } from '@mantine/core';
 
 import { DocumentationSee } from '../../../documentation';

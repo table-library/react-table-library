@@ -10,8 +10,9 @@ export type Layout = {
   horizontalScroll: boolean;
   hiddenColumns: string[];
   fullHeight?: boolean;
-  resizedLayout?: string[];
   inheritLayout?: boolean;
+  resizedLayout?: string[];
+  onLayoutChange?: (widths: string[]) => void;
 };
 ```
 

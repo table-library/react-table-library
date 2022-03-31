@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/material-ui';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/material-ui';
 import { usePagination } from '@table-library/react-table-library/pagination';
 import { Stack, TablePagination } from '@mui/material';
 
@@ -77,7 +77,7 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/material-ui';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/material-ui';
 import { usePagination } from '@table-library/react-table-library/pagination';
 import { Stack, TablePagination } from '@mui/material';
 

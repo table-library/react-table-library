@@ -142,7 +142,7 @@ storiesOf('Features/Column Hiding', module)
       </>
     );
   })
-  .add('with callback', () => {
+  .add('with callbacks', () => {
     const data = { nodes };
 
     const [hiddenColumns, setHiddenColumns] = React.useState(['deadline', 'complete']);
@@ -163,6 +163,8 @@ storiesOf('Features/Column Hiding', module)
     function onColumnHideChange(action, state) {
       console.log(action, state);
     }
+
+    const handleLayoutChange = (widths) => console.log(widths);
 
     return (
       <>
@@ -231,7 +233,7 @@ storiesOf('Features/Column Hiding', module)
           </label>
         </div>
 
-        <Table data={data} layout={{ hiddenColumns }}>
+        <Table data={data} layout={{ hiddenColumns, onLayoutChange: handleLayoutChange }}>
           {(tableList) => (
             <>
               <Header>

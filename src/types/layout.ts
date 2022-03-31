@@ -1,12 +1,13 @@
 // external
 
 export type Layout = {
-  custom: boolean;
-  horizontalScroll: boolean;
-  hiddenColumns: string[];
+  custom?: boolean;
+  horizontalScroll?: boolean;
+  hiddenColumns?: string[];
   fullHeight?: boolean;
-  resizedLayout?: string[];
   inheritLayout?: boolean;
+  resizedLayout?: string[];
+  onLayoutChange?: (widths: string[]) => void;
 };
 
 // internal

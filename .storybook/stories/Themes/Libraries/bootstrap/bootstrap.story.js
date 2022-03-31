@@ -15,7 +15,7 @@ import { useTheme } from '@table-library/react-table-library/theme';
 
 import { nodes } from '../../../data';
 
-storiesOf('Library Themes/Bootstrap UI (WIP)', module)
+storiesOf('Library Themes/Bootstrap (WIP)', module)
   .addParameters({ component: Table })
   .add('base', () => {
     const data = { nodes };

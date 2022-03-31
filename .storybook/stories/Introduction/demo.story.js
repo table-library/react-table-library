@@ -24,7 +24,7 @@ import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import PieChartIcon from '@mui/icons-material/PieChart';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CloseIcon from '@mui/icons-material/Close';
-import { Sparklines, SparklinesLine, SparklinesReferenceLine } from 'react-sparklines';
+import { Sparklines, SparklinesLine } from 'react-sparklines';
 
 import {
   Table,
@@ -36,7 +36,7 @@ import {
   Cell,
 } from '@table-library/react-table-library/table';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/material-ui';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/material-ui';
 import { usePagination } from '@table-library/react-table-library/pagination';
 
 const queryClient = new QueryClient();
@@ -291,6 +291,21 @@ const PRICE_CHANGE_PERCENTAGE = {
   },
 };
 
+const CATEGORIES = {
+  cryptocurrencies: {
+    label: 'Cryptocurrencies',
+  },
+  'decentralized-finance-defi': {
+    label: 'DeFi',
+  },
+  'non-fungible-tokens-nft': {
+    label: 'NFT',
+  },
+  metaverse: {
+    label: 'Metaverse',
+  },
+};
+
 const CUSTOM_COLUMNS = {
   ath: {
     label: 'ATH',
@@ -325,6 +340,10 @@ const CUSTOM_COLUMNS = {
       }),
   },
 };
+
+const DEFAULT_PAGE = 1;
+const DEFAULT_SIZE = 10;
+const DEFAULT_CATEGORY = 'cryptocurrencies';
 
 const StyledSelect = styled(Select)`
   & .MuiSelect-select {
@@ -376,12 +395,18 @@ const ViewMarket = ({ marketData, item, isExpanded, onOpen, onClose }) => {
   );
 };
 
-const queryCurrencies = ({ page, size }) => () =>
-  axios
+const queryCurrencies = ({ page, size, category }) => () => {
+  let extra = '';
+  if (category !== DEFAULT_CATEGORY) {
+    extra = `category=${category}&`;
+  }
+
+  return axios
     .get(
-      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${size}&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d%2C14d%2C30d%2C200d%2C1y`,
+      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&${extra}order=market_cap_desc&per_page=${size}&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d%2C14d%2C30d%2C200d%2C1y`,
     )
     .then((result) => result.data);
+};
 
 const queryMarkets = (id) => () =>
   axios
@@ -402,8 +427,6 @@ const Demo = () => {
   const [expandedMarketIds, setExpandedMarketIds] = React.useState([]);
 
   const handleExpand = (incomingId) => {
-    console.log(expandedMarketIds, incomingId, isDropdownOpen);
-
     const id = incomingId ?? isDropdownOpen.id;
 
     if (expandedMarketIds.includes(id)) {
@@ -411,14 +434,6 @@ const Demo = () => {
     } else {
       setExpandedMarketIds(expandedMarketIds.concat(id));
     }
-  };
-
-  // search
-
-  const [search, setSearch] = React.useState('');
-
-  const handleSearch = (event) => {
-    setSearch(event.target.value);
   };
 
   // percentages
@@ -457,14 +472,19 @@ const Demo = () => {
     error: null,
   });
 
-  const fetchCurrencies = async ({ page, size }, fetchState) => {
+  const fetchCurrencies = async ({ page, size, category }, fetchState) => {
     setFetchState(fetchState);
-    setCurrencies(await queryClient.fetchQuery('currencies', queryCurrencies({ page, size })));
+    setCurrencies(
+      await queryClient.fetchQuery('currencies', queryCurrencies({ page, size, category })),
+    );
     setFetchState({ isLoading: false, isOverlayLoading: false, error: null });
   };
 
   React.useEffect(() => {
-    fetchCurrencies({ page: 1, size: 10 }, { isLoading: true });
+    fetchCurrencies(
+      { page: DEFAULT_PAGE, size: DEFAULT_SIZE, category: activeCategory },
+      { isLoading: true },
+    );
   }, []);
 
   const marketsData = useQueries(
@@ -476,14 +496,27 @@ const Demo = () => {
 
   const data = { nodes: isWatchlistActive ? favorites : currencies };
 
+  // category
+
+  const [activeCategory, setActiveCategory] = React.useState(DEFAULT_CATEGORY);
+
+  React.useEffect(() => {
+    pagination.fns.onSetPage(DEFAULT_PAGE);
+    pagination.fns.onSetSize(50); // TODO
+    fetchCurrencies(
+      { page: DEFAULT_PAGE, size: 50, category: activeCategory },
+      { overlayLoading: true },
+    );
+  }, [activeCategory]);
+
   // pagination
 
   const pagination = usePagination(
     data,
     {
       state: {
-        page: 0,
-        size: 10,
+        page: DEFAULT_PAGE,
+        size: DEFAULT_SIZE,
       },
       onChange: onPaginationChange,
     },
@@ -493,7 +526,10 @@ const Demo = () => {
   );
 
   function onPaginationChange(action, state) {
-    fetchCurrencies({ page: state.page + 1, size: state.size }, { isOverlayLoading: true });
+    fetchCurrencies(
+      { page: state.page + 1, size: state.size, category: activeCategory },
+      { isOverlayLoading: true },
+    );
   }
 
   // watchlist handler
@@ -507,8 +543,8 @@ const Demo = () => {
   };
 
   const handleWatchList = () => {
-    pagination.fns.onSetPage(1);
-    pagination.fns.onSetSize(10);
+    pagination.fns.onSetPage(DEFAULT_PAGE);
+    pagination.fns.onSetSize(DEFAULT_SIZE);
     setWatchlistActive(!isWatchlistActive);
   };
 
@@ -528,21 +564,15 @@ const Demo = () => {
             Portfolio
           </Button>
           <Divider orientation="vertical" flexItem />
-          <Button color="primary" size="small" onClick={() => {}}>
-            Cryptocurrencies
-          </Button>
-          <Button color="inherit" size="small" onClick={() => {}}>
-            Categories
-          </Button>
-          <Button color="inherit" size="small" onClick={() => {}}>
-            DeFi
-          </Button>
-          <Button color="inherit" size="small" onClick={() => {}}>
-            NFT
-          </Button>
-          <Button color="inherit" size="small" onClick={() => {}}>
-            Metaverse
-          </Button>
+          {Object.keys(CATEGORIES).map((key) => (
+            <Button
+              color={key === activeCategory ? 'primary' : 'inherit'}
+              size="small"
+              onClick={() => setActiveCategory(key)}
+            >
+              {CATEGORIES[key].label}
+            </Button>
+          ))}
         </Stack>
 
         <Stack direction="row" spacing={1} m={1}>
@@ -716,7 +746,6 @@ const Demo = () => {
                         <Cell>
                           <Sparklines data={item.sparkline_in_7d.price} height={40}>
                             <SparklinesLine color="#1976d2" />
-                            <SparklinesReferenceLine type="mean" />
                           </Sparklines>
                         </Cell>
                         {customColumnsActive.map((column) => (
@@ -756,10 +785,12 @@ const Demo = () => {
       {fetchState.isOverlayLoading && <OverlayLoading />}
 
       <TablePagination
-        count={isWatchlistActive ? data.nodes.length : 9688} // API does not offer this number
+        count={
+          isWatchlistActive ? data.nodes.length : 9688 // TODO API does not offer this number
+        }
         page={pagination.state.page}
         rowsPerPage={pagination.state.size}
-        rowsPerPageOptions={[10, 25, 100]}
+        rowsPerPageOptions={activeCategory === DEFAULT_CATEGORY ? [10, 25, 50, 100] : [50]} // TODO
         onRowsPerPageChange={(event) => pagination.fns.onSetSize(parseInt(event.target.value, 10))}
         onPageChange={(event, page) => pagination.fns.onSetPage(page)}
       />

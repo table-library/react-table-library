@@ -51,7 +51,7 @@ export const parameters = {
           'Chakra UI',
           'Material UI',
           'Semantic UI (WIP)',
-          'Bootstrap UI (WIP)',
+          'Bootstrap (WIP)',
           'Ant Design (WIP)',
         ],
         'Product Themes',
