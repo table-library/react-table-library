@@ -43,6 +43,15 @@ const queryClient = new QueryClient();
 
 const twoDecimals = (integer) => Number((Math.round(integer * 100) / 100).toFixed(2));
 
+const disablePin = `
+  @media screen and (max-width: 480px) {
+    &.pin-left, &.pin-right {
+      position: static;
+      z-index: 1;
+    }
+  }
+`;
+
 const CUSTOM_SHARED_THEME = {
   HeaderRow: `
     font-size: 12px;
@@ -58,6 +67,8 @@ const CUSTOM_SHARED_THEME = {
   BaseCell: `
     padding-top: 14px;
     padding-bottom: 14px;
+
+    ${disablePin}
 
     min-width: 20%;
     width: 20%;

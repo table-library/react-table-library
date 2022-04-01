@@ -88,7 +88,7 @@ storiesOf('Features/Fixed Header', module)
 
     return (
       // check .storybook/preview.js for body style
-      <>
+      <div style={{ height: '100vh' }}>
         <div
           style={{
             height: '40%',
@@ -150,7 +150,7 @@ storiesOf('Features/Fixed Header', module)
         >
           Some Footer
         </div>
-      </>
+      </div>
     );
   })
   .add('in flex container', () => {
@@ -164,10 +164,10 @@ storiesOf('Features/Fixed Header', module)
 
     return (
       // check .storybook/preview.js for body style
-      <>
+      <div style={{ height: '100vh' }}>
         <div
           style={{
-            height: '40%',
+            height: '40vh',
             border: '1px solid black',
             display: 'flex',
             justifyContent: 'center',
@@ -178,6 +178,7 @@ storiesOf('Features/Fixed Header', module)
         </div>
         <div
           style={{
+            height: '20vh',
             flex: '1',
             display: 'flex',
             flexDirection: 'column',
@@ -233,7 +234,7 @@ storiesOf('Features/Fixed Header', module)
         </div>
         <div
           style={{
-            height: '40%',
+            height: '40vh',
             border: '1px solid black',
             display: 'flex',
             justifyContent: 'center',
@@ -242,7 +243,7 @@ storiesOf('Features/Fixed Header', module)
         >
           Some Footer
         </div>
-      </>
+      </div>
     );
   })
   .add('documentation', () => (
