@@ -20,6 +20,13 @@ storiesOf('Misc/Actions', module)
     const data = { nodes };
 
     const theme = useTheme({
+      Row: `
+        &:hover {
+          .td:nth-of-type(5) button {
+            opacity: 1;
+          }
+        }
+      `,
       BaseCell: `
         &:nth-of-type(1), &:nth-of-type(3), &:nth-of-type(4), &:nth-of-type(5) {
           min-width: 10%;
@@ -32,6 +39,12 @@ storiesOf('Misc/Actions', module)
 
           div {
             width: 100%;
+          }
+        }
+
+        &:nth-of-type(5) {
+          button {
+            opacity: 0;
           }
         }
 
@@ -82,15 +95,25 @@ storiesOf('Misc/Actions', module)
                     <div
                       style={{
                         display: 'flex',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <span style={{ marginRight: '4px' }}>{item.type}</span>
+                      <button>B</button>
+                    </div>
+                  </Cell>
+                  <Cell>
+                    <div
+                      style={{
+                        display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
                       }}
                     >
-                      <span>{item.type}</span>
-                      <button>B</button>
+                      <span>{item.isComplete.toString()}</span>
+                      <button>C</button>
                     </div>
                   </Cell>
-                  <Cell>{item.isComplete.toString()}</Cell>
                   <Cell>
                     <div
                       style={{
@@ -100,7 +123,7 @@ storiesOf('Misc/Actions', module)
                       }}
                     >
                       <span>{item.nodes?.length}</span>
-                      <button>C</button>
+                      <button>D</button>
                     </div>
                   </Cell>
                 </Row>
