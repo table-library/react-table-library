@@ -1,3 +1,4 @@
+import * as React from 'react';
 import cs from 'clsx';
 
 import * as COLORS from '@table-library/react-table-library/common/colors';

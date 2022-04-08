@@ -1,6 +1,7 @@
+import * as React from 'react';
+
 import { State, IdReducerFunctions } from '@table-library/react-table-library/types/common';
 import { TableNode, GetRowProps } from '@table-library/react-table-library/types/table';
-import React from 'react';
 
 export enum SelectClickTypes {
   RowClick,

@@ -1,3 +1,4 @@
+import * as React from 'react';
 import useDoubleClickBase from 'use-double-click';
 
 import { TableNode, OnClick } from '@table-library/react-table-library/types/table';
