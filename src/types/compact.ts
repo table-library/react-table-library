@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 import { TableNode, TableProps, RowProps } from '@table-library/react-table-library/types/table';
 import { ColumnSortProps } from '@table-library/react-table-library/types/sort';
 import { ColumnSelectProps } from '@table-library/react-table-library/types/select';
