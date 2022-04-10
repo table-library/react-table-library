@@ -63,7 +63,7 @@ export const CompactTable: React.FC<CompactTableProps> = React.forwardRef(
         onInit={onInit}
       >
         {(tableList: TableNode[]) => (
-          <>
+          <React.Fragment>
             {tableOptions?.renderBeforeTable && tableOptions.renderBeforeTable()}
             {virtualizedOptions ? (
               <VirtualizedTable
@@ -87,7 +87,7 @@ export const CompactTable: React.FC<CompactTableProps> = React.forwardRef(
               <CompactFooter columns={columns} />
             )}
             {tableOptions?.renderAfterTable && tableOptions.renderAfterTable()}
-          </>
+          </React.Fragment>
         )}
       </Table>
     );

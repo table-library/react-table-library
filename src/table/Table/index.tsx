@@ -101,7 +101,7 @@ const Table: React.FC<TableProps> = React.forwardRef(
                   <TreeContext.Provider value={tree}>
                     <PaginationContext.Provider value={pagination}>
                       {layout?.inheritLayout ? (
-                        <>{children && children(modifiedNodes)}</>
+                        <React.Fragment>{children && children(modifiedNodes)}</React.Fragment>
                       ) : (
                         <LayoutProvider
                           layout={layout}

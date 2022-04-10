@@ -28,7 +28,7 @@ export const CompactRow: React.FC<CompactRowProps> = ({
   const { tree, select } = tableProps;
 
   return (
-    <>
+    <React.Fragment>
       {rowOptions?.renderBeforeRow && rowOptions.renderBeforeRow(item)}
 
       <Row item={item} {...rowProps}>
@@ -87,6 +87,6 @@ export const CompactRow: React.FC<CompactRowProps> = ({
       </Row>
 
       {rowOptions?.renderAfterRow && rowOptions.renderAfterRow(item)}
-    </>
+    </React.Fragment>
   );
 };

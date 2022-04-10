@@ -16,7 +16,7 @@ export const NormalTable: React.FC<NormalTableProps> = ({
   ...tableProps
 }: NormalTableProps) => {
   return (
-    <>
+    <React.Fragment>
       <CompactHeader columns={columns} {...tableProps} />
 
       <Body>
@@ -31,6 +31,6 @@ export const NormalTable: React.FC<NormalTableProps> = ({
           />
         ))}
       </Body>
-    </>
+    </React.Fragment>
   );
 };

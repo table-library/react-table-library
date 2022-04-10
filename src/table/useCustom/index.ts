@@ -29,7 +29,7 @@ const reducer = (state: State, action: Action) => {
 
 const DEFAULT_STATE = {};
 
-const useCustom = (name: string, data: Data, primary: StateAndChange | Nullish, context: any) => {
+const useCustom = (name: string, data: Data, primary: StateAndChange | Nullish, context?: any) => {
   const controlledState: State = primary?.state
     ? { ...DEFAULT_STATE, ...primary.state }
     : { ...DEFAULT_STATE };
