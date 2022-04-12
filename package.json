@@ -1,6 +1,6 @@
 {
   "name": "@table-library/react-table-library",
-  "version": "2.0.30",
+  "version": "0.0.0-development",
   "description": "react-table-library",
   "type": "module",
   "main": "main.js",
@@ -118,7 +118,8 @@
     "copyreadme": "cp -rf README.md lib",
     "dist": "npm run check && npm run library:build && cd lib && npm publish",
     "dist:beta": "npm run check && npm run library:build && cd lib && npm publish --tag beta",
-    "prepublishOnly": "echo \"Warning: Don't run 'npm publish' in root. Use 'npm run dist' instead.\" && exit 0"
+    "prepublishOnly": "echo \"Warning: Don't run 'npm publish' in root. Use 'npm run dist' instead.\" && exit 0",
+    "semantic-release": "semantic-release"
   },
   "husky": {
     "hooks": {
@@ -133,7 +134,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/table-library/react-table-library.git"
+    "url": "https://github.com/table-library/react-table-library.git"
   },
   "keywords": [
     "react",
