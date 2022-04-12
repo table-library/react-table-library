@@ -16,6 +16,7 @@ jobs:
           node-version: "16.x"
       - run: npm install
       - run: npm run check
+      - run: npm whoami
       - run: npm run dist --if-present
       - run: npx semantic-release
         env:
