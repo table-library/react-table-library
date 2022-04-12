@@ -5,6 +5,6 @@
     ["@semantic-release/npm", {
       "pkgRoot": "lib"
     }],
-    "@semantic-release/git"
+    "@semantic-release/github"
   ]
 }
