@@ -30,7 +30,12 @@ const getRowProps = (features: Features, props: RowProps) =>
     .map((feature) => (feature as any)._getRowProps(props, features));
 
 const evaluateProps = (rowPropsByFeature: FeatureProps[], onSingleClick: OnClick | Nullish) => {
-  const { themeByFeature, classNamesByFeature, onClickByFeature } = rowPropsByFeature.reduce(
+  const {
+    themeByFeature,
+    classNamesByFeature,
+    clickable,
+    onClickByFeature,
+  } = rowPropsByFeature.reduce(
     (acc, value) => {
       const { theme, className, onClick } = value;
 
@@ -41,6 +46,8 @@ const evaluateProps = (rowPropsByFeature: FeatureProps[], onSingleClick: OnClick
 
       const mergedClassName = cs(acc.classNamesByFeature, className);
 
+      const mergedClickable = acc.clickable || !!onClick;
+
       const mergedOnClick = (node: TableNode, event: React.SyntheticEvent) => {
         onClick(node, event);
         acc.onClickByFeature(node, event);
@@ -50,12 +57,14 @@ const evaluateProps = (rowPropsByFeature: FeatureProps[], onSingleClick: OnClick
         ...acc,
         themeByFeature: mergedTheme,
         classNamesByFeature: mergedClassName,
+        clickable: mergedClickable,
         onClickByFeature: mergedOnClick,
       };
     },
     {
       themeByFeature: '',
       classNamesByFeature: '',
+      clickable: !!onSingleClick,
       onClickByFeature: (node: TableNode, event: React.SyntheticEvent) => {
         if (onSingleClick && isRowClick(event)) {
           onSingleClick(node, event);
@@ -67,6 +76,7 @@ const evaluateProps = (rowPropsByFeature: FeatureProps[], onSingleClick: OnClick
   return {
     themeByFeature,
     classNamesByFeature,
+    clickable,
     onClickByFeature,
   };
 };
@@ -79,7 +89,7 @@ export const Row: React.FC<RowProps> = (props: RowProps) => {
 
   const theme = React.useContext(ThemeContext);
 
-  const { themeByFeature, classNamesByFeature, onClickByFeature } = evaluateProps(
+  const { themeByFeature, classNamesByFeature, clickable, onClickByFeature } = evaluateProps(
     rowPropsByFeature,
     onClick,
   );
@@ -95,7 +105,7 @@ export const Row: React.FC<RowProps> = (props: RowProps) => {
       role="row"
       className={cs('tr', 'tr-body', classNamesByFeature, className, {
         disabled,
-        clickable: onClickByFeature || onDoubleClick,
+        clickable: clickable || !!onDoubleClick,
       })}
       css={css`
         ${themeByFeature}
