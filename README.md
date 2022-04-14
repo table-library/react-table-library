@@ -4,7 +4,8 @@
 
 [![Version][version-badge]][package]
 [![Size][size-badge]][size]
-[![type-badge]][package]
+[![Types][type-badge]][package]
+[![Semantic Release][semantic-release-badge]][semantic-release]
 [![License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
 [![Changelog][changelog-badge]][changelog]
@@ -46,7 +47,8 @@ yarn add @table-library/react-table-library @emotion/react
 
 ## Usage
 
-**[Documentation](https://react-table-library.com/)**
+* **[Documentation](https://react-table-library.com/)**
+* **[Demo](https://react-tables.com/)**
 
 ```javascript
 import { CompactTable } from '@table-library/react-table-library/compact';
@@ -106,8 +108,10 @@ In 2020, [Robin Wieruch](https://www.robinwieruch.de) created React Table Librar
 [type-badge]: https://img.shields.io/npm/types/@table-library/react-table-library
 [license-badge]: https://img.shields.io/npm/l/@table-library/react-table-library.svg
 [license]: https://github.com/table-library/react-table-library/blob/master/LICENSE
+[semantic-release-badge]: https://img.shields.io/badge/%F0%9F%9A%80-semantic--release-blueviolet
+[semantic-release]: https://github.com/table-library/react-table-library/releases
 [github-star-badge]: https://img.shields.io/github/stars/table-library/react-table-library?style=social
-[github-star]: https://github.com/table-library/react-table-library/
+[github-star]: https://github.com/table-library/react-table-library/stargazers
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg
 [coc]: https://github.com/table-library/react-table-library/blob/master/CODE_OF_CONDUCT.md
 [changelog-badge]: https://img.shields.io/badge/Change-Log-blue
