@@ -125,7 +125,7 @@ In 2020, [Robin Wieruch](https://www.robinwieruch.de) created React Table Librar
 
 There are two kinds of table libraries for React: heavyweight and lightweight.
 
-On the one side of the spectrum, there are **heavyweight table libraries** which are often shipped by UI libraries such as Material UI. These tables have all batteries included, however, they often lack in modern concepts such as composition over configuration, customization, extensibility and first-class server-side operations. When you have to create one giant configuration object for one giant table component, you know that you are working with a heavyweight table library.
+On the one side of the spectrum, there are **heavyweight table libraries** which are often shipped by UI libraries such as MUI X. These tables have all batteries included, however, they often lack in modern concepts such as composition over configuration, customization, extensibility and first-class server-side operations. When you have to create one giant configuration object for one giant table component, you know that you are working with a heavyweight table library.
 
 On the other side of the spectrum, there are **lightweight table libraries**. The most popular one is React Table which is a great library and at the time the status quo in the React community. I very much like this library and used it myself, however, when creating complex tables (read: server-side operations, customizations, feature compositions) from scratch, I always felt like re-inventing the wheel all the time, because I didn't receive enough handholding from the library.
 
