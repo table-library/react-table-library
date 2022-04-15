@@ -1,95 +1,65 @@
 import * as React from 'react';
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/react';
 
-import * as COLORS from '@table-library/react-table-library/common/colors';
+const BASE_STYLE = (props: Record<string, any>) => {
+  let optionalString = '';
 
-const GUTTER = 6;
+  // TODO (do in useHide hook by altering style instead of className)
+  // if (props.className.includes('hide')) {
+  //   optionalString = `
+  //     ${optionalString}
 
-const BASE_STYLE = `
-  display: flex;
-  align-items: center;
+  //     display: none;
+  //   `;
+  // }
 
-  padding-top: 4px;
-  padding-bottom: 4px;
+  if (props.className.includes('pin-left') || props.className.includes('pin-right')) {
+    optionalString = `
+      ${optionalString}
 
-  &:not(.stiff) > div {
-    width: 100%;
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+      position: sticky;
+      z-index: 3;
+    `;
   }
 
-  &:first-of-type > div {
-    padding-left: ${GUTTER}px;
+  return `
+    display: flex;
+    align-items: center;
+
+    ${optionalString}
+  `;
+};
+
+const CELL_CONTAINER_STYLE = (props: Record<string, any>) => `
+  .td {
+    ${BASE_STYLE(props)}
   }
-
-  & > div {
-    padding-right: ${GUTTER}px;
-    padding-left: 20px;
-  }
-
-  &:last-of-type > div {
-    padding-right: ${GUTTER}px;
-  }
-
-  border-right: 1px solid ${COLORS.BORDER};
-
-  &:last-of-type {
-    border-right: 0px solid transparent;
-  }
-
-  &.stiff > div {
-    padding-right: ${GUTTER}px;
-    padding-left: ${GUTTER}px;
-  }
-
-  &.hide {
-    display: none;
-  }
-
-  &.pin-left, &.pin-right {
-    position: sticky;
-    z-index: 3;
-  }
-
-  ${() => {
-    /* #1 */
-    // otherwise tree + resize would have overflow icons */
-  }}
-  background-color: inherit;
-`;
-
-const CELL_CONTAINER_STYLE = css`
-  ${BASE_STYLE}
 `;
 
 const CellContainer = React.forwardRef(
-  (props: Record<string, any>, ref: React.ForwardedRef<HTMLDivElement>) => {
-    return <div {...props} css={CELL_CONTAINER_STYLE} ref={ref} />;
+  ({ children, ...props }: Record<string, any>, ref: React.ForwardedRef<HTMLDivElement>) => {
+    return (
+      <div {...props} ref={ref}>
+        <style>{CELL_CONTAINER_STYLE(props)}</style>
+        {children}
+      </div>
+    );
   },
 );
 
-const HEADER_CELL_CONTAINER_STYLE = ({ _inverseBorder }: { _inverseBorder?: boolean }) => css`
-  ${BASE_STYLE}
-
-  position: relative;
-
-  ${_inverseBorder
-    ? `border-top: 1px solid ${COLORS.BORDER};`
-    : `border-bottom: 1px solid ${COLORS.BORDER};`}
-
-  svg,
-  path {
-    fill: currentColor;
+const HEADER_CELL_CONTAINER_STYLE = (props: Record<string, any>) => `
+  .th {
+    ${BASE_STYLE(props)}
   }
 `;
 
 const HeaderCellContainer = React.forwardRef(
-  (props: Record<string, any>, ref: React.ForwardedRef<HTMLDivElement>) => {
-    return <div {...props} css={HEADER_CELL_CONTAINER_STYLE(props)} ref={ref} />;
+  ({ children, ...props }: Record<string, any>, ref: React.ForwardedRef<HTMLDivElement>) => {
+    return (
+      <div {...props} ref={ref}>
+        <style>{HEADER_CELL_CONTAINER_STYLE(props)}</style>
+        {children}
+      </div>
+    );
   },
 );
 

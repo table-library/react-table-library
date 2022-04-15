@@ -1,52 +1,31 @@
 import * as React from 'react';
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/react';
 
-import * as COLORS from '@table-library/react-table-library/common/colors';
 import { LayoutContext } from '@table-library/react-table-library/common/context/Layout';
 
 import { Nullish } from '@table-library/react-table-library/types/common';
 import { Layout } from '@table-library/react-table-library/types/layout';
 
+// min-width: max-content
+// otherwise pin feature pushes pined columns eventually outside if sum of all column widths is greater than container size
+// https://stackoverflow.com/a/57437315/1189762
 const getBaseStyle = (layout: Layout | Nullish) => `
   display: flex;
   align-items: stretch;
 
-  ${() => {
-    /* #1 */
-    // otherwise tree + resize would have overflow icons */
-  }}
-  background-color: ${COLORS.BACKGROUND};
-
-  ${() => {
-    /* otherwise pin feature pushes pined columns eventually outside if sum of all column widths is greater than container size */
-    /* https://stackoverflow.com/a/57437315/1189762 */
-  }}
   ${layout?.horizontalScroll ? 'min-width: max-content;' : ''}
 `;
 
-const getRowContainerStyle = (layout: Layout | Nullish) => css`
-  ${getBaseStyle(layout)}
-
-  font-size: 18px;
-  color: ${COLORS.FONT_SECONDARY};
-
-  &:hover {
-    color: ${COLORS.FONT_PRIMARY};
-  }
-
-  &.disabled {
-    color: ${COLORS.FONT_DISABLED};
-  }
-
-  &.clickable {
-    cursor: pointer;
+const getRowContainerStyle = (layout: Layout | Nullish) => `
+  .tr-body {
+    ${getBaseStyle(layout)}
   }
 `;
 
 const RowContainer = React.forwardRef(
-  (props: Record<string, any>, ref: React.ForwardedRef<HTMLDivElement> | Nullish) => {
+  (
+    { children, ...props }: Record<string, any>,
+    ref: React.ForwardedRef<HTMLDivElement> | Nullish,
+  ) => {
     const context = React.useContext(LayoutContext);
 
     if (!context) {
@@ -55,19 +34,26 @@ const RowContainer = React.forwardRef(
 
     const { layout } = context;
 
-    return <div {...props} css={getRowContainerStyle(layout)} ref={ref} />;
+    return (
+      <div {...props} ref={ref}>
+        <style>{getRowContainerStyle(layout)}</style>
+        {children}
+      </div>
+    );
   },
 );
 
-const getHeaderRowContainerStyle = (layout: Layout | Nullish) => css`
-  ${getBaseStyle(layout)}
-
-  font-size: 18px;
-  color: ${COLORS.FONT_PRIMARY};
+const getHeaderRowContainerStyle = (layout: Layout | Nullish) => `
+  .tr-header {
+    ${getBaseStyle(layout)}
+  }
 `;
 
 const HeaderRowContainer = React.forwardRef(
-  (props: Record<string, any>, ref: React.ForwardedRef<HTMLDivElement> | Nullish) => {
+  (
+    { children, ...props }: Record<string, any>,
+    ref: React.ForwardedRef<HTMLDivElement> | Nullish,
+  ) => {
     const context = React.useContext(LayoutContext);
 
     if (!context) {
@@ -76,7 +62,12 @@ const HeaderRowContainer = React.forwardRef(
 
     const { layout } = context;
 
-    return <div {...props} css={getHeaderRowContainerStyle(layout)} ref={ref} />;
+    return (
+      <div {...props} ref={ref}>
+        <style>{getHeaderRowContainerStyle(layout)}</style>
+        {children}
+      </div>
+    );
   },
 );
 
