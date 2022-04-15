@@ -16,7 +16,7 @@ const getBaseStyle = (layout: Layout | Nullish) => `
 `;
 
 const getRowContainerStyle = (layout: Layout | Nullish) => `
-  .tr-body {
+  [data-table-library="tr-body"] {
     ${getBaseStyle(layout)}
   }
 `;
@@ -35,8 +35,8 @@ const RowContainer = React.forwardRef(
     const { layout } = context;
 
     return (
-      <div {...props} ref={ref}>
-        <style>{getRowContainerStyle(layout)}</style>
+      <div {...props} ref={ref} data-table-library="tr-body">
+        <style dangerouslySetInnerHTML={{ __html: getRowContainerStyle(layout) }} />
         {children}
       </div>
     );
@@ -44,7 +44,7 @@ const RowContainer = React.forwardRef(
 );
 
 const getHeaderRowContainerStyle = (layout: Layout | Nullish) => `
-  .tr-header {
+  [data-table-library="tr-header"] {
     ${getBaseStyle(layout)}
   }
 `;
@@ -63,8 +63,8 @@ const HeaderRowContainer = React.forwardRef(
     const { layout } = context;
 
     return (
-      <div {...props} ref={ref}>
-        <style>{getHeaderRowContainerStyle(layout)}</style>
+      <div {...props} ref={ref} data-table-library="tr-header">
+        <style dangerouslySetInnerHTML={{ __html: getHeaderRowContainerStyle(layout) }} />
         {children}
       </div>
     );

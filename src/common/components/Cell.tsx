@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const BASE_STYLE = (props: Record<string, any>) => {
+const getBaseStyle = (props: Record<string, any>) => {
   let optionalString = '';
 
   // TODO (do in useHide hook by altering style instead of className)
@@ -29,34 +29,34 @@ const BASE_STYLE = (props: Record<string, any>) => {
   `;
 };
 
-const CELL_CONTAINER_STYLE = (props: Record<string, any>) => `
-  .td {
-    ${BASE_STYLE(props)}
+const getCellContainerStyle = (props: Record<string, any>) => `
+  [data-table-library="td"] {
+    ${getBaseStyle(props)}
   }
 `;
 
 const CellContainer = React.forwardRef(
   ({ children, ...props }: Record<string, any>, ref: React.ForwardedRef<HTMLDivElement>) => {
     return (
-      <div {...props} ref={ref}>
-        <style>{CELL_CONTAINER_STYLE(props)}</style>
+      <div {...props} ref={ref} data-table-library="td">
+        <style dangerouslySetInnerHTML={{ __html: getCellContainerStyle(props) }} />
         {children}
       </div>
     );
   },
 );
 
-const HEADER_CELL_CONTAINER_STYLE = (props: Record<string, any>) => `
-  .th {
-    ${BASE_STYLE(props)}
+const getHeaderCellContainerStyle = (props: Record<string, any>) => `
+  [data-table-library="th"] {
+    ${getBaseStyle(props)}
   }
 `;
 
 const HeaderCellContainer = React.forwardRef(
   ({ children, ...props }: Record<string, any>, ref: React.ForwardedRef<HTMLDivElement>) => {
     return (
-      <div {...props} ref={ref}>
-        <style>{HEADER_CELL_CONTAINER_STYLE(props)}</style>
+      <div {...props} ref={ref} data-table-library="th">
+        <style dangerouslySetInnerHTML={{ __html: getHeaderCellContainerStyle(props) }} />
         {children}
       </div>
     );
