@@ -21,9 +21,9 @@ const zipThemes = (themes: Theme[]): Theme =>
 const useTheme = (theme: Theme | Theme[]): Theme => {
   if (Array.isArray(theme)) {
     return zipThemes(theme);
+  } else {
+    return zipThemes([theme]);
   }
-
-  return theme;
 };
 
 export { useTheme, zipThemes };
