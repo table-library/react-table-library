@@ -1,13 +1,16 @@
 import * as React from 'react';
 
-import styles from './styles';
+import { Style } from '@table-library/react-table-library/common/components/Style';
 
-type ButtonProps = {
-  margin: string;
-} & Record<string, any>;
+import { button } from './styles';
 
-export const Button: React.FC<ButtonProps> = React.forwardRef(
-  ({ margin, ...props }: ButtonProps, ref: React.ForwardedRef<HTMLButtonElement>) => {
-    return <button type="button" ref={ref} {...props} css={styles({ margin })} />;
+export const Button = React.forwardRef(
+  (props: Record<string, any>, ref: React.ForwardedRef<HTMLButtonElement>) => {
+    return (
+      <>
+        <Style __html={button(props)} />
+        <button type="button" ref={ref} {...props} data-table-library_button="" />
+      </>
+    );
   },
 );

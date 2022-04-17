@@ -64,6 +64,34 @@ const AESTHETIC_THEME = {
     path {
       fill: currentColor;
     }
+
+    [data-table-library_button] {
+      &.active {
+        font-weight: bold;
+      }
+
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      div {
+        text-align: left;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      div:after {
+        display: block;
+        content: attr(title);
+        font-weight: bold;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+      }
+    }
   `,
   Cell: '',
 };

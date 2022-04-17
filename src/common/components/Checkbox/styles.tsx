@@ -1,7 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/react';
-
-export default () => css`
+export default () => `
   cursor: pointer;
 `;

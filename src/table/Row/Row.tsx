@@ -1,10 +1,6 @@
 import * as React from 'react';
 import cs from 'clsx';
 
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/react';
-
 import { isRowClick } from '@table-library/react-table-library/common/util/isRowClick';
 import { RowContainer } from '@table-library/react-table-library/common/components/Row';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
@@ -107,11 +103,10 @@ export const Row: React.FC<RowProps> = (props: RowProps) => {
         disabled,
         clickable: clickable || !!onDoubleClick,
       })}
-      css={css`
-        ${themeByFeature}
-        ${theme?.BaseRow}
-        ${theme?.Row}
-      `}
+      {...theme?.Row}
+      // css={css`
+      //   ${themeByFeature}
+      // `}
       ref={ref}
     >
       {children}

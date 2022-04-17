@@ -1,7 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/react';
-
 import { ColumnResizeProps } from '@table-library/react-table-library/types/resize';
 
 const resizerStyle = (resize: ColumnResizeProps) => {
@@ -13,7 +9,7 @@ const resizerStyle = (resize: ColumnResizeProps) => {
       ? 'transparent'
       : resize.resizerHighlight;
 
-  return css`
+  return `
     z-index: 1;
     position: absolute;
     top: 0;

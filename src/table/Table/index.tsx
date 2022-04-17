@@ -1,8 +1,5 @@
 import * as React from 'react';
 import cs from 'clsx';
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/react';
 
 import { TableContext } from '@table-library/react-table-library/common/context/Table';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
@@ -86,10 +83,10 @@ const Table: React.FC<TableProps> = React.forwardRef(
       <div
         role="grid"
         className={cs(className)}
-        css={css`
-          ${styles(layout, { isShiftDown })}
-          ${theme?.Table}
-        `}
+        {...theme?.Table}
+        // css={css`
+        //   ${styles(layout, { isShiftDown })}
+        // `}
         ref={callbackRef}
         {...rest}
       >

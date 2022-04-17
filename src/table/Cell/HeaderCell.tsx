@@ -1,8 +1,5 @@
 import * as React from 'react';
 import cs from 'clsx';
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { css, jsx } from '@emotion/react';
 
 import { HeaderCellContainer } from '@table-library/react-table-library/common/components/Cell';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
@@ -43,14 +40,11 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
         'pin-left': pinLeft,
         'pin-right': pinRight,
       })}
-      css={css`
-        ${theme?.BaseCell}
-        ${theme?.HeaderCell}
-      `}
+      {...theme?.HeaderCell}
       ref={cellRef}
     >
       <div>{children}</div>
-      {resize && <span ref={resizeRef} css={resizerStyle(resize)} />}
+      {/* {resize && <span ref={resizeRef} css={resizerStyle(resize)} />} */}
     </HeaderCellContainer>
   );
 };
