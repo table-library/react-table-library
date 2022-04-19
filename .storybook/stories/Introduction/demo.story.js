@@ -34,6 +34,7 @@ import {
   Row,
   HeaderCell,
   Cell,
+  useCustom,
 } from '@table-library/react-table-library/table';
 import { useTheme } from '@table-library/react-table-library/theme';
 import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/material-ui';
@@ -44,7 +45,7 @@ const queryClient = new QueryClient();
 const twoDecimals = (integer) => Number((Math.round(integer * 100) / 100).toFixed(2));
 
 const disablePin = `
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 920px) {
     &.pin-left, &.pin-right {
       position: static;
       z-index: 1;
@@ -52,21 +53,36 @@ const disablePin = `
   }
 `;
 
-const CUSTOM_SHARED_THEME = {
+export const CUSTOM_SHARED_THEME = {
+  BaseRow: `
+    height: 54px;
+
+    font-size: 14px;
+    color: rgba(22, 22, 22, 0.88);
+
+    &:hover {
+      color: rgba(22, 22, 22, 0.88);
+    }
+  `,
   HeaderRow: `
     font-size: 12px;
+
+    border-top: none;
+    border-bottom: 1px solid #D4D4D4;
   `,
   Row: `
     font-size: 14px;
-    color: #141414;
 
-    &:hover {
-      background-color: #f8fafd;
-    }
+    border-bottom: 1px solid #D4D4D4;
   `,
   BaseCell: `
-    padding-top: 14px;
-    padding-bottom: 14px;
+    padding: 16px 8px;
+
+    &:not(.stiff) > div {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
     ${disablePin}
 
@@ -94,8 +110,10 @@ const CUSTOM_SHARED_THEME = {
       width: 240px;
     }
 
+    background-color: rgb(245, 245, 245);
+
     &:nth-of-type(1), &:nth-of-type(2), &:nth-of-type(3), &:last-of-type {
-      background-color: #fafafa;
+      background-color: rgb(250, 250, 250);
     }
 
     &:nth-of-type(3) {
@@ -115,28 +133,28 @@ const CUSTOM_SHARED_THEME = {
 
       box-shadow: -5px 0 5px -2px #dadada;
 
-      & > div {
-        display: flex;
-        justify-content: flex-end;
-      }
+      display: flex;
+      justify-content: center;
+    }
+
+    & .MuiLinearProgress-colorPrimary {
+      background-color: #A6465B;
+    }
+
+    & .MuiLinearProgress-barColorPrimary {
+      background-color: #439867;
     }
   `,
 };
 
-const CUSTOM_PRIMARY_THEME = {
-  HeaderRow: `
-    border-top: 1px solid #e2e8f0;
-  `,
-};
+export const CUSTOM_PRIMARY_THEME = {};
 
-const CUSTOM_SECONDARY_THEME = {
+export const CUSTOM_SECONDARY_THEME = {
   Table: `
     overflow: inherit;
   `,
   BaseRow: `
-    &.tr.tr-header, &.tr.tr-body {
-      background-color: #fafafa;
-    }
+    background-color: rgb(250, 250, 250);
   `,
 };
 
@@ -193,7 +211,9 @@ const MarketsTable = ({ data, customColumnsActive }) => {
                       &nbsp;
                       <Chip
                         label="Buy"
-                        color="primary"
+                        style={{
+                          color: '#439867',
+                        }}
                         variant="outlined"
                         size="small"
                         clickable
@@ -210,7 +230,9 @@ const MarketsTable = ({ data, customColumnsActive }) => {
                   <Cell>
                     <Chip
                       label={item.trust_score}
-                      style={{ color: item.trust_score }}
+                      style={{
+                        color: item.trust_score === 'green' ? '#439867' : '#A6465B',
+                      }}
                       variant="outlined"
                     />
                   </Cell>
@@ -355,8 +377,11 @@ const CUSTOM_COLUMNS = {
 const DEFAULT_PAGE = 1;
 const DEFAULT_SIZE = 10;
 const DEFAULT_CATEGORY = 'cryptocurrencies';
+const WATCHLIST_CATEGORY = 'watchlist';
 
 const StyledSelect = styled(Select)`
+  font-size: 12px;
+
   & .MuiSelect-select {
     padding-left: 0;
   }
@@ -366,18 +391,39 @@ const StyledSelect = styled(Select)`
   }
 `;
 
+const Ellipse = ({ style = {}, children, ...rest }) => (
+  <div
+    style={{
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      ...style,
+    }}
+    {...rest}
+  >
+    {children}
+  </div>
+);
+
 const AlignCenter = ({ children, style }) => (
   <div style={{ display: 'flex', alignItems: 'center', ...style }}>{children}</div>
 );
 
-const Indicator = ({ prefix = '', value, suffix = '' }) => {
+export const Indicator = ({ prefix = '', value, suffix = '' }) => {
   const isPositive = value > 0;
 
   return (
-    <AlignCenter style={{ color: isPositive ? 'green' : 'red' }}>
+    <AlignCenter
+      style={{
+        color: isPositive ? 'var(--theme-ui-colors-success)' : 'var(--theme-ui-colors-error)',
+      }}
+    >
       {prefix}
-      {isPositive ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />} {value.toString().replace('-', '')}
-      {suffix}
+      {isPositive ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}&nbsp;
+      <Ellipse>
+        {value.toString().replace('-', '')}
+        {suffix}
+      </Ellipse>
     </AlignCenter>
   );
 };
@@ -447,7 +493,7 @@ const Demo = () => {
   const [expandedMarketIds, setExpandedMarketIds] = React.useState([]);
 
   const handleExpand = (incomingId) => {
-    const id = incomingId ?? isDropdownOpen.id;
+    const id = incomingId || isDropdownOpen?.id || '';
 
     if (expandedMarketIds.includes(id)) {
       setExpandedMarketIds(expandedMarketIds.filter((value) => value !== id));
@@ -468,10 +514,13 @@ const Demo = () => {
 
   // watchlist
 
-  const [isWatchlistActive, setWatchlistActive] = React.useState(false);
-  const [favorites, setFavorites] = useLocalStorageState('favorites', {
+  const [watched, setWatched] = useLocalStorageState('watched', {
     defaultValue: [],
   });
+
+  // category
+
+  const [activeCategory, setActiveCategory] = React.useState(DEFAULT_CATEGORY);
 
   // customize
 
@@ -480,8 +529,7 @@ const Demo = () => {
 
   // theming
 
-  const materialTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme([materialTheme, CUSTOM_SHARED_THEME, CUSTOM_PRIMARY_THEME]);
+  const theme = useTheme([CUSTOM_SHARED_THEME, CUSTOM_PRIMARY_THEME]);
 
   // data
 
@@ -495,17 +543,10 @@ const Demo = () => {
   const fetchCurrencies = async ({ page, size, category }, fetchState) => {
     setFetchState(fetchState);
     setCurrencies(
-      await queryClient.fetchQuery('currencies', queryCurrencies({ page, size, category })),
+      await queryClient.fetchQuery(['currencies'], queryCurrencies({ page, size, category })),
     );
     setFetchState({ isLoading: false, isOverlayLoading: false, error: null });
   };
-
-  React.useEffect(() => {
-    fetchCurrencies(
-      { page: DEFAULT_PAGE, size: DEFAULT_SIZE, category: activeCategory },
-      { isLoading: true },
-    );
-  }, []);
 
   const marketsData = useQueries(
     expandedMarketIds.map((id) => ({
@@ -514,20 +555,9 @@ const Demo = () => {
     })),
   );
 
-  const data = { nodes: isWatchlistActive ? favorites : currencies };
-
-  // category
-
-  const [activeCategory, setActiveCategory] = React.useState(DEFAULT_CATEGORY);
-
-  React.useEffect(() => {
-    pagination.fns.onSetPage(DEFAULT_PAGE);
-    pagination.fns.onSetSize(10); // TODO
-    fetchCurrencies(
-      { page: DEFAULT_PAGE, size: 10, category: activeCategory },
-      { overlayLoading: true },
-    );
-  }, [activeCategory]);
+  const data = {
+    nodes: activeCategory === WATCHLIST_CATEGORY ? watched : currencies,
+  };
 
   // pagination
 
@@ -541,7 +571,7 @@ const Demo = () => {
       onChange: onPaginationChange,
     },
     {
-      isServer: isWatchlistActive ? false : true,
+      isServer: activeCategory === WATCHLIST_CATEGORY ? false : true,
     },
   );
 
@@ -552,42 +582,89 @@ const Demo = () => {
     );
   }
 
+  // activeCategory
+
+  useCustom('activeCategory', data, {
+    state: { activeCategory },
+    onChange: onActiveCategoryChange,
+  });
+
+  function onActiveCategoryChange(action, state) {
+    const size = state.activeCategory === DEFAULT_CATEGORY ? 10 : 50; // TODO
+
+    pagination.fns.onSetPage(DEFAULT_PAGE);
+    pagination.fns.onSetSize(size);
+
+    fetchCurrencies(
+      {
+        page: DEFAULT_PAGE,
+        size: size,
+        category: state.activeCategory,
+      },
+      { isOverlayLoading: true },
+    );
+  }
+
   // watchlist handler
 
   const handleFavorite = (item) => {
-    if (favorites.map((value) => value.id).includes(item.id)) {
-      setFavorites(favorites.filter((value) => value.id !== item.id));
+    if (watched.map((value) => value.id).includes(item.id)) {
+      setWatched(watched.filter((value) => value.id !== item.id));
     } else {
-      setFavorites(favorites.concat(item));
+      setWatched(watched.concat(item));
     }
   };
 
   const handleWatchList = () => {
     pagination.fns.onSetPage(DEFAULT_PAGE);
     pagination.fns.onSetSize(DEFAULT_SIZE);
-    setWatchlistActive(!isWatchlistActive);
+
+    setActiveCategory(WATCHLIST_CATEGORY);
   };
+
+  // reactive query
+
+  React.useEffect(() => {
+    fetchCurrencies(
+      {
+        page: DEFAULT_PAGE,
+        size: DEFAULT_SIZE,
+        category: activeCategory,
+      },
+      { isLoading: true },
+    );
+  }, [activeCategory]);
 
   return (
     <>
-      <Stack direction="row" justifyContent="space-between">
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        style={{
+          borderBottom: '1px solid #D4D4D4',
+          overflowX: 'auto',
+        }}
+      >
         <Stack direction="row" spacing={1} m={1}>
           <Button
-            color={isWatchlistActive ? 'primary' : 'inherit'}
+            color="secondary"
             size="small"
-            startIcon={isWatchlistActive ? <StarIcon /> : <StarOutlineIcon />}
+            variant={activeCategory === WATCHLIST_CATEGORY ? 'outlined' : 'text'}
+            startIcon={activeCategory === WATCHLIST_CATEGORY ? <StarIcon /> : <StarOutlineIcon />}
             onClick={handleWatchList}
           >
             Watchlist
           </Button>
-          <Button color="inherit" size="small" startIcon={<PieChartIcon />} onClick={() => {}}>
+          <Button color="secondary" size="small" startIcon={<PieChartIcon />} onClick={() => {}}>
             Portfolio
           </Button>
           <Divider orientation="vertical" flexItem />
           {Object.keys(CATEGORIES).map((key) => (
             <Button
-              color={key === activeCategory ? 'primary' : 'inherit'}
+              key={key}
+              color="secondary"
               size="small"
+              variant={key === activeCategory ? 'outlined' : 'text'}
               onClick={() => setActiveCategory(key)}
             >
               {CATEGORIES[key].label}
@@ -597,8 +674,9 @@ const Demo = () => {
 
         <Stack direction="row" spacing={1} m={1}>
           <Button
-            color={isCustomizeActive ? 'primary' : 'inherit'}
+            color="secondary"
             size="small"
+            variant={isCustomizeActive ? 'outlined' : 'text'}
             onClick={() => setCustomizeActive(!isCustomizeActive)}
           >
             Customize
@@ -610,16 +688,20 @@ const Demo = () => {
         <Stack
           direction="row"
           justifyContent="space-between"
-          style={{ borderTop: '1px solid #e2e8f0' }}
+          style={{
+            borderBottom: '1px solid #D4D4D4',
+            overflowX: 'auto',
+          }}
         >
           <Stack direction="row" alignItems="center" spacing={1} m={1}>
-            <span>Add Columns:</span>
+            <small style={{ textTransform: 'uppercase' }}>Add Columns:</small>
 
             {Object.keys(CUSTOM_COLUMNS).map((key) => (
               <Button
                 key={key}
-                color={customColumnsActive.includes(key) ? 'primary' : 'inherit'}
+                color="secondary"
                 size="small"
+                variant={customColumnsActive.includes(key) ? 'outlined' : 'text'}
                 onClick={() =>
                   customColumnsActive.includes(key)
                     ? setCustomColumnsActive(customColumnsActive.filter((value) => value !== key))
@@ -633,8 +715,8 @@ const Demo = () => {
 
           <Stack direction="row" spacing={1} m={1}>
             {!!customColumnsActive.length && (
-              <Button color="inherit" size="small" onClick={() => setCustomColumnsActive([])}>
-                Clear Customization
+              <Button color="secondary" size="small" onClick={() => setCustomColumnsActive([])}>
+                Clear Columns
               </Button>
             )}
           </Stack>
@@ -720,7 +802,7 @@ const Demo = () => {
                         <Cell pinLeft>
                           <Tooltip title="Add to Main Watchlist" arrow>
                             <IconButton size="small" onClick={() => handleFavorite(item)}>
-                              {favorites.map((value) => value.id).includes(item.id) ? (
+                              {watched.map((value) => value.id).includes(item.id) ? (
                                 <StarIcon fontSize="small" />
                               ) : (
                                 <StarOutlineIcon fontSize="small" />
@@ -731,9 +813,11 @@ const Demo = () => {
                         <Cell pinLeft>{item.market_cap_rank}</Cell>
                         <Cell pinLeft>
                           <AlignCenter>
-                            <img src={item.image} width={20} height={20} />
-                            &nbsp;{item.name}&nbsp;
-                            <span style={{ color: '#808a9d' }}>{item.symbol.toUpperCase()}</span>
+                            <img alt="icon" src={item.image} width={20} height={20} />
+                            <Ellipse>
+                              &nbsp;{item.name}&nbsp;
+                              <span style={{ color: '#808a9d' }}>{item.symbol.toUpperCase()}</span>
+                            </Ellipse>
                           </AlignCenter>
                         </Cell>
                         <Cell>
@@ -765,7 +849,7 @@ const Demo = () => {
                         </Cell>
                         <Cell>
                           <Sparklines data={item.sparkline_in_7d.price} height={40}>
-                            <SparklinesLine color="#1976d2" />
+                            <SparklinesLine color="#439867" />
                           </Sparklines>
                         </Cell>
                         {customColumnsActive.map((column) => (
@@ -773,7 +857,7 @@ const Demo = () => {
                             {CUSTOM_COLUMNS[column].render(item)}
                           </Cell>
                         ))}
-                        <Cell pinRight>
+                        <Cell pinRight stiff>
                           <ViewMarket
                             marketData={marketData}
                             item={item}
@@ -806,7 +890,7 @@ const Demo = () => {
 
       <TablePagination
         count={
-          isWatchlistActive ? data.nodes.length : 9688 // TODO API does not offer this number
+          activeCategory === WATCHLIST_CATEGORY ? data.nodes.length : 9688 // TODO API does not offer this number
         }
         page={pagination.state.page}
         rowsPerPage={pagination.state.size}
