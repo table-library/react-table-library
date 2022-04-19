@@ -40,7 +40,7 @@ const RowContainer = React.forwardRef(
 
     const { layout } = context;
 
-    return <div {...props} css={getRowContainerStyle(layout)} ref={ref} />;
+    return <div css={getRowContainerStyle(layout)} ref={ref} {...props} />;
   },
 );
 
@@ -58,7 +58,7 @@ const HeaderRowContainer = React.forwardRef(
 
     const { layout } = context;
 
-    return <div {...props} css={getHeaderRowContainerStyle(layout)} ref={ref} />;
+    return <div css={getHeaderRowContainerStyle(layout)} ref={ref} {...props} />;
   },
 );
 

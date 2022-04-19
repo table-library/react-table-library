@@ -101,18 +101,19 @@ export const Row: React.FC<RowProps> = (props: RowProps) => {
 
   return (
     <RowContainer
-      {...rest}
       role="row"
-      className={cs('tr', 'tr-body', classNamesByFeature, className, {
-        disabled,
-        clickable: clickable || !!onDoubleClick,
-      })}
+      data-table-library_tr-body=""
       css={css`
         ${themeByFeature}
         ${theme?.BaseRow}
         ${theme?.Row}
       `}
+      className={cs('tr', 'tr-body', classNamesByFeature, className, {
+        disabled,
+        clickable: clickable || !!onDoubleClick,
+      })}
       ref={ref}
+      {...rest}
     >
       {children}
     </RowContainer>

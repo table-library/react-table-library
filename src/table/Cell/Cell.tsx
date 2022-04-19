@@ -23,18 +23,19 @@ export const Cell: React.FC<CellProps> = ({
 
   return (
     <CellContainer
-      {...rest}
       role="gridcell"
+      data-table-library_td=""
+      css={css`
+        ${theme?.BaseCell}
+        ${theme?.Cell}
+      `}
       className={cs('td', className, {
         stiff,
         'pin-left': pinLeft,
         'pin-right': pinRight,
       })}
-      css={css`
-        ${theme?.BaseCell}
-        ${theme?.Cell}
-      `}
       onClick={onClick}
+      {...rest}
     >
       <div>{children}</div>
     </CellContainer>

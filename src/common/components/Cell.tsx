@@ -35,7 +35,7 @@ const CELL_CONTAINER_STYLE = css`
 
 const CellContainer = React.forwardRef(
   (props: Record<string, any>, ref: React.ForwardedRef<HTMLDivElement>) => {
-    return <div {...props} css={CELL_CONTAINER_STYLE} ref={ref} />;
+    return <div css={CELL_CONTAINER_STYLE} ref={ref} {...props} />;
   },
 );
 
@@ -47,7 +47,7 @@ const HEADER_CELL_CONTAINER_STYLE = css`
 
 const HeaderCellContainer = React.forwardRef(
   (props: Record<string, any>, ref: React.ForwardedRef<HTMLDivElement>) => {
-    return <div {...props} css={HEADER_CELL_CONTAINER_STYLE} ref={ref} />;
+    return <div css={HEADER_CELL_CONTAINER_STYLE} ref={ref} {...props} />;
   },
 );
 
