@@ -59,17 +59,13 @@ const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
     }
   `,
   BaseCell: `
-    padding: ${options.verticalSpacing}px 0;
-    &:first-of-type {
-      padding-left: ${options.horizontalSpacing}px;
-    }
-    &:last-of-type {
-      padding-right: ${options.horizontalSpacing}px;
-    }
+    padding: ${options.verticalSpacing}px ${options.horizontalSpacing}px;
 
-    border-top: 1px solid transparent;
-    border-right: 1px solid transparent;
-    border-bottom: 1px solid transparent;
+    &:not(.stiff) > div {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   `,
   HeaderCell: `
     & > div {

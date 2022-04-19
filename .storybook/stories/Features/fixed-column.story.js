@@ -118,8 +118,6 @@ storiesOf('Features/Fixed Column', module)
         &:nth-of-type(4) {
           min-width: 50%;
           width: 50%;
-
-          border-right: 1px solid transparent;
         }
 
         &:nth-of-type(5) {
@@ -127,8 +125,6 @@ storiesOf('Features/Fixed Column', module)
 
           min-width: 250px;
           width: 250px;
-
-          border-left: 1px solid #a0a8ae;
         }
       `,
     });
@@ -206,7 +202,7 @@ storiesOf('Features/Fixed Column', module)
     return (
       <div
         style={{
-          height: '150px',
+          height: '100px',
         }}
       >
         <Table data={data} theme={theme} layout={{ custom: true, horizontalScroll: true }}>
@@ -247,11 +243,6 @@ storiesOf('Features/Fixed Column', module)
   })
   .add('documentation', () => (
     <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
       <li>
         <strong>Caveats: </strong>
         <ul>

@@ -18,7 +18,7 @@ import { useTree, CellTree } from '@table-library/react-table-library/tree';
 
 import { manyNodes } from '../data';
 
-const ROW_HEIGHT = 28;
+const ROW_HEIGHT = 19;
 
 const WithStickyHeader = React.forwardRef(({ children, ...rest }, ref) => (
   <div ref={ref} {...rest}>
@@ -68,7 +68,7 @@ storiesOf('Features/Virtualized', module)
                 <FixedSizeList
                   height={height}
                   width={width}
-                  itemCount={data.nodes.length}
+                  itemCount={tableList.length}
                   itemSize={ROW_HEIGHT}
                   innerElementType={WithStickyHeader}
                   itemData={{ items: tableList }}
@@ -137,7 +137,7 @@ storiesOf('Features/Virtualized', module)
                 <FixedSizeList
                   height={height}
                   width={width}
-                  itemCount={data.nodes.length}
+                  itemCount={tableList.length}
                   itemSize={ROW_HEIGHT}
                   innerElementType={WithStickyHeader}
                   itemData={{ items: tableList }}
@@ -172,13 +172,4 @@ storiesOf('Features/Virtualized', module)
         </Table>
       </div>
     );
-  })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ));
+  });

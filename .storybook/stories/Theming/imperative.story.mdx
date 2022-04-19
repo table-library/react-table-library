@@ -1,0 +1,23 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Theming/Imperative Style" />
+
+# Imperative Style
+
+```javascript
+const select = useRowSelect(data);
+
+// get all state
+console.log(select.state);
+
+// ... then in the Row component when you assign the className conditionally:
+
+<Row className={select.state.ids.includes(item.id) ? "multi-selected" : "not-selected"}  ... >
+
+// ... or for single select
+
+<Row className={select.state.id === item.id ? "single-selected" : "not-selected"}  ... >
+
+// then you can use the new class in your theme and style it
+// the same workflow can be used for inline style
+```

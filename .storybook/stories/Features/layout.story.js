@@ -362,13 +362,4 @@ storiesOf('Features/Layout', module)
     <>
       See <strong>Features/Horizontal Scroll</strong>
     </>
-  ))
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
   ));

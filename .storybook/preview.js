@@ -45,6 +45,8 @@ export const parameters = {
         ['Data', 'Compact Table', 'Composed Table', ...Features],
         'Compact Table',
         ['Base', ...Features],
+        'Theming',
+        ['Themes', 'CSS Class', 'Imperative Style'],
         'Library Themes',
         [
           'Mantine',

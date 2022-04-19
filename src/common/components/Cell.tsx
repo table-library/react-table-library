@@ -3,61 +3,28 @@ import * as React from 'react';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 
-import * as COLORS from '@table-library/react-table-library/common/colors';
-
-const GUTTER = 6;
-
 const BASE_STYLE = `
   display: flex;
   align-items: center;
-
-  padding-top: 4px;
-  padding-bottom: 4px;
-
-  &:not(.stiff) > div {
-    width: 100%;
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  &:first-of-type > div {
-    padding-left: ${GUTTER}px;
-  }
-
-  & > div {
-    padding-right: ${GUTTER}px;
-    padding-left: 20px;
-  }
-
-  &:last-of-type > div {
-    padding-right: ${GUTTER}px;
-  }
-
-  border-right: 1px solid ${COLORS.BORDER};
-
-  &:last-of-type {
-    border-right: 0px solid transparent;
-  }
-
-  &.stiff > div {
-    padding-right: ${GUTTER}px;
-    padding-left: ${GUTTER}px;
-  }
 
   &.hide {
     display: none;
   }
 
-  &.pin-left, &.pin-right {
+  &.pin-left,
+  &.pin-right {
     position: sticky;
     z-index: 3;
+  }
+
+  &:not(.stiff) > div {
+    width: 100%;
   }
 
   ${() => {
     /* #1 */
     // otherwise tree + resize would have overflow icons */
+    // otherwise pin shine through */
   }}
   background-color: inherit;
 `;
@@ -72,24 +39,15 @@ const CellContainer = React.forwardRef(
   },
 );
 
-const HEADER_CELL_CONTAINER_STYLE = ({ _inverseBorder }: { _inverseBorder?: boolean }) => css`
+const HEADER_CELL_CONTAINER_STYLE = css`
   ${BASE_STYLE}
 
   position: relative;
-
-  ${_inverseBorder
-    ? `border-top: 1px solid ${COLORS.BORDER};`
-    : `border-bottom: 1px solid ${COLORS.BORDER};`}
-
-  svg,
-  path {
-    fill: currentColor;
-  }
 `;
 
 const HeaderCellContainer = React.forwardRef(
   (props: Record<string, any>, ref: React.ForwardedRef<HTMLDivElement>) => {
-    return <div {...props} css={HEADER_CELL_CONTAINER_STYLE(props)} ref={ref} />;
+    return <div {...props} css={HEADER_CELL_CONTAINER_STYLE} ref={ref} />;
   },
 );
 

@@ -40,8 +40,6 @@ const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
     }
   `,
   BaseRow: `
-    height: 54px;
-
     font-size: 14px;
   `,
   HeaderRow: `
@@ -65,9 +63,10 @@ const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
   BaseCell: `
     padding: ${options.verticalSpacing}px ${options.horizontalSpacing}px;
 
-    border-top: 1px solid transparent;
-    border-right: 1px solid transparent;
-    border-bottom: 1px solid transparent;
+    & > div {
+      padding-top: 2px;
+      padding-bottom: 2.5px;
+    }
 
     &:focus {
       outline: dotted;

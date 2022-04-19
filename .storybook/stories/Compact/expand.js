@@ -1,6 +1,8 @@
 import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
+import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 
 import { DocumentationSee } from '../documentation';
 import { nodes } from '../data';
@@ -9,6 +11,8 @@ const key = 'Expand';
 
 const Component = () => {
   const data = { nodes };
+
+  const theme = useTheme(getTheme());
 
   const [ids, setIds] = React.useState([]);
 
@@ -74,7 +78,13 @@ const Component = () => {
 
   return (
     <>
-      <CompactTable columns={COLUMNS} rowProps={ROW_PROPS} rowOptions={ROW_OPTIONS} data={data} />
+      <CompactTable
+        columns={COLUMNS}
+        rowProps={ROW_PROPS}
+        rowOptions={ROW_OPTIONS}
+        data={data}
+        theme={theme}
+      />
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />
@@ -86,6 +96,8 @@ const code = `
 import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
+import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 
 import { DocumentationSee } from '../documentation';
 import { nodes } from '../data';
@@ -94,6 +106,8 @@ const key = 'Expand';
 
 const Component = () => {
   const data = { nodes };
+
+  const theme = useTheme(getTheme());
 
   const [ids, setIds] = React.useState([]);
 
@@ -159,7 +173,13 @@ const Component = () => {
 
   return (
     <>
-      <CompactTable columns={COLUMNS} rowProps={ROW_PROPS} rowOptions={ROW_OPTIONS} data={data} />
+      <CompactTable
+        columns={COLUMNS}
+        rowProps={ROW_PROPS}
+        rowOptions={ROW_OPTIONS}
+        data={data}
+        theme={theme}
+      />
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />

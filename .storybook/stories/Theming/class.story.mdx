@@ -1,0 +1,66 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Theming/CSS Class" />
+
+# CSS Class
+
+If you want to give a component a specific CSS class, do it this way:
+
+```
+<Row className="foo" ... >
+```
+
+Then if you want to style all Row components with this CSS class, specify it in the `THEME` that is passed to `const = useTheme(THEME)`:
+
+```
+const THEME = {
+  Row: `
+    &.foo {
+      background-color: pink;
+    }
+  `
+};
+```
+
+There are some built-in classes based on the built-in features. For example, the select state on a Row component: when you inspect the HTML element in the browser, you will see that the Row component receives the optional CSS classes based on its select status:
+
+```
+row-select-selected
+row-select-single-selected
+```
+
+While the former is applied for multi-select, the latter gets applied for single select. So if you want to style a row for multi-select, do it the following way:
+
+```
+const THEME = {
+  Row: `
+    &.row-select-selected {
+      background-color: red;
+    }
+  `
+};
+```
+
+For single select, it would look like this:
+
+```
+const THEME = {
+  Row: `
+    &.row-select-single-selected {
+      background-color: blue;
+    }
+  `
+};
+```
+
+If you want to style both cases the same way, then use the selectors this way:
+
+```
+const THEME = {
+  Row: `
+    &.row-select-selected, &.row-select-single-selected {
+      background-color: orange;
+    }
+  `
+};
+```

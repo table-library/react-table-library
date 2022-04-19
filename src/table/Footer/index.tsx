@@ -17,7 +17,7 @@ const FooterRow: React.FC<HeaderRowProps> = (props) => (
 );
 
 const FooterCell: React.FC<HeaderCellProps> = (props) => (
-  <HeaderCell {...props} role="columnfooter" _inverseBorder />
+  <HeaderCell {...props} role="columnfooter" />
 );
 
 export { Footer, FooterRow, FooterCell };

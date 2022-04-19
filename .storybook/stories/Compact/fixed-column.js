@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 
 import { DocumentationSee } from '../documentation';
 import { nodes } from '../data';
@@ -11,8 +12,10 @@ const key = 'Fixed Column';
 const Component = () => {
   const data = { nodes };
 
-  const theme = useTheme({
-    BaseCell: `
+  const theme = useTheme([
+    getTheme(),
+    {
+      BaseCell: `
       &:nth-of-type(1) {
         left: 0px;
 
@@ -37,7 +40,8 @@ const Component = () => {
         width: 700px;
       }
     `,
-  });
+    },
+  ]);
 
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name, pinLeft: true },
@@ -79,6 +83,7 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 
 import { DocumentationSee } from '../documentation';
 import { nodes } from '../data';
@@ -88,8 +93,10 @@ const key = 'Fixed Column';
 const Component = () => {
   const data = { nodes };
 
-  const theme = useTheme({
-    BaseCell: \`
+  const theme = useTheme([
+    getTheme(),
+    {
+      BaseCell: \`
       &:nth-of-type(1) {
         left: 0px;
 
@@ -114,7 +121,8 @@ const Component = () => {
         width: 700px;
       }
     \`,
-  });
+    },
+  ]);
 
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name, pinLeft: true },

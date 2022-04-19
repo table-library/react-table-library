@@ -38,7 +38,7 @@ storiesOf('Features/Fixed Header', module)
     return (
       <div
         style={{
-          height: '150px',
+          height: '100px',
         }}
       >
         <Table data={data} theme={theme}>
@@ -91,7 +91,7 @@ storiesOf('Features/Fixed Header', module)
       <div style={{ height: '100vh' }}>
         <div
           style={{
-            height: '40%',
+            height: '45%',
             border: '1px solid black',
             display: 'flex',
             justifyContent: 'center',
@@ -102,7 +102,7 @@ storiesOf('Features/Fixed Header', module)
         </div>
         <div
           style={{
-            height: '20%',
+            height: '10%',
           }}
         >
           <Table data={data} theme={theme}>
@@ -141,7 +141,7 @@ storiesOf('Features/Fixed Header', module)
         </div>
         <div
           style={{
-            height: '40%',
+            height: '45%',
             border: '1px solid black',
             display: 'flex',
             justifyContent: 'center',
@@ -167,7 +167,7 @@ storiesOf('Features/Fixed Header', module)
       <div style={{ height: '100vh' }}>
         <div
           style={{
-            height: '40vh',
+            height: '45vh',
             border: '1px solid black',
             display: 'flex',
             justifyContent: 'center',
@@ -178,7 +178,7 @@ storiesOf('Features/Fixed Header', module)
         </div>
         <div
           style={{
-            height: '20vh',
+            height: '10vh',
             flex: '1',
             display: 'flex',
             flexDirection: 'column',
@@ -234,7 +234,7 @@ storiesOf('Features/Fixed Header', module)
         </div>
         <div
           style={{
-            height: '40vh',
+            height: '45vh',
             border: '1px solid black',
             display: 'flex',
             justifyContent: 'center',
@@ -245,22 +245,4 @@ storiesOf('Features/Fixed Header', module)
         </div>
       </div>
     );
-  })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.robinwieruch.de/react-table-fixed-header/"
-        >
-          Tutorial
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ));
+  });

@@ -3,7 +3,6 @@ import * as React from 'react';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 
-import * as COLORS from '@table-library/react-table-library/common/colors';
 import { LayoutContext } from '@table-library/react-table-library/common/context/Layout';
 
 import { Nullish } from '@table-library/react-table-library/types/common';
@@ -16,8 +15,9 @@ const getBaseStyle = (layout: Layout | Nullish) => `
   ${() => {
     /* #1 */
     // otherwise tree + resize would have overflow icons */
+    // otherwise pin shine through */
   }}
-  background-color: ${COLORS.BACKGROUND};
+  background-color: #ffffff;
 
   ${() => {
     /* otherwise pin feature pushes pined columns eventually outside if sum of all column widths is greater than container size */
@@ -28,21 +28,6 @@ const getBaseStyle = (layout: Layout | Nullish) => `
 
 const getRowContainerStyle = (layout: Layout | Nullish) => css`
   ${getBaseStyle(layout)}
-
-  font-size: 18px;
-  color: ${COLORS.FONT_SECONDARY};
-
-  &:hover {
-    color: ${COLORS.FONT_PRIMARY};
-  }
-
-  &.disabled {
-    color: ${COLORS.FONT_DISABLED};
-  }
-
-  &.clickable {
-    cursor: pointer;
-  }
 `;
 
 const RowContainer = React.forwardRef(
@@ -61,9 +46,6 @@ const RowContainer = React.forwardRef(
 
 const getHeaderRowContainerStyle = (layout: Layout | Nullish) => css`
   ${getBaseStyle(layout)}
-
-  font-size: 18px;
-  color: ${COLORS.FONT_PRIMARY};
 `;
 
 const HeaderRowContainer = React.forwardRef(

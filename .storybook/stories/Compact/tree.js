@@ -1,6 +1,8 @@
 import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
+import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 import { useTree } from '@table-library/react-table-library/tree';
 
 import { DocumentationSee } from '../documentation';
@@ -10,6 +12,8 @@ const key = 'Tree';
 
 const Component = () => {
   const data = { nodes };
+
+  const theme = useTheme(getTheme());
 
   const tree = useTree(data, {
     onChange: onTreeChange,
@@ -40,7 +44,7 @@ const Component = () => {
 
   return (
     <>
-      <CompactTable columns={COLUMNS} data={data} tree={tree} />
+      <CompactTable columns={COLUMNS} data={data} theme={theme} tree={tree} />
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />
@@ -52,15 +56,19 @@ const code = `
 import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
+import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 import { useTree } from '@table-library/react-table-library/tree';
 
 import { DocumentationSee } from '../documentation';
 import { nodes } from '../data';
 
-const key = 'Select';
+const key = 'Tree';
 
 const Component = () => {
   const data = { nodes };
+
+  const theme = useTheme(getTheme());
 
   const tree = useTree(data, {
     onChange: onTreeChange,
@@ -91,7 +99,7 @@ const Component = () => {
 
   return (
     <>
-      <CompactTable columns={COLUMNS} data={data} tree={tree} />
+      <CompactTable columns={COLUMNS} data={data} theme={theme} tree={tree} />
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />

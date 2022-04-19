@@ -1,6 +1,8 @@
 import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
+import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 
 import { DocumentationSee } from '../documentation';
 import { nodes } from '../data';
@@ -9,6 +11,8 @@ const key = 'Editable';
 
 const Component = () => {
   const [data, setData] = React.useState({ nodes });
+
+  const theme = useTheme(getTheme());
 
   const handleUpdate = (value, id, property) => {
     setData((state) => ({
@@ -84,7 +88,7 @@ const Component = () => {
 
   return (
     <>
-      <CompactTable columns={COLUMNS} data={data} />
+      <CompactTable columns={COLUMNS} data={data} theme={theme} />
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />
@@ -96,6 +100,8 @@ const code = `
 import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
+import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 
 import { DocumentationSee } from '../documentation';
 import { nodes } from '../data';
@@ -104,6 +110,8 @@ const key = 'Editable';
 
 const Component = () => {
   const [data, setData] = React.useState({ nodes });
+
+  const theme = useTheme(getTheme());
 
   const handleUpdate = (value, id, property) => {
     setData((state) => ({
@@ -179,7 +187,7 @@ const Component = () => {
 
   return (
     <>
-      <CompactTable columns={COLUMNS} data={data} />
+      <CompactTable columns={COLUMNS} data={data} theme={theme} />
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />

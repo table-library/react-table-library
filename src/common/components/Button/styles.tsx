@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 
-export default ({ margin }: { margin: string }) => css`
+export default css`
   display: flex;
   align-items: center;
 
@@ -29,14 +29,6 @@ export default ({ margin }: { margin: string }) => css`
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  &.prefix span {
-    margin-right: ${margin};
-  }
-
-  &.suffix span {
-    margin-left: ${margin};
   }
 
   div {

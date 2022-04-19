@@ -53,7 +53,7 @@ storiesOf('Composites/Resize & Fixed Column', module)
     return (
       <div
         style={{
-          height: '150px',
+          height: '100px',
         }}
       >
         <Table data={data} theme={theme} layout={{ custom: true, horizontalScroll: true }}>

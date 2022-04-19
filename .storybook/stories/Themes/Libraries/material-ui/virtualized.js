@@ -36,7 +36,7 @@ const Component = () => {
   ];
 
   const VIRTUALIZED_OPTIONS = {
-    rowHeight: (_item, _index) => 49.5,
+    rowHeight: (_item, _index) => 54,
   };
 
   return (
@@ -95,7 +95,7 @@ const Component = () => {
   ];
 
   const VIRTUALIZED_OPTIONS = {
-    rowHeight: (_item, _index) => 49.5,
+    rowHeight: (_item, _index) => 54,
   };
 
   return (
