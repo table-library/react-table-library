@@ -3,6 +3,7 @@ import useInterval from 'use-interval';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 
 import { DisableAnimationsContext } from '../../stories/loki.js';
 import { DocumentationSee } from '../documentation';
@@ -14,11 +15,13 @@ const key = 'Data Grid';
 const Component = () => {
   const [nodes, setNodes] = React.useState(lotsOfNodes);
 
-  const theme = useTheme({
-    Table: `
+  const theme = useTheme([
+    getTheme(),
+    {
+      Table: `
       height: 100%;
     `,
-    BaseCell: `
+      BaseCell: `
       color: #000000;
 
       min-width: 15%;
@@ -32,7 +35,8 @@ const Component = () => {
         left: 15%;
       }
     `,
-  });
+    },
+  ]);
 
   const COLUMNS = [
     {
@@ -157,6 +161,7 @@ import useInterval from 'use-interval';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 
 import { DisableAnimationsContext } from '../../stories/loki.js';
 import { DocumentationSee } from '../documentation';
@@ -168,11 +173,13 @@ const key = 'Data Grid';
 const Component = () => {
   const [nodes, setNodes] = React.useState(lotsOfNodes);
 
-  const theme = useTheme({
-    Table: \`
+  const theme = useTheme([
+    getTheme(),
+    {
+      Table: \`
       height: 100%;
     \`,
-    BaseCell: \`
+      BaseCell: \`
       color: #000000;
 
       min-width: 15%;
@@ -186,7 +193,8 @@ const Component = () => {
         left: 15%;
       }
     \`,
-  });
+    },
+  ]);
 
   const COLUMNS = [
     {

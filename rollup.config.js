@@ -33,9 +33,10 @@ export default {
     tree: './src/tree/index.ts',
     pagination: './src/pagination/index.ts',
     // themes
+    baseline: './src/themes/baseline/index.ts',
     mantine: './src/themes/mantine/index.ts',
-    chakra: './src/themes/chakra-ui/index.ts',
-    material: './src/themes/material-ui/index.ts',
+    ['chakra-ui']: './src/themes/chakra-ui/index.ts',
+    ['material-ui']: './src/themes/material-ui/index.ts',
   },
   output: [
     // ES module version, for modern browsers

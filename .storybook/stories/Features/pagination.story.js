@@ -291,22 +291,4 @@ storiesOf('Features/Pagination', module)
         </div>
       </>
     );
-  })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.robinwieruch.de/react-table-pagination/"
-        >
-          Tutorial
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
-    </ul>
-  ));
+  });

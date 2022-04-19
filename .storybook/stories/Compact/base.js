@@ -1,6 +1,8 @@
 import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
+import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 
 import { DocumentationSee } from '../documentation';
 import { nodes } from '../data';
@@ -9,6 +11,8 @@ const key = 'Base';
 
 const Component = () => {
   const data = { nodes };
+
+  const theme = useTheme(getTheme());
 
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name },
@@ -31,7 +35,7 @@ const Component = () => {
 
   return (
     <>
-      <CompactTable columns={COLUMNS} data={data} />
+      <CompactTable columns={COLUMNS} data={data} theme={theme} />
 
       <br />
       <DocumentationSee noLink anchor={'Features'} />
@@ -43,6 +47,8 @@ const code = `
 import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
+import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 
 import { DocumentationSee } from '../documentation';
 import { nodes } from '../data';
@@ -51,6 +57,8 @@ const key = 'Base';
 
 const Component = () => {
   const data = { nodes };
+
+  const theme = useTheme(getTheme());
 
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name },
@@ -73,7 +81,7 @@ const Component = () => {
 
   return (
     <>
-      <CompactTable columns={COLUMNS} data={data} />
+      <CompactTable columns={COLUMNS} data={data} theme={theme} />
 
       <br />
       <DocumentationSee noLink anchor={'Features'} />

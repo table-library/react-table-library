@@ -31,23 +31,24 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
 
   return (
     <HeaderCellContainer
-      {...rest}
       role={role}
+      data-table-library_th=""
       data-cell-key={hideKey || index}
       data-resize-min-width={
         typeof resize === 'boolean' || resize?.minWidth == null ? 75 : resize.minWidth
       }
+      css={css`
+        ${theme?.BaseCell}
+        ${theme?.HeaderCell}
+      `}
       className={cs('th', className, {
         stiff,
         resize,
         'pin-left': pinLeft,
         'pin-right': pinRight,
       })}
-      css={css`
-        ${theme?.BaseCell}
-        ${theme?.HeaderCell}
-      `}
       ref={cellRef}
+      {...rest}
     >
       <div>{children}</div>
       {resize && <span ref={resizeRef} css={resizerStyle(resize)} />}

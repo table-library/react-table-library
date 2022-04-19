@@ -11,10 +11,11 @@ export const Body: React.FC<BodyProps> = ({ children, ...rest }: BodyProps) => {
 
   return (
     <div
-      className="tbody"
       css={css`
         ${theme?.Body}
       `}
+      data-table-library_body=""
+      className="tbody"
       {...rest}
     >
       {children}

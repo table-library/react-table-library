@@ -72,15 +72,12 @@ export const SortButton: React.FC<SortButtonProps> = ({
     <Button
       className={cs({
         active: state.sortKey === sortKey,
-        prefix,
-        suffix,
       })}
-      margin={mergedSortIconOptions.margin}
       onClick={handleToggleSort}
     >
-      {prefix && icon && <span>{icon}</span>}
+      {prefix && icon && <span style={{ marginRight: mergedSortIconOptions.margin }}>{icon}</span>}
       <div title={typeof children === 'string' ? children : ''}>{children}</div>
-      {suffix && icon && <span>{icon}</span>}
+      {suffix && icon && <span style={{ marginLeft: mergedSortIconOptions.margin }}>{icon}</span>}
     </Button>
   );
 };

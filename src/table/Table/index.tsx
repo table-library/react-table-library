@@ -85,11 +85,12 @@ const Table: React.FC<TableProps> = React.forwardRef(
     return (
       <div
         role="grid"
-        className={cs(className)}
+        data-table-library_table=""
         css={css`
           ${styles(layout, { isShiftDown })}
           ${theme?.Table}
         `}
+        className={cs(className)}
         ref={callbackRef}
         {...rest}
       >

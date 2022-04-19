@@ -1,6 +1,8 @@
 import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
+import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 
 import { DocumentationSee } from '../documentation';
 import { manyNodes } from '../data';
@@ -9,6 +11,8 @@ const key = 'Virtualized';
 
 const Component = () => {
   const data = { nodes: manyNodes };
+
+  const theme = useTheme(getTheme());
 
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name },
@@ -36,7 +40,12 @@ const Component = () => {
   return (
     <>
       <div style={{ height: '300px' }}>
-        <CompactTable columns={COLUMNS} virtualizedOptions={VIRTUALIZED_OPTIONS} data={data} />
+        <CompactTable
+          columns={COLUMNS}
+          virtualizedOptions={VIRTUALIZED_OPTIONS}
+          data={data}
+          theme={theme}
+        />
       </div>
 
       <br />
@@ -49,6 +58,8 @@ const code = `
 import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
+import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 
 import { DocumentationSee } from '../documentation';
 import { manyNodes } from '../data';
@@ -57,6 +68,8 @@ const key = 'Virtualized';
 
 const Component = () => {
   const data = { nodes: manyNodes };
+
+  const theme = useTheme(getTheme());
 
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name },
@@ -84,7 +97,12 @@ const Component = () => {
   return (
     <>
       <div style={{ height: '300px' }}>
-        <CompactTable columns={COLUMNS} virtualizedOptions={VIRTUALIZED_OPTIONS} data={data} />
+        <CompactTable
+          columns={COLUMNS}
+          virtualizedOptions={VIRTUALIZED_OPTIONS}
+          data={data}
+          theme={theme}
+        />
       </div>
 
       <br />

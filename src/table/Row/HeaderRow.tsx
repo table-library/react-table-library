@@ -37,11 +37,12 @@ export const HeaderRow: React.FC<HeaderRowProps> = ({
   return (
     <HeaderRowContainer
       role={role}
-      className={cs('tr', _className, className)}
+      data-table-library_tr-header=""
       css={css`
         ${theme?.BaseRow}
         ${theme?.HeaderRow}
       `}
+      className={cs('tr', _className, className)}
       ref={ref}
       {...rest}
     >

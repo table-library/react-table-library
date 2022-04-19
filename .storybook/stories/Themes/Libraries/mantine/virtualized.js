@@ -35,7 +35,7 @@ const Component = () => {
   ];
 
   const VIRTUALIZED_OPTIONS = {
-    rowHeight: (_item, _index) => 38.5,
+    rowHeight: (_item, _index) => 41.5,
   };
 
   return (
@@ -60,10 +60,7 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import {
-  DEFAULT_OPTIONS,
-  getTheme,
-} from '@table-library/react-table-library/mantine';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/mantine';
 
 import { DocumentationSee } from '../../../documentation';
 import { manyNodes } from '../../../data';
@@ -73,7 +70,7 @@ const key = 'Virtualized';
 const Component = () => {
   const data = { nodes: manyNodes };
 
-  const mantineTheme = getTheme(DEFAULT_OPTIONS);
+  const mantineTheme = getTheme(DEFAULT_OPTIONS, { isVirtualized: true });
   const theme = useTheme(mantineTheme);
 
   const COLUMNS = [
@@ -96,7 +93,7 @@ const Component = () => {
   ];
 
   const VIRTUALIZED_OPTIONS = {
-    rowHeight: (_item, _index) => 37.5,
+    rowHeight: (_item, _index) => 41.5,
   };
 
   return (

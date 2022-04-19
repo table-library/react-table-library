@@ -122,7 +122,7 @@ storiesOf('Features/Horizontal Scroll', module)
     return (
       <div
         style={{
-          height: '150px',
+          height: '100px',
         }}
       >
         <Table data={data} theme={theme} layout={{ custom: true, horizontalScroll: true }}>
@@ -163,20 +163,6 @@ storiesOf('Features/Horizontal Scroll', module)
   })
   .add('documentation', () => (
     <ul>
-      <li>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.robinwieruch.de/react-table-fixed-header/"
-        >
-          Tutorial
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/table-library/react-table-library/tree/master/.storybook/stories">
-          Story Code
-        </a>
-      </li>
       <li>
         <strong>Caveats: </strong>
         <ul>

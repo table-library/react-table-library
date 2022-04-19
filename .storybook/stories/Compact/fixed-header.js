@@ -1,6 +1,8 @@
 import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
+import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 
 import { DocumentationSee } from '../documentation';
 import { nodes } from '../data';
@@ -9,6 +11,8 @@ const key = 'Fixed Header';
 
 const Component = () => {
   const data = { nodes };
+
+  const theme = useTheme(getTheme());
 
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name },
@@ -33,10 +37,10 @@ const Component = () => {
     <>
       <div
         style={{
-          height: '150px',
+          height: '100px',
         }}
       >
-        <CompactTable columns={COLUMNS} data={data} layout={{ fullHeight: true }} />
+        <CompactTable columns={COLUMNS} data={data} theme={theme} layout={{ fullHeight: true }} />
       </div>
 
       <br />
@@ -49,6 +53,8 @@ const code = `
 import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
+import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 
 import { DocumentationSee } from '../documentation';
 import { nodes } from '../data';
@@ -57,6 +63,8 @@ const key = 'Fixed Header';
 
 const Component = () => {
   const data = { nodes };
+
+  const theme = useTheme(getTheme());
 
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name },
@@ -81,10 +89,10 @@ const Component = () => {
     <>
       <div
         style={{
-          height: '150px',
+          height: '100px',
         }}
       >
-        <CompactTable columns={COLUMNS} data={data} layout={{ fullHeight: true }} />
+        <CompactTable columns={COLUMNS} data={data} theme={theme} layout={{ fullHeight: true }} />
       </div>
 
       <br />
