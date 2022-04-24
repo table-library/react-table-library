@@ -8,6 +8,11 @@ export enum SortIconPositions {
   Suffix,
 }
 
+export enum SortToggleType {
+  Alternate,
+  AlternateWithReset,
+}
+
 export type SortOptionsIcon = {
   position?: SortIconPositions;
   margin?: string;
@@ -22,6 +27,7 @@ export type SortFn = (node: TableNode[]) => TableNode[];
 export type SortOptions = {
   sortFns: Record<string, SortFn>;
   isServer?: boolean;
+  sortToggleType?: SortToggleType;
   sortIcon?: SortOptionsIcon;
   isRecursive?: boolean;
 };
@@ -38,6 +44,7 @@ export type SortOptionsIconSound = {
 export type SortOptionsSound = {
   sortFns: Record<string, SortFn>;
   isServer: boolean;
+  sortToggleType: SortToggleType;
   sortIcon: SortOptionsIconSound;
   isRecursive: boolean;
 };

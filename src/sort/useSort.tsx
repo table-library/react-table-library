@@ -13,6 +13,7 @@ import {
   Sort,
   SortOptions,
   SortIconPositions,
+  SortToggleType,
 } from '@table-library/react-table-library/types/sort';
 
 import { HeaderCellSort } from './HeaderCellSort';
@@ -21,11 +22,25 @@ const TOGGLE_SORT = 'TOGGLE_SORT';
 const SET = 'SET';
 
 const toggleSort = (state: State, action: Action) => {
-  const reverse = action.payload.sortKey === state.sortKey && !state.reverse;
+  const isPreviousSort = action.payload.value.sortKey === state.sortKey;
+  const isPreviousReverse = state.reverse;
+
+  if (
+    isPreviousSort &&
+    isPreviousReverse &&
+    action.payload.options.sortToggleType === SortToggleType.AlternateWithReset
+  ) {
+    return {
+      sortKey: 'NONE',
+      reverse: false,
+    };
+  }
+
+  const isReverse = isPreviousSort && !isPreviousReverse;
 
   return {
-    ...action.payload,
-    reverse,
+    ...action.payload.value,
+    reverse: isReverse,
   };
 };
 
@@ -63,6 +78,7 @@ const DEFAULT_SORT_ICON = {
 
 const DEFAULT_OPTIONS = {
   isServer: false,
+  sortToggleType: SortToggleType.Alternate,
   sortIcon: DEFAULT_SORT_ICON,
   isRecursive: true,
 };
@@ -91,9 +107,9 @@ const useSort = (
     (value) =>
       dispatchWithMiddleware({
         type: TOGGLE_SORT,
-        payload: value,
+        payload: { value, options },
       }),
-    [dispatchWithMiddleware],
+    [options, dispatchWithMiddleware],
   );
 
   useSyncControlledState(controlledState, state, () =>
