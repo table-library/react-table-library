@@ -5,5 +5,7 @@ import * as React from 'react';
 // };
 
 export const isRowClick = (event: React.SyntheticEvent | React.KeyboardEvent) =>
+  (event.target as HTMLElement).tagName === 'svg' ||
+  (event.target as HTMLElement).tagName === 'path' ||
   (event.target as HTMLElement).tagName === 'DIV' ||
   (event.target as HTMLElement).tagName === 'SPAN';
