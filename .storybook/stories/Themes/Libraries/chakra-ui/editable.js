@@ -102,7 +102,7 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/themes/chakra';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/chakra';
 
 import { DocumentationSee } from '../../../documentation';
 import { nodes } from '../../../data';

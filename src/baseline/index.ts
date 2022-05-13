@@ -1,6 +1,8 @@
 import * as COLORS from '@table-library/react-table-library/common/colors';
 import { zipThemes } from '@table-library/react-table-library/theme/index';
 
+import { Theme } from '@table-library/react-table-library/types/theme';
+
 const GUTTER = 6;
 
 const BASELINE_THEME = {
@@ -74,6 +76,6 @@ const BASELINE_THEME = {
   Cell: '',
 };
 
-export const getTheme = () => {
+export const getTheme = (): Theme => {
   return zipThemes([BASELINE_THEME]);
 };

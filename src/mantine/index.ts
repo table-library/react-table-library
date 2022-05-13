@@ -1,5 +1,7 @@
 import { zipThemes } from '@table-library/react-table-library/theme/index';
 
+import { Theme } from '@table-library/react-table-library/types/theme';
+
 type Configuration = {
   isVirtualized?: boolean;
 };
@@ -26,16 +28,13 @@ type OptionsSound = {
 const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
   Table: `
     .caption-container {
-      padding: 10px 22px;
+      margin-top: 10px;
       display: flex;
-      justify-content: flex-start;
+      justify-content: center;
       width: 100%;
-
-      border-top: 1px solid #e0e0e0;
     }
 
     caption {
-      font-size: 14px;
       color: #868e96;
     }
   `,
@@ -43,9 +42,7 @@ const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
     font-size: 14px;
   `,
   HeaderRow: `
-    font-weight: bold;
-
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #dee2e6;
 
     &.tr-footer {
       border-top: 1px solid transparent;
@@ -53,25 +50,35 @@ const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
     }
   `,
   Row: `
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #dee2e6;
 
     &.tr.tr-body.row-select.row-select-single-selected, &.tr.tr-body.row-select.row-select-selected {
-      background-color: #bddffd;
-      border-bottom: 1px solid #bddffd;
+      background-color: #b3dcff;
+      border-bottom: 1px solid #b3dcff;
     }
   `,
   BaseCell: `
     padding: ${options.verticalSpacing}px ${options.horizontalSpacing}px;
 
-    & > div {
-      padding-top: 2px;
-      padding-bottom: 2.5px;
+    &:not(.stiff) > div {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
+  `,
+  HeaderCell: `
+    font-weight: bold;
+    color: #495057;
 
-    &:focus {
-      outline: dotted;
-      outline-width: 1px;
-      outline-offset: -1px;
+    & > div {
+      padding: 6px 0;
+    }
+  `,
+  Cell: `
+    color: #000000;
+
+    & > div {
+      padding: 2px 0;
     }
   `,
 });
@@ -88,12 +95,8 @@ const getVirtualizedHighlight = (highlightOnHover: boolean) =>
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getVirtualizedTheme = (options: OptionsSound, configuration: ConfigurationSound) => ({
   Body: `
-    & > div:not(:last-of-type) > .tr {
-      border-bottom: 1px solid #e2e8f0;
-    }
-
     & > div:nth-of-type(odd) > .tr {
-      background-color: ${options.striped ? '#f5f5f5' : '#ffffff'};
+      background-color: ${options.striped ? '#f8f9fa' : '#ffffff'};
     }
 
     & > div:nth-of-type(even) > .tr {
@@ -116,12 +119,8 @@ const getNoneVirtualizedHighlight = (highlightOnHover: boolean) =>
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getNoneVirtualizedTheme = (options: OptionsSound, configuration: ConfigurationSound) => ({
   Row: `
-    &.tr:not(:last-of-type) {
-      border-bottom: 1px solid #e2e8f0;
-    }
-
     &:nth-of-type(odd) {
-      background-color: ${options.striped ? '#f5f5f5' : '#ffffff'};
+      background-color: ${options.striped ? '#f8f9fa' : '#ffffff'};
     }
 
     &:nth-of-type(even) {
@@ -142,18 +141,18 @@ const getZipTheme = (options: OptionsSound, configuration: ConfigurationSound) =
   return zipThemes([commonTheme, specificTheme]);
 };
 
-export const DEFAULT_OPTIONS = {
-  horizontalSpacing: 16,
-  verticalSpacing: 16,
+export const DEFAULT_OPTIONS: OptionsSound = {
+  horizontalSpacing: 10,
+  verticalSpacing: 10,
   striped: false,
   highlightOnHover: false,
 };
 
-export const DEFAULT_CONFIGURATION = {
+export const DEFAULT_CONFIGURATION: ConfigurationSound = {
   isVirtualized: false,
 };
 
-export const getTheme = (options?: Options, configuration?: Configuration) => {
+export const getTheme = (options?: Options, configuration?: Configuration): Theme => {
   const mergedOptions = {
     ...DEFAULT_OPTIONS,
     ...(options ? options : {}),
