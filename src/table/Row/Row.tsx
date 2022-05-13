@@ -15,6 +15,7 @@ import { useConsumeRowLayout } from '@table-library/react-table-library/resize/u
 import { Nullish } from '@table-library/react-table-library/types/common';
 import {
   OnClick,
+  Event,
   Features,
   RowProps,
   FeatureProps,
@@ -103,6 +104,7 @@ export const Row: React.FC<RowProps> = (props: RowProps) => {
     <RowContainer
       role="row"
       data-table-library_tr-body=""
+      onClick={onDoubleClick ? () => {} : (event: Event) => onClickByFeature(item, event)}
       css={css`
         ${themeByFeature}
         ${theme?.BaseRow}

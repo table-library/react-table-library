@@ -13,7 +13,9 @@ import { Pagination } from '@table-library/react-table-library/types/pagination'
 
 export type RestProps = Record<string, any>;
 
-export type OnClick = (node: TableNode, event: React.SyntheticEvent | React.KeyboardEvent) => void;
+export type Event = React.SyntheticEvent | React.KeyboardEvent;
+
+export type OnClick = (node: TableNode, event: Event) => void;
 
 export type CellProps = {
   className?: string;

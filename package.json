@@ -13,8 +13,7 @@
   "dependencies": {
     "clsx": "1.1.1",
     "react-virtualized-auto-sizer": "1.0.6",
-    "react-window": "1.8.6",
-    "use-double-click": "1.0.5"
+    "react-window": "1.8.6"
   },
   "devDependencies": {
     "@babel/core": "7.12.17",
@@ -54,7 +53,6 @@
     "@types/react-dom": "17.0.11",
     "@types/react-virtualized-auto-sizer": "1.0.1",
     "@types/react-window": "1.8.5",
-    "@types/use-double-click": "1.0.1",
     "@typescript-eslint/eslint-plugin": "5.10.2",
     "@typescript-eslint/parser": "5.10.2",
     "axios": "0.21.1",

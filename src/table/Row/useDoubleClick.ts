@@ -1,20 +1,54 @@
 import * as React from 'react';
-import useDoubleClickBase from 'use-double-click';
 
-import { TableNode, OnClick } from '@table-library/react-table-library/types/table';
+import { TableNode, OnClick, Event } from '@table-library/react-table-library/types/table';
 import { Nullish } from '@table-library/react-table-library/types/common';
 
 const NOOP = () => {};
+
+const useDoubleClickBase = ({
+  onSingleClick,
+  onDoubleClick,
+  ref,
+}: {
+  ref: React.MutableRefObject<HTMLDivElement | null>;
+  onSingleClick: (e: Event) => void;
+  onDoubleClick: ((e: Event) => void) | null;
+}) => {
+  React.useEffect(() => {
+    const { current } = ref;
+
+    let clickCount = 0;
+
+    const handleDoubleClick = (event: any) => {
+      if (onDoubleClick) {
+        clickCount += 1;
+
+        setTimeout(() => {
+          if (clickCount === 1) onSingleClick(event);
+          else if (clickCount === 2) onDoubleClick(event);
+
+          clickCount = 0;
+        }, 300);
+      }
+    };
+
+    current?.addEventListener('click', handleDoubleClick);
+
+    return () => {
+      current?.removeEventListener('click', handleDoubleClick);
+    };
+  });
+};
 
 export const useDoubleClick = (
   ref: React.MutableRefObject<HTMLDivElement | null>,
   onClick: OnClick | Nullish,
   onDoubleClick: OnClick | Nullish,
   node: TableNode,
-) =>
+) => {
   useDoubleClickBase({
     onSingleClick: onClick ? (event) => onClick(node, event) : NOOP,
-    onDoubleClick: onDoubleClick ? (event) => onDoubleClick(node, event) : NOOP,
-    latency: onDoubleClick ? 250 : 0,
+    onDoubleClick: onDoubleClick ? (event) => onDoubleClick(node, event) : null,
     ref,
   });
+};
