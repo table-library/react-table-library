@@ -7,7 +7,7 @@
   "chromeFlags": "--headless --disable-gpu --hide-scrollbars --no-sandbox --cap-add=SYS_ADMIN",
   "configurations": {
     "chrome.laptop": {
-      "target": "chrome.app",
+      "target": "chrome.docker",
       "width": 1920,
       "height": 1080,
       "deviceScaleFactor": 1,
