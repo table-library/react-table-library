@@ -1,4 +1,4 @@
 git stash
 git pull --rebase origin master
-npm install
-npm run storybook:build
+yarn install
+yarn run storybook:build
