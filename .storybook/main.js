@@ -1,6 +1,7 @@
 module.exports = {
   stories: ['./stories/**/*.@(js|jsx|ts|tsx|mdx)'],
   addons: ['@storybook/addon-docs', '@storybook/addon-links'],
+  staticDirs: ['./static'],
 
   // due to storybook composition, chakra shows up as stories
   // https://github.com/chakra-ui/chakra-ui/issues/2263#issuecomment-767557426
