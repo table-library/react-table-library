@@ -83,9 +83,10 @@ const usePagination = (
     }),
   );
 
-  const getTotalPages = React.useCallback((nodes) => Math.ceil(nodes.length / state.size), [
-    state.size,
-  ]);
+  const getTotalPages = React.useCallback(
+    (nodes) => Math.ceil(nodes.length / state.size),
+    [state.size],
+  );
 
   const getPages = React.useCallback(
     (nodes) =>

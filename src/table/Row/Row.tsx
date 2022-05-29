@@ -31,48 +31,44 @@ const getRowProps = (features: Features, props: RowProps) =>
     .map((feature) => (feature as any)._getRowProps(props, features));
 
 const evaluateProps = (rowPropsByFeature: FeatureProps[], onSingleClick: OnClick | Nullish) => {
-  const {
-    themeByFeature,
-    classNamesByFeature,
-    clickable,
-    onClickByFeature,
-  } = rowPropsByFeature.reduce(
-    (acc, value) => {
-      const { theme, className, onClick } = value;
+  const { themeByFeature, classNamesByFeature, clickable, onClickByFeature } =
+    rowPropsByFeature.reduce(
+      (acc, value) => {
+        const { theme, className, onClick } = value;
 
-      const mergedTheme = `
+        const mergedTheme = `
         ${acc.themeByFeature}
         ${theme}
       `;
 
-      const mergedClassName = cs(acc.classNamesByFeature, className);
+        const mergedClassName = cs(acc.classNamesByFeature, className);
 
-      const mergedClickable = acc.clickable || !!onClick;
+        const mergedClickable = acc.clickable || !!onClick;
 
-      const mergedOnClick = (node: TableNode, event: React.SyntheticEvent) => {
-        onClick(node, event);
-        acc.onClickByFeature(node, event);
-      };
+        const mergedOnClick = (node: TableNode, event: React.SyntheticEvent) => {
+          onClick(node, event);
+          acc.onClickByFeature(node, event);
+        };
 
-      return {
-        ...acc,
-        themeByFeature: mergedTheme,
-        classNamesByFeature: mergedClassName,
-        clickable: mergedClickable,
-        onClickByFeature: mergedOnClick,
-      };
-    },
-    {
-      themeByFeature: '',
-      classNamesByFeature: '',
-      clickable: !!onSingleClick,
-      onClickByFeature: (node: TableNode, event: React.SyntheticEvent) => {
-        if (onSingleClick && isRowClick(event)) {
-          onSingleClick(node, event);
-        }
+        return {
+          ...acc,
+          themeByFeature: mergedTheme,
+          classNamesByFeature: mergedClassName,
+          clickable: mergedClickable,
+          onClickByFeature: mergedOnClick,
+        };
       },
-    },
-  );
+      {
+        themeByFeature: '',
+        classNamesByFeature: '',
+        clickable: !!onSingleClick,
+        onClickByFeature: (node: TableNode, event: React.SyntheticEvent) => {
+          if (onSingleClick && isRowClick(event)) {
+            onSingleClick(node, event);
+          }
+        },
+      },
+    );
 
   return {
     themeByFeature,
