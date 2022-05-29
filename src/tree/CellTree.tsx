@@ -12,7 +12,7 @@ import { Nullish, State } from '@table-library/react-table-library/types/common'
 import { TableNode } from '@table-library/react-table-library/types/table';
 import { CellTreeProps } from '@table-library/react-table-library/types/tree';
 
-const style = () => css`
+const style = css`
   display: flex;
   align-items: center;
 
@@ -85,7 +85,7 @@ export const CellTree: React.FC<CellTreeProps> = ({
 
   return (
     <Cell {...passThrough}>
-      <div css={style()}>
+      <div css={style}>
         <Button
           className="prefix narrow"
           margin={icon ? mergedTreeIconOptions.margin : mergedTreeIconOptions.noIconMargin}

@@ -2,6 +2,6 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 
-export default () => css`
+export default css`
   cursor: pointer;
 `;
