@@ -13,7 +13,7 @@
   "dependencies": {
     "clsx": "1.1.1",
     "react-virtualized-auto-sizer": "1.0.6",
-    "react-window": "1.8.6"
+    "react-window": "1.8.7"
   },
   "devDependencies": {
     "@babel/core": "7.12.17",
