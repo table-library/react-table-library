@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Types/Layout" />
 
@@ -6,13 +6,13 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 ```javascript
 export type Layout = {
-  custom: boolean;
-  horizontalScroll: boolean;
-  hiddenColumns: string[];
-  fullHeight?: boolean;
-  inheritLayout?: boolean;
-  resizedLayout?: string[];
-  onLayoutChange?: (widths: string[]) => void;
+  custom: boolean,
+  horizontalScroll: boolean,
+  hiddenColumns: string[],
+  fullHeight?: boolean,
+  inheritLayout?: boolean,
+  resizedLayout?: string[],
+  onLayoutChange?: (widths: string[]) => void,
 };
 ```
 

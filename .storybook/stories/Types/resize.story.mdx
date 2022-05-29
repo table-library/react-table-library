@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Types/Resize" />
 
@@ -6,9 +6,9 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 ```javascript
 type ColumnResizePropsObject = {
-  minWidth?: number;
-  resizerWidth?: number;
-  resizerHighlight?: string;
+  minWidth?: number,
+  resizerWidth?: number,
+  resizerHighlight?: string,
 };
 
 export type ColumnResizeProps = ColumnResizePropsObject | boolean;

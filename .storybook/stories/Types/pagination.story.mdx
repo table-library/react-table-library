@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Types/Pagination" />
 
@@ -9,23 +9,23 @@ import { State, Modifier } from '@table-library/react-table-library/types/common
 import { TableNode } from '@table-library/react-table-library/types/table';
 
 export type PaginationOptions = {
-  isServer?: boolean;
+  isServer?: boolean,
 };
 
 export type PaginationOptionsSound = {
-  isServer: boolean;
+  isServer: boolean,
 };
 
 export type PaginationFunctions = {
-  onSetPage: (page: number) => void;
-  onSetSize: (size: number) => void;
+  onSetPage: (page: number) => void,
+  onSetSize: (size: number) => void,
 };
 
 export type Pagination = {
-  state: State;
-  fns: PaginationFunctions;
-  options: PaginationOptionsSound;
-  modifier: Modifier;
+  state: State,
+  fns: PaginationFunctions,
+  options: PaginationOptionsSound,
+  modifier: Modifier,
 };
 
 export type Pages = Record<string, TableNode[]>;

@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Types/Data" />
 
@@ -8,14 +8,14 @@ Either table component needs to receive the following `Data` type as `data` prop
 
 ```javascript
 export type TableNode = {
-  id: string;
-  nodes?: TableNode[] | Nullish;
-  [prop: string]: any;
+  id: string,
+  nodes?: TableNode[] | Nullish,
+  [prop: string]: any,
 };
 
 export type Data = {
-  pageInfo?: any;
-  nodes: TableNode[];
+  pageInfo?: any,
+  nodes: TableNode[],
 };
 ```
 

@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Types/Composed Table" />
 
@@ -21,59 +21,59 @@ export type RestProps = Record<string, any>;
 export type OnClick = (node: TableNode, event: React.SyntheticEvent | React.KeyboardEvent) => void;
 
 export type CellProps = {
-  className?: string;
-  hide?: boolean;
-  pinLeft?: boolean;
-  pinRight?: boolean;
-  stiff?: boolean;
-  onClick?: (event: React.SyntheticEvent) => void;
-  children: React.ReactNode;
+  className?: string,
+  hide?: boolean,
+  pinLeft?: boolean,
+  pinRight?: boolean,
+  stiff?: boolean,
+  onClick?: (event: React.SyntheticEvent) => void,
+  children: React.ReactNode,
 } & RestProps;
 
 export type HeaderCellProps = {
-  index?: number;
-  hideKey?: string;
-  className?: string;
-  hide?: boolean;
-  pinLeft?: boolean;
-  pinRight?: boolean;
-  stiff?: boolean;
-  resize?: ColumnResizeProps;
-  children: React.ReactNode;
+  index?: number,
+  hideKey?: string,
+  className?: string,
+  hide?: boolean,
+  pinLeft?: boolean,
+  pinRight?: boolean,
+  stiff?: boolean,
+  resize?: ColumnResizeProps,
+  children: React.ReactNode,
 } & RestProps;
 
 export type RowProps = {
-  item: TableNode;
-  className?: string;
-  disabled?: boolean;
-  onClick?: OnClick;
-  onDoubleClick?: OnClick;
-  children: React.ReactNode;
+  item: TableNode,
+  className?: string,
+  disabled?: boolean,
+  onClick?: OnClick,
+  onDoubleClick?: OnClick,
+  children: React.ReactNode,
 } & RestProps;
 
 export type BodyProps = {
-  children: React.ReactNode;
+  children: React.ReactNode,
 } & RestProps;
 
 export type HeaderRowProps = {
-  className?: string;
-  children: React.ReactNode;
+  className?: string,
+  children: React.ReactNode,
 } & RestProps;
 
 export type HeaderProps = {
-  children: React.ReactNode;
+  children: React.ReactNode,
 } & RestProps;
 
 export type TableProps = {
-  data: Data;
-  theme?: Theme;
-  layout?: Layout;
-  sort?: Sort;
-  pagination?: Pagination;
-  select?: Select;
-  tree?: Tree;
-  onInit?: OnInitFunction;
-  children?: (nodes: TableNode[]) => React.ReactNode;
+  data: Data,
+  theme?: Theme,
+  layout?: Layout,
+  sort?: Sort,
+  pagination?: Pagination,
+  select?: Select,
+  tree?: Tree,
+  onInit?: OnInitFunction,
+  children?: (nodes: TableNode[]) => React.ReactNode,
 } & RestProps;
 ```
 

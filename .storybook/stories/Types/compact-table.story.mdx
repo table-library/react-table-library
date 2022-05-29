@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Types/Compact Table" />
 
@@ -13,41 +13,41 @@ import { ColumnResizeProps } from '@table-library/react-table-library/types/resi
 import { ColumnHideProps } from '@table-library/react-table-library/types/hide';
 
 export type Column = {
-  label: string;
-  renderCell: (node: TableNode) => React.ReactNode;
-  resize?: ColumnResizeProps;
-  sort?: ColumnSortProps;
-  select?: ColumnSelectProps;
-  tree?: ColumnTreeProps;
-  pinLeft?: boolean;
-  pinRight?: boolean;
-  hide?: ColumnHideProps;
-  cellProps?: Record<string, any>;
+  label: string,
+  renderCell: (node: TableNode) => React.ReactNode,
+  resize?: ColumnResizeProps,
+  sort?: ColumnSortProps,
+  select?: ColumnSelectProps,
+  tree?: ColumnTreeProps,
+  pinLeft?: boolean,
+  pinRight?: boolean,
+  hide?: ColumnHideProps,
+  cellProps?: Record<string, any>,
 };
 
 export type VirtualizedOptions = {
-  rowHeight: number | ((item: TableNode, index: number) => number);
-  itemCount?: number;
+  rowHeight: number | ((item: TableNode, index: number) => number),
+  itemCount?: number,
 };
 
 export type TableOptions = {
-  renderBeforeTable?: () => React.ReactNode;
-  renderAfterTable?: () => React.ReactNode;
+  renderBeforeTable?: () => React.ReactNode,
+  renderAfterTable?: () => React.ReactNode,
 };
 
 export type RowOptions = {
-  renderBeforeRow?: (node: TableNode) => React.ReactNode;
-  renderAfterRow?: (node: TableNode) => React.ReactNode;
+  renderBeforeRow?: (node: TableNode) => React.ReactNode,
+  renderAfterRow?: (node: TableNode) => React.ReactNode,
 };
 
 export type RowPropsAsObject = Omit<RowProps, 'item' | 'children'>;
 
 export type CompactTableProps = TableProps & {
-  columns: Column[];
-  tableOptions?: TableOptions;
-  rowProps?: RowPropsAsObject;
-  rowOptions?: RowOptions;
-  virtualizedOptions?: VirtualizedOptions;
+  columns: Column[],
+  tableOptions?: TableOptions,
+  rowProps?: RowPropsAsObject,
+  rowOptions?: RowOptions,
+  virtualizedOptions?: VirtualizedOptions,
 };
 ```
 
