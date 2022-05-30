@@ -6,6 +6,7 @@
   "main": "main.js",
   "types": "index.d.ts",
   "peerDependencies": {
+    "@emotion/react": ">= 11",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },
