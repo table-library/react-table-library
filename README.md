@@ -17,13 +17,13 @@
 
 ## React Table Library
 
-React Table Library -- an almost headless table library -- which prioritzes:
+React Table Library -- an almost headless table library -- which prioritizes:
 
 - opt-in feature richness
 - built-in themes and custom theming
-- server-side operations as first-class citizen
+- server-side operations as first-class citizens
 - small library size
-- developer experience
+- pleasant developer experience
 - TypeScript support
 - SSR support
 
@@ -92,16 +92,16 @@ const Component = () => {
 
 ## The Problem
 
-You find yourself looking for a fitting table component which solves your problem, but you cannot find the one solution which comes with all the desired features yet stays customisable for a pleasant developer experience. Personally I ran into this problem myself after working with lots of different React table components -- from UI libraries but also as standalone libraries -- and none of them felt right to me. After working on React tables for three different clients of mine over the past year, I decided to roll my own solution for them. I came to the conclusion that the React ecosystem needs another table library -- which does things right.
+You are looking for a suitable table component to solve your problem, but you cannot find any one solution which comes with all your desired features and is still  customizable for a pleasant developer experience. I myself ran into this problem after working with many different React table components -- from UI libraries but also from standalone libraries -- and none of them felt right to me. After working on React tables for three different clients over the past year, I decided to create my own solution for my clients. I came to the conclusion that the React ecosystem needs yet another table library -- which does it better.
 
 ## The Solution
 
-In 2020, [Robin Wieruch](https://www.robinwieruch.de) created React Table Library in collaboration with [Big Ladder Software](https://bigladdersoftware.com/). After working with different table libraries to fit their needs, they decided to roll their own solution with the following subjects in mind ...
+In 2020, [Robin Wieruch](https://www.robinwieruch.de) created React Table Library in collaboration with [Big Ladder Software](https://bigladdersoftware.com/). After working with different table libraries to fit their needs, they decided to create their own solution with the following objectives in mind ...
 
 - composition over configuration
-- customization & extensibility
-- server-side operations (e.g. search, pagination) as first-class citizen
-- developer experience
+- customization and extensibility
+- server-side operations (e.g. search, pagination) as first-class citizens
+- pleasant developer experience
 
 [version-badge]: https://img.shields.io/npm/v/@table-library/react-table-library
 [package]: https://www.npmjs.com/package/@table-library/react-table-library
@@ -129,8 +129,8 @@ In 2020, [Robin Wieruch](https://www.robinwieruch.de) created React Table Librar
 
 There are two kinds of table libraries for React: heavyweight and lightweight.
 
-On the one side of the spectrum, there are **heavyweight table libraries** which are often shipped by UI libraries such as MUI X. These tables have all batteries included, however, they often lack in modern concepts such as composition over configuration, customization, extensibility and first-class server-side operations. When you have to create one giant configuration object for one giant table component, you know that you are working with a heavyweight table library.
+At one end of the spectrum, there are **heavyweight table libraries** which are often shipped by UI libraries such as MUI X. These tables have all the bells and whistles included, however, they often fail to use modern concepts such as composition over configuration, customization, extensibility, and server-side operations as first-class citizens. When you have to create one giant configuration object for one giant table component, then you know that you are working with a heavyweight table library.
 
-On the other side of the spectrum, there are **lightweight table libraries**. The most popular one is React Table which is a great library and at the time the status quo in the React community. I very much like this library and used it myself, however, when creating complex tables (read: server-side operations, customizations, feature compositions) from scratch, I always felt like re-inventing the wheel all the time, because I didn't receive enough handholding from the library.
+At the other end of the spectrum, there are **lightweight table libraries**. The most popular one is React Table which is a great library and at the time was the go-to library in the React community. I very much like this library and used it myself, however, when creating complex tables (read: server-side operations, customizations, feature compositions) from scratch, I felt that I was re-inventing the wheel every time, because I did not receive enough support from the library.
 
-With **React Table Library** I wanted to have something in between heavyweight and lightweight. I wanted to give developers enough handholding for various built-in features, enable them to perform more complex server-side operations, while still keeping them all the flexibility to create their custom table with a composable approach by using components and hooks. I hope you like this library as well and give it a chance for your next project!
+With **React Table Library** I wanted to create something between heavyweight and lightweight. I wanted to give developers enough support for various built-in features to enable them to perform more complex server-side operations, while still giving them all the flexibility to create their own custom table with a composable approach by using components and hooks. I hope you like this library as well and try it out for your next project! It takes less than ten minutes to test the power of React Table Library.
