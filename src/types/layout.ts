@@ -6,6 +6,7 @@ export type Layout = {
   custom?: boolean;
   horizontalScroll?: boolean;
   fixedHeader?: boolean;
+  isDiv?: boolean;
   resizedLayout?: string;
   onLayoutChange?: (grid: string) => void;
 };

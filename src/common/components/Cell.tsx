@@ -3,6 +3,8 @@ import * as React from 'react';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 
+import { LayoutContext } from '@table-library/react-table-library/common/context';
+
 const BASE_STYLE = `
   ${() => {
     // cells in a table come with margin/padding
@@ -58,7 +60,17 @@ const CELL_CONTAINER_STYLE = css`
 
 const CellContainer = React.forwardRef(
   (props: Record<string, any>, ref: React.ForwardedRef<HTMLTableCellElement>) => {
-    return <td css={CELL_CONTAINER_STYLE} ref={ref} {...props} />;
+    const context = React.useContext(LayoutContext);
+
+    if (!context) {
+      throw new Error('No Layout Context.');
+    }
+
+    const { layout } = context;
+
+    const As = layout?.isDiv ? 'div' : 'td';
+
+    return <As css={CELL_CONTAINER_STYLE} ref={ref} {...props} />;
   },
 );
 
@@ -78,7 +90,17 @@ const HEADER_CELL_CONTAINER_STYLE = css`
 
 const HeaderCellContainer = React.forwardRef(
   (props: Record<string, any>, ref: React.ForwardedRef<HTMLTableCellElement>) => {
-    return <th css={HEADER_CELL_CONTAINER_STYLE} ref={ref} {...props} />;
+    const context = React.useContext(LayoutContext);
+
+    if (!context) {
+      throw new Error('No Layout Context.');
+    }
+
+    const { layout } = context;
+
+    const As = layout?.isDiv ? 'div' : 'th';
+
+    return <As css={HEADER_CELL_CONTAINER_STYLE} ref={ref} {...props} />;
   },
 );
 

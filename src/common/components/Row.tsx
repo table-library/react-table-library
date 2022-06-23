@@ -3,6 +3,8 @@ import * as React from 'react';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 
+import { LayoutContext } from '@table-library/react-table-library/common/context';
+
 import { Nullish } from '@table-library/react-table-library/types/common';
 
 const getBaseStyle = () => `
@@ -22,7 +24,17 @@ const getRowContainerStyle = () => css`
 
 const RowContainer = React.forwardRef(
   (props: Record<string, any>, ref: React.ForwardedRef<HTMLTableRowElement> | Nullish) => {
-    return <tr css={getRowContainerStyle()} ref={ref} {...props} />;
+    const context = React.useContext(LayoutContext);
+
+    if (!context) {
+      throw new Error('No Layout Context.');
+    }
+
+    const { layout } = context;
+
+    const As = layout?.isDiv ? 'div' : 'tr';
+
+    return <As css={getRowContainerStyle()} ref={ref} {...props} />;
   },
 );
 
@@ -32,7 +44,17 @@ const getHeaderRowContainerStyle = () => css`
 
 const HeaderRowContainer = React.forwardRef(
   (props: Record<string, any>, ref: React.ForwardedRef<HTMLTableRowElement> | Nullish) => {
-    return <tr css={getHeaderRowContainerStyle()} ref={ref} {...props} />;
+    const context = React.useContext(LayoutContext);
+
+    if (!context) {
+      throw new Error('No Layout Context.');
+    }
+
+    const { layout } = context;
+
+    const As = layout?.isDiv ? 'div' : 'tr';
+
+    return <As css={getHeaderRowContainerStyle()} ref={ref} {...props} />;
   },
 );
 

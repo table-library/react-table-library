@@ -65,7 +65,7 @@ export const parameters = {
         'CRUD',
         ['Create', 'Update', 'Delete'],
         'Misc',
-        ['Cell', 'Row', 'Column', 'Footer', 'Actions'],
+        ['Cell', 'Row', 'Table', 'Column', 'Footer', 'Actions'],
         'Recipes',
         ['Controlled'],
         'Client vs Server',

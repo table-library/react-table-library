@@ -157,7 +157,32 @@ storiesOf('Features/Expand', module)
                     <Cell>{item.nodes?.length}</Cell>
                   </Row>
 
-                  {ids.includes(item.id) && <strong>{item.name.toUpperCase()}</strong>}
+                  {ids.includes(item.id) && (
+                    <tr style={{ display: 'flex', gridColumn: '1 / -1' }}>
+                      <td style={{ flex: '1' }}>
+                        <ul
+                          style={{
+                            margin: '0',
+                            padding: '0',
+                            backgroundColor: '#e0e0e0',
+                          }}
+                        >
+                          <li>
+                            <strong>Name:</strong> {item.name.toUpperCase()}
+                          </li>
+                          <li>
+                            <strong>Deadline:</strong> {item.deadline.toLocaleDateString('en-US')}
+                          </li>
+                          <li>
+                            <strong>Type:</strong> {item.type}
+                          </li>
+                          <li>
+                            <strong>Complete:</strong> {item.isComplete.toString()}
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                  )}
                 </React.Fragment>
               ))}
             </Body>

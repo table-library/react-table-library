@@ -100,8 +100,10 @@ const Table: React.FC<TableProps> = React.forwardRef(
 
     const theme = useTheme(allThemes);
 
+    const As = layout?.isDiv ? 'div' : 'table';
+
     return (
-      <table
+      <As
         role="grid"
         data-table-library_table=""
         css={css`
@@ -133,7 +135,7 @@ const Table: React.FC<TableProps> = React.forwardRef(
             </ThemeContext.Provider>
           </TableContext.Provider>
         )}
-      </table>
+      </As>
     );
   },
 );
