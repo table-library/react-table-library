@@ -39,7 +39,7 @@ storiesOf('Features/Data Grid', module)
 
     const theme = useTheme({
       Table: `
-        grid-template-columns: repeat(10, minmax(150px, 1fr));
+        --data-table-library_grid-template-columns:  repeat(10, minmax(150px, 1fr));
       `,
       BaseCell: `
         color: #000000;

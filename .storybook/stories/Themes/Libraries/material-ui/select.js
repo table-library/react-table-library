@@ -17,7 +17,7 @@ const Component = () => {
   const materialTheme = getTheme(DEFAULT_OPTIONS);
   const customTheme = {
     Table: `
-      grid-template-columns: 70px repeat(5, minmax(0, 1fr));
+      --data-table-library_grid-template-columns:  70px repeat(5, minmax(0, 1fr));
     `,
   };
   const theme = useTheme([materialTheme, customTheme]);
@@ -99,7 +99,7 @@ const Component = () => {
 const materialTheme = getTheme(DEFAULT_OPTIONS);
   const customTheme = {
     Table: \`
-      grid-template-columns: 70px repeat(5, minmax(0, 1fr));
+      --data-table-library_grid-template-columns:  70px repeat(5, minmax(0, 1fr));
     \`,
   };
   const theme = useTheme([materialTheme, customTheme]);

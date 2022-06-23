@@ -42,7 +42,7 @@ const Component = () => {
   });
   const customTheme = {
     Table: `
-      grid-template-columns: 44px repeat(5, minmax(0, 1fr));
+      --data-table-library_grid-template-columns:  44px repeat(5, minmax(0, 1fr));
 
       margin: 16px 0px;
     `,
@@ -406,7 +406,7 @@ const Component = () => {
   });
   const customTheme = {
     Table: \`
-      grid-template-columns: 44px repeat(5, minmax(0, 1fr));
+      --data-table-library_grid-template-columns:  44px repeat(5, minmax(0, 1fr));
 
       margin: 16px 0px;
     \`,

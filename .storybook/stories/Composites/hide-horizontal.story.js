@@ -32,7 +32,7 @@ storiesOf('Composites/Column Hide & Horizontal', module)
 
     const theme = useTheme({
       Table: `
-        grid-template-columns: 50% 40% 20%;
+        --data-table-library_grid-template-columns:  50% 40% 20%;
       `,
     });
 

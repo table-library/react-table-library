@@ -92,7 +92,7 @@ storiesOf('Features/Select', module)
 
     const theme = useTheme({
       Table: `
-        grid-template-columns: 24px repeat(5, minmax(0, 1fr));
+        --data-table-library_grid-template-columns:  24px repeat(5, minmax(0, 1fr));
       `,
     });
 
@@ -147,7 +147,7 @@ storiesOf('Features/Select', module)
 
     const theme = useTheme({
       Table: `
-        grid-template-columns: repeat(3, minmax(0, 1fr)) 24px repeat(2, minmax(0, 1fr));
+        --data-table-library_grid-template-columns:  repeat(3, minmax(0, 1fr)) 24px repeat(2, minmax(0, 1fr));
       `,
     });
 
@@ -202,7 +202,7 @@ storiesOf('Features/Select', module)
 
     const theme = useTheme({
       Table: `
-        grid-template-columns: 24px repeat(5, minmax(0, 1fr));
+        --data-table-library_grid-template-columns:  24px repeat(5, minmax(0, 1fr));
       `,
     });
 
@@ -264,7 +264,7 @@ storiesOf('Features/Select', module)
 
     const theme = useTheme({
       Table: `
-        grid-template-columns: 24px repeat(5, minmax(0, 1fr));
+        --data-table-library_grid-template-columns:  24px repeat(5, minmax(0, 1fr));
       `,
     });
 
@@ -326,7 +326,7 @@ storiesOf('Features/Select', module)
 
     const theme = useTheme({
       Table: `
-        grid-template-columns: 24px repeat(5, minmax(0, 1fr));
+        --data-table-library_grid-template-columns:  24px repeat(5, minmax(0, 1fr));
       `,
     });
 
@@ -388,7 +388,7 @@ storiesOf('Features/Select', module)
 
     const theme = useTheme({
       Table: `
-        grid-template-columns: 24px repeat(5, minmax(0, 1fr));
+        --data-table-library_grid-template-columns:  24px repeat(5, minmax(0, 1fr));
       `,
     });
 
@@ -444,7 +444,7 @@ storiesOf('Features/Select', module)
 
     const theme = useTheme({
       Table: `
-        grid-template-columns: 24px repeat(5, minmax(0, 1fr));
+        --data-table-library_grid-template-columns:  24px repeat(5, minmax(0, 1fr));
       `,
     });
 
@@ -500,7 +500,7 @@ storiesOf('Features/Select', module)
 
     const theme = useTheme({
       Table: `
-        grid-template-columns: 24px repeat(5, minmax(0, 1fr));
+        --data-table-library_grid-template-columns:  24px repeat(5, minmax(0, 1fr));
       `,
     });
 
@@ -561,7 +561,7 @@ storiesOf('Features/Select', module)
 
     const theme = useTheme({
       Table: `
-        grid-template-columns: 24px repeat(5, minmax(0, 1fr));
+        --data-table-library_grid-template-columns:  24px repeat(5, minmax(0, 1fr));
       `,
     });
 
@@ -622,7 +622,7 @@ storiesOf('Features/Select', module)
 
     const theme = useTheme({
       Table: `
-        grid-template-columns: 38px repeat(5, minmax(0, 1fr));
+        --data-table-library_grid-template-columns:  38px repeat(5, minmax(0, 1fr));
       `,
     });
 

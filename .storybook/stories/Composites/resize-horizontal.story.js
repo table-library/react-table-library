@@ -21,7 +21,7 @@ storiesOf('Composites/Resize & Horizontal', module)
 
     const theme = useTheme({
       Table: `
-        grid-template-columns: 25% 25% 25% 25% minmax(150px, 1fr);
+        --data-table-library_grid-template-columns:  25% 25% 25% 25% minmax(150px, 1fr);
       `,
     });
 

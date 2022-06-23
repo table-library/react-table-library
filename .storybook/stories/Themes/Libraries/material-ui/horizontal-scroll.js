@@ -15,7 +15,7 @@ const Component = () => {
   const materialTheme = getTheme(DEFAULT_OPTIONS);
   const customTheme = {
     Table: `
-      grid-template-columns: 25% 25% 25% 25% minmax(150px, 1fr);
+      --data-table-library_grid-template-columns:  25% 25% 25% 25% minmax(150px, 1fr);
     `,
   };
   const theme = useTheme([materialTheme, customTheme]);
@@ -72,7 +72,7 @@ const Component = () => {
   const materialTheme = getTheme(DEFAULT_OPTIONS);
   const customTheme = {
     Table: \`
-      grid-template-columns: 25% 25% 25% 25% minmax(150px, 1fr);
+      --data-table-library_grid-template-columns:  25% 25% 25% 25% minmax(150px, 1fr);
     \`,
   };
   const theme = useTheme([materialTheme, customTheme]);

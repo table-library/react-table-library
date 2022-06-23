@@ -70,7 +70,7 @@ storiesOf('Features/Layout', module)
 
     const theme = useTheme({
       Table: `
-        grid-template-columns: 30% repeat(2, minmax(0, 1fr)) 25% 100px;
+        --data-table-library_grid-template-columns:  30% repeat(2, minmax(0, 1fr)) 25% 100px;
       `,
     });
 

@@ -21,7 +21,7 @@ storiesOf('Misc/Actions', module)
 
     const theme = useTheme({
       Table: `
-        grid-template-columns: minmax(0, 1fr) 26px repeat(4, minmax(0, 1fr)) 26px;
+        --data-table-library_grid-template-columns:  minmax(0, 1fr) 26px repeat(4, minmax(0, 1fr)) 26px;
       `,
       Row: `
         &:hover {

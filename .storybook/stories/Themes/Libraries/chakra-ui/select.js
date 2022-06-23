@@ -17,7 +17,7 @@ const Component = () => {
   const chakraTheme = getTheme(DEFAULT_OPTIONS);
   const customTheme = {
     Table: `
-      grid-template-columns: 64px repeat(5, minmax(0, 1fr));
+      --data-table-library_grid-template-columns:  64px repeat(5, minmax(0, 1fr));
     `,
   };
   const theme = useTheme([chakraTheme, customTheme]);
@@ -101,7 +101,7 @@ const Component = () => {
   const chakraTheme = getTheme(DEFAULT_OPTIONS);
   const customTheme = {
     Table: \`
-      grid-template-columns: 64px repeat(5, minmax(0, 1fr));
+      --data-table-library_grid-template-columns:  64px repeat(5, minmax(0, 1fr));
     \`,
   };
   const theme = useTheme([chakraTheme, customTheme]);

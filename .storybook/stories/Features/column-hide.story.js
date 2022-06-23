@@ -161,7 +161,7 @@ storiesOf('Features/Column Hiding', module)
 
     const theme = useTheme({
       Table: `
-        grid-template-columns: 30% 50% 20%;
+        --data-table-library_grid-template-columns:  30% 50% 20%;
       `,
     });
 

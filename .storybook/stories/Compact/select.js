@@ -17,7 +17,7 @@ const Component = () => {
     getTheme(),
     {
       Table: `
-        grid-template-columns: 44px repeat(5, minmax(0, 1fr));
+        --data-table-library_grid-template-columns:  44px repeat(5, minmax(0, 1fr));
       `,
     },
   ]);
@@ -85,7 +85,7 @@ const Component = () => {
     getTheme(),
     {
       Table: \`
-        grid-template-columns: 44px repeat(5, minmax(0, 1fr));
+        --data-table-library_grid-template-columns:  44px repeat(5, minmax(0, 1fr));
       \`,
     },
   ]);

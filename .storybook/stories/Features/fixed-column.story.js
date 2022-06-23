@@ -31,7 +31,7 @@ storiesOf('Features/Fixed Column', module)
 
     const theme = useTheme({
       Table: `
-        grid-template-columns: 250px 150px 25% 25% 50%;
+        --data-table-library_grid-template-columns:  250px 150px 25% 25% 50%;
       `,
       BaseCell: `
         &:nth-of-type(1) {
@@ -89,7 +89,7 @@ storiesOf('Features/Fixed Column', module)
 
     const theme = useTheme({
       Table: `
-        grid-template-columns: 250px 25% 25% 50% 150px;
+        --data-table-library_grid-template-columns:  250px 25% 25% 50% 150px;
       `,
       BaseCell: `
         &:nth-of-type(1) {
@@ -143,7 +143,7 @@ storiesOf('Features/Fixed Column', module)
 
     const theme = useTheme({
       Table: `
-        grid-template-columns: 250px 150px 25% 25% 50%;
+        --data-table-library_grid-template-columns:  250px 150px 25% 25% 50%;
       `,
       BaseCell: `
         &:nth-of-type(1) {

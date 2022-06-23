@@ -15,7 +15,7 @@ const Component = () => {
   const mantineTheme = getTheme(DEFAULT_OPTIONS);
   const customTheme = {
     Table: `
-      grid-template-columns: 25% 25% 25% 25% minmax(150px, 1fr);
+      --data-table-library_grid-template-columns:  25% 25% 25% 25% minmax(150px, 1fr);
     `,
   };
   const theme = useTheme([mantineTheme, customTheme]);
@@ -75,7 +75,7 @@ const Component = () => {
   const mantineTheme = getTheme(DEFAULT_OPTIONS);
   const customTheme = {
     Table: \`
-      grid-template-columns: 25% 25% 25% 25% minmax(150px, 1fr);
+      --data-table-library_grid-template-columns:  25% 25% 25% 25% minmax(150px, 1fr);
     \`,
   };
   const theme = useTheme([mantineTheme, customTheme]);

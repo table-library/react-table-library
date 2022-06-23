@@ -25,7 +25,7 @@ storiesOf('Client vs Server', module)
   .add('Server-Side', () => {
     const theme = useTheme({
       Table: `
-        grid-template-columns: 24px repeat(4, minmax(0, 1fr));
+        --data-table-library_grid-template-columns:  24px repeat(4, minmax(0, 1fr));
       `,
     });
 

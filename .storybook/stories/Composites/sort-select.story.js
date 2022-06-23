@@ -28,7 +28,7 @@ storiesOf('Composites/Sort & Select', module)
 
     const theme = useTheme({
       Table: `
-        grid-template-columns: 24px repeat(5, minmax(0, 1fr));
+        --data-table-library_grid-template-columns:  24px repeat(5, minmax(0, 1fr));
       `,
     });
 
