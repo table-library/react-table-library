@@ -19,7 +19,6 @@ export type OnClick = (node: TableNode, event: Event) => void;
 
 export type CellProps = {
   className?: string;
-  hide?: boolean;
   pinLeft?: boolean;
   pinRight?: boolean;
   stiff?: boolean;
@@ -29,7 +28,6 @@ export type CellProps = {
 
 export type HeaderCellProps = {
   index?: number;
-  hideKey?: string;
   className?: string;
   hide?: boolean;
   pinLeft?: boolean;
@@ -88,7 +86,7 @@ export type Data = {
 
 // internal
 
-export type OnInitFunction = (node: HTMLDivElement) => void;
+export type OnInitFunction = (node: HTMLTableElement) => void;
 
 export type Features = {
   select: Select | Nullish;

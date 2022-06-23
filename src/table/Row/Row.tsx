@@ -10,8 +10,6 @@ import { RowContainer } from '@table-library/react-table-library/common/componen
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
 import { useFeatures } from '@table-library/react-table-library/common/context/Feature';
 
-import { useConsumeRowLayout } from '@table-library/react-table-library/resize/useConsumeRowLayout';
-
 import { Nullish } from '@table-library/react-table-library/types/common';
 import {
   OnClick,
@@ -91,10 +89,9 @@ export const Row: React.FC<RowProps> = (props: RowProps) => {
     onClick,
   );
 
-  const ref = React.useRef<HTMLInputElement>(null);
+  const ref = React.useRef<HTMLTableRowElement>(null);
 
   useDoubleClick(ref, onClickByFeature, onDoubleClick, item);
-  useConsumeRowLayout(ref, '.td');
 
   return (
     <RowContainer

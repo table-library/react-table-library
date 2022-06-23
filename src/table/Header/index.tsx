@@ -8,9 +8,7 @@ import { ThemeContext } from '@table-library/react-table-library/common/context/
 import { HeaderProps } from '@table-library/react-table-library/types/table';
 
 const headerRow = `
-  position: sticky;
-  top: 0;
-  z-index: 4;
+  display: contents;
 `;
 
 export const Header: React.FC<HeaderProps> = ({
@@ -21,7 +19,7 @@ export const Header: React.FC<HeaderProps> = ({
   const theme = React.useContext(ThemeContext);
 
   return (
-    <div
+    <thead
       role="rowgroup"
       className={_className}
       css={css`
@@ -35,6 +33,6 @@ export const Header: React.FC<HeaderProps> = ({
           return React.cloneElement(child);
         }
       })}
-    </div>
+    </thead>
   );
 };

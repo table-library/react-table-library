@@ -11,6 +11,7 @@ module.exports = {
           '@table-library/react-table-library/common': './src/common',
           '@table-library/react-table-library/table': './src/table',
           '@table-library/react-table-library/compact': './src/compact',
+          '@table-library/react-table-library/virtualized': './src/virtualized',
           // features
           '@table-library/react-table-library/theme': './src/theme',
           '@table-library/react-table-library/resize': './src/resize',

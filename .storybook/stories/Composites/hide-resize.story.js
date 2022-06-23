@@ -96,29 +96,24 @@ storiesOf('Composites/Column Hide & Resize', module)
           </label>
         </div>
 
-        <Table
-          data={data}
-          layout={{
-            hiddenColumns,
-          }}
-        >
+        <Table data={data}>
           {(tableList) => (
             <>
               <Header>
                 <HeaderRow>
-                  <HeaderCell resize hideKey="NAME">
+                  <HeaderCell resize hide={hiddenColumns.includes('NAME')}>
                     Task
                   </HeaderCell>
-                  <HeaderCell resize hideKey="DEADLINE">
+                  <HeaderCell resize hide={hiddenColumns.includes('DEADLINE')}>
                     Deadline
                   </HeaderCell>
-                  <HeaderCell resize hideKey="TYPE">
+                  <HeaderCell resize hide={hiddenColumns.includes('TYPE')}>
                     Type
                   </HeaderCell>
-                  <HeaderCell resize hideKey="COMPLETE">
+                  <HeaderCell resize hide={hiddenColumns.includes('COMPLETE')}>
                     Complete
                   </HeaderCell>
-                  <HeaderCell resize hideKey="TASKS">
+                  <HeaderCell resize hide={hiddenColumns.includes('TASKS')}>
                     Tasks
                   </HeaderCell>
                 </HeaderRow>
@@ -127,17 +122,19 @@ storiesOf('Composites/Column Hide & Resize', module)
               <Body>
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    <Cell>{item.name}</Cell>
-                    <Cell>
+                    <Cell hide={hiddenColumns.includes('NAME')}>{item.name}</Cell>
+                    <Cell hide={hiddenColumns.includes('DEADLINE')}>
                       {item.deadline.toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: '2-digit',
                         day: '2-digit',
                       })}
                     </Cell>
-                    <Cell>{item.type}</Cell>
-                    <Cell>{item.isComplete.toString()}</Cell>
-                    <Cell>{item.nodes?.length}</Cell>
+                    <Cell hide={hiddenColumns.includes('TYPE')}>{item.type}</Cell>
+                    <Cell hide={hiddenColumns.includes('COMPLETE')}>
+                      {item.isComplete.toString()}
+                    </Cell>
+                    <Cell hide={hiddenColumns.includes('TASKS')}>{item.nodes?.length}</Cell>
                   </Row>
                 ))}
               </Body>

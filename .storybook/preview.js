@@ -42,7 +42,7 @@ export const parameters = {
         'First Steps',
         ['Compact Table', 'Composed Table'],
         'Types',
-        ['Data', 'Compact Table', 'Composed Table', ...Features],
+        ['Data', 'Compact Table', 'Composed Table', ...Features, 'Virtualized'],
         'Compact Table',
         ['Base', ...Features],
         'Theming',

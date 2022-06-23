@@ -25,35 +25,7 @@ storiesOf('Client vs Server', module)
   .add('Server-Side', () => {
     const theme = useTheme({
       Table: `
-        margin: 20px;
-        border-radius: 4px;
-        border: 1px solid #e0e0e0;
-      `,
-      BaseRow: `
-        height: 52px;
-        font-size: 14px;
-
-        border-bottom: 1px solid #e0e0e0;
-      `,
-      HeaderRow: `
-        font-weight: bold;
-      `,
-      Row: `
-        &:hover {
-          background-color: #f5f5f5;
-        }
-
-        &.row-select-selected, &.row-select-single-selected {
-          background-color: #edf4fb;
-
-          &:hover {
-            background-color: #e3eefa;
-          }
-        }
-      `,
-      BaseCell: `
-        border-right: 1px solid transparent;
-        border-bottom: 1px solid transparent;
+        grid-template-columns: 24px repeat(4, minmax(0, 1fr));
       `,
     });
 
@@ -189,7 +161,13 @@ storiesOf('Client vs Server', module)
           Only "Ask HN"
         </label>
 
-        <Table data={data} theme={theme} select={select} pagination={pagination}>
+        <Table
+          data={data}
+          theme={theme}
+          layout={{ custom: true }}
+          select={select}
+          pagination={pagination}
+        >
           {(tableList) => (
             <>
               <Header>

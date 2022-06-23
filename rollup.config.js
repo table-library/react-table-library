@@ -26,6 +26,7 @@ export default {
     common: './src/common/index.ts',
     table: './src/table/index.ts',
     compact: './src/compact/index.ts',
+    virtualized: './src/virtualized/index.ts',
     // features
     theme: './src/theme/index.ts',
     sort: './src/sort/index.ts',

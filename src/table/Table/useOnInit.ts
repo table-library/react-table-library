@@ -9,13 +9,14 @@ export const useOnInit = (
 ): [boolean, OnInitFunction] => {
   const [calledOnce, setCalledOnce] = React.useState(false);
 
-  const callbackRef = (node: HTMLDivElement) => {
+  const callbackRef = (node: HTMLTableElement) => {
     if (!node) return;
 
     if (calledOnce) return;
     setCalledOnce(true);
 
     tableElementRef.current = node;
+
     onInit(node);
   };
 

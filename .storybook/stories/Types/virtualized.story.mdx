@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Types/Virtualized" />
+
+# Virtualized
+
+```javascript
+import * as React from 'react';
+
+import { TableNode } from '@table-library/react-table-library/types/table';
+
+export type RowHeight = number | ((item: TableNode, index: number) => number);
+
+export type VirtualizedProps = {
+  tableList: TableNode[],
+  rowHeight: RowHeight,
+  Header: React.ReactNode,
+  Body: React.ReactNode,
+};
+```

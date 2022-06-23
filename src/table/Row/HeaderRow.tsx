@@ -6,17 +6,65 @@ import { css, jsx } from '@emotion/react';
 
 import { HeaderRowContainer } from '@table-library/react-table-library/common/components/Row';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
-import { useProduceRowLayout } from '@table-library/react-table-library/resize/useProduceRowLayout';
-import { useConsumeRowLayout } from '@table-library/react-table-library/resize/useConsumeRowLayout';
-import { useLayoutHide } from '@table-library/react-table-library/resize/useLayoutHide';
+import {
+  toDataColumn,
+  applyProgrammaticHide,
+  getHeaderColumns,
+} from '@table-library/react-table-library/common/util/columns';
 
 import { HeaderRowProps } from '@table-library/react-table-library/types/table';
+import { LayoutContext } from '@table-library/react-table-library/common/context';
 
 const isReactFragment = (variableToInspect: any) => {
   if (variableToInspect.type) {
     return variableToInspect.type === React.Fragment;
   }
   return variableToInspect === React.Fragment;
+};
+
+const useInitialLayout = () => {
+  const context = React.useContext(LayoutContext);
+
+  // const onlyOnce = React.useRef(false);
+
+  React.useLayoutEffect(() => {
+    if (!context) {
+      throw new Error('No Layout Context.');
+    }
+
+    const { layout, tableElementRef } = context;
+
+    // if (onlyOnce.current) return;
+    // onlyOnce.current = true;
+
+    const dataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
+
+    let resizedLayout = '';
+
+    if (layout?.resizedLayout) {
+      resizedLayout = layout?.resizedLayout;
+    }
+
+    // distribute layout once evenly if no custom layout is defined
+    else if (!layout?.custom) {
+      const visibleDataColumns = dataColumns.filter((dataColumn) => !dataColumn.isHide);
+
+      const getPercentage = () => `${100 / visibleDataColumns.length}%`;
+
+      resizedLayout = visibleDataColumns.map(getPercentage).join(' ');
+    }
+
+    tableElementRef.current!.style.setProperty(
+      '--data-table-library_grid-template-columns',
+      resizedLayout,
+    );
+
+    applyProgrammaticHide(tableElementRef, dataColumns);
+
+    if (layout?.onLayoutChange) {
+      layout?.onLayoutChange(tableElementRef.current!.style.gridTemplateColumns as string);
+    }
+  }, [context]);
 };
 
 export const HeaderRow: React.FC<HeaderRowProps> = ({
@@ -28,11 +76,9 @@ export const HeaderRow: React.FC<HeaderRowProps> = ({
 }: HeaderRowProps) => {
   const theme = React.useContext(ThemeContext);
 
-  const ref = React.useRef<HTMLDivElement>(null);
-  useProduceRowLayout(ref, '.th');
-  useConsumeRowLayout(ref, '.th');
-  useLayoutHide();
-  useConsumeRowLayout(ref, '.th');
+  const ref = React.useRef<HTMLTableRowElement>(null);
+
+  useInitialLayout();
 
   return (
     <HeaderRowContainer

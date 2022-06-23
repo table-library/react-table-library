@@ -15,9 +15,6 @@ const Component = () => {
   const [nodes, setNodes] = React.useState(lotsOfNodes);
 
   const theme = useTheme({
-    Table: `
-      height: 100%;
-    `,
     BaseCell: `
       color: #000000;
 
@@ -141,7 +138,7 @@ const Component = () => {
           virtualizedOptions={VIRTUALIZED_OPTIONS}
           data={data}
           theme={theme}
-          layout={{ custom: true, horizontalScroll: true }}
+          layout={{ custom: true, horizontalScroll: true, fixedHeader: true }}
         />
       </div>
 
@@ -169,9 +166,6 @@ const Component = () => {
   const [nodes, setNodes] = React.useState(lotsOfNodes);
 
   const theme = useTheme({
-    Table: \`
-      height: 100%;
-    \`,
     BaseCell: \`
       color: #000000;
 
@@ -295,7 +289,7 @@ const Component = () => {
           virtualizedOptions={VIRTUALIZED_OPTIONS}
           data={data}
           theme={theme}
-          layout={{ custom: true, horizontalScroll: true }}
+          layout={{ custom: true, horizontalScroll: true, fixedHeader: true }}
         />
       </div>
 

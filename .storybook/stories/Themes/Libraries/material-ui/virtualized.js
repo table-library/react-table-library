@@ -47,6 +47,7 @@ const Component = () => {
           virtualizedOptions={VIRTUALIZED_OPTIONS}
           data={data}
           theme={theme}
+          layout={{ fixedHeader: true }}
         />
       </Paper>
 
@@ -106,6 +107,7 @@ const Component = () => {
           virtualizedOptions={VIRTUALIZED_OPTIONS}
           data={data}
           theme={theme}
+          layout={{ fixedHeader: true }}
         />
       </Paper>
 

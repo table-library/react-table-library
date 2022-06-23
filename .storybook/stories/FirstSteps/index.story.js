@@ -19,7 +19,7 @@ storiesOf('First Steps/Compact Table', module)
     component: CompactTable,
   })
   .add(CompactTableStory.key, CompactTableStory.Component, {
-    docs: { source: { code: CompactTableStory.code || '' } },
+    docs: { source: { code: CompactTableStory.code || '', state: 'open' } },
   });
 
 storiesOf('First Steps/Composed Table', module)
@@ -35,5 +35,5 @@ storiesOf('First Steps/Composed Table', module)
     },
   })
   .add(ComposedTableStory.key, ComposedTableStory.Component, {
-    docs: { source: { code: ComposedTableStory.code || '' } },
+    docs: { source: { code: ComposedTableStory.code || '', state: 'open' } },
   });

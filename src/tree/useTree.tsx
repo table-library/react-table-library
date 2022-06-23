@@ -46,7 +46,7 @@ const getRowProps = (props: RowProps, features: Features): FeatureProps => {
     }
 
     .td:nth-of-type(${treeYLevel + 1}) > div {
-      margin-left: ${treeXLevel * tree.options.indentation}px;
+      padding-left: ${treeXLevel * tree.options.indentation}px;
     }
   `;
 

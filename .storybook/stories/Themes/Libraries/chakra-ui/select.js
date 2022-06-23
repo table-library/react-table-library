@@ -15,7 +15,12 @@ const Component = () => {
   const data = { nodes };
 
   const chakraTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(chakraTheme);
+  const customTheme = {
+    Table: `
+      grid-template-columns: 64px repeat(5, minmax(0, 1fr));
+    `,
+  };
+  const theme = useTheme([chakraTheme, customTheme]);
 
   const select = useRowSelect(data, {
     onChange: onSelectChange,
@@ -94,7 +99,12 @@ const Component = () => {
   const data = { nodes };
 
   const chakraTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(chakraTheme);
+  const customTheme = {
+    Table: \`
+      grid-template-columns: 64px repeat(5, minmax(0, 1fr));
+    \`,
+  };
+  const theme = useTheme([chakraTheme, customTheme]);
 
   const select = useRowSelect(data, {
     onChange: onSelectChange,

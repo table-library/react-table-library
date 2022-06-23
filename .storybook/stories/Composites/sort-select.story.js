@@ -9,6 +9,7 @@ import {
   Row,
   Cell,
 } from '@table-library/react-table-library/table';
+import { useTheme } from '@table-library/react-table-library/theme';
 
 import { useSort, HeaderCellSort } from '@table-library/react-table-library/sort';
 
@@ -24,6 +25,12 @@ storiesOf('Composites/Sort & Select', module)
   .addParameters({ component: Table })
   .add('base', () => {
     const data = { nodes };
+
+    const theme = useTheme({
+      Table: `
+        grid-template-columns: 24px repeat(5, minmax(0, 1fr));
+      `,
+    });
 
     const sort = useSort(
       data,
@@ -54,7 +61,7 @@ storiesOf('Composites/Sort & Select', module)
     }
 
     return (
-      <Table data={data} sort={sort} select={select}>
+      <Table data={data} theme={theme} layout={{ custom: true }} sort={sort} select={select}>
         {(tableList) => (
           <>
             <Header>

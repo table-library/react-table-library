@@ -10,15 +10,17 @@ export const Body: React.FC<BodyProps> = ({ children, ...rest }: BodyProps) => {
   const theme = React.useContext(ThemeContext);
 
   return (
-    <div
+    <tbody
       css={css`
         ${theme?.Body}
+
+        display: contents;
       `}
       data-table-library_body=""
       className="tbody"
       {...rest}
     >
       {children}
-    </div>
+    </tbody>
   );
 };

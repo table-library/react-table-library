@@ -1,21 +1,13 @@
 import * as React from 'react';
 
 import { Table } from '@table-library/react-table-library/table/index';
-import { useTheme } from '@table-library/react-table-library/theme/index';
 
 import { TableNode } from '@table-library/react-table-library/types/table';
-import { Theme } from '@table-library/react-table-library/types/theme';
 import { CompactTableProps, Column } from '@table-library/react-table-library/types/compact';
 
 import { VirtualizedTable } from './VirtualizedTable';
 import { NormalTable } from './NormalTable';
 import { CompactFooter } from './CompactFooter';
-
-const FULL_HEIGHT_THEME = {
-  Table: `
-    height: 100%;
-  `,
-};
 
 export const CompactTable: React.FC<CompactTableProps> = React.forwardRef(
   (
@@ -29,26 +21,7 @@ export const CompactTable: React.FC<CompactTableProps> = React.forwardRef(
     }: CompactTableProps,
     ref: any,
   ) => {
-    const {
-      data,
-      theme: customTheme,
-      layout,
-      sort,
-      pagination,
-      select,
-      tree,
-      onInit = () => {},
-    } = tableProps;
-
-    let allThemes: Theme[] = [];
-    if (layout?.fullHeight || virtualizedOptions) {
-      allThemes = allThemes.concat(FULL_HEIGHT_THEME);
-    }
-    if (customTheme) {
-      allThemes = allThemes.concat(customTheme);
-    }
-
-    const theme = useTheme(allThemes);
+    const { data, theme, layout, sort, pagination, select, tree, onInit = () => {} } = tableProps;
 
     return (
       <Table

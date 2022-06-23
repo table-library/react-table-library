@@ -41,19 +41,17 @@ const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
   HeaderRow: `
     text-transform: uppercase;
     font-size: 12px;
-    font-weight: bold;
 
-    border-bottom: 1px solid #e2e8f0;
+    &.tr-header .th {
+      border-bottom: 1px solid #e2e8f0;
+    }
 
-    &.tr-footer {
-      border-top: 1px solid transparent;
-      border-bottom: 1px solid transparent;
+    &.tr-footer .th {
+      border-top: 1px solid #e2e8f0;
     }
   `,
   Row: `
     font-size: 16px;
-
-    border-bottom: 1px solid #e2e8f0;
 
     &.tr.tr-body.row-select.row-select-single-selected, &.tr.tr-body.row-select.row-select-selected {
       background-color: #81E6D9;
@@ -62,12 +60,6 @@ const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
   `,
   BaseCell: `
     padding: ${options.verticalSpacing}px ${options.horizontalSpacing}px;
-
-    &:not(.stiff) > div {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
   `,
   HeaderCell: `
     & > div {
@@ -75,20 +67,16 @@ const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
       padding-bottom: 3px;
     }
   `,
-  Cell: `
-    &.stiff > div {
-      display: flex;
-    }
-  `,
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getVirtualizedTheme = (options: OptionsSound, configuration: ConfigurationSound) => ({
-  Body: `
-    & > div:not(:last-of-type) > .tr {
+  Row: `
+    & .td {
       border-bottom: 1px solid #e2e8f0;
     }
-
+  `,
+  Body: `
     & > div:nth-of-type(odd) > .tr {
       background-color: ${options.striped ? '#E6FFFA' : '#ffffff'};
     }
@@ -102,7 +90,7 @@ const getVirtualizedTheme = (options: OptionsSound, configuration: Configuration
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getNoneVirtualizedTheme = (options: OptionsSound, configuration: ConfigurationSound) => ({
   Row: `
-    &.tr:not(:last-of-type) {
+    &:not(:last-of-type) > .td {
       border-bottom: 1px solid #e2e8f0;
     }
 

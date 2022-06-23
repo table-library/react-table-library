@@ -15,26 +15,8 @@ const Component = () => {
 
   const chakraTheme = getTheme(DEFAULT_OPTIONS);
   const customTheme = {
-    BaseCell: `
-      &:nth-of-type(1) {
-        min-width: 50%;
-        width: 50%;
-      }
-
-      &:nth-of-type(2) {
-        min-width: 200px;
-        width: 200px;
-      }
-
-      &:nth-of-type(3), &:nth-of-type(4) {
-        min-width: 25%;
-        width: 25%;
-      }
-
-      &:nth-of-type(5) {
-        min-width: 50%;
-        width: 50%;
-      }
+    Table: `
+      grid-template-columns: 25% 25% 25% 25% minmax(150px, 1fr);
     `,
   };
   const theme = useTheme([chakraTheme, customTheme]);
@@ -93,26 +75,8 @@ const Component = () => {
 
   const chakraTheme = getTheme(DEFAULT_OPTIONS);
   const customTheme = {
-    BaseCell: \`
-      &:nth-of-type(1) {
-        min-width: 50%;
-        width: 50%;
-      }
-
-      &:nth-of-type(2) {
-        min-width: 200px;
-        width: 200px;
-      }
-
-      &:nth-of-type(3), &:nth-of-type(4) {
-        min-width: 25%;
-        width: 25%;
-      }
-
-      &:nth-of-type(5) {
-        min-width: 50%;
-        width: 50%;
-      }
+    Table: \`
+      grid-template-columns: 25% 25% 25% 25% minmax(150px, 1fr);
     \`,
   };
   const theme = useTheme([chakraTheme, customTheme]);

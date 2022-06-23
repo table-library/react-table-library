@@ -61,6 +61,8 @@ const Component = () => {
   });
   const customTheme = {
     Table: `
+      grid-template-columns: 64px repeat(5, minmax(0, 1fr));
+
       margin: 16px 0px;
     `,
   };
@@ -369,6 +371,7 @@ const Component = () => {
           columns={COLUMNS}
           data={{ ...data, nodes: modifiedNodes }}
           theme={theme}
+          layout={{ custom: true }}
           select={select}
           tree={tree}
           sort={sort}
@@ -503,6 +506,8 @@ const Component = () => {
   });
   const customTheme = {
     Table: \`
+      grid-template-columns: 64px repeat(5, minmax(0, 1fr));
+
       margin: 16px 0px;
     \`,
   };
@@ -811,6 +816,7 @@ const Component = () => {
           columns={COLUMNS}
           data={{ ...data, nodes: modifiedNodes }}
           theme={theme}
+          layout={{ custom: true }}
           select={select}
           tree={tree}
           sort={sort}

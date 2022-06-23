@@ -8,4 +8,5 @@ export const isRowClick = (event: React.SyntheticEvent | React.KeyboardEvent) =>
   (event.target as HTMLElement).tagName === 'svg' ||
   (event.target as HTMLElement).tagName === 'path' ||
   (event.target as HTMLElement).tagName === 'DIV' ||
-  (event.target as HTMLElement).tagName === 'SPAN';
+  (event.target as HTMLElement).tagName === 'SPAN' ||
+  (event.target as HTMLElement).tagName === 'TD';

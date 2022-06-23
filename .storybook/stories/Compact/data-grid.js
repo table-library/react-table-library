@@ -18,23 +18,20 @@ const Component = () => {
   const theme = useTheme([
     getTheme(),
     {
-      Table: `
-      height: 100%;
-    `,
       BaseCell: `
-      color: #000000;
+        color: #000000;
 
-      min-width: 15%;
-      width: 15%;
+        min-width: 15%;
+        width: 15%;
 
-      &:nth-of-type(1) {
-        left: 0px;
-      }
+        &:nth-of-type(1) {
+          left: 0px;
+        }
 
-      &:nth-of-type(2) {
-        left: 15%;
-      }
-    `,
+        &:nth-of-type(2) {
+          left: 15%;
+        }
+      `,
     },
   ]);
 
@@ -145,7 +142,7 @@ const Component = () => {
           virtualizedOptions={VIRTUALIZED_OPTIONS}
           data={data}
           theme={theme}
-          layout={{ custom: true, horizontalScroll: true }}
+          layout={{ custom: true, horizontalScroll: true, fixedHeader: true }}
         />
       </div>
 
@@ -176,23 +173,20 @@ const Component = () => {
   const theme = useTheme([
     getTheme(),
     {
-      Table: \`
-      height: 100%;
-    \`,
       BaseCell: \`
-      color: #000000;
+        color: #000000;
 
-      min-width: 15%;
-      width: 15%;
+        min-width: 15%;
+        width: 15%;
 
-      &:nth-of-type(1) {
-        left: 0px;
-      }
+        &:nth-of-type(1) {
+          left: 0px;
+        }
 
-      &:nth-of-type(2) {
-        left: 15%;
-      }
-    \`,
+        &:nth-of-type(2) {
+          left: 15%;
+        }
+      \`,
     },
   ]);
 
@@ -303,7 +297,7 @@ const Component = () => {
           virtualizedOptions={VIRTUALIZED_OPTIONS}
           data={data}
           theme={theme}
-          layout={{ custom: true, horizontalScroll: true }}
+          layout={{ custom: true, horizontalScroll: true, fixedHeader: true }}
         />
       </div>
 

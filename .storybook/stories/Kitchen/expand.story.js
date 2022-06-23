@@ -11,6 +11,7 @@ import {
   HeaderCell,
   Cell,
 } from '@table-library/react-table-library/table';
+import { useTheme } from '@table-library/react-table-library/theme';
 
 import { nodes } from '../data';
 
@@ -20,6 +21,21 @@ storiesOf('Kitchen Sink/Expand', module)
     const DURATION = 500;
 
     const data = { nodes };
+
+    const theme = useTheme({
+      Table: `
+        .animate {
+          grid-column: 1 / -1;
+
+          display: flex;
+        }
+
+        .animate > div {
+          flex: 1;
+          display: flex;
+        }
+      `,
+    });
 
     const [ids, setIds] = React.useState([]);
     const [heights, setHeights] = React.useState([]);
@@ -38,10 +54,10 @@ storiesOf('Kitchen Sink/Expand', module)
       setHeights(computeHeights(ids));
     }, [ids]);
 
-    const computeHeights = (ids) => ids.reduce((acc, id) => ({ ...acc, [id]: 'auto' }), {});
+    const computeHeights = (ids) => ids.reduce((acc, id) => ({ ...acc, [id]: 78 }), {});
 
     return (
-      <Table data={data}>
+      <Table data={data} theme={theme}>
         {(tableList) => (
           <>
             <Header>
@@ -72,27 +88,35 @@ storiesOf('Kitchen Sink/Expand', module)
                   </Row>
 
                   {ids.includes(item.id) && (
-                    <AnimateHeight duration={DURATION} height={heights[item.id] || 0}>
-                      <ul
-                        style={{
-                          margin: '0',
-                          padding: '0',
-                          backgroundColor: '#e0e0e0',
-                        }}
-                      >
-                        <li>
-                          <strong>Name:</strong> {item.name.toUpperCase()}
-                        </li>
-                        <li>
-                          <strong>Deadline:</strong> {item.deadline.toLocaleDateString('en-US')}
-                        </li>
-                        <li>
-                          <strong>Type:</strong> {item.type}
-                        </li>
-                        <li>
-                          <strong>Complete:</strong> {item.isComplete.toString()}
-                        </li>
-                      </ul>
+                    <AnimateHeight
+                      duration={DURATION}
+                      height={heights[item.id] || 0}
+                      className="animate"
+                    >
+                      <tr style={{ flex: '1', display: 'flex' }}>
+                        <td style={{ flex: '1' }}>
+                          <ul
+                            style={{
+                              margin: '0',
+                              padding: '0',
+                              backgroundColor: '#e0e0e0',
+                            }}
+                          >
+                            <li>
+                              <strong>Name:</strong> {item.name.toUpperCase()}
+                            </li>
+                            <li>
+                              <strong>Deadline:</strong> {item.deadline.toLocaleDateString('en-US')}
+                            </li>
+                            <li>
+                              <strong>Type:</strong> {item.type}
+                            </li>
+                            <li>
+                              <strong>Complete:</strong> {item.isComplete.toString()}
+                            </li>
+                          </ul>
+                        </td>
+                      </tr>
                     </AnimateHeight>
                   )}
                 </React.Fragment>

@@ -14,6 +14,7 @@ import {
   HeaderCell,
   Cell,
 } from '@table-library/react-table-library/table';
+import { useTheme } from '@table-library/react-table-library/theme';
 
 import {
   HeaderCellSelect,
@@ -89,6 +90,12 @@ storiesOf('Features/Select', module)
   .add('checkbox', () => {
     const data = { nodes };
 
+    const theme = useTheme({
+      Table: `
+        grid-template-columns: 24px repeat(5, minmax(0, 1fr));
+      `,
+    });
+
     const select = useRowSelect(data, {
       onChange: onSelectChange,
     });
@@ -98,7 +105,7 @@ storiesOf('Features/Select', module)
     }
 
     return (
-      <Table data={data} select={select}>
+      <Table data={data} theme={theme} layout={{ custom: true }} select={select}>
         {(tableList) => (
           <>
             <Header>
@@ -135,8 +142,158 @@ storiesOf('Features/Select', module)
       </Table>
     );
   })
+  .add('checkbox position', () => {
+    const data = { nodes };
+
+    const theme = useTheme({
+      Table: `
+        grid-template-columns: repeat(2, minmax(0, 1fr)) 24px repeat(1, minmax(0, 1fr));
+      `,
+    });
+
+    const select = useRowSelect(data, {
+      onChange: onSelectChange,
+    });
+
+    function onSelectChange(action, state) {
+      console.log(action, state);
+    }
+
+    const [hiddenColumns, setHiddenColumns] = React.useState(['DEADLINE', 'COMPLETE']);
+
+    const toggleColumn = (column) => {
+      if (hiddenColumns.includes(column)) {
+        setHiddenColumns(hiddenColumns.filter((v) => v !== column));
+      } else {
+        setHiddenColumns(hiddenColumns.concat(column));
+      }
+    };
+
+    return (
+      <>
+        <div>
+          <label htmlFor="name">
+            <input
+              id="name"
+              type="checkbox"
+              value="NAME"
+              checked={!hiddenColumns.includes('NAME')}
+              onChange={() => toggleColumn('NAME')}
+            />
+            Name
+          </label>
+        </div>
+
+        <div>
+          <label htmlFor="deadline">
+            <input
+              id="deadline"
+              type="checkbox"
+              value="DEADLINE"
+              checked={!hiddenColumns.includes('DEADLINE')}
+              onChange={() => toggleColumn('DEADLINE')}
+            />
+            Deadline
+          </label>
+        </div>
+
+        <div>
+          <label htmlFor="type">
+            <input
+              id="type"
+              type="checkbox"
+              value="TYPE"
+              checked={!hiddenColumns.includes('TYPE')}
+              onChange={() => toggleColumn('TYPE')}
+            />
+            Type
+          </label>
+        </div>
+
+        <div>
+          <label htmlFor="complete">
+            <input
+              id="complete"
+              type="checkbox"
+              value="COMPLETE"
+              checked={!hiddenColumns.includes('COMPLETE')}
+              onChange={() => toggleColumn('COMPLETE')}
+            />
+            Complete
+          </label>
+        </div>
+
+        <div>
+          <label htmlFor="tasks">
+            <input
+              id="tasks"
+              type="checkbox"
+              value="TASKS"
+              checked={!hiddenColumns.includes('TASKS')}
+              onChange={() => toggleColumn('TASKS')}
+            />
+            Tasks
+          </label>
+        </div>
+
+        <Table data={data} theme={theme} layout={{ custom: true }} select={select}>
+          {(tableList) => (
+            <>
+              <Header>
+                <HeaderRow>
+                  <HeaderCell hide={hiddenColumns.includes('NAME')} resize>
+                    Task
+                  </HeaderCell>
+                  <HeaderCell hide={hiddenColumns.includes('DEADLINE')} resize>
+                    Deadline
+                  </HeaderCell>
+                  <HeaderCell hide={hiddenColumns.includes('TYPE')} resize>
+                    Type
+                  </HeaderCell>
+                  <HeaderCellSelect />
+                  <HeaderCell hide={hiddenColumns.includes('COMPLETE')} resize>
+                    Complete
+                  </HeaderCell>
+                  <HeaderCell hide={hiddenColumns.includes('TASKS')} resize>
+                    Tasks
+                  </HeaderCell>
+                </HeaderRow>
+              </Header>
+
+              <Body>
+                {tableList.map((item) => (
+                  <Row key={item.id} item={item}>
+                    <Cell hide={hiddenColumns.includes('NAME')}>{item.name}</Cell>
+                    <Cell hide={hiddenColumns.includes('DEADLINE')}>
+                      {item.deadline.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                      })}
+                    </Cell>
+                    <Cell hide={hiddenColumns.includes('TYPE')}>{item.type}</Cell>
+                    <CellSelect item={item} />
+                    <Cell hide={hiddenColumns.includes('COMPLETE')}>
+                      {item.isComplete.toString()}
+                    </Cell>
+                    <Cell hide={hiddenColumns.includes('TASKS')}>{item.nodes?.length}</Cell>
+                  </Row>
+                ))}
+              </Body>
+            </>
+          )}
+        </Table>
+      </>
+    );
+  })
   .add('select on checkbox ', () => {
     const data = { nodes };
+
+    const theme = useTheme({
+      Table: `
+        grid-template-columns: 24px repeat(5, minmax(0, 1fr));
+      `,
+    });
 
     const select = useRowSelect(
       data,
@@ -153,7 +310,7 @@ storiesOf('Features/Select', module)
     }
 
     return (
-      <Table data={data} select={select}>
+      <Table data={data} theme={theme} layout={{ custom: true }} select={select}>
         {(tableList) => (
           <>
             <Header>
@@ -194,6 +351,12 @@ storiesOf('Features/Select', module)
   .add('all single select', () => {
     const data = { nodes };
 
+    const theme = useTheme({
+      Table: `
+        grid-template-columns: 24px repeat(5, minmax(0, 1fr));
+      `,
+    });
+
     const select = useRowSelect(
       data,
       {
@@ -210,7 +373,7 @@ storiesOf('Features/Select', module)
     }
 
     return (
-      <Table data={data} select={select}>
+      <Table data={data} theme={theme} layout={{ custom: true }} select={select}>
         {(tableList) => (
           <>
             <Header>
@@ -250,6 +413,12 @@ storiesOf('Features/Select', module)
   .add('all multi select', () => {
     const data = { nodes };
 
+    const theme = useTheme({
+      Table: `
+        grid-template-columns: 24px repeat(5, minmax(0, 1fr));
+      `,
+    });
+
     const select = useRowSelect(
       data,
       {
@@ -266,7 +435,7 @@ storiesOf('Features/Select', module)
     }
 
     return (
-      <Table data={data} select={select}>
+      <Table data={data} theme={theme} layout={{ custom: true }} select={select}>
         {(tableList) => (
           <>
             <Header>
@@ -306,6 +475,12 @@ storiesOf('Features/Select', module)
   .add('default single select', () => {
     const data = { nodes };
 
+    const theme = useTheme({
+      Table: `
+        grid-template-columns: 24px repeat(5, minmax(0, 1fr));
+      `,
+    });
+
     const select = useRowSelect(data, {
       state: { id: '3' },
       onChange: onSelectChange,
@@ -316,7 +491,7 @@ storiesOf('Features/Select', module)
     }
 
     return (
-      <Table data={data} select={select}>
+      <Table data={data} theme={theme} layout={{ custom: true }} select={select}>
         {(tableList) => (
           <>
             <Header>
@@ -356,6 +531,12 @@ storiesOf('Features/Select', module)
   .add('default multi select', () => {
     const data = { nodes };
 
+    const theme = useTheme({
+      Table: `
+        grid-template-columns: 24px repeat(5, minmax(0, 1fr));
+      `,
+    });
+
     const select = useRowSelect(data, {
       state: { ids: ['2', '4'] },
       onChange: onSelectChange,
@@ -366,7 +547,7 @@ storiesOf('Features/Select', module)
     }
 
     return (
-      <Table data={data} select={select}>
+      <Table data={data} theme={theme} layout={{ custom: true }} select={select}>
         {(tableList) => (
           <>
             <Header>
@@ -406,6 +587,12 @@ storiesOf('Features/Select', module)
   .add('isCarryForward', () => {
     const data = { nodes };
 
+    const theme = useTheme({
+      Table: `
+        grid-template-columns: 24px repeat(5, minmax(0, 1fr));
+      `,
+    });
+
     const select = useRowSelect(
       data,
       {
@@ -421,7 +608,7 @@ storiesOf('Features/Select', module)
     }
 
     return (
-      <Table data={data} select={select}>
+      <Table data={data} theme={theme} layout={{ custom: true }} select={select}>
         {(tableList) => (
           <>
             <Header>
@@ -461,6 +648,12 @@ storiesOf('Features/Select', module)
   .add('isPartialToAll', () => {
     const data = { nodes };
 
+    const theme = useTheme({
+      Table: `
+        grid-template-columns: 24px repeat(5, minmax(0, 1fr));
+      `,
+    });
+
     const select = useRowSelect(
       data,
       {
@@ -476,7 +669,7 @@ storiesOf('Features/Select', module)
     }
 
     return (
-      <Table data={data} select={select}>
+      <Table data={data} theme={theme} layout={{ custom: true }} select={select}>
         {(tableList) => (
           <>
             <Header>
@@ -516,6 +709,12 @@ storiesOf('Features/Select', module)
   .add('custom checkbox (Material UI)', () => {
     const data = { nodes };
 
+    const theme = useTheme({
+      Table: `
+        grid-template-columns: 38px repeat(5, minmax(0, 1fr));
+      `,
+    });
+
     const select = useRowSelect(data, {
       onChange: onSelectChange,
     });
@@ -526,7 +725,7 @@ storiesOf('Features/Select', module)
 
     return (
       <MaterialThemeProvider theme={createMaterialTheme({})}>
-        <Table data={data} select={select}>
+        <Table data={data} theme={theme} layout={{ custom: true }} select={select}>
           {(tableList) => (
             <>
               <Header>

@@ -5,20 +5,18 @@ import * as React from 'react';
 export type Layout = {
   custom?: boolean;
   horizontalScroll?: boolean;
-  hiddenColumns?: string[];
-  fullHeight?: boolean;
-  inheritLayout?: boolean;
-  resizedLayout?: string[];
-  onLayoutChange?: (widths: string[]) => void;
+  fixedHeader?: boolean;
+  resizedLayout?: string;
+  onLayoutChange?: (grid: string) => void;
 };
 
 // internal
 
 export type TableMemory = {
-  resizedLayout: (string | null)[];
+  resizedLayout: string;
   hiddenSpacesInMemory: (number | null)[];
 };
 
 export type TableMemoryRef = React.MutableRefObject<TableMemory | null>;
 
-export type TableElementRef = React.MutableRefObject<HTMLDivElement | null>;
+export type TableElementRef = React.MutableRefObject<HTMLTableElement | null>;

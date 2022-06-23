@@ -29,19 +29,13 @@ storiesOf('Features/Fixed Header', module)
   .add('base', () => {
     const data = { nodes };
 
-    const theme = useTheme({
-      Table: `
-        height: 100%;
-      `,
-    });
-
     return (
       <div
         style={{
           height: '100px',
         }}
       >
-        <Table data={data} theme={theme}>
+        <Table data={data} layout={{ fixedHeader: true }}>
           {(tableList) => (
             <>
               <Header>
@@ -80,12 +74,6 @@ storiesOf('Features/Fixed Header', module)
   .add('in height container', () => {
     const data = { nodes };
 
-    const theme = useTheme({
-      Table: `
-        height: 100%;
-      `,
-    });
-
     return (
       // check .storybook/preview.js for body style
       <div style={{ height: '100vh' }}>
@@ -105,7 +93,7 @@ storiesOf('Features/Fixed Header', module)
             height: '10%',
           }}
         >
-          <Table data={data} theme={theme}>
+          <Table data={data} layout={{ fixedHeader: true }}>
             {(tableList) => (
               <>
                 <Header>
