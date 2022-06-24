@@ -25,7 +25,7 @@ const isReactFragment = (variableToInspect: any) => {
 const useInitialLayout = () => {
   const context = React.useContext(LayoutContext);
 
-  // const onlyOnce = React.useRef(false);
+  const onlyOnce = React.useRef(false);
 
   React.useLayoutEffect(() => {
     if (!context) {
@@ -34,39 +34,40 @@ const useInitialLayout = () => {
 
     const { layout, tableElementRef } = context;
 
-    // if (onlyOnce.current) return;
-    // onlyOnce.current = true;
-
     const dataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
 
-    let resizedLayout = '';
+    if (!onlyOnce.current) {
+      onlyOnce.current = true;
 
-    if (layout?.resizedLayout) {
-      resizedLayout = layout?.resizedLayout;
+      let resizedLayout = '';
+
+      if (layout?.resizedLayout) {
+        resizedLayout = layout?.resizedLayout;
+      }
+
+      // distribute layout once evenly if no custom layout is defined
+      else if (!layout?.custom) {
+        const visibleDataColumns = dataColumns.filter((dataColumn) => !dataColumn.isHide);
+
+        const getPercentage = () => {
+          return 'minmax(0px, 1fr)';
+          // return `${100 / visibleDataColumns.length}%`;
+        };
+
+        resizedLayout = visibleDataColumns.map(getPercentage).join(' ');
+      }
+
+      tableElementRef.current!.style.setProperty(
+        '--data-table-library_grid-template-columns',
+        resizedLayout,
+      );
+
+      if (layout?.onLayoutChange) {
+        layout?.onLayoutChange(tableElementRef.current!.style.gridTemplateColumns as string);
+      }
     }
-
-    // distribute layout once evenly if no custom layout is defined
-    else if (!layout?.custom) {
-      const visibleDataColumns = dataColumns.filter((dataColumn) => !dataColumn.isHide);
-
-      const getPercentage = () => {
-        return 'minmax(0px, 1fr)';
-        // return `${100 / visibleDataColumns.length}%`;
-      };
-
-      resizedLayout = visibleDataColumns.map(getPercentage).join(' ');
-    }
-
-    tableElementRef.current!.style.setProperty(
-      '--data-table-library_grid-template-columns',
-      resizedLayout,
-    );
 
     applyProgrammaticHide(tableElementRef, dataColumns);
-
-    if (layout?.onLayoutChange) {
-      layout?.onLayoutChange(tableElementRef.current!.style.gridTemplateColumns as string);
-    }
   }, [context]);
 };
 
