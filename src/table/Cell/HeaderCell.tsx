@@ -57,15 +57,18 @@ const useUpdateLayout = (index: number, hide: boolean | Nullish) => {
       }
     };
 
-    const gridTemplateColumns = visibleDataColumns
+    const resizedLayout = visibleDataColumns
       .map((dataColumn: DataColumn) =>
         layout?.horizontalScroll ? `${getPixel(dataColumn)}px` : `${getPercentage(dataColumn)}`,
       )
       .join(' ');
 
-    const didChange = gridTemplateColumns !== tableElementRef.current!.style.gridTemplateColumns;
+    const didChange = resizedLayout !== tableElementRef.current!.style.gridTemplateColumns;
 
-    tableElementRef.current!.style.gridTemplateColumns = gridTemplateColumns;
+    tableElementRef.current!.style.setProperty(
+      '--data-table-library_grid-template-columns',
+      resizedLayout,
+    );
 
     applyProgrammaticHide(tableElementRef, dataColumns);
 
@@ -77,7 +80,7 @@ const useUpdateLayout = (index: number, hide: boolean | Nullish) => {
     }
 
     if (layout?.onLayoutChange && didChange) {
-      layout?.onLayoutChange(tableElementRef.current!.style.gridTemplateColumns as string);
+      layout?.onLayoutChange(resizedLayout as string);
     }
   }, [index, hide, layout, tableElementRef, tableMemoryRef]);
 };

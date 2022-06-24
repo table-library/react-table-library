@@ -49,7 +49,10 @@ const useInitialLayout = () => {
     else if (!layout?.custom) {
       const visibleDataColumns = dataColumns.filter((dataColumn) => !dataColumn.isHide);
 
-      const getPercentage = () => `${100 / visibleDataColumns.length}%`;
+      const getPercentage = () => {
+        return 'minmax(0px, 1fr)';
+        // return `${100 / visibleDataColumns.length}%`;
+      };
 
       resizedLayout = visibleDataColumns.map(getPercentage).join(' ');
     }

@@ -65,14 +65,19 @@ const applySize = (index: number, tableElementRef: TableElementRef, resizeWidth:
   const diff = tableWidth - newColumnWidthsAsPx.reduce((acc, value) => acc + value, 0);
   newColumnWidthsAsPx[actualIndex] = newColumnWidthsAsPx[actualIndex] + diff;
 
-  const newColumnWidths = dataColumns.map((column, i) => {
-    const pixel = newColumnWidthsAsPx[i];
-    const percentage = (pixel / tableWidth) * 100;
+  const resizedLayout = dataColumns
+    .map((column, i) => {
+      const pixel = newColumnWidthsAsPx[i];
+      const percentage = (pixel / tableWidth) * 100;
 
-    return column.isStiff || isOverflow ? `${pixel}px` : `${percentage}%`;
-  });
+      return column.isStiff || isOverflow ? `${pixel}px` : `minmax(0, ${percentage}%)`;
+    })
+    .join(' ');
 
-  tableElementRef.current!.style.gridTemplateColumns = newColumnWidths.join(' ');
+  tableElementRef.current!.style.setProperty(
+    '--data-table-library_grid-template-columns',
+    resizedLayout,
+  );
 
   // pin feature
 
