@@ -126,7 +126,9 @@ export const useResize = (index: number, hide: boolean | Nullish) => {
     (event) => {
       event.preventDefault();
 
-      previousGrid.current = tableElementRef.current!.style.gridTemplateColumns;
+      previousGrid.current = tableElementRef.current!.style.getPropertyValue(
+        '--data-table-library_grid-template-columns',
+      );
 
       isMouseDown.current = true;
       startOffset.current = cellRef.current!.offsetWidth - event.pageX;
@@ -150,12 +152,14 @@ export const useResize = (index: number, hide: boolean | Nullish) => {
   const onMouseUp = React.useCallback(() => {
     isMouseDown.current = false;
 
-    const didChange =
-      previousGrid.current !== tableElementRef.current!.style.gridTemplateColumns &&
-      previousGrid.current !== '';
+    const grid = tableElementRef.current!.style.getPropertyValue(
+      '--data-table-library_grid-template-columns',
+    );
+
+    const didChange = previousGrid.current !== grid && previousGrid.current !== '';
 
     if (layout?.onLayoutChange && didChange) {
-      layout?.onLayoutChange(tableElementRef.current!.style.gridTemplateColumns as string);
+      layout?.onLayoutChange(grid);
     }
   }, [layout, tableElementRef]);
 
