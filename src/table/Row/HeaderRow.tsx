@@ -62,8 +62,8 @@ const useInitialLayout = () => {
         resizedLayout,
       );
 
-      if (layout?.onLayoutChange) {
-        layout?.onLayoutChange(tableElementRef.current!.style.gridTemplateColumns as string);
+      if (layout?.onLayoutChange && resizedLayout !== '') {
+        layout?.onLayoutChange(resizedLayout);
       }
     }
 

@@ -152,14 +152,14 @@ export const useResize = (index: number, hide: boolean | Nullish) => {
   const onMouseUp = React.useCallback(() => {
     isMouseDown.current = false;
 
-    const grid = tableElementRef.current!.style.getPropertyValue(
+    const resizedLayout = tableElementRef.current!.style.getPropertyValue(
       '--data-table-library_grid-template-columns',
     );
 
-    const didChange = previousGrid.current !== grid && previousGrid.current !== '';
+    const didChange = previousGrid.current !== resizedLayout;
 
-    if (layout?.onLayoutChange && didChange) {
-      layout?.onLayoutChange(grid);
+    if (layout?.onLayoutChange && didChange && resizedLayout !== '') {
+      layout?.onLayoutChange(resizedLayout);
     }
   }, [layout, tableElementRef]);
 

@@ -79,8 +79,8 @@ const useUpdateLayout = (index: number, hide: boolean | Nullish) => {
       delete tableMemoryRef.current!.hiddenSpacesInMemory[index];
     }
 
-    if (layout?.onLayoutChange && didChange) {
-      layout?.onLayoutChange(resizedLayout as string);
+    if (layout?.onLayoutChange && didChange && resizedLayout !== '') {
+      layout?.onLayoutChange(resizedLayout);
     }
   }, [index, hide, layout, tableElementRef, tableMemoryRef]);
 };
