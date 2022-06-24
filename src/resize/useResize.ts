@@ -70,7 +70,7 @@ const applySize = (index: number, tableElementRef: TableElementRef, resizeWidth:
       const pixel = newColumnWidthsAsPx[i];
       const percentage = (pixel / tableWidth) * 100;
 
-      return column.isStiff || isOverflow ? `${pixel}px` : `minmax(0, ${percentage}%)`;
+      return column.isStiff || isOverflow ? `${pixel}px` : `minmax(${percentage}%, 1fr)`;
     })
     .join(' ');
 
