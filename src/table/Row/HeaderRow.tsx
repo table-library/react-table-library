@@ -6,6 +6,7 @@ import { css, jsx } from '@emotion/react';
 
 import { HeaderRowContainer } from '@table-library/react-table-library/common/components/Row';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
+import { LayoutContext } from '@table-library/react-table-library/common/context';
 import {
   toDataColumn,
   applyProgrammaticHide,
@@ -13,7 +14,6 @@ import {
 } from '@table-library/react-table-library/common/util/columns';
 
 import { HeaderRowProps } from '@table-library/react-table-library/types/table';
-import { LayoutContext } from '@table-library/react-table-library/common/context';
 
 const isReactFragment = (variableToInspect: any) => {
   if (variableToInspect.type) {
@@ -34,38 +34,54 @@ const useInitialLayout = () => {
 
     const { layout, tableElementRef } = context;
 
-    const dataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
+    if (onlyOnce.current) return;
+    onlyOnce.current = true;
 
-    if (!onlyOnce.current) {
-      onlyOnce.current = true;
+    let resizedLayout = '';
 
-      let resizedLayout = '';
+    if (layout?.resizedLayout) {
+      resizedLayout = layout?.resizedLayout;
+    }
 
-      if (layout?.resizedLayout) {
-        resizedLayout = layout?.resizedLayout;
-      }
+    // distribute layout once evenly if no custom layout is defined
+    else if (!layout?.custom) {
+      const dataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
 
-      // distribute layout once evenly if no custom layout is defined
-      else if (!layout?.custom) {
-        const visibleDataColumns = dataColumns.filter((dataColumn) => !dataColumn.isHide);
+      const visibleDataColumns = dataColumns.filter((dataColumn) => !dataColumn.isHide);
 
-        const getPercentage = () => {
-          return 'minmax(0px, 1fr)';
-          // return `${100 / visibleDataColumns.length}%`;
-        };
+      const getPercentage = () => {
+        return 'minmax(0px, 1fr)';
+        // return `${100 / visibleDataColumns.length}%`;
+      };
 
-        resizedLayout = visibleDataColumns.map(getPercentage).join(' ');
-      }
+      resizedLayout = visibleDataColumns.map(getPercentage).join(' ');
+    }
 
+    if (resizedLayout) {
       tableElementRef.current!.style.setProperty(
         '--data-table-library_grid-template-columns',
         resizedLayout,
       );
-
-      if (layout?.onLayoutChange && resizedLayout !== '') {
-        layout?.onLayoutChange(resizedLayout);
-      }
     }
+  }, [context]);
+};
+
+const useInitialHide = () => {
+  const context = React.useContext(LayoutContext);
+
+  const onlyOnce = React.useRef(false);
+
+  React.useLayoutEffect(() => {
+    if (!context) {
+      throw new Error('No Layout Context.');
+    }
+
+    const { tableElementRef } = context;
+
+    if (onlyOnce.current) return;
+    onlyOnce.current = true;
+
+    const dataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
 
     applyProgrammaticHide(tableElementRef, dataColumns);
   }, [context]);
@@ -83,6 +99,7 @@ export const HeaderRow: React.FC<HeaderRowProps> = ({
   const ref = React.useRef<HTMLTableRowElement>(null);
 
   useInitialLayout();
+  useInitialHide();
 
   return (
     <HeaderRowContainer

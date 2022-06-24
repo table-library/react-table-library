@@ -8,6 +8,12 @@ import { css, jsx } from '@emotion/react';
 import { isRowClick } from '@table-library/react-table-library/common/util/isRowClick';
 import { RowContainer } from '@table-library/react-table-library/common/components/Row';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
+import { LayoutContext } from '@table-library/react-table-library/common/context';
+import {
+  toDataColumn,
+  applyProgrammaticHide,
+  getHeaderColumns,
+} from '@table-library/react-table-library/common/util/columns';
 import { useFeatures } from '@table-library/react-table-library/common/context/Feature';
 
 import { Nullish } from '@table-library/react-table-library/types/common';
@@ -76,6 +82,27 @@ const evaluateProps = (rowPropsByFeature: FeatureProps[], onSingleClick: OnClick
   };
 };
 
+const useInitialHide = () => {
+  const context = React.useContext(LayoutContext);
+
+  const onlyOnce = React.useRef(false);
+
+  React.useLayoutEffect(() => {
+    if (!context) {
+      throw new Error('No Layout Context.');
+    }
+
+    const { tableElementRef } = context;
+
+    if (onlyOnce.current) return;
+    onlyOnce.current = true;
+
+    const dataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
+
+    applyProgrammaticHide(tableElementRef, dataColumns);
+  }, [context]);
+};
+
 export const Row: React.FC<RowProps> = (props: RowProps) => {
   const { item, className, disabled, onClick, onDoubleClick, children, ...rest } = props;
 
@@ -83,6 +110,9 @@ export const Row: React.FC<RowProps> = (props: RowProps) => {
   const rowPropsByFeature = getRowProps(features, props);
 
   const theme = React.useContext(ThemeContext);
+
+  // needed for virtualized rows where cells might not be programmatically hidden on render yet
+  useInitialHide();
 
   const { themeByFeature, classNamesByFeature, clickable, onClickByFeature } = evaluateProps(
     rowPropsByFeature,
