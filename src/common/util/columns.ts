@@ -35,22 +35,6 @@ export type DataColumn = {
   isHide?: boolean;
 };
 
-export const applyProgrammaticHide = (
-  tableElementRef: TableElementRef,
-  dataColumns: DataColumn[],
-) => {
-  const applyHide = (cell: HTMLElement, i: number) => {
-    if (dataColumns[i].isHide) {
-      cell.classList.add('hide');
-    } else {
-      cell.classList.remove('hide');
-    }
-  };
-
-  applyToHeaderColumns(tableElementRef, applyHide);
-  applyToColumns(tableElementRef, applyHide);
-};
-
 export const toDataColumn = (column: HTMLElement, index: number) => ({
   index,
   minWidth: +column.getAttribute('data-resize-min-width')!,

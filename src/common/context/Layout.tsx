@@ -41,13 +41,13 @@ const LayoutProvider = ({
 };
 
 const setResizedLayout = (resizedLayout: string, tableElementRef: TableElementRef) => {
-  console.log({ resizedLayout });
-
   const previousResizedLayout = tableElementRef.current!.style.getPropertyValue(
     '--data-table-library_grid-template-columns',
   );
 
-  if (tableElementRef.current && resizedLayout && previousResizedLayout !== resizedLayout) {
+  const didChange = previousResizedLayout !== resizedLayout;
+
+  if (tableElementRef.current && resizedLayout && didChange) {
     tableElementRef.current.style.setProperty(
       '--data-table-library_grid-template-columns',
       resizedLayout,

@@ -31,6 +31,7 @@ export const Cell: React.FC<CellProps> = ({
       `}
       className={cs('td', className, {
         stiff,
+        hide,
         'pin-left': pinLeft,
         'pin-right': pinRight,
       })}

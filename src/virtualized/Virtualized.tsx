@@ -25,7 +25,7 @@ const Virtualized: React.FC<VirtualizedProps> = ({
           itemCount={tableList.length}
           itemSize={(index) => getRowHeight(rowHeight, tableList[index], index)}
           innerElementType={React.forwardRef(({ children, ...rest }, ref) => (
-            <div ref={ref} {...rest} data-table-library_virtualized="">
+            <div ref={ref} {...rest}>
               <div
                 style={{
                   ...SHARED_VIRTUALIZE_STYLE,

@@ -16,11 +16,10 @@ import { useResize } from '@table-library/react-table-library/resize/useResize';
 import {
   DataColumn,
   toDataColumn,
-  applyProgrammaticHide,
   getHeaderColumns,
 } from '@table-library/react-table-library/common/util/columns';
 
-import { HeaderCellProps } from '@table-library/react-table-library/types/table';
+import { Data, HeaderCellProps } from '@table-library/react-table-library/types/table';
 import { Nullish } from '@table-library/react-table-library/types/common';
 
 const useUpdateLayout = (index: number, hide: boolean | Nullish) => {
@@ -33,65 +32,28 @@ const useUpdateLayout = (index: number, hide: boolean | Nullish) => {
   const { layout, tableElementRef, tableMemoryRef } = context;
 
   React.useLayoutEffect(() => {
-    const isVirtualized = !!tableElementRef.current!.querySelector(
-      '[data-table-library_virtualized=""]',
-    );
-
-    const dataColumnsFromBeforeReRender = tableMemoryRef.current!.dataColumns;
+    const preservedDataColumns = tableMemoryRef.current!.dataColumns;
     const dataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
 
-    if (!dataColumnsFromBeforeReRender?.length) return;
-
-    const getWidth = (dataColumn: DataColumn) => {
-      if (isVirtualized) {
-        return dataColumnsFromBeforeReRender.find(
-          (dataColumnFrom) => dataColumnFrom.index === dataColumn.index,
-        )?.width;
-      } else {
-        return dataColumn.width;
-      }
-    };
+    if (!preservedDataColumns?.length) return;
 
     const visibleDataColumns = dataColumns.filter((dataColumn) => !dataColumn.isHide);
 
-    const getPixel = (dataColumn: DataColumn) => {
-      if (dataColumn.index === index) {
-        const maybeSpace = tableMemoryRef.current!.hiddenSpacesInMemory[dataColumn.index];
-        return maybeSpace || dataColumn.minWidth * 2; // TODO: could be a configuration like hide={boolean | enabled, minWidth}
-      } else {
-        // return dataColumn.width;
-        return getWidth(dataColumn);
-      }
-    };
+    const getPartialResizedLayout = (dataColumn: DataColumn) => {
+      if (dataColumn.isStiff || layout?.horizontalScroll) {
+        const findPreservedDataColumn = (value: DataColumn) => value.index === dataColumn.index;
+        const preservedDataColumn = preservedDataColumns.find(findPreservedDataColumn)!;
 
-    console.log(index, tableMemoryRef.current!.hiddenSpacesInMemory);
-
-    const getPercentage = (dataColumn: DataColumn) => {
-      if (dataColumn.isStiff) {
-        // return `${dataColumn.width}px`;
-        const maybeSpace = tableMemoryRef.current!.hiddenSpacesInMemory[dataColumn.index];
-        return maybeSpace ? `${maybeSpace}px` : `${getWidth(dataColumn)}px`;
+        return `${preservedDataColumn.width || preservedDataColumn.minWidth * 2}px`;
       } else {
         return 'minmax(0px, 1fr)';
       }
     };
 
-    const resizedLayout = visibleDataColumns
-      .map((dataColumn: DataColumn) =>
-        layout?.horizontalScroll ? `${getPixel(dataColumn)}px` : getPercentage(dataColumn),
-      )
-      .join(' ');
+    const resizedLayout = visibleDataColumns.map(getPartialResizedLayout).join(' ');
 
-    console.log('HeaderCell');
     setResizedLayout(resizedLayout, tableElementRef);
     propagateResizedLayout(resizedLayout, layout);
-
-    applyProgrammaticHide(tableElementRef, dataColumns);
-
-    // store
-    // check if 0, because it runs for all HeaderCell
-    const width = getWidth(dataColumns[index]);
-    if (hide && width) tableMemoryRef.current!.hiddenSpacesInMemory[index] = width;
   }, [index, hide, layout, tableElementRef, tableMemoryRef]);
 };
 
@@ -127,6 +89,7 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
       `}
       className={cs('th', className, {
         stiff,
+        hide,
         resize,
         'pin-left': pinLeft,
         'pin-right': pinRight,

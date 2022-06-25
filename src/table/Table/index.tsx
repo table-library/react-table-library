@@ -44,6 +44,7 @@ const useTableMemoryRef = (layout: Layout | Nullish): TableMemoryRef => {
     tableMemoryRef.current = {
       resizedLayout: '',
       hiddenSpacesInMemory: [],
+      dataColumns: [],
     };
   }
 

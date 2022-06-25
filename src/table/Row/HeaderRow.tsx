@@ -9,7 +9,6 @@ import { ThemeContext } from '@table-library/react-table-library/common/context/
 import { LayoutContext, setResizedLayout } from '@table-library/react-table-library/common/context';
 import {
   toDataColumn,
-  applyProgrammaticHide,
   getHeaderColumns,
 } from '@table-library/react-table-library/common/util/columns';
 
@@ -35,14 +34,16 @@ const useInitialLayout = () => {
     const { layout, tableElementRef, tableMemoryRef } = context;
 
     const dataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
-    // we need these for HeaderCell, which re-render with every state change in a virtualized list, to remember the width
-    tableMemoryRef.current!.dataColumns = dataColumns;
+
+    // we need these for HeaderCell, which may re-render with every state change (e.g. virtualized), to remember the initial width
+    if (!tableMemoryRef.current!.dataColumns.length) {
+      tableMemoryRef.current!.dataColumns = dataColumns;
+    }
 
     if (onlyOnce.current) return;
     onlyOnce.current = true;
 
     if (layout?.resizedLayout) {
-      console.log('HeaderRow: CONTROLLED');
       const controlledResizedLayout = layout?.resizedLayout;
       setResizedLayout(controlledResizedLayout, tableElementRef);
     }
@@ -51,35 +52,11 @@ const useInitialLayout = () => {
     else if (!layout?.custom) {
       const visibleDataColumns = dataColumns.filter((dataColumn) => !dataColumn.isHide);
 
-      const getPercentage = () => {
-        return 'minmax(0px, 1fr)';
-      };
+      const getPartialLayout = () => 'minmax(0px, 1fr)';
 
-      console.log('HeaderRow: EVEN');
-      const resizedLayout = visibleDataColumns.map(getPercentage).join(' ');
+      const resizedLayout = visibleDataColumns.map(getPartialLayout).join(' ');
       setResizedLayout(resizedLayout, tableElementRef);
     }
-  }, [context]);
-};
-
-const useInitialHide = () => {
-  const context = React.useContext(LayoutContext);
-
-  const onlyOnce = React.useRef(false);
-
-  React.useLayoutEffect(() => {
-    if (!context) {
-      throw new Error('No Layout Context.');
-    }
-
-    const { tableElementRef } = context;
-
-    if (onlyOnce.current) return;
-    onlyOnce.current = true;
-
-    const dataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
-
-    applyProgrammaticHide(tableElementRef, dataColumns);
   }, [context]);
 };
 
@@ -95,7 +72,6 @@ export const HeaderRow: React.FC<HeaderRowProps> = ({
   const ref = React.useRef<HTMLTableRowElement>(null);
 
   useInitialLayout();
-  useInitialHide();
 
   return (
     <HeaderRowContainer

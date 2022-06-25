@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Nullish } from '@table-library/react-table-library/types/common';
-import { TableElementRef } from '@table-library/react-table-library/types/layout';
+import { Layout, TableElementRef } from '@table-library/react-table-library/types/layout';
 
 import {
   LayoutContext,
@@ -16,7 +16,12 @@ import {
   applyToColumns,
 } from '@table-library/react-table-library/common/util/columns';
 
-const applySize = (index: number, tableElementRef: TableElementRef, resizeWidth: number) => {
+const applySize = (
+  index: number,
+  layout: Layout | Nullish,
+  tableElementRef: TableElementRef,
+  resizeWidth: number,
+) => {
   let dataColumns = getHeaderColumns(tableElementRef)
     .map(toDataColumn)
     .filter((column) => !column.isHide);
@@ -39,7 +44,7 @@ const applySize = (index: number, tableElementRef: TableElementRef, resizeWidth:
   );
 
   const tableWidth = dataColumns.reduce((acc, dataColumn) => acc + dataColumn.width, 0);
-  const isOverflow = !!((tableElementRef.current?.getBoundingClientRect().width || 0) < tableWidth);
+  // const isOverflow = !!((tableElementRef.current?.getBoundingClientRect().width || 0) < tableWidth);
 
   const { minWidth } = dataColumns[actualIndex];
   const proposedWidth = resizeWidth > minWidth || resizeWidth === 0 ? resizeWidth : minWidth;
@@ -74,7 +79,9 @@ const applySize = (index: number, tableElementRef: TableElementRef, resizeWidth:
       const pixel = newColumnWidthsAsPx[i];
       const percentage = (pixel / tableWidth) * 100;
 
-      return column.isStiff || isOverflow ? `${pixel}px` : `minmax(${percentage}%, 1fr)`;
+      return column.isStiff || layout?.horizontalScroll
+        ? `${pixel}px`
+        : `minmax(${percentage}%, 1fr)`;
     })
     .join(' ');
 
@@ -143,12 +150,12 @@ export const useResize = (index: number, hide: boolean | Nullish) => {
         event.preventDefault();
 
         const resizeWidth = startOffset.current + event.pageX;
-        const resizedLayout = applySize(index, tableElementRef, resizeWidth);
+        const resizedLayout = applySize(index, layout, tableElementRef, resizeWidth);
 
         setResizedLayout(resizedLayout, tableElementRef);
       }
     },
-    [index, tableElementRef],
+    [index, layout, tableElementRef],
   );
 
   const onMouseUp = React.useCallback(() => {
