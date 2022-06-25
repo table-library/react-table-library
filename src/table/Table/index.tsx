@@ -42,8 +42,7 @@ const useTableMemoryRef = (layout: Layout | Nullish): TableMemoryRef => {
 
   if (!tableMemoryRef.current) {
     tableMemoryRef.current = {
-      resizedLayout: '',
-      hiddenSpacesInMemory: [],
+      onlyOnce: false,
       dataColumns: [],
     };
   }

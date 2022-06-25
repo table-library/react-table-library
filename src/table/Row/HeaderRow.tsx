@@ -24,8 +24,6 @@ const isReactFragment = (variableToInspect: any) => {
 const useInitialLayout = () => {
   const context = React.useContext(LayoutContext);
 
-  const onlyOnce = React.useRef(false);
-
   React.useLayoutEffect(() => {
     if (!context) {
       throw new Error('No Layout Context.');
@@ -35,13 +33,8 @@ const useInitialLayout = () => {
 
     const dataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
 
-    // we need these for HeaderCell, which may re-render with every state change (e.g. virtualized), to remember the initial width
-    if (!tableMemoryRef.current!.dataColumns.length) {
-      tableMemoryRef.current!.dataColumns = dataColumns;
-    }
-
-    if (onlyOnce.current) return;
-    onlyOnce.current = true;
+    if (tableMemoryRef.current?.onlyOnce) return;
+    tableMemoryRef.current!.onlyOnce = true;
 
     if (layout?.resizedLayout) {
       const controlledResizedLayout = layout?.resizedLayout;
@@ -56,6 +49,12 @@ const useInitialLayout = () => {
 
       const resizedLayout = visibleDataColumns.map(getPartialLayout).join(' ');
       setResizedLayout(resizedLayout, tableElementRef);
+    }
+
+    // we need these for HeaderCell, which may re-render with every state change (e.g. virtualized), to remember the initial width
+    if (!tableMemoryRef.current!.dataColumns.length) {
+      const preservedDataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
+      tableMemoryRef.current!.dataColumns = preservedDataColumns;
     }
   }, [context]);
 };

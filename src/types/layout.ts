@@ -18,9 +18,8 @@ export type Layout = {
 // internal
 
 export type TableMemory = {
-  resizedLayout: string;
+  onlyOnce: boolean;
   dataColumns: DataColumn[];
-  hiddenSpacesInMemory: (number | Nullish)[];
 };
 
 export type TableMemoryRef = React.MutableRefObject<TableMemory | null>;
