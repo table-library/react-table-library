@@ -6,7 +6,11 @@ import { css, jsx } from '@emotion/react';
 
 import { HeaderCellContainer } from '@table-library/react-table-library/common/components/Cell';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
-import { LayoutContext } from '@table-library/react-table-library/common/context';
+import {
+  LayoutContext,
+  propagateResizedLayout,
+  setResizedLayout,
+} from '@table-library/react-table-library/common/context';
 import { resizerStyle } from '@table-library/react-table-library/resize/styles';
 import { useResize } from '@table-library/react-table-library/resize/useResize';
 import {
@@ -28,60 +32,66 @@ const useUpdateLayout = (index: number, hide: boolean | Nullish) => {
 
   const { layout, tableElementRef, tableMemoryRef } = context;
 
-  const previousHide = React.useRef(hide);
-
   React.useLayoutEffect(() => {
-    if (previousHide.current === hide) return;
-    previousHide.current = hide;
+    const isVirtualized = !!tableElementRef.current!.querySelector(
+      '[data-table-library_virtualized=""]',
+    );
 
+    const dataColumnsFromBeforeReRender = tableMemoryRef.current!.dataColumns;
     const dataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
-    const visibleDataColumns = dataColumns.filter((dataColumn) => !dataColumn.isHide);
 
-    // read
-    const maybeSpace = tableMemoryRef.current!.hiddenSpacesInMemory[index];
+    if (!dataColumnsFromBeforeReRender?.length) return;
 
-    const getPixel = (dataColumn: DataColumn) => {
-      if (dataColumn.index === index) {
-        return maybeSpace || dataColumn.minWidth * 2; // TODO: could be a configuration like hide={boolean | enabled, minWidth}
+    const getWidth = (dataColumn: DataColumn) => {
+      if (isVirtualized) {
+        return dataColumnsFromBeforeReRender.find(
+          (dataColumnFrom) => dataColumnFrom.index === dataColumn.index,
+        )?.width;
       } else {
         return dataColumn.width;
       }
     };
 
+    const visibleDataColumns = dataColumns.filter((dataColumn) => !dataColumn.isHide);
+
+    const getPixel = (dataColumn: DataColumn) => {
+      if (dataColumn.index === index) {
+        const maybeSpace = tableMemoryRef.current!.hiddenSpacesInMemory[dataColumn.index];
+        return maybeSpace || dataColumn.minWidth * 2; // TODO: could be a configuration like hide={boolean | enabled, minWidth}
+      } else {
+        // return dataColumn.width;
+        return getWidth(dataColumn);
+      }
+    };
+
+    console.log(index, tableMemoryRef.current!.hiddenSpacesInMemory);
+
     const getPercentage = (dataColumn: DataColumn) => {
       if (dataColumn.isStiff) {
-        return `${dataColumn.width}px`;
+        // return `${dataColumn.width}px`;
+        const maybeSpace = tableMemoryRef.current!.hiddenSpacesInMemory[dataColumn.index];
+        return maybeSpace ? `${maybeSpace}px` : `${getWidth(dataColumn)}px`;
       } else {
         return 'minmax(0px, 1fr)';
-        // return 100 / visibleDataColumns.length;
       }
     };
 
     const resizedLayout = visibleDataColumns
       .map((dataColumn: DataColumn) =>
-        layout?.horizontalScroll ? `${getPixel(dataColumn)}px` : `${getPercentage(dataColumn)}`,
+        layout?.horizontalScroll ? `${getPixel(dataColumn)}px` : getPercentage(dataColumn),
       )
       .join(' ');
 
-    const didChange = resizedLayout !== tableElementRef.current!.style.gridTemplateColumns;
-
-    tableElementRef.current!.style.setProperty(
-      '--data-table-library_grid-template-columns',
-      resizedLayout,
-    );
+    console.log('HeaderCell');
+    setResizedLayout(resizedLayout, tableElementRef);
+    propagateResizedLayout(resizedLayout, layout);
 
     applyProgrammaticHide(tableElementRef, dataColumns);
 
     // store
-    if (hide) {
-      tableMemoryRef.current!.hiddenSpacesInMemory[index] = dataColumns[index].width;
-    } else {
-      delete tableMemoryRef.current!.hiddenSpacesInMemory[index];
-    }
-
-    if (layout?.onLayoutChange && didChange && resizedLayout !== '') {
-      layout?.onLayoutChange(resizedLayout);
-    }
+    // check if 0, because it runs for all HeaderCell
+    const width = getWidth(dataColumns[index]);
+    if (hide && width) tableMemoryRef.current!.hiddenSpacesInMemory[index] = width;
   }, [index, hide, layout, tableElementRef, tableMemoryRef]);
 };
 

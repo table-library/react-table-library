@@ -40,4 +40,25 @@ const LayoutProvider = ({
   return <LayoutContext.Provider value={value}>{children}</LayoutContext.Provider>;
 };
 
-export { LayoutContext, LayoutProvider };
+const setResizedLayout = (resizedLayout: string, tableElementRef: TableElementRef) => {
+  console.log({ resizedLayout });
+
+  const previousResizedLayout = tableElementRef.current!.style.getPropertyValue(
+    '--data-table-library_grid-template-columns',
+  );
+
+  if (tableElementRef.current && resizedLayout && previousResizedLayout !== resizedLayout) {
+    tableElementRef.current.style.setProperty(
+      '--data-table-library_grid-template-columns',
+      resizedLayout,
+    );
+  }
+};
+
+const propagateResizedLayout = (resizedLayout: string, layout: Layout | Nullish) => {
+  if (layout?.onLayoutChange && resizedLayout) {
+    layout.onLayoutChange(resizedLayout);
+  }
+};
+
+export { LayoutContext, LayoutProvider, setResizedLayout, propagateResizedLayout };

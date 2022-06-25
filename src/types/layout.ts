@@ -1,5 +1,9 @@
 import * as React from 'react';
 
+import { DataColumn } from '@table-library/react-table-library/common/util/columns';
+
+import { Nullish } from '@table-library/react-table-library/types/common';
+
 // external
 
 export type Layout = {
@@ -15,7 +19,8 @@ export type Layout = {
 
 export type TableMemory = {
   resizedLayout: string;
-  hiddenSpacesInMemory: (number | null)[];
+  dataColumns: DataColumn[];
+  hiddenSpacesInMemory: (number | Nullish)[];
 };
 
 export type TableMemoryRef = React.MutableRefObject<TableMemory | null>;

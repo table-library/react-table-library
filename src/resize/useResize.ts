@@ -3,7 +3,11 @@ import * as React from 'react';
 import { Nullish } from '@table-library/react-table-library/types/common';
 import { TableElementRef } from '@table-library/react-table-library/types/layout';
 
-import { LayoutContext } from '@table-library/react-table-library/common/context/Layout';
+import {
+  LayoutContext,
+  propagateResizedLayout,
+  setResizedLayout,
+} from '@table-library/react-table-library/common/context/Layout';
 import {
   DataColumn,
   toDataColumn,
@@ -74,11 +78,6 @@ const applySize = (index: number, tableElementRef: TableElementRef, resizeWidth:
     })
     .join(' ');
 
-  tableElementRef.current!.style.setProperty(
-    '--data-table-library_grid-template-columns',
-    resizedLayout,
-  );
-
   // pin feature
 
   const applyFixedColumn = (cell: HTMLElement, i: number) => {
@@ -103,6 +102,8 @@ const applySize = (index: number, tableElementRef: TableElementRef, resizeWidth:
 
   applyToHeaderColumns(tableElementRef, applyFixedColumn);
   applyToColumns(tableElementRef, applyFixedColumn);
+
+  return resizedLayout;
 };
 
 export const useResize = (index: number, hide: boolean | Nullish) => {
@@ -142,8 +143,9 @@ export const useResize = (index: number, hide: boolean | Nullish) => {
         event.preventDefault();
 
         const resizeWidth = startOffset.current + event.pageX;
+        const resizedLayout = applySize(index, tableElementRef, resizeWidth);
 
-        applySize(index, tableElementRef, resizeWidth);
+        setResizedLayout(resizedLayout, tableElementRef);
       }
     },
     [index, tableElementRef],
@@ -158,8 +160,8 @@ export const useResize = (index: number, hide: boolean | Nullish) => {
 
     const didChange = previousGrid.current !== resizedLayout;
 
-    if (layout?.onLayoutChange && didChange && resizedLayout !== '') {
-      layout?.onLayoutChange(resizedLayout);
+    if (didChange) {
+      propagateResizedLayout(resizedLayout, layout);
     }
   }, [layout, tableElementRef]);
 

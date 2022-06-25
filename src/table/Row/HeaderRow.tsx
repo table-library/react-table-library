@@ -6,7 +6,7 @@ import { css, jsx } from '@emotion/react';
 
 import { HeaderRowContainer } from '@table-library/react-table-library/common/components/Row';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
-import { LayoutContext } from '@table-library/react-table-library/common/context';
+import { LayoutContext, setResizedLayout } from '@table-library/react-table-library/common/context';
 import {
   toDataColumn,
   applyProgrammaticHide,
@@ -32,36 +32,32 @@ const useInitialLayout = () => {
       throw new Error('No Layout Context.');
     }
 
-    const { layout, tableElementRef } = context;
+    const { layout, tableElementRef, tableMemoryRef } = context;
+
+    const dataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
+    // we need these for HeaderCell, which re-render with every state change in a virtualized list, to remember the width
+    tableMemoryRef.current!.dataColumns = dataColumns;
 
     if (onlyOnce.current) return;
     onlyOnce.current = true;
 
-    let resizedLayout = '';
-
     if (layout?.resizedLayout) {
-      resizedLayout = layout?.resizedLayout;
+      console.log('HeaderRow: CONTROLLED');
+      const controlledResizedLayout = layout?.resizedLayout;
+      setResizedLayout(controlledResizedLayout, tableElementRef);
     }
 
     // distribute layout once evenly if no custom layout is defined
     else if (!layout?.custom) {
-      const dataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
-
       const visibleDataColumns = dataColumns.filter((dataColumn) => !dataColumn.isHide);
 
       const getPercentage = () => {
         return 'minmax(0px, 1fr)';
-        // return `${100 / visibleDataColumns.length}%`;
       };
 
-      resizedLayout = visibleDataColumns.map(getPercentage).join(' ');
-    }
-
-    if (resizedLayout) {
-      tableElementRef.current!.style.setProperty(
-        '--data-table-library_grid-template-columns',
-        resizedLayout,
-      );
+      console.log('HeaderRow: EVEN');
+      const resizedLayout = visibleDataColumns.map(getPercentage).join(' ');
+      setResizedLayout(resizedLayout, tableElementRef);
     }
   }, [context]);
 };
