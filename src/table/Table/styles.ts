@@ -21,6 +21,10 @@ export default (configuration: Configuration) => `
   --data-table-library_grid-template-columns: '';
   grid-template-columns: var(--data-table-library_grid-template-columns);
 
+  button * {
+    pointer-events: none;
+  }
+
   ${
     configuration.isShiftDown
       ? `
