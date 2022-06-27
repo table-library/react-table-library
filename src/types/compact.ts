@@ -34,8 +34,8 @@ export type TableOptions = {
 };
 
 export type RowOptions = {
-  renderBeforeRow?: (node: TableNode) => React.ReactNode;
-  renderAfterRow?: (node: TableNode) => React.ReactNode;
+  renderBeforeRow?: (node: TableNode, index: number) => React.ReactNode;
+  renderAfterRow?: (node: TableNode, index: number) => React.ReactNode;
 };
 
 export type RowPropsAsObject = Omit<RowProps, 'item' | 'children'>;

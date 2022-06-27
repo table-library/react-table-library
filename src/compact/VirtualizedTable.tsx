@@ -62,6 +62,7 @@ const VirtualizedRow: React.FC<VirtualizedRowProps> = ({
       }}
     >
       <CompactRow
+        index={index}
         item={item}
         columns={columns}
         rowProps={rowProps}
