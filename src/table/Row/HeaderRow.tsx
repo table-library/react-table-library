@@ -6,7 +6,11 @@ import { css, jsx } from '@emotion/react';
 
 import { HeaderRowContainer } from '@table-library/react-table-library/common/components/Row';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
-import { LayoutContext, setResizedLayout } from '@table-library/react-table-library/common/context';
+import {
+  LayoutContext,
+  preserveResizedLayout,
+  setResizedLayout,
+} from '@table-library/react-table-library/common/context';
 import {
   toDataColumn,
   getHeaderColumns,
@@ -38,7 +42,7 @@ const useInitialLayout = () => {
 
     if (layout?.resizedLayout) {
       const controlledResizedLayout = layout?.resizedLayout;
-      setResizedLayout(controlledResizedLayout, tableElementRef);
+      setResizedLayout(controlledResizedLayout, tableElementRef, tableMemoryRef);
     }
 
     // distribute layout once evenly if no custom layout is defined
@@ -48,13 +52,9 @@ const useInitialLayout = () => {
       const getPartialLayout = () => 'minmax(0px, 1fr)';
 
       const resizedLayout = visibleDataColumns.map(getPartialLayout).join(' ');
-      setResizedLayout(resizedLayout, tableElementRef);
-    }
-
-    // we need these for HeaderCell, which may re-render with every state change (e.g. virtualized), to remember the initial width
-    if (!tableMemoryRef.current!.dataColumns.length) {
-      const preservedDataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
-      tableMemoryRef.current!.dataColumns = preservedDataColumns;
+      setResizedLayout(resizedLayout, tableElementRef, tableMemoryRef);
+    } else {
+      preserveResizedLayout(tableElementRef, tableMemoryRef);
     }
   }, [context]);
 };

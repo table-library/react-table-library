@@ -44,10 +44,9 @@ const applySize = (
   );
 
   const tableWidth = dataColumns.reduce((acc, dataColumn) => acc + dataColumn.width, 0);
-  // const isOverflow = !!((tableElementRef.current?.getBoundingClientRect().width || 0) < tableWidth);
 
   const { minWidth } = dataColumns[actualIndex];
-  const proposedWidth = resizeWidth > minWidth || resizeWidth === 0 ? resizeWidth : minWidth;
+  const proposedWidth = resizeWidth > minWidth && resizeWidth !== 0 ? resizeWidth : minWidth;
   const diffWidth = proposedWidth - dataColumns[actualIndex].width;
 
   // calculate new widths of cell under consideration of its neighbors
@@ -74,15 +73,29 @@ const applySize = (
   const diff = tableWidth - newColumnWidthsAsPx.reduce((acc, value) => acc + value, 0);
   newColumnWidthsAsPx[actualIndex] = newColumnWidthsAsPx[actualIndex] + diff;
 
+  let isStretchedInluded = false;
+
   const resizedLayout = dataColumns
+    // mapRight
+    .slice(0)
+    .reverse()
     .map((column, i) => {
-      const pixel = newColumnWidthsAsPx[i];
+      const pixel = newColumnWidthsAsPx.slice(0).reverse()[i]; // mapRight
       const percentage = (pixel / tableWidth) * 100;
 
-      return column.isStiff || layout?.horizontalScroll
-        ? `${pixel}px`
-        : `minmax(${percentage}%, 1fr)`;
+      if (column.isStiff || layout?.horizontalScroll) {
+        return `${pixel}px`;
+      }
+
+      if (!isStretchedInluded) {
+        isStretchedInluded = true;
+        return `minmax(0, 1fr)`;
+      }
+
+      return `minmax(0, ${percentage}%)`;
     })
+    .slice(0) // reverse mapRight
+    .reverse()
     .join(' ');
 
   // pin feature
@@ -120,7 +133,7 @@ export const useResize = (index: number, hide: boolean | Nullish) => {
     throw new Error('No Layout Context.');
   }
 
-  const { tableElementRef, layout } = context;
+  const { tableElementRef, tableMemoryRef, layout } = context;
 
   const cellRef = React.useRef<HTMLTableCellElement>(null);
   const resizeRef = React.useRef<HTMLSpanElement>(null);
@@ -152,10 +165,10 @@ export const useResize = (index: number, hide: boolean | Nullish) => {
         const resizeWidth = startOffset.current + event.pageX;
         const resizedLayout = applySize(index, layout, tableElementRef, resizeWidth);
 
-        setResizedLayout(resizedLayout, tableElementRef);
+        setResizedLayout(resizedLayout, tableElementRef, tableMemoryRef);
       }
     },
-    [index, layout, tableElementRef],
+    [index, layout, tableElementRef, tableMemoryRef],
   );
 
   const onMouseUp = React.useCallback(() => {
@@ -169,8 +182,11 @@ export const useResize = (index: number, hide: boolean | Nullish) => {
 
     if (didChange) {
       propagateResizedLayout(resizedLayout, layout);
+
+      const newPreservedDataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
+      tableMemoryRef.current!.dataColumns = newPreservedDataColumns;
     }
-  }, [layout, tableElementRef]);
+  }, [layout, tableElementRef, tableMemoryRef]);
 
   React.useEffect(() => {
     const { current } = resizeRef;

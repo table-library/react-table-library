@@ -1,5 +1,10 @@
 import * as React from 'react';
 
+import {
+  toDataColumn,
+  getHeaderColumns,
+} from '@table-library/react-table-library/common/util/columns';
+
 import { Nullish } from '@table-library/react-table-library/types/common';
 import {
   Layout,
@@ -40,7 +45,20 @@ const LayoutProvider = ({
   return <LayoutContext.Provider value={value}>{children}</LayoutContext.Provider>;
 };
 
-const setResizedLayout = (resizedLayout: string, tableElementRef: TableElementRef) => {
+const preserveResizedLayout = (
+  tableElementRef: TableElementRef,
+  tableMemoryRef: TableMemoryRef,
+) => {
+  // we need these for HeaderCell, which may re-render with every state change (e.g. virtualized), to remember the initial width
+  const preservedDataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
+  tableMemoryRef.current!.dataColumns = preservedDataColumns;
+};
+
+const setResizedLayout = (
+  resizedLayout: string,
+  tableElementRef: TableElementRef,
+  tableMemoryRef: TableMemoryRef,
+) => {
   const previousResizedLayout = tableElementRef.current!.style.getPropertyValue(
     '--data-table-library_grid-template-columns',
   );
@@ -52,6 +70,8 @@ const setResizedLayout = (resizedLayout: string, tableElementRef: TableElementRe
       '--data-table-library_grid-template-columns',
       resizedLayout,
     );
+
+    preserveResizedLayout(tableElementRef, tableMemoryRef);
   }
 };
 
@@ -61,4 +81,10 @@ const propagateResizedLayout = (resizedLayout: string, layout: Layout | Nullish)
   }
 };
 
-export { LayoutContext, LayoutProvider, setResizedLayout, propagateResizedLayout };
+export {
+  LayoutContext,
+  LayoutProvider,
+  setResizedLayout,
+  preserveResizedLayout,
+  propagateResizedLayout,
+};

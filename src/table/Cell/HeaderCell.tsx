@@ -19,8 +19,15 @@ import {
   getHeaderColumns,
 } from '@table-library/react-table-library/common/util/columns';
 
-import { Data, HeaderCellProps } from '@table-library/react-table-library/types/table';
+import { HeaderCellProps } from '@table-library/react-table-library/types/table';
 import { Nullish } from '@table-library/react-table-library/types/common';
+
+const getPreservedColumn = (index: number, preservedDataColumns: DataColumn[]) => {
+  const findPreservedDataColumn = (dataColumn: DataColumn) => dataColumn.index === index;
+  const preservedDataColumn = preservedDataColumns.find(findPreservedDataColumn)!;
+
+  return preservedDataColumn;
+};
 
 const useUpdateLayout = (index: number, hide: boolean | Nullish) => {
   const context = React.useContext(LayoutContext);
@@ -34,15 +41,16 @@ const useUpdateLayout = (index: number, hide: boolean | Nullish) => {
   React.useLayoutEffect(() => {
     const preservedDataColumns = tableMemoryRef.current!.dataColumns;
     const dataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
+    const thisPreservedDataColumn = getPreservedColumn(index, preservedDataColumns);
 
-    if (!preservedDataColumns?.length) return;
+    const hideStatusDidNotChange = thisPreservedDataColumn?.isHide === !!hide;
+    if (!preservedDataColumns?.length || hideStatusDidNotChange) return;
 
     const visibleDataColumns = dataColumns.filter((dataColumn) => !dataColumn.isHide);
 
     const getPartialResizedLayout = (dataColumn: DataColumn) => {
       if (dataColumn.isStiff || layout?.horizontalScroll) {
-        const findPreservedDataColumn = (value: DataColumn) => value.index === dataColumn.index;
-        const preservedDataColumn = preservedDataColumns.find(findPreservedDataColumn)!;
+        const preservedDataColumn = getPreservedColumn(dataColumn.index, preservedDataColumns);
 
         return `${preservedDataColumn.width || preservedDataColumn.minWidth * 2}px`;
       } else {
@@ -52,8 +60,11 @@ const useUpdateLayout = (index: number, hide: boolean | Nullish) => {
 
     const resizedLayout = visibleDataColumns.map(getPartialResizedLayout).join(' ');
 
-    setResizedLayout(resizedLayout, tableElementRef);
+    setResizedLayout(resizedLayout, tableElementRef, tableMemoryRef);
     propagateResizedLayout(resizedLayout, layout);
+
+    const newPreservedDataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
+    tableMemoryRef.current!.dataColumns = newPreservedDataColumns;
   }, [index, hide, layout, tableElementRef, tableMemoryRef]);
 };
 
