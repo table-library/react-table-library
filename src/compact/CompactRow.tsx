@@ -33,7 +33,7 @@ export const CompactRow: React.FC<CompactRowProps> = ({
       {rowOptions?.renderBeforeRow && rowOptions.renderBeforeRow(item, index)}
 
       <Row item={item} {...rowProps}>
-        {columns.map((column: Column) => {
+        {columns.map((column: Column, jindex: number) => {
           const sharedProps = {
             pinLeft: column.pinLeft,
             pinRight: column.pinRight,
@@ -79,7 +79,7 @@ export const CompactRow: React.FC<CompactRowProps> = ({
           }
 
           return (
-            <React.Fragment key={index}>
+            <React.Fragment key={jindex}>
               {checkbox}
               {cell}
             </React.Fragment>
