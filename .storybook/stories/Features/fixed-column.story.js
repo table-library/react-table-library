@@ -30,44 +30,35 @@ storiesOf('Features/Fixed Column', module)
     const data = { nodes };
 
     const theme = useTheme({
+      Table: `
+        --data-table-library_grid-template-columns:  250px 150px 25% 25% 50%;
+      `,
       BaseCell: `
         &:nth-of-type(1) {
           left: 0px;
-
-          min-width: 250px;
-          width: 250px;
         }
 
         &:nth-of-type(2) {
           left: 250px;
-
-          min-width: 150px;
-          width: 150px;
-        }
-
-        &:nth-of-type(3) {
-          min-width: 50%;
-          width: 50%;
-        }
-
-        &:nth-of-type(4), &:nth-of-type(5) {
-          min-width: 25%;
-          width: 25%;
         }
       `,
     });
 
     return (
-      <Table data={data} theme={theme} layout={{ custom: true, horizontalScroll: true }}>
+      <Table data={data} theme={theme} layout={{ custom: true }}>
         {(tableList) => (
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell pinLeft>Task</HeaderCell>
-                <HeaderCell pinLeft>Deadline</HeaderCell>
-                <HeaderCell>Type</HeaderCell>
-                <HeaderCell>Complete</HeaderCell>
-                <HeaderCell>Tasks</HeaderCell>
+                <HeaderCell resize pinLeft>
+                  Task
+                </HeaderCell>
+                <HeaderCell resize pinLeft>
+                  Deadline
+                </HeaderCell>
+                <HeaderCell resize>Type</HeaderCell>
+                <HeaderCell resize>Complete</HeaderCell>
+                <HeaderCell resize>Tasks</HeaderCell>
               </HeaderRow>
             </Header>
 
@@ -97,40 +88,22 @@ storiesOf('Features/Fixed Column', module)
     const data = { nodes };
 
     const theme = useTheme({
+      Table: `
+        --data-table-library_grid-template-columns:  250px 25% 25% 50% 150px;
+      `,
       BaseCell: `
         &:nth-of-type(1) {
           left: 0px;
-
-          min-width: 250px;
-          width: 250px;
-        }
-
-        &:nth-of-type(2) {
-          min-width: 50%;
-          width: 50%;
-        }
-
-        &:nth-of-type(3) {
-          min-width: 250px;
-          width: 250px;
-        }
-
-        &:nth-of-type(4) {
-          min-width: 50%;
-          width: 50%;
         }
 
         &:nth-of-type(5) {
-          right: 0;
-
-          min-width: 250px;
-          width: 250px;
+          right: 0px;
         }
       `,
     });
 
     return (
-      <Table data={data} theme={theme} layout={{ custom: true, horizontalScroll: true }}>
+      <Table data={data} theme={theme} layout={{ custom: true }}>
         {(tableList) => (
           <>
             <Header>
@@ -170,31 +143,15 @@ storiesOf('Features/Fixed Column', module)
 
     const theme = useTheme({
       Table: `
-        height: 100%;
+        --data-table-library_grid-template-columns:  250px 150px 25% 25% 50%;
       `,
       BaseCell: `
         &:nth-of-type(1) {
           left: 0px;
-
-          min-width: 250px;
-          width: 250px;
         }
 
         &:nth-of-type(2) {
           left: 250px;
-
-          min-width: 150px;
-          width: 150px;
-        }
-
-        &:nth-of-type(3) {
-          min-width: 50%;
-          width: 50%;
-        }
-
-        &:nth-of-type(4), &:nth-of-type(5) {
-          min-width: 25%;
-          width: 25%;
         }
       `,
     });
@@ -205,7 +162,11 @@ storiesOf('Features/Fixed Column', module)
           height: '100px',
         }}
       >
-        <Table data={data} theme={theme} layout={{ custom: true, horizontalScroll: true }}>
+        <Table
+          data={data}
+          theme={theme}
+          layout={{ custom: true, horizontalScroll: true, fixedHeader: true }}
+        >
           {(tableList) => (
             <>
               <Header>
@@ -240,15 +201,4 @@ storiesOf('Features/Fixed Column', module)
         </Table>
       </div>
     );
-  })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <strong>Caveats: </strong>
-        <ul>
-          <li>% can be used, even a sum of % that's above 100%</li>
-          <li>When resize feature is active, a resize transforms all % to px columns</li>
-        </ul>
-      </li>
-    </ul>
-  ));
+  });

@@ -45,7 +45,7 @@ const Component = () => {
           height: '150px',
         }}
       >
-        <CompactTable columns={COLUMNS} data={data} theme={theme} layout={{ fullHeight: true }} />
+        <CompactTable columns={COLUMNS} data={data} theme={theme} layout={{ fixedHeader: true }} />
       </Box>
 
       <br />
@@ -102,7 +102,7 @@ const Component = () => {
           height: '150px',
         }}
       >
-        <CompactTable columns={COLUMNS} data={data} theme={theme} layout={{ fullHeight: true }} />
+        <CompactTable columns={COLUMNS} data={data} theme={theme} layout={{ fixedHeader: true }} />
       </Box>
 
       <br />

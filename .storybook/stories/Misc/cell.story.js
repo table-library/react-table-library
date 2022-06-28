@@ -36,17 +36,21 @@ storiesOf('Misc/Cell', module)
             <Body>
               {tableList.map((item) => (
                 <Row key={item.id} item={item}>
-                  <Cell onClick={(event) => console.log('Click Cell', event)}>{item.name}</Cell>
-                  <Cell>
+                  <Cell onClick={(event) => console.log('Click Cell 1', event)}>{item.name}</Cell>
+                  <Cell onClick={(event) => console.log('Click Cell 2', event)}>
                     {item.deadline.toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: '2-digit',
                       day: '2-digit',
                     })}
                   </Cell>
-                  <Cell>{item.type}</Cell>
-                  <Cell>{item.isComplete.toString()}</Cell>
-                  <Cell>{item.nodes?.length}</Cell>
+                  <Cell onClick={(event) => console.log('Click Cell 3', event)}>{item.type}</Cell>
+                  <Cell onClick={(event) => console.log('Click Cell 4', event)}>
+                    {item.isComplete.toString()}
+                  </Cell>
+                  <Cell onClick={(event) => console.log('Click Cell 5', event)}>
+                    {item.nodes?.length}
+                  </Cell>
                 </Row>
               ))}
             </Body>
@@ -60,7 +64,7 @@ storiesOf('Misc/Cell', module)
 
     const theme = useTheme({
       BaseCell: `
-        &:focus {
+        &:hover, &:focus {
           outline: dotted;
           outline-width: 1px;
           outline-offset: -1px;

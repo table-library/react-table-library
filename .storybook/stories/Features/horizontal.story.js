@@ -30,26 +30,8 @@ storiesOf('Features/Horizontal Scroll', module)
     const data = { nodes };
 
     const theme = useTheme({
-      BaseCell: `
-        &:nth-of-type(1) {
-          min-width: 50%;
-          width: 50%;
-        }
-
-        &:nth-of-type(2) {
-          min-width: 200px;
-          width: 200px;
-        }
-
-        &:nth-of-type(3), &:nth-of-type(4) {
-          min-width: 25%;
-          width: 25%;
-        }
-
-        &:nth-of-type(5) {
-          min-width: 50%;
-          width: 50%;
-        }
+      Table: `
+        --data-table-library_grid-template-columns:  25% 25% 25% 25% minmax(150px, 1fr);
       `,
     });
 
@@ -94,28 +76,7 @@ storiesOf('Features/Horizontal Scroll', module)
 
     const theme = useTheme({
       Table: `
-        height: 100%;
-      `,
-      BaseCell: `
-        &:nth-of-type(1) {
-          min-width: 50%;
-          width: 50%;
-        }
-
-        &:nth-of-type(2) {
-          min-width: 200px;
-          width: 200px;
-        }
-
-        &:nth-of-type(3), &:nth-of-type(4) {
-          min-width: 25%;
-          width: 25%;
-        }
-
-        &:nth-of-type(5) {
-          min-width: 50%;
-          width: 50%;
-        }
+        --data-table-library_grid-template-columns:  25% 25% 25% 25% minmax(150px, 1fr);
       `,
     });
 
@@ -125,7 +86,11 @@ storiesOf('Features/Horizontal Scroll', module)
           height: '100px',
         }}
       >
-        <Table data={data} theme={theme} layout={{ custom: true, horizontalScroll: true }}>
+        <Table
+          data={data}
+          theme={theme}
+          layout={{ custom: true, horizontalScroll: true, fixedHeader: true }}
+        >
           {(tableList) => (
             <>
               <Header>
@@ -160,15 +125,4 @@ storiesOf('Features/Horizontal Scroll', module)
         </Table>
       </div>
     );
-  })
-  .add('documentation', () => (
-    <ul>
-      <li>
-        <strong>Caveats: </strong>
-        <ul>
-          <li>% can be used, even a sum of % that's above 100%</li>
-          <li>When resize feature is active, a resize transforms all % to px columns though</li>
-        </ul>
-      </li>
-    </ul>
-  ));
+  });

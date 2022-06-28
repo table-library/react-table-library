@@ -54,60 +54,42 @@ const disablePin = `
 `;
 
 export const CUSTOM_SHARED_THEME = {
+  Table: `
+    --data-table-library_grid-template-columns:  80px 80px 240px repeat(6, minmax(180px, 1fr)) 80px;
+  `,
   BaseRow: `
-    height: 54px;
-
     font-size: 14px;
     color: rgba(22, 22, 22, 0.88);
 
     &:hover {
       color: rgba(22, 22, 22, 0.88);
     }
+
+    border-bottom: 1px solid #D4D4D4;
   `,
   HeaderRow: `
     font-size: 12px;
-
     border-top: none;
-    border-bottom: 1px solid #D4D4D4;
   `,
   Row: `
     font-size: 14px;
-
-    border-bottom: 1px solid #D4D4D4;
   `,
   BaseCell: `
-    padding: 16px 8px;
-
-    &:not(.stiff) > div {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+    height: 54px;
+    padding: 0 16px;
 
     ${disablePin}
 
-    min-width: 20%;
-    width: 20%;
-
     &:nth-of-type(1) {
       left: 0px;
-
-      min-width: 80px;
-      width: 80px;
     }
 
     &:nth-of-type(2) {
       left: 80px;
-
-      min-width: 80px;
-      width: 80px;
     }
 
     &:nth-of-type(3) {
       left: 160px;
-
-      min-width: 240px;
-      width: 240px;
     }
 
     background-color: rgb(245, 245, 245);
@@ -120,21 +102,16 @@ export const CUSTOM_SHARED_THEME = {
       box-shadow: 5px 0 5px -2px #dadada;
     }
 
-    &.small {
-      min-width: 200px;
-      width: 200px;
-    }
-
     &:last-of-type {
       right: 0;
 
-      min-width: 80px;
-      width: 80px;
-
       box-shadow: -5px 0 5px -2px #dadada;
 
-      display: flex;
-      justify-content: center;
+      & > div {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+      }
     }
 
     & .MuiLinearProgress-colorPrimary {
@@ -151,25 +128,21 @@ export const CUSTOM_PRIMARY_THEME = {};
 
 export const CUSTOM_SECONDARY_THEME = {
   Table: `
-    overflow: inherit;
+    display: inherit;
   `,
   BaseRow: `
     background-color: rgb(250, 250, 250);
   `,
 };
 
-const MarketsTable = ({ data, customColumnsActive }) => {
+const MarketsTable = ({ data, hiddenColumns }) => {
   // theming
 
   const materialTheme = getTheme(DEFAULT_OPTIONS);
   const theme = useTheme([materialTheme, CUSTOM_SHARED_THEME, CUSTOM_SECONDARY_THEME]);
 
   return (
-    <Table
-      data={data}
-      theme={theme}
-      layout={{ custom: true, horizontalScroll: true, inheritLayout: true }}
-    >
+    <Table data={data} theme={theme}>
       {(tableListSecondary) => (
         <>
           <Header>
@@ -183,8 +156,8 @@ const MarketsTable = ({ data, customColumnsActive }) => {
               <HeaderCell />
               <HeaderCell />
               <HeaderCell />
-              {customColumnsActive.map((column) => (
-                <HeaderCell key={column} className="small" />
+              {Object.keys(CUSTOM_COLUMNS).map((column) => (
+                <HeaderCell key={column} hide={hiddenColumns.includes(column)} />
               ))}
               <HeaderCell pinRight />
             </HeaderRow>
@@ -239,8 +212,8 @@ const MarketsTable = ({ data, customColumnsActive }) => {
                   <Cell />
                   <Cell />
                   <Cell />
-                  {customColumnsActive.map((column) => (
-                    <Cell key={column} className="small" />
+                  {Object.keys(CUSTOM_COLUMNS).map((column) => (
+                    <Cell key={column} hide={hiddenColumns.includes(column)} className="small" />
                   ))}
                   <Cell pinRight />
                 </Row>
@@ -458,18 +431,20 @@ const onError = (error) => {
   return [];
 };
 
-export const queryCurrencies = ({ page, size, category }) => () => {
-  const extra = category !== DEFAULT_CATEGORY ? `category=${category}&` : '';
+export const queryCurrencies =
+  ({ page, size, category }) =>
+  () => {
+    const extra = category !== DEFAULT_CATEGORY ? `category=${category}&` : '';
 
-  return axios
-    .get(
-      `https://api.react-tables.com/?proxy=${btoa(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&${extra}order=market_cap_desc&per_page=${size}&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d%2C14d%2C30d%2C200d%2C1y`,
-      )}`,
-    )
-    .then((result) => result.data)
-    .catch(onError);
-};
+    return axios
+      .get(
+        `https://api.react-tables.com/?proxy=${btoa(
+          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&${extra}order=market_cap_desc&per_page=${size}&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d%2C14d%2C30d%2C200d%2C1y`,
+        )}`,
+      )
+      .then((result) => result.data)
+      .catch(onError);
+  };
 
 export const queryMarkets = (id) => () =>
   axios
@@ -525,7 +500,7 @@ const Demo = () => {
   // customize
 
   const [isCustomizeActive, setCustomizeActive] = React.useState(false);
-  const [customColumnsActive, setCustomColumnsActive] = React.useState([]);
+  const [hiddenColumns, setHiddenColumns] = React.useState(Object.keys(CUSTOM_COLUMNS));
 
   // theming
 
@@ -701,11 +676,11 @@ const Demo = () => {
                 key={key}
                 color="secondary"
                 size="small"
-                variant={customColumnsActive.includes(key) ? 'outlined' : 'text'}
+                variant={hiddenColumns.includes(key) ? 'text' : 'outlined'}
                 onClick={() =>
-                  customColumnsActive.includes(key)
-                    ? setCustomColumnsActive(customColumnsActive.filter((value) => value !== key))
-                    : setCustomColumnsActive(customColumnsActive.concat(key))
+                  hiddenColumns.includes(key)
+                    ? setHiddenColumns(hiddenColumns.filter((value) => value !== key))
+                    : setHiddenColumns(hiddenColumns.concat(key))
                 }
               >
                 {CUSTOM_COLUMNS[key].label}
@@ -714,8 +689,12 @@ const Demo = () => {
           </Stack>
 
           <Stack direction="row" spacing={1} m={1}>
-            {!!customColumnsActive.length && (
-              <Button color="secondary" size="small" onClick={() => setCustomColumnsActive([])}>
+            {hiddenColumns.length < Object.keys(CUSTOM_COLUMNS).length && (
+              <Button
+                color="secondary"
+                size="small"
+                onClick={() => setHiddenColumns(Object.keys(CUSTOM_COLUMNS))}
+              >
                 Clear Columns
               </Button>
             )}
@@ -768,18 +747,21 @@ const Demo = () => {
                   </HeaderCell>
                   <HeaderCell resize>Market Cap</HeaderCell>
                   <HeaderCell resize>Circulating Supply</HeaderCell>
-                  <HeaderCell>Last 7 Days</HeaderCell>
-                  {customColumnsActive.map((column) => (
-                    <HeaderCell key={column} className="small">
+                  <HeaderCell resize={hiddenColumns.length !== Object.keys(CUSTOM_COLUMNS).length}>
+                    Last 7 Days
+                  </HeaderCell>
+                  {Object.keys(CUSTOM_COLUMNS).map((column) => (
+                    <HeaderCell
+                      key={column}
+                      resize
+                      hide={hiddenColumns.includes(column)}
+                      className="small"
+                    >
                       <AlignCenter>
                         {CUSTOM_COLUMNS[column].label}&nbsp;
                         <IconButton
                           size="small"
-                          onClick={() =>
-                            setCustomColumnsActive(
-                              customColumnsActive.filter((value) => value !== column),
-                            )
-                          }
+                          onClick={() => setHiddenColumns(hiddenColumns.concat(column))}
                         >
                           <CloseIcon />
                         </IconButton>
@@ -852,12 +834,16 @@ const Demo = () => {
                             <SparklinesLine color="#439867" />
                           </Sparklines>
                         </Cell>
-                        {customColumnsActive.map((column) => (
-                          <Cell key={column} className="small">
+                        {Object.keys(CUSTOM_COLUMNS).map((column) => (
+                          <Cell
+                            key={column}
+                            hide={hiddenColumns.includes(column)}
+                            className="small"
+                          >
                             {CUSTOM_COLUMNS[column].render(item)}
                           </Cell>
                         ))}
-                        <Cell pinRight stiff>
+                        <Cell pinRight>
                           <ViewMarket
                             marketData={marketData}
                             item={item}
@@ -873,7 +859,7 @@ const Demo = () => {
                           data={{
                             nodes: marketData?.data.tickers || [],
                           }}
-                          customColumnsActive={customColumnsActive}
+                          hiddenColumns={hiddenColumns}
                         />
                       )}
                     </React.Fragment>

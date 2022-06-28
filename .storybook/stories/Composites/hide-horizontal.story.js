@@ -32,28 +32,7 @@ storiesOf('Composites/Column Hide & Horizontal', module)
 
     const theme = useTheme({
       Table: `
-        height: 100%;
-      `,
-      BaseCell: `
-        &:nth-of-type(1) {
-          min-width: 50%;
-          width: 50%;
-        }
-
-        &:nth-of-type(2) {
-          min-width: 200px;
-          width: 200px;
-        }
-
-        &:nth-of-type(3), &:nth-of-type(4) {
-          min-width: 25%;
-          width: 25%;
-        }
-
-        &:nth-of-type(5) {
-          min-width: 50%;
-          width: 50%;
-        }
+        --data-table-library_grid-template-columns:  50% 40% 20%;
       `,
     });
 
@@ -124,41 +103,35 @@ storiesOf('Composites/Column Hide & Horizontal', module)
           </label>
         </div>
 
-        <Table
-          data={data}
-          theme={theme}
-          layout={{
-            custom: true,
-            horizontalScroll: true,
-            hiddenColumns,
-          }}
-        >
+        <Table data={data} theme={theme} layout={{ custom: true, horizontalScroll: true }}>
           {(tableList) => (
             <>
               <Header>
                 <HeaderRow>
-                  <HeaderCell hideKey="NAME">Task</HeaderCell>
-                  <HeaderCell hideKey="DEADLINE">Deadline</HeaderCell>
-                  <HeaderCell hideKey="TYPE">Type</HeaderCell>
-                  <HeaderCell hideKey="COMPLETE">Complete</HeaderCell>
-                  <HeaderCell hideKey="TASKS">Tasks</HeaderCell>
+                  <HeaderCell hide={hiddenColumns.includes('NAME')}>Task</HeaderCell>
+                  <HeaderCell hide={hiddenColumns.includes('DEADLINE')}>Deadline</HeaderCell>
+                  <HeaderCell hide={hiddenColumns.includes('TYPE')}>Type</HeaderCell>
+                  <HeaderCell hide={hiddenColumns.includes('COMPLETE')}>Complete</HeaderCell>
+                  <HeaderCell hide={hiddenColumns.includes('TASKS')}>Tasks</HeaderCell>
                 </HeaderRow>
               </Header>
 
               <Body>
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    <Cell>{item.name}</Cell>
-                    <Cell>
+                    <Cell hide={hiddenColumns.includes('NAME')}>{item.name}</Cell>
+                    <Cell hide={hiddenColumns.includes('DEADLINE')}>
                       {item.deadline.toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: '2-digit',
                         day: '2-digit',
                       })}
                     </Cell>
-                    <Cell>{item.type}</Cell>
-                    <Cell>{item.isComplete.toString()}</Cell>
-                    <Cell>{item.nodes?.length}</Cell>
+                    <Cell hide={hiddenColumns.includes('TYPE')}>{item.type}</Cell>
+                    <Cell hide={hiddenColumns.includes('COMPLETE')}>
+                      {item.isComplete.toString()}
+                    </Cell>
+                    <Cell hide={hiddenColumns.includes('TASKS')}>{item.nodes?.length}</Cell>
                   </Row>
                 ))}
               </Body>

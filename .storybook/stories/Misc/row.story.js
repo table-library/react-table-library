@@ -146,111 +146,114 @@ storiesOf('Misc/Row', module)
       </Table>
     );
   })
-  .add('row outline', () => {
-    const data = { nodes };
+  // .add('row outline', () => {
+  //   const data = { nodes };
 
-    const theme = useTheme({
-      BaseRow: `
-        &:focus {
-          outline: dotted;
-          outline-width: 1px;
-          outline-offset: -1px;
-        }
-      `,
-    });
+  //   const theme = useTheme({
+  //     BaseRow: `
+  //       &:hover, &:focus {
+  //         outline: dotted;
+  //         outline-width: 10px;
+  //         outline-offset: -1px;
+  //       }
+  //     `,
+  //   });
 
-    return (
-      <Table data={data} theme={theme}>
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCell>Task</HeaderCell>
-                <HeaderCell>Deadline</HeaderCell>
-                <HeaderCell>Type</HeaderCell>
-                <HeaderCell>Complete</HeaderCell>
-                <HeaderCell>Tasks</HeaderCell>
-              </HeaderRow>
-            </Header>
+  //   return (
+  //     <Table data={data} theme={theme}>
+  //       {(tableList) => (
+  //         <>
+  //           <Header>
+  //             <HeaderRow>
+  //               <HeaderCell>Task</HeaderCell>
+  //               <HeaderCell>Deadline</HeaderCell>
+  //               <HeaderCell>Type</HeaderCell>
+  //               <HeaderCell>Complete</HeaderCell>
+  //               <HeaderCell>Tasks</HeaderCell>
+  //             </HeaderRow>
+  //           </Header>
 
-            <Body>
-              {tableList.map((item) => (
-                <Row key={item.id} item={item} tabIndex="-1">
-                  <Cell onClick={(event) => console.log('Click Cell', event)}>{item.name}</Cell>
-                  <Cell>
-                    {item.deadline.toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: '2-digit',
-                      day: '2-digit',
-                    })}
-                  </Cell>
-                  <Cell>{item.type}</Cell>
-                  <Cell>{item.isComplete.toString()}</Cell>
-                  <Cell>{item.nodes?.length}</Cell>
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
-    );
-  })
-  .add('row tab navigation', () => {
-    const data = { nodes };
+  //           <Body>
+  //             {tableList.map((item) => (
+  //               <Row key={item.id} item={item} tabIndex="-1">
+  //                 <Cell onClick={(event) => console.log('Click Cell', event)}>{item.name}</Cell>
+  //                 <Cell>
+  //                   {item.deadline.toLocaleDateString('en-US', {
+  //                     year: 'numeric',
+  //                     month: '2-digit',
+  //                     day: '2-digit',
+  //                   })}
+  //                 </Cell>
+  //                 <Cell>{item.type}</Cell>
+  //                 <Cell>{item.isComplete.toString()}</Cell>
+  //                 <Cell>{item.nodes?.length}</Cell>
+  //               </Row>
+  //             ))}
+  //           </Body>
+  //         </>
+  //       )}
+  //     </Table>
+  //   );
+  // })
+  // .add('row tab navigation', () => {
+  //   const data = { nodes };
 
-    const theme = useTheme({
-      BaseRow: `
-        &:focus {
-          outline: dotted;
-          outline-width: 1px;
-          outline-offset: -1px;
-        }
-      `,
-    });
+  //   const theme = useTheme({
+  //     BaseRow: `
+  //       &:focus {
+  //         outline: dotted;
+  //         outline-width: 1px;
+  //         outline-offset: -1px;
+  //       }
+  //     `,
+  //   });
 
-    return (
-      <Table data={data} theme={theme}>
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCell>Task</HeaderCell>
-                <HeaderCell>Deadline</HeaderCell>
-                <HeaderCell>Type</HeaderCell>
-                <HeaderCell>Complete</HeaderCell>
-                <HeaderCell>Tasks</HeaderCell>
-              </HeaderRow>
-            </Header>
+  //   return (
+  //     <Table data={data} theme={theme}>
+  //       {(tableList) => (
+  //         <>
+  //           <Header>
+  //             <HeaderRow>
+  //               <HeaderCell>Task</HeaderCell>
+  //               <HeaderCell>Deadline</HeaderCell>
+  //               <HeaderCell>Type</HeaderCell>
+  //               <HeaderCell>Complete</HeaderCell>
+  //               <HeaderCell>Tasks</HeaderCell>
+  //             </HeaderRow>
+  //           </Header>
 
-            <Body>
-              {tableList.map((item, index) => (
-                <Row key={item.id} item={item} ariaColindex={index + 1} tabIndex={index + 1}>
-                  <Cell onClick={(event) => console.log('Click Cell', event)}>{item.name}</Cell>
-                  <Cell>
-                    {item.deadline.toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: '2-digit',
-                      day: '2-digit',
-                    })}
-                  </Cell>
-                  <Cell>{item.type}</Cell>
-                  <Cell>{item.isComplete.toString()}</Cell>
-                  <Cell>{item.nodes?.length}</Cell>
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
-    );
-  })
+  //           <Body>
+  //             {tableList.map((item, index) => (
+  //               <Row key={item.id} item={item} ariaColindex={index + 1} tabIndex={index + 1}>
+  //                 <Cell onClick={(event) => console.log('Click Cell', event)}>{item.name}</Cell>
+  //                 <Cell>
+  //                   {item.deadline.toLocaleDateString('en-US', {
+  //                     year: 'numeric',
+  //                     month: '2-digit',
+  //                     day: '2-digit',
+  //                   })}
+  //                 </Cell>
+  //                 <Cell>{item.type}</Cell>
+  //                 <Cell>{item.isComplete.toString()}</Cell>
+  //                 <Cell>{item.nodes?.length}</Cell>
+  //               </Row>
+  //             ))}
+  //           </Body>
+  //         </>
+  //       )}
+  //     </Table>
+  //   );
+  // })
   .add('variable row height', () => {
     const data = { nodes };
 
     const getHeight = (index) => ((index % 3) + 1) * 25;
 
     const theme = useTheme({
-      BaseRow: `
+      HeaderRow: `
+        background-color: #fafafa;
+      `,
+      Row: `
         &:nth-of-type(odd) {
           background-color: #f5f5f5;
         }
@@ -261,6 +264,8 @@ storiesOf('Misc/Row', module)
       `,
     });
 
+    const getCellStyle = (index) => ({ style: { height: `${getHeight(index)}px` } });
+
     return (
       <Table data={data} theme={theme}>
         {(tableList) => (
@@ -277,18 +282,23 @@ storiesOf('Misc/Row', module)
 
             <Body>
               {tableList.map((item, index) => (
-                <Row key={item.id} item={item} style={{ height: `${getHeight(index)}px` }}>
-                  <Cell onClick={(event) => console.log('Click Cell', event)}>{item.name}</Cell>
-                  <Cell>
+                <Row key={item.id} item={item}>
+                  <Cell
+                    {...getCellStyle(index)}
+                    onClick={(event) => console.log('Click Cell', event)}
+                  >
+                    {item.name}
+                  </Cell>
+                  <Cell {...getCellStyle(index)}>
                     {item.deadline.toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: '2-digit',
                       day: '2-digit',
                     })}
                   </Cell>
-                  <Cell>{item.type}</Cell>
-                  <Cell>{item.isComplete.toString()}</Cell>
-                  <Cell>{item.nodes?.length}</Cell>
+                  <Cell {...getCellStyle(index)}>{item.type}</Cell>
+                  <Cell {...getCellStyle(index)}>{item.isComplete.toString()}</Cell>
+                  <Cell {...getCellStyle(index)}>{item.nodes?.length}</Cell>
                 </Row>
               ))}
             </Body>

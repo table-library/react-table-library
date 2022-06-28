@@ -34,7 +34,7 @@ const Component = () => {
   ];
 
   const VIRTUALIZED_OPTIONS = {
-    rowHeight: (_item, _index) => 27,
+    rowHeight: (_item, _index) => 33,
   };
 
   return (
@@ -45,6 +45,7 @@ const Component = () => {
           virtualizedOptions={VIRTUALIZED_OPTIONS}
           data={data}
           theme={theme}
+          layout={{ fixedHeader: true }}
         />
       </div>
 
@@ -91,7 +92,7 @@ const Component = () => {
   ];
 
   const VIRTUALIZED_OPTIONS = {
-    rowHeight: (_item, _index) => 27,
+    rowHeight: (_item, _index) => 33,
   };
 
   return (
@@ -102,6 +103,7 @@ const Component = () => {
           virtualizedOptions={VIRTUALIZED_OPTIONS}
           data={data}
           theme={theme}
+          layout={{ fixedHeader: true }}
         />
       </div>
 

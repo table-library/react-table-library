@@ -20,6 +20,9 @@ storiesOf('Misc/Actions', module)
     const data = { nodes };
 
     const theme = useTheme({
+      Table: `
+        --data-table-library_grid-template-columns:  minmax(0, 1fr) 26px repeat(4, minmax(0, 1fr)) 26px;
+      `,
       Row: `
         &:hover {
           .td:nth-of-type(5) button {
@@ -28,34 +31,16 @@ storiesOf('Misc/Actions', module)
         }
       `,
       BaseCell: `
-        &:nth-of-type(1), &:nth-of-type(3), &:nth-of-type(4), &:nth-of-type(5) {
-          min-width: 10%;
-          width: 10%;
-        }
-
-        &:nth-of-type(2) {
-          min-width: 50px;
-          width: 50px;
-
-          div {
-            width: 100%;
-          }
-        }
-
         &:nth-of-type(5) {
           button {
             opacity: 0;
           }
         }
-
-        &:nth-of-type(6) {
-          flex: 1;
-        }
       `,
     });
 
     return (
-      <Table data={data} theme={theme}>
+      <Table data={data} theme={theme} layout={{ custom: true }}>
         {(tableList) => (
           <>
             <Header>
@@ -66,6 +51,7 @@ storiesOf('Misc/Actions', module)
                 <HeaderCell>Type</HeaderCell>
                 <HeaderCell>Complete</HeaderCell>
                 <HeaderCell>Tasks</HeaderCell>
+                <HeaderCell stiff />
               </HeaderRow>
             </Header>
 
@@ -114,15 +100,15 @@ storiesOf('Misc/Actions', module)
                       <button>C</button>
                     </div>
                   </Cell>
-                  <Cell>
+                  <Cell>{item.nodes?.length}</Cell>
+                  <Cell stiff>
                     <div
                       style={{
                         display: 'flex',
-                        justifyContent: 'space-between',
+                        justifyContent: 'center',
                         alignItems: 'center',
                       }}
                     >
-                      <span>{item.nodes?.length}</span>
                       <button>D</button>
                     </div>
                   </Cell>

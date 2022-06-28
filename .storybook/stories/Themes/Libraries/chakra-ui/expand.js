@@ -14,7 +14,21 @@ const Component = () => {
   const data = { nodes };
 
   const chakraTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(chakraTheme);
+  const customTheme = {
+    Table: `
+      .animate {
+        grid-column: 1 / -1;
+
+        display: flex;
+      }
+
+      .animate > div {
+        flex: 1;
+        display: flex;
+      }
+    `,
+  };
+  const theme = useTheme([chakraTheme, customTheme]);
 
   const [ids, setIds] = React.useState([]);
 
@@ -51,26 +65,30 @@ const Component = () => {
 
   const ROW_OPTIONS = {
     renderAfterRow: (item) => (
-      <Collapse in={ids.includes(item.id)}>
-        <ul
-          style={{
-            margin: '0',
-            padding: '0',
-          }}
-        >
-          <li>
-            <strong>Name:</strong> {item.name.toUpperCase()}
-          </li>
-          <li>
-            <strong>Deadline:</strong> {item.deadline.toLocaleDateString('en-US')}
-          </li>
-          <li>
-            <strong>Type:</strong> {item.type}
-          </li>
-          <li>
-            <strong>Complete:</strong> {item.isComplete.toString()}
-          </li>
-        </ul>
+      <Collapse className="animate" in={ids.includes(item.id)}>
+        <tr style={{ flex: '1', display: 'flex' }}>
+          <td style={{ flex: '1' }}>
+            <ul
+              style={{
+                margin: '0',
+                padding: '0',
+              }}
+            >
+              <li>
+                <strong>Name:</strong> {item.name.toUpperCase()}
+              </li>
+              <li>
+                <strong>Deadline:</strong> {item.deadline.toLocaleDateString('en-US')}
+              </li>
+              <li>
+                <strong>Type:</strong> {item.type}
+              </li>
+              <li>
+                <strong>Complete:</strong> {item.isComplete.toString()}
+              </li>
+            </ul>
+          </td>
+        </tr>
       </Collapse>
     ),
   };
@@ -110,7 +128,21 @@ const Component = () => {
   const data = { nodes };
 
   const chakraTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(chakraTheme);
+  const customTheme = {
+    Table: \`
+      .animate {
+        grid-column: 1 / -1;
+
+        display: flex;
+      }
+
+      .animate > div {
+        flex: 1;
+        display: flex;
+      }
+    \`,
+  };
+  const theme = useTheme([chakraTheme, customTheme]);
 
   const [ids, setIds] = React.useState([]);
 
@@ -147,26 +179,30 @@ const Component = () => {
 
   const ROW_OPTIONS = {
     renderAfterRow: (item) => (
-      <Collapse in={ids.includes(item.id)}>
-        <ul
-          style={{
-            margin: '0',
-            padding: '0',
-          }}
-        >
-          <li>
-            <strong>Name:</strong> {item.name.toUpperCase()}
-          </li>
-          <li>
-            <strong>Deadline:</strong> {item.deadline.toLocaleDateString('en-US')}
-          </li>
-          <li>
-            <strong>Type:</strong> {item.type}
-          </li>
-          <li>
-            <strong>Complete:</strong> {item.isComplete.toString()}
-          </li>
-        </ul>
+      <Collapse className="animate" in={ids.includes(item.id)}>
+        <tr style={{ flex: '1', display: 'flex' }}>
+          <td style={{ flex: '1' }}>
+            <ul
+              style={{
+                margin: '0',
+                padding: '0',
+              }}
+            >
+              <li>
+                <strong>Name:</strong> {item.name.toUpperCase()}
+              </li>
+              <li>
+                <strong>Deadline:</strong> {item.deadline.toLocaleDateString('en-US')}
+              </li>
+              <li>
+                <strong>Type:</strong> {item.type}
+              </li>
+              <li>
+                <strong>Complete:</strong> {item.isComplete.toString()}
+              </li>
+            </ul>
+          </td>
+        </tr>
       </Collapse>
     ),
   };

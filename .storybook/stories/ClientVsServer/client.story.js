@@ -31,35 +31,7 @@ storiesOf('Client vs Server', module)
 
     const theme = useTheme({
       Table: `
-        margin: 20px;
-        border-radius: 4px;
-        border: 1px solid #e0e0e0;
-      `,
-      BaseRow: `
-        height: 52px;
-        font-size: 14px;
-
-        border-bottom: 1px solid #e0e0e0;
-      `,
-      HeaderRow: `
-        font-weight: bold;
-      `,
-      Row: `
-        &:hover {
-          background-color: #f5f5f5;
-        }
-
-        &.row-select-selected, &.row-select-single-selected {
-          background-color: #edf4fb;
-
-          &:hover {
-            background-color: #e3eefa;
-          }
-        }
-      `,
-      BaseCell: `
-        border-right: 1px solid transparent;
-        border-bottom: 1px solid transparent;
+        --data-table-library_grid-template-columns:  24px repeat(5, minmax(0, 1fr));
       `,
     });
 
@@ -119,85 +91,88 @@ storiesOf('Client vs Server', module)
     }
 
     return (
-      <Table
-        data={data}
-        theme={theme}
-        tree={tree}
-        select={select}
-        sort={sort}
-        pagination={pagination}
-      >
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCellSelect />
-                <HeaderCellSort resize sortKey="TASK">
-                  Task
-                </HeaderCellSort>
-                <HeaderCellSort resize sortKey="DEADLINE">
-                  Deadline
-                </HeaderCellSort>
-                <HeaderCellSort resize sortKey="TYPE">
-                  Type
-                </HeaderCellSort>
-                <HeaderCellSort resize sortKey="COMPLETE">
-                  Complete
-                </HeaderCellSort>
-                <HeaderCellSort resize sortKey="TASKS">
-                  Tasks
-                </HeaderCellSort>
-              </HeaderRow>
-            </Header>
+      <>
+        <Table
+          data={data}
+          theme={theme}
+          layout={{ custom: true }}
+          tree={tree}
+          select={select}
+          sort={sort}
+          pagination={pagination}
+        >
+          {(tableList) => (
+            <>
+              <Header>
+                <HeaderRow>
+                  <HeaderCellSelect />
+                  <HeaderCellSort resize sortKey="TASK">
+                    Task
+                  </HeaderCellSort>
+                  <HeaderCellSort resize sortKey="DEADLINE">
+                    Deadline
+                  </HeaderCellSort>
+                  <HeaderCellSort resize sortKey="TYPE">
+                    Type
+                  </HeaderCellSort>
+                  <HeaderCellSort resize sortKey="COMPLETE">
+                    Complete
+                  </HeaderCellSort>
+                  <HeaderCellSort resize sortKey="TASKS">
+                    Tasks
+                  </HeaderCellSort>
+                </HeaderRow>
+              </Header>
 
-            <Body>
-              {tableList.map((item) => (
-                <Row key={item.id} item={item}>
-                  <CellSelect item={item} />
-                  <CellTree item={item}>{item.name}</CellTree>
-                  <Cell>
-                    {item.deadline.toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: '2-digit',
-                      day: '2-digit',
-                    })}
-                  </Cell>
-                  <Cell>{item.type}</Cell>
-                  <Cell>{item.isComplete.toString()}</Cell>
-                  <Cell>{item.nodes?.length}</Cell>
-                </Row>
-              ))}
-            </Body>
-
-            <div
-              style={{
-                fontSize: '14px',
-                padding: '12px',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
-            >
-              <span>Total Pages: {pagination.state.getTotalPages(data.nodes)}</span>
-
-              <span>
-                Page:{' '}
-                {pagination.state.getPages(data.nodes).map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    style={{
-                      fontWeight: pagination.state.page === index ? 'bold' : 'normal',
-                    }}
-                    onClick={() => pagination.fns.onSetPage(index)}
-                  >
-                    {index + 1}
-                  </button>
+              <Body>
+                {tableList.map((item) => (
+                  <Row key={item.id} item={item}>
+                    <CellSelect item={item} />
+                    <CellTree item={item}>{item.name}</CellTree>
+                    <Cell>
+                      {item.deadline.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                      })}
+                    </Cell>
+                    <Cell>{item.type}</Cell>
+                    <Cell>{item.isComplete.toString()}</Cell>
+                    <Cell>{item.nodes?.length}</Cell>
+                  </Row>
                 ))}
-              </span>
-            </div>
-          </>
-        )}
-      </Table>
+              </Body>
+            </>
+          )}
+        </Table>
+
+        <div
+          style={{
+            fontSize: '14px',
+            padding: '12px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <span>Total Pages: {pagination.state.getTotalPages(data.nodes)}</span>
+
+          <span>
+            Page:{' '}
+            {pagination.state.getPages(data.nodes).map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                style={{
+                  fontWeight: pagination.state.page === index ? 'bold' : 'normal',
+                }}
+                onClick={() => pagination.fns.onSetPage(index)}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </span>
+        </div>
+      </>
     );
   });

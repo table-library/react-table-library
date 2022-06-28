@@ -459,7 +459,7 @@ storiesOf('Features/Tree', module)
         onChange: onTreeChange,
       },
       {
-        indentation: 10,
+        indentation: 40,
       },
     );
 

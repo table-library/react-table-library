@@ -38,7 +38,7 @@ export const CompactHeader: React.FC<CompactTableProps> = ({
             resize: column.resize,
             pinLeft: column.pinLeft,
             pinRight: column.pinRight,
-            hideKey: column.hide?.hideKey,
+            hide: column.hide,
           };
 
           // sort feature

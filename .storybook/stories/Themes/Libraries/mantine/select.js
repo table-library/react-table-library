@@ -15,7 +15,12 @@ const Component = () => {
   const data = { nodes };
 
   const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(mantineTheme);
+  const customTheme = {
+    Table: `
+      --data-table-library_grid-template-columns:  44px repeat(5, minmax(0, 1fr));
+    `,
+  };
+  const theme = useTheme([mantineTheme, customTheme]);
 
   const select = useRowSelect(data, {
     onChange: onSelectChange,
@@ -64,7 +69,13 @@ const Component = () => {
 
   return (
     <>
-      <CompactTable columns={COLUMNS} data={data} theme={theme} select={select} />
+      <CompactTable
+        columns={COLUMNS}
+        data={data}
+        theme={theme}
+        layout={{ custom: true }}
+        select={select}
+      />
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />
@@ -77,10 +88,7 @@ import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
-import {
-  DEFAULT_OPTIONS,
-  getTheme,
-} from '@table-library/react-table-library/mantine';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/mantine';
 import { useRowSelect } from '@table-library/react-table-library/select';
 import { Checkbox } from '@mantine/core';
 
@@ -93,7 +101,12 @@ const Component = () => {
   const data = { nodes };
 
   const mantineTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(mantineTheme);
+  const customTheme = {
+    Table: \`
+      --data-table-library_grid-template-columns:  44px repeat(5, minmax(0, 1fr));
+    \`,
+  };
+  const theme = useTheme([mantineTheme, customTheme]);
 
   const select = useRowSelect(data, {
     onChange: onSelectChange,
@@ -142,7 +155,13 @@ const Component = () => {
 
   return (
     <>
-      <CompactTable columns={COLUMNS} data={data} theme={theme} select={select} />
+      <CompactTable
+        columns={COLUMNS}
+        data={data}
+        theme={theme}
+        layout={{ custom: true }}
+        select={select}
+      />
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />

@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 import { TableNode, TableProps, RowProps } from '@table-library/react-table-library/types/table';
+import { RowHeight } from '@table-library/react-table-library/types/virtualized';
 import { ColumnSortProps } from '@table-library/react-table-library/types/sort';
 import { ColumnSelectProps } from '@table-library/react-table-library/types/select';
 import { ColumnTreeProps } from '@table-library/react-table-library/types/tree';
 import { ColumnResizeProps } from '@table-library/react-table-library/types/resize';
-import { ColumnHideProps } from '@table-library/react-table-library/types/hide';
 
 // external
 
@@ -19,12 +19,12 @@ export type Column = {
   tree?: ColumnTreeProps;
   pinLeft?: boolean;
   pinRight?: boolean;
-  hide?: ColumnHideProps;
+  hide?: boolean;
   cellProps?: Record<string, any>;
 };
 
 export type VirtualizedOptions = {
-  rowHeight: number | ((item: TableNode, index: number) => number);
+  rowHeight: RowHeight;
   itemCount?: number;
 };
 
@@ -34,8 +34,8 @@ export type TableOptions = {
 };
 
 export type RowOptions = {
-  renderBeforeRow?: (node: TableNode) => React.ReactNode;
-  renderAfterRow?: (node: TableNode) => React.ReactNode;
+  renderBeforeRow?: (node: TableNode, index: number) => React.ReactNode;
+  renderAfterRow?: (node: TableNode, index: number) => React.ReactNode;
 };
 
 export type RowPropsAsObject = Omit<RowProps, 'item' | 'children'>;

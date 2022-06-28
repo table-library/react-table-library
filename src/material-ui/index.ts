@@ -45,18 +45,15 @@ const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
     font-size: 14px;
   `,
   HeaderRow: `
-    font-weight: bold;
+    &.tr-header .th {
+      border-bottom: 1px solid #e0e0e0;
+    }
 
-    border-bottom: 1px solid #e0e0e0;
-
-    &.tr-footer {
-      border-top: 1px solid transparent;
-      border-bottom: 1px solid transparent;
+    &.tr-footer .th {
+      border-top: 1px solid #e0e0e0;
     }
   `,
   Row: `
-    border-bottom: 1px solid #e0e0e0;
-
     &.tr.tr-body.row-select.row-select-single-selected, &.tr.tr-body.row-select.row-select-selected {
       background-color: #bddffd;
       border-bottom: 1px solid #bddffd;
@@ -89,11 +86,12 @@ const getVirtualizedHighlight = (highlightOnHover: boolean) =>
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getVirtualizedTheme = (options: OptionsSound, configuration: ConfigurationSound) => ({
-  Body: `
-    & > div:not(:last-of-type) > .tr {
+  Row: `
+    & .td {
       border-bottom: 1px solid #e2e8f0;
     }
-
+  `,
+  Body: `
     & > div:nth-of-type(odd) > .tr {
       background-color: ${options.striped ? '#f5f5f5' : '#ffffff'};
     }
@@ -118,8 +116,8 @@ const getNoneVirtualizedHighlight = (highlightOnHover: boolean) =>
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getNoneVirtualizedTheme = (options: OptionsSound, configuration: ConfigurationSound) => ({
   Row: `
-    &.tr:not(:last-of-type) {
-      border-bottom: 1px solid #e2e8f0;
+    &:not(:last-of-type) > .td {
+      border-bottom: 1px solid #e0e0e0;
     }
 
     &:nth-of-type(odd) {

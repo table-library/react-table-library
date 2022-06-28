@@ -13,7 +13,14 @@ const key = 'Select';
 const Component = () => {
   const data = { nodes };
 
-  const theme = useTheme(getTheme());
+  const theme = useTheme([
+    getTheme(),
+    {
+      Table: `
+        --data-table-library_grid-template-columns:  44px repeat(5, minmax(0, 1fr));
+      `,
+    },
+  ]);
 
   const select = useRowSelect(data, {
     onChange: onSelectChange,
@@ -44,7 +51,13 @@ const Component = () => {
 
   return (
     <>
-      <CompactTable columns={COLUMNS} data={data} theme={theme} select={select} />
+      <CompactTable
+        columns={COLUMNS}
+        data={data}
+        theme={theme}
+        layout={{ custom: true }}
+        select={select}
+      />
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />
@@ -68,7 +81,14 @@ const key = 'Select';
 const Component = () => {
   const data = { nodes };
 
-  const theme = useTheme(getTheme());
+  const theme = useTheme([
+    getTheme(),
+    {
+      Table: \`
+        --data-table-library_grid-template-columns:  44px repeat(5, minmax(0, 1fr));
+      \`,
+    },
+  ]);
 
   const select = useRowSelect(data, {
     onChange: onSelectChange,
@@ -99,7 +119,13 @@ const Component = () => {
 
   return (
     <>
-      <CompactTable columns={COLUMNS} data={data} theme={theme} select={select} />
+      <CompactTable
+        columns={COLUMNS}
+        data={data}
+        theme={theme}
+        layout={{ custom: true }}
+        select={select}
+      />
 
       <br />
       <DocumentationSee anchor={'Features/' + key} />

@@ -20,9 +20,10 @@ export const NormalTable: React.FC<NormalTableProps> = ({
       <CompactHeader columns={columns} {...tableProps} />
 
       <Body>
-        {tableList.map((item: TableNode) => (
+        {tableList.map((item: TableNode, index: number) => (
           <CompactRow
             key={item.id}
+            index={index}
             item={item}
             columns={columns}
             rowProps={rowProps}

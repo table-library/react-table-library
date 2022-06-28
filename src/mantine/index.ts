@@ -42,16 +42,15 @@ const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
     font-size: 14px;
   `,
   HeaderRow: `
-    border-bottom: 1px solid #dee2e6;
+    &.tr-header .th {
+      border-bottom: 1px solid #dee2e6;
+    }
 
-    &.tr-footer {
-      border-top: 1px solid transparent;
-      border-bottom: 1px solid transparent;
+    &.tr-footer .th {
+      border-top: 1px solid #dee2e6;
     }
   `,
   Row: `
-    border-bottom: 1px solid #dee2e6;
-
     &.tr.tr-body.row-select.row-select-single-selected, &.tr.tr-body.row-select.row-select-selected {
       background-color: #b3dcff;
       border-bottom: 1px solid #b3dcff;
@@ -59,12 +58,6 @@ const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
   `,
   BaseCell: `
     padding: ${options.verticalSpacing}px ${options.horizontalSpacing}px;
-
-    &:not(.stiff) > div {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
   `,
   HeaderCell: `
     font-weight: bold;
@@ -94,6 +87,11 @@ const getVirtualizedHighlight = (highlightOnHover: boolean) =>
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getVirtualizedTheme = (options: OptionsSound, configuration: ConfigurationSound) => ({
+  Row: `
+    & .td {
+      border-bottom: 1px solid #dee2e6;
+    }
+  `,
   Body: `
     & > div:nth-of-type(odd) > .tr {
       background-color: ${options.striped ? '#f8f9fa' : '#ffffff'};
@@ -119,6 +117,10 @@ const getNoneVirtualizedHighlight = (highlightOnHover: boolean) =>
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getNoneVirtualizedTheme = (options: OptionsSound, configuration: ConfigurationSound) => ({
   Row: `
+    &:not(:last-of-type) .td {
+      border-bottom: 1px solid #dee2e6;
+    }
+
     &:nth-of-type(odd) {
       background-color: ${options.striped ? '#f8f9fa' : '#ffffff'};
     }

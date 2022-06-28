@@ -107,23 +107,28 @@ storiesOf('Server/Expand', module)
                   </Row>
 
                   {ids.includes(item.id) && (
-                    <div
-                      style={{
-                        backgroundColor: '#e0e0e0',
-                      }}
-                    >
-                      <strong>Tasks: {item.nodes.length}</strong>
-                      <ul
-                        style={{
-                          margin: '0',
-                          padding: '0',
-                        }}
-                      >
-                        {item.nodes.map((node) => (
-                          <li key={node.id}>{node.name}</li>
-                        ))}
-                      </ul>
-                    </div>
+                    <tr style={{ display: 'flex', gridColumn: '1 / -1' }}>
+                      <td style={{ flex: '1' }}>
+                        <div
+                          style={{
+                            borderTop: '1px solid #a0a8ae',
+                            borderBottom: '1px solid #a0a8ae',
+                          }}
+                        >
+                          <strong>Tasks: {item.nodes.length}</strong>
+                          <ul
+                            style={{
+                              margin: '0',
+                              padding: '0',
+                            }}
+                          >
+                            {item.nodes.map((node) => (
+                              <li key={node.id}>{node.name}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
                   )}
                 </React.Fragment>
               ))}

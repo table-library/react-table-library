@@ -16,9 +16,10 @@ const evaluateProps = (props: Record<string, any>, item: TableNode) =>
     return acc;
   }, {});
 
-type CompactRowProps = { item: TableNode } & CompactTableProps;
+type CompactRowProps = { item: TableNode; index: number } & CompactTableProps;
 
 export const CompactRow: React.FC<CompactRowProps> = ({
+  index,
   item,
   columns,
   rowProps,
@@ -29,10 +30,10 @@ export const CompactRow: React.FC<CompactRowProps> = ({
 
   return (
     <React.Fragment>
-      {rowOptions?.renderBeforeRow && rowOptions.renderBeforeRow(item)}
+      {rowOptions?.renderBeforeRow && rowOptions.renderBeforeRow(item, index)}
 
       <Row item={item} {...rowProps}>
-        {columns.map((column: Column, index: number) => {
+        {columns.map((column: Column) => {
           const sharedProps = {
             pinLeft: column.pinLeft,
             pinRight: column.pinRight,
@@ -86,7 +87,7 @@ export const CompactRow: React.FC<CompactRowProps> = ({
         })}
       </Row>
 
-      {rowOptions?.renderAfterRow && rowOptions.renderAfterRow(item)}
+      {rowOptions?.renderAfterRow && rowOptions.renderAfterRow(item, index)}
     </React.Fragment>
   );
 };

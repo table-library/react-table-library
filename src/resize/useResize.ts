@@ -1,66 +1,67 @@
 import * as React from 'react';
 
-import { LayoutContext } from '@table-library/react-table-library/common/context/Layout';
+import { Nullish } from '@table-library/react-table-library/types/common';
+import { Layout, TableElementRef } from '@table-library/react-table-library/types/layout';
+
 import {
+  LayoutContext,
+  propagateResizedLayout,
+  setResizedLayout,
+} from '@table-library/react-table-library/common/context/Layout';
+import {
+  DataColumn,
+  toDataColumn,
   getHeaderColumns,
   applyToHeaderColumns,
   applyToColumns,
 } from '@table-library/react-table-library/common/util/columns';
 
-import { Nullish } from '@table-library/react-table-library/types/common';
-import { TableElementRef, Layout } from '@table-library/react-table-library/types/layout';
-
-type DataColumn = {
-  index: number;
-  minResizeWidth: number;
-  width: number;
-  isStiff: boolean;
-};
-
-const applyResize = (
+const applySize = (
   index: number,
-  tableElementRef: TableElementRef,
   layout: Layout | Nullish,
+  tableElementRef: TableElementRef,
   resizeWidth: number,
 ) => {
-  const headerColumns = getHeaderColumns(tableElementRef);
+  let dataColumns = getHeaderColumns(tableElementRef)
+    .map(toDataColumn)
+    .filter((column) => !column.isHide);
 
-  const columns = headerColumns.map((headerCell, j) => ({
-    index: j,
-    minResizeWidth: +headerCell.getAttribute('data-resize-min-width')!, // should not be null, because defined with fallback on Cell
-    width: headerCell.getBoundingClientRect().width,
-    isStiff: headerCell.classList.contains('stiff'),
-  }));
+  const actualIndex = dataColumns.findIndex((column) => column.index === index);
 
-  const afterColumn = columns.reduce((acc: DataColumn | Nullish, value: DataColumn, j: number) => {
-    if (acc) return acc;
-    if (j > index && value.width !== 0) return value;
+  dataColumns = dataColumns.map((value, i) => ({ ...value, index: i }));
 
-    return acc;
-  }, null);
+  // after column is needed for adjusting the size of the next column when resizing the current column
+  // e.g. current column becomes larger, after column becomes smaller
 
-  const thead = tableElementRef.current!.querySelector('.thead');
-  const tableWidth = thead?.getBoundingClientRect().width || 0;
+  const afterColumn = dataColumns.reduce(
+    (acc: DataColumn | Nullish, dataColumn: DataColumn, j: number) => {
+      if (acc) return acc;
+      if (j > actualIndex && dataColumn.width !== 0) return dataColumn;
 
-  const { minResizeWidth } = columns[index];
+      return acc;
+    },
+    null,
+  );
 
-  const actualResizeWidth = resizeWidth > minResizeWidth ? resizeWidth : minResizeWidth;
+  const tableWidth = dataColumns.reduce((acc, dataColumn) => acc + dataColumn.width, 0);
 
-  const diffWidth = actualResizeWidth - columns[index].width;
+  const { minWidth } = dataColumns[actualIndex];
+  const proposedWidth = resizeWidth > minWidth && resizeWidth !== 0 ? resizeWidth : minWidth;
+  const diffWidth = proposedWidth - dataColumns[actualIndex].width;
 
   // calculate new widths of cell under consideration of its neighbors
 
-  const newColumnWidthsAsPx = columns.map((column, i) => {
-    if (afterColumn && index === i) {
+  const newColumnWidthsAsPx = dataColumns.map((column, i) => {
+    if (afterColumn && actualIndex === i) {
       const nextWidth = afterColumn.width - diffWidth;
-      const willNextAdjust = nextWidth > minResizeWidth;
+      const willNextAdjust = nextWidth > minWidth;
 
-      return willNextAdjust ? actualResizeWidth : column.width;
+      return willNextAdjust ? proposedWidth : column.width;
     }
 
     if (afterColumn?.index === i) {
       const nextWidth = column.width - diffWidth;
-      const shouldAdjust = nextWidth > minResizeWidth;
+      const shouldAdjust = nextWidth > minWidth;
 
       return shouldAdjust ? nextWidth : column.width;
     }
@@ -68,25 +69,38 @@ const applyResize = (
     return column.width;
   });
 
-  const newColumnWidths = columns.map((column, i) => {
-    const px = newColumnWidthsAsPx[i];
-    const percentage = (px / tableWidth) * 100;
+  // we do want to have full table width again, not wider and not narrower
+  const diff = tableWidth - newColumnWidthsAsPx.reduce((acc, value) => acc + value, 0);
+  newColumnWidthsAsPx[actualIndex] = newColumnWidthsAsPx[actualIndex] + diff;
 
-    // if horizontalScroll, then we cannot work with "absolute" percentages
-    // TODO maybe there is a way to keep % for horizontalScroll, however, use with resize feature I didn't find one yet
-    return column.isStiff || layout?.horizontalScroll ? `${px}px` : `${percentage}%`;
-  });
+  let isStretchedInluded = false;
 
-  // imperative write of all cell widths
+  const resizedLayout = dataColumns
+    // mapRight
+    .slice(0)
+    .reverse()
+    .map((column, i) => {
+      const pixel = newColumnWidthsAsPx.slice(0).reverse()[i]; // mapRight
+      const percentage = (pixel / tableWidth) * 100;
 
-  const applyWidth = (cell: HTMLElement, i: number) => {
-    cell.style.width = newColumnWidths[i];
-    cell.style.minWidth = newColumnWidths[i];
-  };
+      if (column.isStiff || layout?.horizontalScroll) {
+        return `${pixel}px`;
+      }
 
-  // pin feature as edge case
+      if (!isStretchedInluded) {
+        isStretchedInluded = true;
+        return `minmax(0, 1fr)`;
+      }
 
-  const applyLeft = (cell: HTMLElement, i: number) => {
+      return `minmax(0, ${percentage}%)`;
+    })
+    .slice(0) // reverse mapRight
+    .reverse()
+    .join(' ');
+
+  // pin feature
+
+  const applyFixedColumn = (cell: HTMLElement, i: number) => {
     if ([...Array.from(cell.classList)].includes('pin-left')) {
       const left = newColumnWidthsAsPx.reduce((sum, v, j) => {
         if (j >= i) return sum;
@@ -106,25 +120,25 @@ const applyResize = (
     }
   };
 
-  applyToHeaderColumns(tableElementRef, applyWidth);
-  applyToColumns(tableElementRef, applyWidth);
+  applyToHeaderColumns(tableElementRef, applyFixedColumn);
+  applyToColumns(tableElementRef, applyFixedColumn);
 
-  applyToHeaderColumns(tableElementRef, applyLeft);
-  applyToColumns(tableElementRef, applyLeft);
-
-  return newColumnWidths;
+  return resizedLayout;
 };
 
-export const useResize = (cellRef: React.RefObject<HTMLDivElement>, index: number) => {
+export const useResize = (index: number, hide: boolean | Nullish) => {
   const context = React.useContext(LayoutContext);
 
   if (!context) {
     throw new Error('No Layout Context.');
   }
 
-  const { tableMemoryRef, tableElementRef, layout } = context;
+  const { tableElementRef, tableMemoryRef, layout } = context;
 
+  const cellRef = React.useRef<HTMLTableCellElement>(null);
   const resizeRef = React.useRef<HTMLSpanElement>(null);
+
+  const previousGrid = React.useRef<string>('');
 
   const startOffset = React.useRef<number | null>(null);
   const isMouseDown = React.useRef<boolean>(false);
@@ -133,10 +147,14 @@ export const useResize = (cellRef: React.RefObject<HTMLDivElement>, index: numbe
     (event) => {
       event.preventDefault();
 
+      previousGrid.current = tableElementRef.current!.style.getPropertyValue(
+        '--data-table-library_grid-template-columns',
+      );
+
       isMouseDown.current = true;
       startOffset.current = cellRef.current!.offsetWidth - event.pageX;
     },
-    [cellRef],
+    [tableElementRef],
   );
 
   const onMouseMove = React.useCallback(
@@ -145,13 +163,9 @@ export const useResize = (cellRef: React.RefObject<HTMLDivElement>, index: numbe
         event.preventDefault();
 
         const resizeWidth = startOffset.current + event.pageX;
+        const resizedLayout = applySize(index, layout, tableElementRef, resizeWidth);
 
-        tableMemoryRef.current!.resizedLayout = applyResize(
-          index,
-          tableElementRef,
-          layout,
-          resizeWidth,
-        );
+        setResizedLayout(resizedLayout, tableElementRef, tableMemoryRef);
       }
     },
     [index, layout, tableElementRef, tableMemoryRef],
@@ -160,10 +174,19 @@ export const useResize = (cellRef: React.RefObject<HTMLDivElement>, index: numbe
   const onMouseUp = React.useCallback(() => {
     isMouseDown.current = false;
 
-    if (layout?.onLayoutChange) {
-      layout?.onLayoutChange(tableMemoryRef.current!.resizedLayout as string[]);
+    const resizedLayout = tableElementRef.current!.style.getPropertyValue(
+      '--data-table-library_grid-template-columns',
+    );
+
+    const didChange = previousGrid.current !== resizedLayout;
+
+    if (didChange) {
+      propagateResizedLayout(resizedLayout, layout);
+
+      const newPreservedDataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
+      tableMemoryRef.current!.dataColumns = newPreservedDataColumns;
     }
-  }, [layout, tableMemoryRef]);
+  }, [layout, tableElementRef, tableMemoryRef]);
 
   React.useEffect(() => {
     const { current } = resizeRef;
@@ -181,7 +204,7 @@ export const useResize = (cellRef: React.RefObject<HTMLDivElement>, index: numbe
         document.removeEventListener('mouseup', onMouseUp);
       }
     };
-  }, [onMouseDown, onMouseMove, onMouseUp]);
+  }, [hide, onMouseDown, onMouseMove, onMouseUp]);
 
-  return { resizeRef };
+  return { cellRef, resizeRef };
 };

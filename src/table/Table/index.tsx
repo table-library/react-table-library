@@ -14,6 +14,7 @@ import { PaginationContext } from '@table-library/react-table-library/common/con
 
 import { applyModifiers } from '@table-library/react-table-library/common/util/modifiers';
 import { useShiftDown } from '@table-library/react-table-library/common/hooks/useShiftDown';
+import { useTheme } from '@table-library/react-table-library/theme/index';
 
 import { Nullish } from '@table-library/react-table-library/types/common';
 import { TableProps } from '@table-library/react-table-library/types/table';
@@ -23,6 +24,7 @@ import {
   TableMemoryRef,
   TableElementRef,
 } from '@table-library/react-table-library/types/layout';
+import { Theme } from '@table-library/react-table-library/types/theme';
 
 import { useOnInit } from './useOnInit';
 
@@ -40,19 +42,25 @@ const useTableMemoryRef = (layout: Layout | Nullish): TableMemoryRef => {
 
   if (!tableMemoryRef.current) {
     tableMemoryRef.current = {
-      resizedLayout: layout?.resizedLayout ?? [],
-      hiddenSpacesInMemory: [],
+      onlyOnce: false,
+      dataColumns: [],
     };
   }
 
   return tableMemoryRef;
 };
 
+const FULL_HEIGHT_THEME = {
+  Table: `
+    height: 100%;
+  `,
+};
+
 const Table: React.FC<TableProps> = React.forwardRef(
   (
     {
       data,
-      theme,
+      theme: customTheme,
       layout,
       sort,
       pagination,
@@ -82,12 +90,24 @@ const Table: React.FC<TableProps> = React.forwardRef(
     // no selection of content (e.g. text) in table if shift is active (e.g. select shift feature)
     const isShiftDown = useShiftDown();
 
+    let allThemes: Theme[] = [];
+    if (layout?.fixedHeader) {
+      allThemes = allThemes.concat(FULL_HEIGHT_THEME);
+    }
+    if (customTheme) {
+      allThemes = allThemes.concat(customTheme);
+    }
+
+    const theme = useTheme(allThemes);
+
+    const As = layout?.isDiv ? 'div' : 'table';
+
     return (
-      <div
+      <As
         role="grid"
         data-table-library_table=""
         css={css`
-          ${styles(layout, { isShiftDown })}
+          ${styles({ isShiftDown })}
           ${theme?.Table}
         `}
         className={cs(className)}
@@ -101,17 +121,13 @@ const Table: React.FC<TableProps> = React.forwardRef(
                 <SelectContext.Provider value={select}>
                   <TreeContext.Provider value={tree}>
                     <PaginationContext.Provider value={pagination}>
-                      {layout?.inheritLayout ? (
-                        <React.Fragment>{children && children(modifiedNodes)}</React.Fragment>
-                      ) : (
-                        <LayoutProvider
-                          layout={layout}
-                          tableElementRef={tableElementRef}
-                          tableMemoryRef={tableMemoryRef}
-                        >
-                          {children && children(modifiedNodes)}
-                        </LayoutProvider>
-                      )}
+                      <LayoutProvider
+                        layout={layout}
+                        tableElementRef={tableElementRef}
+                        tableMemoryRef={tableMemoryRef}
+                      >
+                        {children && children(modifiedNodes)}
+                      </LayoutProvider>
                     </PaginationContext.Provider>
                   </TreeContext.Provider>
                 </SelectContext.Provider>
@@ -119,7 +135,7 @@ const Table: React.FC<TableProps> = React.forwardRef(
             </ThemeContext.Provider>
           </TableContext.Provider>
         )}
-      </div>
+      </As>
     );
   },
 );

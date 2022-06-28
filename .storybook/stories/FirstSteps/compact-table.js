@@ -28,7 +28,7 @@ const Component = () => {
     { label: 'Tasks', renderCell: (item) => item.nodes?.length },
   ];
 
-  return <CompactTable columns={COLUMNS} data={data} />;
+  return <CompactTable columns={COLUMNS} data={data} layout={{ isDiv: true }} />;
 };
 
 const code = `

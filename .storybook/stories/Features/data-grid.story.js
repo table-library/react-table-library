@@ -13,34 +13,14 @@ import {
   HeaderCell,
   Cell,
 } from '@table-library/react-table-library/table';
+import { Virtualized } from '@table-library/react-table-library/virtualized';
 import { useTheme } from '@table-library/react-table-library/theme';
 
 import { DisableAnimationsContext } from '../../stories/loki.js';
 import { lotsOfNodes, randomFromInterval } from '../data';
 import { valueToColor } from '../util';
 
-const ROW_HEIGHT = 30;
-
-const WithStickyHeader = React.forwardRef(({ children, ...rest }, ref) => (
-  <div ref={ref} {...rest}>
-    <Header>
-      <HeaderRow>
-        <HeaderCell pinLeft>A</HeaderCell>
-        <HeaderCell pinLeft>B</HeaderCell>
-        <HeaderCell>C</HeaderCell>
-        <HeaderCell>D</HeaderCell>
-        <HeaderCell>E</HeaderCell>
-        <HeaderCell>F</HeaderCell>
-        <HeaderCell>G</HeaderCell>
-        <HeaderCell>H</HeaderCell>
-        <HeaderCell>I</HeaderCell>
-        <HeaderCell>J</HeaderCell>
-      </HeaderRow>
-    </Header>
-
-    <Body>{children}</Body>
-  </div>
-));
+const ROW_HEIGHT = 19;
 
 storiesOf('Features/Data Grid', module)
   .addParameters({
@@ -59,20 +39,17 @@ storiesOf('Features/Data Grid', module)
 
     const theme = useTheme({
       Table: `
-        height: 100%;
+        --data-table-library_grid-template-columns:  repeat(10, minmax(150px, 1fr));
       `,
       BaseCell: `
         color: #000000;
-
-        min-width: 15%;
-        width: 15%;
 
         &:nth-of-type(1) {
           left: 0px;
         }
 
         &:nth-of-type(2) {
-          left: 15%;
+          left: 150px;
         }
       `,
     });
@@ -99,68 +76,52 @@ storiesOf('Features/Data Grid', module)
 
     return (
       <div style={{ height: '300px' }}>
-        <Table data={data} theme={theme} layout={{ custom: true, horizontalScroll: true }}>
+        <Table
+          data={data}
+          theme={theme}
+          layout={{ custom: true, horizontalScroll: true, fixedHeader: true }}
+        >
           {(tableList) => (
-            <AutoSizer>
-              {({ width, height }) => (
-                <FixedSizeList
-                  height={height}
-                  width={width}
-                  itemCount={data.nodes.length}
-                  itemSize={ROW_HEIGHT}
-                  innerElementType={WithStickyHeader}
-                  itemData={{ items: tableList }}
-                >
-                  {({ index, style, data }) => (
-                    <div
-                      style={{
-                        ...style,
-                        top: style.top + ROW_HEIGHT,
-                      }}
-                    >
-                      <Row item={data.items[index]}>
-                        <Cell
-                          style={{ backgroundColor: valueToColor(data.items[index].cellA) }}
-                          pinLeft
-                        >
-                          {data.items[index].cellA}
-                        </Cell>
-                        <Cell
-                          style={{ backgroundColor: valueToColor(data.items[index].cellB) }}
-                          pinLeft
-                        >
-                          {data.items[index].cellB}
-                        </Cell>
-                        <Cell style={{ backgroundColor: valueToColor(data.items[index].cellC) }}>
-                          {data.items[index].cellC}
-                        </Cell>
-                        <Cell style={{ backgroundColor: valueToColor(data.items[index].cellD) }}>
-                          {data.items[index].cellD}
-                        </Cell>
-                        <Cell style={{ backgroundColor: valueToColor(data.items[index].cellE) }}>
-                          {data.items[index].cellE}
-                        </Cell>
-                        <Cell style={{ backgroundColor: valueToColor(data.items[index].cellF) }}>
-                          {data.items[index].cellF}
-                        </Cell>
-                        <Cell style={{ backgroundColor: valueToColor(data.items[index].cellG) }}>
-                          {data.items[index].cellG}
-                        </Cell>
-                        <Cell style={{ backgroundColor: valueToColor(data.items[index].cellH) }}>
-                          {data.items[index].cellH}
-                        </Cell>
-                        <Cell style={{ backgroundColor: valueToColor(data.items[index].cellI) }}>
-                          {data.items[index].cellI}
-                        </Cell>
-                        <Cell style={{ backgroundColor: valueToColor(data.items[index].cellJ) }}>
-                          {data.items[index].cellJ}
-                        </Cell>
-                      </Row>
-                    </div>
-                  )}
-                </FixedSizeList>
+            <Virtualized
+              tableList={tableList}
+              rowHeight={ROW_HEIGHT}
+              header={() => (
+                <HeaderRow>
+                  <HeaderCell resize pinLeft>
+                    A
+                  </HeaderCell>
+                  <HeaderCell resize pinLeft>
+                    B
+                  </HeaderCell>
+                  <HeaderCell resize>C</HeaderCell>
+                  <HeaderCell resize>D</HeaderCell>
+                  <HeaderCell resize>E</HeaderCell>
+                  <HeaderCell resize>F</HeaderCell>
+                  <HeaderCell resize>G</HeaderCell>
+                  <HeaderCell resize>H</HeaderCell>
+                  <HeaderCell resize>I</HeaderCell>
+                  <HeaderCell resize>J</HeaderCell>
+                </HeaderRow>
               )}
-            </AutoSizer>
+              body={(item, index) => (
+                <Row item={item}>
+                  <Cell pinLeft style={{ backgroundColor: valueToColor(item.cellA) }}>
+                    {item.cellA}
+                  </Cell>
+                  <Cell pinLeft style={{ backgroundColor: valueToColor(item.cellB) }}>
+                    {item.cellB}
+                  </Cell>
+                  <Cell style={{ backgroundColor: valueToColor(item.cellC) }}>{item.cellC}</Cell>
+                  <Cell style={{ backgroundColor: valueToColor(item.cellD) }}>{item.cellD}</Cell>
+                  <Cell style={{ backgroundColor: valueToColor(item.cellE) }}>{item.cellE}</Cell>
+                  <Cell style={{ backgroundColor: valueToColor(item.cellF) }}>{item.cellF}</Cell>
+                  <Cell style={{ backgroundColor: valueToColor(item.cellG) }}>{item.cellG}</Cell>
+                  <Cell style={{ backgroundColor: valueToColor(item.cellH) }}>{item.cellH}</Cell>
+                  <Cell style={{ backgroundColor: valueToColor(item.cellI) }}>{item.cellI}</Cell>
+                  <Cell style={{ backgroundColor: valueToColor(item.cellJ) }}>{item.cellJ}</Cell>
+                </Row>
+              )}
+            />
           )}
         </Table>
       </div>

@@ -26,3 +26,19 @@ export const applyToHeaderColumns = (tableElementRef: TableElementRef, callback:
 
 export const applyToColumns = (tableElementRef: TableElementRef, callback: Callback) =>
   applyToBaseColumns(tableElementRef, callback, '.tr-body', '.td');
+
+export type DataColumn = {
+  index: number;
+  minWidth: number;
+  width: number;
+  isStiff: boolean;
+  isHide?: boolean;
+};
+
+export const toDataColumn = (column: HTMLElement, index: number) => ({
+  index,
+  minWidth: +column.getAttribute('data-resize-min-width')!,
+  width: column.getBoundingClientRect().width,
+  isStiff: column.classList.contains('stiff'),
+  isHide: column.getAttribute('data-hide') === 'true',
+});

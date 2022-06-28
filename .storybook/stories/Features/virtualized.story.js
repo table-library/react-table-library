@@ -12,30 +12,13 @@ import {
   HeaderCell,
   Cell,
 } from '@table-library/react-table-library/table';
-import { useTheme } from '@table-library/react-table-library/theme';
+import { Virtualized } from '@table-library/react-table-library/virtualized';
 
 import { useTree, CellTree } from '@table-library/react-table-library/tree';
 
 import { manyNodes } from '../data';
 
 const ROW_HEIGHT = 19;
-
-const WithStickyHeader = React.forwardRef(({ children, ...rest }, ref) => (
-  <div ref={ref} {...rest}>
-    <Header>
-      <HeaderRow>
-        <HeaderCell stiff>Index</HeaderCell>
-        <HeaderCell>Task</HeaderCell>
-        <HeaderCell>Deadline</HeaderCell>
-        <HeaderCell>Type</HeaderCell>
-        <HeaderCell>Complete</HeaderCell>
-        <HeaderCell>Tasks</HeaderCell>
-      </HeaderRow>
-    </Header>
-
-    <Body>{children}</Body>
-  </div>
-));
 
 storiesOf('Features/Virtualized', module)
   .addParameters({
@@ -52,53 +35,41 @@ storiesOf('Features/Virtualized', module)
   .add('large list', () => {
     const data = { nodes: manyNodes };
 
-    const theme = useTheme({
-      Table: `
-        height: 100%;
-      `,
-    });
-
     return (
       /* see Features/Fixed Header for flexbox instead of height container */
       <div style={{ height: '300px' }}>
-        <Table data={data} theme={theme}>
+        <Table data={data} layout={{ fixedHeader: true }}>
           {(tableList) => (
-            <AutoSizer>
-              {({ width, height }) => (
-                <FixedSizeList
-                  height={height}
-                  width={width}
-                  itemCount={tableList.length}
-                  itemSize={ROW_HEIGHT}
-                  innerElementType={WithStickyHeader}
-                  itemData={{ items: tableList }}
-                >
-                  {({ index, style, data }) => (
-                    <div
-                      style={{
-                        ...style,
-                        top: style.top + ROW_HEIGHT,
-                      }}
-                    >
-                      <Row item={data.items[index]}>
-                        <Cell stiff>{index}</Cell>
-                        <Cell>{data.items[index].name}</Cell>
-                        <Cell>
-                          {data.items[index].deadline.toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit',
-                          })}
-                        </Cell>
-                        <Cell>{data.items[index].type}</Cell>
-                        <Cell>{data.items[index].isComplete.toString()}</Cell>
-                        <Cell>{data.items[index].nodes?.length}</Cell>
-                      </Row>
-                    </div>
-                  )}
-                </FixedSizeList>
+            <Virtualized
+              tableList={tableList}
+              rowHeight={ROW_HEIGHT}
+              header={() => (
+                <HeaderRow>
+                  <HeaderCell stiff>Index</HeaderCell>
+                  <HeaderCell>Task</HeaderCell>
+                  <HeaderCell>Deadline</HeaderCell>
+                  <HeaderCell>Type</HeaderCell>
+                  <HeaderCell>Complete</HeaderCell>
+                  <HeaderCell>Tasks</HeaderCell>
+                </HeaderRow>
               )}
-            </AutoSizer>
+              body={(item, index) => (
+                <Row item={item}>
+                  <Cell stiff>{index}</Cell>
+                  <Cell>{item.name}</Cell>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
+                </Row>
+              )}
+            />
           )}
         </Table>
       </div>
@@ -106,12 +77,6 @@ storiesOf('Features/Virtualized', module)
   })
   .add('large tree', () => {
     const data = { nodes: manyNodes };
-
-    const theme = useTheme({
-      Table: `
-        height: 100%;
-      `,
-    });
 
     const tree = useTree(
       data,
@@ -130,44 +95,38 @@ storiesOf('Features/Virtualized', module)
     return (
       /* see Features/Fixed Header for flexbox instead of height container */
       <div style={{ height: '300px' }}>
-        <Table data={data} theme={theme} tree={tree}>
+        <Table data={data} layout={{ fixedHeader: true }} tree={tree}>
           {(tableList) => (
-            <AutoSizer>
-              {({ width, height }) => (
-                <FixedSizeList
-                  height={height}
-                  width={width}
-                  itemCount={tableList.length}
-                  itemSize={ROW_HEIGHT}
-                  innerElementType={WithStickyHeader}
-                  itemData={{ items: tableList }}
-                >
-                  {({ index, style, data }) => (
-                    <div
-                      style={{
-                        ...style,
-                        top: style.top + ROW_HEIGHT,
-                      }}
-                    >
-                      <Row item={data.items[index]}>
-                        <Cell stiff>{index}</Cell>
-                        <CellTree item={data.items[index]}>{data.items[index].name}</CellTree>
-                        <Cell>
-                          {data.items[index].deadline.toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit',
-                          })}
-                        </Cell>
-                        <Cell>{data.items[index].type}</Cell>
-                        <Cell>{data.items[index].isComplete.toString()}</Cell>
-                        <Cell>{data.items[index].nodes?.length}</Cell>
-                      </Row>
-                    </div>
-                  )}
-                </FixedSizeList>
+            <Virtualized
+              tableList={tableList}
+              rowHeight={ROW_HEIGHT}
+              header={() => (
+                <HeaderRow>
+                  <HeaderCell stiff>Index</HeaderCell>
+                  <HeaderCell>Task</HeaderCell>
+                  <HeaderCell>Deadline</HeaderCell>
+                  <HeaderCell>Type</HeaderCell>
+                  <HeaderCell>Complete</HeaderCell>
+                  <HeaderCell>Tasks</HeaderCell>
+                </HeaderRow>
               )}
-            </AutoSizer>
+              body={(item, index) => (
+                <Row item={item}>
+                  <Cell stiff>{index}</Cell>
+                  <CellTree item={item}>{item.name}</CellTree>
+                  <Cell>
+                    {item.deadline.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                    })}
+                  </Cell>
+                  <Cell>{item.type}</Cell>
+                  <Cell>{item.isComplete.toString()}</Cell>
+                  <Cell>{item.nodes?.length}</Cell>
+                </Row>
+              )}
+            />
           )}
         </Table>
       </div>

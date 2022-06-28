@@ -27,7 +27,7 @@ const Component = () => {
   };
 
   const COLUMNS = [
-    { label: 'Task', renderCell: (item) => item.name, hide: { hideKey: 'TASK' } },
+    { label: 'Task', renderCell: (item) => item.name, hide: hiddenColumns.includes('TASK') },
     {
       label: 'Deadline',
       renderCell: (item) =>
@@ -36,15 +36,19 @@ const Component = () => {
           month: '2-digit',
           day: '2-digit',
         }),
-      hide: { hideKey: 'DEADLINE' },
+      hide: hiddenColumns.includes('DEADLINE'),
     },
-    { label: 'Type', renderCell: (item) => item.type, hide: { hideKey: 'TYPE' } },
+    { label: 'Type', renderCell: (item) => item.type, hide: hiddenColumns.includes('TYPE') },
     {
       label: 'Complete',
       renderCell: (item) => item.isComplete.toString(),
-      hide: { hideKey: 'COMPLETE' },
+      hide: hiddenColumns.includes('COMPLETE'),
     },
-    { label: 'Tasks', renderCell: (item) => item.nodes?.length, hide: { hideKey: 'TASKS' } },
+    {
+      label: 'Tasks',
+      renderCell: (item) => item.nodes?.length,
+      hide: hiddenColumns.includes('TASKS'),
+    },
   ];
 
   return (
@@ -137,7 +141,7 @@ const Component = () => {
   };
 
   const COLUMNS = [
-    { label: 'Task', renderCell: (item) => item.name, hide: { hideKey: 'TASK' } },
+    { label: 'Task', renderCell: (item) => item.name, hide: hiddenColumns.includes('TASK') },
     {
       label: 'Deadline',
       renderCell: (item) =>
@@ -146,15 +150,19 @@ const Component = () => {
           month: '2-digit',
           day: '2-digit',
         }),
-      hide: { hideKey: 'DEADLINE' },
+      hide: hiddenColumns.includes('DEADLINE'),
     },
-    { label: 'Type', renderCell: (item) => item.type, hide: { hideKey: 'TYPE' } },
+    { label: 'Type', renderCell: (item) => item.type, hide: hiddenColumns.includes('TYPE') },
     {
       label: 'Complete',
       renderCell: (item) => item.isComplete.toString(),
-      hide: { hideKey: 'COMPLETE' },
+      hide: hiddenColumns.includes('COMPLETE'),
     },
-    { label: 'Tasks', renderCell: (item) => item.nodes?.length, hide: { hideKey: 'TASKS' } },
+    {
+      label: 'Tasks',
+      renderCell: (item) => item.nodes?.length,
+      hide: hiddenColumns.includes('TASKS'),
+    },
   ];
 
   return (

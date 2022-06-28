@@ -8,4 +8,3 @@ export * from './resize';
 export * from './select';
 export * from './sort';
 export * from './tree';
-export * from './hide';

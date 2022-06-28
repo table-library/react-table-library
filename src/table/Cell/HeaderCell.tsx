@@ -6,14 +6,70 @@ import { css, jsx } from '@emotion/react';
 
 import { HeaderCellContainer } from '@table-library/react-table-library/common/components/Cell';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
+import {
+  LayoutContext,
+  propagateResizedLayout,
+  setResizedLayout,
+} from '@table-library/react-table-library/common/context';
 import { resizerStyle } from '@table-library/react-table-library/resize/styles';
 import { useResize } from '@table-library/react-table-library/resize/useResize';
+import {
+  DataColumn,
+  toDataColumn,
+  getHeaderColumns,
+} from '@table-library/react-table-library/common/util/columns';
 
 import { HeaderCellProps } from '@table-library/react-table-library/types/table';
+import { Nullish } from '@table-library/react-table-library/types/common';
+
+const getPreservedColumn = (index: number, preservedDataColumns: DataColumn[]) => {
+  const findPreservedDataColumn = (dataColumn: DataColumn) => dataColumn.index === index;
+  const preservedDataColumn = preservedDataColumns.find(findPreservedDataColumn)!;
+
+  return preservedDataColumn;
+};
+
+const useUpdateLayout = (index: number, hide: boolean | Nullish) => {
+  const context = React.useContext(LayoutContext);
+
+  if (!context) {
+    throw new Error('No Layout Context.');
+  }
+
+  const { layout, tableElementRef, tableMemoryRef } = context;
+
+  React.useLayoutEffect(() => {
+    const preservedDataColumns = tableMemoryRef.current!.dataColumns;
+    const dataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
+    const thisPreservedDataColumn = getPreservedColumn(index, preservedDataColumns);
+
+    const hideStatusDidNotChange = thisPreservedDataColumn?.isHide === !!hide;
+    if (!preservedDataColumns?.length || hideStatusDidNotChange) return;
+
+    const visibleDataColumns = dataColumns.filter((dataColumn) => !dataColumn.isHide);
+
+    const getPartialResizedLayout = (dataColumn: DataColumn) => {
+      if (dataColumn.isStiff || layout?.horizontalScroll) {
+        const preservedDataColumn = getPreservedColumn(dataColumn.index, preservedDataColumns);
+
+        return `${preservedDataColumn.width || preservedDataColumn.minWidth * 2}px`;
+      } else {
+        return 'minmax(0px, 1fr)';
+      }
+    };
+
+    const resizedLayout = visibleDataColumns.map(getPartialResizedLayout).join(' ');
+
+    setResizedLayout(resizedLayout, tableElementRef, tableMemoryRef);
+    propagateResizedLayout(resizedLayout, layout);
+
+    const newPreservedDataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
+    tableMemoryRef.current!.dataColumns = newPreservedDataColumns;
+  }, [index, hide, layout, tableElementRef, tableMemoryRef]);
+};
 
 export const HeaderCell: React.FC<HeaderCellProps> = ({
   index,
-  hideKey,
   className,
   hide,
   pinLeft,
@@ -26,14 +82,15 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
 }: HeaderCellProps) => {
   const theme = React.useContext(ThemeContext);
 
-  const cellRef = React.useRef<HTMLDivElement>(null);
-  const { resizeRef } = useResize(cellRef, index!);
+  useUpdateLayout(index!, hide);
+
+  const { cellRef, resizeRef } = useResize(index!, hide);
 
   return (
     <HeaderCellContainer
       role={role}
       data-table-library_th=""
-      data-cell-key={hideKey || index}
+      data-hide={!!hide}
       data-resize-min-width={
         typeof resize === 'boolean' || resize?.minWidth == null ? 75 : resize.minWidth
       }
@@ -43,6 +100,7 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
       `}
       className={cs('th', className, {
         stiff,
+        hide,
         resize,
         'pin-left': pinLeft,
         'pin-right': pinRight,
@@ -51,7 +109,7 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
       {...rest}
     >
       <div>{children}</div>
-      {resize && <span ref={resizeRef} css={resizerStyle(resize)} />}
+      {resize && !hide && <span ref={resizeRef} css={resizerStyle(resize)} />}
     </HeaderCellContainer>
   );
 };

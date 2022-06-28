@@ -15,7 +15,12 @@ const Component = () => {
   const data = { nodes };
 
   const materialTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(materialTheme);
+  const customTheme = {
+    Table: `
+      --data-table-library_grid-template-columns:  70px repeat(5, minmax(0, 1fr));
+    `,
+  };
+  const theme = useTheme([materialTheme, customTheme]);
 
   const select = useRowSelect(data, {
     onChange: onSelectChange,
@@ -32,6 +37,7 @@ const Component = () => {
       select: {
         renderHeaderCellSelect: () => (
           <Checkbox
+            size="small"
             checked={select.state.all}
             indeterminate={!select.state.all && !select.state.none}
             onChange={select.fns.onToggleAll}
@@ -39,6 +45,7 @@ const Component = () => {
         ),
         renderCellSelect: (item) => (
           <Checkbox
+            size="small"
             checked={select.state.ids.includes(item.id)}
             onChange={() => select.fns.onToggleById(item.id)}
           />
@@ -89,8 +96,13 @@ const key = 'Select';
 const Component = () => {
   const data = { nodes };
 
-  const materialTheme = getTheme(DEFAULT_OPTIONS);
-  const theme = useTheme(materialTheme);
+const materialTheme = getTheme(DEFAULT_OPTIONS);
+  const customTheme = {
+    Table: \`
+      --data-table-library_grid-template-columns:  70px repeat(5, minmax(0, 1fr));
+    \`,
+  };
+  const theme = useTheme([materialTheme, customTheme]);
 
   const select = useRowSelect(data, {
     onChange: onSelectChange,
@@ -107,6 +119,7 @@ const Component = () => {
       select: {
         renderHeaderCellSelect: () => (
           <Checkbox
+            size="small"
             checked={select.state.all}
             indeterminate={!select.state.all && !select.state.none}
             onChange={select.fns.onToggleAll}
@@ -114,6 +127,7 @@ const Component = () => {
         ),
         renderCellSelect: (item) => (
           <Checkbox
+            size="small"
             checked={select.state.ids.includes(item.id)}
             onChange={() => select.fns.onToggleById(item.id)}
           />

@@ -10,6 +10,7 @@ import {
   HeaderCell,
   Cell,
 } from '@table-library/react-table-library/table';
+import { useTheme } from '@table-library/react-table-library/theme';
 
 import { CellTree, useTree, TreeExpandClickTypes } from '@table-library/react-table-library/tree';
 import {
@@ -81,6 +82,12 @@ storiesOf('Composites/Tree & Select', module)
   .add('select on checkbox, expand tree on tree icon click', () => {
     const data = { nodes };
 
+    const theme = useTheme({
+      Table: `
+        --data-table-library_grid-template-columns:  24px repeat(5, minmax(0, 1fr));
+      `,
+    });
+
     const tree = useTree(
       data,
       {
@@ -111,7 +118,7 @@ storiesOf('Composites/Tree & Select', module)
     }
 
     return (
-      <Table data={data} tree={tree} select={select}>
+      <Table data={data} theme={theme} layout={{ custom: true }} tree={tree} select={select}>
         {(tableList) => (
           <>
             <Header>
@@ -151,6 +158,12 @@ storiesOf('Composites/Tree & Select', module)
   .add('select on row click, expand tree on tree icon click', () => {
     const data = { nodes };
 
+    const theme = useTheme({
+      Table: `
+        --data-table-library_grid-template-columns:  24px repeat(5, minmax(0, 1fr));
+      `,
+    });
+
     const tree = useTree(
       data,
       {
@@ -181,7 +194,7 @@ storiesOf('Composites/Tree & Select', module)
     }
 
     return (
-      <Table data={data} tree={tree} select={select}>
+      <Table data={data} theme={theme} layout={{ custom: true }} tree={tree} select={select}>
         {(tableList) => (
           <>
             <Header>
@@ -221,6 +234,12 @@ storiesOf('Composites/Tree & Select', module)
   .add('expand tree on row click, select on checkbox', () => {
     const data = { nodes };
 
+    const theme = useTheme({
+      Table: `
+        --data-table-library_grid-template-columns:  24px repeat(5, minmax(0, 1fr));
+      `,
+    });
+
     const tree = useTree(
       data,
       {
@@ -251,7 +270,7 @@ storiesOf('Composites/Tree & Select', module)
     }
 
     return (
-      <Table data={data} tree={tree} select={select}>
+      <Table data={data} theme={theme} layout={{ custom: true }} tree={tree} select={select}>
         {(tableList) => (
           <>
             <Header>
@@ -352,6 +371,12 @@ storiesOf('Composites/Tree & Select', module)
   .add('only checkbox: select on checkbox, expand tree on row click', () => {
     const data = { nodes };
 
+    const theme = useTheme({
+      Table: `
+        --data-table-library_grid-template-columns:  24px repeat(5, minmax(0, 1fr));
+      `,
+    });
+
     const tree = useTree(
       data,
       {
@@ -381,7 +406,7 @@ storiesOf('Composites/Tree & Select', module)
     }
 
     return (
-      <Table data={data} tree={tree} select={select}>
+      <Table data={data} theme={theme} layout={{ custom: true }} tree={tree} select={select}>
         {(tableList) => (
           <>
             <Header>

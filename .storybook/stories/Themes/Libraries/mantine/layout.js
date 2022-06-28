@@ -14,21 +14,8 @@ const Component = () => {
 
   const mantineTheme = getTheme(DEFAULT_OPTIONS);
   const customTheme = useTheme({
-    BaseCell: `
-      &:nth-of-type(1) {
-        min-width: 35%;
-        width: 35%;
-      }
-
-      &:nth-of-type(2), &:nth-of-type(3), &:nth-of-type(4) {
-        min-width: 15%;
-        width: 15%;
-      }
-
-      &:nth-of-type(5) {
-        min-width: 20%;
-        width: 20%;
-      }
+    Table: `
+      --data-table-library_grid-template-columns:  30% repeat(2, minmax(0, 1fr)) 25% 100px;
     `,
   });
   const theme = useTheme([mantineTheme, customTheme]);
@@ -82,21 +69,8 @@ const Component = () => {
 
   const mantineTheme = getTheme(DEFAULT_OPTIONS);
   const customTheme = useTheme({
-    BaseCell: \`
-      &:nth-of-type(1) {
-        min-width: 35%;
-        width: 35%;
-      }
-
-      &:nth-of-type(2), &:nth-of-type(3), &:nth-of-type(4) {
-        min-width: 15%;
-        width: 15%;
-      }
-
-      &:nth-of-type(5) {
-        min-width: 20%;
-        width: 20%;
-      }
+    Table: \`
+      --data-table-library_grid-template-columns:  30% repeat(2, minmax(0, 1fr)) 25% 100px;
     \`,
   });
   const theme = useTheme([mantineTheme, customTheme]);

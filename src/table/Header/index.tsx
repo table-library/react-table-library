@@ -4,13 +4,12 @@ import * as React from 'react';
 import { css, jsx } from '@emotion/react';
 
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
+import { LayoutContext } from '@table-library/react-table-library/common/context';
 
 import { HeaderProps } from '@table-library/react-table-library/types/table';
 
 const headerRow = `
-  position: sticky;
-  top: 0;
-  z-index: 4;
+  display: contents;
 `;
 
 export const Header: React.FC<HeaderProps> = ({
@@ -20,8 +19,18 @@ export const Header: React.FC<HeaderProps> = ({
 }: HeaderProps) => {
   const theme = React.useContext(ThemeContext);
 
+  const context = React.useContext(LayoutContext);
+
+  if (!context) {
+    throw new Error('No Layout Context.');
+  }
+
+  const { layout } = context;
+
+  const As = layout?.isDiv ? 'div' : 'thead';
+
   return (
-    <div
+    <As
       role="rowgroup"
       className={_className}
       css={css`
@@ -35,6 +44,6 @@ export const Header: React.FC<HeaderProps> = ({
           return React.cloneElement(child);
         }
       })}
-    </div>
+    </As>
   );
 };

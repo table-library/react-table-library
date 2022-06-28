@@ -42,6 +42,8 @@ const Component = () => {
   });
   const customTheme = {
     Table: `
+      --data-table-library_grid-template-columns:  44px repeat(5, minmax(0, 1fr));
+
       margin: 16px 0px;
     `,
   };
@@ -316,6 +318,7 @@ const Component = () => {
         columns={COLUMNS}
         data={{ ...data, nodes: modifiedNodes }}
         theme={theme}
+        layout={{ custom: true }}
         select={select}
         tree={tree}
         sort={sort}
@@ -403,6 +406,8 @@ const Component = () => {
   });
   const customTheme = {
     Table: \`
+      --data-table-library_grid-template-columns:  44px repeat(5, minmax(0, 1fr));
+
       margin: 16px 0px;
     \`,
   };
@@ -603,7 +608,7 @@ const Component = () => {
     {
       label: 'Tasks',
       renderCell: (item) => (
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
           <span>{item.nodes?.length}</span>
           <ActionIcon
             variant="hover"
@@ -677,6 +682,7 @@ const Component = () => {
         columns={COLUMNS}
         data={{ ...data, nodes: modifiedNodes }}
         theme={theme}
+        layout={{ custom: true }}
         select={select}
         tree={tree}
         sort={sort}
