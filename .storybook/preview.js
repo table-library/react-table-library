@@ -22,6 +22,7 @@ const Features = [
   'Editable',
   'Data Grid',
   'Column Hiding',
+  'Column Replace',
   'Column Ordering',
   'Column Grouping (WIP)',
 ];

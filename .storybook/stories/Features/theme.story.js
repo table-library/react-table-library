@@ -27,7 +27,7 @@ storiesOf('Features/Theme', module)
       Cell,
     },
   })
-  .add('opt-in baseline', () => {
+  .add('optional baseline', () => {
     const data = { nodes };
 
     const theme = useTheme(getTheme());
@@ -250,8 +250,10 @@ storiesOf('Features/Theme', module)
     const data = { nodes };
 
     const theme = useTheme({
-      HeaderCell: `
-        border-bottom: 1px solid #a0a8ae;
+      HeaderRow: `
+        .th {
+          border-bottom: 1px solid #a0a8ae;
+        }
       `,
       BaseCell: `
         &:not(:last-of-type) {
@@ -306,23 +308,23 @@ storiesOf('Features/Theme', module)
       </Table>
     );
   })
-  .add('gap', () => {
+  .add('margin', () => {
     const data = { nodes };
 
     const theme = useTheme({
-      HeaderCell: `
-        border-bottom: 1px solid #a0a8ae;
-      `,
-      Row: `
-        .td {
+      HeaderRow: `
+        .th {
           border-bottom: 1px solid #a0a8ae;
         }
       `,
       BaseCell: `
-        border-right: 1px solid #a0a8ae;
-
         margin: 9px;
         padding: 11px;
+      `,
+      Cell: `
+        &:not(:last-of-type) {
+          border-right: 1px solid #a0a8ae;
+        }
       `,
     });
 
@@ -362,19 +364,21 @@ storiesOf('Features/Theme', module)
       </Table>
     );
   })
-  .add('indentation', () => {
+  .add('padding', () => {
     const data = { nodes };
 
     const theme = useTheme({
-      HeaderCell: `
-        border-bottom: 1px solid #a0a8ae;
+      HeaderRow: `
+        .th {
+          border-bottom: 1px solid #a0a8ae;
+        }
       `,
       BaseCell: `
         &:not(:last-of-type) {
           border-right: 1px solid #a0a8ae;
         }
 
-        padding-left: 30px;
+        padding: 8px 16px;
       `,
     });
 
@@ -418,18 +422,20 @@ storiesOf('Features/Theme', module)
     const data = { nodes };
 
     const theme = useTheme({
+      HeaderRow: `
+        .th {
+          border-bottom: 1px solid #a0a8ae;
+        }
+      `,
       BaseCell: `
         &:not(:last-of-type) {
           border-right: 1px solid #a0a8ae;
         }
       `,
       HeaderCell: `
-        border-bottom: 1px solid #a0a8ae;
         padding-right: 6px;
 
         & > div {
-          flex: 1;
-
           display: flex;
           justify-content: space-between;
         }
@@ -492,18 +498,14 @@ storiesOf('Features/Theme', module)
 
     const theme = useTheme({
       Row: `
-        position: relative;
-        z-index: 1;
+        cursor: pointer;
 
         .td {
           border-top: 1px solid #a0a8ae;
           border-bottom: 1px solid #a0a8ae;
         }
 
-        cursor: pointer;
-
         &:hover .td {
-          z-index: 2;
           border-top: 1px solid orange;
           border-bottom: 1px solid orange;
         }
@@ -580,14 +582,14 @@ storiesOf('Features/Theme', module)
       `,
     };
 
-    const gapTheme = {
+    const marginTheme = {
       BaseCell: `
         margin: 9px;
         padding: 11px;
       `,
     };
 
-    const theme = useTheme([colorTheme, stripedTheme, gapTheme]);
+    const theme = useTheme([colorTheme, stripedTheme, marginTheme]);
 
     return (
       <Table data={data} theme={theme}>
