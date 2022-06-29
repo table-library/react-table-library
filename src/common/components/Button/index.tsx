@@ -6,7 +6,7 @@ import { css, jsx } from '@emotion/react';
 import styles from './styles';
 
 type ButtonProps = {
-  margin: string;
+  margin?: string;
 } & Record<string, any>;
 
 export const Button: React.FC<ButtonProps> = React.forwardRef(
