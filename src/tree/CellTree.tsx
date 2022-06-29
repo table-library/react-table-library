@@ -91,7 +91,7 @@ export const CellTree: React.FC<CellTreeProps> = ({
           margin={icon ? mergedTreeIconOptions.margin : mergedTreeIconOptions.noIconMargin}
           onClick={handleClick}
         >
-          {icon ? <span>{icon}</span> : <span />}
+          {icon ? <div>{icon}</div> : <div />}
         </Button>
         <div>{children}</div>
       </div>

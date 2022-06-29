@@ -5,8 +5,12 @@ import { css, jsx } from '@emotion/react';
 
 import styles from './styles';
 
-export const Button = React.forwardRef(
-  (props: Record<string, any>, ref: React.ForwardedRef<HTMLButtonElement>) => {
-    return <button type="button" ref={ref} {...props} css={styles} />;
+type ButtonProps = {
+  margin: string;
+} & Record<string, any>;
+
+export const Button: React.FC<ButtonProps> = React.forwardRef(
+  ({ margin, ...props }: ButtonProps, ref: React.ForwardedRef<HTMLButtonElement>) => {
+    return <button type="button" ref={ref} {...props} css={styles({ margin })} />;
   },
 );
