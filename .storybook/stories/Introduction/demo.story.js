@@ -55,7 +55,7 @@ const disablePin = `
 
 export const CUSTOM_SHARED_THEME = {
   Table: `
-    --data-table-library_grid-template-columns:  80px 80px 240px repeat(6, minmax(180px, 1fr)) 80px;
+    --data-table-library_grid-template-columns:  80px 80px 240px repeat(6, minmax(20%, 1fr)) 80px;
   `,
   BaseRow: `
     font-size: 14px;
