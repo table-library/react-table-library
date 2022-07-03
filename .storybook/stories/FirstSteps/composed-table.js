@@ -9,6 +9,8 @@ import {
   HeaderCell,
   Cell,
 } from '@table-library/react-table-library/table';
+import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 
 import { nodes } from '../data';
 
@@ -17,8 +19,10 @@ const key = 'Composed Table';
 const Component = () => {
   const data = { nodes };
 
+  const theme = useTheme(getTheme());
+
   return (
-    <Table data={data}>
+    <Table data={data} theme={theme}>
       {(tableList) => (
         <>
           <Header>
@@ -66,6 +70,8 @@ import {
   HeaderCell,
   Cell,
 } from '@table-library/react-table-library/table';
+import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 
 import { nodes } from '../data';
 
@@ -74,8 +80,10 @@ const key = 'Composed Table';
 const Component = () => {
   const data = { nodes };
 
+  const theme = useTheme(getTheme());
+
   return (
-    <Table data={data}>
+    <Table data={data} theme={theme}>
       {(tableList) => (
         <>
           <Header>

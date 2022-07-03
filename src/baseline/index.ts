@@ -8,7 +8,7 @@ const BASELINE_THEME = {
   Header: '',
   Body: '',
   BaseRow: `
-    font-size: 18px;
+    font-size: 16px;
   `,
   HeaderRow: `
     color: ${COLORS.FONT_PRIMARY};
@@ -23,15 +23,16 @@ const BASELINE_THEME = {
     &:hover {
       color: ${COLORS.FONT_PRIMARY};
     }
+
+    &:not(:last-of-type) > .td {
+      border-bottom: 1px solid ${COLORS.BORDER};
+    }
   `,
   BaseCell: `
     padding: 6px 12px;
-
-    &:not(:last-of-type) {
-      border-right: 1px solid ${COLORS.BORDER};
-    }
   `,
   HeaderCell: `
+    font-weight: bold;
     border-bottom: 1px solid ${COLORS.BORDER};
 
     svg,
@@ -39,7 +40,13 @@ const BASELINE_THEME = {
       fill: currentColor;
     }
   `,
-  Cell: '',
+  Cell: `
+    &:focus {
+      outline: dotted;
+      outline-width: 1px;
+      outline-offset: -1px;
+    }
+  `,
 };
 
 export const getTheme = (): Theme => {

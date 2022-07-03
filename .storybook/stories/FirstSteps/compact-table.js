@@ -1,6 +1,8 @@
 import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
+import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 
 import { nodes } from '../data';
 
@@ -9,6 +11,8 @@ const key = 'Compact Table';
 const Component = () => {
   const data = { nodes };
 
+  const theme = useTheme(getTheme());
+
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name },
     {
@@ -28,20 +32,24 @@ const Component = () => {
     { label: 'Tasks', renderCell: (item) => item.nodes?.length },
   ];
 
-  return <CompactTable columns={COLUMNS} data={data} layout={{ isDiv: true }} />;
+  return <CompactTable columns={COLUMNS} data={data} theme={theme} />;
 };
 
 const code = `
 import * as React from 'react';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
+import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 
 import { nodes } from '../data';
 
-const key = 'CompactTable';
+const key = 'Compact Table';
 
 const Component = () => {
   const data = { nodes };
+
+  const theme = useTheme(getTheme());
 
   const COLUMNS = [
     { label: 'Task', renderCell: (item) => item.name },
@@ -62,7 +70,7 @@ const Component = () => {
     { label: 'Tasks', renderCell: (item) => item.nodes?.length },
   ];
 
-  return <CompactTable columns={COLUMNS} data={data} />;
+  return <CompactTable columns={COLUMNS} data={data} theme={theme} />;
 };
 `;
 
