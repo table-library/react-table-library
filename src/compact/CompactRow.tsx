@@ -37,6 +37,7 @@ export const CompactRow: React.FC<CompactRowProps> = ({
           const sharedProps = {
             pinLeft: column.pinLeft,
             pinRight: column.pinRight,
+            hide: column.hide,
           };
 
           const evaluatedCellProps = evaluateProps(column?.cellProps || {}, item);
