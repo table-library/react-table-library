@@ -136,7 +136,7 @@ export const useResize = (index: number, hide: boolean | Nullish) => {
   const { tableElementRef, tableMemoryRef, layout } = context;
 
   const cellRef = React.useRef<HTMLTableCellElement>(null);
-  const resizeRef = React.useRef<HTMLSpanElement>(null);
+  const resizeRef = React.useRef<HTMLDivElement>(null);
 
   const previousGrid = React.useRef<string>('');
 
@@ -153,6 +153,8 @@ export const useResize = (index: number, hide: boolean | Nullish) => {
 
       isMouseDown.current = true;
       startOffset.current = cellRef.current!.offsetWidth - event.pageX;
+
+      cellRef.current?.querySelector('.resizer-area')!.classList.add('active');
     },
     [tableElementRef],
   );
@@ -186,6 +188,8 @@ export const useResize = (index: number, hide: boolean | Nullish) => {
       const newPreservedDataColumns = getHeaderColumns(tableElementRef).map(toDataColumn);
       tableMemoryRef.current!.dataColumns = newPreservedDataColumns;
     }
+
+    cellRef.current?.querySelector('.resizer-area')!.classList.remove('active');
   }, [layout, tableElementRef, tableMemoryRef]);
 
   React.useEffect(() => {

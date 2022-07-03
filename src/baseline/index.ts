@@ -35,6 +35,10 @@ const BASELINE_THEME = {
     font-weight: bold;
     border-bottom: 1px solid ${COLORS.BORDER};
 
+    .resizer-handle {
+      background-color: ${COLORS.BORDER};
+    }
+
     svg,
     path {
       fill: currentColor;

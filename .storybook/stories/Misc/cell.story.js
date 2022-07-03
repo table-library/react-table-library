@@ -141,28 +141,21 @@ storiesOf('Misc/Cell', module)
               {tableList.map((item, index) => (
                 <Row key={item.id} item={item}>
                   <Cell
-                    ariaColindex={1 + index * 5}
                     tabIndex={1 + index * 5}
                     onClick={(event) => console.log('Click Cell', event)}
                   >
                     {item.name}
                   </Cell>
-                  <Cell ariaColindex={2 + index * 5} tabIndex={2 + index * 5}>
+                  <Cell tabIndex={2 + index * 5}>
                     {item.deadline.toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: '2-digit',
                       day: '2-digit',
                     })}
                   </Cell>
-                  <Cell ariaColindex={3 + index * 5} tabIndex={3 + index * 5}>
-                    {item.type}
-                  </Cell>
-                  <Cell ariaColindex={4 + index * 5} tabIndex={4 + index * 5}>
-                    {item.isComplete.toString()}
-                  </Cell>
-                  <Cell ariaColindex={5 + index * 5} tabIndex={5 + index * 5}>
-                    {item.nodes?.length}
-                  </Cell>
+                  <Cell tabIndex={3 + index * 5}>{item.type}</Cell>
+                  <Cell tabIndex={4 + index * 5}>{item.isComplete.toString()}</Cell>
+                  <Cell tabIndex={5 + index * 5}>{item.nodes?.length}</Cell>
                 </Row>
               ))}
             </Body>

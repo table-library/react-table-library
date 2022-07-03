@@ -109,7 +109,11 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
       {...rest}
     >
       <div>{children}</div>
-      {resize && !hide && <span ref={resizeRef} css={resizerStyle(resize)} />}
+      {resize && !hide && (
+        <div className="resizer-area" ref={resizeRef} css={resizerStyle(resize).area}>
+          <span className="resizer-handle" css={resizerStyle(resize).handle} />
+        </div>
+      )}
     </HeaderCellContainer>
   );
 };

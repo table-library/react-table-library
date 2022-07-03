@@ -32,7 +32,7 @@ const Component = () => {
       renderCell: (item) => item.isComplete.toString(),
       resize: true,
     },
-    { label: 'Tasks', renderCell: (item) => item.nodes?.length, resize: true },
+    { label: 'Tasks', renderCell: (item) => item.nodes?.length },
   ];
 
   return (
@@ -80,7 +80,7 @@ const Component = () => {
       renderCell: (item) => item.isComplete.toString(),
       resize: true,
     },
-    { label: 'Tasks', renderCell: (item) => item.nodes?.length, resize: true },
+    { label: 'Tasks', renderCell: (item) => item.nodes?.length },
   ];
 
   return (
