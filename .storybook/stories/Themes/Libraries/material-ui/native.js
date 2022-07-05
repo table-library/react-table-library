@@ -113,7 +113,7 @@ const Component = () => {
       <CompactTable columns={COLUMNS} tableOptions={TABLE_OPTIONS} data={data} theme={theme} />
 
       <br />
-      <DocumentationSee noLink anchor={"Mantine's official documentation"} />
+      <DocumentationSee noLink anchor={"Material UI's official documentation"} />
     </>
   );
 };
@@ -234,7 +234,7 @@ const Component = () => {
       <CompactTable columns={COLUMNS} tableOptions={TABLE_OPTIONS} data={data} theme={theme} />
 
       <br />
-      <DocumentationSee noLink anchor={"Mantine's official documentation"} />
+      <DocumentationSee noLink anchor={"Material UI's official documentation"} />
     </>
   );
 };
