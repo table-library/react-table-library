@@ -33,6 +33,7 @@ export type DataColumn = {
   width: number;
   isStiff: boolean;
   isHide?: boolean;
+  isColSpan?: boolean;
 };
 
 export const toDataColumn = (column: HTMLElement, index: number) => ({
@@ -41,4 +42,5 @@ export const toDataColumn = (column: HTMLElement, index: number) => ({
   width: column.getBoundingClientRect().width,
   isStiff: column.classList.contains('stiff'),
   isHide: column.getAttribute('data-hide') === 'true',
+  isColSpan: column.classList.contains('colspan'),
 });

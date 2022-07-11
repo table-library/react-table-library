@@ -9,6 +9,8 @@ import { isRowClick } from '@table-library/react-table-library/common/util/isRow
 import { RowContainer } from '@table-library/react-table-library/common/components/Row';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
 import { useFeatures } from '@table-library/react-table-library/common/context/Feature';
+import { isReactFragment } from '@table-library/react-table-library/common/util/isFragment';
+import { getPreviousColSpans } from '@table-library/react-table-library/common/util/getPreviousColSpans';
 
 import { Nullish } from '@table-library/react-table-library/types/common';
 import {
@@ -110,7 +112,28 @@ export const Row: React.FC<RowProps> = (props: RowProps) => {
       ref={ref}
       {...rest}
     >
-      {children}
+      {React.Children.toArray(children)
+        .filter(Boolean)
+        .map((child, index) => {
+          if (React.isValidElement(child)) {
+            let extraProps = {};
+
+            // edge case: CompactTable renders checkbox (select feature) + cell in one fragment
+            // this would break the resize feature
+            // hence we need to pass the index from the outside then (see CompactTable)
+
+            // also column grouping
+            if (!isReactFragment(child)) {
+              extraProps = {
+                ...extraProps,
+                index,
+                previousColSpans: getPreviousColSpans(children, index),
+              };
+            }
+
+            return React.cloneElement(child, extraProps);
+          }
+        })}
     </RowContainer>
   );
 };

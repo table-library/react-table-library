@@ -15,15 +15,10 @@ import {
   toDataColumn,
   getHeaderColumns,
 } from '@table-library/react-table-library/common/util/columns';
+import { isReactFragment } from '@table-library/react-table-library/common/util/isFragment';
+import { getPreviousColSpans } from '@table-library/react-table-library/common/util/getPreviousColSpans';
 
 import { HeaderRowProps } from '@table-library/react-table-library/types/table';
-
-const isReactFragment = (variableToInspect: any) => {
-  if (variableToInspect.type) {
-    return variableToInspect.type === React.Fragment;
-  }
-  return variableToInspect === React.Fragment;
-};
 
 const useInitialLayout = () => {
   const context = React.useContext(LayoutContext);
@@ -93,10 +88,13 @@ export const HeaderRow: React.FC<HeaderRowProps> = ({
             // edge case: CompactTable renders checkbox (select feature) + cell in one fragment
             // this would break the resize feature
             // hence we need to pass the index from the outside then (see CompactTable)
+
+            // also column grouping
             if (!isReactFragment(child)) {
               extraProps = {
                 ...extraProps,
                 index,
+                previousColSpans: getPreviousColSpans(children, index),
               };
             }
 

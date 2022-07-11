@@ -75,9 +75,12 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
   pinLeft,
   pinRight,
   stiff,
+  colSpan = 0,
+  previousColSpans = 0,
   resize,
   role = 'columnheader',
   children,
+  style,
   ...rest
 }: HeaderCellProps) => {
   const theme = React.useContext(ThemeContext);
@@ -86,34 +89,50 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
 
   const { cellRef, resizeRef } = useResize(index!, hide);
 
+  let colSpanStyle = {};
+  if (colSpan) {
+    colSpanStyle = {
+      ...colSpanStyle,
+      'grid-column': `span ${colSpan} / ${index + colSpan + previousColSpans + 1}`,
+    };
+  }
+
   return (
-    <HeaderCellContainer
-      role={role}
-      data-table-library_th=""
-      data-hide={!!hide}
-      data-resize-min-width={
-        typeof resize === 'boolean' || resize?.minWidth == null ? 75 : resize.minWidth
-      }
-      css={css`
-        ${theme?.BaseCell}
-        ${theme?.HeaderCell}
-      `}
-      className={cs('th', className, {
-        stiff,
-        hide,
-        resize,
-        'pin-left': pinLeft,
-        'pin-right': pinRight,
-      })}
-      ref={cellRef}
-      {...rest}
-    >
-      <div>{children}</div>
-      {resize && !hide && (
-        <div className="resizer-area" ref={resizeRef} css={resizerStyle(resize).area}>
-          <span className="resizer-handle" css={resizerStyle(resize).handle} />
-        </div>
-      )}
-    </HeaderCellContainer>
+    <>
+      <HeaderCellContainer
+        role={role}
+        data-table-library_th=""
+        data-hide={!!hide}
+        data-resize-min-width={
+          typeof resize === 'boolean' || resize?.minWidth == null ? 75 : resize.minWidth
+        }
+        style={{ ...colSpanStyle, ...style }}
+        css={css`
+          ${theme?.BaseCell}
+          ${theme?.HeaderCell}
+        `}
+        className={cs('th', className, {
+          stiff,
+          hide,
+          resize,
+          'pin-left': pinLeft,
+          'pin-right': pinRight,
+        })}
+        ref={cellRef}
+        {...rest}
+      >
+        <div>{children}</div>
+        {resize && !hide && (
+          <div className="resizer-area" ref={resizeRef} css={resizerStyle(resize).area}>
+            <span className="resizer-handle" css={resizerStyle(resize).handle} />
+          </div>
+        )}
+      </HeaderCellContainer>
+
+      {/* column grouping */}
+      {Array.from({ length: colSpan - 1 }, () => (
+        <HeaderCellContainer className={cs('th', 'hide', 'colspan')} />
+      ))}
+    </>
   );
 };
