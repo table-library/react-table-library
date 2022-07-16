@@ -14,7 +14,7 @@ import { useTheme } from '@table-library/react-table-library/theme';
 
 import { nodes } from '../data';
 
-storiesOf('Composites/Resize & Horizontal', module)
+storiesOf('Mixing Features/Resize & Horizontal', module)
   .addParameters({ component: Table })
   .add('base', () => {
     const data = { nodes };

@@ -14,7 +14,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('Composites/Column Hide & Resize', module)
+storiesOf('Mixing Features/Column Hide & Resize', module)
   .addParameters({ component: Table })
   .add('base', () => {
     const data = { nodes };

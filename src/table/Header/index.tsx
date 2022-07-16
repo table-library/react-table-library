@@ -1,4 +1,5 @@
 import * as React from 'react';
+import cs from 'clsx';
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
@@ -12,11 +13,7 @@ const headerRow = `
   display: contents;
 `;
 
-export const Header: React.FC<HeaderProps> = ({
-  _className = 'thead',
-  children,
-  ...rest
-}: HeaderProps) => {
+export const Header: React.FC<HeaderProps> = ({ isFooter, children, ...rest }: HeaderProps) => {
   const theme = React.useContext(ThemeContext);
 
   const context = React.useContext(LayoutContext);
@@ -27,15 +24,15 @@ export const Header: React.FC<HeaderProps> = ({
 
   const { layout } = context;
 
-  const As = layout?.isDiv ? 'div' : 'thead';
+  const As = layout?.isDiv ? 'div' : isFooter ? 'tfoot' : 'thead';
 
   return (
     <As
       role="rowgroup"
-      className={_className}
+      className={cs({ tfoot: isFooter, thead: !isFooter })}
       css={css`
         ${headerRow}
-        ${theme?.Header}
+        ${isFooter ? theme?.Footer : theme?.Header}
       `}
       {...rest}
     >

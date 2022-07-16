@@ -15,7 +15,7 @@ import { useTheme } from '@table-library/react-table-library/theme';
 
 import { nodes } from '../data';
 
-storiesOf('Composites/Column Hide & Horizontal', module)
+storiesOf('Mixing Features/Column Hide & Horizontal', module)
   .addParameters({ component: Table })
   .add('base', () => {
     const data = { nodes };

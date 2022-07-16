@@ -33,6 +33,7 @@ export type HeaderCellProps = {
   pinLeft?: boolean;
   pinRight?: boolean;
   stiff?: boolean;
+  isFooter?: boolean;
   resize?: ColumnResizeProps;
   children?: React.ReactNode;
 } & RestProps;
@@ -51,6 +52,7 @@ export type BodyProps = {
 } & RestProps;
 
 export type HeaderRowProps = {
+  isFooter?: boolean;
   className?: string;
   children: React.ReactNode;
 } & RestProps;

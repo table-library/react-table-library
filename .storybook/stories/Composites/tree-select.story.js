@@ -22,7 +22,7 @@ import {
 
 import { nodes } from '../data';
 
-storiesOf('Composites/Tree & Select', module)
+storiesOf('Mixing Features/Tree & Select', module)
   .addParameters({ component: Table })
   .add('base', () => {
     const data = { nodes };

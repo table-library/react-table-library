@@ -29,7 +29,7 @@ export const Cell: React.FC<CellProps> = ({
   if (colSpan) {
     colSpanStyle = {
       ...colSpanStyle,
-      'grid-column': `span ${colSpan} / ${index + colSpan + previousColSpans + 1}`,
+      gridColumn: `span ${colSpan} / ${index + colSpan + previousColSpans + 1}`,
     };
   }
 

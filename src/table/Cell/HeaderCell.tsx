@@ -75,6 +75,7 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
   pinLeft,
   pinRight,
   stiff,
+  isFooter,
   colSpan = 0,
   previousColSpans = 0,
   resize,
@@ -93,7 +94,7 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
   if (colSpan) {
     colSpanStyle = {
       ...colSpanStyle,
-      'grid-column': `span ${colSpan} / ${index + colSpan + previousColSpans + 1}`,
+      gridColumn: `span ${colSpan} / ${index + colSpan + previousColSpans + 1}`,
     };
   }
 
@@ -109,7 +110,7 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
         style={{ ...colSpanStyle, ...style }}
         css={css`
           ${theme?.BaseCell}
-          ${theme?.HeaderCell}
+          ${isFooter ? theme?.FooterCell : theme?.HeaderCell}
         `}
         className={cs('th', className, {
           stiff,

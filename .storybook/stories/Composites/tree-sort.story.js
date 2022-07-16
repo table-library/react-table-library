@@ -16,7 +16,7 @@ import { useSort, HeaderCellSort } from '@table-library/react-table-library/sort
 
 import { nodes } from '../data';
 
-storiesOf('Composites/Tree & Sort', module)
+storiesOf('Mixing Features/Tree & Sort', module)
   .addParameters({ component: Table })
   .add('base', () => {
     const data = { nodes };

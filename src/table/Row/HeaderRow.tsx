@@ -57,7 +57,7 @@ const useInitialLayout = () => {
 export const HeaderRow: React.FC<HeaderRowProps> = ({
   className,
   role = 'rowheader',
-  _className = 'tr-header',
+  isFooter,
   children,
   ...rest
 }: HeaderRowProps) => {
@@ -73,9 +73,12 @@ export const HeaderRow: React.FC<HeaderRowProps> = ({
       data-table-library_tr-header=""
       css={css`
         ${theme?.BaseRow}
-        ${theme?.HeaderRow}
+        ${isFooter ? theme?.FooterRow : theme?.HeaderRow}
       `}
-      className={cs('tr', _className, className)}
+      className={cs('tr', className, {
+        'tr-footer': isFooter,
+        'tr-header': !isFooter,
+      })}
       ref={ref}
       {...rest}
     >

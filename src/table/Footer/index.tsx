@@ -10,14 +10,14 @@ import {
   HeaderCellProps,
 } from '@table-library/react-table-library/types/table';
 
-const Footer: React.FC<HeaderProps> = (props) => <Header {...props} _className="tfoot" />;
+const Footer: React.FC<HeaderProps> = (props) => <Header {...props} isFooter />;
 
 const FooterRow: React.FC<HeaderRowProps> = (props) => (
-  <HeaderRow {...props} _className="tr-footer" role="rowfooter" />
+  <HeaderRow {...props} isFooter role="rowfooter" />
 );
 
 const FooterCell: React.FC<HeaderCellProps> = (props) => (
-  <HeaderCell {...props} role="columnfooter" />
+  <HeaderCell {...props} isFooter role="columnfooter" />
 );
 
 export { Footer, FooterRow, FooterCell };
