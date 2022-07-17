@@ -14,7 +14,7 @@ import { useTheme } from '@table-library/react-table-library/theme';
 
 import { nodes } from '../data';
 
-storiesOf('Features/Column Grouping', module)
+storiesOf('Misc/Cell Grouping', module)
   .addParameters({
     component: Table,
     subcomponents: {
@@ -26,7 +26,7 @@ storiesOf('Features/Column Grouping', module)
       Cell,
     },
   })
-  .add('base', () => {
+  .add('by column', () => {
     const data = { nodes };
 
     return (
@@ -35,10 +35,18 @@ storiesOf('Features/Column Grouping', module)
           <>
             <Header>
               <HeaderRow>
-                <HeaderCell colSpan={2} style={{ backgroundColor: 'blue', color: 'white' }}>
+                <HeaderCell
+                  gridColumnStart={1}
+                  gridColumnEnd={3}
+                  style={{ backgroundColor: 'blue', color: 'white' }}
+                >
                   Task
                 </HeaderCell>
-                <HeaderCell colSpan={2} style={{ backgroundColor: 'green', color: 'white' }}>
+                <HeaderCell
+                  gridColumnStart={3}
+                  gridColumnEnd={5}
+                  style={{ backgroundColor: 'green', color: 'white' }}
+                >
                   Type
                 </HeaderCell>
                 <HeaderCell>Tasks</HeaderCell>
@@ -49,7 +57,11 @@ storiesOf('Features/Column Grouping', module)
               {tableList.map((item, index) =>
                 index === 1 ? (
                   <Row key={item.id} item={item}>
-                    <Cell colSpan={3} style={{ backgroundColor: 'red', color: 'white' }}>
+                    <Cell
+                      gridColumnStart={1}
+                      gridColumnEnd={4}
+                      style={{ backgroundColor: 'red', color: 'white' }}
+                    >
                       {item.name}
                     </Cell>
                     <Cell>{item.isComplete.toString()}</Cell>
@@ -66,14 +78,22 @@ storiesOf('Features/Column Grouping', module)
                       })}
                     </Cell>
                     <Cell>{item.type}</Cell>
-                    <Cell colSpan={2} style={{ backgroundColor: 'blue', color: 'white' }}>
+                    <Cell
+                      gridColumnStart={4}
+                      gridColumnEnd={6}
+                      style={{ backgroundColor: 'blue', color: 'white' }}
+                    >
                       {item.isComplete.toString()}
                     </Cell>
                   </Row>
                 ) : index === 3 ? (
                   <Row key={item.id} item={item}>
                     <Cell>{item.name}</Cell>
-                    <Cell colSpan={2} style={{ backgroundColor: 'orange', color: 'white' }}>
+                    <Cell
+                      gridColumnStart={2}
+                      gridColumnEnd={4}
+                      style={{ backgroundColor: 'orange', color: 'white' }}
+                    >
                       {item.deadline.toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: '2-digit',
@@ -85,11 +105,19 @@ storiesOf('Features/Column Grouping', module)
                   </Row>
                 ) : index === 4 ? (
                   <Row key={item.id} item={item}>
-                    <Cell colSpan={2} style={{ backgroundColor: 'green', color: 'white' }}>
+                    <Cell
+                      gridColumnStart={1}
+                      gridColumnEnd={3}
+                      style={{ backgroundColor: 'green', color: 'white' }}
+                    >
                       {item.name}
                     </Cell>
                     <Cell>{item.type}</Cell>
-                    <Cell colSpan={2} style={{ backgroundColor: 'green', color: 'white' }}>
+                    <Cell
+                      gridColumnStart={4}
+                      gridColumnEnd={6}
+                      style={{ backgroundColor: 'green', color: 'white' }}
+                    >
                       {item.isComplete.toString()}
                     </Cell>
                   </Row>

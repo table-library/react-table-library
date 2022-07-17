@@ -16,8 +16,8 @@ export const Cell: React.FC<CellProps> = ({
   pinLeft,
   pinRight,
   stiff,
-  colSpan = 0,
-  previousColSpans = 0,
+  gridColumnStart,
+  gridColumnEnd,
   onClick,
   children,
   style,
@@ -25,20 +25,15 @@ export const Cell: React.FC<CellProps> = ({
 }: CellProps) => {
   const theme = React.useContext(ThemeContext);
 
-  let colSpanStyle = {};
-  if (colSpan) {
-    colSpanStyle = {
-      ...colSpanStyle,
-      gridColumn: `span ${colSpan} / ${index + colSpan + previousColSpans + 1}`,
-    };
-  }
+  const hasColSpan = gridColumnStart && gridColumnEnd;
+  const colSpan = hasColSpan ? gridColumnEnd - gridColumnStart - 1 : 0;
 
   return (
     <>
       <CellContainer
         role="gridcell"
         data-table-library_td=""
-        style={{ ...colSpanStyle, ...style }}
+        style={{ ...(hasColSpan ? { gridColumnStart, gridColumnEnd } : {}), ...style }}
         css={css`
           ${theme?.BaseCell}
           ${theme?.Cell}
@@ -56,7 +51,7 @@ export const Cell: React.FC<CellProps> = ({
       </CellContainer>
 
       {/* column grouping */}
-      {Array.from({ length: colSpan - 1 }, () => (
+      {Array.from({ length: colSpan }, () => (
         <CellContainer className={cs('td', 'hide', 'colspan')} />
       ))}
     </>

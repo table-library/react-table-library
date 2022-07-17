@@ -22,6 +22,8 @@ export type CellProps = {
   pinLeft?: boolean;
   pinRight?: boolean;
   stiff?: boolean;
+  gridColumnStart?: number;
+  gridColumnEnd?: number;
   onClick?: (event: React.SyntheticEvent) => void;
   children?: React.ReactNode;
 } & RestProps;
@@ -34,6 +36,8 @@ export type HeaderCellProps = {
   pinRight?: boolean;
   stiff?: boolean;
   isFooter?: boolean;
+  gridColumnStart?: number;
+  gridColumnEnd?: number;
   resize?: ColumnResizeProps;
   children?: React.ReactNode;
 } & RestProps;

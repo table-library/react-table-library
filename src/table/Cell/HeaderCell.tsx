@@ -76,8 +76,8 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
   pinRight,
   stiff,
   isFooter,
-  colSpan = 0,
-  previousColSpans = 0,
+  gridColumnStart,
+  gridColumnEnd,
   resize,
   role = 'columnheader',
   children,
@@ -90,13 +90,8 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
 
   const { cellRef, resizeRef } = useResize(index!, hide);
 
-  let colSpanStyle = {};
-  if (colSpan) {
-    colSpanStyle = {
-      ...colSpanStyle,
-      gridColumn: `span ${colSpan} / ${index + colSpan + previousColSpans + 1}`,
-    };
-  }
+  const hasColSpan = gridColumnStart && gridColumnEnd;
+  const colSpan = hasColSpan ? gridColumnEnd - gridColumnStart - 1 : 0;
 
   return (
     <>
@@ -107,7 +102,7 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
         data-resize-min-width={
           typeof resize === 'boolean' || resize?.minWidth == null ? 75 : resize.minWidth
         }
-        style={{ ...colSpanStyle, ...style }}
+        style={{ ...(hasColSpan ? { gridColumnStart, gridColumnEnd } : {}), ...style }}
         css={css`
           ${theme?.BaseCell}
           ${isFooter ? theme?.FooterCell : theme?.HeaderCell}
@@ -131,7 +126,7 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
       </HeaderCellContainer>
 
       {/* column grouping */}
-      {Array.from({ length: colSpan - 1 }, () => (
+      {Array.from({ length: colSpan }, () => (
         <HeaderCellContainer className={cs('th', 'hide', 'colspan')} />
       ))}
     </>

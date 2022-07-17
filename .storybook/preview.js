@@ -24,7 +24,6 @@ const Features = [
   'Column Hiding',
   'Column Replace',
   'Column Ordering',
-  'Column Grouping (WIP)',
 ];
 
 export const parameters = {
@@ -64,7 +63,7 @@ export const parameters = {
         'CRUD',
         ['Create', 'Update', 'Delete'],
         'Misc',
-        ['Cell', 'Row', 'Table', 'Column', 'Footer', 'Actions'],
+        ['Cell', 'Row', 'Table', 'Column', 'Footer', 'Actions', 'Cell Grouping'],
         'Recipes',
         ['Controlled'],
         'Client vs Server',

@@ -25,7 +25,6 @@ import * as EditableStory from './editable';
 // import * as DataGridStory from './data-grid';
 import * as ColumnHideStory from './column-hide';
 import * as ColumnOrderStory from './column-order';
-import * as ColumnGroupStory from './column-group';
 
 const stories = [
   BaseStory,
@@ -49,7 +48,6 @@ const stories = [
   // DataGridStory,
   ColumnHideStory,
   ColumnOrderStory,
-  ColumnGroupStory,
 ];
 
 const storyContainer = storiesOf('Library Themes/Material UI', module).addParameters({

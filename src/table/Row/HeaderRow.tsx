@@ -16,7 +16,6 @@ import {
   getHeaderColumns,
 } from '@table-library/react-table-library/common/util/columns';
 import { isReactFragment } from '@table-library/react-table-library/common/util/isFragment';
-import { getPreviousColSpans } from '@table-library/react-table-library/common/util/getPreviousColSpans';
 
 import { HeaderRowProps } from '@table-library/react-table-library/types/table';
 
@@ -97,7 +96,6 @@ export const HeaderRow: React.FC<HeaderRowProps> = ({
               extraProps = {
                 ...extraProps,
                 index,
-                previousColSpans: getPreviousColSpans(children, index),
               };
             }
 
