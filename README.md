@@ -27,6 +27,8 @@ React Table Library -- an almost headless table library -- which prioritizes:
 - TypeScript support
 - SSR support
 
+Check out awesome tables over here: **[Demo](https://react-tables.com/)**
+
 ## Requirements
 
 React Table Library requires the following libraries to be installed:
@@ -47,8 +49,7 @@ yarn add @table-library/react-table-library @emotion/react
 
 ## Usage
 
-* **[Documentation](https://react-table-library.com/)**
-* **[Demo](https://react-tables.com/)**
+- **[Documentation](https://react-table-library.com/)**
 
 ```javascript
 import { CompactTable } from '@table-library/react-table-library/compact';
@@ -62,7 +63,7 @@ const nodes = [
     isComplete: true,
     nodes: 3,
   },
-]
+];
 
 const COLUMNS = [
   { label: 'Task', renderCell: (item) => item.name },
@@ -92,7 +93,7 @@ const Component = () => {
 
 ## The Problem
 
-You are looking for a suitable table component to solve your problem, but you cannot find any one solution which comes with all your desired features and is still  customizable for a pleasant developer experience. I myself ran into this problem after working with many different React table components -- from UI libraries but also from standalone libraries -- and none of them felt right to me. After working on React tables for three different clients over the past year, I decided to create my own solution for my clients. I came to the conclusion that the React ecosystem needs yet another table library -- which does it better.
+You are looking for a suitable table component to solve your problem, but you cannot find any one solution which comes with all your desired features and is still customizable for a pleasant developer experience. I myself ran into this problem after working with many different React table components -- from UI libraries but also from standalone libraries -- and none of them felt right to me. After working on React tables for three different clients over the past year, I decided to create my own solution for my clients. I came to the conclusion that the React ecosystem needs yet another table library -- which does it better.
 
 ## The Solution
 
