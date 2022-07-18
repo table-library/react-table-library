@@ -10,6 +10,7 @@ import { RowContainer } from '@table-library/react-table-library/common/componen
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
 import { useFeatures } from '@table-library/react-table-library/common/context/Feature';
 import { isReactFragment } from '@table-library/react-table-library/common/util/isFragment';
+import { getPreviousColSpans } from '@table-library/react-table-library/common/util/getPreviousColSpans';
 
 import { Nullish } from '@table-library/react-table-library/types/common';
 import {
@@ -126,6 +127,7 @@ export const Row: React.FC<RowProps> = (props: RowProps) => {
               extraProps = {
                 ...extraProps,
                 index,
+                previousColSpans: getPreviousColSpans(children, index),
               };
             }
 

@@ -16,6 +16,8 @@ export const Cell: React.FC<CellProps> = ({
   pinLeft,
   pinRight,
   stiff,
+  includePreviousColSpan,
+  previousColSpans,
   gridColumnStart,
   gridColumnEnd,
   onClick,
@@ -27,13 +29,24 @@ export const Cell: React.FC<CellProps> = ({
 
   const hasColSpan = gridColumnStart && gridColumnEnd;
   const colSpan = hasColSpan ? gridColumnEnd - gridColumnStart - 1 : 0;
+  const computedGridColumnStart = includePreviousColSpan
+    ? gridColumnStart + previousColSpans
+    : gridColumnStart;
+  const computedGridColumnEnd = includePreviousColSpan
+    ? gridColumnEnd + previousColSpans
+    : gridColumnEnd;
 
   return (
     <>
       <CellContainer
         role="gridcell"
         data-table-library_td=""
-        style={{ ...(hasColSpan ? { gridColumnStart, gridColumnEnd } : {}), ...style }}
+        style={{
+          ...(hasColSpan
+            ? { gridColumnStart: computedGridColumnStart, gridColumnEnd: computedGridColumnEnd }
+            : {}),
+          ...style,
+        }}
         css={css`
           ${theme?.BaseCell}
           ${theme?.Cell}

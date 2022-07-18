@@ -76,6 +76,8 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
   pinRight,
   stiff,
   isFooter,
+  includePreviousColSpan,
+  previousColSpans,
   gridColumnStart,
   gridColumnEnd,
   resize,
@@ -92,6 +94,12 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
 
   const hasColSpan = gridColumnStart && gridColumnEnd;
   const colSpan = hasColSpan ? gridColumnEnd - gridColumnStart - 1 : 0;
+  const computedGridColumnStart = includePreviousColSpan
+    ? gridColumnStart + previousColSpans
+    : gridColumnStart;
+  const computedGridColumnEnd = includePreviousColSpan
+    ? gridColumnEnd + previousColSpans
+    : gridColumnEnd;
 
   return (
     <>
@@ -102,7 +110,12 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
         data-resize-min-width={
           typeof resize === 'boolean' || resize?.minWidth == null ? 75 : resize.minWidth
         }
-        style={{ ...(hasColSpan ? { gridColumnStart, gridColumnEnd } : {}), ...style }}
+        style={{
+          ...(hasColSpan
+            ? { gridColumnStart: computedGridColumnStart, gridColumnEnd: computedGridColumnEnd }
+            : {}),
+          ...style,
+        }}
         css={css`
           ${theme?.BaseCell}
           ${isFooter ? theme?.FooterCell : theme?.HeaderCell}
