@@ -33,9 +33,12 @@ export type IdReducerFunctions = {
   onRemoveById: (id: string) => void;
   onToggleById: (id: string) => void;
 
-  onAddByIdRecursively: (ids: string[], options: IdReducerFunctionsOptions) => void;
-  onRemoveByIdRecursively: (ids: string[]) => void;
+  onAddByIds: (ids: string[], options: IdReducerFunctionsOptions) => void;
+  onRemoveByIds: (ids: string[]) => void;
   onToggleByIdRecursively: (id: string, options: IdReducerFunctionsOptions) => void;
+
+  onAddByIdRecursively: (id: string, options: IdReducerFunctionsOptions) => void;
+  onRemoveByIdRecursively: (id: string) => void;
 
   onAddByIdExclusively: (id: string) => void;
   onRemoveByIdExclusively: () => void;

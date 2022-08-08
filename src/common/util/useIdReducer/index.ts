@@ -90,8 +90,8 @@ const set = (state: State, action: Action) => ({
 
 const ADD_BY_ID = 'ADD_BY_ID';
 const REMOVE_BY_ID = 'REMOVE_BY_ID';
-const ADD_BY_ID_RECURSIVELY = 'ADD_BY_ID_RECURSIVELY';
-const REMOVE_BY_ID_RECURSIVELY = 'REMOVE_BY_ID_RECURSIVELY';
+const ADD_BY_IDS = 'ADD_BY_IDS';
+const REMOVE_BY_IDS = 'REMOVE_BY_IDS';
 const ADD_BY_ID_EXCLUSIVELY = 'ADD_BY_ID_EXCLUSIVELY';
 const REMOVE_BY_ID_EXCLUSIVELY = 'REMOVE_BY_ID_EXCLUSIVELY';
 const ADD_ALL = 'ADD_ALL';
@@ -106,10 +106,10 @@ const reducer = (state: State, action: Action) => {
     case REMOVE_BY_ID: {
       return removeById(state, action);
     }
-    case ADD_BY_ID_RECURSIVELY: {
+    case ADD_BY_IDS: {
       return addByIdRecursively(state, action);
     }
-    case REMOVE_BY_ID_RECURSIVELY: {
+    case REMOVE_BY_IDS: {
       return removeByIdRecursively(state, action);
     }
     case ADD_BY_ID_EXCLUSIVELY: {
@@ -141,6 +141,12 @@ const getMergedOptions = (options: Record<string, any>) => ({
   ...DEFAULT_OPTIONS,
   ...options,
 });
+
+const getRecursiveIds = (id: string, nodes: TableNode[]) => {
+  const node = findNodeById(nodes, id);
+
+  return [node, ...fromTreeToList(node?.nodes)].map((item) => item!.id);
+};
 
 const useIdReducer = (
   data: Data,
@@ -203,12 +209,12 @@ const useIdReducer = (
     [state, onAddById, onRemoveById],
   );
 
-  const onAddByIdRecursively = React.useCallback(
+  const onAddByIds = React.useCallback(
     (ids, options) => {
       const mergedOptions = getMergedOptions(options);
 
       dispatchWithMiddleware({
-        type: ADD_BY_ID_RECURSIVELY,
+        type: ADD_BY_IDS,
         payload: {
           ids,
           options: mergedOptions,
@@ -218,10 +224,10 @@ const useIdReducer = (
     [dispatchWithMiddleware],
   );
 
-  const onRemoveByIdRecursively = React.useCallback(
+  const onRemoveByIds = React.useCallback(
     (ids) => {
       dispatchWithMiddleware({
-        type: REMOVE_BY_ID_RECURSIVELY,
+        type: REMOVE_BY_IDS,
         payload: { ids },
       });
     },
@@ -232,30 +238,48 @@ const useIdReducer = (
     (id, options) => {
       const mergedOptions = getMergedOptions(options);
 
-      const node = findNodeById(data.nodes, id);
-
-      const ids = [node, ...fromTreeToList(node?.nodes)].map((item) => item!.id);
+      const ids = getRecursiveIds(id, data.nodes);
 
       if (!mergedOptions.isPartialToAll) {
         if (includesNone(ids, state.ids)) {
-          onAddByIdRecursively(ids, mergedOptions);
+          onAddByIds(ids, mergedOptions);
         } else {
-          onRemoveByIdRecursively(ids);
+          onRemoveByIds(ids);
         }
       }
 
       if (mergedOptions.isPartialToAll) {
         if (includesAll(ids, state.ids)) {
-          onRemoveByIdRecursively(ids);
+          onRemoveByIds(ids);
         } else {
-          onAddByIdRecursively(ids, mergedOptions);
+          onAddByIds(ids, mergedOptions);
         }
       }
 
       shiftToggle.current.lastToggledId = id;
       shiftToggle.current.currentShiftIds = [];
     },
-    [data.nodes, state.ids, onAddByIdRecursively, onRemoveByIdRecursively],
+    [data.nodes, state.ids, onAddByIds, onRemoveByIds],
+  );
+
+  const onAddByIdRecursively = React.useCallback(
+    (id, options) => {
+      const mergedOptions = getMergedOptions(options);
+
+      const ids = getRecursiveIds(id, data.nodes);
+
+      onAddByIds(ids, mergedOptions);
+    },
+    [data.nodes, onAddByIds],
+  );
+
+  const onRemoveByIdRecursively = React.useCallback(
+    (id) => {
+      const ids = getRecursiveIds(id, data.nodes);
+
+      onRemoveByIds(ids);
+    },
+    [data.nodes, onRemoveByIds],
   );
 
   const onAddByIdExclusively = React.useCallback(
@@ -334,7 +358,7 @@ const useIdReducer = (
       const mergedOptions = getMergedOptions(options);
 
       if (shiftToggle.current.currentShiftIds.length) {
-        onRemoveByIdRecursively(shiftToggle.current.currentShiftIds);
+        onRemoveByIds(shiftToggle.current.currentShiftIds);
         shiftToggle.current.currentShiftIds = [];
       }
 
@@ -352,10 +376,10 @@ const useIdReducer = (
 
       const newShiftIds = ids.slice(originIndex, targetIndex + 1);
 
-      onAddByIdRecursively(newShiftIds, mergedOptions);
+      onAddByIds(newShiftIds, mergedOptions);
       shiftToggle.current.currentShiftIds = newShiftIds;
     },
-    [data.nodes, onAddByIdRecursively, onRemoveByIdRecursively],
+    [data.nodes, onAddByIds, onRemoveByIds],
   );
 
   useSyncControlledState(controlledState, state, () =>
@@ -371,9 +395,12 @@ const useIdReducer = (
       onRemoveById,
       onToggleById,
 
+      onAddByIds,
+      onRemoveByIds,
+      onToggleByIdRecursively,
+
       onAddByIdRecursively,
       onRemoveByIdRecursively,
-      onToggleByIdRecursively,
 
       onAddByIdExclusively,
       onRemoveByIdExclusively,
@@ -388,10 +415,10 @@ const useIdReducer = (
     [
       onAddAll,
       onAddById,
-      onAddByIdRecursively,
+      onAddByIds,
       onRemoveAll,
       onRemoveById,
-      onRemoveByIdRecursively,
+      onRemoveByIds,
       onAddByIdExclusively,
       onRemoveByIdExclusively,
       onToggleByIdExclusively,
@@ -399,6 +426,8 @@ const useIdReducer = (
       onToggleById,
       onToggleByIdRecursively,
       onToggleByIdShift,
+      onAddByIdRecursively,
+      onRemoveByIdRecursively,
     ],
   );
 
