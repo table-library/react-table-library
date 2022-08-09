@@ -47,7 +47,7 @@ const Component = () => {
           virtualizedOptions={VIRTUALIZED_OPTIONS}
           data={data}
           theme={theme}
-          layout={{ fixedHeader: true }}
+          layout={{ isDiv: true, fixedHeader: true }}
         />
       </Box>
 
@@ -107,7 +107,7 @@ const Component = () => {
           virtualizedOptions={VIRTUALIZED_OPTIONS}
           data={data}
           theme={theme}
-          layout={{ fixedHeader: true }}
+          layout={{ isDiv: true, fixedHeader: true }}
         />
       </Box>
 

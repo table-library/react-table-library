@@ -38,7 +38,7 @@ storiesOf('Features/Virtualized', module)
     return (
       /* see Features/Fixed Header for flexbox instead of height container */
       <div style={{ height: '300px' }}>
-        <Table data={data} layout={{ fixedHeader: true }}>
+        <Table data={data} layout={{ isDiv: true, fixedHeader: true }}>
           {(tableList) => (
             <Virtualized
               tableList={tableList}
@@ -95,7 +95,7 @@ storiesOf('Features/Virtualized', module)
     return (
       /* see Features/Fixed Header for flexbox instead of height container */
       <div style={{ height: '300px' }}>
-        <Table data={data} layout={{ fixedHeader: true }} tree={tree}>
+        <Table data={data} layout={{ isDiv: true, fixedHeader: true }} tree={tree}>
           {(tableList) => (
             <Virtualized
               tableList={tableList}
