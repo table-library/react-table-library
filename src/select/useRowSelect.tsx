@@ -40,7 +40,6 @@ const getRowProps = (props: RowProps, features: Features): FeatureProps => {
   const theme = `
     &.row-select-selected,
     &.row-select-single-selected {
-      color: ${COLORS.FONT_PRIMARY};
       font-weight: bold;
 
       background-color: ${COLORS.ROW_SELECTED};
