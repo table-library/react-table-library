@@ -5,6 +5,12 @@
   "type": "module",
   "main": "main.js",
   "types": "index.d.ts",
+  "overrides": {
+    "react-virtualized-auto-sizer": {
+      "react": "^18.0.0",
+      "react-dom": "^18.0.0"
+    }
+  },
   "peerDependencies": {
     "@emotion/react": ">= 11",
     "react": ">=16.8.0",
