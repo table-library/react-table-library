@@ -5,3 +5,5 @@ export * from './findNodeById';
 export * from './fromTreeToList';
 export * from './recursiveMergeInsert';
 export * from './recursiveReplaceInsert';
+export * from './getExtendedNodes';
+export * from './getPath';
