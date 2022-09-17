@@ -27,7 +27,7 @@ React Table Library -- an almost headless table library -- which prioritizes:
 - TypeScript support
 - SSR support
 
-Check out awesome tables over here: **[Demo](https://react-tables.com/)**
+**[Showreel](https://react-tables.com/)**
 
 ## Requirements
 
