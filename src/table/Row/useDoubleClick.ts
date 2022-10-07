@@ -14,23 +14,23 @@ const useDoubleClickBase = ({
   onSingleClick: (e: Event) => void;
   onDoubleClick: ((e: Event) => void) | null;
 }) => {
+  const clickCount = React.useRef(0);
+
   React.useEffect(() => {
     const { current } = ref;
 
-    let clickCount = 0;
-
     const handleDoubleClick = (event: any) => {
       if (onDoubleClick) {
-        if (clickCount === 0) {
+        if (clickCount.current === 0) {
           onSingleClick(event);
         }
 
-        clickCount += 1;
+        clickCount.current += 1;
 
         setTimeout(() => {
-          if (clickCount === 2) onDoubleClick(event);
+          if (clickCount.current === 2) onDoubleClick(event);
 
-          clickCount = 0;
+          clickCount.current = 0;
         }, 300);
       }
     };
