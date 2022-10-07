@@ -67,12 +67,7 @@ storiesOf('Features/Select', module)
 
             <Body>
               {tableList.map((item) => (
-                <Row
-                  item={item}
-                  key={item.id}
-                  onClick={() => console.log('single')}
-                  onDoubleClick={() => console.log('double')}
-                >
+                <Row item={item} key={item.id}>
                   <Cell>{item.name}</Cell>
                   <Cell>
                     {item.deadline.toLocaleDateString('en-US', {

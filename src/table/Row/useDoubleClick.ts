@@ -21,8 +21,6 @@ const useDoubleClickBase = ({
 
     const handleDoubleClick = (event: any) => {
       if (onDoubleClick) {
-        console.log(clickCount.current);
-
         if (clickCount.current === 0) {
           onSingleClick(event);
         }
@@ -30,7 +28,6 @@ const useDoubleClickBase = ({
         clickCount.current += 1;
 
         setTimeout(() => {
-          console.log('timeout', clickCount.current);
           if (clickCount.current === 2) onDoubleClick(event);
 
           clickCount.current = 0;
