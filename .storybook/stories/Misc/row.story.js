@@ -81,6 +81,7 @@ storiesOf('Misc/Row', module)
                 <Row
                   key={item.id}
                   item={item}
+                  onClick={(item, event) => console.log('Single Click Row', item, event)}
                   onDoubleClick={(item, event) => console.log('Double Click Row', item, event)}
                 >
                   <Cell>{item.name}</Cell>

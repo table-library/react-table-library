@@ -21,11 +21,14 @@ const useDoubleClickBase = ({
 
     const handleDoubleClick = (event: any) => {
       if (onDoubleClick) {
+        if (clickCount === 0) {
+          onSingleClick(event);
+        }
+
         clickCount += 1;
 
         setTimeout(() => {
-          if (clickCount === 1) onSingleClick(event);
-          else if (clickCount === 2) onDoubleClick(event);
+          if (clickCount === 2) onDoubleClick(event);
 
           clickCount = 0;
         }, 300);
