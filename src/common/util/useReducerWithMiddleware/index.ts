@@ -11,6 +11,7 @@ const useReducerWithMiddleware = (
 ): [State, (action: Action) => void] => {
   const [state, dispatch] = React.useReducer(reducer, controlledState);
 
+  const sRef = React.useRef<State | null>(null);
   const aRef = React.useRef<Action | null>(null);
 
   const dispatchWithMiddleware = (action: Action) => {
@@ -18,6 +19,8 @@ const useReducerWithMiddleware = (
       middlewareFn(action, state, context ? context.current : undefined),
     );
 
+    const nextState = reducer(state, action);
+    sRef.current = nextState;
     aRef.current = action;
 
     dispatch(action);
@@ -27,10 +30,11 @@ const useReducerWithMiddleware = (
     if (!aRef.current) return;
 
     afterwareFns.forEach((afterwareFn) =>
-      afterwareFn(aRef.current!, state, context ? context.current : undefined),
+      afterwareFn(aRef.current!, sRef.current!, context ? context.current : undefined),
     );
 
     aRef.current = null;
+    sRef.current = null;
   }, [context, afterwareFns, state]);
 
   return [state, dispatchWithMiddleware];
