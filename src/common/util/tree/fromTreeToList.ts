@@ -10,12 +10,12 @@ type ExtendedNode = {
   ancestors: TableNode[];
 };
 
-export const fromTreeToList = (nodes: TableNode[] | Nullish): TableNode[] =>
-  (nodes || []).reduce((acc: TableNode[], value: TableNode) => {
+export const fromTreeToList = <T extends TableNode>(nodes: T[] | Nullish): T[] =>
+  (nodes || []).reduce((acc: T[], value: T) => {
     acc = acc.concat(value); // eslint-disable-line no-param-reassign
 
     if (value.nodes) {
-      acc = acc.concat(fromTreeToList(value.nodes)); // eslint-disable-line no-param-reassign
+      acc = acc.concat(fromTreeToList(value.nodes as T[])); // eslint-disable-line no-param-reassign
     }
 
     return acc;
