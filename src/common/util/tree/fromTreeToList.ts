@@ -1,14 +1,7 @@
 import { Nullish } from '@table-library/react-table-library/types/common';
-import { Data, TableNode } from '@table-library/react-table-library/types/table';
+import { Data, TableNode, ExtendedNode } from '@table-library/react-table-library/types/table';
 
 import { hasLeaves } from './hasLeaves';
-
-type ExtendedNode = {
-  treeXLevel: number;
-  treeYLevel: number;
-  parentNode: TableNode;
-  ancestors: TableNode[];
-};
 
 export const fromTreeToList = <T extends TableNode>(nodes: T[] | Nullish): T[] =>
   (nodes || []).reduce((acc: T[], value: T) => {
@@ -27,9 +20,9 @@ export const fromTreeToListExtended = (
   treeIds: string[],
   treeXLevel = 0,
   treeYLevel = 0,
-  parentNode: (TableNode & ExtendedNode) | Nullish,
-): (TableNode & ExtendedNode)[] =>
-  (nodes || []).reduce((acc: (TableNode & ExtendedNode)[], value: TableNode) => {
+  parentNode: ExtendedNode<TableNode> | Nullish,
+): ExtendedNode<TableNode>[] =>
+  (nodes || []).reduce((acc: ExtendedNode<TableNode>[], value: TableNode) => {
     let listNode;
 
     if (value.nodes) {
@@ -41,14 +34,17 @@ export const fromTreeToListExtended = (
     const extendedNode = {
       treeXLevel,
       treeYLevel,
-      parentNode: parentNode || data,
-      ancestors: parentNode ? [parentNode, ...parentNode.ancestors] : [parentNode || data],
-    } as ExtendedNode;
+      // TODO: data needs to be explicitly typed here for this edge case of root
+      parentNode: (parentNode || data) as ExtendedNode<TableNode>,
+      ancestors: (parentNode
+        ? [parentNode, ...(parentNode?.ancestors ?? [])]
+        : [parentNode || data]) as ExtendedNode<TableNode>[],
+    };
 
     listNode = {
       ...listNode,
       ...extendedNode,
-    } as TableNode & ExtendedNode;
+    } as ExtendedNode<TableNode>;
 
     acc = acc.concat(listNode); // eslint-disable-line no-param-reassign
 

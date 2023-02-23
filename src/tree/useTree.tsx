@@ -17,6 +17,7 @@ import {
   Features,
   FeatureProps,
   RowProps,
+  ExtendedNode,
 } from '@table-library/react-table-library/types/table';
 import {
   Tree,
@@ -120,7 +121,7 @@ const useTree = (
     },
   };
 
-  const modifier = (nodes: TableNode[]): TableNode[] => {
+  const modifier = (nodes: TableNode[]): ExtendedNode<TableNode>[] => {
     if (mergedOptions.isServer) {
       return nodes;
     }

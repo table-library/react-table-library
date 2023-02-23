@@ -1,3 +1,5 @@
+import { ExtendedNode, TableNode } from './table';
+
 export type Nullish = null | undefined;
 
 export type Action = {
@@ -21,7 +23,7 @@ export type StateAndChange = {
   onChange?: MiddlewareFunction;
 };
 
-export type Modifier = (nodes: any[]) => any[];
+export type Modifier = (nodes: TableNode[]) => TableNode[] | ExtendedNode<TableNode>[];
 
 type IdReducerFunctionsOptions = {
   isCarryForward?: boolean;

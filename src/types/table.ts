@@ -85,6 +85,13 @@ export type TableNode = {
   [prop: string]: any;
 };
 
+export type ExtendedNode<T extends TableNode> = T & {
+  treeXLevel?: number;
+  treeYLevel?: number;
+  parentNode?: ExtendedNode<T> | Nullish;
+  ancestors?: ExtendedNode<T>[];
+};
+
 export type Data = {
   pageInfo?: any;
   nodes: TableNode[];

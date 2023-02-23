@@ -5,7 +5,7 @@ import { useSyncControlledState } from '@table-library/react-table-library/commo
 import { useSyncRefState } from '@table-library/react-table-library/common/util/useSyncRefState';
 
 import { Action, State, StateAndChange } from '@table-library/react-table-library/types/common';
-import { Data, TableNode } from '@table-library/react-table-library/types/table';
+import { Data, ExtendedNode, TableNode } from '@table-library/react-table-library/types/table';
 import {
   Pages,
   Pagination,
@@ -139,7 +139,7 @@ const usePagination = (
     getPageBoundaries,
   };
 
-  const modifier = (nodes: TableNode[]): TableNode[] => {
+  const modifier = (nodes: TableNode[]): ExtendedNode<TableNode>[] => {
     if (mergedOptions.isServer) {
       return nodes;
     }

@@ -8,7 +8,7 @@ import IconChevronSingleUp from '@table-library/react-table-library/common/icons
 import IconChevronSingleUpDown from '@table-library/react-table-library/common/icons/IconChevronSingleUpDown';
 
 import { Action, State, StateAndChange } from '@table-library/react-table-library/types/common';
-import { Data, TableNode } from '@table-library/react-table-library/types/table';
+import { Data, ExtendedNode, TableNode } from '@table-library/react-table-library/types/table';
 import {
   Sort,
   SortOptions,
@@ -163,7 +163,7 @@ const useSort = (
 
   const stateAndGetters = { ...state, sortFn };
 
-  const modifier = (nodes: TableNode[]): TableNode[] => {
+  const modifier = (nodes: TableNode[]): ExtendedNode<TableNode>[] => {
     if (mergedOptions.isServer) {
       return nodes;
     }
