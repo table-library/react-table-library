@@ -68,15 +68,15 @@ export type HeaderProps = {
 } & RestProps;
 
 export type TableProps = {
-  data: Data,
-  theme?: Theme,
-  layout?: Layout,
-  sort?: Sort,
-  pagination?: Pagination,
-  select?: Select,
-  tree?: Tree,
-  onInit?: OnInitFunction,
-  children?: (nodes: TableNode[]) => React.ReactNode,
+  data: Data;
+  theme?: Theme;
+  layout?: Layout;
+  sort?: Sort;
+  pagination?: Pagination;
+  select?: Select;
+  tree?: Tree;
+  onInit?: OnInitFunction;
+  children?: (nodes: ExtendedNode<TableNode>[]) => React.ReactNode;
 } & RestProps;
 ```
 

@@ -74,7 +74,7 @@ export type TableProps = {
   select?: Select;
   tree?: Tree;
   onInit?: OnInitFunction;
-  children?: (nodes: TableNode[]) => React.ReactNode;
+  children?: (nodes: ExtendedNode<TableNode>[]) => React.ReactNode;
 } & RestProps;
 
 // external data
