@@ -8,9 +8,9 @@ import { Cell } from '@table-library/react-table-library/table/Cell';
 import { TreeContext } from '@table-library/react-table-library/common/context/Tree';
 import { isLeaf } from '@table-library/react-table-library/common/util/tree';
 
-import { Nullish, State } from '@table-library/react-table-library/types/common';
+import { State } from '@table-library/react-table-library/types/common';
 import { TableNode } from '@table-library/react-table-library/types/table';
-import { CellTreeProps } from '@table-library/react-table-library/types/tree';
+import { CellTreeProps, CustomIcon } from '@table-library/react-table-library/types/tree';
 
 const style = css`
   display: flex;
@@ -23,13 +23,28 @@ const style = css`
   }
 `;
 
+export type Size = {
+  height: string;
+  width: string;
+};
+
+const resolveIcon = (customIcon: CustomIcon, node: TableNode, size: Size) => {
+  if (!customIcon) return null;
+
+  if (typeof customIcon === 'function') {
+    return React.cloneElement(customIcon(node), { ...size });
+  }
+
+  return React.cloneElement(customIcon, { ...size });
+};
+
 const getTreeIcon = (
   item: TableNode,
   treeState: State,
   treeIconSize: string,
-  TreeIconDefault: React.ReactElement | Nullish,
-  TreeIconRight: React.ReactElement | Nullish,
-  TreeIconDown: React.ReactElement | Nullish,
+  TreeIconDefault: CustomIcon,
+  TreeIconRight: CustomIcon,
+  TreeIconDown: CustomIcon,
 ) => {
   const size = {
     height: `${treeIconSize}`,
@@ -39,14 +54,14 @@ const getTreeIcon = (
   const isTreeExpanded = treeState.ids.includes(item.id);
 
   if (!isLeaf(item) && isTreeExpanded) {
-    return TreeIconDown ? React.cloneElement(TreeIconDown, { ...size }) : null;
+    return resolveIcon(TreeIconDown, item, size);
   }
 
   if (!isLeaf(item) && !isTreeExpanded) {
-    return TreeIconRight ? React.cloneElement(TreeIconRight, { ...size }) : null;
+    return resolveIcon(TreeIconRight, item, size);
   }
 
-  return TreeIconDefault ? React.cloneElement(TreeIconDefault, { ...size }) : null;
+  return resolveIcon(TreeIconDefault, item, size);
 };
 
 export const CellTree: React.FC<CellTreeProps> = ({

@@ -7,6 +7,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FolderIcon from '@mui/icons-material/Folder';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 
 import {
   Table,
@@ -353,7 +355,8 @@ storiesOf('Features/Tree', module)
       {
         treeIcon: {
           margin: '4px',
-          iconDefault: <InsertDriveFileOutlinedIcon fontSize="small" />,
+          iconDefault: (node) =>
+            node.isComplete ? <CheckIcon fontSize="small" /> : <CloseIcon fontSize="small" />,
           iconRight: <FolderIcon fontSize="small" />,
           iconDown: <FolderOpenIcon fontSize="small" />,
         },

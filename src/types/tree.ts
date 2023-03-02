@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {
-  Nullish,
   State,
   IdReducerFunctions,
   Modifier,
+  Nullish,
 } from '@table-library/react-table-library/types/common';
 import { TableNode, GetRowProps } from '@table-library/react-table-library/types/table';
 
@@ -12,13 +12,15 @@ export enum TreeExpandClickTypes {
   ButtonClick,
 }
 
+export type CustomIcon = React.ReactElement | ((node: TableNode) => React.ReactElement) | Nullish;
+
 export type TreeOptionsIcon = {
   margin?: string;
   size?: string;
   noIconMargin?: string;
-  iconDefault?: React.ReactElement | Nullish;
-  iconRight?: React.ReactElement | Nullish;
-  iconDown?: React.ReactElement | Nullish;
+  iconDefault?: CustomIcon;
+  iconRight?: CustomIcon;
+  iconDown?: CustomIcon;
 };
 
 export type TreeOptions = {
@@ -34,9 +36,9 @@ export type TreeOptionsIconSound = {
   margin: string;
   size: string;
   noIconMargin: string;
-  iconDefault: React.ReactElement | Nullish;
-  iconRight: React.ReactElement | Nullish;
-  iconDown: React.ReactElement | Nullish;
+  iconDefault: CustomIcon;
+  iconRight: CustomIcon;
+  iconDown: CustomIcon;
 };
 
 export type TreeOptionsSound = {
