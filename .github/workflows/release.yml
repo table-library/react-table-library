@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: '16.x'
       - run: yarn install
-      - run: yarn run check
+      - run: yarn run valid
       - run: yarn run library:build
       - run: yarn run semantic-release
         env:

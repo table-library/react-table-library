@@ -8,7 +8,7 @@ import {
   StateAndChange,
   Nullish,
 } from '@table-library/react-table-library/types/common';
-import { Data } from '@table-library/react-table-library/types/table';
+import { Data, TableNode } from '@table-library/react-table-library/types/table';
 
 const set = (state: State, action: Action) => ({
   ...state,
@@ -29,7 +29,12 @@ const reducer = (state: State, action: Action) => {
 
 const DEFAULT_STATE = {};
 
-const useCustom = (name: string, data: Data, primary: StateAndChange | Nullish, context?: any) => {
+const useCustom = <T extends TableNode>(
+  name: string,
+  data: Data<T>,
+  primary: StateAndChange | Nullish,
+  context?: any,
+) => {
   const controlledState: State = primary?.state
     ? { ...DEFAULT_STATE, ...primary.state }
     : { ...DEFAULT_STATE };

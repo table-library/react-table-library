@@ -23,14 +23,14 @@ export type StateAndChange = {
   onChange?: MiddlewareFunction;
 };
 
-export type Modifier = (nodes: TableNode[]) => TableNode[] | ExtendedNode<TableNode>[];
+export type Modifier<T extends TableNode> = (nodes: T[]) => ExtendedNode<T>[];
 
 type IdReducerFunctionsOptions = {
   isCarryForward?: boolean;
   isPartialToAll?: boolean;
 } & Record<string, any>;
 
-export type IdReducerFunctions = {
+export type IdReducerFunctions<T extends TableNode> = {
   onAddById: (id: string) => void;
   onRemoveById: (id: string) => void;
   onToggleById: (id: string) => void;
@@ -46,7 +46,11 @@ export type IdReducerFunctions = {
   onRemoveByIdExclusively: () => void;
   onToggleByIdExclusively: (id: string) => void;
 
-  onToggleByIdShift: (id: string, options: IdReducerFunctionsOptions, modifier: Modifier) => void;
+  onToggleByIdShift: (
+    id: string,
+    options: IdReducerFunctionsOptions,
+    modifier: Modifier<T>,
+  ) => void;
 
   onAddAll: (ids: string[]) => void;
   onRemoveAll: () => void;

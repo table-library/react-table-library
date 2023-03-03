@@ -42,7 +42,7 @@ export type ColumnSelectProps = ColumnSelectPropsObject | boolean;
 
 export type Select<T extends TableNode> = {
   state: State;
-  fns: IdReducerFunctions;
+  fns: IdReducerFunctions<T>;
   options: SelectOptionsSound;
   _getRowProps: GetRowProps<T>;
   components: {

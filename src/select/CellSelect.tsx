@@ -15,7 +15,7 @@ export const CellSelect = React.memo(
   <T extends TableNode>({ item, ...passThrough }: CellSelectProps<T>) => {
     const select = useSelectContext<T>();
 
-    const features = useFeatures();
+    const features = useFeatures<T>();
     const isShiftDown = useShiftDown();
 
     if (!select) {
@@ -33,7 +33,7 @@ export const CellSelect = React.memo(
       const isMuiltiSelectType = select.options.buttonSelect === SelectTypes.MultiSelect;
 
       if (isShiftDown && isMuiltiSelectType) {
-        select.fns.onToggleByIdShift(item.id, select.options, applyModifiers(features));
+        select.fns.onToggleByIdShift(item.id, select.options, applyModifiers<T>(features));
       } else if (isMuiltiSelectType) {
         select.fns.onToggleByIdRecursively(item.id, {
           isCarryForward: select.options.isCarryForward,

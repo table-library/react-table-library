@@ -4,13 +4,13 @@ import cs from 'clsx';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 
-import { TableContext } from '@table-library/react-table-library/common/context/Table';
+import { createTableContext } from '@table-library/react-table-library/common/context/Table';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
 import { LayoutProvider } from '@table-library/react-table-library/common/context/Layout';
-import { SortContext } from '@table-library/react-table-library/common/context/Sort';
+import { createSortContext } from '@table-library/react-table-library/common/context/Sort';
 import { createSelectContext } from '@table-library/react-table-library/common/context/Select';
 import { createTreeContext } from '@table-library/react-table-library/common/context/Tree';
-import { PaginationContext } from '@table-library/react-table-library/common/context/Pagination';
+import { createPaginationContext } from '@table-library/react-table-library/common/context/Pagination';
 
 import { applyModifiers } from '@table-library/react-table-library/common/util/modifiers';
 import { useShiftDown } from '@table-library/react-table-library/common/hooks/useShiftDown';
@@ -102,8 +102,11 @@ const Table = React.forwardRef(
 
     const As = layout?.isDiv ? 'div' : 'table';
 
-    const TreeContext = createTreeContext<T>();
+    const TableContext = createTableContext<T>();
+    const SortContext = createSortContext<T>();
     const SelectContext = createSelectContext<T>();
+    const TreeContext = createTreeContext<T>();
+    const PaginationContext = createPaginationContext<T>();
 
     return (
       <As

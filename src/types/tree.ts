@@ -67,10 +67,10 @@ export type CellTreeProps<T extends TableNode> = {
 
 export type Tree<T extends TableNode> = {
   state: State;
-  fns: IdReducerFunctions;
+  fns: IdReducerFunctions<T>;
   options: TreeOptionsSound<T>;
   _getRowProps: GetRowProps<T>;
-  modifier: Modifier;
+  modifier: Modifier<T>;
   components: {
     CellTree: React.FunctionComponent<CellTreeProps<T>>;
   };

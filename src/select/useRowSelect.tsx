@@ -105,7 +105,7 @@ const DEFAULT_OPTIONS = {
 };
 
 const useRowSelect = <T extends TableNode>(
-  data: Data,
+  data: Data<T>,
   primary?: StateAndChange,
   options?: SelectOptions,
   context?: any,
@@ -116,7 +116,7 @@ const useRowSelect = <T extends TableNode>(
 
   const onChange = primary?.onChange ? primary.onChange : () => {};
 
-  const [state, fns] = useIdReducer(data, controlledState, onChange, context);
+  const [state, fns] = useIdReducer<T>(data, controlledState, onChange, context);
 
   useSyncRefState('select', context, state);
 

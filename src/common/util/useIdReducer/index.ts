@@ -148,12 +148,12 @@ const getRecursiveIds = (id: string, nodes: TableNode[]) => {
   return [node, ...fromTreeToList(node?.nodes)].map((item) => item!.id);
 };
 
-const useIdReducer = (
-  data: Data,
+const useIdReducer = <T extends TableNode>(
+  data: Data<T>,
   controlledState: State,
   onChange: MiddlewareFunction,
   context: any,
-): [State, IdReducerFunctions] => {
+): [State, IdReducerFunctions<T>] => {
   const [state, dispatchWithMiddleware] = useReducerWithMiddleware(
     reducer,
     controlledState,

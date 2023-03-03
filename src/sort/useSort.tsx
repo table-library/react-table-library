@@ -83,12 +83,12 @@ const DEFAULT_OPTIONS = {
   isRecursive: true,
 };
 
-const useSort = (
-  data: Data,
+const useSort = <T extends TableNode>(
+  data: Data<T>,
   primary: StateAndChange,
   options: SortOptions,
   context?: any,
-): Sort => {
+): Sort<T> => {
   const controlledState: State = primary?.state
     ? { ...DEFAULT_STATE, ...primary.state }
     : { ...DEFAULT_STATE };
@@ -163,7 +163,7 @@ const useSort = (
 
   const stateAndGetters = { ...state, sortFn };
 
-  const modifier = (nodes: TableNode[]): ExtendedNode<TableNode>[] => {
+  const modifier = (nodes: T[]): ExtendedNode<T>[] => {
     if (mergedOptions.isServer) {
       return nodes;
     }

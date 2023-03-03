@@ -24,9 +24,9 @@ export type ExtendedNode<T extends TableNode> = T & {
   ancestors?: ExtendedNode<T>[];
 };
 
-export type Data = {
+export type Data<T extends TableNode> = {
   pageInfo?: any;
-  nodes: TableNode[];
+  nodes: T[];
 };
 
 // external
@@ -86,11 +86,11 @@ export type HeaderProps = {
 } & RestProps;
 
 export type TableProps<T extends TableNode> = {
-  data: Data;
+  data: Data<T>;
   theme?: Theme;
   layout?: Layout;
-  sort?: Sort;
-  pagination?: Pagination;
+  sort?: Sort<T>;
+  pagination?: Pagination<T>;
   select?: Select<T>;
   tree?: Tree<T>;
   onInit?: OnInitFunction;
@@ -104,8 +104,8 @@ export type OnInitFunction = (node: HTMLTableElement) => void;
 export type Features<T extends TableNode> = {
   select: Select<T> | Nullish;
   tree: Tree<T> | Nullish;
-  sort: Sort | Nullish;
-  pagination: Pagination | Nullish;
+  sort: Sort<T> | Nullish;
+  pagination: Pagination<T> | Nullish;
 };
 
 export type FeatureProps<T extends TableNode> = {
