@@ -24,13 +24,16 @@ import {
 
 import { useDoubleClick } from './useDoubleClick';
 
-const getRowProps = (features: Features, props: RowProps) =>
+const getRowProps = <T extends TableNode>(features: Features<T>, props: RowProps<T>) =>
   Object.values(features)
     .filter(Boolean)
     .filter((feature) => feature?.hasOwnProperty('_getRowProps'))
     .map((feature) => (feature as any)._getRowProps(props, features));
 
-const evaluateProps = (rowPropsByFeature: FeatureProps[], onSingleClick: OnClick | Nullish) => {
+const evaluateProps = <T extends TableNode>(
+  rowPropsByFeature: FeatureProps<T>[],
+  onSingleClick: OnClick<T> | Nullish,
+) => {
   const { themeByFeature, classNamesByFeature, clickable, onClickByFeature } =
     rowPropsByFeature.reduce(
       (acc, value) => {
@@ -45,7 +48,7 @@ const evaluateProps = (rowPropsByFeature: FeatureProps[], onSingleClick: OnClick
 
         const mergedClickable = acc.clickable || !!onClick;
 
-        const mergedOnClick = (node: TableNode, event: React.SyntheticEvent) => {
+        const mergedOnClick = (node: T, event: React.SyntheticEvent) => {
           onClick(node, event);
           acc.onClickByFeature(node, event);
         };
@@ -62,7 +65,7 @@ const evaluateProps = (rowPropsByFeature: FeatureProps[], onSingleClick: OnClick
         themeByFeature: '',
         classNamesByFeature: '',
         clickable: !!onSingleClick,
-        onClickByFeature: (node: TableNode, event: React.SyntheticEvent) => {
+        onClickByFeature: (node: T, event: React.SyntheticEvent) => {
           if (onSingleClick && isRowClick(event)) {
             onSingleClick(node, event);
           }
@@ -78,22 +81,22 @@ const evaluateProps = (rowPropsByFeature: FeatureProps[], onSingleClick: OnClick
   };
 };
 
-export const Row: React.FC<RowProps> = (props: RowProps) => {
+export const Row = <T extends TableNode>(props: RowProps<T>) => {
   const { item, className, disabled, onClick, onDoubleClick, children, ...rest } = props;
 
-  const features = useFeatures();
-  const rowPropsByFeature = getRowProps(features, props);
+  const features = useFeatures<T>();
+  const rowPropsByFeature = getRowProps<T>(features, props);
 
   const theme = React.useContext(ThemeContext);
 
-  const { themeByFeature, classNamesByFeature, clickable, onClickByFeature } = evaluateProps(
+  const { themeByFeature, classNamesByFeature, clickable, onClickByFeature } = evaluateProps<T>(
     rowPropsByFeature,
     onClick,
   );
 
   const ref = React.useRef<HTMLTableRowElement>(null);
 
-  useDoubleClick(ref, onClickByFeature, onDoubleClick, item);
+  useDoubleClick<T>(ref, onClickByFeature, onDoubleClick, item);
 
   return (
     <RowContainer

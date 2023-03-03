@@ -5,7 +5,7 @@ import { css, jsx } from '@emotion/react';
 
 import { Button } from '@table-library/react-table-library/common/components/Button';
 import { Cell } from '@table-library/react-table-library/table/Cell';
-import { TreeContext } from '@table-library/react-table-library/common/context/Tree';
+import { useTreeContext } from '@table-library/react-table-library/common/context/Tree';
 import { isLeaf } from '@table-library/react-table-library/common/util/tree';
 
 import { State } from '@table-library/react-table-library/types/common';
@@ -28,7 +28,7 @@ export type Size = {
   width: string;
 };
 
-const resolveIcon = (customIcon: CustomIcon, node: TableNode, size: Size) => {
+const resolveIcon = <T extends TableNode>(customIcon: CustomIcon<T>, node: T, size: Size) => {
   if (!customIcon) return null;
 
   if (typeof customIcon === 'function') {
@@ -38,13 +38,13 @@ const resolveIcon = (customIcon: CustomIcon, node: TableNode, size: Size) => {
   return React.cloneElement(customIcon, { ...size });
 };
 
-const getTreeIcon = (
-  item: TableNode,
+const getTreeIcon = <T extends TableNode>(
+  item: T,
   treeState: State,
   treeIconSize: string,
-  TreeIconDefault: CustomIcon,
-  TreeIconRight: CustomIcon,
-  TreeIconDown: CustomIcon,
+  TreeIconDefault: CustomIcon<T>,
+  TreeIconRight: CustomIcon<T>,
+  TreeIconDown: CustomIcon<T>,
 ) => {
   const size = {
     height: `${treeIconSize}`,
@@ -54,23 +54,23 @@ const getTreeIcon = (
   const isTreeExpanded = treeState.ids.includes(item.id);
 
   if (!isLeaf(item) && isTreeExpanded) {
-    return resolveIcon(TreeIconDown, item, size);
+    return resolveIcon<T>(TreeIconDown, item, size);
   }
 
   if (!isLeaf(item) && !isTreeExpanded) {
-    return resolveIcon(TreeIconRight, item, size);
+    return resolveIcon<T>(TreeIconRight, item, size);
   }
 
-  return resolveIcon(TreeIconDefault, item, size);
+  return resolveIcon<T>(TreeIconDefault, item, size);
 };
 
-export const CellTree: React.FC<CellTreeProps> = ({
+export const CellTree = <T extends TableNode>({
   item,
   treeIcon = {},
   children,
   ...passThrough
-}: CellTreeProps) => {
-  const context = React.useContext(TreeContext);
+}: CellTreeProps<T>) => {
+  const context = useTreeContext<T>();
 
   if (!context) {
     throw new Error('No Tree Context. No return value from useTree provided to Table component.');
@@ -89,7 +89,7 @@ export const CellTree: React.FC<CellTreeProps> = ({
     fns.onToggleById(item.id);
   };
 
-  const icon = getTreeIcon(
+  const icon = getTreeIcon<T>(
     item,
     state,
     mergedTreeIconOptions.size,

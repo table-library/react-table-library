@@ -1,6 +1,6 @@
 {
   "name": "@table-library/react-table-library",
-  "version": "0.0.0-development",
+  "version": "4.0.30.beta.0",
   "description": "react-table-library",
   "type": "module",
   "main": "main.js",

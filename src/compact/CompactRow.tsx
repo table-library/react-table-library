@@ -5,7 +5,7 @@ import { Row, Cell } from '@table-library/react-table-library/table/index';
 import { TableNode } from '@table-library/react-table-library/types/table';
 import { CompactTableProps, Column } from '@table-library/react-table-library/types/compact';
 
-const evaluateProps = (props: Record<string, any>, item: TableNode) =>
+const evaluateProps = <T extends TableNode>(props: Record<string, any>, item: T) =>
   Object.keys(props).reduce((acc: Record<string, any>, key: string) => {
     if (typeof props[key] === 'function') {
       acc[key] = props[key](item);
@@ -16,16 +16,16 @@ const evaluateProps = (props: Record<string, any>, item: TableNode) =>
     return acc;
   }, {});
 
-type CompactRowProps = { item: TableNode; index: number } & CompactTableProps;
+type CompactRowProps<T extends TableNode> = { item: T; index: number } & CompactTableProps<T>;
 
-export const CompactRow: React.FC<CompactRowProps> = ({
+export const CompactRow = <T extends TableNode>({
   index,
   item,
   columns,
   rowProps,
   rowOptions,
   ...tableProps
-}: CompactRowProps) => {
+}: CompactRowProps<T>) => {
   const { tree, select } = tableProps;
 
   return (
@@ -33,14 +33,14 @@ export const CompactRow: React.FC<CompactRowProps> = ({
       {rowOptions?.renderBeforeRow && rowOptions.renderBeforeRow(item, index)}
 
       <Row item={item} {...rowProps}>
-        {columns.map((column: Column, jindex: number) => {
+        {columns.map((column: Column<T>, jindex: number) => {
           const sharedProps = {
             pinLeft: column.pinLeft,
             pinRight: column.pinRight,
             hide: column.hide,
           };
 
-          const evaluatedCellProps = evaluateProps(column?.cellProps || {}, item);
+          const evaluatedCellProps = evaluateProps<T>(column?.cellProps || {}, item);
 
           let cell = null;
           if (tree && column.tree) {

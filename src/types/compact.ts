@@ -9,14 +9,14 @@ import { ColumnResizeProps } from '@table-library/react-table-library/types/resi
 
 // external
 
-export type Column = {
+export type Column<T extends TableNode> = {
   label: string;
-  renderCell: (node: TableNode) => React.ReactNode;
+  renderCell: (node: T) => React.ReactNode;
   footer?: string;
   resize?: ColumnResizeProps;
   sort?: ColumnSortProps;
   select?: ColumnSelectProps;
-  tree?: ColumnTreeProps;
+  tree?: ColumnTreeProps<T>;
   pinLeft?: boolean;
   pinRight?: boolean;
   hide?: boolean;
@@ -33,37 +33,37 @@ export type TableOptions = {
   renderAfterTable?: () => React.ReactNode;
 };
 
-export type RowOptions = {
-  renderBeforeRow?: (node: TableNode, index: number) => React.ReactNode;
-  renderAfterRow?: (node: TableNode, index: number) => React.ReactNode;
+export type RowOptions<T extends TableNode> = {
+  renderBeforeRow?: (node: T, index: number) => React.ReactNode;
+  renderAfterRow?: (node: T, index: number) => React.ReactNode;
 };
 
-export type RowPropsAsObject = Omit<RowProps, 'item' | 'children'>;
+export type RowPropsAsObject<T extends TableNode> = Omit<RowProps<T>, 'item' | 'children'>;
 
-export type CompactTableProps = TableProps & {
-  columns: Column[];
+export type CompactTableProps<T extends TableNode> = TableProps<T> & {
+  columns: Column<T>[];
   tableOptions?: TableOptions;
-  rowProps?: RowPropsAsObject;
-  rowOptions?: RowOptions;
+  rowProps?: RowPropsAsObject<T>;
+  rowOptions?: RowOptions<T>;
   virtualizedOptions?: VirtualizedOptions;
 };
 
 // internal
 
-export type NormalTableProps = CompactTableProps & {
-  tableList: TableNode[];
+export type NormalTableProps<T extends TableNode> = CompactTableProps<T> & {
+  tableList: T[];
 };
 
-export type VirtualizedTableProps = CompactTableProps & {
-  tableList: TableNode[];
+export type VirtualizedTableProps<T extends TableNode> = CompactTableProps<T> & {
+  tableList: T[];
 };
 
-export type Internals = {
+export type Internals<T extends TableNode> = {
   index: number;
   style: any;
-  data: { items: TableNode[] };
+  data: { items: T[] };
 };
 
-export type InternalsObject = {
-  internals: Internals;
+export type InternalsObject<T extends TableNode> = {
+  internals: Internals<T>;
 };

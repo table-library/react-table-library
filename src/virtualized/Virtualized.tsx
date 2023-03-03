@@ -2,7 +2,7 @@ import * as React from 'react';
 import { VariableSizeList } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 
-import { Header, Body } from '@table-library/react-table-library/table/index';
+import { Header, Body, TableNode } from '@table-library/react-table-library/table/index';
 import {
   getRowHeight,
   SHARED_VIRTUALIZE_STYLE,
@@ -10,14 +10,14 @@ import {
 
 import { VirtualizedProps } from '@table-library/react-table-library/types/virtualized';
 
-const Virtualized: React.FC<VirtualizedProps> = ({
+const Virtualized = <T extends TableNode>({
   tableList,
   rowHeight,
   header,
   body,
   tableOptions,
   rowOptions,
-}: VirtualizedProps) => {
+}: VirtualizedProps<T>) => {
   return (
     <>
       {tableOptions?.renderBeforeTable && tableOptions.renderBeforeTable()}

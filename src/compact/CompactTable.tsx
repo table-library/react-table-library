@@ -9,8 +9,8 @@ import { VirtualizedTable } from './VirtualizedTable';
 import { NormalTable } from './NormalTable';
 import { CompactFooter } from './CompactFooter';
 
-export const CompactTable: React.FC<CompactTableProps> = React.forwardRef(
-  (
+export const CompactTable = React.forwardRef(
+  <T extends TableNode>(
     {
       columns,
       rowProps = {},
@@ -18,7 +18,7 @@ export const CompactTable: React.FC<CompactTableProps> = React.forwardRef(
       rowOptions,
       virtualizedOptions,
       ...tableProps
-    }: CompactTableProps,
+    }: CompactTableProps<T>,
     ref: any,
   ) => {
     const { data, theme, layout, sort, pagination, select, tree, onInit = () => {} } = tableProps;
@@ -35,7 +35,7 @@ export const CompactTable: React.FC<CompactTableProps> = React.forwardRef(
         tree={tree}
         onInit={onInit}
       >
-        {(tableList: TableNode[]) => (
+        {(tableList: T[]) => (
           <React.Fragment>
             {tableOptions?.renderBeforeTable && tableOptions.renderBeforeTable()}
             {virtualizedOptions ? (
@@ -56,7 +56,7 @@ export const CompactTable: React.FC<CompactTableProps> = React.forwardRef(
                 {...tableProps}
               />
             )}
-            {columns.some((column: Column) => !!column.footer) && (
+            {columns.some((column: Column<T>) => !!column.footer) && (
               <CompactFooter columns={columns} />
             )}
             {tableOptions?.renderAfterTable && tableOptions.renderAfterTable()}

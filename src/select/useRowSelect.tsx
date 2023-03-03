@@ -25,7 +25,10 @@ import {
 import { HeaderCellSelect } from './HeaderCellSelect';
 import { CellSelect } from './CellSelect';
 
-const getRowProps = (props: RowProps, features: Features): FeatureProps => {
+const getRowProps = <T extends TableNode>(
+  props: RowProps<T>,
+  features: Features<T>,
+): FeatureProps<T> => {
   const { item } = props;
 
   const { select } = features;
@@ -101,12 +104,12 @@ const DEFAULT_OPTIONS = {
   isPartialToAll: false,
 };
 
-const useRowSelect = (
+const useRowSelect = <T extends TableNode>(
   data: Data,
   primary?: StateAndChange,
   options?: SelectOptions,
   context?: any,
-): Select => {
+): Select<T> => {
   const controlledState: State = primary?.state
     ? { ...DEFAULT_STATE, ...primary.state }
     : { ...DEFAULT_STATE };

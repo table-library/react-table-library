@@ -27,7 +27,10 @@ import {
 
 import { CellTree } from './CellTree';
 
-const getRowProps = (props: RowProps, features: Features): FeatureProps => {
+const getRowProps = <T extends TableNode>(
+  props: RowProps<T>,
+  features: Features<T>,
+): FeatureProps<T> => {
   const { item } = props;
 
   const { tree } = features;
@@ -96,12 +99,12 @@ const DEFAULT_OPTIONS = {
   treeYLevel: 0,
 };
 
-const useTree = (
+const useTree = <T extends TableNode>(
   data: Data,
   primary?: StateAndChange,
-  options?: TreeOptions,
+  options?: TreeOptions<T>,
   context?: any,
-): Tree => {
+): Tree<T> => {
   const controlledState: State = primary?.state
     ? { ...DEFAULT_STATE, ...primary.state }
     : { ...DEFAULT_STATE };

@@ -5,11 +5,11 @@ import { TableOptions, RowOptions } from '@table-library/react-table-library/typ
 
 export type RowHeight = number | ((item: TableNode, index: number) => number);
 
-export type VirtualizedProps = {
-  tableList: TableNode[];
+export type VirtualizedProps<T extends TableNode> = {
+  tableList: T[];
   rowHeight: RowHeight;
   header: () => React.ReactNode;
-  body: (node: TableNode, index: number) => React.ReactNode;
+  body: (node: T, index: number) => React.ReactNode;
   tableOptions: TableOptions;
-  rowOptions: RowOptions;
+  rowOptions: RowOptions<T>;
 };

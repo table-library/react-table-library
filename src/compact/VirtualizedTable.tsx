@@ -2,7 +2,7 @@ import * as React from 'react';
 import { VariableSizeList } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 
-import { Body } from '@table-library/react-table-library/table/index';
+import { Body, TableNode } from '@table-library/react-table-library/table/index';
 import {
   SHARED_VIRTUALIZE_STYLE,
   getRowHeight,
@@ -18,7 +18,10 @@ import {
 import { CompactHeader } from './CompactHeader';
 import { CompactRow } from './CompactRow';
 
-const withStickyHeader = ({ columns, ...tableProps }: CompactTableProps) => {
+const withStickyHeader = <T extends TableNode>({
+  columns,
+  ...tableProps
+}: CompactTableProps<T>) => {
   return React.forwardRef(({ children, ...rest }, ref) => (
     // @ts-ignore
     <div ref={ref} {...rest}>
@@ -38,16 +41,16 @@ const withStickyHeader = ({ columns, ...tableProps }: CompactTableProps) => {
   ));
 };
 
-type VirtualizedRowProps = InternalsObject & CompactTableProps;
+type VirtualizedRowProps<T extends TableNode> = InternalsObject<T> & CompactTableProps<T>;
 
-const VirtualizedRow: React.FC<VirtualizedRowProps> = ({
+const VirtualizedRow = <T extends TableNode>({
   internals,
   columns,
   rowProps,
   rowOptions,
   virtualizedOptions,
   ...tableProps
-}: VirtualizedRowProps) => {
+}: VirtualizedRowProps<T>) => {
   const { index, style, data } = internals;
   const item = data.items[index];
 
@@ -73,14 +76,14 @@ const VirtualizedRow: React.FC<VirtualizedRowProps> = ({
   );
 };
 
-export const VirtualizedTable: React.FC<VirtualizedTableProps> = ({
+export const VirtualizedTable = <T extends TableNode>({
   tableList,
   columns,
   rowProps = {},
   rowOptions,
   virtualizedOptions,
   ...tableProps
-}: VirtualizedTableProps) => {
+}: VirtualizedTableProps<T>) => {
   return (
     <AutoSizer>
       {({ width, height }: { width: any; height: any }) => (
@@ -91,10 +94,10 @@ export const VirtualizedTable: React.FC<VirtualizedTableProps> = ({
           itemSize={(index: number) =>
             getRowHeight(virtualizedOptions?.rowHeight, tableList[index], index)
           }
-          innerElementType={withStickyHeader({ columns, ...tableProps })}
+          innerElementType={withStickyHeader<T>({ columns, ...tableProps })}
           itemData={{ items: tableList }}
         >
-          {(internals: Internals) => (
+          {(internals: Internals<T>) => (
             <VirtualizedRow
               internals={internals}
               columns={columns}

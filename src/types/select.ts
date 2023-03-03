@@ -29,8 +29,8 @@ export type SelectOptionsSound = {
   isPartialToAll: boolean;
 };
 
-export type CellSelectProps = {
-  item: TableNode;
+export type CellSelectProps<T extends TableNode> = {
+  item: T;
 };
 
 type ColumnSelectPropsObject = {
@@ -40,13 +40,13 @@ type ColumnSelectPropsObject = {
 
 export type ColumnSelectProps = ColumnSelectPropsObject | boolean;
 
-export type Select = {
+export type Select<T extends TableNode> = {
   state: State;
   fns: IdReducerFunctions;
   options: SelectOptionsSound;
-  _getRowProps: GetRowProps;
+  _getRowProps: GetRowProps<T>;
   components: {
     HeaderCellSelect: React.FunctionComponent<Record<string, any>>;
-    CellSelect: React.FunctionComponent<CellSelectProps>;
+    CellSelect: React.FunctionComponent<CellSelectProps<T>>;
   };
 };

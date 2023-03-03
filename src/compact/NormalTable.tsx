@@ -8,19 +8,19 @@ import { NormalTableProps } from '@table-library/react-table-library/types/compa
 import { CompactHeader } from './CompactHeader';
 import { CompactRow } from './CompactRow';
 
-export const NormalTable: React.FC<NormalTableProps> = ({
+export const NormalTable = <T extends TableNode>({
   tableList,
   columns,
   rowProps = {},
   rowOptions,
   ...tableProps
-}: NormalTableProps) => {
+}: NormalTableProps<T>) => {
   return (
     <React.Fragment>
       <CompactHeader columns={columns} {...tableProps} />
 
       <Body>
-        {tableList.map((item: TableNode, index: number) => (
+        {tableList.map((item: T, index: number) => (
           <CompactRow
             key={item.id}
             index={index}
