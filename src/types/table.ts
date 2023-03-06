@@ -11,8 +11,10 @@ import { Pagination } from '@table-library/react-table-library/types/pagination'
 
 // external data
 
+export type Identifier = string | number;
+
 export type TableNode = {
-  id: string;
+  id: Identifier;
   nodes?: TableNode[] | Nullish;
   [prop: string]: any;
 };

@@ -5,76 +5,68 @@ import { Meta } from '@storybook/addon-docs';
 # Composed Table
 
 ```javascript
-import * as React from 'react';
-
-import { Nullish } from '@table-library/react-table-library/types/common';
-import { Theme } from '@table-library/react-table-library/types/theme';
-import { Layout } from '@table-library/react-table-library/types/layout';
-import { ColumnResizeProps } from '@table-library/react-table-library/types/resize';
-import { Select } from '@table-library/react-table-library/types/select';
-import { Tree } from '@table-library/react-table-library/types/tree';
-import { Sort } from '@table-library/react-table-library/types/sort';
-import { Pagination } from '@table-library/react-table-library/types/pagination';
-
 export type RestProps = Record<string, any>;
 
-export type OnClick = (node: TableNode, event: React.SyntheticEvent | React.KeyboardEvent) => void;
+export type Event = React.SyntheticEvent | React.KeyboardEvent;
+
+export type OnClick<T extends TableNode> = (node: T, event: Event) => void;
 
 export type CellProps = {
-  className?: string,
-  pinLeft?: boolean,
-  pinRight?: boolean,
-  stiff?: boolean,
-  gridColumnStart?: number,
-  gridColumnEnd?: number,
-  onClick?: (event: React.SyntheticEvent) => void,
-  children?: React.ReactNode,
+  className?: string;
+  pinLeft?: boolean;
+  pinRight?: boolean;
+  stiff?: boolean;
+  gridColumnStart?: number;
+  gridColumnEnd?: number;
+  onClick?: (event: React.SyntheticEvent) => void;
+  children?: React.ReactNode;
 } & RestProps;
 
 export type HeaderCellProps = {
-  index?: number,
-  className?: string,
-  hide?: boolean,
-  pinLeft?: boolean,
-  pinRight?: boolean,
-  stiff?: boolean,
-  isFooter?: boolean,
-  gridColumnStart?: number,
-  gridColumnEnd?: number,
-  resize?: ColumnResizeProps,
-  children?: React.ReactNode,
+  index?: number;
+  className?: string;
+  hide?: boolean;
+  pinLeft?: boolean;
+  pinRight?: boolean;
+  stiff?: boolean;
+  isFooter?: boolean;
+  gridColumnStart?: number;
+  gridColumnEnd?: number;
+  resize?: ColumnResizeProps;
+  children?: React.ReactNode;
 } & RestProps;
 
-export type RowProps = {
-  item: TableNode,
-  className?: string,
-  disabled?: boolean,
-  onClick?: OnClick,
-  onDoubleClick?: OnClick,
-  children: React.ReactNode,
+export type RowProps<T extends TableNode> = {
+  item: T;
+  className?: string;
+  disabled?: boolean;
+  onClick?: OnClick<T>;
+  onDoubleClick?: OnClick<T>;
+  children: React.ReactNode;
 } & RestProps;
 
 export type BodyProps = {
-  children: React.ReactNode,
+  children: React.ReactNode;
 } & RestProps;
 
 export type HeaderRowProps = {
-  className?: string,
-  children: React.ReactNode,
+  isFooter?: boolean;
+  className?: string;
+  children: React.ReactNode;
 } & RestProps;
 
 export type HeaderProps = {
-  children: React.ReactNode,
+  children: React.ReactNode;
 } & RestProps;
 
-export type TableProps = {
-  data: Data;
+export type TableProps<T extends TableNode> = {
+  data: Data<T>;
   theme?: Theme;
   layout?: Layout;
-  sort?: Sort;
-  pagination?: Pagination;
-  select?: Select;
-  tree?: Tree;
+  sort?: Sort<T>;
+  pagination?: Pagination<T>;
+  select?: Select<T>;
+  tree?: Tree<T>;
   onInit?: OnInitFunction;
   children?: (nodes: ExtendedNode<TableNode>[]) => React.ReactNode;
 } & RestProps;

@@ -1,5 +1,10 @@
 import { Nullish } from '@table-library/react-table-library/types/common';
-import { Data, TableNode, ExtendedNode } from '@table-library/react-table-library/types/table';
+import {
+  Data,
+  TableNode,
+  ExtendedNode,
+  Identifier,
+} from '@table-library/react-table-library/types/table';
 
 import { hasLeaves } from './hasLeaves';
 
@@ -17,7 +22,7 @@ export const fromTreeToList = <T extends TableNode>(nodes: T[] | Nullish): T[] =
 export const fromTreeToListExtended = <T extends TableNode>(
   data: Data<T>,
   nodes: T[],
-  treeIds: string[],
+  treeIds: Identifier[],
   treeXLevel = 0,
   treeYLevel = 0,
   parentNode: ExtendedNode<T> | Nullish,

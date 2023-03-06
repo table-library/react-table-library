@@ -5,6 +5,8 @@ import { Meta } from '@storybook/addon-docs';
 # Compact Table
 
 ```javascript
+import * as React from 'react';
+
 import { TableNode, TableProps, RowProps } from '@table-library/react-table-library/types/table';
 import { RowHeight } from '@table-library/react-table-library/types/virtualized';
 import { ColumnSortProps } from '@table-library/react-table-library/types/sort';
@@ -12,42 +14,43 @@ import { ColumnSelectProps } from '@table-library/react-table-library/types/sele
 import { ColumnTreeProps } from '@table-library/react-table-library/types/tree';
 import { ColumnResizeProps } from '@table-library/react-table-library/types/resize';
 
-export type Column = {
-  label: string,
-  renderCell: (node: TableNode) => React.ReactNode,
-  resize?: ColumnResizeProps,
-  sort?: ColumnSortProps,
-  select?: ColumnSelectProps,
-  tree?: ColumnTreeProps,
-  pinLeft?: boolean,
-  pinRight?: boolean,
-  hide?: boolean,
-  cellProps?: Record<string, any>,
+export type Column<T extends TableNode> = {
+  label: string;
+  renderCell: (node: T) => React.ReactNode;
+  footer?: string;
+  resize?: ColumnResizeProps;
+  sort?: ColumnSortProps;
+  select?: ColumnSelectProps;
+  tree?: ColumnTreeProps<T>;
+  pinLeft?: boolean;
+  pinRight?: boolean;
+  hide?: boolean;
+  cellProps?: Record<string, any>;
 };
 
 export type VirtualizedOptions = {
-  rowHeight: RowHeight,
-  itemCount?: number,
+  rowHeight: RowHeight;
+  itemCount?: number;
 };
 
 export type TableOptions = {
-  renderBeforeTable?: () => React.ReactNode,
-  renderAfterTable?: () => React.ReactNode,
+  renderBeforeTable?: () => React.ReactNode;
+  renderAfterTable?: () => React.ReactNode;
 };
 
-export type RowOptions = {
-  renderBeforeRow?: (node: TableNode) => React.ReactNode,
-  renderAfterRow?: (node: TableNode) => React.ReactNode,
+export type RowOptions<T extends TableNode> = {
+  renderBeforeRow?: (node: T, index: number) => React.ReactNode;
+  renderAfterRow?: (node: T, index: number) => React.ReactNode;
 };
 
-export type RowPropsAsObject = Omit<RowProps, 'item' | 'children'>;
+export type RowPropsAsObject<T extends TableNode> = Omit<RowProps<T>, 'item' | 'children'>;
 
-export type CompactTableProps = TableProps & {
-  columns: Column[],
-  tableOptions?: TableOptions,
-  rowProps?: RowPropsAsObject,
-  rowOptions?: RowOptions,
-  virtualizedOptions?: VirtualizedOptions,
+export type CompactTableProps<T extends TableNode> = TableProps<T> & {
+  columns: Column<T>[];
+  tableOptions?: TableOptions;
+  rowProps?: RowPropsAsObject<T>;
+  rowOptions?: RowOptions<T>;
+  virtualizedOptions?: VirtualizedOptions;
 };
 ```
 
