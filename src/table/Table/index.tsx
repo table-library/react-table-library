@@ -4,20 +4,20 @@ import cs from 'clsx';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 
-import { TableContext } from '@table-library/react-table-library/common/context/Table';
+import { createTableContext } from '@table-library/react-table-library/common/context/Table';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
 import { LayoutProvider } from '@table-library/react-table-library/common/context/Layout';
-import { SortContext } from '@table-library/react-table-library/common/context/Sort';
-import { SelectContext } from '@table-library/react-table-library/common/context/Select';
-import { TreeContext } from '@table-library/react-table-library/common/context/Tree';
-import { PaginationContext } from '@table-library/react-table-library/common/context/Pagination';
+import { createSortContext } from '@table-library/react-table-library/common/context/Sort';
+import { createSelectContext } from '@table-library/react-table-library/common/context/Select';
+import { createTreeContext } from '@table-library/react-table-library/common/context/Tree';
+import { createPaginationContext } from '@table-library/react-table-library/common/context/Pagination';
 
 import { applyModifiers } from '@table-library/react-table-library/common/util/modifiers';
 import { useShiftDown } from '@table-library/react-table-library/common/hooks/useShiftDown';
 import { useTheme } from '@table-library/react-table-library/theme/index';
 
 import { Nullish } from '@table-library/react-table-library/types/common';
-import { TableProps } from '@table-library/react-table-library/types/table';
+import { TableNode, TableProps } from '@table-library/react-table-library/types/table';
 import {
   Layout,
   TableMemory,
@@ -56,8 +56,8 @@ const FULL_HEIGHT_THEME = {
   `,
 };
 
-const Table: React.FC<TableProps> = React.forwardRef(
-  (
+const Table = React.forwardRef(
+  <T extends TableNode>(
     {
       data,
       theme: customTheme,
@@ -70,14 +70,14 @@ const Table: React.FC<TableProps> = React.forwardRef(
       className = 'table',
       children,
       ...rest
-    }: TableProps,
+    }: TableProps<T>,
     ref: any,
   ) => {
     const tableElementRef = useTableElementRef(ref);
     const tableMemoryRef = useTableMemoryRef(layout);
 
     // if changed, adjust useFeatures hook
-    const modifiedNodes = applyModifiers({
+    const modifiedNodes = applyModifiers<T>({
       sort,
       pagination,
       tree,
@@ -101,6 +101,12 @@ const Table: React.FC<TableProps> = React.forwardRef(
     const theme = useTheme(allThemes);
 
     const As = layout?.isDiv ? 'div' : 'table';
+
+    const TableContext = createTableContext<T>();
+    const SortContext = createSortContext<T>();
+    const SelectContext = createSelectContext<T>();
+    const TreeContext = createTreeContext<T>();
+    const PaginationContext = createPaginationContext<T>();
 
     return (
       <As

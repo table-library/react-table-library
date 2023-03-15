@@ -1,16 +1,21 @@
 import * as React from 'react';
 
-import { Footer, FooterRow, FooterCell } from '@table-library/react-table-library/table/index';
+import {
+  Footer,
+  FooterRow,
+  FooterCell,
+  TableNode,
+} from '@table-library/react-table-library/table/index';
 
 import { Column } from '@table-library/react-table-library/types/compact';
 
-type FooterProps = { columns: Column[] };
+type FooterProps<T extends TableNode> = { columns: Column<T>[] };
 
-export const CompactFooter: React.FC<FooterProps> = ({ columns }: FooterProps) => {
+export const CompactFooter = <T extends TableNode>({ columns }: FooterProps<T>) => {
   return (
     <Footer>
       <FooterRow>
-        {columns.map((column: Column, index: number) => (
+        {columns.map((column: Column<T>, index: number) => (
           <FooterCell key={index}>{column.footer}</FooterCell>
         ))}
       </FooterRow>

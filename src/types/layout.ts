@@ -2,8 +2,6 @@ import * as React from 'react';
 
 import { DataColumn } from '@table-library/react-table-library/common/util/columns';
 
-import { Nullish } from '@table-library/react-table-library/types/common';
-
 // external
 
 export type Layout = {

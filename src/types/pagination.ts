@@ -14,11 +14,11 @@ export type PaginationFunctions = {
   onSetSize: (size: number) => void;
 };
 
-export type Pagination = {
+export type Pagination<T extends TableNode> = {
   state: State;
   fns: PaginationFunctions;
   options: PaginationOptionsSound;
-  modifier: Modifier;
+  modifier: Modifier<T>;
 };
 
 export type Pages = Record<string, TableNode[]>;

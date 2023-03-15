@@ -1,7 +1,19 @@
 import * as React from 'react';
 
-import { Data } from '@table-library/react-table-library/types/table';
+import { TableNode, Data } from '@table-library/react-table-library/types/table';
 
-const TableContext = React.createContext<Data | null>(null);
+let TableContext: any = null;
 
-export { TableContext };
+const createTableContext = <T extends TableNode>() => {
+  // singleton check
+  if (TableContext) return TableContext;
+
+  TableContext = React.createContext<Data<T> | null>(null);
+  return TableContext;
+};
+
+const useTableContext = <T extends TableNode>(): Data<T> => {
+  return React.useContext(TableContext);
+};
+
+export { createTableContext, useTableContext };

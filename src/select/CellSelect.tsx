@@ -1,20 +1,21 @@
 import * as React from 'react';
 
 import { Cell } from '@table-library/react-table-library/table/Cell';
-import { SelectContext } from '@table-library/react-table-library/common/context/Select';
+import { useSelectContext } from '@table-library/react-table-library/common/context/Select';
 import { useFeatures } from '@table-library/react-table-library/common/context/Feature';
 import { applyModifiers } from '@table-library/react-table-library/common/util/modifiers';
 import { useShiftDown } from '@table-library/react-table-library/common/hooks/useShiftDown';
 
 import { SelectTypes, CellSelectProps } from '@table-library/react-table-library/types/select';
+import { TableNode } from '@table-library/react-table-library/types/table';
 
 import { Checkbox } from './Checkbox';
 
-export const CellSelect: React.FC<CellSelectProps> = React.memo(
-  ({ item, ...passThrough }: CellSelectProps) => {
-    const select = React.useContext(SelectContext);
+export const CellSelect = React.memo(
+  <T extends TableNode>({ item, ...passThrough }: CellSelectProps<T>) => {
+    const select = useSelectContext<T>();
 
-    const features = useFeatures();
+    const features = useFeatures<T>();
     const isShiftDown = useShiftDown();
 
     if (!select) {
@@ -32,7 +33,7 @@ export const CellSelect: React.FC<CellSelectProps> = React.memo(
       const isMuiltiSelectType = select.options.buttonSelect === SelectTypes.MultiSelect;
 
       if (isShiftDown && isMuiltiSelectType) {
-        select.fns.onToggleByIdShift(item.id, select.options, applyModifiers(features));
+        select.fns.onToggleByIdShift(item.id, select.options, applyModifiers<T>(features));
       } else if (isMuiltiSelectType) {
         select.fns.onToggleByIdRecursively(item.id, {
           isCarryForward: select.options.isCarryForward,

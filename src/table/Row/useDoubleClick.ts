@@ -43,11 +43,11 @@ const useDoubleClickBase = ({
   });
 };
 
-export const useDoubleClick = (
+export const useDoubleClick = <T extends TableNode>(
   ref: React.MutableRefObject<HTMLDivElement | null>,
-  onClick: OnClick | Nullish,
-  onDoubleClick: OnClick | Nullish,
-  node: TableNode,
+  onClick: OnClick<T> | Nullish,
+  onDoubleClick: OnClick<T> | Nullish,
+  node: T,
 ) => {
   useDoubleClickBase({
     onSingleClick: onClick ? (event) => onClick(node, event) : NOOP,

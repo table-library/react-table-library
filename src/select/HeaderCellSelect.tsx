@@ -1,17 +1,18 @@
 import * as React from 'react';
 
-import { SelectContext } from '@table-library/react-table-library/common/context/Select';
+import { useSelectContext } from '@table-library/react-table-library/common/context/Select';
 import { HeaderCell } from '@table-library/react-table-library/table/Cell';
 
 import { SelectTypes } from '@table-library/react-table-library/types/select';
+import { TableNode } from '@table-library/react-table-library/types/table';
 
 import { Checkbox } from './Checkbox';
 
 type HeaderCellSelectProps = Record<string, any>;
 
-export const HeaderCellSelect: React.FC<HeaderCellSelectProps> = React.memo(
-  (passThrough: HeaderCellSelectProps) => {
-    const select = React.useContext(SelectContext);
+export const HeaderCellSelect = React.memo(
+  <T extends TableNode>(passThrough: HeaderCellSelectProps) => {
+    const select = useSelectContext<T>();
 
     if (!select) {
       throw new Error(

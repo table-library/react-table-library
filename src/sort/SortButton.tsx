@@ -4,6 +4,7 @@ import cs from 'clsx';
 import { Button } from '@table-library/react-table-library/common/components/Button';
 
 import { Nullish, State } from '@table-library/react-table-library/types/common';
+import { TableNode } from '@table-library/react-table-library/types/table';
 import {
   Sort,
   SortOptionsIcon,
@@ -34,19 +35,19 @@ const getSortIcon = (
   return SortIconDefault ? React.cloneElement(SortIconDefault, { ...size }) : null;
 };
 
-type SortButtonProps = {
-  sort: Sort;
+type SortButtonProps<T extends TableNode> = {
+  sort: Sort<T>;
   sortKey: string;
   sortIcon: SortOptionsIcon;
   children: React.ReactNode;
 };
 
-export const SortButton: React.FC<SortButtonProps> = ({
+export const SortButton = <T extends TableNode>({
   sort,
   sortKey,
   sortIcon = {},
   children,
-}: SortButtonProps) => {
+}: SortButtonProps<T>) => {
   const { state, fns, options } = sort;
 
   const mergedSortIconOptions = {

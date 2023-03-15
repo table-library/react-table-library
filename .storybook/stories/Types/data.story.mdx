@@ -7,10 +7,12 @@ import { Meta } from '@storybook/addon-docs';
 Either table component needs to receive the following `Data` type as `data` prop:
 
 ```javascript
+export type Identifier = string | number;
+
 export type TableNode = {
-  id: string,
-  nodes?: TableNode[] | Nullish,
-  [prop: string]: any,
+  id: Identifier;
+  nodes?: TableNode[] | Nullish;
+  [prop: string]: any;
 };
 
 export type ExtendedNode<T extends TableNode> = T & {
@@ -20,9 +22,9 @@ export type ExtendedNode<T extends TableNode> = T & {
   ancestors?: ExtendedNode<T>[];
 };
 
-export type Data = {
-  pageInfo?: any,
-  nodes: TableNode[],
+export type Data<T extends TableNode> = {
+  pageInfo?: any;
+  nodes: T[];
 };
 ```
 

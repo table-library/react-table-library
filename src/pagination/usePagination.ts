@@ -38,12 +38,12 @@ const DEFAULT_OPTIONS = {
   isServer: false,
 };
 
-const usePagination = (
-  data: Data,
+const usePagination = <T extends TableNode>(
+  data: Data<T>,
   primary?: StateAndChange,
   options?: PaginationOptions,
   context?: any,
-): Pagination => {
+): Pagination<T> => {
   const controlledState: State = primary?.state
     ? { ...DEFAULT_STATE, ...primary.state }
     : { ...DEFAULT_STATE };
@@ -139,7 +139,7 @@ const usePagination = (
     getPageBoundaries,
   };
 
-  const modifier = (nodes: TableNode[]): ExtendedNode<TableNode>[] => {
+  const modifier = (nodes: T[]): ExtendedNode<T>[] => {
     if (mergedOptions.isServer) {
       return nodes;
     }

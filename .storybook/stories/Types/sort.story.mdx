@@ -76,11 +76,11 @@ export type HeaderCellSortProps = {
   children?: React.ReactNode;
 } & Record<string, any>;
 
-export type Sort = {
+export type Sort<T extends TableNode> = {
   state: State;
   fns: SortFunctions;
   options: SortOptionsSound;
-  modifier: Modifier;
+  modifier: Modifier<T>;
   components: {
     HeaderCellSort: React.FunctionComponent<HeaderCellSortProps>;
   };

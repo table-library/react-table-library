@@ -9,13 +9,35 @@ import { Tree } from '@table-library/react-table-library/types/tree';
 import { Sort } from '@table-library/react-table-library/types/sort';
 import { Pagination } from '@table-library/react-table-library/types/pagination';
 
+// external data
+
+export type Identifier = string | number;
+
+export type TableNode = {
+  id: Identifier;
+  nodes?: TableNode[] | Nullish;
+  [prop: string]: any;
+};
+
+export type ExtendedNode<T extends TableNode> = T & {
+  treeXLevel?: number;
+  treeYLevel?: number;
+  parentNode?: ExtendedNode<T> | Nullish;
+  ancestors?: ExtendedNode<T>[];
+};
+
+export type Data<T extends TableNode> = {
+  pageInfo?: any;
+  nodes: T[];
+};
+
 // external
 
 export type RestProps = Record<string, any>;
 
 export type Event = React.SyntheticEvent | React.KeyboardEvent;
 
-export type OnClick = (node: TableNode, event: Event) => void;
+export type OnClick<T extends TableNode> = (node: T, event: Event) => void;
 
 export type CellProps = {
   className?: string;
@@ -42,12 +64,12 @@ export type HeaderCellProps = {
   children?: React.ReactNode;
 } & RestProps;
 
-export type RowProps = {
-  item: TableNode;
+export type RowProps<T extends TableNode> = {
+  item: T;
   className?: string;
   disabled?: boolean;
-  onClick?: OnClick;
-  onDoubleClick?: OnClick;
+  onClick?: OnClick<T>;
+  onDoubleClick?: OnClick<T>;
   children: React.ReactNode;
 } & RestProps;
 
@@ -65,53 +87,36 @@ export type HeaderProps = {
   children: React.ReactNode;
 } & RestProps;
 
-export type TableProps = {
-  data: Data;
+export type TableProps<T extends TableNode> = {
+  data: Data<T>;
   theme?: Theme;
   layout?: Layout;
-  sort?: Sort;
-  pagination?: Pagination;
-  select?: Select;
-  tree?: Tree;
+  sort?: Sort<T>;
+  pagination?: Pagination<T>;
+  select?: Select<T>;
+  tree?: Tree<T>;
   onInit?: OnInitFunction;
   children?: (nodes: ExtendedNode<TableNode>[]) => React.ReactNode;
 } & RestProps;
-
-// external data
-
-export type TableNode = {
-  id: string;
-  nodes?: TableNode[] | Nullish;
-  [prop: string]: any;
-};
-
-export type ExtendedNode<T extends TableNode> = T & {
-  treeXLevel?: number;
-  treeYLevel?: number;
-  parentNode?: ExtendedNode<T> | Nullish;
-  ancestors?: ExtendedNode<T>[];
-};
-
-export type Data = {
-  pageInfo?: any;
-  nodes: TableNode[];
-};
 
 // internal
 
 export type OnInitFunction = (node: HTMLTableElement) => void;
 
-export type Features = {
-  select: Select | Nullish;
-  tree: Tree | Nullish;
-  sort: Sort | Nullish;
-  pagination: Pagination | Nullish;
+export type Features<T extends TableNode> = {
+  select: Select<T> | Nullish;
+  tree: Tree<T> | Nullish;
+  sort: Sort<T> | Nullish;
+  pagination: Pagination<T> | Nullish;
 };
 
-export type FeatureProps = {
+export type FeatureProps<T extends TableNode> = {
   theme?: string;
   className?: string;
-  onClick: OnClick;
+  onClick: OnClick<T>;
 };
 
-export type GetRowProps = (props: RowProps, features: Features) => FeatureProps;
+export type GetRowProps<T extends TableNode> = (
+  props: RowProps<T>,
+  features: Features<T>,
+) => FeatureProps<T>;

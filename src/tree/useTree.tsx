@@ -27,7 +27,10 @@ import {
 
 import { CellTree } from './CellTree';
 
-const getRowProps = (props: RowProps, features: Features): FeatureProps => {
+const getRowProps = <T extends TableNode>(
+  props: RowProps<T>,
+  features: Features<T>,
+): FeatureProps<T> => {
   const { item } = props;
 
   const { tree } = features;
@@ -96,19 +99,19 @@ const DEFAULT_OPTIONS = {
   treeYLevel: 0,
 };
 
-const useTree = (
-  data: Data,
+const useTree = <T extends TableNode>(
+  data: Data<T>,
   primary?: StateAndChange,
-  options?: TreeOptions,
+  options?: TreeOptions<T>,
   context?: any,
-): Tree => {
+): Tree<T> => {
   const controlledState: State = primary?.state
     ? { ...DEFAULT_STATE, ...primary.state }
     : { ...DEFAULT_STATE };
 
   const onChange = primary?.onChange ? primary.onChange : () => {};
 
-  const [state, fns] = useIdReducer(data, controlledState, onChange, context);
+  const [state, fns] = useIdReducer<T>(data, controlledState, onChange, context);
 
   useSyncRefState('tree', context, state);
 
@@ -121,7 +124,7 @@ const useTree = (
     },
   };
 
-  const modifier = (nodes: TableNode[]): ExtendedNode<TableNode>[] => {
+  const modifier = (nodes: T[]): ExtendedNode<T>[] => {
     if (mergedOptions.isServer) {
       return nodes;
     }

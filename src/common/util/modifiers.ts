@@ -1,9 +1,9 @@
 import { TableNode, Features, ExtendedNode } from '@table-library/react-table-library/types/table';
 
 export const applyModifiers =
-  ({ sort, pagination, tree }: Features) =>
-  (nodes: TableNode[]) => {
-    let modifiedNodes: ExtendedNode<TableNode>[] = [...nodes];
+  <T extends TableNode>({ sort, pagination, tree }: Features<T>) =>
+  (nodes: T[]) => {
+    let modifiedNodes: ExtendedNode<T>[] = [...nodes];
 
     modifiedNodes = sort ? sort.modifier(modifiedNodes) : modifiedNodes;
 

@@ -1,4 +1,4 @@
-import { ExtendedNode, TableNode } from './table';
+import { ExtendedNode, Identifier, TableNode } from './table';
 
 export type Nullish = null | undefined;
 
@@ -10,8 +10,8 @@ export type Action = {
 export type State = Record<string, any>;
 
 export type IdState = {
-  id?: string | Nullish;
-  ids: string[];
+  id?: Identifier | Nullish;
+  ids: Identifier[];
   all?: boolean;
   none?: boolean;
 } & State;
@@ -23,32 +23,36 @@ export type StateAndChange = {
   onChange?: MiddlewareFunction;
 };
 
-export type Modifier = (nodes: TableNode[]) => TableNode[] | ExtendedNode<TableNode>[];
+export type Modifier<T extends TableNode> = (nodes: T[]) => ExtendedNode<T>[];
 
 type IdReducerFunctionsOptions = {
   isCarryForward?: boolean;
   isPartialToAll?: boolean;
 } & Record<string, any>;
 
-export type IdReducerFunctions = {
-  onAddById: (id: string) => void;
-  onRemoveById: (id: string) => void;
-  onToggleById: (id: string) => void;
+export type IdReducerFunctions<T extends TableNode> = {
+  onAddById: (id: Identifier) => void;
+  onRemoveById: (id: Identifier) => void;
+  onToggleById: (id: Identifier) => void;
 
-  onAddByIds: (ids: string[], options: IdReducerFunctionsOptions) => void;
-  onRemoveByIds: (ids: string[]) => void;
-  onToggleByIdRecursively: (id: string, options: IdReducerFunctionsOptions) => void;
+  onAddByIds: (ids: Identifier[], options: IdReducerFunctionsOptions) => void;
+  onRemoveByIds: (ids: Identifier[]) => void;
+  onToggleByIdRecursively: (id: Identifier, options: IdReducerFunctionsOptions) => void;
 
-  onAddByIdRecursively: (id: string, options: IdReducerFunctionsOptions) => void;
-  onRemoveByIdRecursively: (id: string) => void;
+  onAddByIdRecursively: (id: Identifier, options: IdReducerFunctionsOptions) => void;
+  onRemoveByIdRecursively: (id: Identifier) => void;
 
-  onAddByIdExclusively: (id: string) => void;
+  onAddByIdExclusively: (id: Identifier) => void;
   onRemoveByIdExclusively: () => void;
-  onToggleByIdExclusively: (id: string) => void;
+  onToggleByIdExclusively: (id: Identifier) => void;
 
-  onToggleByIdShift: (id: string, options: IdReducerFunctionsOptions, modifier: Modifier) => void;
+  onToggleByIdShift: (
+    id: Identifier,
+    options: IdReducerFunctionsOptions,
+    modifier: Modifier<T>,
+  ) => void;
 
-  onAddAll: (ids: string[]) => void;
+  onAddAll: (ids: Identifier[]) => void;
   onRemoveAll: () => void;
   onToggleAll: (options: IdReducerFunctionsOptions) => void;
 };

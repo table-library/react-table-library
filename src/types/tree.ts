@@ -12,63 +12,66 @@ export enum TreeExpandClickTypes {
   ButtonClick,
 }
 
-export type CustomIcon = React.ReactElement | ((node: TableNode) => React.ReactElement) | Nullish;
+export type CustomIcon<T extends TableNode> =
+  | React.ReactElement
+  | ((node: T) => React.ReactElement)
+  | Nullish;
 
-export type TreeOptionsIcon = {
+export type TreeOptionsIcon<T extends TableNode> = {
   margin?: string;
   size?: string;
   noIconMargin?: string;
-  iconDefault?: CustomIcon;
-  iconRight?: CustomIcon;
-  iconDown?: CustomIcon;
+  iconDefault?: CustomIcon<T>;
+  iconRight?: CustomIcon<T>;
+  iconDown?: CustomIcon<T>;
 };
 
-export type TreeOptions = {
+export type TreeOptions<T extends TableNode> = {
   isServer?: boolean;
-  treeIcon?: TreeOptionsIcon;
+  treeIcon?: TreeOptionsIcon<T>;
   clickType?: TreeExpandClickTypes;
   indentation?: number;
   treeXLevel?: number;
   treeYLevel?: number;
 };
 
-export type TreeOptionsIconSound = {
+export type TreeOptionsIconSound<T extends TableNode> = {
   margin: string;
   size: string;
   noIconMargin: string;
-  iconDefault: CustomIcon;
-  iconRight: CustomIcon;
-  iconDown: CustomIcon;
+  iconDefault: CustomIcon<T>;
+  iconRight: CustomIcon<T>;
+  iconDown: CustomIcon<T>;
 };
 
-export type TreeOptionsSound = {
+export type TreeOptionsSound<T extends TableNode> = {
   isServer: boolean;
-  treeIcon: TreeOptionsIconSound;
+  treeIcon: TreeOptionsIconSound<T>;
   clickType: TreeExpandClickTypes;
   indentation: number;
   treeXLevel: number;
   treeYLevel: number;
 };
 
-export type ColumnTreePropsObject = {
-  treeIcon?: TreeOptionsIcon;
+export type ColumnTreePropsObject<T extends TableNode> = {
+  treeIcon?: TreeOptionsIcon<T>;
 };
 
-export type ColumnTreeProps = ColumnTreePropsObject | boolean;
+export type ColumnTreeProps<T extends TableNode> = ColumnTreePropsObject<T> | boolean;
 
-export type CellTreeProps = {
-  item: TableNode;
-  treeIcon?: TreeOptionsIcon;
+export type CellTreeProps<T extends TableNode> = {
+  item: T;
+  treeIcon?: TreeOptionsIcon<T>;
   children?: React.ReactNode;
 };
 
-export type Tree = {
+export type Tree<T extends TableNode> = {
   state: State;
-  fns: IdReducerFunctions;
-  options: TreeOptionsSound;
-  _getRowProps: GetRowProps;
-  modifier: Modifier;
+  fns: IdReducerFunctions<T>;
+  options: TreeOptionsSound<T>;
+  _getRowProps: GetRowProps<T>;
+  modifier: Modifier<T>;
   components: {
-    CellTree: React.FunctionComponent<CellTreeProps>;
+    CellTree: React.FunctionComponent<CellTreeProps<T>>;
   };
 };
