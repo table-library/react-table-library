@@ -3,33 +3,37 @@ import useInterval from 'use-interval';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 
-import { DisableAnimationsContext } from '../../../../stories/loki.js';
-import { DocumentationSee } from '../../../documentation';
-import { lotsOfNodes, randomFromInterval } from '../../../data';
-import { valueToColor } from '../../../util';
+import { DisableAnimationsContext } from '../../stories/loki.jsx';
+import { DocumentationSee } from '../documentation';
+import { lotsOfNodes, randomFromInterval } from '../data';
+import { valueToColor } from '../util';
 
 const key = 'Data Grid';
 
 const Component = () => {
   const [nodes, setNodes] = React.useState(lotsOfNodes);
 
-  const theme = useTheme({
-    BaseCell: `
-      color: #000000;
+  const theme = useTheme([
+    getTheme(),
+    {
+      BaseCell: `
+        color: #000000;
 
-      min-width: 15%;
-      width: 15%;
+        min-width: 15%;
+        width: 15%;
 
-      &:nth-of-type(1) {
-        left: 0px;
-      }
+        &:nth-of-type(1) {
+          left: 0px;
+        }
 
-      &:nth-of-type(2) {
-        left: 15%;
-      }
-    `,
-  });
+        &:nth-of-type(2) {
+          left: 15%;
+        }
+      `,
+    },
+  ]);
 
   const COLUMNS = [
     {
@@ -154,9 +158,10 @@ import useInterval from 'use-interval';
 
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
+import { getTheme } from '@table-library/react-table-library/baseline';
 
-import { DisableAnimationsContext } from '../../stories/loki.js';
-import { DocumentationSee } from '../../../documentation';
+import { DisableAnimationsContext } from '../../stories/loki.jsx';
+import { DocumentationSee } from '../documentation';
 import { lotsOfNodes, randomFromInterval } from '../data';
 import { valueToColor } from '../util';
 
@@ -165,22 +170,25 @@ const key = 'Data Grid';
 const Component = () => {
   const [nodes, setNodes] = React.useState(lotsOfNodes);
 
-  const theme = useTheme({
-    BaseCell: \`
-      color: #000000;
+  const theme = useTheme([
+    getTheme(),
+    {
+      BaseCell: \`
+        color: #000000;
 
-      min-width: 15%;
-      width: 15%;
+        min-width: 15%;
+        width: 15%;
 
-      &:nth-of-type(1) {
-        left: 0px;
-      }
+        &:nth-of-type(1) {
+          left: 0px;
+        }
 
-      &:nth-of-type(2) {
-        left: 15%;
-      }
-    \`,
-  });
+        &:nth-of-type(2) {
+          left: 15%;
+        }
+      \`,
+    },
+  ]);
 
   const COLUMNS = [
     {

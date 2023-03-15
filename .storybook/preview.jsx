@@ -2,7 +2,7 @@ import * as React from 'react';
 import 'loki/configure-react';
 import isLokiRunning from '@loki/is-loki-running';
 
-import { DisableAnimationsContext } from './stories/loki.js';
+import { DisableAnimationsContext } from './stories/loki';
 
 const Features = [
   'Theme',

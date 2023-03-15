@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { CompactTable, CompactTableProps } from '@table-library/react-table-library/compact';
+import { CompactTable } from '@table-library/react-table-library/compact';
 
 import * as BaseStory from './base';
 import * as ThemeStory from './theme';

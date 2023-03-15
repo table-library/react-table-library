@@ -4,7 +4,7 @@ import useInterval from 'use-interval';
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
 
-import { DisableAnimationsContext } from '../../../../stories/loki.js';
+import { DisableAnimationsContext } from '../../../../stories/loki.jsx';
 import { DocumentationSee } from '../../../documentation';
 import { lotsOfNodes, randomFromInterval } from '../../../data';
 import { valueToColor } from '../../../util';
@@ -155,10 +155,10 @@ import useInterval from 'use-interval';
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
 
-import { DisableAnimationsContext } from '../../../../stories/loki.js';
+import { DisableAnimationsContext } from '../../stories/loki.jsx';
 import { DocumentationSee } from '../../../documentation';
-import { lotsOfNodes, randomFromInterval } from '../../../data';
-import { valueToColor } from '../../../util';
+import { lotsOfNodes, randomFromInterval } from '../data';
+import { valueToColor } from '../util';
 
 const key = 'Data Grid';
 
