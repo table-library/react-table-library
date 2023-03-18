@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   stories: ['./stories/**/*.@(js|jsx|ts|tsx|mdx)'],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+  addons: ['@storybook/addon-docs', '@storybook/addon-links'],
   staticDirs: ['./static'],
 
   // due to storybook composition, chakra shows up as stories
@@ -13,6 +13,7 @@ module.exports = {
   framework: '@storybook/react',
   core: {
     builder: '@storybook/builder-vite',
+    disableTelemetry: true,
   },
 
   async viteFinal(config, { configType }) {
@@ -20,18 +21,16 @@ module.exports = {
     // You can change the configuration based on that.
     // 'PRODUCTION' is used when building the static version of storybook.
 
-    // chakra + framer motion is not working with storybook
-    // https://github.com/framer/motion/issues/1307#issuecomment-966827629
-    // config.module.rules.push({
-    //   type: 'javascript/auto',
-    //   test: /\.mjs$/,
-    //   include: /node_modules/,
-    // });
-
     // chakra does not show styles in storybook
     // https://github.com/storybookjs/storybook/issues/13114#issuecomment-846464338
     return {
       ...config,
+      build: {
+        ...config.build,
+        // https://github.com/storybookjs/builder-vite/issues/409
+        // https://github.com/vitejs/vite/issues/2433
+        sourcemap: false,
+      },
       resolve: {
         ...config.resolve,
         alias: [
