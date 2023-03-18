@@ -30,6 +30,10 @@ module.exports = {
         // https://github.com/storybookjs/builder-vite/issues/409
         // https://github.com/vitejs/vite/issues/2433
         sourcemap: false,
+        rollupOptions: {
+          ...config.build.rollupOptions,
+          cache: false,
+        },
       },
       resolve: {
         ...config.resolve,
