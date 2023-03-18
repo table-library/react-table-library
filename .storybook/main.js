@@ -30,10 +30,19 @@ module.exports = {
         // https://github.com/storybookjs/builder-vite/issues/409
         // https://github.com/vitejs/vite/issues/2433
         sourcemap: false,
-        minify: false,
+        // minify: false,
         rollupOptions: {
           ...config.build.rollupOptions,
+          maxParallelFileOps: 2,
           cache: false,
+          output: {
+            sourcemap: false,
+            manualChunks: (id) => {
+              if (id.includes('node_modules')) {
+                return 'vendor';
+              }
+            },
+          },
         },
       },
       resolve: {
