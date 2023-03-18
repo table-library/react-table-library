@@ -114,7 +114,7 @@
     "loki:test": "loki test",
     "loki:update": "loki update",
     "storybook:dev": "start-storybook .storybook .storybook/static -p 9001",
-    "storybook:build": "build-storybook .storybook .storybook/static -o dist",
+    "storybook:build": "NODE_OPTIONS=--max-old-space-size=4096 build-storybook .storybook .storybook/static -o dist",
     "storybook:preview": "http-server dist -o",
     "library:build": "rollup -c && npm run copypackage && npm run copyreadme",
     "valid": "npm run test && npm run prettier:check && npm run lint:check && tsc",
