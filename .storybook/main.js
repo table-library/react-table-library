@@ -26,13 +26,13 @@ module.exports = {
     return {
       ...config,
       build: {
-        ...config.build,
+        ...(config?.build ?? {}),
         // https://github.com/storybookjs/builder-vite/issues/409
         // https://github.com/vitejs/vite/issues/2433
         sourcemap: false,
         // minify: false,
         rollupOptions: {
-          ...config.build.rollupOptions,
+          ...(config?.build?.rollupOptions ?? {}),
           maxParallelFileOps: 2,
           cache: false,
           output: {
@@ -46,7 +46,7 @@ module.exports = {
         },
       },
       resolve: {
-        ...config.resolve,
+        ...(config?.resolve ?? {}),
         alias: [
           {
             find: '@table-library/react-table-library/types',
