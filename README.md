@@ -40,11 +40,11 @@ React Table Library requires the following libraries to be installed:
 ## Installation
 
 ```sh
-npm install @table-library/react-table-library @emotion/react
+npm install @table-library/react-table-library @emotion/react @emotion/cache @emotion/server
 ```
 
 ```sh
-yarn add @table-library/react-table-library @emotion/react
+yarn add @table-library/react-table-library @emotion/react @emotion/cache @emotion/server
 ```
 
 ## Usage
