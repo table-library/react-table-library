@@ -38,6 +38,10 @@ export default ({ margin }: { margin?: string }) => css`
   &.suffix {
     margin-left: ${margin || 0};
   }
+  
+  &.no-shrink {
+    flex-shrink: 0;
+  }
 
   div {
     text-align: left;
