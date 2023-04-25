@@ -102,7 +102,7 @@ export const CellTree = <T extends TableNode>({
     <Cell {...passThrough}>
       <div css={style}>
         <Button
-          className="prefix narrow"
+          className="prefix narrow no-shrink"
           margin={icon ? mergedTreeIconOptions.margin : mergedTreeIconOptions.noIconMargin}
           onClick={handleClick}
         >
