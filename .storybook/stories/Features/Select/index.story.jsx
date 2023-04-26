@@ -35,6 +35,9 @@ import DefaultSingleSelectCode from './default-single-select?raw';
 import DefaultMultiSelectComponent from './default-multi-select';
 import DefaultMultiSelectCode from './default-multi-select?raw';
 
+import ClickOnlySelectsComponent from './click-only-selects';
+import ClickOnlySelectsCode from './click-only-selects?raw';
+
 import IsCarryForwardComponent from './is-carry-forward';
 import IsCarryForwardCode from './is-carry-forward?raw';
 
@@ -55,6 +58,7 @@ createStories(
     createStory('all multi select', AllMultiSelectComponent, AllMultiSelectCode),
     createStory('default single select', DefaultSingleSelectComponent, DefaultSingleSelectCode),
     createStory('default multi select', DefaultMultiSelectComponent, DefaultMultiSelectCode),
+    createStory('click only selects', ClickOnlySelectsComponent, ClickOnlySelectsCode),
     createStory('is carry forward', IsCarryForwardComponent, IsCarryForwardCode),
     createStory('is partial to all', IsPartialToAllComponent, IsPartialToAllCode),
     createStory('custom checkbox (Material UI)', IsPartialToAllComponent, IsPartialToAllCode),
