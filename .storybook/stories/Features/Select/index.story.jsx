@@ -41,6 +41,9 @@ import IsCarryForwardCode from './is-carry-forward?raw';
 import IsPartialToAllComponent from './is-partial-to-all';
 import IsPartialToAllCode from './is-partial-to-all?raw';
 
+import EnforceHasSelectionComponent from './enforce-has-selection'
+import EnforceHasSelectionCode from './enforce-has-selection?raw'
+
 import CustomCheckboxComponent from './custom-checkbox';
 import CustomCheckboxCode from './custom-checkbox?raw';
 
@@ -57,6 +60,7 @@ createStories(
     createStory('default multi select', DefaultMultiSelectComponent, DefaultMultiSelectCode),
     createStory('is carry forward', IsCarryForwardComponent, IsCarryForwardCode),
     createStory('is partial to all', IsPartialToAllComponent, IsPartialToAllCode),
+    createStory('enforce has selection', EnforceHasSelectionComponent, EnforceHasSelectionCode),
     createStory('custom checkbox (Material UI)', CustomCheckboxComponent, CustomCheckboxCode),
   ],
   Table,
