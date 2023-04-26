@@ -30,7 +30,7 @@ const Component = () => {
   const data = { nodes };
 
   const select = useRowSelect(data, {
-    state: {id: '3'},
+    // state: {id: '3'},
     onChange: onSelectChange,
   }, {enforceHasSelection: true});
 
