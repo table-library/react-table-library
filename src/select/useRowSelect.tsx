@@ -79,7 +79,9 @@ const getRowProps = <T extends TableNode>(
       select.fns.onToggleByIdShift(node.id, select.options, applyModifiers(features));
     } else if (isMultiSelectType) {
       select.fns.onToggleById(node.id);
-    } /* isSingleSelectType */ else {
+    } /* isSingleSelectType */ else if (select.options.enforceHasSelection) {
+      select.fns.onAddByIdExclusively(node.id);
+    } else {
       select.fns.onToggleByIdExclusively(node.id);
     }
   };
@@ -96,12 +98,18 @@ const DEFAULT_STATE = {
   id: null,
 };
 
+const DEFAULT_STATE_ENFORCE_HAS_SELECTION = {
+  ids: [],
+  id: '0',
+};
+
 const DEFAULT_OPTIONS = {
   clickType: SelectClickTypes.RowClick,
   rowSelect: SelectTypes.SingleSelect,
   buttonSelect: SelectTypes.MultiSelect,
   isCarryForward: true,
   isPartialToAll: false,
+  enforceHasSelection: false,
 };
 
 const useRowSelect = <T extends TableNode>(
@@ -110,20 +118,21 @@ const useRowSelect = <T extends TableNode>(
   options?: SelectOptions,
   context?: any,
 ): Select<T> => {
-  const controlledState: State = primary?.state
-    ? { ...DEFAULT_STATE, ...primary.state }
-    : { ...DEFAULT_STATE };
+  const mergedOptions = {
+    ...DEFAULT_OPTIONS,
+    ...(options ?? {}),
+  };
+
+  const controlledState: State = {
+    ...(mergedOptions.enforceHasSelection ? DEFAULT_STATE_ENFORCE_HAS_SELECTION : DEFAULT_STATE),
+    ...(primary?.state ?? {}),
+  };
 
   const onChange = primary?.onChange ? primary.onChange : () => {};
 
   const [state, fns] = useIdReducer<T>(data, controlledState, onChange, context);
 
   useSyncRefState('select', context, state);
-
-  const mergedOptions = {
-    ...DEFAULT_OPTIONS,
-    ...(options ? options : {}),
-  };
 
   return {
     state,

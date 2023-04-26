@@ -19,6 +19,7 @@ export type SelectOptions = {
   buttonSelect?: SelectTypes;
   isCarryForward?: boolean;
   isPartialToAll?: boolean;
+  enforceHasSelection?: boolean;
 };
 
 export type SelectOptionsSound = Required<SelectOptions>;
