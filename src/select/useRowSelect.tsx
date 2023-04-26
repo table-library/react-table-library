@@ -79,7 +79,9 @@ const getRowProps = <T extends TableNode>(
       select.fns.onToggleByIdShift(node.id, select.options, applyModifiers(features));
     } else if (isMultiSelectType) {
       select.fns.onToggleById(node.id);
-    } /* isSingleSelectType */ else {
+    } /* isSingleSelectType */ else if (select.options.clickOnlySelects) {
+      select.fns.onAddByIdExclusively(node.id);
+    } else {
       select.fns.onToggleByIdExclusively(node.id);
     }
   };
@@ -102,6 +104,7 @@ const DEFAULT_OPTIONS = {
   buttonSelect: SelectTypes.MultiSelect,
   isCarryForward: true,
   isPartialToAll: false,
+  clickOnlySelects: false,
 };
 
 const useRowSelect = <T extends TableNode>(
