@@ -21,13 +21,7 @@ export type SelectOptions = {
   isPartialToAll?: boolean;
 };
 
-export type SelectOptionsSound = {
-  clickType: SelectClickTypes;
-  rowSelect: SelectTypes;
-  buttonSelect: SelectTypes;
-  isCarryForward: boolean;
-  isPartialToAll: boolean;
-};
+export type SelectOptionsSound = Required<SelectOptions>;
 
 export type CellSelectProps<T extends TableNode> = {
   item: T;
