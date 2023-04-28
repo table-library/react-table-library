@@ -32,21 +32,12 @@ export type SortOptions = {
   isRecursive?: boolean;
 };
 
-export type SortOptionsIconSound = {
-  position: SortIconPositions;
-  margin: string;
-  size: string;
-  iconDefault: React.ReactElement | Nullish;
-  iconUp: React.ReactElement | Nullish;
-  iconDown: React.ReactElement | Nullish;
-};
+export type SortOptionsIconSound = Required<SortOptionsIcon>;
 
-export type SortOptionsSound = {
-  sortFns: Record<string, SortFn>;
-  isServer: boolean;
-  sortToggleType: SortToggleType;
-  sortIcon: SortOptionsIconSound;
-  isRecursive: boolean;
+type SortOptionsSound = {
+  [K in keyof Required<SortOptions>]: K extends 'sortIcon'
+    ? SortOptionsIconSound
+    : Required<SortOptions>[K];
 };
 
 export type SortFunctionInput = {
