@@ -35,9 +35,10 @@ const useCustom = <T extends TableNode>(
   primary: StateAndChange | Nullish,
   context?: any,
 ) => {
-  const controlledState: State = primary?.state
-    ? { ...DEFAULT_STATE, ...primary.state }
-    : { ...DEFAULT_STATE };
+  const controlledState: State = {
+    ...DEFAULT_STATE,
+    ...(primary?.state ?? {}),
+  };
 
   const onChange = primary?.onChange ? primary.onChange : () => {};
 
