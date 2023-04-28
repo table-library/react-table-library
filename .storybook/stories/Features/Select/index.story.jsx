@@ -57,7 +57,7 @@ createStories(
     createStory('default multi select', DefaultMultiSelectComponent, DefaultMultiSelectCode),
     createStory('is carry forward', IsCarryForwardComponent, IsCarryForwardCode),
     createStory('is partial to all', IsPartialToAllComponent, IsPartialToAllCode),
-    createStory('custom checkbox (Material UI)', IsPartialToAllComponent, IsPartialToAllCode),
+    createStory('custom checkbox (Material UI)', CustomCheckboxComponent, CustomCheckboxCode),
   ],
   Table,
   {
