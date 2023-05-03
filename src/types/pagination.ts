@@ -5,9 +5,7 @@ export type PaginationOptions = {
   isServer?: boolean;
 };
 
-export type PaginationOptionsSound = {
-  isServer: boolean;
-};
+export type PaginationOptionsSound = Required<PaginationOptions>;
 
 export type PaginationFunctions = {
   onSetPage: (page: number) => void;

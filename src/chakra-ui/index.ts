@@ -6,9 +6,7 @@ type Configuration = {
   isVirtualized?: boolean;
 };
 
-type ConfigurationSound = {
-  isVirtualized: boolean;
-};
+type ConfigurationSound = Required<Configuration>;
 
 type Options = {
   horizontalSpacing?: number;
@@ -16,11 +14,7 @@ type Options = {
   striped?: boolean;
 };
 
-type OptionsSound = {
-  horizontalSpacing: number;
-  verticalSpacing: number;
-  striped: boolean;
-};
+type OptionsSound = Required<Options>;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getCommonTheme = (options: OptionsSound, _: ConfigurationSound) => ({
