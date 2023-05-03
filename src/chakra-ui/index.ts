@@ -121,12 +121,12 @@ export const DEFAULT_CONFIGURATION = {
 export const getTheme = (options?: Options, configuration?: Configuration): Theme => {
   const mergedOptions = {
     ...DEFAULT_OPTIONS,
-    ...(options ? options : {}),
+    ...(options ?? {}),
   };
 
   const mergedConfiguration = {
     ...DEFAULT_CONFIGURATION,
-    ...(configuration ? configuration : {}),
+    ...(configuration ?? {}),
   };
 
   return getZipTheme(mergedOptions, mergedConfiguration);

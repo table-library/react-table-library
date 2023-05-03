@@ -44,9 +44,10 @@ const usePagination = <T extends TableNode>(
   options?: PaginationOptions,
   context?: any,
 ): Pagination<T> => {
-  const controlledState: State = primary?.state
-    ? { ...DEFAULT_STATE, ...primary.state }
-    : { ...DEFAULT_STATE };
+  const controlledState: State = {
+    ...DEFAULT_STATE,
+    ...(primary?.state ?? {}),
+  };
 
   const onChange = primary?.onChange ? primary.onChange : () => {};
 
@@ -129,7 +130,7 @@ const usePagination = <T extends TableNode>(
 
   const mergedOptions = {
     ...DEFAULT_OPTIONS,
-    ...(options ? options : {}),
+    ...(options ?? {}),
   };
 
   const stateAndGetters = {

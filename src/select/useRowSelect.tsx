@@ -110,9 +110,10 @@ const useRowSelect = <T extends TableNode>(
   options?: SelectOptions,
   context?: any,
 ): Select<T> => {
-  const controlledState: State = primary?.state
-    ? { ...DEFAULT_STATE, ...primary.state }
-    : { ...DEFAULT_STATE };
+  const controlledState: State = {
+    ...DEFAULT_STATE,
+    ...(primary?.state ?? {}),
+  };
 
   const onChange = primary?.onChange ? primary.onChange : () => {};
 
@@ -122,7 +123,7 @@ const useRowSelect = <T extends TableNode>(
 
   const mergedOptions = {
     ...DEFAULT_OPTIONS,
-    ...(options ? options : {}),
+    ...(options ?? {}),
   };
 
   return {
