@@ -5,6 +5,10 @@
     ["@semantic-release/npm", {
       "pkgRoot": "lib"
     }],
-    "@semantic-release/github"
+    ["@semantic-release/github", {
+        "successComment": false,
+        "failTitle": false
+      }
+    ]
   ]
 }
