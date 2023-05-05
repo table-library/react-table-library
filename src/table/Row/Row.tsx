@@ -98,11 +98,17 @@ export const Row = <T extends TableNode>(props: RowProps<T>) => {
 
   useDoubleClick<T>(ref, onClickByFeature, onDoubleClick, item);
 
+  const handleClick = disabled
+    ? () => {}
+    : onDoubleClick
+    ? () => {}
+    : (event: Event) => onClickByFeature(item, event);
+
   return (
     <RowContainer
       role="row"
       data-table-library_tr-body=""
-      onClick={onDoubleClick ? () => {} : (event: Event) => onClickByFeature(item, event)}
+      onClick={handleClick}
       css={css`
         ${themeByFeature}
         ${theme?.BaseRow}

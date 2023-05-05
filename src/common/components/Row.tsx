@@ -10,6 +10,10 @@ import { Nullish } from '@table-library/react-table-library/types/common';
 const getBaseStyle = () => `
   display: contents;
 
+  &.disabled td {
+    cursor: auto;
+  }
+
   ${() => {
     /* #1 */
     // otherwise tree + resize would have overflow icons */
