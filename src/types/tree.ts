@@ -61,6 +61,7 @@ export type ColumnTreeProps<T extends TableNode> = ColumnTreePropsObject<T> | bo
 
 export type CellTreeProps<T extends TableNode> = {
   item: T;
+  pinLeft?: boolean;
   treeIcon?: TreeOptionsIcon<T>;
   children?: React.ReactNode;
 };

@@ -10,6 +10,6 @@ export type VirtualizedProps<T extends TableNode> = {
   rowHeight: RowHeight;
   header: () => React.ReactNode;
   body: (node: T, index: number) => React.ReactNode;
-  tableOptions: TableOptions;
-  rowOptions: RowOptions<T>;
+  tableOptions?: TableOptions;
+  rowOptions?: RowOptions<T>;
 };
