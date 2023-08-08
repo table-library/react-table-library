@@ -5,7 +5,7 @@ import {
   Modifier,
   Nullish,
 } from '@table-library/react-table-library/types/common';
-import { TableNode, GetRowProps } from '@table-library/react-table-library/types/table';
+import { TableNode, GetRowProps, CellProps } from '@table-library/react-table-library/types/table';
 
 export enum TreeExpandClickTypes {
   RowClick,
@@ -61,10 +61,9 @@ export type ColumnTreeProps<T extends TableNode> = ColumnTreePropsObject<T> | bo
 
 export type CellTreeProps<T extends TableNode> = {
   item: T;
-  pinLeft?: boolean;
   treeIcon?: TreeOptionsIcon<T>;
   children?: React.ReactNode;
-};
+} & CellProps;
 
 export type Tree<T extends TableNode> = {
   state: State;
