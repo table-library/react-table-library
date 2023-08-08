@@ -52,6 +52,8 @@ const useUpdateLayout = (index: number, hide: boolean | Nullish) => {
       if (dataColumn.isStiff || layout?.horizontalScroll) {
         const preservedDataColumn = getPreservedColumn(dataColumn.index, preservedDataColumns);
 
+        if (!preservedDataColumn) return 'minmax(0px, 1fr)';
+
         return `${preservedDataColumn.width || preservedDataColumn.minWidth * 2}px`;
       } else {
         return 'minmax(0px, 1fr)';
