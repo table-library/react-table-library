@@ -1,4 +1,4 @@
-import { Theme } from '@table-library/react-table-library/types/theme';
+import { Theme } from '@overmap-ai/react-table-library/types/theme';
 
 const zipThemes = (themes: Theme[]): Theme =>
   themes.reduce((acc: Record<string, any>, value: any) => {

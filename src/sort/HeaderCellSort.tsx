@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { useSortContext } from '@table-library/react-table-library/common/context/Sort';
+import { useSortContext } from '@overmap-ai/react-table-library/common/context/Sort';
 import { HeaderCell } from '@table-library/react-table-library/table/Cell';
 
 import { TableNode } from '@table-library/react-table-library/types/table';

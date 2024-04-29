@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { TableNode, OnClick, Event } from '@table-library/react-table-library/types/table';
-import { Nullish } from '@table-library/react-table-library/types/common';
+import { TableNode, OnClick, Event } from '@overmap-ai/react-table-library/types/table';
+import { Nullish } from '@overmap-ai/react-table-library/types/common';
 
 const NOOP = () => {};
 

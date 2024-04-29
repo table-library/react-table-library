@@ -4,18 +4,18 @@ import cs from 'clsx';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 
-import { HeaderRowContainer } from '@table-library/react-table-library/common/components/Row';
-import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
+import { HeaderRowContainer } from '@overmap-ai/react-table-library/common/components/Row';
+import { ThemeContext } from '@overmap-ai/react-table-library/common/context/Theme';
 import {
   LayoutContext,
   preserveResizedLayout,
   setResizedLayout,
-} from '@table-library/react-table-library/common/context';
+} from '@overmap-ai/react-table-library/common/context';
 import {
   toDataColumn,
   getHeaderColumns,
-} from '@table-library/react-table-library/common/util/columns';
-import { isReactFragment } from '@table-library/react-table-library/common/util/isFragment';
+} from '@overmap-ai/react-table-library/common/util/columns';
+import { isReactFragment } from '@overmap-ai/react-table-library/common/util/isFragment';
 import { getPreviousColSpans } from '@table-library/react-table-library/common/util/getPreviousColSpans';
 
 import { HeaderRowProps } from '@table-library/react-table-library/types/table';

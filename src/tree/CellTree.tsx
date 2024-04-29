@@ -3,14 +3,14 @@ import * as React from 'react';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 
-import { Button } from '@table-library/react-table-library/common/components/Button';
-import { Cell } from '@table-library/react-table-library/table/Cell';
-import { useTreeContext } from '@table-library/react-table-library/common/context/Tree';
-import { isLeaf } from '@table-library/react-table-library/common/util/tree';
+import { Button } from '@overmap-ai/react-table-library/common/components/Button';
+import { Cell } from '@overmap-ai/react-table-library/table/Cell';
+import { useTreeContext } from '@overmap-ai/react-table-library/common/context/Tree';
+import { isLeaf } from '@overmap-ai/react-table-library/common/util/tree';
 
-import { State } from '@table-library/react-table-library/types/common';
-import { TableNode } from '@table-library/react-table-library/types/table';
-import { CellTreeProps, CustomIcon } from '@table-library/react-table-library/types/tree';
+import { State } from '@overmap-ai/react-table-library/types/common';
+import { TableNode } from '@overmap-ai/react-table-library/types/table';
+import { CellTreeProps, CustomIcon } from '@overmap-ai/react-table-library/types/tree';
 
 const style = css`
   display: flex;

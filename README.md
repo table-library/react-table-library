@@ -40,7 +40,7 @@ React Table Library requires the following libraries to be installed:
 ## Installation
 
 ```sh
-npm install @table-library/react-table-library @emotion/react
+npm install @overmap-ai/react-table-library @emotion/react
 ```
 
 ```sh

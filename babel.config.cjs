@@ -7,13 +7,13 @@ module.exports = {
       'module-resolver',
       {
         alias: {
-          '@table-library/react-table-library/types': './src/types',
-          '@table-library/react-table-library/common': './src/common',
-          '@table-library/react-table-library/table': './src/table',
-          '@table-library/react-table-library/compact': './src/compact',
-          '@table-library/react-table-library/virtualized': './src/virtualized',
+          '@overmap-ai/react-table-library/types': './src/types',
+          '@overmap-ai/react-table-library/common': './src/common',
+          '@overmap-ai/react-table-library/table': './src/table',
+          '@overmap-ai/react-table-library/compact': './src/compact',
+          '@overmap-ai/react-table-library/virtualized': './src/virtualized',
           // features
-          '@table-library/react-table-library/theme': './src/theme',
+          '@overmap-ai/react-table-library/theme': './src/theme',
           '@table-library/react-table-library/resize': './src/resize',
           '@table-library/react-table-library/sort': './src/sort',
           '@table-library/react-table-library/select': './src/select',

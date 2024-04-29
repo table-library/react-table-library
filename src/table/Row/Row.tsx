@@ -5,14 +5,14 @@ import cs from 'clsx';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 
-import { isRowClick } from '@table-library/react-table-library/common/util/isRowClick';
-import { RowContainer } from '@table-library/react-table-library/common/components/Row';
-import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
-import { useFeatures } from '@table-library/react-table-library/common/context/Feature';
-import { isReactFragment } from '@table-library/react-table-library/common/util/isFragment';
-import { getPreviousColSpans } from '@table-library/react-table-library/common/util/getPreviousColSpans';
+import { isRowClick } from '@overmap-ai/react-table-library/common/util/isRowClick';
+import { RowContainer } from '@overmap-ai/react-table-library/common/components/Row';
+import { ThemeContext } from '@overmap-ai/react-table-library/common/context/Theme';
+import { useFeatures } from '@overmap-ai/react-table-library/common/context/Feature';
+import { isReactFragment } from '@overmap-ai/react-table-library/common/util/isFragment';
+import { getPreviousColSpans } from '@overmap-ai/react-table-library/common/util/getPreviousColSpans';
 
-import { Nullish } from '@table-library/react-table-library/types/common';
+import { Nullish } from '@overmap-ai/react-table-library/types/common';
 import {
   OnClick,
   Event,

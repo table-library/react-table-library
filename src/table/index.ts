@@ -1,4 +1,4 @@
-export * from '@table-library/react-table-library/types/table';
+export * from '@overmap-ai/react-table-library/types/table';
 
 export * from './Table';
 export * from './Body';

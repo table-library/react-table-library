@@ -1,16 +1,16 @@
 import * as React from 'react';
 import cs from 'clsx';
-import { isRowClick } from '@table-library/react-table-library/common/util/isRowClick';
+import { isRowClick } from '@overmap-ai/react-table-library/common/util/isRowClick';
 import {
   isLeaf,
   fromTreeToListExtended,
-} from '@table-library/react-table-library/common/util/tree';
-import { useIdReducer } from '@table-library/react-table-library/common/util/useIdReducer';
-import { useSyncRefState } from '@table-library/react-table-library/common/util/useSyncRefState';
-import IconChevronSingleDown from '@table-library/react-table-library/common/icons/IconChevronSingleDown';
-import IconChevronSingleRight from '@table-library/react-table-library/common/icons/IconChevronSingleRight';
+} from '@overmap-ai/react-table-library/common/util/tree';
+import { useIdReducer } from '@overmap-ai/react-table-library/common/util/useIdReducer';
+import { useSyncRefState } from '@overmap-ai/react-table-library/common/util/useSyncRefState';
+import IconChevronSingleDown from '@overmap-ai/react-table-library/common/icons/IconChevronSingleDown';
+import IconChevronSingleRight from '@overmap-ai/react-table-library/common/icons/IconChevronSingleRight';
 
-import { State, StateAndChange } from '@table-library/react-table-library/types/common';
+import { State, StateAndChange } from '@overmap-ai/react-table-library/types/common';
 import {
   Data,
   TableNode,

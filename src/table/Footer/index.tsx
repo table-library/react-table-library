@@ -8,7 +8,7 @@ import {
   HeaderProps,
   HeaderRowProps,
   HeaderCellProps,
-} from '@table-library/react-table-library/types/table';
+} from '@overmap-ai/react-table-library/types/table';
 
 const Footer: React.FC<HeaderProps> = (props) => <Header {...props} isFooter />;
 

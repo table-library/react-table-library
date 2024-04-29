@@ -4,10 +4,10 @@ import cs from 'clsx';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 
-import { CellContainer } from '@table-library/react-table-library/common/components/Cell';
-import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
+import { CellContainer } from '@overmap-ai/react-table-library/common/components/Cell';
+import { ThemeContext } from '@overmap-ai/react-table-library/common/context/Theme';
 
-import { CellProps } from '@table-library/react-table-library/types/table';
+import { CellProps } from '@overmap-ai/react-table-library/types/table';
 
 export const Cell: React.FC<CellProps> = ({
   index,

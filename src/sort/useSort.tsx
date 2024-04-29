@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { useReducerWithMiddleware } from '@table-library/react-table-library/common/util/useReducerWithMiddleware';
-import { useSyncControlledState } from '@table-library/react-table-library/common/util//useSyncControlledState';
-import { useSyncRefState } from '@table-library/react-table-library/common/util/useSyncRefState';
+import { useReducerWithMiddleware } from '@overmap-ai/react-table-library/common/util/useReducerWithMiddleware';
+import { useSyncControlledState } from '@overmap-ai/react-table-library/common/util//useSyncControlledState';
+import { useSyncRefState } from '@overmap-ai/react-table-library/common/util/useSyncRefState';
 import IconChevronSingleDown from '@table-library/react-table-library/common/icons/IconChevronSingleDown';
 import IconChevronSingleUp from '@table-library/react-table-library/common/icons/IconChevronSingleUp';
 import IconChevronSingleUpDown from '@table-library/react-table-library/common/icons/IconChevronSingleUpDown';

@@ -4,7 +4,7 @@ import cs from 'clsx';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 
-import { createTableContext } from '@table-library/react-table-library/common/context/Table';
+import { createTableContext } from '@overmap-ai/react-table-library/common/context/Table';
 import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
 import { LayoutProvider } from '@table-library/react-table-library/common/context/Layout';
 import { createSortContext } from '@table-library/react-table-library/common/context/Sort';

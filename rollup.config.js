@@ -42,7 +42,7 @@ export default {
   output: [
     // ES module version, for modern browsers
     {
-      name: '@table-library/react-table-library',
+      name: '@overmap-ai/react-table-library',
       dir: `${__dirname}/lib`,
       format: 'es',
       sourcemap: true,
@@ -51,7 +51,7 @@ export default {
     },
     // CommonJS version, also for modern browsers (and Node)
     {
-      name: '@table-library/react-table-library',
+      name: '@overmap-ai/react-table-library',
       dir: `${__dirname}/lib/cjs`,
       format: 'cjs',
       sourcemap: true,

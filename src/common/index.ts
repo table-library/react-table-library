@@ -1,3 +1,3 @@
-export * from '@table-library/react-table-library/types/common';
+export * from '@overmap-ai/react-table-library/types/common';
 
 export * from './util';

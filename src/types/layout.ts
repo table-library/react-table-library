@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { DataColumn } from '@table-library/react-table-library/common/util/columns';
+import { DataColumn } from '@overmap-ai/react-table-library/common/util/columns';
 
 // external
 
