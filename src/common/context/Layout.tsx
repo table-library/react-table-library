@@ -3,14 +3,14 @@ import * as React from 'react';
 import {
   toDataColumn,
   getHeaderColumns,
-} from '@table-library/react-table-library/common/util/columns';
+} from '@overmap-ai/react-table-library/common/util/columns';
 
-import { Nullish } from '@table-library/react-table-library/types/common';
+import { Nullish } from '@overmap-ai/react-table-library/types/common';
 import {
   Layout,
   TableMemoryRef,
   TableElementRef,
-} from '@table-library/react-table-library/types/layout';
+} from '@overmap-ai/react-table-library/types/layout';
 
 type Value = {
   tableElementRef: TableElementRef;

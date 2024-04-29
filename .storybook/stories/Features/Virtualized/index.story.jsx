@@ -6,8 +6,8 @@ import {
   Row,
   HeaderCell,
   Cell,
-} from '@table-library/react-table-library/table';
-import { Virtualized } from '@table-library/react-table-library/virtualized';
+} from '@overmap-ai/react-table-library/table';
+import { Virtualized } from '@overmap-ai/react-table-library/virtualized';
 
 import { createStories, createStory } from '../../create-story';
 

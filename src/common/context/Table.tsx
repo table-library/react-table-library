@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { TableNode, Data } from '@table-library/react-table-library/types/table';
+import { TableNode, Data } from '@overmap-ai/react-table-library/types/table';
 
 let TableContext: any = null;
 

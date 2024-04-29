@@ -17,11 +17,11 @@ import {
   Row,
   HeaderCell,
   Cell,
-} from '@table-library/react-table-library/table';
+} from '@overmap-ai/react-table-library/table';
 
-import { useTree, CellTree, TreeExpandClickTypes } from '@table-library/react-table-library/tree';
-import { useTheme } from '@table-library/react-table-library/theme';
-import { findNodeById } from '@table-library/react-table-library/common';
+import { useTree, CellTree, TreeExpandClickTypes } from '@overmap-ai/react-table-library/tree';
+import { useTheme } from '@overmap-ai/react-table-library/theme';
+import { findNodeById } from '@overmap-ai/react-table-library/common';
 
 import { nodes } from '../../data';
 

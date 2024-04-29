@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import { css, jsx, SerializedStyles } from '@emotion/react';
 
-import { ColumnResizeProps } from '@table-library/react-table-library/types/resize';
+import { ColumnResizeProps } from '@overmap-ai/react-table-library/types/resize';
 
 const resizerStyle = (
   resize: ColumnResizeProps,

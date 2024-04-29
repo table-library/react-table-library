@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { CompactTable } from '@table-library/react-table-library/compact';
-import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/chakra-ui';
+import { CompactTable } from '@overmap-ai/react-table-library/compact';
+import { useTheme } from '@overmap-ai/react-table-library/theme';
+import { DEFAULT_OPTIONS, getTheme } from '@overmap-ai/react-table-library/chakra-ui';
 import { Box } from '@chakra-ui/react';
 
 import { DocumentationSee } from '../../../documentation';
@@ -50,9 +50,9 @@ const Component = () => {
 const code = `
 import * as React from 'react';
 
-import { CompactTable } from '@table-library/react-table-library/compact';
-import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/chakra-ui';
+import { CompactTable } from '@overmap-ai/react-table-library/compact';
+import { useTheme } from '@overmap-ai/react-table-library/theme';
+import { DEFAULT_OPTIONS, getTheme } from '@overmap-ai/react-table-library/chakra-ui';
 import { Box } from '@chakra-ui/react';
 
 import { DocumentationSee } from '../../../documentation';

@@ -13,8 +13,8 @@ import {
   Row,
   HeaderCell,
   Cell,
-} from '@table-library/react-table-library/table';
-import { useTheme } from '@table-library/react-table-library/theme';
+} from '@overmap-ai/react-table-library/table';
+import { useTheme } from '@overmap-ai/react-table-library/theme';
 
 import {
   HeaderCellSelect,
@@ -22,7 +22,7 @@ import {
   SelectClickTypes,
   SelectTypes,
   useRowSelect,
-} from '@table-library/react-table-library/select';
+} from '@overmap-ai/react-table-library/select';
 
 import { nodes } from '../../data';
 

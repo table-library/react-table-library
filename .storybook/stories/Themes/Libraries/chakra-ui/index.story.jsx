@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { CompactTable } from '@table-library/react-table-library/compact';
+import { CompactTable } from '@overmap-ai/react-table-library/compact';
 import { ChakraProvider } from '@chakra-ui/react';
 
 import * as BaseStory from './base';

@@ -1,4 +1,4 @@
-import { Identifier } from '@table-library/react-table-library/types/table';
+import { Identifier } from '@overmap-ai/react-table-library/types/table';
 
 export const includesAll = (idsOne: Identifier[], idsTwo: Identifier[]) => {
   return idsOne.every((id) => idsTwo.includes(id));

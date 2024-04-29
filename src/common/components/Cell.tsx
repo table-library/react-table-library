@@ -3,7 +3,7 @@ import * as React from 'react';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 
-import { LayoutContext } from '@table-library/react-table-library/common/context';
+import { LayoutContext } from '@overmap-ai/react-table-library/common/context';
 
 const BASE_STYLE = `
   ${() => {

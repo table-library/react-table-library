@@ -5,26 +5,26 @@ import cs from 'clsx';
 import { css, jsx } from '@emotion/react';
 
 import { createTableContext } from '@overmap-ai/react-table-library/common/context/Table';
-import { ThemeContext } from '@table-library/react-table-library/common/context/Theme';
-import { LayoutProvider } from '@table-library/react-table-library/common/context/Layout';
-import { createSortContext } from '@table-library/react-table-library/common/context/Sort';
-import { createSelectContext } from '@table-library/react-table-library/common/context/Select';
-import { createTreeContext } from '@table-library/react-table-library/common/context/Tree';
-import { createPaginationContext } from '@table-library/react-table-library/common/context/Pagination';
+import { ThemeContext } from '@overmap-ai/react-table-library/common/context/Theme';
+import { LayoutProvider } from '@overmap-ai/react-table-library/common/context/Layout';
+import { createSortContext } from '@overmap-ai/react-table-library/common/context/Sort';
+import { createSelectContext } from '@overmap-ai/react-table-library/common/context/Select';
+import { createTreeContext } from '@overmap-ai/react-table-library/common/context/Tree';
+import { createPaginationContext } from '@overmap-ai/react-table-library/common/context/Pagination';
 
-import { applyModifiers } from '@table-library/react-table-library/common/util/modifiers';
-import { useShiftDown } from '@table-library/react-table-library/common/hooks/useShiftDown';
-import { useTheme } from '@table-library/react-table-library/theme/index';
+import { applyModifiers } from '@overmap-ai/react-table-library/common/util/modifiers';
+import { useShiftDown } from '@overmap-ai/react-table-library/common/hooks/useShiftDown';
+import { useTheme } from '@overmap-ai/react-table-library/theme/index';
 
-import { Nullish } from '@table-library/react-table-library/types/common';
-import { TableNode, TableProps } from '@table-library/react-table-library/types/table';
+import { Nullish } from '@overmap-ai/react-table-library/types/common';
+import { TableNode, TableProps } from '@overmap-ai/react-table-library/types/table';
 import {
   Layout,
   TableMemory,
   TableMemoryRef,
   TableElementRef,
-} from '@table-library/react-table-library/types/layout';
-import { Theme } from '@table-library/react-table-library/types/theme';
+} from '@overmap-ai/react-table-library/types/layout';
+import { Theme } from '@overmap-ai/react-table-library/types/theme';
 
 import { useOnInit } from './useOnInit';
 

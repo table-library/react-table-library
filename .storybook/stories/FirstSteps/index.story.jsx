@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/react';
 
-import { CompactTable } from '@table-library/react-table-library/compact';
+import { CompactTable } from '@overmap-ai/react-table-library/compact';
 import {
   Table,
   Header,
@@ -9,7 +9,7 @@ import {
   Row,
   HeaderCell,
   Cell,
-} from '@table-library/react-table-library/table';
+} from '@overmap-ai/react-table-library/table';
 
 import * as CompactTableStory from './compact-table';
 import * as ComposedTableStory from './composed-table';

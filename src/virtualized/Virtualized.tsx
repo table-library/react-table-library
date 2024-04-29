@@ -2,13 +2,13 @@ import * as React from 'react';
 import { VariableSizeList } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 
-import { Header, Body, TableNode } from '@table-library/react-table-library/table/index';
+import { Header, Body, TableNode } from '@overmap-ai/react-table-library/table/index';
 import {
   getRowHeight,
   SHARED_VIRTUALIZE_STYLE,
-} from '@table-library/react-table-library/common/util/virtualized';
+} from '@overmap-ai/react-table-library/common/util/virtualized';
 
-import { VirtualizedProps } from '@table-library/react-table-library/types/virtualized';
+import { VirtualizedProps } from '@overmap-ai/react-table-library/types/virtualized';
 
 const Virtualized = <T extends TableNode>({
   tableList,

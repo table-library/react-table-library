@@ -49,63 +49,63 @@ module.exports = {
         ...(config?.resolve ?? {}),
         alias: [
           {
-            find: '@table-library/react-table-library/types',
+            find: '@overmap-ai/react-table-library/types',
             replacement: path.resolve(__dirname, '../src/types/'),
           },
           {
-            find: '@table-library/react-table-library/common',
+            find: '@overmap-ai/react-table-library/common',
             replacement: path.resolve(__dirname, '../src/common/'),
           },
           {
-            find: '@table-library/react-table-library/table',
+            find: '@overmap-ai/react-table-library/table',
             replacement: path.resolve(__dirname, '../src/table/'),
           },
           {
-            find: '@table-library/react-table-library/compact',
+            find: '@overmap-ai/react-table-library/compact',
             replacement: path.resolve(__dirname, '../src/compact/'),
           },
           {
-            find: '@table-library/react-table-library/virtualized',
+            find: '@overmap-ai/react-table-library/virtualized',
             replacement: path.resolve(__dirname, '../src/virtualized/'),
           },
           {
-            find: '@table-library/react-table-library/theme',
+            find: '@overmap-ai/react-table-library/theme',
             replacement: path.resolve(__dirname, '../src/theme/'),
           },
           {
-            find: '@table-library/react-table-library/resize',
+            find: '@overmap-ai/react-table-library/resize',
             replacement: path.resolve(__dirname, '../src/resize/'),
           },
           {
-            find: '@table-library/react-table-library/sort',
+            find: '@overmap-ai/react-table-library/sort',
             replacement: path.resolve(__dirname, '../src/sort/'),
           },
           {
-            find: '@table-library/react-table-library/select',
+            find: '@overmap-ai/react-table-library/select',
             replacement: path.resolve(__dirname, '../src/select/'),
           },
           {
-            find: '@table-library/react-table-library/tree',
+            find: '@overmap-ai/react-table-library/tree',
             replacement: path.resolve(__dirname, '../src/tree/'),
           },
           {
-            find: '@table-library/react-table-library/pagination',
+            find: '@overmap-ai/react-table-library/pagination',
             replacement: path.resolve(__dirname, '../src/pagination/'),
           },
           {
-            find: '@table-library/react-table-library/baseline',
+            find: '@overmap-ai/react-table-library/baseline',
             replacement: path.resolve(__dirname, '../src/baseline/'),
           },
           {
-            find: '@table-library/react-table-library/mantine',
+            find: '@overmap-ai/react-table-library/mantine',
             replacement: path.resolve(__dirname, '../src/mantine/'),
           },
           {
-            find: '@table-library/react-table-library/chakra-ui',
+            find: '@overmap-ai/react-table-library/chakra-ui',
             replacement: path.resolve(__dirname, '../src/chakra-ui/'),
           },
           {
-            find: '@table-library/react-table-library/material-ui',
+            find: '@overmap-ai/react-table-library/material-ui',
             replacement: path.resolve(__dirname, '../src/material-ui/'),
           },
           {

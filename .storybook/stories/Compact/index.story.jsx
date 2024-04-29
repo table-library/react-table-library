@@ -1,4 +1,4 @@
-import { CompactTable } from '@table-library/react-table-library/compact';
+import { CompactTable } from '@overmap-ai/react-table-library/compact';
 
 import { createStories, createStory } from '../create-story';
 

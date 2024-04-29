@@ -8,8 +8,8 @@ import {
   Row,
   HeaderCell,
   Cell,
-} from '@table-library/react-table-library/table';
-import { useRowSelect, SelectTypes } from '@table-library/react-table-library/select';
+} from '@overmap-ai/react-table-library/table';
+import { useRowSelect, SelectTypes } from '@overmap-ai/react-table-library/select';
 
 import { nodes } from '../../data';
 

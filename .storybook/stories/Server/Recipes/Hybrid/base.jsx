@@ -9,8 +9,8 @@ import {
   HeaderCell,
   Cell,
   useCustom,
-} from '@table-library/react-table-library/table';
-import { useTheme } from '@table-library/react-table-library/theme';
+} from '@overmap-ai/react-table-library/table';
+import { useTheme } from '@overmap-ai/react-table-library/theme';
 
 import { getData } from '../../../server';
 

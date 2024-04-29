@@ -15,12 +15,12 @@ import {
   FeatureProps,
   RowProps,
   ExtendedNode,
-} from '@table-library/react-table-library/types/table';
+} from '@overmap-ai/react-table-library/types/table';
 import {
   Tree,
   TreeOptions,
   TreeExpandClickTypes,
-} from '@table-library/react-table-library/types/tree';
+} from '@overmap-ai/react-table-library/types/tree';
 
 import { CellTree } from './CellTree';
 

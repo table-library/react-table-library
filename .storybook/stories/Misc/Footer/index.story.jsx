@@ -9,7 +9,7 @@ import {
   Footer,
   FooterRow,
   FooterCell,
-} from '@table-library/react-table-library/table';
+} from '@overmap-ai/react-table-library/table';
 
 import { createStories, createStory } from '../../create-story';
 

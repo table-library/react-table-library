@@ -6,8 +6,8 @@ import {
   Row,
   HeaderCell,
   Cell,
-} from '@table-library/react-table-library/table';
-import { HeaderCellSelect, CellSelect } from '@table-library/react-table-library/select';
+} from '@overmap-ai/react-table-library/table';
+import { HeaderCellSelect, CellSelect } from '@overmap-ai/react-table-library/select';
 
 import { createStories, createStory } from '../../create-story';
 

@@ -8,7 +8,7 @@ import {
   StateAndChange,
   Nullish,
 } from '@overmap-ai/react-table-library/types/common';
-import { Data, TableNode } from '@table-library/react-table-library/types/table';
+import { Data, TableNode } from '@overmap-ai/react-table-library/types/table';
 
 const set = (state: State, action: Action) => ({
   ...state,

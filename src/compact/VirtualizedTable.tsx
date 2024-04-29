@@ -2,18 +2,18 @@ import * as React from 'react';
 import { VariableSizeList } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 
-import { Body, TableNode } from '@table-library/react-table-library/table/index';
+import { Body, TableNode } from '@overmap-ai/react-table-library/table/index';
 import {
   SHARED_VIRTUALIZE_STYLE,
   getRowHeight,
-} from '@table-library/react-table-library/common/util/virtualized';
+} from '@overmap-ai/react-table-library/common/util/virtualized';
 
 import {
   CompactTableProps,
   VirtualizedTableProps,
   InternalsObject,
   Internals,
-} from '@table-library/react-table-library/types/compact';
+} from '@overmap-ai/react-table-library/types/compact';
 
 import { CompactHeader } from './CompactHeader';
 import { CompactRow } from './CompactRow';

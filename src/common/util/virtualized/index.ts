@@ -1,6 +1,6 @@
-import { TableNode } from '@table-library/react-table-library/types/table';
-import { Nullish } from '@table-library/react-table-library/types/common';
-import { RowHeight } from '@table-library/react-table-library/types/virtualized';
+import { TableNode } from '@overmap-ai/react-table-library/types/table';
+import { Nullish } from '@overmap-ai/react-table-library/types/common';
+import { RowHeight } from '@overmap-ai/react-table-library/types/virtualized';
 
 export const getRowHeight = (
   rowHeight: RowHeight | Nullish,

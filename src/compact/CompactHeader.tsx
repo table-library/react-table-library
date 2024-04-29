@@ -5,9 +5,9 @@ import {
   HeaderRow,
   HeaderCell,
   TableNode,
-} from '@table-library/react-table-library/table/index';
+} from '@overmap-ai/react-table-library/table/index';
 
-import { CompactTableProps, Column } from '@table-library/react-table-library/types/compact';
+import { CompactTableProps, Column } from '@overmap-ai/react-table-library/types/compact';
 
 const countPriorCheckboxes = <T extends TableNode>(columns: Column<T>[], column: Column<T>) => {
   const index = columns.indexOf(column);

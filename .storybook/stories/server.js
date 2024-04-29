@@ -1,4 +1,4 @@
-import { findNodeById } from '@table-library/react-table-library/common';
+import { findNodeById } from '@overmap-ai/react-table-library/common';
 
 import { nodes as NODES } from './data';
 

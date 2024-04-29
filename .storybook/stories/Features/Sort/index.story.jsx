@@ -6,8 +6,8 @@ import {
   Row,
   HeaderCell,
   Cell,
-} from '@table-library/react-table-library/table';
-import { HeaderCellSort } from '@table-library/react-table-library/sort';
+} from '@overmap-ai/react-table-library/table';
+import { HeaderCellSort } from '@overmap-ai/react-table-library/sort';
 
 import { createStories, createStory } from '../../create-story';
 

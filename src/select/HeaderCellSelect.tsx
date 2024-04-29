@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import { useSelectContext } from '@table-library/react-table-library/common/context/Select';
-import { HeaderCell } from '@table-library/react-table-library/table/Cell';
+import { useSelectContext } from '@overmap-ai/react-table-library/common/context/Select';
+import { HeaderCell } from '@overmap-ai/react-table-library/table/Cell';
 
-import { SelectTypes } from '@table-library/react-table-library/types/select';
-import { TableNode } from '@table-library/react-table-library/types/table';
+import { SelectTypes } from '@overmap-ai/react-table-library/types/select';
+import { TableNode } from '@overmap-ai/react-table-library/types/table';
 
 import { Checkbox } from './Checkbox';
 

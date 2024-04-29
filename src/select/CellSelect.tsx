@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-import { Cell } from '@table-library/react-table-library/table/Cell';
-import { useSelectContext } from '@table-library/react-table-library/common/context/Select';
-import { useFeatures } from '@table-library/react-table-library/common/context/Feature';
-import { applyModifiers } from '@table-library/react-table-library/common/util/modifiers';
-import { useShiftDown } from '@table-library/react-table-library/common/hooks/useShiftDown';
+import { Cell } from '@overmap-ai/react-table-library/table/Cell';
+import { useSelectContext } from '@overmap-ai/react-table-library/common/context/Select';
+import { useFeatures } from '@overmap-ai/react-table-library/common/context/Feature';
+import { applyModifiers } from '@overmap-ai/react-table-library/common/util/modifiers';
+import { useShiftDown } from '@overmap-ai/react-table-library/common/hooks/useShiftDown';
 
-import { SelectTypes, CellSelectProps } from '@table-library/react-table-library/types/select';
-import { TableNode } from '@table-library/react-table-library/types/table';
+import { SelectTypes, CellSelectProps } from '@overmap-ai/react-table-library/types/select';
+import { TableNode } from '@overmap-ai/react-table-library/types/table';
 
 import { Checkbox } from './Checkbox';
 

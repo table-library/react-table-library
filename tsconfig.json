@@ -12,14 +12,14 @@
       "@overmap-ai/react-table-library/theme/*": ["./src/theme/*"],
       "@overmap-ai/react-table-library/resize/*": ["./src/resize/*"],
       "@overmap-ai/react-table-library/sort/*": ["./src/sort/*"],
-      "@table-library/react-table-library/select/*": ["./src/select/*"],
-      "@table-library/react-table-library/tree/*": ["./src/tree/*"],
-      "@table-library/react-table-library/pagination/*": ["./src/pagination/*"],
+      "@overmap-ai/react-table-library/select/*": ["./src/select/*"],
+      "@overmap-ai/react-table-library/tree/*": ["./src/tree/*"],
+      "@overmap-ai/react-table-library/pagination/*": ["./src/pagination/*"],
       // themes
-      "@table-library/react-table-library/baseline/*": ["./src/baseline/*"],
-      "@table-library/react-table-library/mantine/*": ["./src/mantine/*"],
-      "@table-library/react-table-library/chakra-ui/*": ["./src/chakra-ui/*"],
-      "@table-library/react-table-library/material-ui/*": ["./src/material-ui/*"]
+      "@overmap-ai/react-table-library/baseline/*": ["./src/baseline/*"],
+      "@overmap-ai/react-table-library/mantine/*": ["./src/mantine/*"],
+      "@overmap-ai/react-table-library/chakra-ui/*": ["./src/chakra-ui/*"],
+      "@overmap-ai/react-table-library/material-ui/*": ["./src/material-ui/*"]
     },
     "allowJs": true,
     "skipLibCheck": true,

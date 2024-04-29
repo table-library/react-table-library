@@ -1,26 +1,26 @@
 import * as React from 'react';
 import cs from 'clsx';
 
-import * as COLORS from '@table-library/react-table-library/common/colors';
-import { isRowClick } from '@table-library/react-table-library/common/util/isRowClick';
-import { useIdReducer } from '@table-library/react-table-library/common/util/useIdReducer';
-import { useSyncRefState } from '@table-library/react-table-library/common/util/useSyncRefState';
-import { applyModifiers } from '@table-library/react-table-library/common/util/modifiers';
+import * as COLORS from '@overmap-ai/react-table-library/common/colors';
+import { isRowClick } from '@overmap-ai/react-table-library/common/util/isRowClick';
+import { useIdReducer } from '@overmap-ai/react-table-library/common/util/useIdReducer';
+import { useSyncRefState } from '@overmap-ai/react-table-library/common/util/useSyncRefState';
+import { applyModifiers } from '@overmap-ai/react-table-library/common/util/modifiers';
 
-import { State, StateAndChange } from '@table-library/react-table-library/types/common';
+import { State, StateAndChange } from '@overmap-ai/react-table-library/types/common';
 import {
   Data,
   TableNode,
   Features,
   FeatureProps,
   RowProps,
-} from '@table-library/react-table-library/types/table';
+} from '@overmap-ai/react-table-library/types/table';
 import {
   Select,
   SelectOptions,
   SelectTypes,
   SelectClickTypes,
-} from '@table-library/react-table-library/types/select';
+} from '@overmap-ai/react-table-library/types/select';
 
 import { HeaderCellSelect } from './HeaderCellSelect';
 import { CellSelect } from './CellSelect';

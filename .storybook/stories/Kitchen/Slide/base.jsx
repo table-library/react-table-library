@@ -11,9 +11,9 @@ import {
   Row,
   HeaderCell,
   Cell,
-} from '@table-library/react-table-library/table';
-import { useTheme } from '@table-library/react-table-library/theme';
-import { useRowSelect } from '@table-library/react-table-library/select';
+} from '@overmap-ai/react-table-library/table';
+import { useTheme } from '@overmap-ai/react-table-library/theme';
+import { useRowSelect } from '@overmap-ai/react-table-library/select';
 
 import { nodes } from '../../data';
 

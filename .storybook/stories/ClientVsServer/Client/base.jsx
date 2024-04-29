@@ -10,16 +10,16 @@ import {
   HeaderCell,
   Cell,
   useCustom,
-} from '@table-library/react-table-library/table';
-import { useTheme } from '@table-library/react-table-library/theme';
-import { CellTree, useTree, TreeExpandClickTypes } from '@table-library/react-table-library/tree';
+} from '@overmap-ai/react-table-library/table';
+import { useTheme } from '@overmap-ai/react-table-library/theme';
+import { CellTree, useTree, TreeExpandClickTypes } from '@overmap-ai/react-table-library/tree';
 import {
   CellSelect,
   HeaderCellSelect,
   useRowSelect,
-} from '@table-library/react-table-library/select';
-import { useSort, HeaderCellSort } from '@table-library/react-table-library/sort';
-import { usePagination } from '@table-library/react-table-library/pagination';
+} from '@overmap-ai/react-table-library/select';
+import { useSort, HeaderCellSort } from '@overmap-ai/react-table-library/sort';
+import { usePagination } from '@overmap-ai/react-table-library/pagination';
 
 import { nodes } from '../../data';
 

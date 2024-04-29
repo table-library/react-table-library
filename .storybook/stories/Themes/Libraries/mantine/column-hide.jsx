@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { CompactTable } from '@table-library/react-table-library/compact';
-import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/mantine';
+import { CompactTable } from '@overmap-ai/react-table-library/compact';
+import { useTheme } from '@overmap-ai/react-table-library/theme';
+import { DEFAULT_OPTIONS, getTheme } from '@overmap-ai/react-table-library/mantine';
 import { Group, Checkbox } from '@mantine/core';
 
 import { DocumentationSee } from '../../../documentation';
@@ -92,9 +92,9 @@ const Component = () => {
 const code = `
 import * as React from 'react';
 
-import { CompactTable } from '@table-library/react-table-library/compact';
-import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/mantine';
+import { CompactTable } from '@overmap-ai/react-table-library/compact';
+import { useTheme } from '@overmap-ai/react-table-library/theme';
+import { DEFAULT_OPTIONS, getTheme } from '@overmap-ai/react-table-library/mantine';
 import { Group, Checkbox } from '@mantine/core';
 
 import { DocumentationSee } from '../../../documentation';

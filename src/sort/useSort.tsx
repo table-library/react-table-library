@@ -3,18 +3,18 @@ import * as React from 'react';
 import { useReducerWithMiddleware } from '@overmap-ai/react-table-library/common/util/useReducerWithMiddleware';
 import { useSyncControlledState } from '@overmap-ai/react-table-library/common/util//useSyncControlledState';
 import { useSyncRefState } from '@overmap-ai/react-table-library/common/util/useSyncRefState';
-import IconChevronSingleDown from '@table-library/react-table-library/common/icons/IconChevronSingleDown';
-import IconChevronSingleUp from '@table-library/react-table-library/common/icons/IconChevronSingleUp';
-import IconChevronSingleUpDown from '@table-library/react-table-library/common/icons/IconChevronSingleUpDown';
+import IconChevronSingleDown from '@overmap-ai/react-table-library/common/icons/IconChevronSingleDown';
+import IconChevronSingleUp from '@overmap-ai/react-table-library/common/icons/IconChevronSingleUp';
+import IconChevronSingleUpDown from '@overmap-ai/react-table-library/common/icons/IconChevronSingleUpDown';
 
-import { Action, State, StateAndChange } from '@table-library/react-table-library/types/common';
-import { Data, ExtendedNode, TableNode } from '@table-library/react-table-library/types/table';
+import { Action, State, StateAndChange } from '@overmap-ai/react-table-library/types/common';
+import { Data, ExtendedNode, TableNode } from '@overmap-ai/react-table-library/types/table';
 import {
   Sort,
   SortOptions,
   SortIconPositions,
   SortToggleType,
-} from '@table-library/react-table-library/types/sort';
+} from '@overmap-ai/react-table-library/types/sort';
 
 import { HeaderCellSort } from './HeaderCellSort';
 

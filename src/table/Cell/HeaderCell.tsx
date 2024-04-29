@@ -19,8 +19,8 @@ import {
   getHeaderColumns,
 } from '@overmap-ai/react-table-library/common/util/columns';
 
-import { HeaderCellProps } from '@table-library/react-table-library/types/table';
-import { Nullish } from '@table-library/react-table-library/types/common';
+import { HeaderCellProps } from '@overmap-ai/react-table-library/types/table';
+import { Nullish } from '@overmap-ai/react-table-library/types/common';
 
 const getPreservedColumn = (index: number, preservedDataColumns: DataColumn[]) => {
   const findPreservedDataColumn = (dataColumn: DataColumn) => dataColumn.index === index;

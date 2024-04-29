@@ -1,10 +1,10 @@
-import { Nullish } from '@table-library/react-table-library/types/common';
+import { Nullish } from '@overmap-ai/react-table-library/types/common';
 import {
   Data,
   TableNode,
   ExtendedNode,
   Identifier,
-} from '@table-library/react-table-library/types/table';
+} from '@overmap-ai/react-table-library/types/table';
 
 import { hasLeaves } from './hasLeaves';
 

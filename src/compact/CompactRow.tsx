@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { Row, Cell } from '@table-library/react-table-library/table/index';
+import { Row, Cell } from '@overmap-ai/react-table-library/table/index';
 
-import { TableNode } from '@table-library/react-table-library/types/table';
-import { CompactTableProps, Column } from '@table-library/react-table-library/types/compact';
+import { TableNode } from '@overmap-ai/react-table-library/types/table';
+import { CompactTableProps, Column } from '@overmap-ai/react-table-library/types/compact';
 
 const evaluateProps = <T extends TableNode>(props: Record<string, any>, item: T) =>
   Object.keys(props).reduce((acc: Record<string, any>, key: string) => {

@@ -16,9 +16,9 @@ import {
   getHeaderColumns,
 } from '@overmap-ai/react-table-library/common/util/columns';
 import { isReactFragment } from '@overmap-ai/react-table-library/common/util/isFragment';
-import { getPreviousColSpans } from '@table-library/react-table-library/common/util/getPreviousColSpans';
+import { getPreviousColSpans } from '@overmap-ai/react-table-library/common/util/getPreviousColSpans';
 
-import { HeaderRowProps } from '@table-library/react-table-library/types/table';
+import { HeaderRowProps } from '@overmap-ai/react-table-library/types/table';
 
 const useInitialLayout = () => {
   const context = React.useContext(LayoutContext);

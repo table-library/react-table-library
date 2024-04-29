@@ -8,15 +8,15 @@ import {
   Row,
   HeaderCell,
   Cell,
-} from '@table-library/react-table-library/table';
-import { useTheme } from '@table-library/react-table-library/theme';
-import { CellTree, useTree, TreeExpandClickTypes } from '@table-library/react-table-library/tree';
+} from '@overmap-ai/react-table-library/table';
+import { useTheme } from '@overmap-ai/react-table-library/theme';
+import { CellTree, useTree, TreeExpandClickTypes } from '@overmap-ai/react-table-library/tree';
 import {
   CellSelect,
   HeaderCellSelect,
   useRowSelect,
   SelectClickTypes,
-} from '@table-library/react-table-library/select';
+} from '@overmap-ai/react-table-library/select';
 
 import { nodes } from '../../data';
 

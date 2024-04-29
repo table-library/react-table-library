@@ -1,20 +1,20 @@
 import * as React from 'react';
 
-import { Nullish } from '@table-library/react-table-library/types/common';
-import { Layout, TableElementRef } from '@table-library/react-table-library/types/layout';
+import { Nullish } from '@overmap-ai/react-table-library/types/common';
+import { Layout, TableElementRef } from '@overmap-ai/react-table-library/types/layout';
 
 import {
   LayoutContext,
   propagateResizedLayout,
   setResizedLayout,
-} from '@table-library/react-table-library/common/context/Layout';
+} from '@overmap-ai/react-table-library/common/context/Layout';
 import {
   DataColumn,
   toDataColumn,
   getHeaderColumns,
   applyToHeaderColumns,
   applyToColumns,
-} from '@table-library/react-table-library/common/util/columns';
+} from '@overmap-ai/react-table-library/common/util/columns';
 
 const applySize = (
   index: number,
