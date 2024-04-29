@@ -49,6 +49,14 @@ export default {
       entryFileNames: '[name].js',
       // preserveModules: true,
     },
+    // CommonJS version, also for modern browsers (and Node)
+    {
+      name: '@table-library/react-table-library',
+      dir: `${__dirname}/lib/cjs`,
+      format: 'cjs',
+      sourcemap: true,
+      entryFileNames: '[name].cjs',
+    },
     // SystemJS version, for older browsers
     // {
     //   dir: `${__dirname}/lib/nomodule`,
