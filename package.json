@@ -1,5 +1,5 @@
 {
-  "name": "@overmap-ai/react-table-library",
+  "name": "@table-library/react-table-library",
   "version": "0.0.0-development",
   "description": "react-table-library",
   "type": "module",
@@ -105,9 +105,6 @@
     "prettier": "prettier 'src/**/*.{js,ts,tsx}'",
     "prettier:write": "npm run prettier -- --write",
     "prettier:check": "npm run prettier -- --check",
-    "lint": "eslint 'src/**/*.{js,ts,tsx}' --ignore-pattern .eslintignore --max-warnings 0",
-    "lint:check": "npm run lint",
-    "lint:fix": "npm run lint -- --fix",
     "test": "jest --config ./.storybook/jest.config.json",
     "test:watch": "npm run test -- --watch",
     "test:update": "npm run test -- --u",
@@ -117,7 +114,7 @@
     "storybook:build": "NODE_OPTIONS=--max-old-space-size=4096 build-storybook .storybook .storybook/static -o dist",
     "storybook:preview": "http-server dist -o",
     "library:build": "rollup -c && npm run copyfiles",
-    "valid": "npm run test && npm run prettier:check && npm run lint:check && tsc",
+    "valid": "npm run test && tsc",
     "copyfiles": "copyfiles.sh",
     "dist": "npm run valid && npm run library:build && cd lib && npm publish",
     "dist:beta": "npm run valid && npm run library:build && cd lib && npm publish --tag beta",
@@ -130,9 +127,11 @@
     }
   },
   "lint-staged": {
-    "*.js": [
-      "npm run lint",
-      "npm run prettier:write"
+    "*.{js,jsx,ts,tsx}": [
+      "yarn eslint --fix"
+    ],
+    "*.{css,scss}": [
+      "prettier --write"
     ]
   },
   "repository": {
