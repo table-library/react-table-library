@@ -1,10 +1,7 @@
 import * as React from 'react';
 import cs from 'clsx';
 import { isRowClick } from '@overmap-ai/react-table-library/common/util/isRowClick';
-import {
-  isLeaf,
-  fromTreeToListExtended,
-} from '@overmap-ai/react-table-library/common/util/tree';
+import { isLeaf, fromTreeToListExtended } from '@overmap-ai/react-table-library/common/util/tree';
 import { useIdReducer } from '@overmap-ai/react-table-library/common/util/useIdReducer';
 import { useSyncRefState } from '@overmap-ai/react-table-library/common/util/useSyncRefState';
 import IconChevronSingleDown from '@overmap-ai/react-table-library/common/icons/IconChevronSingleDown';

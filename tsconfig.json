@@ -7,9 +7,7 @@
       "@overmap-ai/react-table-library/common/*": ["./src/common/*"],
       "@overmap-ai/react-table-library/table/*": ["./src/table/*"],
       "@overmap-ai/react-table-library/compact/*": ["./src/compact/*"],
-      "@overmap-ai/react-table-library/virtualized/*": [
-        "./src/virtualized/*"
-      ],
+      "@overmap-ai/react-table-library/virtualized/*": ["./src/virtualized/*"],
       // features
       "@overmap-ai/react-table-library/theme/*": ["./src/theme/*"],
       "@overmap-ai/react-table-library/resize/*": ["./src/resize/*"],
@@ -21,7 +19,7 @@
       "@table-library/react-table-library/baseline/*": ["./src/baseline/*"],
       "@table-library/react-table-library/mantine/*": ["./src/mantine/*"],
       "@table-library/react-table-library/chakra-ui/*": ["./src/chakra-ui/*"],
-      "@table-library/react-table-library/material-ui/*": ["./src/material-ui/*"],
+      "@table-library/react-table-library/material-ui/*": ["./src/material-ui/*"]
     },
     "allowJs": true,
     "skipLibCheck": true,

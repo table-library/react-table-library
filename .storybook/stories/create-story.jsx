@@ -12,12 +12,7 @@ export const createStory = (key, Component, code) => ({
   }),
 });
 
-export const createStories = (
-  path,
-  stories,
-  component,
-  subcomponents,
-) => {
+export const createStories = (path, stories, component, subcomponents) => {
   const storyContainer = storiesOf(path, module).addParameters({
     component,
     subcomponents,
@@ -28,6 +23,6 @@ export const createStories = (
       docs: {
         source: { state: 'closed', code: story.code || '' },
       },
-    })
+    });
   });
 };
