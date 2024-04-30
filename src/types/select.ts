@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { State, IdReducerFunctions } from '@table-library/react-table-library/types/common';
-import { TableNode, GetRowProps } from '@table-library/react-table-library/types/table';
+import { State, IdReducerFunctions } from '@overmap-ai/react-table-library/types/common';
+import { TableNode, GetRowProps } from '@overmap-ai/react-table-library/types/table';
 
 export enum SelectClickTypes {
   RowClick,

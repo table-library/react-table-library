@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { Nullish } from '@table-library/react-table-library/types/common';
-import { TableNode } from '@table-library/react-table-library/types/table';
-import { Select } from '@table-library/react-table-library/types/select';
+import { Nullish } from '@overmap-ai/react-table-library/types/common';
+import { TableNode } from '@overmap-ai/react-table-library/types/table';
+import { Select } from '@overmap-ai/react-table-library/types/select';
 
 let SelectContext: any = null;
 

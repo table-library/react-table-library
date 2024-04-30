@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { CompactTable } from '@table-library/react-table-library/compact';
-import { useTheme } from '@table-library/react-table-library/theme';
-import { getTheme } from '@table-library/react-table-library/baseline';
-import { useRowSelect } from '@table-library/react-table-library/select';
+import { CompactTable } from '@overmap-ai/react-table-library/compact';
+import { useTheme } from '@overmap-ai/react-table-library/theme';
+import { getTheme } from '@overmap-ai/react-table-library/baseline';
+import { useRowSelect } from '@overmap-ai/react-table-library/select';
 
 import { DocumentationSee } from '../documentation';
 import { nodes } from '../data';

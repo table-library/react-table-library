@@ -8,10 +8,10 @@ import {
   Row,
   HeaderCell,
   Cell,
-} from '@table-library/react-table-library/table';
-import { Virtualized } from '@table-library/react-table-library/virtualized';
+} from '@overmap-ai/react-table-library/table';
+import { Virtualized } from '@overmap-ai/react-table-library/virtualized';
 
-import { useTree, CellTree } from '@table-library/react-table-library/tree';
+import { useTree, CellTree } from '@overmap-ai/react-table-library/tree';
 
 import { manyNodes } from '../../data';
 

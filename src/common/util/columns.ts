@@ -1,4 +1,4 @@
-import { TableElementRef } from '@table-library/react-table-library/types/layout';
+import { TableElementRef } from '@overmap-ai/react-table-library/types/layout';
 
 export const getHeaderColumns = (tableElementRef: TableElementRef): HTMLElement[] => {
   const thead = tableElementRef.current!.querySelector('.tr-header');

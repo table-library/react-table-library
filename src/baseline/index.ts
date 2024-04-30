@@ -1,7 +1,7 @@
-import * as COLORS from '@table-library/react-table-library/common/colors';
-import { zipThemes } from '@table-library/react-table-library/theme/index';
+import * as COLORS from '@overmap-ai/react-table-library/common/colors';
+import { zipThemes } from '@overmap-ai/react-table-library/theme/index';
 
-import { Theme } from '@table-library/react-table-library/types/theme';
+import { Theme } from '@overmap-ai/react-table-library/types/theme';
 
 const BASELINE_THEME = {
   Table: '',

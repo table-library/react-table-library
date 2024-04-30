@@ -40,11 +40,11 @@ React Table Library requires the following libraries to be installed:
 ## Installation
 
 ```sh
-npm install @table-library/react-table-library @emotion/react
+npm install @overmap-ai/react-table-library @emotion/react
 ```
 
 ```sh
-yarn add @table-library/react-table-library @emotion/react
+yarn add @overmap-ai/react-table-library @emotion/react
 ```
 
 ## Usage
@@ -52,7 +52,7 @@ yarn add @table-library/react-table-library @emotion/react
 - **[Documentation](https://react-table-library.com/)**
 
 ```javascript
-import { CompactTable } from '@table-library/react-table-library/compact';
+import { CompactTable } from '@overmap-ai/react-table-library/compact';
 
 const nodes = [
   {
@@ -104,10 +104,10 @@ In 2020, [Robin Wieruch](https://www.robinwieruch.de) created React Table Librar
 - server-side operations (e.g. search, pagination) as first-class citizens
 - pleasant developer experience
 
-[version-badge]: https://img.shields.io/npm/v/@table-library/react-table-library
-[package]: https://www.npmjs.com/package/@table-library/react-table-library
-[type-badge]: https://img.shields.io/npm/types/@table-library/react-table-library
-[license-badge]: https://img.shields.io/npm/l/@table-library/react-table-library.svg
+[version-badge]: https://img.shields.io/npm/v/@overmap-ai/react-table-library
+[package]: https://www.npmjs.com/package/@overmap-ai/react-table-library
+[type-badge]: https://img.shields.io/npm/types/@overmap-ai/react-table-library
+[license-badge]: https://img.shields.io/npm/l/@overmap-ai/react-table-library.svg
 [license]: https://github.com/table-library/react-table-library/blob/master/LICENSE
 [semantic-release-badge]: https://img.shields.io/badge/%F0%9F%9A%80-semantic--release-blueviolet
 [semantic-release]: https://github.com/table-library/react-table-library/releases
@@ -121,8 +121,8 @@ In 2020, [Robin Wieruch](https://www.robinwieruch.de) created React Table Librar
 [twitter-badge]: https://img.shields.io/twitter/url/https/github.com/table-library/react-table-library.svg?style=social
 [twitter-follow]: https://twitter.com/rwieruch
 [twitter-follow-badge]: https://img.shields.io/twitter/follow/rwieruch?style=social
-[size-badge]: https://badgen.net/bundlephobia/minzip/@table-library/react-table-library@latest
-[size]: https://bundlephobia.com/package/@table-library/react-table-library
+[size-badge]: https://badgen.net/bundlephobia/minzip/@overmap-ai/react-table-library@latest
+[size]: https://bundlephobia.com/package/@overmap-ai/react-table-library
 [github-sponsor-badge]: https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&color=red&logo=GitHub&link=https://github.com/sponsors/rwieruch
 [github-sponsor]: https://github.com/sponsors/rwieruch
 

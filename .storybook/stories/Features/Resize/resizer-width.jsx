@@ -8,7 +8,7 @@ import {
   Row,
   HeaderCell,
   Cell,
-} from '@table-library/react-table-library/table';
+} from '@overmap-ai/react-table-library/table';
 
 import { nodes } from '../../data';
 

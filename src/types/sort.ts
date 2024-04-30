@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { Nullish, State, Modifier } from '@table-library/react-table-library/types/common';
-import { TableNode } from '@table-library/react-table-library/types/table';
+import { Nullish, State, Modifier } from '@overmap-ai/react-table-library/types/common';
+import { TableNode } from '@overmap-ai/react-table-library/types/table';
 
 export enum SortIconPositions {
   Prefix,

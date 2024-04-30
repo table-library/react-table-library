@@ -1,4 +1,4 @@
-import { TableNode, Features, ExtendedNode } from '@table-library/react-table-library/types/table';
+import { TableNode, Features, ExtendedNode } from '@overmap-ai/react-table-library/types/table';
 
 export const applyModifiers =
   <T extends TableNode>({ sort, pagination, tree }: Features<T>) =>

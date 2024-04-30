@@ -1,5 +1,5 @@
-import { State, Modifier } from '@table-library/react-table-library/types/common';
-import { TableNode } from '@table-library/react-table-library/types/table';
+import { State, Modifier } from '@overmap-ai/react-table-library/types/common';
+import { TableNode } from '@overmap-ai/react-table-library/types/table';
 
 export type PaginationOptions = {
   isServer?: boolean;

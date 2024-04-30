@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-import { TableNode, TableProps, RowProps } from '@table-library/react-table-library/types/table';
-import { RowHeight } from '@table-library/react-table-library/types/virtualized';
-import { ColumnSortProps } from '@table-library/react-table-library/types/sort';
-import { ColumnSelectProps } from '@table-library/react-table-library/types/select';
-import { ColumnTreeProps } from '@table-library/react-table-library/types/tree';
-import { ColumnResizeProps } from '@table-library/react-table-library/types/resize';
+import { TableNode, TableProps, RowProps } from '@overmap-ai/react-table-library/types/table';
+import { RowHeight } from '@overmap-ai/react-table-library/types/virtualized';
+import { ColumnSortProps } from '@overmap-ai/react-table-library/types/sort';
+import { ColumnSelectProps } from '@overmap-ai/react-table-library/types/select';
+import { ColumnTreeProps } from '@overmap-ai/react-table-library/types/tree';
+import { ColumnResizeProps } from '@overmap-ai/react-table-library/types/resize';
 
 // external
 

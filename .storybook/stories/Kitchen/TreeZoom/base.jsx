@@ -11,8 +11,8 @@ import {
   Row,
   HeaderCell,
   Cell,
-} from '@table-library/react-table-library/table';
-import { useTree, CellTree, TreeExpandClickTypes } from '@table-library/react-table-library/tree';
+} from '@overmap-ai/react-table-library/table';
+import { useTree, CellTree, TreeExpandClickTypes } from '@overmap-ai/react-table-library/tree';
 
 import { nodes } from '../../data';
 

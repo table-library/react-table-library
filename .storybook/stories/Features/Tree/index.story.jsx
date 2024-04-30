@@ -6,8 +6,8 @@ import {
   Row,
   HeaderCell,
   Cell,
-} from '@table-library/react-table-library/table';
-import { CellTree } from '@table-library/react-table-library/tree';
+} from '@overmap-ai/react-table-library/table';
+import { CellTree } from '@overmap-ai/react-table-library/tree';
 
 import { createStories, createStory } from '../../create-story';
 

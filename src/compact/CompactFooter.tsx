@@ -5,9 +5,9 @@ import {
   FooterRow,
   FooterCell,
   TableNode,
-} from '@table-library/react-table-library/table/index';
+} from '@overmap-ai/react-table-library/table/index';
 
-import { Column } from '@table-library/react-table-library/types/compact';
+import { Column } from '@overmap-ai/react-table-library/types/compact';
 
 type FooterProps<T extends TableNode> = { columns: Column<T>[] };
 

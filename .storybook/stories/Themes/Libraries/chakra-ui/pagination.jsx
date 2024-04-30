@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { CompactTable } from '@table-library/react-table-library/compact';
-import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/chakra-ui';
-import { usePagination } from '@table-library/react-table-library/pagination';
+import { CompactTable } from '@overmap-ai/react-table-library/compact';
+import { useTheme } from '@overmap-ai/react-table-library/theme';
+import { DEFAULT_OPTIONS, getTheme } from '@overmap-ai/react-table-library/chakra-ui';
+import { usePagination } from '@overmap-ai/react-table-library/pagination';
 import { Box, HStack, Button, IconButton } from '@chakra-ui/react';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 
@@ -95,10 +95,10 @@ const Component = () => {
 const code = `
 import * as React from 'react';
 
-import { CompactTable } from '@table-library/react-table-library/compact';
-import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/chakra-ui';
-import { usePagination } from '@table-library/react-table-library/pagination';
+import { CompactTable } from '@overmap-ai/react-table-library/compact';
+import { useTheme } from '@overmap-ai/react-table-library/theme';
+import { DEFAULT_OPTIONS, getTheme } from '@overmap-ai/react-table-library/chakra-ui';
+import { usePagination } from '@overmap-ai/react-table-library/pagination';
 import { Box, HStack, Button, IconButton } from '@chakra-ui/react';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 

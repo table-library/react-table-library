@@ -1,9 +1,9 @@
 import * as React from 'react';
 import useInterval from 'use-interval';
 
-import { CompactTable } from '@table-library/react-table-library/compact';
-import { useTheme } from '@table-library/react-table-library/theme';
-import { getTheme } from '@table-library/react-table-library/baseline';
+import { CompactTable } from '@overmap-ai/react-table-library/compact';
+import { useTheme } from '@overmap-ai/react-table-library/theme';
+import { getTheme } from '@overmap-ai/react-table-library/baseline';
 
 import { DisableAnimationsContext } from '../../stories/loki.jsx';
 import { DocumentationSee } from '../documentation';
@@ -156,9 +156,9 @@ const code = `
 import * as React from 'react';
 import useInterval from 'use-interval';
 
-import { CompactTable } from '@table-library/react-table-library/compact';
-import { useTheme } from '@table-library/react-table-library/theme';
-import { getTheme } from '@table-library/react-table-library/baseline';
+import { CompactTable } from '@overmap-ai/react-table-library/compact';
+import { useTheme } from '@overmap-ai/react-table-library/theme';
+import { getTheme } from '@overmap-ai/react-table-library/baseline';
 
 import { DisableAnimationsContext } from '../../stories/loki.jsx';
 import { DocumentationSee } from '../documentation';

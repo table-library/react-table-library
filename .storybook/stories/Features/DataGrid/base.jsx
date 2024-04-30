@@ -11,9 +11,9 @@ import {
   Row,
   HeaderCell,
   Cell,
-} from '@table-library/react-table-library/table';
-import { Virtualized } from '@table-library/react-table-library/virtualized';
-import { useTheme } from '@table-library/react-table-library/theme';
+} from '@overmap-ai/react-table-library/table';
+import { Virtualized } from '@overmap-ai/react-table-library/virtualized';
+import { useTheme } from '@overmap-ai/react-table-library/theme';
 
 import { DisableAnimationsContext } from '../../../stories/loki.jsx';
 import { lotsOfNodes, randomFromInterval } from '../../data';

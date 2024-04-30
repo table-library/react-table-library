@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { Nullish } from '@table-library/react-table-library/types/common';
-import { TableNode } from '@table-library/react-table-library/types/table';
-import { Tree } from '@table-library/react-table-library/types/tree';
+import { Nullish } from '@overmap-ai/react-table-library/types/common';
+import { TableNode } from '@overmap-ai/react-table-library/types/table';
+import { Tree } from '@overmap-ai/react-table-library/types/tree';
 
 let TreeContext: any = null;
 

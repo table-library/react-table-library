@@ -1,18 +1,18 @@
 import * as React from 'react';
 
-import { useCustom } from '@table-library/react-table-library/table';
-import { CompactTable } from '@table-library/react-table-library/compact';
-import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/mantine';
-import { useRowSelect } from '@table-library/react-table-library/select';
-import { useTree, TreeExpandClickTypes } from '@table-library/react-table-library/tree';
-import { useSort } from '@table-library/react-table-library/sort';
-import { usePagination } from '@table-library/react-table-library/pagination';
+import { useCustom } from '@overmap-ai/react-table-library/table';
+import { CompactTable } from '@overmap-ai/react-table-library/compact';
+import { useTheme } from '@overmap-ai/react-table-library/theme';
+import { DEFAULT_OPTIONS, getTheme } from '@overmap-ai/react-table-library/mantine';
+import { useRowSelect } from '@overmap-ai/react-table-library/select';
+import { useTree, TreeExpandClickTypes } from '@overmap-ai/react-table-library/tree';
+import { useSort } from '@overmap-ai/react-table-library/sort';
+import { usePagination } from '@overmap-ai/react-table-library/pagination';
 import {
   fromTreeToList,
   findNodeById,
   insertNode,
-} from '@table-library/react-table-library/common';
+} from '@overmap-ai/react-table-library/common';
 import {
   Group,
   TextInput,
@@ -364,19 +364,19 @@ const Component = () => {
 const code = `
 import * as React from 'react';
 
-import { useCustom } from '@table-library/react-table-library/table';
-import { CompactTable } from '@table-library/react-table-library/compact';
-import { useTheme } from '@table-library/react-table-library/theme';
-import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/mantine';
-import { useRowSelect } from '@table-library/react-table-library/select';
-import { useTree, TreeExpandClickTypes } from '@table-library/react-table-library/tree';
-import { useSort } from '@table-library/react-table-library/sort';
-import { usePagination } from '@table-library/react-table-library/pagination';
+import { useCustom } from '@overmap-ai/react-table-library/table';
+import { CompactTable } from '@overmap-ai/react-table-library/compact';
+import { useTheme } from '@overmap-ai/react-table-library/theme';
+import { DEFAULT_OPTIONS, getTheme } from '@overmap-ai/react-table-library/mantine';
+import { useRowSelect } from '@overmap-ai/react-table-library/select';
+import { useTree, TreeExpandClickTypes } from '@overmap-ai/react-table-library/tree';
+import { useSort } from '@overmap-ai/react-table-library/sort';
+import { usePagination } from '@overmap-ai/react-table-library/pagination';
 import {
   fromTreeToList,
   findNodeById,
   insertNode,
-} from '@table-library/react-table-library/common';
+} from '@overmap-ai/react-table-library/common';
 import {
   Group,
   TextInput,

@@ -11,8 +11,8 @@ import {
   Action,
   MiddlewareFunction,
   IdReducerFunctions,
-} from '@table-library/react-table-library/types/common';
-import { Data, TableNode } from '@table-library/react-table-library/types/table';
+} from '@overmap-ai/react-table-library/types/common';
+import { Data, TableNode } from '@overmap-ai/react-table-library/types/table';
 
 const addById = (state: State, action: Action) => {
   return {

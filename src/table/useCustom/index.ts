@@ -1,14 +1,14 @@
-import { useSyncRefState } from '@table-library/react-table-library/common/util/useSyncRefState';
-import { useReducerWithMiddleware } from '@table-library/react-table-library/common/util/useReducerWithMiddleware';
-import { useSyncControlledState } from '@table-library/react-table-library/common/util/useSyncControlledState';
+import { useSyncRefState } from '@overmap-ai/react-table-library/common/util/useSyncRefState';
+import { useReducerWithMiddleware } from '@overmap-ai/react-table-library/common/util/useReducerWithMiddleware';
+import { useSyncControlledState } from '@overmap-ai/react-table-library/common/util/useSyncControlledState';
 
 import {
   State,
   Action,
   StateAndChange,
   Nullish,
-} from '@table-library/react-table-library/types/common';
-import { Data, TableNode } from '@table-library/react-table-library/types/table';
+} from '@overmap-ai/react-table-library/types/common';
+import { Data, TableNode } from '@overmap-ai/react-table-library/types/table';
 
 const set = (state: State, action: Action) => ({
   ...state,

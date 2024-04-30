@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Checkbox as CheckboxBase } from '@table-library/react-table-library/common/components/Checkbox';
+import { Checkbox as CheckboxBase } from '@overmap-ai/react-table-library/common/components/Checkbox';
 
 type CheckboxProps = {
   checked: boolean;

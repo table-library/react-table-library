@@ -2,24 +2,18 @@ import * as React from 'react';
 import axios from 'axios';
 
 import {
-  Table,
-  Header,
-  HeaderRow,
   Body,
-  Row,
-  HeaderCell,
   Cell,
+  Header,
+  HeaderCell,
+  HeaderRow,
+  Row,
+  Table,
   useCustom,
-} from '@table-library/react-table-library/table';
-import { useTheme } from '@table-library/react-table-library/theme';
-import {
-  CellSelect,
-  HeaderCellSelect,
-  useRowSelect,
-} from '@table-library/react-table-library/select';
-import { usePagination } from '@table-library/react-table-library/pagination';
-
-import { nodes } from '../../data';
+} from '@overmap-ai/react-table-library/table';
+import { useTheme } from '@overmap-ai/react-table-library/theme';
+import { CellSelect, HeaderCellSelect, useRowSelect } from '@overmap-ai/react-table-library/select';
+import { usePagination } from '@overmap-ai/react-table-library/pagination';
 
 const Component = () => {
   const theme = useTheme({

@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { Table } from '@table-library/react-table-library/table/index';
+import { Table } from '@overmap-ai/react-table-library/table/index';
 
-import { TableNode } from '@table-library/react-table-library/types/table';
-import { CompactTableProps, Column } from '@table-library/react-table-library/types/compact';
+import { TableNode } from '@overmap-ai/react-table-library/types/table';
+import { CompactTableProps, Column } from '@overmap-ai/react-table-library/types/compact';
 
 import { VirtualizedTable } from './VirtualizedTable';
 import { NormalTable } from './NormalTable';

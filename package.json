@@ -1,5 +1,5 @@
 {
-  "name": "@table-library/react-table-library",
+  "name": "@overmap-ai/react-table-library",
   "version": "0.0.0-development",
   "description": "react-table-library",
   "type": "module",
@@ -16,7 +16,7 @@
     "react-window": "1.8.7"
   },
   "devDependencies": {
-    "@babel/core": "7.12.17",
+    "@babel/core": "^7.24.5",
     "@babel/eslint-parser": "7.13.14",
     "@babel/node": "7.12.17",
     "@babel/plugin-proposal-export-default-from": "7.12.13",
@@ -105,9 +105,6 @@
     "prettier": "prettier 'src/**/*.{js,ts,tsx}'",
     "prettier:write": "npm run prettier -- --write",
     "prettier:check": "npm run prettier -- --check",
-    "lint": "eslint 'src/**/*.{js,ts,tsx}' --ignore-pattern .eslintignore --max-warnings 0",
-    "lint:check": "npm run lint",
-    "lint:fix": "npm run lint -- --fix",
     "test": "jest --config ./.storybook/jest.config.json",
     "test:watch": "npm run test -- --watch",
     "test:update": "npm run test -- --u",
@@ -116,10 +113,9 @@
     "storybook:dev": "start-storybook .storybook .storybook/static -p 9001",
     "storybook:build": "NODE_OPTIONS=--max-old-space-size=4096 build-storybook .storybook .storybook/static -o dist",
     "storybook:preview": "http-server dist -o",
-    "library:build": "rollup -c && npm run copypackage && npm run copyreadme",
-    "valid": "npm run test && npm run prettier:check && npm run lint:check && tsc",
-    "copypackage": "cp -rf package.json lib",
-    "copyreadme": "cp -rf README.md lib",
+    "library:build": "rollup -c && npm run copyfiles",
+    "valid": "npm run test && tsc",
+    "copyfiles": "copyfiles.sh",
     "dist": "npm run valid && npm run library:build && cd lib && npm publish",
     "dist:beta": "npm run valid && npm run library:build && cd lib && npm publish --tag beta",
     "prepublishOnly": "echo \"Warning: Don't run 'npm publish' in root. Use 'npm run dist' instead.\" && exit 0",
@@ -131,9 +127,11 @@
     }
   },
   "lint-staged": {
-    "*.js": [
-      "npm run lint",
-      "npm run prettier:write"
+    "*.{js,jsx,ts,tsx}": [
+      "yarn eslint --fix"
+    ],
+    "*.{css,scss}": [
+      "prettier --write"
     ]
   },
   "repository": {

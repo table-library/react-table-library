@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { State, Action, MiddlewareFunction } from '@table-library/react-table-library/types/common';
+import { State, Action, MiddlewareFunction } from '@overmap-ai/react-table-library/types/common';
 
 const useReducerWithMiddleware = (
   reducer: (state: State, action: Action) => State,

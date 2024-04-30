@@ -8,9 +8,9 @@ import {
   Row,
   HeaderCell,
   Cell,
-} from '@table-library/react-table-library/table';
-import { useTree } from '@table-library/react-table-library/tree';
-import { useSort, HeaderCellSort } from '@table-library/react-table-library/sort';
+} from '@overmap-ai/react-table-library/table';
+import { useTree } from '@overmap-ai/react-table-library/tree';
+import { useSort, HeaderCellSort } from '@overmap-ai/react-table-library/sort';
 
 import { nodes } from '../../data';
 

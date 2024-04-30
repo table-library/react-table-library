@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { State } from '@table-library/react-table-library/types/common';
+import { State } from '@overmap-ai/react-table-library/types/common';
 
 // order of keys must be the same
 // no functions in object allowed

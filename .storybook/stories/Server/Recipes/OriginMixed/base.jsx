@@ -9,8 +9,8 @@ import {
   HeaderCell,
   Cell,
   useCustom,
-} from '@table-library/react-table-library/table';
-import { useSort, HeaderCellSort } from '@table-library/react-table-library/sort';
+} from '@overmap-ai/react-table-library/table';
+import { useSort, HeaderCellSort } from '@overmap-ai/react-table-library/sort';
 
 import { getData } from '../../../server';
 

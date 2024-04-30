@@ -3,9 +3,9 @@ import * as React from 'react';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 
-import { LayoutContext } from '@table-library/react-table-library/common/context';
+import { LayoutContext } from '@overmap-ai/react-table-library/common/context';
 
-import { Nullish } from '@table-library/react-table-library/types/common';
+import { Nullish } from '@overmap-ai/react-table-library/types/common';
 
 const getBaseStyle = () => `
   display: contents;

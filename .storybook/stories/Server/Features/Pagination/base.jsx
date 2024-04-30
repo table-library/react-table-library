@@ -8,8 +8,8 @@ import {
   Row,
   HeaderCell,
   Cell,
-} from '@table-library/react-table-library/table';
-import { usePagination } from '@table-library/react-table-library/pagination';
+} from '@overmap-ai/react-table-library/table';
+import { usePagination } from '@overmap-ai/react-table-library/pagination';
 
 import { getData } from '../../../server';
 

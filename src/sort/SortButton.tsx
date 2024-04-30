@@ -1,15 +1,15 @@
 import * as React from 'react';
 import cs from 'clsx';
 
-import { Button } from '@table-library/react-table-library/common/components/Button';
+import { Button } from '@overmap-ai/react-table-library/common/components/Button';
 
-import { Nullish, State } from '@table-library/react-table-library/types/common';
-import { TableNode } from '@table-library/react-table-library/types/table';
+import { Nullish, State } from '@overmap-ai/react-table-library/types/common';
+import { TableNode } from '@overmap-ai/react-table-library/types/table';
 import {
   Sort,
   SortOptionsIcon,
   SortIconPositions,
-} from '@table-library/react-table-library/types/sort';
+} from '@overmap-ai/react-table-library/types/sort';
 
 const getSortIcon = (
   sortState: State,

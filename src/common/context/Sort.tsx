@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { Nullish } from '@table-library/react-table-library/types/common';
-import { TableNode } from '@table-library/react-table-library/types/table';
-import { Sort } from '@table-library/react-table-library/types/sort';
+import { Nullish } from '@overmap-ai/react-table-library/types/common';
+import { TableNode } from '@overmap-ai/react-table-library/types/table';
+import { Sort } from '@overmap-ai/react-table-library/types/sort';
 
 let SortContext: any = null;
 

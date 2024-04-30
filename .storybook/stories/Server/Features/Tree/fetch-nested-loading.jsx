@@ -8,9 +8,9 @@ import {
   Row,
   HeaderCell,
   Cell,
-} from '@table-library/react-table-library/table';
-import { useTree, CellTree } from '@table-library/react-table-library/tree';
-import { findNodeById, recursiveMergeInsert } from '@table-library/react-table-library/common/util';
+} from '@overmap-ai/react-table-library/table';
+import { useTree, CellTree } from '@overmap-ai/react-table-library/tree';
+import { findNodeById, recursiveMergeInsert } from '@overmap-ai/react-table-library/common/util';
 
 import { getData } from '../../../server';
 

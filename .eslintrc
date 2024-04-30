@@ -29,7 +29,8 @@
     "import/resolver": {
       "babel-module": {
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
+      },
+      "typescript": {}
     },
     "react": {
       "version": "detect"

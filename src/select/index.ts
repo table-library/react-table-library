@@ -1,4 +1,4 @@
-export * from '@table-library/react-table-library/types/select';
+export * from '@overmap-ai/react-table-library/types/select';
 
 export * from './CellSelect';
 export * from './HeaderCellSelect';

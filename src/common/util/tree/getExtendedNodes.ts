@@ -1,4 +1,4 @@
-import { TableNode } from '@table-library/react-table-library/types/table';
+import { TableNode } from '@overmap-ai/react-table-library/types/table';
 
 export const getExtendedNodes = (nodes: TableNode[], parentNode: TableNode | null): TableNode[] => {
   const extendedNodes = nodes.map((node) => ({

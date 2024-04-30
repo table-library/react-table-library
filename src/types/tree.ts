@@ -4,8 +4,8 @@ import {
   IdReducerFunctions,
   Modifier,
   Nullish,
-} from '@table-library/react-table-library/types/common';
-import { TableNode, GetRowProps, CellProps } from '@table-library/react-table-library/types/table';
+} from '@overmap-ai/react-table-library/types/common';
+import { TableNode, GetRowProps, CellProps } from '@overmap-ai/react-table-library/types/table';
 
 export enum TreeExpandClickTypes {
   RowClick,

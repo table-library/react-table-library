@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { Nullish } from '@table-library/react-table-library/types/common';
-import { TableNode } from '@table-library/react-table-library/types/table';
-import { Pagination } from '@table-library/react-table-library/types/pagination';
+import { Nullish } from '@overmap-ai/react-table-library/types/common';
+import { TableNode } from '@overmap-ai/react-table-library/types/table';
+import { Pagination } from '@overmap-ai/react-table-library/types/pagination';
 
 let PaginationContext: any = null;
 

@@ -1,6 +1,6 @@
-import { zipThemes } from '@table-library/react-table-library/theme/index';
+import { zipThemes } from '@overmap-ai/react-table-library/theme/index';
 
-import { Theme } from '@table-library/react-table-library/types/theme';
+import { Theme } from '@overmap-ai/react-table-library/types/theme';
 
 type Configuration = {
   isVirtualized?: boolean;

@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-import { Nullish } from '@table-library/react-table-library/types/common';
-import { Theme } from '@table-library/react-table-library/types/theme';
-import { Layout } from '@table-library/react-table-library/types/layout';
-import { ColumnResizeProps } from '@table-library/react-table-library/types/resize';
-import { Select } from '@table-library/react-table-library/types/select';
-import { Tree } from '@table-library/react-table-library/types/tree';
-import { Sort } from '@table-library/react-table-library/types/sort';
-import { Pagination } from '@table-library/react-table-library/types/pagination';
+import { Nullish } from '@overmap-ai/react-table-library/types/common';
+import { Theme } from '@overmap-ai/react-table-library/types/theme';
+import { Layout } from '@overmap-ai/react-table-library/types/layout';
+import { ColumnResizeProps } from '@overmap-ai/react-table-library/types/resize';
+import { Select } from '@overmap-ai/react-table-library/types/select';
+import { Tree } from '@overmap-ai/react-table-library/types/tree';
+import { Sort } from '@overmap-ai/react-table-library/types/sort';
+import { Pagination } from '@overmap-ai/react-table-library/types/pagination';
 
 // external data
 
