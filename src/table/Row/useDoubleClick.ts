@@ -48,10 +48,11 @@ export const useDoubleClick = <T extends TableNode>(
   onClick: OnClick<T> | Nullish,
   onDoubleClick: OnClick<T> | Nullish,
   node: T,
+  disabled: boolean | undefined,
 ) => {
   useDoubleClickBase({
-    onSingleClick: onClick ? (event) => onClick(node, event) : NOOP,
-    onDoubleClick: onDoubleClick ? (event) => onDoubleClick(node, event) : null,
+    onSingleClick: onClick && !disabled ? (event) => onClick(node, event) : NOOP,
+    onDoubleClick: onDoubleClick && !disabled ? (event) => onDoubleClick(node, event) : null,
     ref,
   });
 };

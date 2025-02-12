@@ -96,7 +96,7 @@ export const Row = <T extends TableNode>(props: RowProps<T>) => {
 
   const ref = React.useRef<HTMLTableRowElement>(null);
 
-  useDoubleClick<T>(ref, onClickByFeature, onDoubleClick, item);
+  useDoubleClick<T>(ref, onClickByFeature, onDoubleClick, item, disabled);
 
   const handleClick = disabled
     ? () => {}

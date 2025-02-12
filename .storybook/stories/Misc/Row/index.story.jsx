@@ -16,6 +16,9 @@ import RowClickCode from './row-click?raw';
 import RowDoubleClickComponent from './row-double-click';
 import RowDoubleClickCode from './row-double-click?raw';
 
+import RowDisabledComponent from './row-disabled';
+import RowDisabledCode from './row-disabled?raw';
+
 import RowOnHoverComponent from './row-on-hover';
 import RowOnHoverCode from './row-on-hover?raw';
 
@@ -27,6 +30,7 @@ createStories(
   [
     createStory('row click', RowClickComponent, RowClickCode),
     createStory('row double click', RowDoubleClickComponent, RowDoubleClickCode),
+    createStory('row disabled', RowDisabledComponent, RowDisabledCode),
     createStory('row on hover', RowOnHoverComponent, RowOnHoverCode),
     createStory('variable row height', VariableRowHeightComponent, VariableRowHeightCode),
   ],
