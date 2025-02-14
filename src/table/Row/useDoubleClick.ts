@@ -28,7 +28,7 @@ const useDoubleClickBase = ({
           else if (clickCount.current === 2) onDoubleClick(event);
 
           clickCount.current = 0;
-        }, 100);
+        }, 300);
       }
     };
 
