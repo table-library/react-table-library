@@ -91,7 +91,7 @@ const useSort = <T extends TableNode>(
 ): Sort<T> => {
   const controlledState: State = {
     ...DEFAULT_STATE,
-    ...(primary.state ?? {}),
+    ...(primary?.state ?? {}),
   };
 
   const onChange = primary?.onChange ? primary.onChange : () => {};
