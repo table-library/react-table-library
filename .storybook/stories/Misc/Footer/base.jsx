@@ -30,16 +30,6 @@ const Component = () => {
               <HeaderCell>Complete</HeaderCell>
               <HeaderCell>Tasks</HeaderCell>
             </HeaderRow>
-
-            <HeaderRow>
-              <HeaderCell
-                style={{ color: 'gray', fontWeight: 400 }}
-                gridColumnStart={1}
-                gridColumnEnd={6}
-              >
-                The spanned header cell that contains a large sentence
-              </HeaderCell>
-            </HeaderRow>
           </Header>
 
           <Body>
