@@ -141,8 +141,8 @@ export const HeaderCell: React.FC<HeaderCellProps> = ({
       </HeaderCellContainer>
 
       {/* column grouping */}
-      {Array.from({ length: colSpan }, () => (
-        <HeaderCellContainer className={cs('th', 'hide', 'colspan')} />
+      {Array.from({ length: colSpan }, (_, jindex: number) => (
+        <HeaderCellContainer key={jindex} className={cs('th', 'hide', 'colspan')} />
       ))}
     </>
   );
