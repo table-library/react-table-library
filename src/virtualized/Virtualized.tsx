@@ -21,8 +21,9 @@ const Virtualized = <T extends TableNode>({
   return (
     <>
       {tableOptions?.renderBeforeTable && tableOptions.renderBeforeTable()}
+      {/* @ts-ignore */}
       <AutoSizer>
-        {({ width, height }) => (
+        {({ width, height }: { width: number; height: number }) => (
           <VariableSizeList
             height={height}
             width={width}

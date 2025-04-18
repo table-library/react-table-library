@@ -12,7 +12,7 @@ import {
   MiddlewareFunction,
   IdReducerFunctions,
 } from '@table-library/react-table-library/types/common';
-import { Data, TableNode } from '@table-library/react-table-library/types/table';
+import { Data, Identifier, TableNode } from '@table-library/react-table-library/types/table';
 
 const addById = (state: State, action: Action) => {
   return {
@@ -142,7 +142,7 @@ const getMergedOptions = (options: Record<string, any>) => ({
   ...options,
 });
 
-const getRecursiveIds = (id: string, nodes: TableNode[]) => {
+const getRecursiveIds = (id: Identifier, nodes: TableNode[]) => {
   const node = findNodeById(nodes, id);
 
   return [node, ...fromTreeToList(node?.nodes)].map((item) => item!.id);
@@ -163,7 +163,10 @@ const useIdReducer = <T extends TableNode>(
   );
 
   // exclusive for select feature
-  const shiftToggle = React.useRef({
+  const shiftToggle = React.useRef<{
+    lastToggledId: Identifier | null;
+    currentShiftIds: Identifier[];
+  }>({
     lastToggledId: null,
     currentShiftIds: [],
   });
@@ -178,7 +181,7 @@ const useIdReducer = <T extends TableNode>(
     );
 
   const onAddById = React.useCallback(
-    (id) =>
+    (id: Identifier) =>
       dispatchWithMiddleware({
         type: ADD_BY_ID,
         payload: { id },
@@ -187,7 +190,7 @@ const useIdReducer = <T extends TableNode>(
   );
 
   const onRemoveById = React.useCallback(
-    (id) =>
+    (id: Identifier) =>
       dispatchWithMiddleware({
         type: REMOVE_BY_ID,
         payload: { id },
@@ -196,7 +199,7 @@ const useIdReducer = <T extends TableNode>(
   );
 
   const onToggleById = React.useCallback(
-    (id) => {
+    (id: Identifier) => {
       if (state.ids.includes(id)) {
         onRemoveById(id);
       } else {
@@ -210,7 +213,7 @@ const useIdReducer = <T extends TableNode>(
   );
 
   const onAddByIds = React.useCallback(
-    (ids, options) => {
+    (ids: Identifier[], options) => {
       const mergedOptions = getMergedOptions(options);
 
       dispatchWithMiddleware({
@@ -225,7 +228,7 @@ const useIdReducer = <T extends TableNode>(
   );
 
   const onRemoveByIds = React.useCallback(
-    (ids) => {
+    (ids: Identifier[]) => {
       dispatchWithMiddleware({
         type: REMOVE_BY_IDS,
         payload: { ids },
@@ -235,7 +238,7 @@ const useIdReducer = <T extends TableNode>(
   );
 
   const onToggleByIdRecursively = React.useCallback(
-    (id, options) => {
+    (id: Identifier, options) => {
       const mergedOptions = getMergedOptions(options);
 
       const ids = getRecursiveIds(id, data.nodes);
@@ -274,7 +277,7 @@ const useIdReducer = <T extends TableNode>(
   );
 
   const onRemoveByIdRecursively = React.useCallback(
-    (id) => {
+    (id: Identifier) => {
       const ids = getRecursiveIds(id, data.nodes);
 
       onRemoveByIds(ids);
@@ -283,7 +286,7 @@ const useIdReducer = <T extends TableNode>(
   );
 
   const onAddByIdExclusively = React.useCallback(
-    (id) => {
+    (id: Identifier) => {
       dispatchWithMiddleware({
         type: ADD_BY_ID_EXCLUSIVELY,
         payload: { id },
@@ -299,7 +302,7 @@ const useIdReducer = <T extends TableNode>(
   }, [dispatchWithMiddleware]);
 
   const onToggleByIdExclusively = React.useCallback(
-    (id) => {
+    (id: Identifier) => {
       if (id === state.id) {
         onRemoveByIdExclusively();
       } else {

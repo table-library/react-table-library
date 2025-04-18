@@ -85,8 +85,9 @@ export const VirtualizedTable = <T extends TableNode>({
   ...tableProps
 }: VirtualizedTableProps<T>) => {
   return (
+    // @ts-ignore
     <AutoSizer>
-      {({ width, height }: { width: any; height: any }) => (
+      {({ width, height }: { width: number; height: number }) => (
         <VariableSizeList
           height={height}
           width={width}
