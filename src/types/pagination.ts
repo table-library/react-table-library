@@ -13,7 +13,11 @@ export type PaginationFunctions = {
 };
 
 export type Pagination<T extends TableNode> = {
-  state: State;
+  state: State & {
+    getTotalPages: (nodes: Array<T>) => number;
+    getPages: (nodes: Array<T>) => Array<T>;
+    getPageBoundaries: (nodes: Array<T>) => { start: number; end: number };
+  };
   fns: PaginationFunctions;
   options: PaginationOptionsSound;
   modifier: Modifier<T>;
