@@ -22,6 +22,7 @@ const withStickyHeader = <T extends TableNode>({
   columns,
   ...tableProps
 }: CompactTableProps<T>) => {
+  // @ts-ignore
   return React.forwardRef(({ children, ...rest }, ref) => (
     // @ts-ignore
     <div ref={ref} {...rest}>
