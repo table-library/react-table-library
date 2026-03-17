@@ -17,6 +17,7 @@ const Virtualized = <T extends TableNode>({
   body,
   tableOptions,
   rowOptions,
+  onItemsRendered
 }: VirtualizedProps<T>) => {
   return (
     <>
@@ -46,6 +47,7 @@ const Virtualized = <T extends TableNode>({
               </div>
             ))}
             itemData={{ items: tableList }}
+            onItemsRendered={onItemsRendered}
           >
             {({ index, style, data }) => (
               <div

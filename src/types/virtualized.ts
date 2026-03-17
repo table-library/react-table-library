@@ -5,6 +5,15 @@ import { TableOptions, RowOptions } from '@table-library/react-table-library/typ
 
 export type RowHeight = number | ((item: TableNode, index: number) => number);
 
+export type ListOnRowsRenderedParams = {
+  overscanStartIndex: number;
+  overscanStopIndex: number;
+  visibleStartIndex: number;
+  visibleStopIndex: number;
+}
+
+export type OnItemsRendered = (props: ListOnRowsRenderedParams) => any;
+
 export type VirtualizedProps<T extends TableNode> = {
   tableList: T[];
   rowHeight: RowHeight;
@@ -12,4 +21,5 @@ export type VirtualizedProps<T extends TableNode> = {
   body: (node: T, index: number) => React.ReactNode;
   tableOptions?: TableOptions;
   rowOptions?: RowOptions<T>;
+  onItemsRendered?: OnItemsRendered;
 };
